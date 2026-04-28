@@ -1,0 +1,71 @@
+{
+    "inspirehep": "LHCb:2015ycz",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Angular analysis of the $B^{0} \\to K^{*0} e^{+} e^{−}$ decay in the low-q$^{2}$ region",
+    "arxiv": "hep-ex/1501.03038",
+    "year": "2015",
+    "abstract": "an angular analysis of the $B^0 \\to K^{\\ast0} e^+ e^−$ decay, using a data sample corresponding to an integrated luminosity of 3.0 fb$^{−1}$ in $pp$ collisions at centre-of-mass energies of 7 and 8 TeV during 2011 and 2012",
+    "pdf": "https://arxiv.org/pdf/1501.03038",
+    "data": [
+        {
+            "obs@1": {
+                "name": "FL(B02Kstee)",
+                "latex": "$F_L(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.16,
+                "sta_err_up": 0.06,
+                "sta_err_down": 0.06,
+                "sys_err_up": 0.03,
+                "sys_err_down": 0.03,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 2.000e-03,
+                "q2max": 1.12,
+                "method": "maximum likelihood"
+            },
+            "obs@2": {
+                "name": "AT2(B02Kstee)",
+                "latex": "$A_T^{(2)}(B^0\\to K^{*0}e^+e^-)$",
+                "value": -0.23,
+                "sta_err_up": 0.23,
+                "sta_err_down": 0.23,
+                "sys_err_up": 0.05,
+                "sys_err_down": 0.05,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 2.000e-03,
+                "q2max": 1.12,
+                "method": "maximum likelihood"
+            },
+            "obs@3": {
+                "name": "ATIm(B02Kstee)",
+                "latex": "$A_T^{\\rm Im}(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.14,
+                "sta_err_up": 0.22,
+                "sta_err_down": 0.22,
+                "sys_err_up": 0.05,
+                "sys_err_down": 0.05,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 2.000e-03,
+                "q2max": 1.12,
+                "method": "maximum likelihood"
+            },
+            "obs@4": {
+                "name": "ATRe(B02Kstee)",
+                "latex": "$A_T^{\\rm Re}(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.1,
+                "sta_err_up": 0.18,
+                "sta_err_down": 0.18,
+                "sys_err_up": 0.05,
+                "sys_err_down": 0.05,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 2.000e-03,
+                "q2max": 1.12,
+                "method": "maximum likelihood"
+            },
+            "correlation": null
+        }
+    ]
+}

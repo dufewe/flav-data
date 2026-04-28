@@ -1,0 +1,29 @@
+{
+    "inspirehep": "LHCb:2018rym",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Evidence for the decay ${B}_s^0\\to {\\overline{K}}^{\\ast 0}{\\mu}^{+}{\\mu}^{-}$",
+    "arxiv": "hep-ex/1804.07167",
+    "year": "2018",
+    "abstract": "a search for the decay $B^0_s \\to K^{\\ast0} \\mu^+ \\mu^-$, using data sets corresponding to 1.0, 2.0 and 1.6 fb$^{−1}$ of integrated luminosity collected during $pp$ collisions at centre-of-mass energies of 7, 8 and 13 TeV, respectively",
+    "pdf": "https://arxiv.org/pdf/1804.07167",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs02Kst0mumu)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\bar{K}^{\\ast0} \\mu^+ \\mu^-)$",
+                "value": 2.9e-8,
+                "sta_err_up": 1.0e-8,
+                "sta_err_down": 1.0e-8,
+                "sys_err_up": 0.2e-8,
+                "sys_err_down": 0.2e-8,
+                "type@1_err_name": "normalisation",
+                "type@1_err_up": 0.3e-8,
+                "type@1_err_down": 0.3e-8,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "correlation": null
+        }
+    ]
+}

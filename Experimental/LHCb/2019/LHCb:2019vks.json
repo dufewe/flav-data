@@ -1,0 +1,52 @@
+{
+        "inspirehep": "LHCb:2019vks",
+        "author": "Aaij, Roel and others",
+        "collaboration": "LHCb",
+        "title": "Measurement of $CP$-violating and mixing-induced observables in $B_s^0 \\to \\phi\\gamma$ decays",
+        "arxiv": "hep-ex/1905.06284",
+        "year": "2019",
+        "abstract": "the CP-violating observables $S_{\\phi\\gamma}$ and $C_{\\phi\\gamma}$ and the mixing-induced observable $A_{\\phi\\gamma}^\\Delta$ from a time-dependent analysis of the $B^0_s \\to \\phi\\gamma$ decay rate",
+        "pdf": "https://arxiv.org/pdf/1905.06284",
+        "data": [
+            {
+                "obs@1": {
+                    "name": "S_phigamma",
+                    "latex": "$S_{\\phi\\gamma}$",
+                    "value": 0.43,
+                    "sta_err_up": 0.30,
+                    "sta_err_down": 0.30,
+                    "sys_err_up": 0.11,
+                    "sys_err_down": 0.11,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "obs@2": {
+                    "name": "C_phigamma",
+                    "latex": "$C_{\\phi\\gamma}$",
+                    "value": 0.11,
+                    "sta_err_up": 0.29,
+                    "sta_err_down": 0.29,
+                    "sys_err_up": 0.11,
+                    "sys_err_down": 0.11,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "obs@3": {
+                    "name": "ADelta_phigamma",
+                    "latex": "$A^\\Delta_{\\phi\\gamma}$",
+                    "value": -0.67,
+                    "sta_err_up": 0.37,
+                    "sta_err_down": 0.41,
+                    "sys_err_up": 0.17,
+                    "sys_err_down": 0.17,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "correlation": [
+                    [1.0,-0.04,-0.04],
+                    [-0.04,1.0,-0.04],
+                    [-0.04,-0.04,1.0]
+                ]        
+            }
+        ]
+    }

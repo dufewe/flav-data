@@ -1,0 +1,50 @@
+{
+    "inspirehep": "LHCb:2019bix",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for Lepton-Flavor Violating Decays $B^+ \\to K^+ {\\mu}^{\\pm} e^{\\mp}$",
+    "arxiv": "hep-ex/1909.01010",
+    "year": "2019",
+    "abstract": "a search for the lepton-ﬂavour violating decays $B^+ \\to K^+ \\mu^\\pm e^\\mp$, using a sample of proton-proton collision data at centre-of-mass energies of 7 and 8 TeV and corresponding to an integrated luminosity of 3 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/1909.01010",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B+2K+e+mu-)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- e^+)$",
+                "value": null,
+                "tot_err_up": 7.0e-9,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B+2K+e+mu-)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- e^+)$",
+                "value": null,
+                "tot_err_up": 9.5e-9,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        },
+        {
+            "obs@1": {
+                "name": "Br(B+2K+e-mu+)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^+ e^-)$",
+                "value": null,
+                "tot_err_up": 6.4e-9,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B+2K+e-mu+)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^+ e^-)$",
+                "value": null,
+                "tot_err_up": 8.8e-9,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        }
+    ]
+}

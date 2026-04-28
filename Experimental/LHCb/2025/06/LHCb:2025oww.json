@@ -1,0 +1,63 @@
+{
+    "inspire-hep": "[LHCb:2025oww](https://inspirehep.net/literature/2935115)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $\\Omega_c^0$ and $\\Xi_c^0$ baryon lifetimes using hadronic $b$-baryon decays",
+    "arxiv": "[hep-ex/2506.13334v2](https://arxiv.org/pdf/2506.13334)",
+    "time": "2025.06.16",
+    "abstract": "an analysis of the lifetimes of the $\\Omega^0_c$ and $\\Xi^0_c$ baryons, using a $pp$ collision dataset collected by the LHCb experiment, corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2506.13334",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Tau(Omegac0)",
+                "latex": "$\\tau(\\Omega_c^0)$",
+                "value": "276.3",
+                "type@1_err": "stat",
+                "type@1_err_up": "19.4",
+                "type@1_err_down": "19.4",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.8",
+                "type@2_err_down": "1.8",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.7",
+                "type@3_err_down": "0.7",
+                "unit": "fs"
+            },
+            "obs@2": {
+                "name": "Tau(Xic0)",
+                "latex": "$\\tau(\\Xi_c^0)$",
+                "value": "149.2",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.5",
+                "type@1_err_down": "2.5",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.9",
+                "type@2_err_down": "0.9",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.4",
+                "type@3_err_down": "0.4",
+                "unit": "fs"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Tau(Omegac0)",
+                "latex": "$\\tau(\\Omega_c^0)$",
+                "value": "274.8",
+                "tot_err_up": "10.5",
+                "tot_err_down": "10.5",
+                "unit": "fs"
+            },
+            "obs@2": {
+                "name": "Tau(Xic0)",
+                "latex": "$\\tau(\\Xi_c^0)$",
+                "value": "150.7",
+                "tot_err_up": "1.6",
+                "tot_err_down": "1.6",
+                "unit": "fs"
+            }
+        }
+    ],
+    "transition-mode": "non-leptonic decay"
+}

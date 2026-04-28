@@ -1,0 +1,23 @@
+{
+    "inspire-hep": "[LHCb:2026luq](https://inspirehep.net/literature/3142508)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for the lepton-flavour violating decays $B^+ \\to \\pi^+ \\mu^\\pm e^\\mp$",
+    "arxiv": "[hep-ex/2604.08396v1](https://arxiv.org/pdf/2604.08396)",
+    "time": "2026.04.09",
+    "abstract": "the first search for the lepton-flavour violating decays $B^+ \\to \\pi^+ \\mu^\\pm e^\\mp$ in proton-proton collisions, using data collected by the LHCb experiment between 2011 and 2018, corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2604.08396",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B+.2.pi+.mu+-.e-+)",
+                "latex": "$\\mathcal{B}(B^+ \\to \\pi^+ \\mu^\\pm e^\\mp)$",
+                "type@1_upper_limit": "1.8e-9",
+                "type@1_level": "90%@CLs",
+                "type@2_upper_limit":"2.2e-9",
+                "type@2_level":"95%@CLs"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

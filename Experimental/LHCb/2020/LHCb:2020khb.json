@@ -1,0 +1,31 @@
+{
+    "inspirehep": "LHCb:2020khb",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for the lepton flavour violating decay $B^+ \\rightarrow K^+ \\mu^- \\tau^+$ using $B_{s2}^{*0}$ decays",
+    "arxiv": "hep-ex/2003.04352",
+    "year": "2020",
+    "abstract": "a search for the lepton ﬂavour violating decay $B^+ \\to K^+ \\mu^- \\tau^+$ using a sample of proton–proton collisions at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to a total integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2003.04352",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B+2K+mutau)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
+                "value": null,
+                "tot_err_up": 3.9e-5,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B+2K+mutau)",
+                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
+                "value": null,
+                "tot_err_up": 4.5e-5,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        }
+    ]
+}

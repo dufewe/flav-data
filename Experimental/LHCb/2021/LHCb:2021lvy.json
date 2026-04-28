@@ -1,0 +1,72 @@
+{
+    "inspirehep": "LHCb:2021lvy",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Tests of lepton universality using $B^0\\to K^0_S \\ell^+ \\ell^-$ and $B^+\\to K^{*+} \\ell^+ \\ell^-$ decays",
+    "arxiv": "hep-ex/2110.09501",
+    "year": "2021",
+    "abstract": "tests of lepton universality in $B^0 \\to K^0_S \\ell^+ \\ell^-$ and $B^+ \\to K^{\\ast+} \\ell^+ \\ell^−$ decays where $\\ell$ is either an electron or a muon, using proton-proton collision data recorded and corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2110.09501",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RKS0[mu/e]",
+                "latex": "$R_{K_S^0}^{\\mu/e}$",
+                "value": 0.66,
+                "sta_err_up": 0.2,
+                "sta_err_down": 0.14,
+                "sys_err_up": 0.02,
+                "sys_err_down": 0.04,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 1.1,
+                "q2max": 6.0
+            },
+            "obs@2": {
+                "name": "RKst+[mu/e]",
+                "latex": "$R_{K^{\\ast+}}^{\\mu/e}$",
+                "value": 0.70,
+                "sta_err_up": 0.18,
+                "sta_err_down": 0.13,
+                "sys_err_up": 0.03,
+                "sys_err_down": 0.04,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 0.045,
+                "q2max": 6.0
+            },
+            "correlation": null
+        },
+        {
+            "obs@1": {
+                "name": "dBr/dq2(BS02K0ee)",
+                "latex": "$d\\mathcal{B}/dq^2(B_S^0 \\to K^0 e^+ e^-)$",
+                "value": 2.6e-8,
+                "sta_err_up": 0.6e-8,
+                "sta_err_down": 0.6e-8,
+                "sys_err_up": 0.1e-8,
+                "sys_err_down": 0.1e-8,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 1.1,
+                "q2max": 6.0,
+                "unit": "GeV-2"
+            },
+            "obs@2": {
+                "name": "dBr/dq2(B+2Kst+ee)",
+                "latex": "$d\\mathcal{B}/dq^2(B^+ \\to K^{\\ast+} e^+ e^-)$",
+                "value": 9.2e-8,
+                "sta_err_up": 1.9e-8,
+                "sta_err_down": 1.8e-8,
+                "sys_err_up": 0.8e-8,
+                "sys_err_down": 0.6e-8,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 0.045,
+                "q2max": 6.0,
+                "unit": "GeV-2"
+            },
+            "correlation": null
+        }
+    ]
+}

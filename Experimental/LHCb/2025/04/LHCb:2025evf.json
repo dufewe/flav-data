@@ -1,0 +1,31 @@
+{
+    "inspire-hep": "[LHCb:2025evf](https://inspirehep.net/literature/2909555)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Observation of the very rare $\\Sigma^+ \\to p \\mu^+ \\mu^-$ decay",
+    "arxiv": "[hep-ex/2504.06096v2](https://arxiv.org/pdf/2504.06096)",
+    "time": "2025.04.08",
+    "abstract": "the first observation of the $\\Sigma^+ \\to p \\mu^+ \\mu^−$ decay with high significance, using proton-proton collision data and corresponding to an integrated luminosity of 5.4 fb$^{−1}$, collected with the LHCb detector at a centre-of-mass energy of 13 TeV",
+    "pdf": "https://arxiv.org/pdf/2504.06096",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Sigma+.2.p.mu+.mu-)",
+                "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
+                "value": "1.08e-8",
+                "tot_err_up": "0.17e-8",
+                "tot_err_down": "0.17e-8",
+                "dataset": "run2"
+            },
+            "obs@2": {
+                "name": "Br(Sigma+.2.p.mu+.mu-)",
+                "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
+                "value": "1.09e-8",
+                "tot_err_up": "0.17e-8",
+                "tot_err_down": "0.17e-8",
+                "dataset": "run1+run2"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,41 @@
+{
+        "inspirehep": "LHCb:2012quo",
+        "author": "Aaij, R and others",
+        "collaboration": "LHCb",
+        "year": "2012",
+        "arxiv": "hep-ex/1209.0313",
+        "title": "Measurement of the ratio of branching fractions $BR(B_0 \\to K^{\\star 0} \\gamma)/BR(B_{s0} \\to \\phi \\gamma)$ and the direct CP asymmetry in $B_0 \\to K^{\\star 0} \\gamma$",
+        "abstract": "the ratio of branching fractions of radiative $B$ decays $B^0\\to K^{\\ast0}\\gamma$ and $B_s^0\\to \\phi\\gamma$, and direct CP asymmetry in $B^0\\to K^{\\ast0}\\gamma$ decays",
+        "pdf": "https://arxiv.org/pdf/1209.0313",
+        "data": [
+            {
+                "obs@1": {
+                    "name": "Br(B02Kst0gamma)/Br(Bs02phigamma)",
+                    "latex": "$\\frac{\\mathcal{B}(B^0\\to K^{\\ast0}\\gamma)}{\\mathcal{B}(B^0_s\\to \\phi\\gamma)}$",
+                    "value": 1.23,
+                    "sta_err_up": 0.06,
+                    "sta_err_down": 0.06,
+                    "sys_err_up": 0.04,
+                    "sys_err_down": 0.04,
+                    "type@1_err_name": "fs/fd",
+                    "type@1_err_up": 0.10, 
+                    "type@1_err_down": 0.10,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "obs@2": {
+                    "name": "ACP(B02Kst0gamma)",
+                    "latex": "$A_{\\rm CP}(B^0\\to K^{\\ast0}\\gamma)$",
+                    "value": 0.8e-2,
+                    "sta_err_up": 1.7e-2,
+                    "sta_err_down": 1.7e-2,
+                    "sys_err_up": 0.9e-2,
+                    "sys_err_down": 0.9e-2,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "correlation": null,
+                "note": "using $f_s/f_d$ value in Storaci:2013jqy, $\\frac{\\mathcal{B}(B^0\\to K^{\\ast0}\\gamma)}{\\mathcal{B}(B^0_s\\to \\phi\\gamma)} = 1.19\\pm0.06\\pm0.04\\pm0.07$ (from flavio)"
+            }
+        ]
+    }

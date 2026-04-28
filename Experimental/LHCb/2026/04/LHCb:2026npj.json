@@ -1,0 +1,53 @@
+{
+    "inspire-hep": "[LHCb:2026npj](https://inspirehep.net/literature/3140593)",
+    "author": "Ablikim, Medina and others",
+    "collaboration": "LHCb, BESIII",
+    "title": "Precise measurement of the CKM angle $\\gamma$ with a novel approach",
+    "arxiv": "[hep-ex/2604.05712v1](https://arxiv.org/pdf/2604.05712)",
+    "time": "2026.04.07",
+    "abstract": "a measurement of the CKM angle $\\gamma$ by applying a novel, unbinned, model-independent approach to datasets of electron-positron collisions collected by the BESIII experiment and proton-proton collisions by the LHCb experiment, corresponding to integrated luminosities of 8 fb$^{−1}$ and 9 fb$^{−1}$, respectively",
+    "pdf": "https://arxiv.org/pdf/2604.05712",
+    "data": [
+        {
+            "obs@1": {
+                "name": "gammaCKM",
+                "latex": "$\\gamma_{\\rm CKM}$",
+                "value": "71.3",
+                "tot_err_up": "5.0",
+                "tot_err_down": "5.0",
+                "unit": "$\\circ$"
+            },
+            "obs@2": {
+                "name": "rB[DK]",
+                "latex": "$r_B^{DK}$",
+                "value": "0.0949",
+                "tot_err_up": "0.0086",
+                "tot_err_down": "0.0085"
+            },
+            "obs@3": {
+                "name": "deltaB[DK]",
+                "latex": "$\\delta_B^{DK}$",
+                "value": "121.6",
+                "tot_err_up": "5.6",
+                "tot_err_down": "5.9",
+                "unit": "$\\circ$"
+            },
+            "obs@4": {
+                "name": "rB[Dpi]",
+                "latex": "$r_B^{D\\pi}$",
+                "value": "0.0064",
+                "tot_err_up": "0.0021",
+                "tot_err_down": "0.0019"
+            },
+            "obs@5": {
+                "name": "deltaB[Dpi]",
+                "latex": "$\\delta_B^{D\\pi}$",
+                "value": "311",
+                "tot_err_up": "17",
+                "tot_err_down": "20",
+                "unit": "$\\circ$"
+            }
+        }
+    ],
+    "transition-mode": "non-leptonic decay"
+}

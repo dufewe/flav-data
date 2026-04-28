@@ -1,0 +1,44 @@
+{
+    "inspirehep": "LHCb:2017rmj",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $B^0_s\\to\\mu^+\\mu^-$ branching fraction and effective lifetime and search for $B^0\\to\\mu^+\\mu^-$ decays",
+    "arxiv": "hep-ex/1703.05747",
+    "year": "2017",
+    "abstract": "a search for the rare decays $B^0_s \\to \\mu^+ \\mu^-$ and $B^0 \\to \\mu^+ \\mu^-$ performed at the LHCb experiment, using data collected in $pp$ collisions corresponding to a total integrated luminosity of 4.4 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/1703.05747",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs02mumu)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\mu^+ \\mu^-)$",
+                "value": 3.0e-9,
+                "sta_err_up": 0.6e-9,
+                "sta_err_down": 0.6e-9,
+                "sys_err_up": 0.3e-9,
+                "sys_err_down": 0.2e-9,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "obs@2": {
+                "name": "Br(B02mumu)",
+                "latex": "$\\mathcal{B}(B^0\\to \\mu^+\\mu^-)$",
+                "value": null,
+                "tot_err_up": 3.4e-10,
+                "tot_err_down": null,
+                "method": "CL@95%"
+            },
+            "obs@3": {
+                "name": "Tau(Bs02mumu)",
+                "latex": "$\\tau(B_s^0 \\to \\mu^+ \\mu^-)$",
+                "value": 2.04,
+                "sta_err_up": 0.44,
+                "sta_err_down": 0.44,
+                "sys_err_up": 0.05,
+                "sys_err_down": 0.05,
+                "unit": "ps"
+            },
+            "correlation": null
+        }
+    ]
+}

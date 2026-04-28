@@ -1,0 +1,50 @@
+{
+    "inspire-hep": "[LHCb:2026hjr](https://inspirehep.net/literature/3143463)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Test of lepton flavour universality with $B^0\\to K^{*0}\\ell^+\\ell^-$ decays at large dilepton invariant mass",
+    "arxiv": "[hep-ex/2604.08631v1](https://arxiv.org/pdf/2604.08631)",
+    "time": "2026.04.09",
+    "abstract": "a test of muon-electron universality in $B^0 \\to K^{\\ast0} \\ell^+ \\ell^−$ decays, in the dilepton-invariant-mass region above the $\\psi(2S)$ resonance, using beauty mesons produced in proton-proton collisions recorded by the LHCb detector at center-of-mass energies of 7, 8, and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2604.08631",
+    "data": [
+        {
+            "obs@1": {
+                "name": "rJ/psi",
+                "latex": "$r_{J/\\psi}$",
+                "value": "1.035",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.013",
+                "type@1_err_down": "0.013",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.035",
+                "type@2_err_down": "0.035"
+            },
+            "obs@2": {
+                "name": "R(B0.2.Kst0)[psi(2S)]",
+                "latex": "$R_{B^0\\to K^{\\ast0}}^{\\psi(2S)}$",
+                "value": "1.034",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.033",
+                "type@1_err_down": "0.033",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.012",
+                "type@2_err_down": "0.012"
+            },
+            "obs@3": {
+                "name": "R(B0.2.Kst0)[mu/e]",
+                "latex": "$R_{B^0\\to K^{\\ast0}}^{\\mu/e}$",
+                "value": "1.08",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.12",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "q2min": "14.0",
+                "q2max": "22.0"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,26 @@
+{
+        "inspirehep": "Storaci:2013jqy",
+        "author": "Storaci, B",
+        "collaboration": "LHCb",
+        "year": "2013",
+        "arxiv": null,
+        "title": "Updated average $f_s/f_d$ $b$-hadron production fraction ratio for 7 TeV $pp$ collisions",
+        "abstract": "the fragmentation-function ratio of $f_s$ and $f_d$ from $B_s^0$ and $B^0$ meson production cross-sections",
+        "pdf": "https://inspirehep.net/files/a9bba5ff9b8dd78ab9584102352561e0",
+        "data": [
+            {
+                "obs@1": {
+                    "name": "fs/fd",
+                    "latex": "$f_s/f_d$",
+                    "value": 0.259,
+                    "sta_err_up": null,
+                    "sta_err_down": null,
+                    "sys_err_up": null,
+                    "sys_err_down": null,
+                    "tot_err_up": 0.015,
+                    "tot_err_down": 0.015
+                },
+                "correlation": null
+            }
+        ]
+    }

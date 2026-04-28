@@ -1,0 +1,43 @@
+{
+        "inspirehep": "LHCb:2017smo",
+        "author": "Aaij, R. and others",
+        "collaboration": "LHCb",
+        "title": "Measurement of the ratio of the $B^0 \\to D^{*-} \\tau^+ \\nu_{\\tau}$ and $B^0 \\to D^{*-} \\mu^+ \\nu_{\\mu}$ branching fractions using three-prong $\\tau$-lepton decays",
+        "arxiv": "hep-ex/1708.08856",
+        "year": "2017",
+        "abstract": "the ratio of branching fractions $R_{D^{\\ast-}} \\equiv \\mathcal{B}(B^0 \\to D^{\\ast-} \\tau^+ \\nu_\\tau)/\\mathcal{B}(B^0 \\to D^{\\ast-}\\mu^+ \\nu_\\mu)$ measured using a data sample of proton-proton collisions collected with the LHCb detector at center-of-mass energies of 7 and 8 TeV, corresponding to an integrated luminosity of 3 fb$^{−1}$",
+        "pdf": "https://arxiv.org/pdf/1708.08856",
+        "data": [
+            {
+                "obs@1": {
+                    "name": "Br(B02Dsttaunu)",
+                    "latex": "$\\mathcal{B}(B^0\\to D^{\\ast-}\\tau^+ \\nu_\\tau)$",
+                    "value": 1.42e-2,
+                    "sta_err_up": 0.094e-2,
+                    "sta_err_down": 0.094e-2,
+                    "sys_err_up": 0.129e-2,
+                    "sys_err_down": 0.129e-2,
+                    "type@1_err_name": "external branching fractions",
+                    "type@1_err_up": 0.054e-2,
+                    "type@1_err_down": 0.054e-2,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "obs@2": {
+                    "name": "RDst-[tau/mu]",
+                    "latex": "$R_{D^{\\ast-}}^{\\tau\\mu}$",
+                    "value": 0.291,
+                    "sta_err_up": 0.019,
+                    "sta_err_down": 0.019,
+                    "sys_err_up": 0.026,
+                    "sys_err_down": 0.026,
+                    "type@1_err_name": "external branching fractions",
+                    "type@1_err_up": 0.013,
+                    "type@1_err_down": 0.013,
+                    "tot_err_up": null,
+                    "tot_err_down": null
+                },
+                "correlation": null
+            }
+        ]
+    }

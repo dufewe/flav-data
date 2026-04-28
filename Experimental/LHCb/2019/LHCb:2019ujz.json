@@ -1,0 +1,50 @@
+{
+    "inspirehep": "LHCb:2019ujz",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for the lepton-flavour-violating decays $B^{0}_{s}\\to\\tau^{\\pm}\\mu^{\\mp}$ and $B^{0}\\to\\tau^{\\pm}\\mu^{\\mp}$",
+    "arxiv": "hep-ex/1905.06614",
+    "year": "2019",
+    "abstract": "a search for the rare decays $B^0_s \\to \\tau^\\pm \\mu^\\mp$ and $B^0 \\to \\tau^\\pm \\mu^\\mp$, where the tau lepton is reconstructed in the channel $\\tau^- \\to \\pi^- \\pi^+ \\pi^- \\nu_\\tau$, based on a data sample corresponding to 3 fb$^{−1}$ of proton-proton collisions recorded in 2011 and 2012",
+    "pdf": "https://arxiv.org/pdf/1905.06614",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs02mutau)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\mu^\\mp \\tau^\\pm)$",
+                "value": null,
+                "tot_err_up": 3.4e-5,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bs02mutau)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\mu^\\mp \\tau^\\pm)$",
+                "value": null,
+                "tot_err_up": 4.2e-5,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        },
+        {
+            "obs@1": {
+                "name": "Br(B02mutau)",
+                "latex": "$\\mathcal{B}(B^0 \\to \\mu^\\mp \\tau^\\pm)$",
+                "value": null,
+                "tot_err_up": 1.2e-5,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B02mutau)",
+                "latex": "$\\mathcal{B}(B^0 \\to \\mu^\\mp \\tau^\\pm)$",
+                "value": null,
+                "tot_err_up": 1.4e-5,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        }
+    ]
+}

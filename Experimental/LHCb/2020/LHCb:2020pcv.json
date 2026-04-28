@@ -1,0 +1,50 @@
+{
+    "inspirehep": "LHCb:2020pcv",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for the Rare Decays $B^0_s\\to e^+e^-$ and $B^0\\to e^+e^-$",
+    "arxiv": "hep-ex/2003.03999",
+    "year": "2020",
+    "abstract": "a search for the decays $B^0_s \\to e^+ e^−$ and $B^0 \\to e^+ e^−$, using data collected in proton-proton collisions at center-of-mass energies of 7, 8 and 13 TeV and corresponding to integrated luminosities of 1, 2 and 2 fb$^{−1}$, respectively",
+    "pdf": "https://arxiv.org/pdf/2003.03999",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs02ee)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to e^+ e^-)$",
+                "value": null,
+                "tot_err_up": 9.4e-9,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bs02ee)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to e^+ e^-)$",
+                "value": null,
+                "tot_err_up": 11.2e-9,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        },
+        {
+            "obs@1": {
+                "name": "Br(B02ee)",
+                "latex": "$\\mathcal{B}(B^0 \\to e^+ e^-)$",
+                "value": null,
+                "tot_err_up": 2.5e-9,
+                "tot_err_down": null,
+                "level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B02ee)",
+                "latex": "$\\mathcal{B}(B^0 \\to e^+ e^-)$",
+                "value": null,
+                "tot_err_up": 3.0e-9,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        }
+    ]
+}

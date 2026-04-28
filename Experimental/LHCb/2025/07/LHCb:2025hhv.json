@@ -1,0 +1,40 @@
+{
+    "inspire-hep": "[LHCb:2025hhv](https://inspirehep.net/literature/2952168)",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $B^0\\to \\rho(770)^0 \\gamma$ branching fraction",
+    "arxiv": "[hep-ex/2507.14401v3](https://arxiv.org/pdf/2507.14401)",
+    "time": "2025.07.18",
+    "abstract": "the ratio between the branching fractions of the $B^0 \\to \\rho(770)^0 \\gamma$ and $B^0 \\to K^{\\ast} (892)^0 \\gamma$ decays with proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2507.14401",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.rho0.gamma)/Br(B0.2.Kst0.gamma)",
+                "latex": "$\\mathcal{B}(B^0\\to\\rho^0\\gamma)/\\mathcal{B}(B^0\\to K^{\\ast0}\\gamma)$",
+                "value": "0.0189",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.0007",
+                "type@1_err_down": "0.0007",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.0005",
+                "type@2_err_down": "0.0005"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.rho0.gamma)",
+                "latex": "$\\mathcal{B}(B^0\\to \\rho^0\\gamma)$",
+                "value": "7.9e-7",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.3e-7",
+                "type@1_err_down": "0.3e-7",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.2e-7",
+                "type@2_err_down": "0.2e-7",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.2e-7",
+                "type@3_err_down": "0.2e-7"
+            }
+        }
+    ],
+    "transition-mode": "radiative decay"
+}

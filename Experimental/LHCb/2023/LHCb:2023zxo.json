@@ -1,0 +1,40 @@
+{
+    "inspirehep": "LHCb:2023zxo",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the ratios of branching fractions $\\mathcal{R}(D^{*})$ and $\\mathcal{R}(D^{0})$",
+    "arxiv": "hep-ex/2302.02886",
+    "year": "2023",
+    "abstract": "an analysis of the ratios of branching fractions $R(D^\\ast) \\equiv \\mathcal{B}(B \\to D^\\ast \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(B \\to D^\\ast \\mu^− \\bar{\\nu}_\\mu)$ and $R(D^0) \\equiv \\mathcal{B}(B^- \\to D^0 \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(B^− \\to D^0 \\mu^− \\bar{\\nu}_\\mu)$, assuming isospin symmetry, using a sample of proton-proton collision data corresponding to 3.0 fb$^{−1}$ of integrated luminosity recorded during 2011 and 2012",
+    "pdf": "https://arxiv.org/pdf/2302.02886",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RDst[tau/mu]",
+                "latex": "$R_{D^\\ast}^{\\tau/\\mu}$",
+                "value": 0.281,
+                "sta_err_up": 0.018,
+                "sta_err_down": 0.018,
+                "sys_err_up": 0.024,
+                "sys_err_down": 0.024,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "obs@2": {
+                "name": "RD0[tau/mu]",
+                "latex": "$R_{D^0}^{\\tau/\\mu}$",
+                "value": 0.441,
+                "sta_err_up": 0.060,
+                "sta_err_down": 0.060,
+                "sys_err_up": 0.066,
+                "sys_err_down": 0.066,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "correlation": [
+                [1.0, -0.43],
+                [-0.43, 1.0]
+            ]
+        }
+    ]
+}

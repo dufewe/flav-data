@@ -1,0 +1,615 @@
+{
+  "HFLAV@overview": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "overview of popular observables",
+    "observables": [
+      {
+        "name": "Tau(B0)",
+        "value": 1.517,
+        "error": 0.004,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(B+)",
+        "value": 1.638,
+        "error": 0.004,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(Bs0)",
+        "value": 1.516,
+        "error": 0.006,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(BsL0)",
+        "value": 1.432,
+        "error": 0.006,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(BsH0)",
+        "value": 1.612,
+        "error": 0.008,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(Bc+)",
+        "value": 0.510,
+        "error": 0.009,
+        "unit": "ps"
+      },
+      {
+        "name": "Tau(Lambdab0)",
+        "value": 1.468,
+        "error": 0.009,
+        "unit": "ps"
+      },
+      {
+        "name": "DeltaMd",
+        "value": 0.5069,
+        "error": 0.0019,
+        "unit": "ps-1"
+      },
+      {
+        "name": "DeltaMs",
+        "value": 17.766,
+        "error": 0.006,
+        "unit": "ps-1"
+      },
+      {
+        "name": "Br(B02Dst+lnu)",
+        "value": 0.049,
+        "error": 0.0012
+      },
+      {
+        "name": "Br(B-2Dst0lnu)",
+        "value": 0.0553,
+        "error": 0.0022
+      },
+      {
+        "name": "Br(B02D+lnu)",
+        "value": 0.0212,
+        "error": 0.0006
+      },
+      {
+        "name": "Br(B-2D0lnu)",
+        "value": 0.0221,
+        "error": 0.0006
+      },
+      {
+        "name": "Br(B2Xclnu)",
+        "value": 0.1063,
+        "error": 0.0015
+      },
+      {
+        "name": "Br(B2Xlnu)",
+        "value": 0.1082,
+        "error": 0.0015
+      },
+      {
+        "name": "Br(B02pi-lnu)",
+        "value": 0.00015,
+        "error": 0.000005
+      },
+      {
+        "name": "Br(B+2rho0lnu)",
+        "value": 0.000158,
+        "error": 0.000011
+      },
+      {
+        "name": "Br(B+2omegalnu)",
+        "value": 0.000119,
+        "error": 0.000010
+      },
+      {
+        "name": "Br(B+2etalnu)",
+        "value": 0.344e-4,
+        "error": 0.043e-4
+      },
+      {
+        "name": "Br(B+2etaprimelnu)",
+        "value": 0.249e-4,
+        "error": 0.067e-4
+      },
+      {
+        "name": "|Vub|@GGOU",
+        "value": 4.06e-3,
+        "error": 0.16e-3
+      },
+      {
+        "name": "|Vub|@exclusive",
+        "value": 3.75e-3,
+        "error": 0.20e-3
+      },
+      {
+        "name": "|Vcb|@exclusive",
+        "value": 39.62e-3,
+        "error": 0.47e-3
+      },
+      {
+        "name": "Br(B+2Kst+[892]gamma)",
+        "value": 39.9e-6,
+        "error": 1.2e-6
+      },
+      {
+        "name": "Br(B+2rho+[770]gamma)",
+        "value": 0.98e-6,
+        "error": 0.24e-6
+      },
+      {
+        "name": "Br(B+2pi+mumu)",
+        "value": 0.0178e-6,
+        "error": 0.0023e-6
+      },
+      {
+        "name": "Br(B+2K+ll)",
+        "value": 0.576e-6,
+        "error": 0.040e-6
+      },
+      {
+        "name": "Br(B+2K+ee)",
+        "value": 0.561e-6,
+        "error": 0.056e-6
+      },
+      {
+        "name": "Br(B+2K+mumu)",
+        "value": 0.450e-6,
+        "error": 0.021e-6
+      },
+      {
+        "name": "Br(B+2Kst+[892]ll)",
+        "value": 1.010e-6,
+        "error": 0.099e-6
+      },
+      {
+        "name": "Br(B+2Kst+[892]ee)",
+        "value": 1.55e-6,
+        "error": 0.33e-6
+      },
+      {
+        "name": "Br(B+2Kst+[892]mumu)",
+        "value": 0.96e-6,
+        "error": 0.10e-6
+      },
+      {
+        "name": "Br(B02Kst0[892]gamma)",
+        "value": 42.1e-6,
+        "error": 1.1e-6
+      },
+      {
+        "name": "Br(B02rho0[770]gamma)",
+        "value": 0.86e-6,
+        "error": 0.15e-6
+      },
+      {
+        "name": "Br(B02omega[782]gamma)",
+        "value": 0.44e-6,
+        "error": 0.17e-6
+      },
+      {
+        "name": "Br(B02K0ll)",
+        "value": 0.328e-6,
+        "error": 0.032e-6
+      },
+      {
+        "name": "Br(B02K0ee)",
+        "value": 0.249e-6,
+        "error": 0.072e-6
+      },
+      {
+        "name": "Br(B02K0mumu)",
+        "value": 0.341e-6,
+        "error": 0.034e-6
+      },
+      {
+        "name": "Br(B02Kst0[892]ll)",
+        "value": 0.99e-6,
+        "error": 0.12e-6
+      },
+      {
+        "name": "Br(B02Kst0[892]ee)",
+        "value": 1.04e-6,
+        "error": 0.17e-6
+      },
+      {
+        "name": "Br(B02Kst0[892]mumu)",
+        "value": 0.94e-6,
+        "error": 0.06e-6
+      },
+      {
+        "name": "Br(B2Xsgamma)",
+        "value": 349e-6,
+        "error": 19e-6,
+        "limit": "B+-/B0-admix,Egamma>1.6GeV"
+      },
+      {
+        "name": "Br(B2rhogamma)",
+        "value": 1.40e-6,
+        "error": 0.22e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2rho/omegagamma)",
+        "value": 1.30e-6,
+        "error": 0.18e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Xsee)",
+        "value": 6.67e-6,
+        "error": 0.83e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Xsmumu)",
+        "value": 4.27e-6,
+        "error": 0.95e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Xsll)",
+        "value": 5.84e-6,
+        "error": 0.69e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kee)",
+        "value": 0.44e-6,
+        "error": 0.06e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kstee)",
+        "value": 1.22e-6,
+        "error": 0.16e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kmumu)",
+        "value": 0.442e-6,
+        "error": 0.036e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kstmumu)",
+        "value": 1.07e-6,
+        "error": 0.09e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kll)",
+        "value": 0.48e-6,
+        "error": 0.04e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B2Kstll)",
+        "value": 1.07e-6,
+        "error": 0.10e-6,
+        "limit": "B+-/B0-admix"
+      },
+      {
+        "name": "Br(B+2tau+nu)",
+        "value": 1094e-7,
+        "error": 208e-7
+      },
+      {
+        "name": "RK+[mu/e]",
+        "value": 0.947,
+        "error": 0.047,
+        "limit": "q2@1.1-6.0"
+      },
+      {
+        "name": "RKst0[892][mu/e]",
+        "value": 1.028,
+        "error": 0.074,
+        "limit": "q2@1.1-6.0"
+      },
+      {
+        "name": "ACP(B+2Kst+[892]gamma)",
+        "value": 0.014,
+        "error": 0.018
+      },
+      {
+        "name": "ACP(B+2Xsgamma)",
+        "value": 0.028,
+        "error": 0.019
+      }
+    ],
+    "correlation": null
+  },
+  "HFLAV@B02pilnu": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "q2-binned branching ratio of B02pi-lnu, namely DeltaBr(B02pi-lnu)/Deltaq2",
+    "observables": [
+      {
+        "name": "q2@0-2",
+        "value": 66.3e-7,
+        "error": 6.1e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@2-4",
+        "value": 69.9e-7,
+        "error": 4.5e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@4-6",
+        "value": 65.5e-7,
+        "error": 3.9e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@6-8",
+        "value": 72.6e-7,
+        "error": 4.2e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@8-10",
+        "value": 67.2e-7,
+        "error": 4.3e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@10-12",
+        "value": 74.2e-7,
+        "error": 4.6e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@12-14",
+        "value": 67.7e-7,
+        "error": 4.6e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@14-16",
+        "value": 64.9e-7,
+        "error": 4.7e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@16-18",
+        "value": 61.5e-7,
+        "error": 4.4e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@18-20",
+        "value": 42.1e-7,
+        "error": 4.3e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@20-22",
+        "value": 45.3e-7,
+        "error": 4.0e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@22-24",
+        "value": 37.1e-7,
+        "error": 4.2e-7,
+        "unit": "GeV-2"
+      },
+      {
+        "name": "q2@24-26.4",
+        "value": 13.2e-7,
+        "error": 2.6e-7,
+        "unit": "GeV-2"
+      }
+    ],
+    "correlation": [
+      [1.0,-0.009,0.233,0.176,0.136,0.17,0.145,0.184,0.159,0.133,0.167,0.15,0.106],
+      [-0.009,1.0,-0.091,0.279,0.126,0.154,0.139,0.144,0.126,0.091,0.127,0.102,0.072],
+      [0.233,-0.091,1.0,-0.031,0.274,0.195,0.207,0.171,0.164,0.116,0.153,0.126,0.093],
+      [0.176,0.279,-0.031,1.0,-0.006,0.294,0.226,0.2,0.186,0.124,0.167,0.151,0.092],
+      [0.136,0.126,0.274,-0.006,1.0,0.033,0.297,0.171,0.182,0.12,0.138,0.138,0.082],
+      [0.17,0.154,0.195,0.294,0.033,1.0,0.097,0.254,0.219,0.153,0.172,0.173,0.103],
+      [0.145,0.139,0.207,0.226,0.297,0.097,1.0,-0.011,0.196,0.094,0.146,0.13,0.079],
+      [0.184,0.144,0.171,0.2,0.171,0.254,-0.011,1.0,0.139,0.194,0.146,0.161,0.103],
+      [0.159,0.126,0.164,0.186,0.182,0.219,0.196,0.139,1.0,0.076,0.149,0.13,0.087],
+      [0.133,0.091,0.116,0.124,0.12,0.153,0.094,0.194,0.076,1.0,0.043,0.111,0.057],
+      [0.167,0.127,0.153,0.167,0.138,0.172,0.146,0.146,0.149,0.043,1.0,0.073,0.094],
+      [0.15,0.102,0.126,0.151,0.138,0.173,0.13,0.161,0.13,0.111,0.073,1.0,-0.038],
+      [0.106,0.072,0.093,0.092,0.082,0.103,0.079,0.103,0.087,0.057,0.094,-0.038,1.0]
+    ]
+  },
+  "HFLAV@B+2rho0lnu": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "q2-binned decay width of B+2rho0lnu, namely DeltaGamma(B+2rho0lnu)/Deltaq2",
+    "observables": [
+      {
+        "name": "q2@0-2",
+        "value": 1.54e-18,
+        "error": 0.62e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@2-4",
+        "value": 2.11e-18,
+        "error": 0.60e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@4-6",
+        "value": 2.68e-18,
+        "error": 0.65e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@6-8",
+        "value": 3.22e-18,
+        "error": 0.67e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@8-10",
+        "value": 2.40e-18,
+        "error": 0.56e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@10-12",
+        "value": 3.34e-18,
+        "error": 0.65e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@12-14",
+        "value": 3.35e-18,
+        "error": 0.65e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@14-16",
+        "value": 3.27e-18,
+        "error": 0.63e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@16-18",
+        "value": 2.66e-18,
+        "error": 0.57e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@18-20",
+        "value": 2.22e-18,
+        "error": 0.52e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@20-22",
+        "value": 0.35e-18,
+        "error": 0.32e-18,
+        "unit": "GeV-1"
+      }
+    ],
+    "correlation": [
+      [1.00,-0.30,0.03,0.01,0.09,0.09,0.09,0.09,0.08,0.08,0.02],
+      [-0.30,1.00,-0.03,0.09,0.11,0.12,0.12,0.12,0.11,0.10,0.02],
+      [0.03,-0.03,1.00,-0.18,0.13,0.13,0.15,0.14,0.13,0.12,0.03],
+      [0.01,0.09,-0.18,1.00,0.06,0.18,0.18,0.18,0.16,0.14,0.04],
+      [0.09,0.11,0.13,0.06,1.00,-0.21,0.05,0.04,0.12,0.10,0.03],
+      [0.09,0.12,0.13,0.18,-0.21,1.00,-0.00,0.07,0.15,0.13,0.04],
+      [0.09,0.12,0.15,0.18,0.05,-0.00,1.00,-0.16,0.14,0.12,0.04],
+      [0.09,0.12,0.14,0.18,0.04,0.07,-0.16,1.00,0.10,0.14,0.05],
+      [0.08,0.11,0.13,0.16,0.12,0.15,0.14,0.10,1.00,-0.27,-0.11],
+      [0.08,0.10,0.12,0.14,0.10,0.13,0.12,0.14,-0.27,1.00,-0.13],
+      [0.02,0.02,0.03,0.04,0.03,0.04,0.04,0.05,-0.11,-0.13,1.00]
+    ]
+  },
+  "HFLAV@B+2omegalnu": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "q2-binned decay width of B+2omegalnu, namely DeltaGamma(B+2omegalnu)/Deltaq2",
+    "observables": [
+      {
+        "name": "q2@0-4",
+        "value": 1.51e-18,
+        "error": 0.46e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@4-8",
+        "value": 1.82e-18,
+        "error": 0.35e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@8-10",
+        "value": 2.95e-18,
+        "error": 0.56e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@10-12",
+        "value": 3.44e-18,
+        "error": 0.59e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "q2@12-21",
+        "value": 2.22e-18,
+        "error": 0.40e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "theta2",
+        "value": -0.01e-18,
+        "error": 1.00e-18,
+        "unit": "GeV-1"
+      },
+      {
+        "name": "theta5",
+        "value": 0.00e-18,
+        "error": 1.00e-18,
+        "unit": "GeV-1"
+      }
+    ],
+    "correlation": [
+      [1.00,-0.15,0.08,0.04,0.06,-0.01,0.00],
+      [-0.15,1.00,0.09,0.09,0.15,-0.01,-0.00],
+      [0.08,0.09,1.00,-0.01,0.12,-0.00,-0.00],
+      [0.04,0.09,-0.01,1.00,0.15,0.00,-0.00],
+      [0.06,0.15,0.12,0.15,1.00,-0.00,-0.00],
+      [-0.01,-0.01,-0.00,0.00,-0.00,1.00,0.00],
+      [0.00,-0.00,-0.00,-0.00,-0.00,0.00,1.00]
+    ]
+  },
+  "HFLAV@|Vub|-|Vcb|": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "combined average on |Vub| and |Vcb|",
+    "observables": [
+      {
+        "name": "|Vub|",
+        "value": 3.43e-3,
+        "error": 0.12e-3
+      },
+      {
+        "name": "|Vcb|",
+        "value": 39.77e-3,
+        "error": 0.46e-3
+      }
+    ],
+    "correlation": [
+      [1.0,0.239],
+      [0.239,1.0]
+    ]
+  },
+  "HFLAV@RD[tau/l]-RDst[tau/l]": {
+    "group": "HFLAV",
+    "arxiv": "2411.18639",
+    "inspire": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+    "description": "combined average on RD and RDst, D+-/D0-admix",
+    "observables": [
+      {
+        "name": "RD[tau/l]",
+        "value": 0.342,
+        "error": 0.026
+      },
+      {
+        "name": "RDst[tau/l]",
+        "value": 0.286,
+        "error": 0.012
+      }
+    ],
+    "correlation": [
+      [1.0,-0.39],
+      [-0.39,1.0]
+    ]
+  }
+}

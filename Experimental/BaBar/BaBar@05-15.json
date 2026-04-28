@@ -1,0 +1,46 @@
+{
+  "BaBar:2005mbx": {
+    "group": "BaBar",
+    "description": "branching ratio of B0 -> tautau",
+    "observables": [
+      {
+        "name": "Br(B02tautau)",
+        "value_up": 4.1e-3,
+        "CL": "90%"
+      }
+    ],
+    "correlation": null
+  },
+  "BaBar:2009cwx": {
+    "group": "BaBar",
+    "description": "branching ratios of B -> Dtaunu and B -> Dsttaunu, LFUV RD and RDst",
+    "observables": [
+      {
+        "name": "Br(B2Dtaunu)",
+        "value": 0.86e-2,
+        "error": 0.27e-2
+      },
+      {
+        "name": "Br(B2Dsttaunu)",
+        "value": 1.62e-2,
+        "error": 0.33e-2
+      },
+      {
+        "name": "RD[tau/l]",
+        "value": 41.6e-2,
+        "error": 12.80e-2
+      },
+      {
+        "name": "RDst[tau/l]",
+        "value": 29.7e-2,
+        "error": 5.88e-2
+      }
+    ],
+    "correlation": [
+      [0,0,0,0],
+      [0,0,0,0],
+      [0,0,1.0,-0.448],
+      [0,0,-0.448,1.0]
+    ]
+  }
+}

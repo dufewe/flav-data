@@ -1,0 +1,175 @@
+{
+    "inspire-hep": "[LHCb:2025rfy](https://inspirehep.net/literature/2909896)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Angular analysis of the decay $B^0_s \\to \\phi e^+ e^-$",
+    "arxiv": "[hep-ex/2504.06346v2](https://arxiv.org/pdf/2504.06346)",
+    "time": "2025.04.08",
+    "abstract": "an angular analysis of the decay $B^0_s \\to \\phi e^+ e^-$ in three bins of dielectron mass squared q$^2$, using proton-proton collision data collected with the LHCb detector between 2011 and 2018 at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$",
+    "pdf": "https://arxiv.org/pdf/2504.06346",
+    "data": [
+        {
+            "obs@1": {
+                "name": "FL(Bs0.2.phi.e+.e-)",
+                "latex": "$F_L(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.25",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.06",
+                "type@2_err_down": "0.06",
+                "q2min": "0.1",
+                "q2max": "1.1"
+            },
+            "obs@2": {
+                "name": "A6p(Bs0.2.phi.e+.e-)",
+                "latex": "$A^{\\prime}_6(B^0_s\\to \\phi e^+e^-$",
+                "value": "0.60",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.23",
+                "type@1_err_down": "0.28",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "q2min": "0.1",
+                "q2max": "1.1"
+            },
+            "obs@3": {
+                "name": "S3(Bs0.2.phi.e+.e-)",
+                "latex": "$S_3(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.23",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.24",
+                "type@1_err_down": "0.24",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "q2min": "0.1",
+                "q2max": "1.1"
+            },
+            "obs@4": {
+                "name": "A9(Bs0.2.phi.e+.e-)",
+                "latex": "$A_9(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.28",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.23",
+                "type@1_err_down": "0.24",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "q2min": "0.1",
+                "q2max": "1.1"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "FL(Bs0.2.phi.e+.e-)",
+                "latex": "$F_L(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.67",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.13",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.06",
+                "type@2_err_down": "0.06",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
+            "obs@2": {
+                "name": "A6p(Bs0.2.phi.e+.e-)",
+                "latex": "$A^{\\prime}_6(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.24",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.40",
+                "type@1_err_down": "0.42",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.09",
+                "type@2_err_down": "0.09",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
+            "obs@3": {
+                "name": "S3(Bs0.2.phi.e+.e-)",
+                "latex": "$S_3(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.07",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.21",
+                "type@1_err_down": "0.21",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
+            "obs@4": {
+                "name": "A9(Bs0.2.phi.e+.e-)",
+                "latex": "$A_9(B^0_s\\to \\phi e^+e^-)$",
+                "value": "-0.14",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.23",
+                "type@1_err_down": "0.24",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "FL(Bs0.2.phi.e+.e-)",
+                "latex": "$F_L(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.43",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.10",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "q2min": "15.0",
+                "q2max": "19.0"
+            },
+            "obs@2": {
+                "name": "A6p(Bs0.2.phi.e+.e-)",
+                "latex": "$A^{\\prime}_6(B^0_s\\to \\phi e^+e^-)$",
+                "value": "-0.57",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.24",
+                "type@1_err_down": "0.25",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "q2min": "15.0",
+                "q2max": "19.0"
+            },
+            "obs@3": {
+                "name": "S3(Bs0.2.phi.e+.e-)",
+                "latex": "$S_3(B^0_s\\to \\phi e^+e^-)$",
+                "value": "-0.01",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.29",
+                "type@1_err_down": "0.28",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.08",
+                "q2min": "15.0",
+                "q2max": "19.0"
+            },
+            "obs@4": {
+                "name": "A9(Bs0.2.phi.e+.e-)",
+                "latex": "$A_9(B^0_s\\to \\phi e^+e^-)$",
+                "value": "0.06",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.25",
+                "type@1_err_down": "0.25",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "q2min": "15.0",
+                "q2max": "19.0"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

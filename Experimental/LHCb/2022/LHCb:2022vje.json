@@ -1,0 +1,72 @@
+{
+    "inspirehep": "LHCb:2022vje",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of lepton universality parameters in $B^+\\to K^+\\ell^+\\ell^-$ and $B^0\\to K^{*0}\\ell^+\\ell^-$ decays",
+    "arxiv": "hep-ex/2212.09153",
+    "year": "2022",
+    "abstract": "a simultaneous analysis of the $B^+ \\to K^+ \\ell^+ \\ell^−$ and $B^0 \\to K^{\\ast0} \\ell^+ \\ell^−$ decays to test muon-electron universality in two ranges of the square of the dilepton invariant mass, q2, using a sample of beauty meson decays produced in proton-proton collisions collected between 2011 and 2018 and corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2212.09153",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RK+[mu/e]",
+                "latex": "$R_{K^+}^{\\mu/e}$",
+                "value": 0.949,
+                "sta_err_up": 0.042,
+                "sta_err_down": 0.041,
+                "sys_err_up": 0.022,
+                "sys_err_down": 0.022,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 1.1,
+                "q2max": 6.0
+            },
+            "obs@2": {
+                "name": "RK+[mu/e]",
+                "latex": "$R_{K^+}^{\\mu/e}$",
+                "value": 0.994,
+                "sta_err_up": 0.09,
+                "sta_err_down": 0.082,
+                "sys_err_up": 0.029,
+                "sys_err_down": 0.027,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 0.1,
+                "q2max": 1.1
+            },
+            "obs@3": {
+                "name": "RKst0[mu/e]",
+                "latex": "$R_{K^{\\ast0}}^{\\mu/e}$",
+                "value": 1.027,
+                "sta_err_up": 0.072,
+                "sta_err_down": 0.068,
+                "sys_err_up": 0.027,
+                "sys_err_down": 0.026,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 1.1,
+                "q2max": 6.0
+            },
+            "obs@4": {
+                "name": "RKst0[mu/e]",
+                "latex": "$R_{K^{\\ast0}}^{\\mu/e}$",
+                "value": 0.927,
+                "sta_err_up": 0.093,
+                "sta_err_down": 0.087,
+                "sys_err_up": 0.036,
+                "sys_err_down": 0.035,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 0.1,
+                "q2max": 1.1
+            },
+            "correlation": [
+                [1.000, 0.015, -0.017, 0.005],
+                [0.015, 1.000, 0.004, -0.033],
+                [-0.017, 0.004, 1.000, 0.016],
+                [0.005, -0.033, 0.016, 1.000]
+            ]
+        }
+    ]
+}

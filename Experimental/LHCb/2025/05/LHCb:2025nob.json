@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "[LHCb:2025nob](https://inspirehep.net/literature/2923439)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the Z-Boson Mass",
+    "arxiv": "[hep-ex/2505.15582v2](https://arxiv.org/pdf/2505.15582)",
+    "time": "2025.05.21",
+    "abstract": "the first dedicated Z-boson mass measurement at the LHC with $Z \\to \\mu^+ \\mu^−$ decays, using proton-proton collisions at a centre-of-mass energy of 13 TeV, recorded in 2016 by the LHCb experiment, and corresponds to an integrated luminosity of 1.7 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2505.15582",
+    "data": [
+        {
+            "obs@1": {
+                "name": "MZ",
+                "latex": "M_Z",
+                "value": "91185.7",
+                "type@1_err": "stat",
+                "type@1_err_up": "8.3",
+                "type@1_err_down": "8.3",
+                "type@2_err": "syst",
+                "type@2_err_up": "3.9",
+                "type@2_err_down": "3.9",
+                "unit": "MeV"
+            },
+            "obs@2": {
+                "name": "f(Z.2.mu+.mu-)",
+                "latex": "$f(Z\\to \\mu^+\\mu^-)$",
+                "value": "1.2",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.1",
+                "type@1_err_down": "0.1"
+            },
+            "type@1_correlation": [
+                [1, 0.015],
+                [0.015, 1]
+            ]
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

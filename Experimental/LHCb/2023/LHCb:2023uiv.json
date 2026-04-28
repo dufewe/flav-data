@@ -1,0 +1,43 @@
+{
+    "inspirehep": "LHCb:2023uiv",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Test of lepton flavor universality using $B^0 \\to D^{*-} \\tau^+ \\nu_\\tau$ decays with hadronic \\tau channels",
+    "arxiv": "hep-ex/2305.01463",
+    "year": "2023",
+    "abstract": "an analysis of the branching fraction $\\mathcal{B}(B^0 \\to D^{\\ast−} \\tau^+ \\nu_\\tau) relative to that of the normalization mode $B^0 \\to D^{\\ast-} \\pi^+ \\pi^− \\pi^+$ using hadronic $\\tau^+ \\to \\pi^+ \\pi^− \\pi^+ (\\pi^0) \\bar{\\nu}_\\tau$ decays and the lepton universality $R(D^{\\ast-})$, in proton-proton collision data at a center-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 2 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2305.01463",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B02Dst+taunu)",
+                "latex": "$\\mathcal{B}(\\bar{B}^0 \\to D^{\\ast+} \\tau^- \\bar{\\nu}_\\tau)$",
+                "value": 1.29e-2,
+                "sta_err_up": 0.08e-2,
+                "sta_err_down": 0.08e-2,
+                "sys_err_up": 0.08e-2,
+                "sys_err_down": 0.08e-2,
+                "type@1_err_name": "external",
+                "type@1_err_up": 0.05e-2,
+                "type@1_err_down": 0.05e-2,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "obs@2": {
+                "name": "RDst+[tau/mu]",
+                "latex": "$R_{D^{\\ast+}}^{\\tau/\\mu}$",
+                "value": 0.260,
+                "sta_err_up": 0.015,
+                "sta_err_down": 0.015,
+                "sys_err_up": 0.016,
+                "sys_err_down": 0.016,
+                "type@1_err_name": "external",
+                "type@1_err_up": 0.012,
+                "type@1_err_down": 0.012,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "correlation": null
+        }
+    ]
+}

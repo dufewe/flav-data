@@ -1,0 +1,39 @@
+{
+    "inspirehep": "LHCb:2021trn",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Test of lepton universality in beauty-quark decays",
+    "arxiv": "hep-ex/2103.11769",
+    "year": "2021",
+    "abstract": "a measurement of the ratio of branching fractions of the decays $B^+ \\to K^+ \\mu^+ \\mu^−$ and $B^+ \\to K^+ e^+ e^−$ with the proton-proton collision data",
+    "pdf": "https://arxiv.org/pdf/2103.11769",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RK+[mu/e]",
+                "latex": "$R_{K^+}^{\\mu/e}$",
+                "value": 0.846,
+                "sta_err_up": 0.042,
+                "sta_err_down": 0.039,
+                "sys_err_up": 0.013,
+                "sys_err_down": 0.012,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "dataset": "run1+run2"
+            },
+            "obs@2": {
+                "name": "dBr/dq2(B+2K+ee)",
+                "latex": "$d\\mathcal{B}/dq^2(B^+\\to K^+ e^+ e^-)$",
+                "value": 28.6e-9,
+                "sta_err_up": 1.5e-9,
+                "sta_err_down": 1.4e-9,
+                "sys_err_up": 1.3e-9,
+                "sys_err_down": 1.3e-9,
+                "q2min": 1.1,
+                "q2max": 6.0,
+                "unit": "GeV-2"
+            },
+            "correlation": null
+        }
+    ]
+}

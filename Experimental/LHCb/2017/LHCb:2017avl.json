@@ -1,0 +1,41 @@
+{
+    "inspirehep": "LHCb:2017avl",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Test of lepton universality with $B^{0} \\rightarrow K^{*0}\\ell^{+}\\ell^{-}$ decays",
+    "arxiv": "hep-ex/1705.05802",
+    "year": "2017",
+    "abstract": "a test of lepton universality, performed by measuring the ratio of the branching fractions of the $B^0 \\to K^{\\ast0} \\mu^+ \\mu^-$ and $B^0 \\to K^{\\ast0} e^+ e^−$ decays, $R_{K^{\\ast0}}$, where the $K^{\\ast0}$ meson is reconstructed in the ﬁnal state $K^+ \\pi^−$, using proton-proton collision data with an integrated luminosity of about 3 fb$^{−1}$ at centre-of-mass energies of 7 and 8 TeV",
+    "pdf": "https://arxiv.org/pdf/1705.05802",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RKst0[mu/e]",
+                "latex": "$R_{K^{\\ast0}}^{\\mu/e}$",
+                "value": 0.66,
+                "sta_err_up": 0.11,
+                "sta_err_down": 0.07,
+                "sys_err_up": 0.03,
+                "sys_err_down": 0.03,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 0.045,
+                "q2max": 1.1
+            },
+            "obs@2": {
+                "name": "RKst0[mu/e]",
+                "latex": "$R_{K^{\\ast0}}^{\\mu/e}$",
+                "value": 0.69,
+                "sta_err_up": 0.11,
+                "sta_err_down": 0.07,
+                "sys_err_up": 0.05,
+                "sys_err_down": 0.05,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 1.1,
+                "q2max": 6.0
+            },
+            "correlation": null
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+        "inspirehep": "LHCb:2011leg",
+        "author": "Aaij, R. and others",
+        "collaboration": "LHCb",
+        "title": "Measurement of $b$-hadron production fractions in $7~\rm{TeV}$ pp collisions",
+        "arxiv": "hep-ex/1111.2357",
+        "year": "2011",
+        "pdf": "https://arxiv.org/pdf/1111.2357",
+        "abstract": "the ratio of strange $B$ meson to light neutral $B$ meson production $f_s/f_d$",
+        "data": [
+            {
+                "obs@1": {
+                    "name": "fs/fd",
+                    "latex": "$f_s/f_d$",
+                    "value": 0.267,
+                    "sta_err_up": null,
+                    "sta_err_down": null,
+                    "sys_err_up": null,
+                    "sys_err_down": null,
+                    "tot_err_up": 0.021,
+                    "tot_err_down": 0.020
+                },
+                "correlation": null
+            }
+        ]
+    }

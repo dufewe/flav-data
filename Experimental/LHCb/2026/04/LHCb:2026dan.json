@@ -1,0 +1,45 @@
+{
+    "inspire-hep": "[LHCb:2026dan](https://inspirehep.net/literature/3144939)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $W$-boson production cross-sections in $pp$ collisions at $\\sqrt{s}$ = 13 TeV in the forward region",
+    "arxiv": "[hep-ex/2604.12706v1](https://arxiv.org/pdf/2604.12706)",
+    "time": "2026.04.14",
+    "abstract": "a precision measurement of the $W$-boson production cross-section, using the $W \\to \\mu\\nu$ decay channel, based on a sample of proton-proton collision data collected by the LHCb experiment at $\\sqrt{s} = 13$ TeV and corresponding to an integrated luminosity of 5.1 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2604.12706",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Sigma(W+.2.mu+.nu)",
+                "latex": "$\\sigma(W^+\\to \\mu^+ \\nu)$",
+                "value": "1754.2",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.5",
+                "type@1_err_down": "1.5",
+                "type@2_err": "syst",
+                "type@2_err_up": "11.9",
+                "type@2_err_down": "11.9",
+                "type@3_err_name": "lumi",
+                "type@3_err_up": "35.1",
+                "type@3_err_down": "35.1",
+                "unit": "pb"
+            },
+            "obs@2": {
+                "name": "Sigma(W-.2.mu-.nubar)",
+                "latex": "$\\sigma(W^-\\to \\mu^- \\bar{\\nu})$",
+                "value": "1178.1",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.3",
+                "type@1_err_down": "1.3",
+                "type@2_err": "syst",
+                "type@2_err_up": "9.7",
+                "type@2_err_down": "9.7",
+                "type@3_err_name": "lumi",
+                "type@3_err_up": "23.6",
+                "type@3_err_down": "23.6",
+                "unit": "pb"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

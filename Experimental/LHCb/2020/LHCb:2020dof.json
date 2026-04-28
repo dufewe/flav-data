@@ -1,0 +1,76 @@
+{
+    "inspirehep": "LHCb:2020dof",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Strong constraints on the $b \\to s\\gamma$ photon polarisation from $B^0 \\to K^{*0} e^+ e^-$ decays",
+    "arxiv": "hep-ex/2010.06011",
+    "year": "2020",
+    "abstract": "an angular analysis of the $B^0 \\to K^{\\ast0} e^+ e^−$ decay, using a data sample corresponding to an integrated luminosity of 9 fb$^{−1}$ of $pp$ collisions",
+    "pdf": "https://arxiv.org/pdf/2010.06011",
+    "data": [
+        {
+            "obs@1": {
+                "name": "FL(B02Kstee)",
+                "latex": "$F_L(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.044,
+                "sta_err_up": 0.026,
+                "sta_err_down": 0.026,
+                "sys_err_up": 0.014,
+                "sys_err_down": 0.014,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 8.000e-04,
+                "q2max": 0.257,
+                "method": "maximum likelihood"
+            },
+            "obs@2": {
+                "name": "ATRe(B02Kstee)",
+                "latex": "$A_T^{\\rm Re}(B^0\\to K^{*0}e^+e^-)$",
+                "value": -0.06,
+                "sta_err_up": 0.08,
+                "sta_err_down": 0.08,
+                "sys_err_up": 0.02,
+                "sys_err_down": 0.02,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 8.000e-04,
+                "q2max": 0.257,
+                "method": "maximum likelihood"
+            },
+            "obs@3": {
+                "name": "AT2(B02Kstee)",
+                "latex": "$A_T^{(2)}(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.11,
+                "sta_err_up": 0.1,
+                "sta_err_down": 0.1,
+                "sys_err_up": 0.02,
+                "sys_err_down": 0.02,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 8.000e-04,
+                "q2max": 0.257,
+                "method": "maximum likelihood"
+            },
+            "obs@4": {
+                "name": "ATIm(B02Kstee)",
+                "latex": "$A_T^{\\rm Im}(B^0\\to K^{*0}e^+e^-)$",
+                "value": 0.02,
+                "sta_err_up": 0.1,
+                "sta_err_down": 0.1,
+                "sys_err_up": 0.01,
+                "sys_err_down": 0.01,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "q2min": 8.000e-04,
+                "q2max": 0.257,
+                "method": "maximum likelihood"
+            },
+            "correlation": [
+                [1.0, -0.02, -0.01, 0.02],
+                [-0.02, 1.0, 0.05, 0.02],
+                [-0.01, 0.05, 1.0, 0.1],
+                [0.02, 0.02, 0.1, 1.0]
+            ]
+        }
+    ]
+}

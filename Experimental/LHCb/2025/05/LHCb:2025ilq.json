@@ -1,0 +1,50 @@
+{
+    "inspire-hep": "[LHCb:2025ilq](https://inspirehep.net/literature/2918595)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the branching fraction ratio R$_{K}$ at large dilepton invariant mass",
+    "arxiv": "[hep-ex/2505.03483v4](https://arxiv.org/pdf/2505.03483)",
+    "time": "2025.05.06",
+    "abstract": "a test of lepton universality between muons and electrons, using $B^+ \\to K^+ \\ell^+ \\ell^−$ decays (where $\\ell = e, \\mu$), in the dilepton invariant-mass-squared region above 14.3 GeV$^2/c^4$, in proton-proton collisions corresponding to an integrated luminosity of 9 fb$^{−1}$ collected by the LHCb experiment between 2011 and 2018",
+    "pdf": "https://arxiv.org/pdf/2505.03483",
+    "data": [
+        {
+            "obs@1": {
+                "name": "r(B+.2.K+)[J/psi]",
+                "latex": "$r_{B^+\\to K^+}^{J/\\psi}$",
+                "value": "0.997",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.003",
+                "type@1_err_down": "0.003",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.055",
+                "type@2_err_down": "0.055"
+            },
+            "obs@2": {
+                "name": "R(B+.2.K+)[psi(2S)]",
+                "latex": "$R_{B^+\\to K^+}^{\\psi(2S)}$",
+                "value": "1.002",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.009",
+                "type@1_err_down": "0.009",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.004",
+                "type@2_err_down": "0.004"
+            },
+            "obs@3": {
+                "name": "R(B+.2.K+)[mu/e]",
+                "latex": "$R_{B^+\\to K^+}^{[\\mu/e]}$",
+                "value": "1.08",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "q2min": "14.3"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+
+}

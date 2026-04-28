@@ -1,0 +1,55 @@
+{
+    "inspirehep": "LHCb:2021vsc",
+    "inspirehep-add": "LHCb:2021awg",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Analysis of Neutral B-Meson Decays into Two Muons",
+    "arxiv": "hep-ex/2108.09284",
+    "year": "2021",
+    "abstract": "an analysis of branching fraction and eﬀective lifetime measurements of the rare decay $B^0_s \\to \\mu^+ \\mu^-$ and searches for the decays $B^0 \\to \\mu^+ \\mu^−$ and $B^0_s \\to \\mu^+ \\mu^− \\gamma$, using proton-proton collision data collected at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to a luminosity of 9 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2108.09284",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs02mumu)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\mu^+ \\mu^-)$",
+                "value": 3.09e-9,
+                "sta_err_up": 0.46e-9,
+                "sta_err_down": 0.43e-9,
+                "sys_err_up": 0.15e-9,
+                "sys_err_down": 0.11e-9,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "obs@2": {
+                "name": "Tau(Bs02mumu)",
+                "latex": "$\\tau(B_s^0\\to \\mu^+ \\mu^-)$",
+                "value": 2.07,
+                "sta_err_up": 0.29,
+                "sta_err_down": 0.29,
+                "sys_err_up": 0.03,
+                "sys_err_down": 0.03,
+                "tot_err_up": null,
+                "tot_err_down": null,
+                "unit": "ps"
+            },
+            "obs@3": {
+                "name": "Br(B02mumu)",
+                "latex": "$\\mathcal{B}(B^0 \\to \\mu^+ \\mu^-)$",
+                "value": null,
+                "tot_err_up": 2.6e-10,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "obs@4": {
+                "name": "Br(Bs02mumugamma)",
+                "latex": "$\\mathcal{B}(B_s^0 \\to \\mu^+ \\mu^- \\gamma)$",
+                "value": null,
+                "tot_err_up": 2.0e-9,
+                "tot_err_down": null,
+                "level": "95%@CL"
+            },
+            "correlation": null
+        }
+    ]
+}

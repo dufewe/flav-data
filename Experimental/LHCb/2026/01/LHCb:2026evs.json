@@ -1,0 +1,31 @@
+{
+    "inspire-hep": "[LHCb:2026evs](https://inspirehep.net/literature/3103133)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Search for lepton-number-violating $B^-\\to D^{(*)+}\\mu^- \\mu^-$ decays",
+    "arxiv": "[hep-ex/2601.07657v1](https://arxiv.org/pdf/2601.07657)",
+    "time": "2026.01.12",
+    "abstract": "a search for lepton-number-violating $B^− \\to D^{(\\ast)+}\\mu^− \\mu^−$ decays, using data collected by the LHCb experiment in proton-proton collisions at a center-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 5.4 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2601.07657",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B-.2.D+.mu-.mu-)",
+                "latex": "$\\mathcal{B}(B^-\\to D^+ \\mu^- \\mu^-)$",
+                "type@1_upper_limit": "3.8e-8",
+                "type@1_level": "90%@CLs",
+                "type@2_upper_limit": "4.6e-8",
+                "type@2_level": "95%@CLs"
+            },
+            "obs@2": {
+                "name": "Br(B-.2.Dst+.mu-.mu-)",
+                "latex": "$\\mathcal{B}(B^-\\to D^{\\ast+} \\mu^- \\mu^-)$",
+                "type@1_upper_limit": "4.5e-8",
+                "type@1_level": "90%@CLs",
+                "type@2_upper_limit": "5.9e-8",
+                "type@2_level": "95%@CLs"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

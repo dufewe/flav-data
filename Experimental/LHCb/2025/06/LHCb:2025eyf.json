@@ -1,0 +1,31 @@
+{
+    "inspire-hep": "[LHCb:2025eyf](https://inspirehep.net/literature/2936547)",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Search for the lepton-flavour-violating decays $B^0 \\to K^{\\ast0} \\tau^{\\pm} e^{\\mp}$",
+    "arxiv": "[hep-ex/2506.15347v2](https://arxiv.org/pdf/2506.15347)",
+    "time": "2025.06.18",
+    "abstract": "a first search at LHCb for the lepton-flavour-violating decays $B^0 \\to K^{\\ast0} \\tau^{\\pm} e^{\\mp}$, using a sample of proton-proton collision data collected with the LHCb detector at a centre-of-mass energy of 13 TeV between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2506.15347",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.Kst0.tau-.e+)",
+                "latex": "$\\mathcal{B}(B^0\\to K^{\\ast0} \\tau^- e^+)$",
+                "type@1_upper_limit": "5.9e-6",
+                "type@1_level": "90%@CLs",
+                "type@2_upper_limit": "7.1e-6",
+                "type@2_level": "95%@CLs"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.Kst0.tau+.e-)",
+                "latex": "$\\mathcal{B}(B^0\\to K^{\\ast0} \\tau^+ e^-)$",
+                "type@1_upper_limit": "4.9e-6",
+                "type@1_level": "90%@CLs",
+                "type@2_upper_limit": "5.9e-6",
+                "type@2_level": "95%@CLs"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,48 @@
+{
+    "inspire-hep": "[LHCb:2025mnp](https://inspirehep.net/literature/3121180)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "First evidence of CP violation in beauty baryon to charmonium decays",
+    "arxiv": "[hep-ex/2509.16103v2](https://arxiv.org/pdf/2509.16103)",
+    "time": "2026.09.19",
+    "abstract": "a study of the difference in the CP asymmetries between $\\Lambda^0_b \\to J/\\psi p \\pi^−$ and $\\Lambda^0_b \\to J/\\psi p K^−$ decays, $\\Delta A_{CP}$, using proton-proton collision data collected by the LHCb experiment in the years 2015–2018, corresponding to an integrated luminosity of 6 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2509.16103",
+    "data": [
+        {
+            "obs@1": {
+                "name": "DeltaACP(Lambdab0.2.J/psi.p)[pi-K]",
+                "latex": "$\\Delta A_{CP}^{\\pi-K}(\\Lambda_b^0\\to J/\\psi p)$",
+                "value": "4.03e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.18e-2",
+                "type@1_err_down": "1.18e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.23e-2",
+                "type@2_err_down": "0.23e-2"
+            },
+            "obs@2": {
+                "name": "DeltaACP(Lambdab0.2.J/psi.p)[pi-K]",
+                "latex": "$\\Delta A_{CP}^{\\pi-K}(\\Lambda_b^0\\to J/\\psi p)$",
+                "value": "4.31e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.06e-2",
+                "type@1_err_down": "1.06e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.28e-2",
+                "type@2_err_down": "0.28e-2"
+            },
+            "obs@3": {
+                "name": "ATodd(Lambdab0.2.J/psi.p.pi-)",
+                "latex": "$A_{T-odd}(\\Lambda_b^0 \\to J/\\psi p \\pi^-)$",
+                "value": "-1.37e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.15e-2",
+                "type@1_err_down": "1.15e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.21e-2",
+                "type@2_err_down": "0.21e-2"
+            }
+        }
+    ],
+    "transition-mode": "non-leptonic decay"
+}

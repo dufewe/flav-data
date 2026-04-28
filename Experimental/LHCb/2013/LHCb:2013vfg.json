@@ -1,0 +1,36 @@
+{
+    "inspirehep": "LHCb:2013vfg",
+    "author": "Aaij, R and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the fragmentation fraction ratio $f_{s}/f_{d}$ and its dependence on $B$ meson kinematics",
+    "arxiv": "hep-ex/1301.5286",
+    "year": "2013",
+    "abstract": "an analysis of the relative production rate of $B^0_s$ and $B^0$ mesons with the hadronic decays $B^0_s \\to D^−_s \\pi^+$ and $B^0 \\to D^− K^+$, using data corresponding to 1.0 fb$^{−1}$ of $pp$ collisions at a centre-of-mass energy of $\\sqrt{s} = 7$ TeV",
+    "pdf": "https://arxiv.org/pdf/1301.5286",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B02D-K+)",
+                "latex": "$\\mathcal{B}(B^0 \\to D^- K^+)$",
+                "value": 2.20e-4,
+                "sta_err_up": 0.03e-4,
+                "sta_err_down": 0.03e-4,
+                "sys_err_up": 0.07e-4,
+                "sys_err_down": 0.07e-4,
+                "type@1_err_name": "normalisation",
+                "type@1_err_up": 0.11e-4,
+                "type@1_err_down": 0.11e-4,
+                "tot_err_up": null,
+                "tot_err_down": null
+            },
+            "obs@2": {
+                "name": "fs/fd",
+                "latex": "$f_s/f_d$",
+                "value": 0.256,
+                "tot_err_up": 0.020,
+                "tot_err_down": 0.020
+            },
+            "correlation": null
+        }
+    ]
+}
