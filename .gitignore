@@ -33,6 +33,7 @@ dist/
 .pytest_cache/
 .coverage
 htmlcov/
+Test/
 
 # Streamlit
 .streamlit/
