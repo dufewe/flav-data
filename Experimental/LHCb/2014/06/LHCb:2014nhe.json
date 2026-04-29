@@ -1,0 +1,37 @@
+{
+    "inspire-hep": "[LHCb:2014nhe](https://inspirehep.net/literature/1298985)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Observation of the $\\Lambda_b^0 \\to J/\\psi p \\pi^-$ decay",
+    "arxiv": "[hep-ex/1406.0755v3](https://arxiv.org/pdf/1406.0755)",
+    "time": "2014.06.03",
+    "abstract": "the ﬁrst observation of the Cabibbo-suppressed decay $\\Lambda^0_b \\to J/\\psi p \\pi^-$, using a data sample of proton-proton collisions at 7 and 8 TeV, corresponding to an integrated luminosity of 3 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/1406.0755",
+    "data": [
+        {
+            "obs@1": {
+                "name": "R(Lambdab0.2.J/psi.p)[pi/K]",
+                "latex": "R_{\\Lambda_b^0 \\to J/\\psi p}^{[\\pi^-/K^-]}",
+                "value": "0.0824",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.0025",
+                "type@1_err_down": "0.0025",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.0042",
+                "type@2_err_down": "0.0042"
+            },
+            "obs@2": {
+                "name": "DeltaACP(Lambdab0.2.J/psi.p)[pi-K]",
+                "latex": "\\Delta A_{CP}^{[\\pi^- - K^-]} (\\Lambda_b^0 \\to J/\\psi p)",
+                "value": "5.7e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.4e-2",
+                "type@1_err_down": "2.4e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.2e-2",
+                "type@2_err_down": "1.2e-2"
+            }
+        }
+    ],
+    "transition-mode": "non-leptonic decay"
+}
