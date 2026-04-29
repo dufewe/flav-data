@@ -1,0 +1,37 @@
+{
+    "inspire-hep": "[LHCb:2025wld](https://inspirehep.net/literature/3084776)",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Branching fraction measurement of the $\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu$ decay",
+    "arxiv": "[hep-ex/2511.15681v2](https://arxiv.org/pdf/2511.15681)",
+    "time": "2025.11.19",
+    "abstract": "a measurement of the branching fraction for the decay $\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu$, using $pp$ collision data collected by the LHCb experiment at a centre-of-mass energy of 13 TeV, based on data recorded between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb$^{−1}$",
+    "pdf": "https://arxiv.org/pdf/2511.15681",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Lambda.2.p.mu-.nuBar)",
+                "latex": "\\mathcal{B}(\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu)",
+                "value": "1.462e-4",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.016e-4",
+                "type@1_err_down": "0.016e-4",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.100e-4",
+                "type@2_err_down": "0.100e-4",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.011e-4",
+                "type@3_err_down": "0.011e-4"
+            },
+            "obs@2": {
+                "name": "R(Lambda.2.p)[mu/e]",
+                "latex": "$\\mathcal{R}_{\\Lambda \\to p}^{\\mu/e}$",
+                "value": "0.175",
+                "tot_err_up": "0.012",
+                "tot_err_down": "0.012",
+                "ref": "[ParticleDataGroup:2024cfk](https://inspirehep.net/literature/2817040)"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}
