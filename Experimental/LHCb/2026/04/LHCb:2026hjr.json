@@ -10,8 +10,8 @@
     "data": [
         {
             "obs@1": {
-                "name": "rJ/psi",
-                "latex": "$r_{J/\\psi}$",
+                "name": "r(B0.2.Kst0.J/psi(2.l+.l-))[mu/e]",
+                "latex": "$r_{B^0 \\to K^{*0} J/\\psi(\\to \\ell^+ \\ell^-)}^{\\mu/e}$",
                 "value": "1.035",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.013",
@@ -21,8 +21,8 @@
                 "type@2_err_down": "0.035"
             },
             "obs@2": {
-                "name": "R(B0.2.Kst0)[psi(2S)]",
-                "latex": "$R_{B^0\\to K^{\\ast0}}^{\\psi(2S)}$",
+                "name": "R(B0.2.Kst0.psi(2S)(2.l+.l-))[mu/e]",
+                "latex": "$R_{B^0 \\to K^{*0} \\psi(2S)(\\to \\ell^+ \\ell^-)}^{\\mu/e}$",
                 "value": "1.034",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.033",
@@ -32,8 +32,8 @@
                 "type@2_err_down": "0.012"
             },
             "obs@3": {
-                "name": "R(B0.2.Kst0)[mu/e]",
-                "latex": "$R_{B^0\\to K^{\\ast0}}^{\\mu/e}$",
+                "name": "R(B0.2.Kst0.l+.l-)[mu/e]",
+                "latex": "$R(B^0 \\to K^{*0} \\ell^+ \\ell^-)^{\\mu/e}$",
                 "value": "1.08",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.14",

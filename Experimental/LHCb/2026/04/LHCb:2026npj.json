@@ -11,37 +11,37 @@
         {
             "obs@1": {
                 "name": "gammaCKM",
-                "latex": "$\\gamma_{\\rm CKM}$",
+                "latex": "$\\gamma_{CKM}$",
                 "value": "71.3",
                 "tot_err_up": "5.0",
                 "tot_err_down": "5.0",
                 "unit": "$\\circ$"
             },
             "obs@2": {
-                "name": "rB[DK]",
-                "latex": "$r_B^{DK}$",
+                "name": "r(B-.2.D0.K-)",
+                "latex": "$r(B^- \\to D^0 K^-)$",
                 "value": "0.0949",
                 "tot_err_up": "0.0086",
                 "tot_err_down": "0.0085"
             },
             "obs@3": {
-                "name": "deltaB[DK]",
-                "latex": "$\\delta_B^{DK}$",
+                "name": "delta(B-.2.D0.K-)",
+                "latex": "$\\delta(B^- \\to D^0 K^-)$",
                 "value": "121.6",
                 "tot_err_up": "5.6",
                 "tot_err_down": "5.9",
                 "unit": "$\\circ$"
             },
             "obs@4": {
-                "name": "rB[Dpi]",
-                "latex": "$r_B^{D\\pi}$",
+                "name": "r(B-.2.D0.pi-)",
+                "latex": "$r(B^- \\to D^0 \\pi^-)$",
                 "value": "0.0064",
                 "tot_err_up": "0.0021",
                 "tot_err_down": "0.0019"
             },
             "obs@5": {
-                "name": "deltaB[Dpi]",
-                "latex": "$\\delta_B^{D\\pi}$",
+                "name": "delta(B-.2.D0.pi-)",
+                "latex": "$\\delta(B^- \\to D^0 \\pi^-)$",
                 "value": "311",
                 "tot_err_up": "17",
                 "tot_err_down": "20",

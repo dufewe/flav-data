@@ -89,12 +89,21 @@
 - 共用的中微子用 `nu1`、`nu2` 等表示
 - 共用的强子用 `h1`、`h2` 等表示
 
+**中间共振态衰变到轻子对**: 在共振态后附加 `(2.l+.l-)`，如 `B0.2.Kst0.J/psi(2.l+.l-)` 表示 $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$。
+
+**比值观测量 LaTeX 格式**: `[condition]` 在 LaTeX 中渲染为上标 `^{condition}`，附加在完整表达式后，如 `$R(B^0 \to K^{*0} \ell^+ \ell^-)^{\mu/e}$`。
+
+**CKM 参数**: $r$ 和 $\delta$ 基于 $B^-$ 衰变振幅比定义 ($b \to u$ 压低道相对 $b \to c$ favored 道), 跃迁符号中 B 和末态介子应带 **负电** (如 `B-.2.D0.K-`, `B-.2.D0.pi-`)。
+
 | 观测量 LaTeX | 符号约定 | 说明 |
 |------|-----------|------|
 | $\frac{\mathcal{B}(B^0 \to \mu^+\mu^-)}{\mathcal{B}(B^0 \to e^+e^-)}$ | `R(B0.2.l+.l-)[mu/e]` | 轻子味比值 |
 | $\frac{\mathcal{B}(B^+ \to K^+\mu^+\mu^-)}{\mathcal{B}(B^+ \to K^+e^+e^-)}$ | `R(B+.2.K+.l+.l-)[mu/e]` | RK |
 | $A_{CP}(B^- \to \mu^-\bar{\nu}_\mu) - A_{CP}(B^- \to e^-\bar{\nu}_e)$ | `DeltaACP(B-.2.l-.nuBar)[mu-e]` | CP 不对称差值 |
 | $R_{K^*} = \frac{\mathcal{B}(B^0 \to K^{*0}\mu^+\mu^-)}{\mathcal{B}(B^0 \to K^{*0}e^+e^-)}$ | `R(B0.2.Kst0.l+.l-)[mu/e]` | RK* |
+| $r = \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | `r(B-.2.D0.K-)` | 幅度比 |
+| $\delta = \arg \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | `delta(B-.2.D0.K-)` | 强相位差 |
+| $r = \frac{\Gamma(B^0 \to K^{*0} J/\psi(\to \mu^+\mu^-))}{\Gamma(B^0 \to K^{*0} J/\psi(\to e^+e^-))}$ | `r(B0.2.Kst0.J/psi(2.l+.l-))[mu/e]` | 归一化比值 |
 
 ### 常用观测量缩写（按观测属性分类）
 
@@ -204,9 +213,9 @@
 
 | 缩写 | 观测量 LaTeX | 说明 |
 |------|------|------|
-| `gammaCKM` | $\gamma_{\rm CKM}$ | CKM 幺正三角形角 |
-| `rB` | $r_B$ | 幅度比 |
-| `deltaB` | $\delta_B$ | 强相位差 |
+| `gammaCKM` | $\gamma_{CKM}$ | CKM 幺正三角形角 |
+| `r` | $r(B^- \to D^0 K^-)$ | 幅度比 (需指定衰变道) |
+| `delta` | $\delta(B^- \to D^0 K^-)$ | 强相位差 (需指定衰变道) |
 
 ## 3. LaTeX 表示映射
 
@@ -266,8 +275,8 @@ OBSERVABLE_LATEX = {
 
     # CKM 参数
     'gammaCKM': '$\\gamma_{CKM}$',
-    'rB': '$r_B$',
-    'deltaB': '$\\delta_B$',
+    'r': '$r$',
+    'delta': '$\\delta$',
 }
 ```
 
