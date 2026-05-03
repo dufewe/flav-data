@@ -161,8 +161,9 @@ python3 scripts/json-valid.py <path/to/file.json>
 - 误差格式: `type@N_err`, `type@N_err_up`, `type@N_err_down` (N=1,2,3...)
 - 上限格式: `type@N_upper_limit`, `type@N_level` (如 `"90%@CLs"`)
 - 运动学条件: `q2min`/`q2max`, `pTmin`/`pTmax`, `etamin`/`etamax` 等
-- 有量纲量必须有 `unit` 字段
+- 有量纲量必须有 `unit` 字段 (如 `"unit": "MeV"`, `"unit": "GeV"`, `"unit": "ps"`)
 - 引用数据需加 `ref` 字段 (Markdown 链接)
+- JSON 文件使用 **4 空格缩进**
 
 ### JSON 格式示例
 

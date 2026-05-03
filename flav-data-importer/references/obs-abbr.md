@@ -21,8 +21,10 @@
 | $\bar{B}^0 \to e^- + e^+$ | `B0Bar.2.e+.e-` | 反 B 介子 |
 | $e^+ e^- \to \mu^- \mu^+$ | `e+.e-.2.mu+.mu-` | 散射过程 |
 | $W^- \to \mu^- \bar{\nu}_\mu$ | `W-.2.mu-.nuBar` | 带电 W 用自身电荷 |
-| $B^+ \to K^+ \mu^+ \mu^-$ | `B+.2.K+.mu+.mu-` | 带电粒子用 +/- |
-| $B^0 \to K^{*0} \mu^+ \mu^-$ | `B0.2.Kst0.mu+.mu-` | K* 共振态 |
+| $B^+ \\to K^+ \\mu^+ \\mu^-$ | `B+.2.K+.mu+.mu-` | 带电粒子用 +/- |
+| $B^+ \\to \\mu^+ \\nu_\\mu$ | `B+.2.mu+.nu` | 纯轻衰变 |
+| $B^- \\to \\mu^- \\bar{\\nu}_\\mu$ | `B-.2.mu-.nuBar` | 纯轻衰变 (反粒子) |
+| $B^0 \\to K^{*0} \\mu^+ \\mu^-$ | `B0.2.Kst0.mu+.mu-` | K* 共振态 |
 | $B_s^0 \to \phi \mu^+ \mu^-$ | `Bs0.2.phi.mu+.mu-` | Bs 介子 |
 | $\Lambda_b^0 \to J/\psi p \pi^-$ | `Lambdab0.2.J/psi.p.pi-` | 重子衰变 |
 | $\Sigma^+ \to p \mu^+ \mu^-$ | `Sigma+.2.p.mu+.mu-` | Sigma 重子 |

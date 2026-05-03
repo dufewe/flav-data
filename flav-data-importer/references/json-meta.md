@@ -164,6 +164,27 @@
 }
 ```
 
+按误差类型分别指定关联矩阵:
+
+```json
+{
+    "obs@1": {
+        ...,
+        "type@1_err": "stat",
+        "type@1_err_up": ...,
+        "type@1_err_down": ...,
+        ...
+    },
+    "obs@2": {
+        ...,
+        "type@1_err": "stat",
+        "type@1_err_up": ...,
+        "type@1_err_down": ...
+    },
+    "type@1_correlation": [[1.0, 0.015], [0.015, 1.0]]
+}
+```
+
 **规则**:
 - 压缩为单行数组格式
 - 关联矩阵: 对角线必须为 1.0，矩阵必须对称
@@ -171,7 +192,7 @@
 - 如果没有关联矩阵或协方差矩阵，省略该字段 (不要设为 null)
 - 矩阵维度 = 同一条目中 obs@N 的数量
 - 矩阵的顺序必须与 obs@N 的编号顺序一致
-- 矩阵名称与误差类型对应: `tot_correlation` (总), `type@1_correlation` (stat), `type@2_correlation` (syst) 等
+- 矩阵名称与误差类型对应: `tot_correlation` (总), `type@1_correlation` (stat), `type@2_correlation` (syst) 等; `tot_correlation` 用于总误差关联矩阵，`type@N_correlation` 用于按误差类型分别指定
 
 ### 协方差矩阵 (covariance)
 
