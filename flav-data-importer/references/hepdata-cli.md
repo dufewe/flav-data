@@ -2,7 +2,7 @@
 
 ## 基本信息
 
-- **路径**: `/Users/dufewe/.hermes/hermes-agent/venv/bin/hepdata-cli`
+- **路径**: `/hepdata-cli`
 - **用途**: 通过 HEPData API 获取高能物理实验数据
 - **优势**: 绕过 Cloudflare 防护，直接访问 HEPData 结构化数据
 
@@ -83,6 +83,9 @@ hepdata-cli download -f json -i inspire 1409497 -d /tmp/hepdata_out
 
 metadata 只包含 URL，需要额外 curl 下载:
 
+> 注意: metadata 中的 URL 路径部分 (如 "Table 1") 含有空格等特殊字符，
+> 用于 curl 时需要进行 URL 编码 (空格 → `%20`)。
+
 ```bash
 # 下载观测值数据 (YAML 格式推荐)
 curl -sL -A "Mozilla/5.0" "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml"
@@ -97,7 +100,7 @@ curl -sL -A "Mozilla/5.0" "https://www.hepdata.net/download/table/ins1409497/Tab
 
 ```yaml
 dependent_variables:
-- header: {name: '$F_{\rm L}$'}          # 可观测量名
+- header: {name: '$F_L$'}          # 可观测量名
   qualifiers:
   - {name: RE, value: 'P P --> B0 < K*...'}
   - {name: SQRT(S), units: GeV, value: '7000.0'}

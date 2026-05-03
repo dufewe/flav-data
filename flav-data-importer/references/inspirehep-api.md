@@ -51,19 +51,19 @@ curl -s -H 'Accept: application/json' \
 | 字段 | 类型 | 说明 | 示例 |
 |------|------|------|------|
 | `control_number` | int | InspireHEP 数据库主键 | `1409497` |
-| `texkeys` | string[] | BibTeX 标识符 (Inspire ID) | `["LHCb:2015svh"]` |
-| `preprint_date` | string | 预印本提交日期 | `"2021-11-09"` |
-| `earliest_date` | string | 最早日期 | `"2021-11-09"` |
+| `texkeys` | string[] | BibTeX 引用标识符 | `["LHCb:2015svh"]` |
+| `preprint_date` | string | 预印本提交日期 | `"2015-12-14"` |
+| `earliest_date` | string | 最早日期 | `"2015-12-14"` |
 | `document_type` | string[] | 文档类型 | `["article"]` |
-| `citation_count` | int | 被引用次数 | `9` |
-| `author_count` | int | 作者数量 | `4` |
+| `citation_count` | int | 被引用次数 | (实际数值) |
+| `author_count` | int | 作者数量 | `500+` |
 
 ### 标题 (titles 数组)
 
 ```json
 "titles": [
-  {"source": "arXiv", "title": "Linking the $R_{K^{(*)}}$ anomalies..."},
-  {"source": "IOP", "title": "Linking anomalies to Hubble tension..."}
+  {"source": "arXiv", "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay"},
+  {"source": "JHEP", "title": "Angular analysis of the B0 to K*0 mu+ mu- decay"}
 ]
 ```
 
@@ -74,12 +74,10 @@ curl -s -H 'Accept: application/json' \
 ```json
 "authors": [
   {
-    "full_name": "Duan, Wen-Feng",
-    "first_name": "Wen-Feng",
-    "last_name": "Duan",
-    "affiliations": [{"value": "CCNU, Wuhan, Inst. Part. Phys."}],
-    "raw_affiliations": [{"value": "Institute of Particle Physics..."}]
-  }
+    "full_name": "Aaij, Roel",
+    "affiliations": [{"value": "Nikhef, Amsterdam"}]
+  },
+  ...
 ]
 ```
 
@@ -89,11 +87,10 @@ curl -s -H 'Accept: application/json' \
 
 ```json
 "publication_info": [{
-  "journal_title": "Chin.Phys.C",
-  "journal_volume": "47",
-  "journal_issue": "3",
-  "artid": "033102",
-  "year": 2023
+  "journal_title": "JHEP",
+  "journal_volume": "02",
+  "artid": "104",
+  "year": 2016
 }]
 ```
 
@@ -101,7 +98,7 @@ curl -s -H 'Accept: application/json' \
 
 ```json
 "dois": [
-  {"source": "IOP", "value": "10.1088/1674-1137/aca888"}
+  {"source": "JHEP", "value": "10.1007/JHEP02(2016)104"}
 ]
 ```
 
@@ -118,8 +115,8 @@ curl -s -H 'Accept: application/json' \
 
 ```json
 "abstracts": [
-  {"source": "arXiv", "value": "The updated measurements..."},
-  {"source": "IOP", "value": "Updated measurements from..."}
+  {"source": "arXiv", "value": "An angular analysis of the $B^0 \\to K^{*0}(\\to K^+\\pi^-)\\mu^+\\mu^-$ decay..."},
+  {"source": "Springer", "value": "An angular analysis of the B0 to K*0 mu+ mu- decay..."}
 ]
 ```
 
@@ -129,10 +126,24 @@ curl -s -H 'Accept: application/json' \
 
 ```json
 "keywords": [
-  {"source": "author", "value": "rare B-meson decays"},
-  {"schema": "INSPIRE", "value": "new physics"}
+  {"source": "author", "value": "angular analysis"},
+  {"schema": "INSPIRE", "value": "rare B-meson decays"}
 ]
 ```
+
+### 额外返回字段
+
+除上述核心字段外，`inspirehep-ext.py` 还返回以下辅助字段:
+
+| 字段 | 说明 |
+|------|------|
+| `arxiv_categories` | arXiv 分类列表 |
+| `journal_year` | 期刊发表年份 |
+| `journal_volume` | 期刊卷号 |
+| `journal_issue` | 期刊期号 |
+| `citation_without_self` | 排除自引后的引用次数 |
+| `inspire_hep_link` | 构建好的 Markdown 链接 (用于 JSON 文件的 `inspire-hep` 字段) |
+| `arxiv_link` | 构建好的 Markdown 链接 (不含版本号，需配合 arxiv-ext.py 补充) |
 
 ## Python 提取示例
 
@@ -220,9 +231,14 @@ def get_inspire_info(arxiv_id):
 inspire_link = f"[{texkey}](https://inspirehep.net/literature/{recid})"
 # 示例: "[LHCb:2015svh](https://inspirehep.net/literature/1409497)"
 
-# arxiv 字段
+# arxiv 字段 (注意: InspireHEP API 不返回版本号，此链接为 v1 占位)
+# 实际使用时应配合 arxiv-ext.py 获取真实版本号后替换
 arxiv_link = f"[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})"
-# 示例: "[1512.04442](https://arxiv.org/pdf/1512.04442)"
+# 示例: "[1512.04442v1](https://arxiv.org/pdf/1512.04442)"
+```
+
+> 注意: InspireHEP API 的 `arxiv_eprints.value` 字段不包含版本号。
+> 要构建带版本号的 arxiv 链接，需先用 `arxiv-ext.py` 获取版本号，再拼接。
 
 ## 两种 ID 的区别
 

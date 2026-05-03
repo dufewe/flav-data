@@ -11,7 +11,7 @@
         {
             "obs@1": {
                 "name": "Br(Lambda.2.p.mu-.nuBar)",
-                "latex": "\\mathcal{B}(\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu)",
+                "latex": "$\\mathcal{B}(\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu)$",
                 "value": "1.462e-4",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.016e-4",

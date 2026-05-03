@@ -44,13 +44,13 @@ curl -s -H 'Accept: application/json' \
 - `preprint_date`: `"2015-12-14"` → `time: "2015.12.14"`
 - `collaborations`: `[{"value": "LHCb"}]`
 - `authors`: 500+ 人 → `"Aaij, Roel and others"`
-- `titles` (arXiv source): `"Angular analysis of the $B^{0}\\rightarrow K^{*0}\\mu^{+}\\mu^{-}$ decay"`
+- `titles` (arXiv source): `"Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay"`
 - `abstracts` (arXiv source): "An angular analysis of the..."
 
 ### 步骤 3: 获取提交日期 (arXiv API)
 
 ```bash
-curl -sL "http://export.arxiv.org/api/query?id_list=1512.04442"
+curl -sL "https://export.arxiv.org/api/query?id_list=1512.04442"
 ```
 
 提取:
@@ -59,7 +59,7 @@ curl -sL "http://export.arxiv.org/api/query?id_list=1512.04442"
 ### 步骤 4: 获取实验数据 (HEPData)
 
 ```bash
-HEPDATA_CLI="/Users/dufewe/.hermes/hermes-agent/venv/bin/hepdata-cli"
+HEPDATA_CLI="/hepdata-cli"
 
 # 获取表格列表
 $HEPDATA_CLI fetch-names -i inspire 1409497
@@ -109,7 +109,7 @@ curl -sL -A "Mozilla/5.0" \
     "data": [
         {
             "obs@1": {
-                "name": "FL(B02Kstmumu)",
+                "name": "FL(B0.2.Kst0.mu+.mu-)",
                 "latex": "$F_L(B^0\\to K^{*0}\\mu^+\\mu^-)$",
                 "value": "0.69",
                 "type@1_err": "stat",
@@ -122,7 +122,7 @@ curl -sL -A "Mozilla/5.0" \
                 "q2max": "1.1"
             },
             "obs@2": {
-                "name": "S3(B02Kstmumu)",
+                "name": "S3(B0.2.Kst0.mu+.mu-)",
                 "latex": "$S_3(B^0\\to K^{*0}\\mu^+\\mu^-)$",
                 "value": "0.012",
                 "type@1_err": "stat",
@@ -151,16 +151,22 @@ mkdir -p Experimental/LHCb/2015/12
 # 写入 JSON 文件
 # → Experimental/LHCb/2015/12/LHCb:2015svh.json
 
-# 更新索引
-python3 scripts/add_to_index.py LHCb 2015 12 LHCb:2015svh
+# 更新年度索引文件
+# 编辑 Experimental/LHCb/2015/LHCb@2015.json，添加月份键和 file_id:
 ```
 
-索引文件更新后:
+索引文件更新后 (`LHCb@2015.json`):
 ```json
 {
     "12": ["LHCb:2015svh"]
 }
 ```
+
+手动更新索引时的注意事项:
+- 键为零填充月份字符串 ("01" 到 "12")
+- 值为 file_id 数组（不含 `.json` 后缀）
+- 月份内 file_id 按 arXiv v1 提交日期排序
+- 如果该月份已存在，将新 file_id 追加到对应数组并重新排序
 
 ### 步骤 8: 验证
 
@@ -190,5 +196,5 @@ rm -rf /tmp/hepdata_1512 /tmp/table*.yaml
 1. **HEPData 有 83 张表** — 需要区分观测值表和关联矩阵表
 2. **多个附录的关联矩阵** — Appendix C/H 分别对应不同的拟合方法 (likelihood vs bootstrap)
 3. **q² bin 很多** — 需要为每个 bin 创建一个 data entry
-4. **观测值名称** — 使用缩写: `FL(B02Kstmumu)` 而非全称
+4. **观测值名称** — 使用新规范 `FL(B0.2.Kst0.mu+.mu-)`: 观测量缩写 + (跃迁道)
 5. **LaTeX 双反斜杠** — JSON 文件中 `$B^0\\to K^{*0}\\mu^+\\mu^-$`

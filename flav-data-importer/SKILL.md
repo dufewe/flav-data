@@ -1,8 +1,8 @@
 ---
 name: flav-data-importer
-description: 用于从味物理实验组或理论组数据文章中抽取结构化数据并保存为完整的json文件。当用户说要从某篇文章或某个网站中提取、更新、删除、验证数据时使用该技能
+description: 用于从味物理实验组或理论组数据文章中抽取结构化数据并保存为完整的 json 文件。当用户说要从某篇文章或某个网站中提取、更新、删除、验证数据时使用该技能
 category: data-science
-tags: [flavor-physics, data-collecting, json-importer, lhcb, hepdata, streamlit]
+tags: [flavor-physics, data-collecting, json-importer, hepdata]
 ---
 
 # flav-data Importer
@@ -16,7 +16,7 @@ flav-data-importer/
 ├── SKILL.md                              # 本文件 (主技能文档)
 ├── references/                           # 参考资料
 │   ├── file-index.md                     # 目录结构和文件索引规则
-│   ├── obs-abbr.md                       # 衰变模式缩写与观测量命名
+│   ├── obs-abbr.md                       # 跃迁符号约定、衰变模式缩写与观测量命名
 │   ├── json-meta.md                      # JSON 元数据格式规范
 │   ├── data-source.md                    # 数据源优先级与使用指南
 │   ├── arxiv-api.md                      # arXiv API 使用方法
@@ -31,6 +31,9 @@ flav-data-importer/
     └── workflow-lhcb-2015svh.md          # B0->K*mumu 角分析数据导入完整流程
 ```
 
+> 注: 本目录树展示的是 `flav-data-importer` 工具自身结构。
+> 数据库根目录为 `flav-data/`，数据文件存储在 `flav-data/Experimental/` 和 `flav-data/Theoretical/` 下。
+
 ## 什么时候使用
 
 - **数据添加**: 将新的实验/理论测量数据导入数据库
@@ -40,12 +43,20 @@ flav-data-importer/
 
 ## 数据库位置
 
-实验数据存储在: `/Users/dufewe/Backup/Selia/projects/2HDM-SMEFT/Fitting/Streamlit/flav-data/Experimental/`
+数据库根目录: `flav-data/`
 
-目录结构: `Experimental/{group}/{year}/{month}/{file_id}.json`
-- `group`: ATLAS, BaBar, Belle, CMS, HFLAV, LEP, LHCb, PDG 等
+实验数据存储在: `flav-data/Experimental/`
+理论数据存储在: `flav-data/Theoretical/`
+
+实验目录结构: `Experimental/{group}/{year}/{month}/{file_id}.json`
+- `group`: ATLAS, BaBar, Belle, BESIII, CDF, CMS, HFLAV, LEP, LHCb, PDG 等
 - `file_id`: InspireHEP texkey (如 `LHCb:2015svh`)
 - 年度索引: `Experimental/{group}/{year}/{group}@{year}.json`
+
+理论目录结构: `Theoretical/{group}/{year}/{month}/{file_id}.json`
+- `group`: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD 等
+- `file_id`: InspireHEP texkey (如 `LHCb:2015svh`)
+- 年度索引: `Theoretical/{group}/{year}/{group}@{year}.json`
 
 详细索引规则参见 `references/file-index.md`。
 
@@ -65,7 +76,8 @@ flav-data-importer/
 2. **CDS** → curl 搜索 CERN 文档服务器
 3. **LHCb Public Pages** → 分析结果页面
 4. **arXiv PDF** → 使用 pymupdf 从 PDF 提取 (作为备选)
-5. **vision_analyze** → 用户提供表格截图时使用
+5. **ar5iv HTML** → `https://ar5iv.labs.arxiv.org/html/<arxiv_id>` 表格解析
+6. **vision_analyze** → 用户提供表格截图时使用
 
 同时获取论文元数据:
 - **arXiv API** → v1 提交日期、标题、摘要、作者
@@ -79,10 +91,10 @@ flav-data-importer/
 
 #### 数据添加
 1. 按 `references/file-index.md` 确定文件路径
-2. 按 `references/json-meta.md` 构建 JSON 元数据
-3. 按 `references/obs-abbr.md` 命名观测量
+2. 按 `references/obs-abbr.md` 确定跃迁符号和观测量命名
+3. 按 `references/json-meta.md` 构建 JSON 元数据
 4. 从数据源提取数值填充到 JSON
-5. 写入文件到 `Experimental/{group}/{year}/{month}/`
+5. 写入文件到 `Experimental/{group}/{year}/{month}/` 或 `Theoretical/{group}/{year}/{month}/`
 6. 更新年度索引文件
 
 #### 数据更新
@@ -108,23 +120,58 @@ python3 scripts/json-valid.py <path/to/file.json>
 检查项:
 - JSON 可解析
 - 顶层字段完整 (inspire-hep, author, collaboration, title, arxiv, time, abstract, pdf, data, transition-mode)
-- obs@N 有必填字段 (name, latex, value, type@1_err, type@1_err_up, type@1_err_down)
+- obs@N 有必填字段: 标准值 (name, latex, value, type@1_err, type@1_err_up, type@1_err_down)、上限值 (name, latex, type@1_upper_limit, type@1_level)、总误差 (name, latex, value, tot_err_up, tot_err_down) 或外部参考值 (name, latex, value, tot_err_up, tot_err_down, ref)
 - 数值字段为字符串
-- 关联矩阵对称且对角线 = 1.0
+- 关联矩阵: 对角线必须为 1.0，矩阵必须对称
+- 协方差矩阵: 只需对称（对角线为误差平方，需人工核对）
 - LaTeX 非空
+- 跃迁符号符合 `A.B.2.C.D` 约定
+- 观测量命名符合 `OBS(transition)[condition]` 约定
 
 ### 步骤五: 清除缓存
 
 完成操作后清除所有临时文件，保持数据库整洁。
 
-## JSON 格式要点
+## 核心规范摘要
+
+### 跃迁符号约定 (`A.B.2.C.D`)
+
+对于 $A + B \to C + D$ 跃迁模式，简写为 `A.B.2.C.D`，其中 $\to$ 写为 `2` 以区分初末态。
+
+- 粒子按电荷 `+`、`-`、`0` 顺序排列
+- 反粒子记为 `Bar` (如 `B0Bar`)，带电粒子直接用电荷标记
+- 中微子不需要带味道
+- 示例: `$B^0 \to e^+ e^-$` → `B0.2.e+.e-`，`$W^- \to \mu^- \bar{\nu}_\mu$` → `W-.2.mu-.nuBar`
+
+详见 `references/obs-abbr.md` 第 1 节。
+
+### 观测量命名 (`OBS(transition)[condition]`)
+
+- `OBS` 为观测量缩写，按观测属性分为: 分支比、衰变宽度、寿命、质量、截面、角分布系数、CP 不对称、优化观测量、比值、CKM 参数等
+- `transition` 为跃迁符号
+- `condition` 为可选条件 (如 `[mu/e]` 表示轻子味比值)
+- 多跃迁道共用粒子用 `l1`, `l2`, `q1`, `q2`, `nu1`, `nu2`, `h1`, `h2` 等表示
+- 示例: `$\mathcal{B}(B^0 \to \mu^+\mu^-)/\mathcal{B}(B^0 \to e^+e^-)$` → `R(B0.2.l+.l-)[mu/e]`
+
+详见 `references/obs-abbr.md` 第 2 节。
+
+### 数值格式
+
+- **所有数值必须为字符串** — `"0.69"` 而非 `0.69`
+- 误差格式: `type@N_err`, `type@N_err_up`, `type@N_err_down` (N=1,2,3...)
+- 上限格式: `type@N_upper_limit`, `type@N_level` (如 `"90%@CLs"`)
+- 运动学条件: `q2min`/`q2max`, `pTmin`/`pTmax`, `etamin`/`etamax` 等
+- 有量纲量必须有 `unit` 字段
+- 引用数据需加 `ref` 字段 (Markdown 链接)
+
+### JSON 格式示例
 
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Angular analysis of the $B^0\\to K^{*0}\\mu^+\\mu^-$ decay",
+    "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "...",
@@ -132,8 +179,8 @@ python3 scripts/json-valid.py <path/to/file.json>
     "data": [
         {
             "obs@1": {
-                "name": "FL(B02Kstmumu)",
-                "latex": "$F_L(B^0\\to K^{*0}\\mu^+\\mu^-)$",
+                "name": "FL(B0.2.Kst0.mu+.mu-)",
+                "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
                 "value": "0.69",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.035",
@@ -144,6 +191,7 @@ python3 scripts/json-valid.py <path/to/file.json>
                 "q2min": "0.1",
                 "q2max": "1.1"
             },
+            "obs@2": { ... },
             "tot_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
         }
     ],
@@ -155,15 +203,15 @@ python3 scripts/json-valid.py <path/to/file.json>
 
 ## 必备工具
 
-| 工具 | 用途 |
-|------|------|
-| arXiv API | 获取 v1 提交日期、标题、摘要 |
-| InspireHEP API | 获取 Inspire ID、DOI、期刊信息 |
-| hepdata-cli | 获取 HEPData 机器可读数据 |
-| web-search / web-extract | 搜索和提取网页内容 |
-| vision_analyze | 表格图片数据提取 |
-| pymupdf | PDF 文本提取 |
-| terminal | 运行 Python 脚本 |
+| 工具 | 用途 | 路径/说明 |
+|------|------|----------|
+| arXiv API | 获取 v1 提交日期、标题、摘要 | `https://export.arxiv.org/api/query` |
+| InspireHEP API | 获取 Inspire ID、DOI、期刊信息 | `https://inspirehep.net/api/literature` |
+| hepdata-cli | 获取 HEPData 机器可读数据 | `/hepdata-cli` |
+| web-search / web-extract | 搜索和提取网页内容 | |
+| vision_analyze | 表格图片数据提取 | |
+| pymupdf | PDF 文本提取 | `/python/site-packages` (不在沙箱中，需 terminal 运行) |
+| terminal | 运行 Python 脚本 | |
 
 ## 常见问题
 
@@ -173,17 +221,14 @@ python3 scripts/json-valid.py <path/to/file.json>
 ### 新数据信息
 当论文中出现 `json-meta.md` 中没有的新字段时，总结归纳后添加到 `references/json-meta.md`。
 
-### 关联矩阵不匹配
-关联矩阵维度必须等于同一 data entry 中 obs@N 的数量，顺序也要一致。
+### 关联矩阵/协方差矩阵不匹配
+矩阵维度必须等于同一 data entry 中 obs@N 的数量，顺序也要一致。关联矩阵对角线为 1.0，协方差矩阵为误差值的平方。
 
 ### 理论论文无 HEPData
 纯理论计算论文通常没有 HEPData 条目，需要从 PDF 中提取理论曲线数据。
-
-### 数值必须为字符串
-JSON 中所有数值字段 (`value`, `q2min`, `type@1_err_up` 等) 必须存储为字符串，如 `"0.69"` 而非 `0.69`。
 
 ### LaTeX 转义
 JSON 文件中 LaTeX 使用双反斜杠，如 `\\to` 而非 `\to`。Python 解析后变成单反斜杠是正常的。
 
 ### 索引文件更新
-每次添加新文件后必须更新年度索引文件 `LHCb@2025.json`，月份键必须零填充 ("01" 到 "12")。
+每次添加新文件后必须更新年度索引文件，如 `LHCb@2025.json`，月份键必须零填充 ("01" 到 "12")。

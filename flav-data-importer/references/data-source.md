@@ -10,7 +10,7 @@
 - **限制**: 纯理论论文通常没有 HEPData 条目
 
 ```bash
-HEPDATA_CLI="/Users/dufewe/.hermes/hermes-agent/venv/bin/hepdata-cli"
+HEPDATA_CLI="/hepdata-cli"
 $HEPDATA_CLI fetch-names -i inspire <inspire_id>
 $HEPDATA_CLI download -f json -i inspire <inspire_id> -d /tmp/out
 ```
@@ -23,7 +23,7 @@ $HEPDATA_CLI download -f json -i inspire <inspire_id> -d /tmp/out
 - **搜索**: 按 arXiv ID 或论文标题搜索
 
 ```bash
-curl -s "https://cds.cern.ch/search?f1=reportnumber&p1=<arxiv_id>&c=LHCb"
+curl -sL "https://cds.cern.ch/search?f=reportnumber&p1=<arxiv_id>"
 ```
 
 ### 3. LHCb Public Analysis Pages
@@ -48,12 +48,12 @@ for page in doc:
 ```
 
 **注意**: `pymupdf` 不在 execute_code 沙箱中，需要用 terminal 运行。
-pymupdf 路径: `/Users/dufewe/Library/Python/3.9/lib/python/site-packages`
 
 ### 5. ar5iv HTML (替代方案)
 
 - **适用**: HTML 格式比 PDF 更容易解析表格时
 - **URL**: `https://ar5iv.labs.arxiv.org/html/<arxiv_id>`
+- **限制**: 论文版本可能不是最新的
 
 ```bash
 curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"

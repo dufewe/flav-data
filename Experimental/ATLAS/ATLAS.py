@@ -4,7 +4,7 @@
 with open('defs.py', 'r', encoding='utf-8') as f:
     exec(f.read())
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from flav_dashboard import run_dashboard
+from Test.OBS.flav_dashboard import run_dashboard
 
 # ---------------------------------------------------------
 # Run dashboard UI by specify experimental collaboration

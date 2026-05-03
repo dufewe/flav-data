@@ -12,6 +12,7 @@ Example:
 """
 
 import urllib.request
+import urllib.error
 import json
 import os
 import sys
@@ -22,7 +23,12 @@ def get_inspire_by_arxiv(arxiv_id):
     """按 arXiv ID 查询 InspireHEP。"""
     url = f'https://inspirehep.net/api/literature?q=eprint:{arxiv_id}'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    response = urllib.request.urlopen(req, timeout=15)
+    try:
+        response = urllib.request.urlopen(req, timeout=15)
+    except urllib.error.HTTPError as e:
+        raise ValueError(f"InspireHEP API 请求失败 (HTTP {e.code}): {e.reason}")
+    except urllib.error.URLError as e:
+        raise ValueError(f"InspireHEP API 连接失败: {e.reason}")
     data = json.loads(response.read().decode('utf-8'))
 
     if not data.get('hits', {}).get('hits'):
@@ -35,7 +41,12 @@ def get_inspire_by_recid(recid):
     """按 InspireHEP 控制号直接查询。"""
     url = f'https://inspirehep.net/api/literature/{recid}'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    response = urllib.request.urlopen(req, timeout=15)
+    try:
+        response = urllib.request.urlopen(req, timeout=15)
+    except urllib.error.HTTPError as e:
+        raise ValueError(f"InspireHEP API 请求失败 (HTTP {e.code}): {e.reason}")
+    except urllib.error.URLError as e:
+        raise ValueError(f"InspireHEP API 连接失败: {e.reason}")
     data = json.loads(response.read().decode('utf-8'))
 
     return data
@@ -51,11 +62,11 @@ def extract_metadata(hit):
         meta = hit
         recid = meta.get('control_number', '')
 
-    # TexKey
+    # TexKey (优先使用第一个)
     texkeys = meta.get('texkeys', [''])
     texkey = texkeys[0] if texkeys else ''
 
-    # 标题 (优先 arXiv 来源)
+    # 标题 (优先 arXiv 来源，保留完整 LaTeX)
     title = ''
     for t in meta.get('titles', []):
         if t.get('source') == 'arXiv':
@@ -64,7 +75,7 @@ def extract_metadata(hit):
     if not title:
         title = meta.get('titles', [{}])[0].get('title', '')
 
-    # 摘要 (优先 arXiv 来源)
+    # 摘要 (优先 arXiv 来源，保留 LaTeX 格式)
     abstract = ''
     for a in meta.get('abstracts', []):
         if a.get('source') == 'arXiv':
@@ -73,7 +84,7 @@ def extract_metadata(hit):
     if not abstract:
         abstract = meta.get('abstracts', [{}])[0].get('value', '')
 
-    # 作者
+    # 作者列表
     authors = meta.get('authors', [])
     author_list = [a.get('full_name', '') for a in authors]
     if len(author_list) > 1:
@@ -83,14 +94,14 @@ def extract_metadata(hit):
     else:
         author_str = ''
 
-    # 第一作者完整信息
+    # 第一作者完整信息 (包含邮箱等)
     first_author = meta.get('first_author', {})
 
     # 合作组
     collaborations = meta.get('collaborations', [])
     collaboration = collaborations[0].get('value', '') if collaborations else ''
 
-    # 日期
+    # 日期 (使用 preprint_date 即 arXiv v1 提交日期)
     preprint_date = meta.get('preprint_date', '')
     time_str = preprint_date.replace('-', '.') if preprint_date else ''
 
@@ -130,15 +141,15 @@ def extract_metadata(hit):
         'arxiv_id': arxiv_id,
         'arxiv_categories': arxiv_categories,
         'journal': journal,
-        'journal_year': str(journal_year),
-        'journal_volume': str(journal_volume),
-        'journal_issue': str(journal_issue),
-        'artid': str(artid),
+        'journal_year': str(journal_year) if journal_year is not None else '',
+        'journal_volume': str(journal_volume) if journal_volume is not None else '',
+        'journal_issue': str(journal_issue) if journal_issue is not None else '',
+        'artid': str(artid) if artid is not None else '',
         'doi': doi,
         'keywords': keywords,
         'citation_count': citation_count,
         'citation_without_self': citation_without_self,
-        # 构建的 Markdown 链接
+        # 构建的 Markdown 链接 (用于 JSON 文件)
         'inspire_hep_link': f'[{texkey}](https://inspirehep.net/literature/{recid})',
         'arxiv_link': f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})',
         'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}',

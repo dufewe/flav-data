@@ -17,7 +17,13 @@ import sys
 import argparse
 import urllib.request
 
-HEPDATA_CLI = "/Users/dufewe/.hermes/hermes-agent/venv/bin/hepdata-cli"
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+
+HEPDATA_CLI = "/hepdata-cli"
 
 
 def fetch_table_names(inspire_id):
@@ -55,8 +61,9 @@ def download_metadata(inspire_id, output_dir):
 
 def download_table_yaml(inspire_id, table_name):
     """下载指定表格的 YAML 数据。"""
-    # URL 编码表格名 (处理空格)
-    encoded_name = table_name.replace(' ', '%20')
+    # 完整 URL 编码表格名 (处理空格、+、# 等特殊字符)
+    from urllib.parse import quote
+    encoded_name = quote(table_name, safe='')
     url = f'https://www.hepdata.net/download/table/ins{inspire_id}/{encoded_name}/yaml'
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     response = urllib.request.urlopen(req, timeout=30)
@@ -79,7 +86,7 @@ def parse_metadata(meta_path):
     for t in tables:
         name = t.get('name', '')
         desc = t.get('description', '').lower()
-        if 'correlation' in desc:
+        if 'correlation' in desc or 'covariance' in desc:
             correlation_tables.append(t)
         else:
             observable_tables.append(t)
@@ -99,6 +106,106 @@ def parse_metadata(meta_path):
         'observable_tables': observable_tables,
         'correlation_tables': correlation_tables,
     }
+
+
+def parse_yaml_observables(yaml_text):
+    """解析观测值 YAML 数据。
+    
+    返回: (observables, qualifiers)
+    observables: list of {header, value, errors, qualifiers}
+    """
+    if not HAS_YAML:
+        print("Warning: PyYAML not installed. Install with: pip install pyyaml")
+        return [], {}
+    
+    data = yaml.safe_load(yaml_text)
+    if not data or 'dependent_variables' not in data:
+        return [], {}
+    
+    observables = []
+    global_qualifiers = data.get('independent_variables', [])
+    
+    for var in data.get('dependent_variables', []):
+        header = var.get('header', {}).get('name', '')
+        qualifiers = var.get('qualifiers', [])
+        
+        for val in var.get('values', []):
+            raw_value = val.get('value')
+            obs = {
+                'header': header,
+                'value': str(raw_value) if raw_value is not None else '',
+                'errors': [],
+                'qualifiers': qualifiers,
+            }
+            
+            for err in val.get('errors', []):
+                err_info = {
+                    'label': err.get('label', ''),
+                }
+                if 'symerror' in err:
+                    se = err['symerror']
+                    err_info['symerror'] = str(se) if se is not None else ''
+                elif 'asymerror' in err:
+                    ae = err['asymerror']
+                    err_info['plus'] = str(ae.get('plus', '')) if ae.get('plus') is not None else ''
+                    err_info['minus'] = str(ae.get('minus', '')) if ae.get('minus') is not None else ''
+                obs['errors'].append(err_info)
+            
+            observables.append(obs)
+    
+    return observables, {'global': global_qualifiers}
+
+
+def parse_yaml_correlation(yaml_text):
+    """解析关联/协方差矩阵 YAML 数据。
+    
+    返回: (matrix_type, matrix, qualifiers)
+    matrix_type: 'correlation' 或 'covariance'
+    matrix: 二维列表
+    """
+    if not HAS_YAML:
+        return 'unknown', [], {}
+    
+    data = yaml.safe_load(yaml_text)
+    if not data or 'dependent_variables' not in data:
+        return 'unknown', [], {}
+    
+    # 判断矩阵类型
+    matrix_type = 'correlation'
+    for var in data.get('dependent_variables', []):
+        header = var.get('header', {}).get('name', '').lower()
+        if 'covariance' in header:
+            matrix_type = 'covariance'
+            break
+    
+    # 提取矩阵值 (按行展开)
+    values = []
+    qualifiers = {}
+    for var in data.get('dependent_variables', []):
+        for val in var.get('values', []):
+            v = val.get('value', '')
+            if v == '-':
+                continue
+            try:
+                values.append(float(v))
+            except (ValueError, TypeError):
+                print(f"Warning: Skipping non-numeric matrix value: {v!r}")
+                continue
+        for q in var.get('qualifiers', []):
+            qualifiers[q.get('name', '')] = q.get('value', '')
+    
+    # 重组为二维矩阵
+    n = int(len(values) ** 0.5)
+    if n * n != len(values):
+        print(f"Warning: Matrix size {len(values)} is not a perfect square")
+        return matrix_type, [], qualifiers
+    
+    matrix = []
+    for i in range(n):
+        row = values[i*n:(i+1)*n]
+        matrix.append(row)
+    
+    return matrix_type, matrix, qualifiers
 
 
 def main():
@@ -149,9 +256,9 @@ def main():
 
     # 打印关联矩阵的 q² 区间
     if info['correlation_tables']:
-        print(f"\nCorrelation matrix bins:")
+        print(f"\nCorrelation/Covariance matrix bins:")
         for t in info['correlation_tables'][:5]:
-            print(f"  {t['name']}: {t['description'][:60]}...")
+            print(f"  {t['name']}: {t['description'][:80]}...")
         if len(info['correlation_tables']) > 5:
             print(f"  ... and {len(info['correlation_tables']) - 5} more")
 
@@ -163,6 +270,18 @@ def main():
         with open(yaml_path, 'w') as f:
             f.write(yaml_data)
         print(f"YAML saved to: {yaml_path}")
+        
+        # 尝试解析
+        if 'correlation' in args.table.lower() or 'covariance' in args.table.lower():
+            mtype, matrix, quals = parse_yaml_correlation(yaml_data)
+            print(f"Matrix type: {mtype}")
+            print(f"Matrix size: {len(matrix)}x{len(matrix[0]) if matrix else 0}")
+            print(f"Qualifiers: {quals}")
+        else:
+            observables, quals = parse_yaml_observables(yaml_data)
+            print(f"Found {len(observables)} observables")
+            for obs in observables[:3]:
+                print(f"  {obs['header']}: {obs['value']} (errors: {len(obs['errors'])})")
 
     # 输出 JSON 摘要
     summary_path = os.path.join(output_dir, 'hepdata_summary.json')
