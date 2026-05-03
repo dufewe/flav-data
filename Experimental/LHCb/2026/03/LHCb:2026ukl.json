@@ -2,10 +2,10 @@
     "inspire-hep": "[LHCb:2026ukl](https://inspirehep.net/literature/3129082)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "First measurement of time-dependent $CP$ violation in the flavor-changing neutral-current decay $B^{0}\\rightarrow K_{S}^{0} \\mu^{+} \\mu^{-}$",
+    "title": "First measurement of time-dependent $CP$ violation in the flavor-changing neutral-current decay $B^{0}\\to K_{S}^{0} \\mu^{+} \\mu^{-}$",
     "arxiv": "[hep-ex/2603.13223v3](https://arxiv.org/pdf/2603.13223)",
     "time": "2026.03.13",
-    "abstract": "a flavor-tagged time-dependent analysis of $B^0 \\to K^0_S \\mu^+ \\mu^−$ decays across the full dimuon mass range excluding the $J/\\psi$ and $\\psi(2S)$ resonance regions, using proton-proton collision data collected by the LHCb experiment in 2011–2018 at center-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{−1}$",
+    "abstract": "a flavor-tagged time-dependent analysis of $B^0 \\to K^0_S \\mu^+ \\mu^-$ decays across the full dimuon mass range excluding the $J/\\psi$ and $\\psi(2S)$ resonance regions, using proton-proton collision data collected by the LHCb experiment in 2011–2018 at center-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$",
     "pdf": "https://arxiv.org/pdf/2603.13223",
     "data": [
         {
@@ -32,9 +32,57 @@
                 "type@2_err_down": "0.05"
             },
             "type@1_correlation": [
-                [1.0, 0.5],
-                [0.5, 1.0]
+                [1.0, 0.50],
+                [0.50, 1.0]
             ]
+        },
+        {
+            "obs@1": {
+                "name": "C(B0.2.KS0.mu+.mu-)",
+                "latex": "$C(B^0 \\to K_S^0 \\mu^+ \\mu^-)$",
+                "value": "0.33",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.44",
+                "type@1_err_down": "0.44",
+                "q2min": "0.0",
+                "q2max": "8.0"
+            },
+            "obs@2": {
+                "name": "S(B0.2.KS0.mu+.mu-)",
+                "latex": "$S(B^0 \\to K_S^0 \\mu^+ \\mu^-)$",
+                "value": "1.10",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.43",
+                "type@1_err_down": "0.43",
+                "q2min": "0.0",
+                "q2max": "8.0"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "C(B0.2.KS0.mu+.mu-)",
+                "latex": "$C(B^0 \\to K_S^0 \\mu^+ \\mu^-)$",
+                "value": "-0.62",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.47",
+                "type@1_err_down": "0.47",
+                "q2min": "11.0",
+                "q2max": "15.0",
+                "q2min_alt": "17.5",
+                "q2max_alt": "inf"
+            },
+            "obs@2": {
+                "name": "S(B0.2.KS0.mu+.mu-)",
+                "latex": "$S(B^0 \\to K_S^0 \\mu^+ \\mu^-)$",
+                "value": "0.48",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.47",
+                "type@1_err_down": "0.47",
+                "q2min": "11.0",
+                "q2max": "15.0",
+                "q2min_alt": "17.5",
+                "q2max_alt": "inf"
+            }
         }
     ],
     "transition-mode": "semi-leptonic decay"

@@ -149,7 +149,7 @@ python3 scripts/json-valid.py <path/to/file.json>
 
 - `OBS` 为观测量缩写，按观测属性分为: 分支比、衰变宽度、寿命、质量、截面、角分布系数、CP 不对称、优化观测量、比值、CKM 参数等
 - `transition` 为跃迁符号
-- `condition` 为可选条件 (如 `[mu/e]` 表示轻子味比值)
+- `condition` 为可选条件 (如 `[mu/e]` 表示轻子味比值), 单跃迁道过程一般不使用
 - 多跃迁道共用粒子用 `l1`, `l2`, `q1`, `q2`, `nu1`, `nu2`, `h1`, `h2` 等表示
 - 示例: `$\mathcal{B}(B^0 \to \mu^+\mu^-)/\mathcal{B}(B^0 \to e^+e^-)$` → `R(B0.2.l+.l-)[mu/e]`
 
