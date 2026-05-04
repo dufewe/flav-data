@@ -5,7 +5,7 @@
     "title": "Observation of the very rare $\\Sigma^+ \\to p \\mu^+ \\mu^-$ decay",
     "arxiv": "[hep-ex/2504.06096v2](https://arxiv.org/pdf/2504.06096)",
     "time": "2025.04.08",
-    "abstract": "the first observation of the $\\Sigma^+ \\to p \\mu^+ \\mu^−$ decay with high significance, using proton-proton collision data and corresponding to an integrated luminosity of 5.4 fb$^{−1}$, collected with the LHCb detector at a centre-of-mass energy of 13 TeV",
+    "abstract": "The first observation of the $\\Sigma^+ \\to p \\mu^+ \\mu^-$ decay is reported with high significance using proton-proton collision data, corresponding to an integrated luminosity of 5.4 fb$^{-1}$, collected with the LHCb detector at a centre-of-mass energy of 13 TeV. A yield of $237 \\pm 16$ $\\Sigma^+ \\to p \\mu^+ \\mu^-$ decays is obtained, where the uncertainty is statistical only. A branching fraction of $(1.08 \\pm 0.17) \\times 10^{-8}$ is measured, where the uncertainty includes statistical and systematic sources. No evidence of resonant structures is found in the dimuon invariant-mass distribution. All results are compatible with Standard Model expectations. This represents the rarest decay of a baryon ever observed.",
     "pdf": "https://arxiv.org/pdf/2504.06096",
     "data": [
         {
@@ -14,16 +14,17 @@
                 "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
                 "value": "1.08e-8",
                 "tot_err_up": "0.17e-8",
-                "tot_err_down": "0.17e-8",
-                "dataset": "run2"
-            },
-            "obs@2": {
+                "tot_err_down": "0.17e-8"
+            }
+        },
+        {
+            "obs@1": {
                 "name": "Br(Sigma+.2.p.mu+.mu-)",
                 "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
                 "value": "1.09e-8",
                 "tot_err_up": "0.17e-8",
                 "tot_err_down": "0.17e-8",
-                "dataset": "run1+run2"
+                "ref": "[He:2018yzu](https://inspirehep.net/literature/1678871)"
             }
         }
     ],

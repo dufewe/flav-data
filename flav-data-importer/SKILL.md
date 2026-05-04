@@ -228,8 +228,17 @@ python3 scripts/json-valid.py <path/to/file.json>
 ### 理论论文无 HEPData
 纯理论计算论文通常没有 HEPData 条目，需要从 PDF 中提取理论曲线数据。
 
+### ref 字段
+当 data entry 需要 `ref` 字段引用来源文献 (如组合结果引用前期论文) 时，**必须**从论文原文的引用列表中找到该文献的 arXiv 号或 Inspire 编号，然后在 **InspireHEP 上搜索获取正确的 TexKey 和 Inspire ID**。**严禁凭空猜测** TexKey。
+
+正确流程:
+1. 从论文原文引用列表找到文献的 arXiv 号
+2. 在 InspireHEP 搜索该 arXiv 号
+3. 获取 TexKey 和 Inspire ID 
+4. 写为 Markdown 链接
+
 ### LaTeX 转义
-JSON 文件中 LaTeX 使用双反斜杠，如 `\\to` 而非 `\to`。Python 解析后变成单反斜杠是正常的。
+JSON 文件中 LaTeX 使用双反斜杠，如 `\\\\to` 而非 `\\to`。Python 解析后变成单反斜杠是正常的。
 
 ### 索引文件更新
 每次添加新文件后必须更新年度索引文件，如 `LHCb@2025.json`，月份键必须零填充 ("01" 到 "12")。

@@ -32,7 +32,7 @@
                 "type@2_err_down": "0.6e-2"
             },
             "obs@3": {
-                "name": "DelatAFB(Lambdac+.2.p.mu+.mu-)",
+                "name": "DeltaAFB(Lambdac+.2.p.mu+.mu-)",
                 "latex": "$\\Delta A_{FB}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
                 "value": "3.1e-2",
                 "type@1_err": "stat",

@@ -74,7 +74,7 @@
 | $\mathcal{B}(B^0 \to e^+ e^-)$ | `Br(B0.2.e+.e-)` |
 | $\Gamma(K^{*0} \to K^+ \pi^-)$ | `Gamma(Kst0.2.K+.pi-)` |
 | $d\mathcal{B}/dq^2(B^0 \to X_s \gamma)$ | `dBr/dq2(B0.2.Xs.gamma)` |
-| $M$ | `Mass(t)` |
+| $M_t$ | `Mass(t)` |
 | $\tau_{e^-}$ | `Tau(e-)` |
 | $\sigma(pp \to e^+ e^-)$ | `Sigma(p.p.2.e+.e-)` |
 | $\Delta M_s$ | `DeltaMass(Bs0.2.Bs0Bar)` |
@@ -159,6 +159,8 @@
 |------|------|------|
 | `ACP` | $A_{CP}$ | CP 不对称 |
 | `DeltaACP` | $\Delta A_{CP}$ | CP 不对称差值 |
+| `SigmaAFB` | $\Sigma A_{FB}$ | CP 平均前后不对称 ($= (A_{FB} + \bar{A}_{FB})/2$) |
+| `DeltaAFB` | $\Delta A_{FB}$ | CP 不对称前后不对称 ($= (A_{FB} - \bar{A}_{FB})/2$) |
 | `A3` | $A_3$ | S3 的 CP 不对称 |
 | `A4` | $A_4$ | S4 的 CP 不对称 |
 | `A5` | $A_5$ | S5 的 CP 不对称 |
@@ -193,6 +195,21 @@
 |------|------|------|
 | `C` | $C$ | 直接 CP 破坏参数 |
 | `S` | $S$ | 混合诱导 CP 破坏参数 |
+
+#### LFU 差值观测量 (Q 观测量)
+
+角系数在 $\mu$ 和 $e$ 模式间的差值: $Q_X = X^{\mu} - X^{e}$。用于检验轻子味普适性。
+
+| 缩写 | 观测量 LaTeX | 说明 |
+|------|------|------|
+| `QFL` | $Q_{F_L}$ | $F_L^{\mu} - F_L^{e}$ |
+| `Q1` | $Q_1$ | $P_1^{\mu} - P_1^{e}$ |
+| `Q2` | $Q_2$ | $P_2^{\mu} - P_2^{e}$ |
+| `Q3` | $Q_3$ | $P_3^{\mu} - P_3^{e}$ |
+| `Q4` | $Q_4$ | $P_4^{\prime\mu} - P_4^{\prime e}$ |
+| `Q5` | $Q_5$ | $P_5^{\prime\mu} - P_5^{\prime e}$ |
+| `Q6` | $Q_6$ | $P_6^{\prime\mu} - P_6^{\prime e}$ |
+| `Q8` | $Q_8$ | $P_8^{\prime\mu} - P_8^{\prime e}$ |
 
 #### 比值与归一化
 
@@ -249,6 +266,8 @@ OBSERVABLE_LATEX = {
     # CP 不对称观测量
     'ACP': '$A_{CP}$',
     'DeltaACP': '$\\Delta A_{CP}$',
+    'SigmaAFB': '$\\Sigma A_{FB}$',
+    'DeltaAFB': '$\\Delta A_{FB}$',
     'A3': '$A_3$', 'A4': '$A_4$', 'A5': '$A_5$',
     'A6s': '$A_{6s}$', 'A7': '$A_7$', 'A8': '$A_8$', 'A9': '$A_9$',
 
@@ -263,6 +282,11 @@ OBSERVABLE_LATEX = {
     # 时间依赖 CP 参数
     'C': '$C$',
     'S': '$S$',
+
+    # LFU 差值观测量
+    'QFL': '$Q_{F_L}$',
+    'Q1': '$Q_1$', 'Q2': '$Q_2$', 'Q3': '$Q_3$',
+    'Q4': '$Q_4$', 'Q5': '$Q_5$', 'Q6': '$Q_6$', 'Q8': '$Q_8$',
 
     # 比值与归一化
     'R': '$R$',

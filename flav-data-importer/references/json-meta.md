@@ -83,7 +83,7 @@
 | `pTmin`/`pTmax` | string | 视情况 | pT 区间 |
 | `etamin`/`etamax` | string | 视情况 | 赝快度区间 |
 | `unit` | string | 视情况 | 单位 (有量纲量必须) |
-| `ref` | string | 视情况 | 外部参考来源的 Markdown 链接 |
+| `ref` | string | 视情况 | 外部参考来源的 Markdown 链接。**必须通过原文引用编号找到 arXiv 号后在 InspireHEP 上搜索获取正确 TexKey**，严禁凭空猜测 |
 
 **注意**:
 - 对称误差时 `err_up` = `err_down`
@@ -149,7 +149,15 @@
 |------|------|
 | `tot_err_up` | 总上误差 (对称误差时上=下) |
 | `tot_err_down` | 总下误差 |
-| `ref` | 外部参考来源的 Markdown 链接 |
+| `ref` | 外部参考来源的 Markdown 链接 (需通过 InspireHEP 搜索获取正确 TexKey 和 Inspire ID) |
+
+示例:
+```json
+{
+    ...,
+    "ref": "[{TexKey}](https://inspirehep.net/literature/{Inspire ID})"
+}
+```
 
 ### 关联矩阵 (tot_correlation / type@N_correlation)
 
