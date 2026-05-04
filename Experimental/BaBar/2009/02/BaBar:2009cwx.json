@@ -1,0 +1,85 @@
+{
+    "inspire-hep": "[BaBar:2009cwx](https://inspirehep.net/literature/813402)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Measurement of the Semileptonic Decays $B\\\\to D\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$ and $B\\\\to D^{*}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$",
+    "arxiv": "[0902.2660v1](https://arxiv.org/pdf/0902.2660)",
+    "time": "2009.02.16",
+    "abstract": "We present measurements of the semileptonic decays $B^{-}\\\\to D^{0}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$, $B^{-}\\\\to D^{*0}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$, $\\\\bar{B}^{0}\\\\to D^{+}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$, and $\\\\bar{B}^{0}\\\\to D^{*+}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau}$, which are sensitive to non--Standard Model amplitudes. The measurements are based on a data sample of $383\\\\times 10^{6}$ $B\\\\bar{B}$ pairs recorded by the BABAR detector. The $\\\\tau^{-}$ is identified in decay modes with a single charged hadron plus neutrals, or with three charged hadrons and a $\\\\pi^{0}$. The signal $B$ meson is fully reconstructed in a hadronic decay mode, while the rest of the event is used to identify the $\\\\tau$. We measure the branching fractions $\\\\mathcal{B}(B\\\\to D\\\\tau\\\\nu)=(0.86\\\\pm 0.24\\\\pm 0.12)\\\\%$ and $\\\\mathcal{B}(B\\\\to D^{*}\\\\tau\\\\nu)=(1.62\\\\pm 0.31\\\\pm 0.10)\\\\%$, and the ratios $R(D)\\\\equiv\\\\mathcal{B}(B\\\\to D\\\\tau\\\\nu)/\\\\mathcal{B}(B\\\\to D\\\\ell\\\\nu)=0.416\\\\pm 0.117\\\\pm 0.055$ and $R(D^{*})\\\\equiv\\\\mathcal{B}(B\\\\to D^{*}\\\\tau\\\\nu)/\\\\mathcal{B}(B\\\\to D^{*}\\\\ell\\\\nu)=0.297\\\\pm 0.056\\\\pm 0.026$, where $\\\\ell$ refers to either an electron or a muon. The results are in agreement with the Standard Model expectations.",
+    "pdf": "https://arxiv.org/pdf/0902.2660",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B-.2.D0.tau-.nuBar)",
+                "latex": "$\\\\mathcal{B}(B^{-}\\\\to D^{0}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau})$",
+                "value": "0.86e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.24e-2",
+                "type@1_err_down": "0.24e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.12e-2",
+                "type@2_err_down": "0.12e-2"
+            },
+            "obs@2": {
+                "name": "Br(B-.2.D*0.tau-.nuBar)",
+                "latex": "$\\\\mathcal{B}(B^{-}\\\\to D^{*0}\\\\tau^{-}\\\\bar{\\\\nu}_{\\\\tau})$",
+                "value": "1.62e-2",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.31e-2",
+                "type@1_err_down": "0.31e-2",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10e-2",
+                "type@2_err_down": "0.10e-2"
+            },
+            "obs@3": {
+                "name": "R(B-.2.D0.l-.nuBar)[tau/l]",
+                "latex": "$R(D)$",
+                "value": "0.416",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.117",
+                "type@1_err_down": "0.117",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.055",
+                "type@2_err_down": "0.055"
+            },
+            "obs@4": {
+                "name": "R(B-.2.D*0.l-.nuBar)[tau/l]",
+                "latex": "$R(D^{*})$",
+                "value": "0.297",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.056",
+                "type@1_err_down": "0.056",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.026",
+                "type@2_err_down": "0.026"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    1.0,
+                    -0.448
+                ],
+                [
+                    0.0,
+                    0.0,
+                    -0.448,
+                    1.0
+                ]
+            ]
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

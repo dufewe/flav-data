@@ -1,0 +1,335 @@
+{
+    "inspire-hep": "[BaBar:2010efp](https://inspirehep.net/literature/855306)",
+    "author": "del Amo Sanchez, P. and others",
+    "collaboration": "BaBar",
+    "title": "Study of B --> pi l nu and B --> rho l nu Decays and Determination of |V_ub|",
+    "arxiv": "[1005.3288v2](https://arxiv.org/pdf/1005.3288)",
+    "time": "2010.05.18",
+    "abstract": "We present an analysis of exclusive charmless semileptonic B-meson decays based on 377 million BBbar pairs recorded with the BABAR detector at the Upsilon(4S) resonance. We select four event samples corresponding to the decay modes B0 --> pi- l+ nu, B+ --> pi0 l+ nu, B0 --> rho- l+ nu, and B+ -> rho0 l+ nu, and find the measured branching fractions to be consistent with isospin symmetry. Assuming isospin symmetry, we combine the two B --> pi l nu samples, and similarly the two B --> rho l nu samples, and measure the branching fractions BF(B0 --> pi- l+ nu) = (1.41 +- 0.05 +- 0.07) x 10^-4 and BF(B0 --> rho- l+ nu) = (1.75 +- 0.15 +- 0.27) x 10^-4, where the errors are statistical and systematic. We compare the measured distribution in q^2, the momentum transfer squared, with predictions for the form factors from QCD calculations and determine the CKM matrix element |V_ub|. Based on the measured partial branching fraction for B --> pi l nu in the range q^2 < 12 GeV^2 and the most recent LCSR calculations we obtain |V_ub| = (3.78 +- 0.13 +0.55-0.40) x 10^-3, where the errors refer to the experimental and theoretical uncertainties. From a simultaneous fit to the data over the full q^2 range and the FNAL/MILC lattice QCD results, we obtain |V_ub| = (2.95 +- 0.31) x 10^-3 from B --> pi l nu, where the error is the combined experimental and theoretical uncertainty.",
+    "pdf": "https://arxiv.org/pdf/1005.3288v2",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.320",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.025",
+                "type@1_err_down": "0.025",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.027",
+                "type@2_err_down": "0.027",
+                "q2min": "0",
+                "q2max": "4"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.321",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.017",
+                "type@1_err_down": "0.017",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.012",
+                "type@2_err_down": "0.012",
+                "q2min": "4",
+                "q2max": "8"
+            },
+            "obs@3": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.235",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.015",
+                "type@1_err_down": "0.015",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.016",
+                "type@2_err_down": "0.016",
+                "q2min": "8",
+                "q2max": "12"
+            },
+            "obs@4": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.220",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.017",
+                "type@1_err_down": "0.017",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.018",
+                "type@2_err_down": "0.018",
+                "q2min": "12",
+                "q2max": "16"
+            },
+            "obs@5": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.201",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.018",
+                "type@1_err_down": "0.018",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.014",
+                "type@2_err_down": "0.014",
+                "q2min": "16",
+                "q2max": "20"
+            },
+            "obs@6": {
+                "name": "Br(B0.2.pi-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\pi^{-}\\ell^{+}\\nu)$",
+                "value": "0.118",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.016",
+                "type@1_err_down": "0.016",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.014",
+                "type@2_err_down": "0.014",
+                "q2min": "20",
+                "q2max": "26.4"
+            },
+            "type@1_correlation": [
+                [
+                    1.0,
+                    0.191,
+                    0.05,
+                    -0.005,
+                    0.068,
+                    0.057
+                ],
+                [
+                    0.191,
+                    1.0,
+                    0.089,
+                    0.058,
+                    0.085,
+                    0.011
+                ],
+                [
+                    0.05,
+                    0.089,
+                    1.0,
+                    0.197,
+                    0.127,
+                    0.005
+                ],
+                [
+                    -0.005,
+                    0.058,
+                    0.197,
+                    1.0,
+                    0.135,
+                    -0.008
+                ],
+                [
+                    0.068,
+                    0.085,
+                    0.127,
+                    0.135,
+                    1.0,
+                    0.032
+                ],
+                [
+                    0.057,
+                    0.011,
+                    0.005,
+                    -0.008,
+                    0.032,
+                    1.0
+                ]
+            ],
+            "type@2_correlation": [
+                [
+                    1.0,
+                    0.521,
+                    0.705,
+                    0.394,
+                    -0.052,
+                    0.075
+                ],
+                [
+                    0.521,
+                    1.0,
+                    0.853,
+                    0.687,
+                    0.605,
+                    0.478
+                ],
+                [
+                    0.705,
+                    0.853,
+                    1.0,
+                    0.652,
+                    0.366,
+                    0.439
+                ],
+                [
+                    0.394,
+                    0.687,
+                    0.652,
+                    1.0,
+                    0.637,
+                    0.367
+                ],
+                [
+                    -0.052,
+                    0.605,
+                    0.366,
+                    0.637,
+                    1.0,
+                    0.509
+                ],
+                [
+                    0.075,
+                    0.478,
+                    0.439,
+                    0.367,
+                    0.509,
+                    1.0
+                ]
+            ],
+            "tot_correlation": [
+                [
+                    1.0,
+                    0.337,
+                    0.401,
+                    0.212,
+                    0.015,
+                    0.066
+                ],
+                [
+                    0.337,
+                    1.0,
+                    0.43,
+                    0.343,
+                    0.272,
+                    0.205
+                ],
+                [
+                    0.401,
+                    0.43,
+                    1.0,
+                    0.443,
+                    0.227,
+                    0.219
+                ],
+                [
+                    0.212,
+                    0.343,
+                    0.443,
+                    1.0,
+                    0.35,
+                    0.18
+                ],
+                [
+                    0.015,
+                    0.272,
+                    0.227,
+                    0.35,
+                    1.0,
+                    0.221
+                ],
+                [
+                    0.066,
+                    0.205,
+                    0.219,
+                    0.18,
+                    0.221,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "Br(B0.2.rho-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\rho^{-}\\ell^{+}\\nu)$",
+                "value": "0.564",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.107",
+                "type@1_err_down": "0.107",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.126",
+                "type@2_err_down": "0.126",
+                "q2min": "0",
+                "q2max": "8"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.rho-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\rho^{-}\\ell^{+}\\nu)$",
+                "value": "0.912",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.059",
+                "type@1_err_down": "0.059",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.135",
+                "type@2_err_down": "0.135",
+                "q2min": "8",
+                "q2max": "16"
+            },
+            "obs@3": {
+                "name": "Br(B0.2.rho-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to\\rho^{-}\\ell^{+}\\nu)$",
+                "value": "0.268",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.022",
+                "type@1_err_down": "0.022",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.058",
+                "type@2_err_down": "0.058",
+                "q2min": "16",
+                "q2max": "20.3"
+            },
+            "type@1_correlation": [
+                [
+                    1.0,
+                    0.264,
+                    0.137
+                ],
+                [
+                    0.264,
+                    1.0,
+                    0.189
+                ],
+                [
+                    0.137,
+                    0.189,
+                    1.0
+                ]
+            ],
+            "type@2_correlation": [
+                [
+                    1.0,
+                    0.339,
+                    0.692
+                ],
+                [
+                    0.339,
+                    1.0,
+                    0.296
+                ],
+                [
+                    0.692,
+                    0.296,
+                    1.0
+                ]
+            ],
+            "tot_correlation": [
+                [
+                    1.0,
+                    0.307,
+                    0.532
+                ],
+                [
+                    0.307,
+                    1.0,
+                    0.281
+                ],
+                [
+                    0.532,
+                    0.281,
+                    1.0
+                ]
+            ]
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

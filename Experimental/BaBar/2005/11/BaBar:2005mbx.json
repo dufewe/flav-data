@@ -1,0 +1,21 @@
+{
+    "inspire-hep": "[BaBar:2005mbx](https://inspirehep.net/literature/697070)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "A Search for the rare decay $B^{0}\\\\to\\\\tau^{+}\\\\tau^{-}$ at BABAR",
+    "arxiv": "[hep-ex/0511015v1](https://arxiv.org/pdf/hep-ex/0511015)",
+    "time": "2005.11.09",
+    "abstract": "We present the results of a search for the decay $B^{0}\\\\to\\\\tau^{+}\\\\tau^{-}$ in a data sample of $(232\\\\pm 3)\\\\times 10^{6}$ $\\\\Upsilon(4S)\\\\to B\\\\bar{B}$ decays using the BABAR detector. Certain extensions of the Standard Model predict an enhanced rate for this decay. We reconstruct one $B$ meson in a hadronic decay mode and search for the decay of the other $B$ meson to $\\\\tau^{+}\\\\tau^{-}$. No evidence for an excess of signal events is found. We set an upper limit on the branching fraction of $\\\\mathcal{B}(B^{0}\\\\to\\\\tau^{+}\\\\tau^{-})<4.1\\\\times 10^{-3}$ at the 90% confidence level.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0511015",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.tau+.tau-)",
+                "latex": "$\\\\mathcal{B}(B^{0}\\\\to\\\\tau^{+}\\\\tau^{-})$",
+                "type@1_upper_limit": "4.1e-3",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}
