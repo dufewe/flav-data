@@ -1,0 +1,113 @@
+{
+    "inspire-hep": "[Belle:2005fli](https://inspirehep.net/literature/679052)",
+    "author": "Iwasaki, M. and others",
+    "collaboration": "Belle",
+    "title": "Improved Measurement of the Electroweak Penguin Process $B \\to X_s \\ell^+ \\ell^-$",
+    "arxiv": "[hep-ex/0503044v1](https://arxiv.org/pdf/hep-ex/0503044)",
+    "time": "2005.03.17",
+    "abstract": "We present an improved measurement of the branching fraction for the electroweak penguin process $B \\to X_s \\ell^+ \\ell^-$, where $\\ell$ is an electron or a muon and $X_s$ is a hadronic state with strangeness $S = -1$. Averaging over both lepton flavors, the inclusive branching fraction is measured to be $\\mathcal{B}(B \\to X_s \\ell^+ \\ell^-) = (4.11 \\pm 0.83 {+0.85 \\atop -0.81}) \\times 10^{-6}$ for $M_{\\ell^+ \\ell^-} > 0.2$ GeV/$c^2$.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0503044",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bbar.2.XsBar.ep.em)[Mll>0.2]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}e^{+}e^{-})(M_{\\ell^{+}\\ell^{-}}>0.2\\,\\mathrm{GeV}/c^2)$",
+                "value": "4.04",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.30",
+                "type@1_err_down": "1.30",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.87",
+                "type@2_err_down": "0.83",
+                "unit": "1e-6",
+                "q2min": "0.2",
+                "q2max": "25.0"
+            },
+            "obs@2": {
+                "name": "Br(Bbar.2.XsBar.mup.mum)[Mll>0.2]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\mu^{+}\\mu^{-})(M_{\\ell^{+}\\ell^{-}}>0.2\\,\\mathrm{GeV}/c^2)$",
+                "value": "4.13",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.05",
+                "type@1_err_down": "1.05",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.85",
+                "type@2_err_down": "0.81",
+                "unit": "1e-6",
+                "q2min": "0.2",
+                "q2max": "25.0"
+            },
+            "obs@3": {
+                "name": "Br(Bbar.2.XsBar.l+.l-)[Mll>0.2]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\ell^{+}\\ell^{-})(M_{\\ell^{+}\\ell^{-}}>0.2\\,\\mathrm{GeV}/c^2)$",
+                "value": "4.11",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.83",
+                "type@1_err_down": "0.83",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.85",
+                "type@2_err_down": "0.81",
+                "unit": "1e-6",
+                "q2min": "0.2",
+                "q2max": "25.0"
+            },
+            "obs@4": {
+                "name": "Br(Bbar.2.XsBar.l+.l-)[0.04<Mll<1.0]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\ell^{+}\\ell^{-})$",
+                "value": "11.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "4.83",
+                "type@1_err_down": "4.83",
+                "type@2_err": "syst",
+                "type@2_err_up": "4.60",
+                "type@2_err_down": "2.71",
+                "unit": "1e-7",
+                "q2min": "0.04",
+                "q2max": "1.0"
+            },
+            "obs@5": {
+                "name": "Br(Bbar.2.XsBar.l+.l-)[1.0<Mll<6.0]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\ell^{+}\\ell^{-})$",
+                "value": "14.93",
+                "type@1_err": "stat",
+                "type@1_err_up": "5.04",
+                "type@1_err_down": "5.04",
+                "type@2_err": "syst",
+                "type@2_err_up": "4.11",
+                "type@2_err_down": "3.21",
+                "unit": "1e-7",
+                "q2min": "1.0",
+                "q2max": "6.0"
+            },
+            "obs@6": {
+                "name": "Br(Bbar.2.XsBar.l+.l-)[6.0<Mll<14.4]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\ell^{+}\\ell^{-})$",
+                "value": "7.32",
+                "type@1_err": "stat",
+                "type@1_err_up": "6.14",
+                "type@1_err_down": "6.14",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.84",
+                "type@2_err_down": "1.91",
+                "unit": "1e-7",
+                "q2min": "6.0",
+                "q2max": "14.4"
+            },
+            "obs@7": {
+                "name": "Br(Bbar.2.XsBar.l+.l-)[14.4<Mll<25.0]",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to X_{s}\\ell^{+}\\ell^{-})$",
+                "value": "4.18",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.17",
+                "type@1_err_down": "1.17",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.61",
+                "type@2_err_down": "0.68",
+                "unit": "1e-7",
+                "q2min": "14.4",
+                "q2max": "25.0"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

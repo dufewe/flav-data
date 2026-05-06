@@ -1,0 +1,137 @@
+{
+    "inspire-hep": "[BaBar:2007ddh](https://inspirehep.net/literature/771234)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "A Measurement of the Branching Fractions of Exclusive $\\bar{B} \\to D^{(*)}(\\pi)\\ell^{-}\\bar{\\nu}_{\\ell}$ Decays in Events with a Fully Reconstructed $B$ Meson",
+    "arxiv": "[0712.3503v1](https://arxiv.org/pdf/0712.3503)",
+    "time": "2007.12.20",
+    "abstract": "We report a measurement of the branching fractions for $\\bar{B} \\to D^{(*)}(\\pi)\\ell^{-}\\bar{\\nu}_{\\ell}$ decays based on 341.1 fb$^{-1}$ of data collected at the $\\Upsilon(4S)$ resonance with the BaBar detector at the PEP-II $e^{+}e^{-}$ storage rings. Events are tagged by fully reconstructing one of the $B$ mesons in a hadronic decay mode. We measure the branching fractions relative to the inclusive semileptonic branching fraction.",
+    "pdf": "https://arxiv.org/pdf/0712.3503",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bm.2.D0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{0}\\ell^{-}\\bar{\\nu})$",
+                "value": "2.33",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.09",
+                "type@1_err_down": "0.09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.09",
+                "type@2_err_down": "0.09",
+                "unit": "%"
+            },
+            "obs@2": {
+                "name": "Br(Bm.2.Dst0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{*0}\\ell^{-}\\bar{\\nu})$",
+                "value": "5.83",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.30",
+                "type@2_err_down": "0.30",
+                "unit": "%"
+            },
+            "obs@3": {
+                "name": "Br(B0Bar.2.Dp.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{+}\\ell^{-}\\bar{\\nu})$",
+                "value": "2.21",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.11",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.12",
+                "type@2_err_down": "0.12",
+                "unit": "%"
+            },
+            "obs@4": {
+                "name": "Br(B0Bar.2.Dstp.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{*+}\\ell^{-}\\bar{\\nu})$",
+                "value": "5.49",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.25",
+                "type@2_err_down": "0.25",
+                "unit": "%"
+            },
+            "obs@5": {
+                "name": "Br(Bm.2.Dp.pim.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{+}\\pi^{-}\\ell^{-}\\bar{\\nu})$",
+                "value": "0.42",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.06",
+                "type@1_err_down": "0.06",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.03",
+                "type@2_err_down": "0.03",
+                "unit": "%"
+            },
+            "obs@6": {
+                "name": "Br(Bm.2.Dstp.pim.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{*+}\\pi^{-}\\ell^{-}\\bar{\\nu})$",
+                "value": "0.59",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.05",
+                "type@1_err_down": "0.05",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "unit": "%"
+            },
+            "obs@7": {
+                "name": "Br(B0Bar.2.D0.pip.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{0}\\pi^{+}\\ell^{-}\\bar{\\nu})$",
+                "value": "0.43",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.08",
+                "type@1_err_down": "0.08",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.03",
+                "type@2_err_down": "0.03",
+                "unit": "%"
+            },
+            "obs@8": {
+                "name": "Br(B0Bar.2.Dst0.pip.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{*0}\\pi^{+}\\ell^{-}\\bar{\\nu})$",
+                "value": "0.48",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.08",
+                "type@1_err_down": "0.08",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "unit": "%"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Br(Bm.2.Dst.pim.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{(*)}\\pi^{-}\\ell^{-}\\bar{\\nu})$",
+                "value": "1.52",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10",
+                "type@2_err_down": "0.10",
+                "unit": "%"
+            },
+            "obs@2": {
+                "name": "Br(B0Bar.2.Dst.pip.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{(*)}\\pi^{+}\\ell^{-}\\bar{\\nu})$",
+                "value": "1.37",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.17",
+                "type@1_err_down": "0.17",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10",
+                "type@2_err_down": "0.10",
+                "unit": "%"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

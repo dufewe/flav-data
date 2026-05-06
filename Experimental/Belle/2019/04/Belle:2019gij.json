@@ -1,0 +1,47 @@
+{
+    "inspire-hep": "[Belle:2019gij](https://inspirehep.net/literature/1730447)",
+    "author": "Abdesselam, A. and others",
+    "collaboration": "Belle",
+    "title": "Measurement of $\\mathcal{R}(D)$ and $\\mathcal{R}(D^{*})$ with a Semileptonic Tagging Method",
+    "arxiv": "[1904.08794v2](https://arxiv.org/pdf/1904.08794)",
+    "time": "2019.04.18",
+    "abstract": "We report a measurement of the ratios of branching fractions $\\mathcal{R}(D) = {\\cal B}(\\bar{B} \\to D \\tau^{-} \\bar{\\nu}_{\\tau})/{\\cal B}(\\bar{B} \\to D \\ell^{-} \\bar{\\nu}_{\\ell})$ and $\\mathcal{R}(D^{\\ast}) = {\\cal B}(\\bar{B} \\to D^{\\ast} \\tau^{-} \\bar{\\nu}_{\\tau})/{\\cal B}(\\bar{B} \\to D^{\\ast} \\ell^{-} \\bar{\\nu}_{\\ell})$, where $\\ell$ denotes either an electron or a muon. The $B$ mesons are reconstructed in a semileptonic decay mode. Using the full Belle data sample of $772 \\times 10^{6}$ $B\\bar{B}$ pairs, we obtain $\\mathcal{R}(D) = 0.307 \\pm 0.037 \\pm 0.016$ and $\\mathcal{R}(D^{*}) = 0.283 \\pm 0.018 \\pm 0.014$, where the first uncertainty is statistical and the second systematic.",
+    "pdf": "https://arxiv.org/pdf/1904.08794",
+    "data": [
+        {
+            "obs@1": {
+                "name": "R(Bbar.2.D.tau.nu)(Bbar.2.D.l.nu)",
+                "latex": "$R(D) = \\frac{\\mathcal{B}(\\bar{B}\\to D\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D\\ell^{-}\\bar{\\nu}_{\\ell})}$",
+                "value": "0.307",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.037",
+                "type@1_err_down": "0.037",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.016",
+                "type@2_err_down": "0.016"
+            },
+            "obs@2": {
+                "name": "R(Bbar.2.Dst.tau.nu)(Bbar.2.Dst.l.nu)",
+                "latex": "$R(D^{*}) = \\frac{\\mathcal{B}(\\bar{B}\\to D^{*}\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu}_{\\ell})}$",
+                "value": "0.283",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.018",
+                "type@1_err_down": "0.018",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.014",
+                "type@2_err_down": "0.014"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    -0.53
+                ],
+                [
+                    -0.53,
+                    1.0
+                ]
+            ]
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

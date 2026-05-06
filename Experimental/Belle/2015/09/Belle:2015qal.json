@@ -1,0 +1,27 @@
+{
+    "inspire-hep": "[Belle:2015qal](https://inspirehep.net/literature/1394389)",
+    "author": "Hamer, J. and others",
+    "collaboration": "Belle",
+    "title": "Search for $B^0 \\to \\pi^- \\tau^+ \\nu_\\tau$ with Hadronic Tagging at Belle",
+    "arxiv": "[1509.06521v1](https://arxiv.org/pdf/1509.06521)",
+    "time": "2015.09.22",
+    "abstract": "We search for the process $B^0 \\to \\pi^- \\tau^+ \\nu_\\tau$ using the full Belle data set of $711\\,\\mathrm{fb}^{-1}$, corresponding to $772 \\times 10^6 B\\bar{B}$ pairs. We observe an excess of $2.8\\sigma$ ($2.4\\sigma$ including systematic uncertainties) above the background-only hypothesis. An upper limit of $\\mathcal{B}(B^0 \\to \\pi^- \\tau^+ \\nu_\\tau) < 2.5 \\times 10^{-4}$ is obtained at the 90% confidence level.",
+    "pdf": "https://arxiv.org/pdf/1509.06521",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.pim.taup.nutau)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{-}\\tau^{+}\\nu_{\\tau})$",
+                "type@1_upper_limit": "2.5e-4",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.pim.taup.nutau)[95%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{-}\\tau^{+}\\nu_{\\tau})$",
+                "type@1_upper_limit": "2.8e-4",
+                "type@1_level": "95%@CL"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

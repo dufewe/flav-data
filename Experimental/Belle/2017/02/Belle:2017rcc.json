@@ -1,0 +1,26 @@
+{
+    "inspire-hep": "[Belle:2017rcc](https://inspirehep.net/literature/1512299)",
+    "author": "Abdesselam, A. and others",
+    "collaboration": "Belle",
+    "title": "Precise determination of the CKM matrix element $\\left| V_{cb}\\right|$ with $\\bar B^0 \\to D^{*\\,+} \\, \\ell^- \\, \\bar \\nu_\\ell$ decays with hadronic tagging at Belle",
+    "arxiv": "[1702.01521v1](https://arxiv.org/pdf/1702.01521)",
+    "time": "2017.02.06",
+    "abstract": "The precise determination of the CKM matrix element $\\left| V_{cb}\\right|$ is important for carrying out tests of the flavour sector of the Standard Model. We present a determination of $|V_{cb}|$ using a data sample of $772 \\times 10^6 B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector.",
+    "pdf": "https://arxiv.org/pdf/1702.01521",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Rmue(B.2.Dst.l.nu)",
+                "latex": "$R_{\\mu/e}(B\\to D^{*}\\ell\\nu)$",
+                "value": "0.96",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.05",
+                "type@1_err_down": "0.05",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.01",
+                "type@2_err_down": "0.01"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

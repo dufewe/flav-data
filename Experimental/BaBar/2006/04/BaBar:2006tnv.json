@@ -1,0 +1,128 @@
+{
+    "inspire-hep": "[BaBar:2006tnv](https://inspirehep.net/literature/713779)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Measurements of Branching Fractions, Rate Asymmetries, and Angular Distributions in the Rare Decays $B \\to K \\ell^{+} \\ell^{-}$ and $B \\to K^{*} \\ell^{+} \\ell^{-}$",
+    "arxiv": "[hep-ex/0604007v1](https://arxiv.org/pdf/hep-ex/0604007)",
+    "time": "2006.04.05",
+    "abstract": "We present measurements of the flavor-changing neutral current decays $B \\to K \\ell^{+} \\ell^{-}$ and $B \\to K^{*} \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either an $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$ pair. The data sample comprises 229 million $B \\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the BaBar detector. We measure the total branching fractions $\\mathcal{B}(B \\to K \\ell^{+} \\ell^{-}) = (0.34 \\pm 0.07 \\pm 0.02) \\times 10^{-6}$ and $\\mathcal{B}(B \\to K^{*} \\ell^{+} \\ell^{-}) = (0.78^{+0.19}_{-0.17} \\pm 0.11) \\times 10^{-6}$.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0604007",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bbar.2.K.l+.l-)",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to K\\ell^{+}\\ell^{-})$",
+                "value": "0.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.07",
+                "type@1_err_down": "0.07",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.02",
+                "type@2_err_down": "0.02",
+                "unit": "1e-6",
+                "q2min": "0.1",
+                "q2max": "22.0"
+            },
+            "obs@2": {
+                "name": "Br(Bbar.2.Kst.l+.l-)",
+                "latex": "$\\mathcal{B}(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "0.78",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.19",
+                "type@1_err_down": "0.17",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.11",
+                "type@2_err_down": "0.11",
+                "unit": "1e-6",
+                "q2min": "0.1",
+                "q2max": "22.0"
+            },
+            "obs@3": {
+                "name": "FL(Bbar.2.Kst.l+.l-)[low-q2]",
+                "latex": "$F_L(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "0.77",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.63",
+                "type@1_err_down": "0.30",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "q2min": "0.1",
+                "q2max": "8.41"
+            },
+            "obs@4": {
+                "name": "FL(Bbar.2.Kst.l+.l-)[high-q2]",
+                "latex": "$F_L(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "0.51",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.22",
+                "type@1_err_down": "0.25",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.08",
+                "q2min": "10.24",
+                "q2max": "22.0"
+            },
+            "obs@5": {
+                "name": "ACP(Bp.2.Kp.l+.l-)",
+                "latex": "$A_{CP}(B^{+}\\to K^{+}\\ell^{+}\\ell^{-})$",
+                "value": "-0.07",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.22",
+                "type@1_err_down": "0.22",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.02",
+                "type@2_err_down": "0.02"
+            },
+            "obs@6": {
+                "name": "ACP(B0.2.Kst0.l+.l-)",
+                "latex": "$A_{CP}(\\bar{B}^{0}\\to K^{*0}\\ell^{+}\\ell^{-})$",
+                "value": "0.03",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.23",
+                "type@1_err_down": "0.23",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.03",
+                "type@2_err_down": "0.03"
+            },
+            "obs@7": {
+                "name": "AFB(Bbar.2.Kst.l+.l-)[low-q2][95%@CL]",
+                "latex": "$A_{FB}(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "0.19",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.5",
+                "type@1_err_down": "0.5",
+                "type@1_level": "95%@CL",
+                "q2min": "0.1",
+                "q2max": "8.41"
+            },
+            "obs@8": {
+                "name": "AFB(Bbar.2.Kst.l+.l-)[high-q2]",
+                "latex": "$A_{FB}(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "0.72",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.28",
+                "type@1_err_down": "0.26",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.08",
+                "q2min": "10.24",
+                "q2max": "22.0"
+            },
+            "obs@9": {
+                "name": "RKst(Bbar.2.Kst.l+.l-)",
+                "latex": "$R_{K^{*}}(\\bar{B}\\to K^{*}\\ell^{+}\\ell^{-})$",
+                "value": "1.40",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.78",
+                "type@1_err_down": "0.78",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10",
+                "type@2_err_down": "0.10",
+                "q2min": "0.1",
+                "q2max": "22.0"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

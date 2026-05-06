@@ -1,0 +1,27 @@
+{
+    "inspire-hep": "[Belle:2010hga](https://inspirehep.net/literature/874639)",
+    "author": "Dungel, W. and others",
+    "collaboration": "Belle",
+    "title": "Measurement of the form factors of the decay $B^0 \\to D^{*-} \\ell^+ \\nu$ and determination of the CKM matrix element $|V_{cb}|$",
+    "arxiv": "[1010.3238v2](https://arxiv.org/pdf/1010.3238)",
+    "time": "2010.10.15",
+    "abstract": "This article reports a measurement of the form factors of the decay $B^0 \\to D^{*-} \\ell^+ \\nu$ and a determination of the CKM matrix element $|V_{cb}|$. The results are based on a data sample of 652 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find $|V_{cb}| = (39.34 \\pm 0.63 (\\text{stat}) \\pm 1.08 (\\text{syst})) \\times 10^{-3}$.",
+    "pdf": "https://arxiv.org/pdf/1010.3238",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Vcb(B0.2.Dstp.l+.nu)",
+                "latex": "$|V_{cb}|(B^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "39.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.63",
+                "type@1_err_down": "0.63",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.08",
+                "type@2_err_down": "1.08",
+                "unit": "1e-3"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,118 @@
+{
+    "inspire-hep": "[BaBar:2008zui](https://inspirehep.net/literature/795646)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Measurements of the Semileptonic Decays $\\bar{B}\\to D\\ell\\bar{\\nu}$ and $\\bar{B}\\to D^{*}\\ell\\bar{\\nu}$ Using a Global Fit to $DX\\ell\\bar{\\nu}$ Final States",
+    "arxiv": "[0809.0828v2](https://arxiv.org/pdf/0809.0828)",
+    "time": "2008.09.04",
+    "abstract": "Semileptonic $\\bar{B}$ decays to $DX\\ell\\bar{\\nu}$ ($\\ell=e$ or $\\mu$) are selected by reconstructing $D^{0}\\ell$ and $D^{+}\\ell$ combinations from a sample of 230 million $\\Upsilon(4S) \\to B\\bar{B}$ decays recorded with the BaBar detector at the PEP-II $e^{+}e^{-}$ collider at SLAC. A global fit to these samples is used to extract the branching fractions $\\mathcal{B}(B^{-}\\to D^{0}\\ell\\bar{\\nu})$ and $\\mathcal{B}(B^{-}\\to D^{*0}\\ell\\bar{\\nu})$, the form-factor slope parameters $\\rho_{D}^{2}$ and $\\rho_{D^{*}}^{2}$, and the products $\\mathcal{G}(1)|V_{cb}|$ and $\\mathcal{F}(1)|V_{cb}|$.",
+    "pdf": "https://arxiv.org/pdf/0809.0828",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bm.2.D0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{0}\\ell^{-}\\bar{\\nu})$",
+                "value": "2.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.03",
+                "type@1_err_down": "0.03",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.13",
+                "type@2_err_down": "0.13",
+                "unit": "%"
+            },
+            "obs@2": {
+                "name": "Br(Bm.2.Dst0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{*0}\\ell^{-}\\bar{\\nu})$",
+                "value": "5.40",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.02",
+                "type@1_err_down": "0.02",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.21",
+                "type@2_err_down": "0.21",
+                "unit": "%"
+            },
+            "obs@3": {
+                "name": "G1Vcb(Bbar.2.D.l-.nuBar)",
+                "latex": "$\\mathcal{G}(1)|V_{cb}|(\\bar{B}\\to D\\ell^{-}\\bar{\\nu})$",
+                "value": "43.1",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.8",
+                "type@1_err_down": "0.8",
+                "type@2_err": "syst",
+                "type@2_err_up": "2.3",
+                "type@2_err_down": "2.3",
+                "unit": "1e-3"
+            },
+            "obs@4": {
+                "name": "F1Vcb(Bbar.2.Dst.l-.nuBar)",
+                "latex": "$\\mathcal{F}(1)|V_{cb}|(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu})$",
+                "value": "35.9",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.2",
+                "type@1_err_down": "0.2",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.2",
+                "type@2_err_down": "1.2",
+                "unit": "1e-3"
+            },
+            "obs@5": {
+                "name": "rho2(Bbar.2.D.l-.nuBar)",
+                "latex": "$\\rho^{2}(\\bar{B}\\to D\\ell^{-}\\bar{\\nu})$",
+                "value": "1.20",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.04",
+                "type@1_err_down": "0.04",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07"
+            },
+            "obs@6": {
+                "name": "rho2(Bbar.2.Dst.l-.nuBar)",
+                "latex": "$\\rho^{2}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu})$",
+                "value": "1.22",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.02",
+                "type@1_err_down": "0.02",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07"
+            }
+        },
+        {
+            "|Vcb| values extracted": "derived",
+            "obs@1": {
+                "name": "Vcb(Bbar.2.D.l-.nuBar)",
+                "latex": "$|V_{cb}|(\\bar{B}\\to D\\ell^{-}\\bar{\\nu})$",
+                "value": "39.9",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.8",
+                "type@1_err_down": "0.8",
+                "type@2_err": "syst",
+                "type@2_err_up": "2.2",
+                "type@2_err_down": "2.2",
+                "type@3_err": "theo",
+                "type@3_err_up": "0.9",
+                "type@3_err_down": "0.9",
+                "unit": "1e-3"
+            },
+            "obs@2": {
+                "name": "Vcb(Bbar.2.Dst.l-.nuBar)",
+                "latex": "$|V_{cb}|(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu})$",
+                "value": "38.6",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.2",
+                "type@1_err_down": "0.2",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.3",
+                "type@2_err_down": "1.3",
+                "type@3_err": "theo",
+                "type@3_err_up": "1.0",
+                "type@3_err_down": "1.0",
+                "unit": "1e-3"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

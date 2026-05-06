@@ -1,0 +1,41 @@
+{
+    "inspire-hep": "[BaBar:2013mob](https://inspirehep.net/literature/1222328)",
+    "author": "Lees, J.P. and others",
+    "collaboration": "BaBar",
+    "title": "Measurement of an Excess of Bbar --> D(*) tau- nu_tau Decays and Implications for Charged Higgs Bosons",
+    "arxiv": "[1303.0571v1](https://arxiv.org/pdf/1303.0571)",
+    "time": "2013.03.03",
+    "abstract": "Based on the full BABAR data sample, we report improved measurements of the ratios R(D) = B(Bbar --> D tau- nu_tau) / B(Bbar --> D l- nu_l) and R(D*) = B(Bbar --> D* tau- nu_tau) / B(Bbar --> D* l- nu_l), where l denotes either an electron or a muon. These ratios are sensitive to potential contributions from charged Higgs bosons in 2HDM scenarios. We obtain R(D) = 0.440 +/- 0.058 +/- 0.042 and R(D*) = 0.332 +/- 0.024 +/- 0.018. The results exceed the Standard Model expectations by 2.0 sigma for R(D) and 2.7 sigma for R(D*), and combined by 3.4 sigma. The results are consistent with the presence of a charged Higgs boson contribution.",
+    "pdf": "https://arxiv.org/pdf/1303.0571",
+    "data": [
+        {
+            "obs@1": {
+                "name": "R(B.2.D.tau.nu)(B.2.D.l.nu)",
+                "latex": "$R(D) = \\frac{\\mathcal{B}(\\bar{B}\\to D\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D\\ell^{-}\\bar{\\nu}_{\\ell})}$",
+                "value": "0.440",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.058",
+                "type@1_err_down": "0.058",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.042",
+                "type@2_err_down": "0.042"
+            },
+            "obs@2": {
+                "name": "R(B.2.Dst.tau.nu)(B.2.Dst.l.nu)",
+                "latex": "$R(D^{*}) = \\frac{\\mathcal{B}(\\bar{B}\\to D^{*}\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu}_{\\ell})}$",
+                "value": "0.332",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.024",
+                "type@1_err_down": "0.024",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.018",
+                "type@2_err_down": "0.018"
+            },
+            "tot_correlation": [
+                [1.0, -0.27],
+                [-0.27, 1.0]
+            ]
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

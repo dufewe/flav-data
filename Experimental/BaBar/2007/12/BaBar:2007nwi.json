@@ -1,0 +1,62 @@
+{
+    "inspire-hep": "[BaBar:2007nwi](https://inspirehep.net/literature/771230)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Measurement of the Decay $B^{-} \\to D^{*0} e^{-} \\bar{\\nu}_{e}$",
+    "arxiv": "[0712.3493v1](https://arxiv.org/pdf/0712.3493)",
+    "time": "2007.12.20",
+    "abstract": "Using 226 million $B\\bar{B}$ events recorded on the $\\Upsilon(4S)$ resonance with the BABAR detector at the SLAC $e^{+}e^{-}$ PEP-II storage rings, we reconstruct $B^{-} \\to D^{*0} e^{-} \\bar{\\nu}_{e}$ candidates in a partial data sample corresponding to an integrated luminosity of 232 fb$^{-1}$, where the $D^{*0}$ decays to $D^{0} \\pi^{0}$ with the $D^{0} \\to K^{-} \\pi^{+}$. We measure the branching fraction $\\mathcal{B}(B^{-} \\to D^{*0} e^{-} \\bar{\\nu}_{e}) = (5.56 \\pm 0.08 \\pm 0.41)\\%$ and the product of the form factor normalization and CKM matrix element $\\mathcal{F}(1) |V_{cb}| = (35.9 \\pm 0.6 \\pm 1.4) \\times 10^{-3}$.",
+    "pdf": "https://arxiv.org/pdf/0712.3493",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bm.2.Dst0.em.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to D^{*0}e^{-}\\bar{\\nu}_{e})$",
+                "value": "5.56",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.08",
+                "type@1_err_down": "0.08",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.41",
+                "type@2_err_down": "0.41",
+                "unit": "%"
+            },
+            "obs@2": {
+                "name": "F1Vcb(Bm.2.Dst0.em.nuBar)",
+                "latex": "$\\mathcal{F}(1)|V_{cb}|(B^{-}\\to D^{*0}e^{-}\\bar{\\nu}_{e})$",
+                "value": "35.9",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.6",
+                "type@1_err_down": "0.6",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.4",
+                "type@2_err_down": "1.4",
+                "unit": "1e-3"
+            },
+            "obs@3": {
+                "name": "rhoA1sq(Bm.2.Dst0.em.nuBar)",
+                "latex": "$\\rho_{A_{1}}^{2}(B^{-}\\to D^{*0}e^{-}\\bar{\\nu}_{e})$",
+                "value": "1.16",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.06",
+                "type@1_err_down": "0.06",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.08"
+            },
+            "obs@4": {
+                "name": "Vcb(Bm.2.Dst0.em.nuBar)",
+                "latex": "$|V_{cb}|(B^{-}\\to D^{*0}e^{-}\\bar{\\nu}_{e})$",
+                "value": "39.0",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.6",
+                "type@1_err_down": "0.6",
+                "type@2_err": "syst",
+                "type@2_err_up": "2.0",
+                "type@2_err_down": "2.0",
+                "unit": "1e-3"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

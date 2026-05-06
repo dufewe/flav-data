@@ -1,0 +1,27 @@
+{
+    "inspire-hep": "[Belle:2006tbq](https://inspirehep.net/literature/732726)",
+    "author": "Satoyama, N. and others",
+    "collaboration": "Belle",
+    "title": "Search for the Rare Leptonic Decays $B^{+} \\to \\mu^{+} \\nu_{\\mu}$ and $B^{+} \\to e^{+} \\nu_{e}$",
+    "arxiv": "[hep-ex/0611045v1](https://arxiv.org/pdf/hep-ex/0611045)",
+    "time": "2006.11.16",
+    "abstract": "We present a search for the decays $B^{+} \\to \\mu^{+} \\nu_{\\mu}$ and $B^{+} \\to e^{+} \\nu_{e}$ in a 253 fb$^{-1}$ data sample collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric energy $e^{+} e^{-}$ collider. We observe no evidence for signal and set 90% confidence level upper limits of $\\mathcal{B}(B^{+} \\to \\mu^{+} \\nu_{\\mu}) < 1.7 \\times 10^{-6}$ and $\\mathcal{B}(B^{+} \\to e^{+} \\nu_{e}) < 9.8 \\times 10^{-7}$.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0611045",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.mup.numu)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\mu^{+}\\nu_{\\mu})$",
+                "type@1_upper_limit": "1.7e-6",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.ep.nue)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to e^{+}\\nu_{e})$",
+                "type@1_upper_limit": "9.8e-7",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

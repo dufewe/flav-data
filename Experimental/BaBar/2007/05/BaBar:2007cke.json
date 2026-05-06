@@ -1,0 +1,87 @@
+{
+    "inspire-hep": "[BaBar:2007cke](https://inspirehep.net/literature/751589)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Determination of the Form Factors for the Decay $B^{0} \\to D^{*-}\\ell^{+}\\nu_{\\ell}$ and of the CKM Matrix Element $|V_{cb}|$",
+    "arxiv": "[0705.4008v2](https://arxiv.org/pdf/0705.4008)",
+    "time": "2007.05.28",
+    "abstract": "We present a combined measurement of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$ and of the parameters $\\rho^{2}$, $R_{1}(1)$, and $R_{2}(1)$, which fully characterize the form factors for the $B^{0} \\to D^{*-}\\ell^{+}\\nu_{\\ell}$ decay in the framework of heavy-quark effective theory. The results, based on a selected sample of 185018 $B^{0} \\to D^{*-}(\\to \\bar{D}^{0}\\pi^{-})\\ell^{+}\\nu_{\\ell}$ candidates from 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance, are $\\rho^{2} = 1.157 \\pm 0.094 \\pm 0.027$, $R_{1}(1) = 1.327 \\pm 0.131 \\pm 0.043$, $R_{2}(1) = 0.859 \\pm 0.077 \\pm 0.021$, and $\\mathcal{F}(1)|V_{cb}| = (34.7 \\pm 0.4 \\pm 1.0) \\times 10^{-3}$.",
+    "pdf": "https://arxiv.org/pdf/0705.4008",
+    "data": [
+        {
+            "obs@1": {
+                "name": "rho2(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$\\rho^{2}(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "1.157",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.094",
+                "type@1_err_down": "0.094",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.027",
+                "type@2_err_down": "0.027"
+            },
+            "obs@2": {
+                "name": "R1(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$R_{1}(1)(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "1.327",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.131",
+                "type@1_err_down": "0.131",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.043",
+                "type@2_err_down": "0.043"
+            },
+            "obs@3": {
+                "name": "R2(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$R_{2}(1)(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "0.859",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.077",
+                "type@1_err_down": "0.077",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.021",
+                "type@2_err_down": "0.021"
+            },
+            "obs@4": {
+                "name": "F1Vcb(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$\\mathcal{F}(1)|V_{cb}|(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "34.7",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.4",
+                "type@1_err_down": "0.4",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.0",
+                "type@2_err_down": "1.0",
+                "unit": "1e-3"
+            },
+            "obs@5": {
+                "name": "Vcb(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$|V_{cb}|(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "37.8",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.4",
+                "type@1_err_down": "0.4",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.1",
+                "type@2_err_down": "1.1",
+                "type@3_err": "theo",
+                "type@3_err_up": "1.2",
+                "type@3_err_down": "1.2",
+                "unit": "1e-3"
+            },
+            "obs@6": {
+                "name": "Br(B0Bar.2.Dstm.l+.nu)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to D^{*-}\\ell^{+}\\nu)$",
+                "value": "4.72",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.05",
+                "type@1_err_down": "0.05",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.34",
+                "type@2_err_down": "0.34",
+                "unit": "%"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "[Belle:2019iji](https://inspirehep.net/literature/1763802)",
+    "author": "Prim, Matthias and others",
+    "collaboration": "Belle",
+    "title": "Search for $B^{+} \\to \\mu^{+} \\nu_{\\mu}$ and $B^{+} \\to \\mu^{+} N$ with Inclusive Tagging",
+    "arxiv": "[1911.03186v1](https://arxiv.org/pdf/1911.03186)",
+    "time": "2019.11.08",
+    "abstract": "We report the result for a search for the leptonic decay of $B^{+} \\to \\mu^{+} \\nu_{\\mu}$ using the full Belle data set of 711 fb$^{-1}$ of integrated luminosity collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^{+}e^{-}$ collider. We use a fully inclusive tagging method to reconstruct the second $B$ meson and observe an excess of events. We obtain an observed branching fraction of $\\mathcal{B}(B^{+} \\to \\mu^{+} \\nu_{\\mu}) = (5.3 \\pm 2.0 \\pm 0.9) \\times 10^{-7}$, corresponding to a significance of 2.4 standard deviations. We set upper limits of $\\mathcal{B}(B^{+} \\to \\mu^{+} \\nu_{\\mu}) < 8.6 \\times 10^{-7}$ (Frequentist) and $< 8.9 \\times 10^{-7}$ (Bayesian) at 90% CL.",
+    "pdf": "https://arxiv.org/pdf/1911.03186",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.mup.numu)",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\mu^{+}\\nu_{\\mu})$",
+                "value": "5.3",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.0",
+                "type@1_err_down": "2.0",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.9",
+                "type@2_err_down": "0.9",
+                "unit": "1e-7"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.mup.numu)[90%@CL][freq]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\mu^{+}\\nu_{\\mu})$",
+                "type@1_upper_limit": "8.6e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(Bp.2.mup.numu)[90%@CL][bayes]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\mu^{+}\\nu_{\\mu})$",
+                "type@1_upper_limit": "8.9e-7",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

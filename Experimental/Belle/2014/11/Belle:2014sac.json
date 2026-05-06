@@ -1,0 +1,36 @@
+{
+    "inspire-hep": "[Belle:2014sac](https://inspirehep.net/literature/1331399)",
+    "author": "Dutta, D. and others",
+    "collaboration": "Belle",
+    "title": "Search for $B_{s}^{0} \\to \\gamma \\gamma$ and a Measurement of the Branching Fraction for $B_{s}^{0} \\to \\phi \\gamma$",
+    "arxiv": "[1411.7771v1](https://arxiv.org/pdf/1411.7771)",
+    "time": "2014.11.28",
+    "abstract": "We search for the decay $B_{s}^{0} \\to \\gamma \\gamma$ and measure the branching fraction for $B_{s}^{0} \\to \\phi \\gamma$ using 121.4 fb$^{-1}$ of data collected at the $\\Upsilon(5S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^{+} e^{-}$ collider. We find no statistically significant evidence for the $B_{s}^{0} \\to \\gamma \\gamma$ signal and set an upper limit on its branching fraction at $3.1 \\times 10^{-6}$. We measure the branching fraction for $B_{s}^{0} \\to \\phi \\gamma$ to be $(3.6 \\pm 0.5 \\pm 0.3 \\pm 0.6) \\times 10^{-5}$.",
+    "pdf": "https://arxiv.org/pdf/1411.7771",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs0.2.gamma.gamma)[90%@CL]",
+                "latex": "$\\mathcal{B}(B_{s}^{0}\\to \\gamma \\gamma)$",
+                "type@1_upper_limit": "3.1e-6",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bs0.2.phi.gamma)",
+                "latex": "$\\mathcal{B}(B_{s}^{0}\\to \\phi \\gamma)$",
+                "value": "3.6",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.5",
+                "type@1_err_down": "0.5",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.3",
+                "type@2_err_down": "0.3",
+                "type@3_err": "fs",
+                "type@3_err_up": "0.6",
+                "type@3_err_down": "0.6",
+                "unit": "1e-5"
+            }
+        }
+    ],
+    "transition-mode": "radiative decay"
+}

@@ -1,0 +1,69 @@
+{
+    "inspire-hep": "[Belle:2013tnz](https://inspirehep.net/literature/1223991)",
+    "author": "Lutz, D. and others",
+    "collaboration": "Belle",
+    "title": "Search for $B \\to h^{(*)} \\nu \\bar{\\nu}$ with the Full Belle $\\Upsilon(4S)$ Data Sample",
+    "arxiv": "[1303.3719v2](https://arxiv.org/pdf/1303.3719)",
+    "time": "2013.03.15",
+    "abstract": "We report a search for the rare decays $B \\to h^{(*)} \\nu \\bar{\\nu}$, where $h^{(*)}$ stands for $K^+, K^0_S, K^{*+}, K^{*0}, \\pi^+, \\pi^0, \\rho^+, \\rho^0$ and $\\phi$. The results are obtained from a data sample that contains $772 \\times 10^6$ $B \\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find no significant signal and set upper limits on the branching fractions at 90% confidence level.",
+    "pdf": "https://arxiv.org/pdf/1303.3719",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.Kp.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "5.5e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.K0s.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to K^{0}_{S}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "9.7e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(Bp.2.Kstp.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{*+}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "4.0e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@4": {
+                "name": "Br(B0.2.Kst0.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to K^{*0}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "5.5e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@5": {
+                "name": "Br(Bp.2.pip.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "9.8e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@6": {
+                "name": "Br(B0.2.pi0.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "6.9e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@7": {
+                "name": "Br(Bp.2.rhop.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\rho^{+}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "21.3e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@8": {
+                "name": "Br(B0.2.rho0.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\rho^{0}\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "20.8e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@9": {
+                "name": "Br(B0.2.phi.nu.nuBar)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\phi\\nu\\bar{\\nu})$",
+                "type@1_upper_limit": "12.7e-5",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

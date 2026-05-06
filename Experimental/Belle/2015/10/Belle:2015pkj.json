@@ -1,0 +1,27 @@
+{
+    "inspire-hep": "[Belle:2015pkj](https://inspirehep.net/literature/1397632)",
+    "author": "Glattauer, F. and others",
+    "collaboration": "Belle",
+    "title": "Measurement of the decay $B\\to D\\ell\\nu_\\ell$ in fully reconstructed events and determination of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$",
+    "arxiv": "[1510.03657v1](https://arxiv.org/pdf/1510.03657)",
+    "time": "2015.10.13",
+    "abstract": "We present a determination of the magnitude of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$ using the decay $B\\to D\\ell\\nu_\\ell$ ($\\ell=e,\\mu$) in a data sample of $711 \\, \\mathrm{fb}^{-1}$ collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+e^-$ collider. We find $|V_{cb}| = (40.44 \\pm 0.86 (\\text{stat}) \\pm 0.87 (\\text{syst})) \\times 10^{-3}$.",
+    "pdf": "https://arxiv.org/pdf/1510.03657",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Vcb(B.2.D.l.nu)",
+                "latex": "$|V_{cb}|(B\\to D\\ell\\nu)$",
+                "value": "40.44",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.86",
+                "type@1_err_down": "0.86",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.87",
+                "type@2_err_down": "0.87",
+                "unit": "1e-3"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

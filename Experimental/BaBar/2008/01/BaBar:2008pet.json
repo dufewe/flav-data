@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "[BaBar:2008pet](https://inspirehep.net/literature/776809)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Searches for the Decays $B^{0} \\to \\ell^{\\pm} \\tau^{\\mp}$ and $B^{+} \\to \\ell^{+} \\nu$ ($\\ell = e, \\mu$) Using Hadronic Tag Reconstruction",
+    "arxiv": "[0801.0697v1](https://arxiv.org/pdf/0801.0697)",
+    "time": "2008.01.04",
+    "abstract": "We present searches for the leptonic decays $B^{+} \\to \\ell^{+} \\nu$ and the lepton flavor violating decays $B^{0} \\to \\ell^{\\pm} \\tau^{\\mp}$, where $\\ell = e, \\mu$, with data collected by the BaBar detector at the PEP-II asymmetric-energy $e^{+}e^{-}$ collider at SLAC. Using 378 million $B\\bar{B}$ pairs, we find no evidence for signal in any of the decay modes and set the following 90% confidence level upper limits: $\\mathcal{B}(B^{+} \\to e^{+} \\nu) < 5.2 \\times 10^{-6}$, $\\mathcal{B}(B^{+} \\to \\mu^{+} \\nu) < 5.6 \\times 10^{-6}$, $\\mathcal{B}(B^{0} \\to e^{+} \\tau^{-}) < 2.8 \\times 10^{-5}$ and $\\mathcal{B}(B^{0} \\to \\mu^{+} \\tau^{-}) < 2.2 \\times 10^{-5}$.",
+    "pdf": "https://arxiv.org/pdf/0801.0697",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.ep.nu)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to e^{+}\\nu)$",
+                "type@1_upper_limit": "5.2e-6",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.mup.nu)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\mu^{+}\\nu)$",
+                "type@1_upper_limit": "5.6e-6",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(B0.2.ep.taum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to e^{+}\\tau^{-})$",
+                "type@1_upper_limit": "2.8e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@4": {
+                "name": "Br(B0.2.mup.taum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\mu^{+}\\tau^{-})$",
+                "type@1_upper_limit": "2.2e-5",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

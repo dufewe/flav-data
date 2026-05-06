@@ -1,0 +1,54 @@
+{
+    "inspire-hep": "[Belle:2014owz](https://inspirehep.net/literature/1283183)",
+    "author": "Sato, Y. and others",
+    "collaboration": "Belle",
+    "title": "Measurement of the Lepton Forward-Backward Asymmetry in Inclusive $B \\rightarrow X_s \\ell^+ \\ell^-$ Decays",
+    "arxiv": "[1402.7134v2](https://arxiv.org/pdf/1402.7134)",
+    "time": "2014.02.28",
+    "abstract": "We report the first measurement of the lepton forward-backward asymmetry $A_{FB}$ as a function of the squared four-momentum of the dilepton system, $q^2$, for the electroweak penguin process $B \\rightarrow X_s \\ell^+ \\ell^-$ with the sum of exclusive hadronic final states containing a light kaon and at most two pions and a kaon. The data sample corresponds to an integrated luminosity of 772 fb$^{-1}$ containing $772 \\times 10^6 B \\bar{B}$ pairs obtained at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider.",
+    "pdf": "https://arxiv.org/pdf/1402.7134",
+    "data": [
+        {
+            "obs@1": {
+                "name": "AFB(Bbar.2.XsBar.l+.l-)",
+                "latex": "$\\langle A_{FB} \\rangle (\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.30",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.24",
+                "type@1_err_down": "0.24",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "q2min": "1.0",
+                "q2max": "6.0"
+            },
+            "obs@2": {
+                "name": "AFB(Bbar.2.XsBar.l+.l-)",
+                "latex": "$\\langle A_{FB} \\rangle (\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.24",
+                "type@1_err_down": "0.24",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.03",
+                "type@2_err_down": "0.03",
+                "q2min": "0.2",
+                "q2max": "4.3"
+            },
+            "obs@3": {
+                "name": "AFB(Bbar.2.XsBar.l+.l-)",
+                "latex": "$\\langle A_{FB} \\rangle (\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.28",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.02",
+                "type@2_err_down": "0.02",
+                "q2min": "14.3",
+                "q2max": "25.0"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

@@ -1,0 +1,62 @@
+{
+    "inspire-hep": "[LHCb:2020zud](https://inspirehep.net/literature/1810424)",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Combination of the ATLAS, CMS and LHCb results on the $B_{(s)}^{0} \\\\to \\\\mu^{+} \\\\mu^{-}$ decays",
+    "arxiv": "[LHCb-CONF-2020-002v1](https://cds.cern.ch/record/2727207/files/LHCb-CONF-2020-002.pdf)",
+    "time": "2020.08.06",
+    "abstract": "A combination of results on the rare $B_{s}^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ and $B^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ decays from the ATLAS, CMS, and LHCb experiments using data collected at the Large Hadron Collider between 2011 and 2016, is presented. The $B_{s}^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ branching fraction is obtained to be $\\\\mathcal{B}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-}) = (2.69_{-0.35}^{+0.37}) \\\\times 10^{-9}$ and the ratio $\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-})/\\\\mathcal{B}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-}) < 0.060$ at 95% CL. The effective lifetime of the $B_{s}^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ decay is measured to be $\\\\tau_{\\\\rm eff} = 1.91_{-0.35}^{+0.37}$ ps.",
+    "pdf": "https://cds.cern.ch/record/2727207/files/LHCb-CONF-2020-002.pdf",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs0.2.mu+.mu-)",
+                "latex": "$\\\\mathcal{B}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-})$",
+                "value": "2.69e-9",
+                "type@1_err": "exp",
+                "type@1_err_up": "0.37e-9",
+                "type@1_err_down": "0.35e-9"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.mu+.mu-)",
+                "latex": "$\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-})$",
+                "value": "0.6e-10",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.7e-10",
+                "type@1_err_down": "0.7e-10"
+            },
+            "obs@3": {
+                "name": "Br(B0.2.mu+.mu-)",
+                "latex": "$\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-})$",
+                "type@1_upper_limit": "1.9e-10",
+                "type@1_level": "95%@CL"
+            },
+            "obs@4": {
+                "name": "Br(B0.2.mu+.mu-)",
+                "latex": "$\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-})$",
+                "type@1_upper_limit": "1.6e-10",
+                "type@1_level": "90%@CL"
+            },
+            "obs@5": {
+                "name": "R(Bs0.2.mu+.mu-)[Bd/Bs]",
+                "latex": "$R = \\\\frac{\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-})}{\\\\mathcal{B}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-})}$",
+                "value": "0.021",
+                "type@1_err": "exp",
+                "type@1_err_up": "0.030",
+                "type@1_err_down": "0.025"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Tau(Bs0.2.mu+.mu-)",
+                "latex": "$\\\\tau_{\\\\rm eff}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-})$",
+                "value": "1.91",
+                "type@1_err": "exp",
+                "type@1_err_up": "0.37",
+                "type@1_err_down": "0.35",
+                "unit": "ps"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}

@@ -1,0 +1,32 @@
+{
+    "inspire-hep": "[TheBaBar:2016xwe](https://inspirehep.net/literature/1466440)",
+    "author": "Lees, J.P. and others",
+    "collaboration": "BaBar",
+    "title": "Search for B+ --> K+ tau+ tau- at the BaBar experiment",
+    "arxiv": "[1605.09637v1](https://arxiv.org/pdf/1605.09637)",
+    "time": "2016.05.31",
+    "abstract": "We search for the rare flavor-changing neutral current process B+ --> K+ tau+ tau- using data from the BABAR experiment. The data sample, collected at the center-of-mass energy of the Upsilon(4S) resonance, corresponds to a total integrated luminosity of 424 fb-1 and to 471x10^6 BBbar pairs. We reconstruct one B meson, produced in the Upsilon(4S) --> B+ B- decay, in one of many hadronic decay modes and search for activity compatible with a B+ --> K+ tau+ tau- decay in the rest of the event. Each tau lepton is required to decay leptonically into an electron or muon and neutrinos. Comparing the expected number of background events with the data sample after applying the selection criteria, we do not find evidence for a signal. The resulting upper limit, at the 90% confidence level, is B(B+ --> K+ tau+ tau-) < 2.25x10^-3.",
+    "pdf": "https://arxiv.org/pdf/1605.09637",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.Kp.tau+.tau-)",
+                "latex": "$\\\\mathcal{B}(B^{+}\\\\to K^{+}\\\\tau^{+}\\\\tau^{-})$",
+                "value": "0.00131",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.00066",
+                "type@1_err_down": "0.00061",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.00035",
+                "type@2_err_down": "0.00025"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.Kp.tau+.tau-)[90%@CL]",
+                "latex": "$\\\\mathcal{B}(B^{+}\\\\to K^{+}\\\\tau^{+}\\\\tau^{-})$",
+                "type@1_upper_limit": "0.00225",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

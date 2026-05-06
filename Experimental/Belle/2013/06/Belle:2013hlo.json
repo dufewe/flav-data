@@ -1,0 +1,974 @@
+{
+    "inspire-hep": "[Belle:2013hlo](https://inspirehep.net/literature/1238273)",
+    "author": "Sibidanov, A. and others",
+    "collaboration": "Belle",
+    "title": "Study of Exclusive $\\bar{B} \\to X_u \\ell^- \\bar{\\nu}_\\ell$ Decays and Extraction of $|V_{ub}|$ using Full Reconstruction Tagging",
+    "arxiv": "[1306.2781v1](https://arxiv.org/pdf/1306.2781)",
+    "time": "2013.06.12",
+    "abstract": "We report the results of a study of the exclusive semileptonic decays $B^- \\to \\pi^0 \\ell^- \\bar{\\nu}_\\ell$, $\\bar{B}^0 \\to \\pi^+ \\ell^- \\bar{\\nu}_\\ell$, $B^- \\to \\rho^0 \\ell^- \\bar{\\nu}_\\ell$, $\\bar{B}^0 \\to \\rho^+ \\ell^- \\bar{\\nu}_\\ell$ and $B^- \\to \\omega \\ell^- \\bar{\\nu}_\\ell$, where $\\ell$ represents an electron or a muon. The events are tagged by fully reconstructing a second $B$ meson in the event in a hadronic decay mode. The measured branching fractions are $\\mathcal{B}(B^- \\to \\pi^0 \\ell^- \\bar{\\nu}_\\ell) = (0.80 \\pm 0.08 \\pm 0.04) \\times 10^{-4}$, $\\mathcal{B}(\\bar{B}^0 \\to \\pi^+ \\ell^- \\bar{\\nu}_\\ell) = (1.49 \\pm 0.09 \\pm 0.07) \\times 10^{-4}$, $\\mathcal{B}(B^- \\to \\rho^0 \\ell^- \\bar{\\nu}_\\ell) = (1.83 \\pm 0.10 \\pm 0.10) \\times 10^{-4}$, $\\mathcal{B}(\\bar{B}^0 \\to \\rho^+ \\ell^- \\bar{\\nu}_\\ell) = (3.22 \\pm 0.27 \\pm 0.24) \\times 10^{-4}$, and $\\mathcal{B}(B^- \\to \\omega \\ell^- \\bar{\\nu}_\\ell) = (1.07 \\pm 0.16 \\pm 0.07) \\times 10^{-4}$. Using the pion modes, a value of $|V_{ub}| = (3.52 \\pm 0.29) \\times 10^{-3}$ is extracted.",
+    "pdf": "https://arxiv.org/pdf/1306.2781",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "0.80",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.08",
+                "type@1_err_down": "0.08",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.04",
+                "type@2_err_down": "0.04",
+                "unit": "1e-4"
+            },
+            "obs@2": {
+                "name": "Br(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.49",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.09",
+                "type@1_err_down": "0.09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "unit": "1e-4"
+            },
+            "obs@3": {
+                "name": "Br(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.83",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.10",
+                "type@1_err_down": "0.10",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10",
+                "type@2_err_down": "0.10",
+                "unit": "1e-4"
+            },
+            "obs@4": {
+                "name": "Br(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "3.22",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.27",
+                "type@1_err_down": "0.27",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.24",
+                "type@2_err_down": "0.24",
+                "unit": "1e-4"
+            },
+            "obs@5": {
+                "name": "Br(Bm.2.omega.l-.nuBar)",
+                "latex": "$\\mathcal{B}(B^{-}\\to \\omega\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.07",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.07",
+                "type@2_err_down": "0.07",
+                "unit": "1e-4"
+            },
+            "obs@6": {
+                "name": "Vcb(Bbar.2.pi.l-.nuBar)",
+                "latex": "$|V_{ub}|(\\bar{B}\\to \\pi\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "3.52",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.18",
+                "type@1_err_down": "0.18",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.17",
+                "type@2_err_down": "0.17",
+                "type@3_err": "theo",
+                "type@3_err_up": "0.20",
+                "type@3_err_down": "0.20",
+                "unit": "1e-3"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.95e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.2e-06",
+                "type@1_err_down": "3.2e-06",
+                "q2min": "0",
+                "q2max": "2"
+            },
+            "obs@2": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.06e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.7e-06",
+                "type@1_err_down": "2.7e-06",
+                "q2min": "2",
+                "q2max": "4"
+            },
+            "obs@3": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.51e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "4",
+                "q2max": "6"
+            },
+            "obs@4": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "9.7e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.3e-06",
+                "type@1_err_down": "2.3e-06",
+                "q2min": "6",
+                "q2max": "8"
+            },
+            "obs@5": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "7.8e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.2e-06",
+                "type@1_err_down": "2.2e-06",
+                "q2min": "8",
+                "q2max": "10"
+            },
+            "obs@6": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.59e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "10",
+                "q2max": "12"
+            },
+            "obs@7": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.35e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.7e-06",
+                "type@1_err_down": "2.7e-06",
+                "q2min": "12",
+                "q2max": "14"
+            },
+            "obs@8": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.36e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "14",
+                "q2max": "16"
+            },
+            "obs@9": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.07e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.5e-06",
+                "type@1_err_down": "2.5e-06",
+                "q2min": "16",
+                "q2max": "18"
+            },
+            "obs@10": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.16e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.5e-06",
+                "type@1_err_down": "2.5e-06",
+                "q2min": "18",
+                "q2max": "20"
+            },
+            "obs@11": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.18e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "20",
+                "q2max": "22"
+            },
+            "obs@12": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "6.7e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.1e-06",
+                "type@1_err_down": "2.1e-06",
+                "q2min": "22",
+                "q2max": "24"
+            },
+            "obs@13": {
+                "name": "dBr(B0Bar.2.pip.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\pi^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.8e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.1e-06",
+                "type@1_err_down": "3.1e-06",
+                "q2min": "24",
+                "q2max": "26"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    -0.145,
+                    0.01,
+                    -0.001,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    -0.0,
+                    -0.0,
+                    0.001,
+                    0.001
+                ],
+                [
+                    -0.145,
+                    1.0,
+                    -0.1,
+                    0.008,
+                    -0.0,
+                    0.001,
+                    -0.002,
+                    -0.001,
+                    -0.001,
+                    0.001,
+                    -0.001,
+                    -0.0,
+                    0.0
+                ],
+                [
+                    0.01,
+                    -0.1,
+                    1.0,
+                    -0.094,
+                    0.003,
+                    -0.001,
+                    0.0,
+                    0.001,
+                    0.001,
+                    -0.002,
+                    -0.002,
+                    0.0,
+                    0.004
+                ],
+                [
+                    -0.001,
+                    0.008,
+                    -0.094,
+                    1.0,
+                    -0.078,
+                    0.005,
+                    0.0,
+                    0.0,
+                    0.001,
+                    -0.001,
+                    0.002,
+                    0.002,
+                    0.005
+                ],
+                [
+                    0.0,
+                    -0.0,
+                    0.003,
+                    -0.078,
+                    1.0,
+                    -0.09699999999999999,
+                    0.003,
+                    0.001,
+                    0.001,
+                    0.0,
+                    0.004,
+                    0.003,
+                    0.009000000000000001
+                ],
+                [
+                    0.0,
+                    0.001,
+                    -0.001,
+                    0.005,
+                    -0.09699999999999999,
+                    1.0,
+                    -0.07200000000000001,
+                    0.005,
+                    0.001,
+                    0.003,
+                    0.005,
+                    0.004,
+                    0.013000000000000001
+                ],
+                [
+                    0.0,
+                    -0.002,
+                    0.0,
+                    0.0,
+                    0.003,
+                    -0.07200000000000001,
+                    1.0,
+                    -0.062,
+                    0.004,
+                    0.002,
+                    0.001,
+                    0.002,
+                    0.01
+                ],
+                [
+                    0.0,
+                    -0.001,
+                    0.001,
+                    0.0,
+                    0.001,
+                    0.005,
+                    -0.062,
+                    1.0,
+                    -0.059000000000000004,
+                    0.002,
+                    0.003,
+                    0.002,
+                    0.011000000000000001
+                ],
+                [
+                    0.0,
+                    -0.001,
+                    0.001,
+                    0.001,
+                    0.001,
+                    0.001,
+                    0.004,
+                    -0.059000000000000004,
+                    1.0,
+                    -0.047,
+                    0.001,
+                    -0.0,
+                    0.009000000000000001
+                ],
+                [
+                    -0.0,
+                    0.001,
+                    -0.002,
+                    -0.001,
+                    0.0,
+                    0.003,
+                    0.002,
+                    0.002,
+                    -0.047,
+                    1.0,
+                    -0.018000000000000002,
+                    0.002,
+                    0.005
+                ],
+                [
+                    -0.0,
+                    -0.001,
+                    -0.002,
+                    0.002,
+                    0.004,
+                    0.005,
+                    0.001,
+                    0.003,
+                    0.001,
+                    -0.018000000000000002,
+                    1.0,
+                    -0.055,
+                    -0.02
+                ],
+                [
+                    0.001,
+                    -0.0,
+                    0.0,
+                    0.002,
+                    0.003,
+                    0.004,
+                    0.002,
+                    0.002,
+                    -0.0,
+                    0.002,
+                    -0.055,
+                    1.0,
+                    -0.012
+                ],
+                [
+                    0.001,
+                    0.0,
+                    0.004,
+                    0.005,
+                    0.009000000000000001,
+                    0.013000000000000001,
+                    0.01,
+                    0.011000000000000001,
+                    0.009000000000000001,
+                    0.005,
+                    -0.02,
+                    -0.012,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.81e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.2e-06",
+                "type@1_err_down": "3.2e-06",
+                "q2min": "0",
+                "q2max": "4"
+            },
+            "obs@2": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.57e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "4",
+                "q2max": "8"
+            },
+            "obs@3": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.08e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.7e-06",
+                "type@1_err_down": "2.7e-06",
+                "q2min": "8",
+                "q2max": "12"
+            },
+            "obs@4": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.85e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "12",
+                "q2max": "16"
+            },
+            "obs@5": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.07e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "16",
+                "q2max": "20"
+            },
+            "obs@6": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "5.1e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.6e-06",
+                "type@1_err_down": "2.6e-06",
+                "q2min": "20",
+                "q2max": "24"
+            },
+            "obs@7": {
+                "name": "dBr(Bm.2.pi0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\pi^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.3e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.5e-06",
+                "type@1_err_down": "2.5e-06",
+                "q2min": "24",
+                "q2max": "28"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    -0.159,
+                    0.035,
+                    0.012,
+                    0.013000000000000001,
+                    0.016,
+                    0.021
+                ],
+                [
+                    -0.159,
+                    1.0,
+                    -0.149,
+                    0.03,
+                    0.013000000000000001,
+                    0.015,
+                    0.025
+                ],
+                [
+                    0.035,
+                    -0.149,
+                    1.0,
+                    -0.098,
+                    0.034,
+                    0.027999999999999997,
+                    0.042
+                ],
+                [
+                    0.012,
+                    0.03,
+                    -0.098,
+                    1.0,
+                    -0.11199999999999999,
+                    0.027999999999999997,
+                    0.035
+                ],
+                [
+                    0.013000000000000001,
+                    0.013000000000000001,
+                    0.034,
+                    -0.11199999999999999,
+                    1.0,
+                    -0.115,
+                    0.026000000000000002
+                ],
+                [
+                    0.016,
+                    0.015,
+                    0.027999999999999997,
+                    0.027999999999999997,
+                    -0.115,
+                    1.0,
+                    -0.131
+                ],
+                [
+                    0.021,
+                    0.025,
+                    0.042,
+                    0.035,
+                    0.026000000000000002,
+                    -0.131,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "3.73e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.06e-05",
+                "type@1_err_down": "1.06e-05",
+                "q2min": "0",
+                "q2max": "4"
+            },
+            "obs@2": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "7.18e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.16e-05",
+                "type@1_err_down": "1.16e-05",
+                "q2min": "4",
+                "q2max": "8"
+            },
+            "obs@3": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "8.06e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.23e-05",
+                "type@1_err_down": "1.23e-05",
+                "q2min": "8",
+                "q2max": "12"
+            },
+            "obs@4": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "7.23e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.25e-05",
+                "type@1_err_down": "1.25e-05",
+                "q2min": "12",
+                "q2max": "16"
+            },
+            "obs@5": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "6.26e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.15e-05",
+                "type@1_err_down": "1.15e-05",
+                "q2min": "16",
+                "q2max": "20"
+            },
+            "obs@6": {
+                "name": "dBr(B0Bar.2.rhop.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B}^{0}\\to \\rho^{+}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.7e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "7.9e-06",
+                "type@1_err_down": "7.9e-06",
+                "q2min": "20",
+                "q2max": "24"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    -0.141,
+                    0.024,
+                    0.009000000000000001,
+                    0.011000000000000001,
+                    0.016
+                ],
+                [
+                    -0.141,
+                    1.0,
+                    -0.11199999999999999,
+                    0.03,
+                    0.024,
+                    0.025
+                ],
+                [
+                    0.024,
+                    -0.11199999999999999,
+                    1.0,
+                    -0.075,
+                    0.05,
+                    0.057999999999999996
+                ],
+                [
+                    0.009000000000000001,
+                    0.03,
+                    -0.075,
+                    1.0,
+                    -0.08800000000000001,
+                    0.061
+                ],
+                [
+                    0.011000000000000001,
+                    0.024,
+                    0.05,
+                    -0.08800000000000001,
+                    1.0,
+                    -0.102
+                ],
+                [
+                    0.016,
+                    0.025,
+                    0.057999999999999996,
+                    0.061,
+                    -0.102,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.24e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "0",
+                "q2max": "2"
+            },
+            "obs@2": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.53e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.1e-06",
+                "type@1_err_down": "3.1e-06",
+                "q2min": "2",
+                "q2max": "4"
+            },
+            "obs@3": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.79e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "4",
+                "q2max": "6"
+            },
+            "obs@4": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.17e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "6",
+                "q2max": "8"
+            },
+            "obs@5": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.43e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.9e-06",
+                "type@1_err_down": "2.9e-06",
+                "q2min": "8",
+                "q2max": "10"
+            },
+            "obs@6": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.99e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "10",
+                "q2max": "12"
+            },
+            "obs@7": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.24e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.4e-06",
+                "type@1_err_down": "3.4e-06",
+                "q2min": "12",
+                "q2max": "14"
+            },
+            "obs@8": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.17e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.3e-06",
+                "type@1_err_down": "3.3e-06",
+                "q2min": "14",
+                "q2max": "16"
+            },
+            "obs@9": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.75e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "3.2e-06",
+                "type@1_err_down": "3.2e-06",
+                "q2min": "16",
+                "q2max": "18"
+            },
+            "obs@10": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "1.43e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.8e-06",
+                "type@1_err_down": "2.8e-06",
+                "q2min": "18",
+                "q2max": "20"
+            },
+            "obs@11": {
+                "name": "dBr(Bm.2.rho0.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\rho^{0}\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "5.9e-06",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.6e-06",
+                "type@1_err_down": "2.6e-06",
+                "q2min": "20",
+                "q2max": "22"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    -0.12300000000000001,
+                    0.008,
+                    0.0,
+                    0.002,
+                    0.002,
+                    0.002,
+                    0.003,
+                    0.003,
+                    0.003,
+                    0.003
+                ],
+                [
+                    -0.12300000000000001,
+                    1.0,
+                    -0.109,
+                    0.008,
+                    0.005,
+                    0.005,
+                    0.006,
+                    0.006999999999999999,
+                    0.009000000000000001,
+                    0.008,
+                    0.008
+                ],
+                [
+                    0.008,
+                    -0.109,
+                    1.0,
+                    -0.09699999999999999,
+                    0.009000000000000001,
+                    0.009000000000000001,
+                    0.008,
+                    0.009000000000000001,
+                    0.013000000000000001,
+                    0.011000000000000001,
+                    0.011000000000000001
+                ],
+                [
+                    0.0,
+                    0.008,
+                    -0.09699999999999999,
+                    1.0,
+                    -0.08800000000000001,
+                    0.013999999999999999,
+                    0.012,
+                    0.015,
+                    0.018000000000000002,
+                    0.013999999999999999,
+                    0.016
+                ],
+                [
+                    0.002,
+                    0.005,
+                    0.009000000000000001,
+                    -0.08800000000000001,
+                    1.0,
+                    -0.09300000000000001,
+                    0.015,
+                    0.016,
+                    0.021,
+                    0.017,
+                    0.018000000000000002
+                ],
+                [
+                    0.002,
+                    0.005,
+                    0.009000000000000001,
+                    0.013999999999999999,
+                    -0.09300000000000001,
+                    1.0,
+                    -0.066,
+                    0.019,
+                    0.027000000000000003,
+                    0.023,
+                    0.024
+                ],
+                [
+                    0.002,
+                    0.006,
+                    0.008,
+                    0.012,
+                    0.015,
+                    -0.066,
+                    1.0,
+                    -0.048,
+                    0.018000000000000002,
+                    0.018000000000000002,
+                    0.024
+                ],
+                [
+                    0.003,
+                    0.006999999999999999,
+                    0.009000000000000001,
+                    0.015,
+                    0.016,
+                    0.019,
+                    -0.048,
+                    1.0,
+                    -0.039,
+                    0.023,
+                    0.025
+                ],
+                [
+                    0.003,
+                    0.009000000000000001,
+                    0.013000000000000001,
+                    0.018000000000000002,
+                    0.021,
+                    0.027000000000000003,
+                    0.018000000000000002,
+                    -0.039,
+                    1.0,
+                    -0.038,
+                    0.027000000000000003
+                ],
+                [
+                    0.003,
+                    0.008,
+                    0.011000000000000001,
+                    0.013999999999999999,
+                    0.017,
+                    0.023,
+                    0.018000000000000002,
+                    0.023,
+                    -0.038,
+                    1.0,
+                    -0.052000000000000005
+                ],
+                [
+                    0.003,
+                    0.008,
+                    0.011000000000000001,
+                    0.016,
+                    0.018000000000000002,
+                    0.024,
+                    0.024,
+                    0.025,
+                    0.027000000000000003,
+                    -0.052000000000000005,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "dBr(Bm.2.omega.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\omega\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "2.28e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "6.2e-06",
+                "type@1_err_down": "6.2e-06",
+                "q2min": "0",
+                "q2max": "7"
+            },
+            "obs@2": {
+                "name": "dBr(Bm.2.omega.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\omega\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "5.65e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.06e-05",
+                "type@1_err_down": "1.06e-05",
+                "q2min": "7",
+                "q2max": "14"
+            },
+            "obs@3": {
+                "name": "dBr(Bm.2.omega.l-.nuBar)",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(B^{-}\\to \\omega\\ell^{-}\\bar{\\nu}_{\\ell})$",
+                "value": "3.39e-05",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.15e-05",
+                "type@1_err_down": "1.15e-05",
+                "q2min": "14",
+                "q2max": "21"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    0.015,
+                    0.10300000000000001
+                ],
+                [
+                    0.015,
+                    1.0,
+                    0.091
+                ],
+                [
+                    0.10300000000000001,
+                    0.091,
+                    1.0
+                ]
+            ]
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

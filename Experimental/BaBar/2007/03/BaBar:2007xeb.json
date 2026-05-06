@@ -1,0 +1,75 @@
+{
+    "inspire-hep": "[BaBar:2007xeb](https://inspirehep.net/literature/746136)",
+    "author": "Aubert, Bernard and others",
+    "collaboration": "BaBar",
+    "title": "Search for the Rare Decay $B \\to \\pi \\ell^{+} \\ell^{-}$",
+    "arxiv": "[hep-ex/0703018v1](https://arxiv.org/pdf/hep-ex/0703018)",
+    "time": "2007.03.07",
+    "abstract": "We have performed a search for the flavor-changing neutral-current decays $B \\to \\pi \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$, using a sample of 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance. We observe no evidence of a signal and measure the upper limit on the isospin-averaged branching fraction to be $\\mathcal{B}(B \\to \\pi \\ell^{+} \\ell^{-}) < 9.1 \\times 10^{-8}$ at 90% confidence level. We also search for the lepton-flavor-violating decays $B \\to \\pi e^{\\pm} \\mu^{\\mp}$ and measure an upper limit on the isospin-averaged branching fraction of $\\mathcal{B}(B \\to \\pi e^{\\pm} \\mu^{\\mp}) < 9.2 \\times 10^{-8}$ at 90% confidence level.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0703018",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.pip.ep.em)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}e^{+}e^{-})$",
+                "type@1_upper_limit": "1.8e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.pi0.ep.em)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}e^{+}e^{-})$",
+                "type@1_upper_limit": "1.4e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(Bp.2.pip.mup.mum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\mu^{+}\\mu^{-})$",
+                "type@1_upper_limit": "2.8e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@4": {
+                "name": "Br(B0.2.pi0.mup.mum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}\\mu^{+}\\mu^{-})$",
+                "type@1_upper_limit": "5.1e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@5": {
+                "name": "Br(Bp.2.pip.em.mup)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}e^{\\pm}\\mu^{\\mp})$",
+                "type@1_upper_limit": "1.7e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@6": {
+                "name": "Br(B0.2.pi0.em.mup)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}e^{\\pm}\\mu^{\\mp})$",
+                "type@1_upper_limit": "1.4e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@7": {
+                "name": "Br(Bp.2.pip.l+.l-)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\ell^{+}\\ell^{-})$",
+                "type@1_upper_limit": "1.2e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@8": {
+                "name": "Br(B0.2.pi0.l+.l-)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}\\ell^{+}\\ell^{-})$",
+                "type@1_upper_limit": "1.2e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@9": {
+                "name": "Br(B.2.pi.l+.l-)[90%@CL]",
+                "latex": "$\\mathcal{B}(B\\to \\pi\\ell^{+}\\ell^{-})$",
+                "type@1_upper_limit": "9.1e-8",
+                "type@1_level": "90%@CL"
+            },
+            "obs@10": {
+                "name": "Br(B.2.pi.em.mup)[90%@CL]",
+                "latex": "$\\mathcal{B}(B\\to \\pi e^{\\pm}\\mu^{\\mp})$",
+                "type@1_upper_limit": "9.2e-8",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

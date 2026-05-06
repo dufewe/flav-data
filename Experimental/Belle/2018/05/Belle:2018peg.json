@@ -1,0 +1,27 @@
+{
+    "inspire-hep": "[Belle:2018peg](https://inspirehep.net/literature/1681440)",
+    "author": "Sandilya, S. and others",
+    "collaboration": "Belle",
+    "title": "Search for the Rare Decay $B^0 \\to K^{*0} e^\\pm \\mu^\\mp$",
+    "arxiv": "[1805.03335v1](https://arxiv.org/pdf/1805.03335)",
+    "time": "2018.05.09",
+    "abstract": "We report a search for the lepton flavor violating decays $B^0 \\to K^{*0} e^\\pm \\mu^\\mp$ using a data sample of 711 fb$^{-1}$ collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find no evidence for the decays and set upper limits on the branching fractions.",
+    "pdf": "https://arxiv.org/pdf/1805.03335",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(B0.2.Kst0.emup.mum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to K^{*0} e^+ \\mu^-)$",
+                "type@1_upper_limit": "1.2e-7",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.Kst0.mup.em)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{0}\\to K^{*0} \\mu^+ e^-)$",
+                "type@1_upper_limit": "1.6e-7",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "semi-leptonic decay"
+}

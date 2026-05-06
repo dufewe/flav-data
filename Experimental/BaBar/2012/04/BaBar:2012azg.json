@@ -1,0 +1,89 @@
+{
+    "inspire-hep": "[BaBar:2012azg](https://inspirehep.net/literature/1125496)",
+    "author": "Lees, J.P. and others",
+    "collaboration": "BaBar",
+    "title": "A Search for the Decay Modes $B^{\\pm} \\to h^{\\pm} \\tau^{\\mp} \\ell^{\\pm}$",
+    "arxiv": "[1204.2852v1](https://arxiv.org/pdf/1204.2852)",
+    "time": "2012.04.13",
+    "abstract": "We present a search for the lepton flavor violating decay modes $B^{\\pm} \\to h^{\\pm} \\tau^{\\mp} \\ell^{\\pm}$ ($h= K, \\pi$; $\\ell= e, \\mu$) using the BaBar data sample, which corresponds to an integrated luminosity of 426 fb$^{-1}$. We find no evidence for these decays and set 90% confidence level upper limits on the branching fractions of a few times $10^{-5}$.",
+    "pdf": "https://arxiv.org/pdf/1204.2852",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.Kp.taum.mup)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{-}\\mu^{+})$",
+                "type@1_upper_limit": "4.5e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.Kp.taup.mum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{+}\\mu^{-})$",
+                "type@1_upper_limit": "2.8e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(Bp.2.Kp.taum.ep)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{-}e^{+})$",
+                "type@1_upper_limit": "4.3e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@4": {
+                "name": "Br(Bp.2.Kp.taup.em)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{+}e^{-})$",
+                "type@1_upper_limit": "1.5e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@5": {
+                "name": "Br(Bp.2.pip.taum.mup)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{-}\\mu^{+})$",
+                "type@1_upper_limit": "6.2e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@6": {
+                "name": "Br(Bp.2.pip.taup.mum)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{+}\\mu^{-})$",
+                "type@1_upper_limit": "4.5e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@7": {
+                "name": "Br(Bp.2.pip.taum.ep)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{-}e^{+})$",
+                "type@1_upper_limit": "7.4e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@8": {
+                "name": "Br(Bp.2.pip.taup.em)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{+}e^{-})$",
+                "type@1_upper_limit": "2.0e-5",
+                "type@1_level": "90%@CL"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Br(Bp.2.Kp.tau.mu)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{\\mp}\\mu^{\\pm})$",
+                "type@1_upper_limit": "4.8e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "Br(Bp.2.Kp.tau.e)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to K^{+}\\tau^{\\mp}e^{\\pm})$",
+                "type@1_upper_limit": "3.0e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@3": {
+                "name": "Br(Bp.2.pip.tau.mu)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{\\mp}\\mu^{\\pm})$",
+                "type@1_upper_limit": "7.2e-5",
+                "type@1_level": "90%@CL"
+            },
+            "obs@4": {
+                "name": "Br(Bp.2.pip.tau.e)[90%@CL]",
+                "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\tau^{\\mp}e^{\\pm})$",
+                "type@1_upper_limit": "7.5e-5",
+                "type@1_level": "90%@CL"
+            }
+        }
+    ],
+    "transition-mode": "leptonic decay"
+}
