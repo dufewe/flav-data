@@ -107,6 +107,71 @@
                 "q2min": "14.4",
                 "q2max": "25.0"
             }
+        },
+        {
+            "obs@1": {
+                "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
+                "latex": "$d\\mathcal{B}/dM_{X_s}(\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "3.75e-7",
+                "type@1_err_up": "0.96e-7",
+                "type@1_err_down": "0.96e-7",
+                "type@2_err_up": "0.34e-7",
+                "type@2_err_down": "0.34e-7",
+                "type@3_err": "syst_model",
+                "type@3_err_up": "0.34e-7",
+                "type@3_err_down": "0.34e-7",
+                "mxs_min": "0.4",
+                "mxs_max": "0.6",
+                "type@1_err": "stat"
+            },
+            "obs@2": {
+                "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
+                "latex": "$d\\mathcal{B}/dM_{X_s}(\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.36e-7",
+                "type@1_err_up": "0.88e-7",
+                "type@1_err_down": "0.88e-7",
+                "type@2_err_up": "0.08e-7",
+                "type@2_err_down": "0.08e-7",
+                "mxs_min": "0.6",
+                "mxs_max": "0.8",
+                "type@1_err": "stat"
+            },
+            "obs@3": {
+                "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
+                "latex": "$d\\mathcal{B}/dM_{X_s}(\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "6.65e-7",
+                "type@1_err_up": "2.25e-7",
+                "type@1_err_down": "2.25e-7",
+                "type@2_err_up": "0.67e-7",
+                "type@2_err_down": "0.67e-7",
+                "mxs_min": "0.8",
+                "mxs_max": "1.0",
+                "type@1_err": "stat"
+            },
+            "obs@4": {
+                "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
+                "latex": "$d\\mathcal{B}/dM_{X_s}(\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "10.50e-7",
+                "type@1_err_up": "6.90e-7",
+                "type@1_err_down": "6.90e-7",
+                "type@2_err_up": "2.00e-7",
+                "type@2_err_down": "2.00e-7",
+                "mxs_min": "1.0",
+                "mxs_max": "1.4",
+                "type@1_err": "stat"
+            },
+            "obs@5": {
+                "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
+                "latex": "$d\\mathcal{B}/dM_{X_s}(\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "46.59e-7",
+                "type@1_err_up": "23.37e-7",
+                "type@1_err_down": "23.37e-7",
+                "type@2_err_up": "22.51e-7",
+                "type@2_err_down": "10.94e-7",
+                "mxs_min": "1.4",
+                "mxs_max": "2.0",
+                "type@1_err": "stat"
+            }
         }
     ],
     "transition-mode": "semi-leptonic decay"

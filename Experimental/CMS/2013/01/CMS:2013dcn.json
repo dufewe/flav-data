@@ -1,0 +1,17 @@
+{
+    "inspire-hep": "https://inspirehep.net/literature?q=texkey:CMS:2013dcn",
+    "author": "CMS Collaboration",
+    "collaboration": "CMS",
+    "title": "CMS:2013dcn",
+    "arxiv": "",
+    "time": "2013.01.01",
+    "abstract": "",
+    "pdf": "",
+    "data": [
+        {
+            "raw_yaml_key": "CMS Bs->mumu 2013",
+            "distribution": "multivariate_numerical"
+        }
+    ],
+    "transition-mode": "flavor changing neutral current"
+}

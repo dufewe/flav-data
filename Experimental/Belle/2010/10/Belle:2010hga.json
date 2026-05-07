@@ -21,6 +21,175 @@
                 "type@2_err_down": "1.08",
                 "unit": "1e-3"
             }
+        },
+        {
+            "obs@1": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "16.45",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.95",
+                "type@1_err_down": "0.95",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.57",
+                "type@2_err_down": "0.57",
+                "w_min": "1.00",
+                "w_max": "1.05"
+            },
+            "obs@2": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "23.96",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.79",
+                "type@1_err_down": "0.79",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.88",
+                "type@2_err_down": "0.88",
+                "w_min": "1.05",
+                "w_max": "1.10"
+            },
+            "obs@3": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "27.68",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.76",
+                "type@1_err_down": "0.76",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.13",
+                "type@2_err_down": "1.13",
+                "w_min": "1.10",
+                "w_max": "1.15"
+            },
+            "obs@4": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "28.76",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.75",
+                "type@1_err_down": "0.75",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.26",
+                "type@2_err_down": "1.26",
+                "w_min": "1.15",
+                "w_max": "1.20"
+            },
+            "obs@5": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "27.05",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.72",
+                "type@1_err_down": "0.72",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.25",
+                "type@2_err_down": "1.25",
+                "w_min": "1.20",
+                "w_max": "1.25"
+            },
+            "obs@6": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "23.74",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.68",
+                "type@1_err_down": "0.68",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.13",
+                "type@2_err_down": "1.13",
+                "w_min": "1.25",
+                "w_max": "1.30"
+            },
+            "obs@7": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "19.88",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.66",
+                "type@1_err_down": "0.66",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.99",
+                "type@2_err_down": "0.99",
+                "w_min": "1.30",
+                "w_max": "1.35"
+            },
+            "obs@8": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "15.71",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.64",
+                "type@1_err_down": "0.64",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.83",
+                "type@2_err_down": "0.83",
+                "w_min": "1.35",
+                "w_max": "1.40"
+            },
+            "obs@9": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "12.12",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.64",
+                "type@1_err_down": "0.64",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.69",
+                "type@2_err_down": "0.69",
+                "w_min": "1.40",
+                "w_max": "1.45"
+            },
+            "obs@10": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "8.65",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.66",
+                "type@1_err_down": "0.66",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.57",
+                "type@2_err_down": "0.57",
+                "w_min": "1.45",
+                "w_max": "1.50"
+            },
+            "unit": "1e-15 GeV"
+        },
+        {
+            "obs@1": {
+                "name": "rho2(B0.2.Dst.l.nu)",
+                "latex": "$\\rho^2 (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
+                "value": "1.206",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.034",
+                "type@1_err_down": "0.034",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.024",
+                "type@2_err_down": "0.024"
+            },
+            "obs@2": {
+                "name": "R1(B0.2.Dst.l.nu)",
+                "latex": "$R_1(1) (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
+                "value": "1.395",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.049",
+                "type@1_err_down": "0.049",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.026",
+                "type@2_err_down": "0.026"
+            },
+            "obs@3": {
+                "name": "R2(B0.2.Dst.l.nu)",
+                "latex": "$R_2(1) (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
+                "value": "0.885",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.044",
+                "type@1_err_down": "0.044",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.026",
+                "type@2_err_down": "0.026"
+            },
+            "note": "CLN fit. Correlation matrix: (Vcb,rho2)=-0.81, (Vcb,R1)=-0.33, (Vcb,R2)=-0.20, (rho2,R1)=0.51, (rho2,R2)=0.40, (R1,R2)=-0.03"
         }
     ],
     "transition-mode": "semi-leptonic decay"

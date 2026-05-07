@@ -20,6 +20,444 @@
                 "type@2_err_up": "0.01",
                 "type@2_err_down": "0.01"
             }
+        },
+        {
+            "obs@1": {
+                "name": "Br(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$\\mathcal{B}(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "4.92",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.23",
+                "type@2_err_down": "0.23",
+                "unit": "1e-2"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.32",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.11",
+                "w_min": "1.00",
+                "w_max": "1.05"
+            },
+            "obs@2": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.08",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "w_min": "1.05",
+                "w_max": "1.10"
+            },
+            "obs@3": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.39",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "w_min": "1.10",
+                "w_max": "1.15"
+            },
+            "obs@4": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.57",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "w_min": "1.15",
+                "w_max": "1.20"
+            },
+            "obs@5": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.63",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "w_min": "1.20",
+                "w_max": "1.25"
+            },
+            "obs@6": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.46",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "w_min": "1.25",
+                "w_max": "1.30"
+            },
+            "obs@7": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.25",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "w_min": "1.30",
+                "w_max": "1.35"
+            },
+            "obs@8": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.08",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "w_min": "1.35",
+                "w_max": "1.40"
+            },
+            "obs@9": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.99",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.13",
+                "type@1_err_down": "0.13",
+                "w_min": "1.40",
+                "w_max": "1.45"
+            },
+            "obs@10": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.83",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "w_min": "1.45",
+                "w_max": "1.50"
+            },
+            "unit": "1e-15 GeV"
+        },
+        {
+            "obs@1": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.80",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.20",
+                "type@1_err_down": "0.20",
+                "cos_min": "-1.00",
+                "cos_max": "-0.80"
+            },
+            "obs@2": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.30",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "cos_min": "-0.80",
+                "cos_max": "-0.60"
+            },
+            "obs@3": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.95",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.13",
+                "type@1_err_down": "0.13",
+                "cos_min": "-0.60",
+                "cos_max": "-0.40"
+            },
+            "obs@4": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.70",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "cos_min": "-0.40",
+                "cos_max": "-0.20"
+            },
+            "obs@5": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.58",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "cos_min": "-0.20",
+                "cos_max": "0.00"
+            },
+            "obs@6": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.65",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.11",
+                "cos_min": "0.00",
+                "cos_max": "0.20"
+            },
+            "obs@7": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.77",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "cos_min": "0.20",
+                "cos_max": "0.40"
+            },
+            "obs@8": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.00",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "cos_min": "0.40",
+                "cos_max": "0.60"
+            },
+            "obs@9": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.50",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.17",
+                "type@1_err_down": "0.17",
+                "cos_min": "0.60",
+                "cos_max": "0.80"
+            },
+            "obs@10": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "3.19",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.25",
+                "type@1_err_down": "0.25",
+                "cos_min": "0.80",
+                "cos_max": "1.00"
+            },
+            "unit": "1e-15 GeV"
+        },
+        {
+            "obs@1": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "0.73",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.07",
+                "type@1_err_down": "0.07",
+                "cos_min": "-1.00",
+                "cos_max": "-0.80"
+            },
+            "obs@2": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.18",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.10",
+                "type@1_err_down": "0.10",
+                "cos_min": "-0.80",
+                "cos_max": "-0.60"
+            },
+            "obs@3": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.64",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.11",
+                "cos_min": "-0.60",
+                "cos_max": "-0.40"
+            },
+            "obs@4": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.04",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "cos_min": "-0.40",
+                "cos_max": "-0.20"
+            },
+            "obs@5": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "cos_min": "-0.20",
+                "cos_max": "0.00"
+            },
+            "obs@6": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.50",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "cos_min": "0.00",
+                "cos_max": "0.20"
+            },
+            "obs@7": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.54",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "cos_min": "0.20",
+                "cos_max": "0.40"
+            },
+            "obs@8": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.68",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "cos_min": "0.40",
+                "cos_max": "0.60"
+            },
+            "obs@9": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.83",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.21",
+                "type@1_err_down": "0.21",
+                "cos_min": "0.60",
+                "cos_max": "0.80"
+            },
+            "obs@10": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.82",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.25",
+                "type@1_err_down": "0.25",
+                "cos_min": "0.80",
+                "cos_max": "1.00"
+            },
+            "unit": "1e-15 GeV"
+        },
+        {
+            "obs@1": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.86",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "0.00",
+                "chi_max": "0.314"
+            },
+            "obs@2": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.31",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "0.314",
+                "chi_max": "0.628"
+            },
+            "obs@3": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.59",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "0.628",
+                "chi_max": "0.942"
+            },
+            "obs@4": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.37",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "0.942",
+                "chi_max": "1.257"
+            },
+            "obs@5": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.95",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.13",
+                "type@1_err_down": "0.13",
+                "chi_min": "1.257",
+                "chi_max": "1.571"
+            },
+            "obs@6": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.87",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "chi_min": "1.571",
+                "chi_max": "1.885"
+            },
+            "obs@7": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.11",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "chi_min": "1.885",
+                "chi_max": "2.199"
+            },
+            "obs@8": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.33",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "2.199",
+                "chi_max": "2.513"
+            },
+            "obs@9": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.15",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "chi_min": "2.513",
+                "chi_max": "2.827"
+            },
+            "obs@10": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.89",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "2.827",
+                "chi_max": "3.142"
+            },
+            "unit": "1e-15 GeV"
+        },
+        {
+            "obs@1": {
+                "name": "Vcb(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$|V_{cb}| (\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "38.2",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.5",
+                "type@1_err_down": "1.5",
+                "note": "CLN unfolded: rho2=1.17 +- 0.15, R1(1)=1.39 +- 0.09, R2(1)=0.91 +- 0.08"
+            },
+            "unit": "1e-3"
         }
     ],
     "transition-mode": "semi-leptonic decay"

@@ -1,0 +1,17 @@
+{
+    "inspire-hep": "https://inspirehep.net/literature?q=texkey:CMS:2019bbr",
+    "author": "CMS Collaboration",
+    "collaboration": "CMS",
+    "title": "CMS:2019bbr",
+    "arxiv": "",
+    "time": "2019.01.01",
+    "abstract": "",
+    "pdf": "",
+    "data": [
+        {
+            "raw_yaml_key": "CMS Bs->mumu effective lifetime 2019",
+            "distribution": null
+        }
+    ],
+    "transition-mode": "flavor changing neutral current"
+}

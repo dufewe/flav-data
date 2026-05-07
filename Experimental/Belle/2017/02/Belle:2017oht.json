@@ -83,6 +83,20 @@
                 "type@1_upper_limit": "2.8e-5",
                 "type@1_level": "90%@CL"
             }
+        },
+        {
+            "obs@1": {
+                "name": "R(B.2.K.nu.nuBar)[exp/sm][90%@CL]",
+                "latex": "$R_K = \\frac{\\mathcal{B}(B \\to K\\nu\\bar{\\nu})}{\\mathcal{B}(B \\to K\\nu\\bar{\\nu})_{SM}}$",
+                "type@1_upper_limit": "3.9",
+                "type@1_level": "90%@CL"
+            },
+            "obs@2": {
+                "name": "R(B.2.Kst.nu.nuBar)[exp/sm][90%@CL]",
+                "latex": "$R_{K^*} = \\frac{\\mathcal{B}(B \\to K^*\\nu\\bar{\\nu})}{\\mathcal{B}(B \\to K^*\\nu\\bar{\\nu})_{SM}}$",
+                "type@1_upper_limit": "2.7",
+                "type@1_level": "90%@CL"
+            }
         }
     ],
     "transition-mode": "semi-leptonic decay"

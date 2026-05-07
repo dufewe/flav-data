@@ -47,6 +47,32 @@
                 "type@2_err_down": "0.02",
                 "q2min": "14.3",
                 "q2max": "25.0"
+            },
+            "obs@4": {
+                "name": "AFB(Bbar.2.XsBar.l+.l-)",
+                "latex": "$\\langle A_{FB} \\rangle (\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.04",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.31",
+                "type@1_err_down": "0.31",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "q2min": "4.3",
+                "q2max": "7.3"
+            },
+            "obs@5": {
+                "name": "AFB(Bbar.2.XsBar.l+.l-)",
+                "latex": "$\\langle A_{FB} \\rangle (\\bar{B} \\to X_s \\ell^+ \\ell^-)$",
+                "value": "0.28",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.21",
+                "type@1_err_down": "0.21",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.02",
+                "type@2_err_down": "0.02",
+                "q2min": "10.5",
+                "q2max": "11.8"
             }
         }
     ],

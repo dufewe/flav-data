@@ -1,0 +1,17 @@
+{
+    "inspire-hep": "https://inspirehep.net/literature?q=texkey:CMS:2019qnb",
+    "author": "CMS Collaboration",
+    "collaboration": "CMS",
+    "title": "CMS:2019qnb",
+    "arxiv": "",
+    "time": "2019.01.01",
+    "abstract": "",
+    "pdf": "",
+    "data": [
+        {
+            "raw_yaml_key": "CMS Bs->mumu 2019",
+            "distribution": "multivariate_numerical"
+        }
+    ],
+    "transition-mode": "flavor changing neutral current"
+}
