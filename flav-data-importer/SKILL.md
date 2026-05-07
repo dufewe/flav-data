@@ -238,7 +238,7 @@ python3 scripts/json-valid.py <path/to/file.json>
 4. 写为 Markdown 链接
 
 ### LaTeX 转义
-JSON 文件中 LaTeX 使用双反斜杠，如 `\\\\to` 而非 `\\to`。Python 解析后变成单反斜杠是正常的。
+JSON 文件中 LaTeX 使用双反斜杠，如 `\\to` 而非 `\to`。Python 解析后变成单反斜杠是正常的。
 
 ### 索引文件更新
 每次添加新文件后必须更新年度索引文件，如 `LHCb@2025.json`，月份键必须零填充 ("01" 到 "12")。
