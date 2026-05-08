@@ -1,0 +1,33 @@
+{
+    "inspire-hep": "[Chatrchyan:2013bka](https://inspirehep.net/literature/1248187)",
+    "author": "Chatrchyan, Serguei and others",
+    "collaboration": "CMS",
+    "title": "Measurement of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ Branching Fraction and Search for $B^0 \\\\to \\\\mu^+ \\\\mu^-$ with the CMS Experiment",
+    "arxiv": "[1307.5025v1](https://arxiv.org/pdf/1307.5025)",
+    "time": "2013.07.18",
+    "abstract": "We present results from a search for the rare leptonic decays $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ and $B^0 \\\\to \\\\mu^+ \\\\mu^-$ in pp collisions at $\\\\sqrt{s} = 7$ and 8 TeV, with data samples of 5 and 20 fb$^{-1}$, respectively, collected by the CMS experiment at the LHC. With an unbinned maximum-likelihood fit to the dimuon invariant mass distributions we determine a branching fraction $\\\\mathcal{B}(B_s^0 \\\\to \\\\mu^+ \\\\mu^-) = (3.0^{+1.0}_{-0.9}) \\\\times 10^{-9}$, where the uncertainty includes the dominant statistical and small systematic contributions. For the decay $B^0 \\\\to \\\\mu^+ \\\\mu^-$ an upper limit of $\\\\mathcal{B}(B^0 \\\\to \\\\mu^+ \\\\mu^-) < 1.1 \\\\times 10^{-9}$ at the 95% confidence level is determined. An excess of $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ events with respect to background is observed with a significance of 4.3 standard deviations.",
+    "pdf": "https://arxiv.org/pdf/1307.5025",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "3.0e-09",
+                "type@1_err": "stat",
+                "type@1_err_up": "1.0e-09",
+                "type@1_err_down": "0.9e-09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.2e-09",
+                "type@2_err_down": "0.2e-09"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "1.1e-09",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "1.1e-09"
+            }
+        }
+    ],
+    "transition-mode": "rare decay"
+}

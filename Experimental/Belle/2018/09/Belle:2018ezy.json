@@ -1,18 +1,116 @@
 {
-    "inspire-hep": "[Belle:2018ezy](https://inspirehep.net/literature/1693396)",
-    "author": "Abdesselam, A. and others",
+    "inspire-hep": "[Abdesselam:2018nnh](https://inspirehep.net/literature/1693396)",
+    "author": "Waheed, E. and others",
     "collaboration": "Belle",
-    "title": "Measurement of the ratio of branching fractions $\\mathcal{B}(\\bar{B}^0 \\to D^{*+} \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$ using semileptonic tagging at Belle",
+    "title": "Measurement of the CKM matrix element $|V_{cb}|$ from $B^0\\to D^{*-}\\ell^{+} \\nu_\\ell$ at Belle",
     "arxiv": "[1809.03290v1](https://arxiv.org/pdf/1809.03290)",
     "time": "2018.09.10",
-    "abstract": "We report a measurement of the ratio of branching fractions $\\mathcal{R}(D^*) = \\mathcal{B}(\\bar{B}^0 \\to D^{*+} \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$ using semileptonic tagging. The result is based on a data sample of 772 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector.",
+    "abstract": "We present a new measurement of the CKM matrix element $|V_{cb}|$ from $B^{0} \\to D^{*-} \\ell^{+} \\nu_\\ell$ decays, reconstructed with the full Belle data set of 711 fb$^{-1}$ integrated luminosity. Two form factor parameterizations, originally conceived by the Caprini-Lellouch-Neubert (CLN) and the Boyd, Grinstein and Lebed (BGL) groups, are used to extract the product $\\mathcal{F}(1)\\eta_{EW}|V_{cb}|$ and the decay form factors, where $\\mathcal{F}(1)$ is the normalization factor and $\\eta_{EW}$ is a small electroweak correction. In the CLN parameterization we find $\\mathcal{F}(1)\\eta_{EW}|V_{cb}| = (35.06 \\pm 0.15 \\pm 0.56) \\times 10^{-3}$, $\\rho^2 = 1.106 \\pm 0.031 \\pm 0.007$, $\\mathcal{R}_1(1) = 1.229 \\pm 0.028 \\pm 0.009$, $\\mathcal{R}_2(1) = 0.852 \\pm 0.021 \\pm 0.006$. For the BGL parameterization we obtain $\\mathcal{F}(1)\\eta_{EW}|V_{cb}| = (34.93 \\pm 0.23 \\pm 0.59) \\times 10^{-3}$, which is consistent with the World Average when correcting for $\\mathcal{F}(1)\\eta_{EW}$. The branching fraction of $B^0 \\to D^{*-} \\ell^{+} \\nu_\\ell$ is measured to be $\\mathcal{B}(B^0 \\to D^{*-} \\ell^{+} \\nu_\\ell) = (4.90 \\pm 0.02 \\pm 0.16)\\%$. We also present a new test of lepton flavor universality violation in semileptonic $B$ decays, $\\mathcal{B}(B^0\\to D^{*-}e^+\\nu)/\\mathcal{B}(B^0\\to D^{*-}\\mu^+\\nu) = 1.01 \\pm 0.01 \\pm 0.03$. The errors correspond to the statistical and systematic uncertainties respectively. This is the most precise measurement of $\\mathcal{F}(1)\\eta_{EW}|V_{cb}|$ and form factors to date and the first experimental study of the BGL form factor parameterization in an experimental measurement.",
     "pdf": "https://arxiv.org/pdf/1809.03290",
     "data": [
         {
             "obs@1": {
-                "name": "Rmue(Bbar.2.Dst.l.nu)",
-                "latex": "$R_{\\mu/e}(\\bar{B}\\to D^{*}\\ell\\bar{\\nu})$",
-                "value": "0.99",
+                "name": "Vcb(B0.2.Dst-.l+.nu)(CLN)",
+                "latex": "$\\mathcal{F}(1)\\eta_{EW}|V_{cb}|(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})_{CLN}$",
+                "value": "0.03506",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.00015",
+                "type@1_err_down": "0.00015",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.00056",
+                "type@2_err_down": "0.00056"
+            },
+            "obs@2": {
+                "name": "rho2(B0.2.Dst-.l+.nu)(CLN)",
+                "latex": "$\\rho^2(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})_{CLN}$",
+                "value": "1.106",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.031",
+                "type@1_err_down": "0.031",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.007",
+                "type@2_err_down": "0.007"
+            },
+            "obs@3": {
+                "name": "R1(B0.2.Dst-.l+.nu)(CLN)",
+                "latex": "$\\mathcal{R}_1(1)(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})_{CLN}$",
+                "value": "1.229",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.028",
+                "type@1_err_down": "0.028",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.009",
+                "type@2_err_down": "0.009"
+            },
+            "obs@4": {
+                "name": "R2(B0.2.Dst-.l+.nu)(CLN)",
+                "latex": "$\\mathcal{R}_2(1)(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})_{CLN}$",
+                "value": "0.852",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.021",
+                "type@1_err_down": "0.021",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.006",
+                "type@2_err_down": "0.006"
+            },
+            "tot_correlation": [
+                [
+                    1.0,
+                    0.593,
+                    -0.883,
+                    0.655
+                ],
+                [
+                    0.593,
+                    1.0,
+                    -0.692,
+                    -0.062
+                ],
+                [
+                    -0.883,
+                    -0.692,
+                    1.0,
+                    -0.268
+                ],
+                [
+                    0.655,
+                    -0.062,
+                    -0.268,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "obs@1": {
+                "name": "Vcb(B0.2.Dst-.l+.nu)(BGL)",
+                "latex": "$\\mathcal{F}(1)\\eta_{EW}|V_{cb}|(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})_{BGL}$",
+                "value": "0.03493",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.00023",
+                "type@1_err_down": "0.00023",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.00059",
+                "type@2_err_down": "0.00059"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Br(B0.2.Dst-.l+.nu)",
+                "latex": "$\\mathcal{B}(B^{0}\\to D^{*-}\\ell^{+}\\nu_{\\ell})$",
+                "value": "0.0490",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.0002",
+                "type@1_err_down": "0.0002",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.0016",
+                "type@2_err_down": "0.0016"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "R(B0.2.Dst-.l+.nu)[e/mu]",
+                "latex": "$\\frac{\\mathcal{B}(B^0\\to D^{*-}e^+\\nu)}{\\mathcal{B}(B^0\\to D^{*-}\\mu^+\\nu)}$",
+                "value": "1.01",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.01",
                 "type@1_err_down": "0.01",

@@ -1,4 +1,6 @@
-# necessary packages and definitions
+# ---------------------------------------------------------
+# Necessary packages and definitions
+# ---------------------------------------------------------
 
 import streamlit as st
 import json
@@ -26,3 +28,7 @@ month_label = {
     "11": "Nov.",
     "12": "Dec."
 }
+
+EXPEGROUP = ["ATLAS","CMS", "LHCb", "Belle", "BaBar"]
+THEOGROUP = ["HPQCD"]
+OBSGROUP = ["Flavor", "EWPO"]

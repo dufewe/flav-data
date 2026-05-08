@@ -1,0 +1,45 @@
+{
+    "inspire-hep": "[CMS:2022mgd](https://inspirehep.net/literature/2616304)",
+    "author": "Tumasyan, Armen and others",
+    "collaboration": "CMS",
+    "title": "Measurement of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decay properties and search for the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ decay in proton-proton collisions at $\\\\sqrt{s} = 13$ TeV",
+    "arxiv": "[2212.10311v1](https://arxiv.org/pdf/2212.10311)",
+    "time": "2022.12.16",
+    "abstract": "Measurements are presented of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction and effective lifetime, as well as results of a search for the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ decay in proton-proton collisions at $\\\\sqrt{s} = 13$ TeV at the LHC. The analysis is based on data collected with the CMS detector in 2016-2018 corresponding to an integrated luminosity of 140 fb$^{-1}$. The branching fraction of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decay and the effective $B_s^0$ meson lifetime are the most precise single measurements to date. No evidence for the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ decay has been found. All results are found to be consistent with the standard model predictions and previous measurements.",
+    "pdf": "https://arxiv.org/pdf/2212.10311",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bs0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "2.9e-09",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.7e-09",
+                "type@1_err_down": "0.6e-09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.2e-09",
+                "type@2_err_down": "0.2e-09"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "3.6e-10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "3.6e-10"
+            },
+            "obs@3": {
+                "name": "Tau(Bs0.2.mup.mu-)",
+                "latex": "$\\\\tau(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "1.70",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.61",
+                "type@1_err_down": "0.44",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "unit": "ps"
+            }
+        }
+    ],
+    "transition-mode": "rare decay"
+}

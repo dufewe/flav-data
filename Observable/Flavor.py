@@ -1,7 +1,41 @@
+# ---------------------------------------------------------
+# Load packages and definitions
+# ---------------------------------------------------------
 with open('./defs.py', 'r', encoding='utf-8') as f:
     exec(f.read())
 
-st.sidebar.button("sss")
+# ---------------------------------------------------------
+# Fundamental conventions
+# ---------------------------------------------------------
+st.markdown('''
+# 基本符号约定
+本flav-data库的相关符号约定展示如下：
+- 对于一般的跃迁或衰变道(`transition`)，例如$A + B  \\to C + D$跃迁模式，我们将markdown文本简写为`A.B.2.C.D`形式以辨别该跃迁模式中所有的初、末态粒子并将跃迁符号$\\to$写为`2`
+- 粒子态表示成其英文字符串和其电荷属性的组合形式，其中粒子态的电荷属性有`+`、`-`和`0`三种，分别表示正电荷、负电荷和电中性
+- 在各跃迁模式中，初、末态粒子按照其电荷`+`、`-`、`0`的顺序进行排列
+- 反粒子标记为正粒子名称后加`Bar`，而带电粒子则直接用其电荷进行标记
+- 中微子符号不带味道指标，统一用`nu`或`nuBar`表示
+''')
+
+st.markdown('''
+# 观测量命名规则
+本flav-data库中观测量命名规则展示如下：
+- 观测量统一写为`OBS(transition)[condition]`的形式，其中`OBS`为观测量名称简写、`transition`表示该观测量所属的跃迁模式，而`condition`则是观测量中多跃迁模式间的关联条件（注：`condition`只在涉及多跃迁模式的观测量中表示出来）
+- 
+''')
+
+
+# ---------------------------------------------------------
+# Fundamental observable definitions
+# ---------------------------------------------------------
+st.markdown('''
+# Fundamental observables in flavor physics
+
+
+
+
+
+''')
 
 st.markdown('''
 for charged-current beauty processes $B\\to M\\ell\\nu$, the observables include
