@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "[Akeroyd:2017mhr](https://inspirehep.net/literature/1615885)",
+    "author": "Akeroyd, A. G. and Chen, Chuan-Hung",
+    "collaboration": "",
+    "title": "Constraint on the branching ratio of $B_c \\\\to \\\\tau \\\\bar{\\\\nu}$ from LEP1 and consequences for $R(D^{(*)})$ anomaly",
+    "arxiv": "[1708.04072v1](https://arxiv.org/pdf/1708.04072)",
+    "time": "2017.08.14",
+    "abstract": "We show that LEP data taken at the Z peak requires $\\\\mathcal{B}(B_c^- \\\\to \\\\tau^- \\\\bar{\\\\nu}) \\\\lesssim 10\\\\%$, and this constraint is significantly stronger than the recent constraint $\\\\mathcal{B}(B_c^- \\\\to \\\\tau^- \\\\bar{\\\\nu}) \\\\lesssim 30\\\\%$ from considering the lifetime of $B_c$. In order to respect this new constraint, any explanation of the $R(D)$ and $R(D^*)$ anomaly in terms of $H^\\\\pm$ alone would require the future measurements of $R(D^*)$ to be even closer to the Standard Model prediction.",
+    "pdf": "https://arxiv.org/pdf/1708.04072",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Bc-.2.tau-.nuBar)",
+                "latex": "$\\\\mathcal{B}(B_c^- \\\\to \\\\tau^- \\\\bar{\\\\nu})$",
+                "value": "0.10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "0.10"
+            }
+        }
+    ],
+    "transition-mode": "pure leptonic decay"
+}

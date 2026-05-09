@@ -1,0 +1,61 @@
+{
+    "inspire-hep": "691576",
+    "author": "Schael, S. and others",
+    "collaboration": "ALEPH, DELPHI, L3, OPAL, SLD, LEP Electroweak Working Group, SLD Electroweak Group, SLD Heavy Flavour Group",
+    "title": "Precision electroweak measurements on the Z resonance",
+    "arxiv": "[hep-ex/0509008v1](https://arxiv.org/pdf/hep-ex/0509008.pdf)",
+    "year": "2005",
+    "time": "2005-09-07",
+    "abstract": "We report on the final electroweak measurements performed with data taken at the Z resonance by the experiments operating at SLC and LEP. The data consist of 17 million Z decays at LEP and 600 thousand Z decays by SLD. The mass and width of the Z boson, and its couplings to fermions are precisely measured: mZ = 91.1875 +- 0.0021 GeV, GammaZ = 2.4952 +- 0.0023 GeV, sin^2 theta_eff^lept = 0.23153 +- 0.00016. The number of light neutrino species is determined to be 2.9840 +- 0.0082.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0509008.pdf",
+    "transition-mode": "z-pole-combination",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mZ(e+.e-.2.Z.2.all)",
+                "latex": "$m_{Z}$",
+                "value": "91.1875",
+                "tot_err_up": "0.0021",
+                "tot_err_down": "0.0021",
+                "unit": "GeV"
+            },
+            "obs@2": {
+                "name": "GammaZ(e+.e-.2.Z.2.all)",
+                "latex": "$\\Gamma_{Z}$",
+                "value": "2.4952",
+                "tot_err_up": "0.0023",
+                "tot_err_down": "0.0023",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "sigma_had0(e+.e-.2.Z.2.had)",
+                "latex": "$\\sigma_{had}^{0}$",
+                "value": "41.540",
+                "tot_err_up": "0.037",
+                "tot_err_down": "0.037",
+                "unit": "nb"
+            },
+            "obs@4": {
+                "name": "Nnu(Z.2.nu.nubar)",
+                "latex": "$N_{\\nu}$",
+                "value": "2.9840",
+                "tot_err_up": "0.0082",
+                "tot_err_down": "0.0082"
+            },
+            "obs@5": {
+                "name": "sin2theta_eff_lept(Z.2.l+.l-)",
+                "latex": "$\\sin^{2}\\theta_{eff}^{lept}$",
+                "value": "0.23153",
+                "tot_err_up": "0.00016",
+                "tot_err_down": "0.00016"
+            },
+            "obs@6": {
+                "name": "rho_lept(Z.2.l+.l-)",
+                "latex": "$\\rho_{\\ell}$",
+                "value": "1.0050",
+                "tot_err_up": "0.0010",
+                "tot_err_down": "0.0010"
+            }
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "inspire-hep": "1688995",
+    "author": "Tanabashi, M. and others",
+    "collaboration": "Particle Data Group",
+    "title": "Review of Particle Physics",
+    "arxiv": "no arxiv (published in PRD)",
+    "year": "2018",
+    "time": "2018-06-05",
+    "abstract": "The Review summarizes much of particle physics and cosmology. Using data from previous editions, plus 2,873 new measurements from 758 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons.",
+    "pdf": "https://pdg.lbl.gov/2018/reviews/rpp2018-rev-standard-model.pdf",
+    "transition-mode": "z-pole-combination",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mZ(e+.e-.2.Z.2.all)",
+                "latex": "$m_{Z}$",
+                "value": "91.1876",
+                "tot_err_up": "0.0021",
+                "tot_err_down": "0.0021",
+                "unit": "GeV"
+            },
+            "obs@2": {
+                "name": "GammaZ(e+.e-.2.Z.2.all)",
+                "latex": "$\\Gamma_{Z}$",
+                "value": "2.4952",
+                "tot_err_up": "0.0023",
+                "tot_err_down": "0.0023",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "sigma_had0(e+.e-.2.Z.2.had)",
+                "latex": "$\\sigma_{had}^{0}$",
+                "value": "41.541",
+                "tot_err_up": "0.037",
+                "tot_err_down": "0.037",
+                "unit": "nb"
+            },
+            "obs@4": {
+                "name": "Re(e+.e-.2.Z.2.had)",
+                "latex": "$R_{e}^{0}$",
+                "value": "20.804",
+                "tot_err_up": "0.050",
+                "tot_err_down": "0.050"
+            },
+            "obs@5": {
+                "name": "Rmu(e+.e-.2.Z.2.had)",
+                "latex": "$R_{\\mu}^{0}$",
+                "value": "20.785",
+                "tot_err_up": "0.033",
+                "tot_err_down": "0.033"
+            },
+            "obs@6": {
+                "name": "Rtau(e+.e-.2.Z.2.had)",
+                "latex": "$R_{\\tau}^{0}$",
+                "value": "20.764",
+                "tot_err_up": "0.045",
+                "tot_err_down": "0.045"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Rb(Z.2.b.bbar)",
+                "latex": "$R_{b}^{0}$",
+                "value": "0.21629",
+                "tot_err_up": "0.00066",
+                "tot_err_down": "0.00066"
+            },
+            "obs@2": {
+                "name": "Rc(Z.2.c.cbar)",
+                "latex": "$R_{c}^{0}$",
+                "value": "0.1721",
+                "tot_err_up": "0.0030",
+                "tot_err_down": "0.0030"
+            },
+            "obs@3": {
+                "name": "Afb0_b(Z.2.b.bbar)",
+                "latex": "$A_{FB}^{0,b}$",
+                "value": "0.0992",
+                "tot_err_up": "0.0016",
+                "tot_err_down": "0.0016"
+            },
+            "obs@4": {
+                "name": "Afb0_c(Z.2.c.cbar)",
+                "latex": "$A_{FB}^{0,c}$",
+                "value": "0.0707",
+                "tot_err_up": "0.0035",
+                "tot_err_down": "0.0035"
+            },
+            "obs@5": {
+                "name": "Ab(Z.2.b.bbar)",
+                "latex": "$A_{b}$",
+                "value": "0.923",
+                "tot_err_up": "0.020",
+                "tot_err_down": "0.020"
+            },
+            "obs@6": {
+                "name": "Ac(Z.2.c.cbar)",
+                "latex": "$A_{c}$",
+                "value": "0.670",
+                "tot_err_up": "0.027",
+                "tot_err_down": "0.027"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "sin2theta_eff_lept(Z.2.l+.l-)",
+                "latex": "$\\sin^{2}\\theta_{eff}^{lept}$",
+                "value": "0.23154",
+                "tot_err_up": "0.00003",
+                "tot_err_down": "0.00003"
+            },
+            "obs@2": {
+                "name": "mW(p.p.2.W.2.f.fbar)",
+                "latex": "$m_{W}$",
+                "value": "80.379",
+                "tot_err_up": "0.012",
+                "tot_err_down": "0.012",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "GammaW(p.p.2.W.2.f.fbar)",
+                "latex": "$\\Gamma_{W}$",
+                "value": "2.085",
+                "tot_err_up": "0.042",
+                "tot_err_down": "0.042",
+                "unit": "GeV"
+            }
+        }
+    ]
+}

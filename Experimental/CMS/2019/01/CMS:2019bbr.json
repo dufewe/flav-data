@@ -1,17 +1,45 @@
 {
-    "inspire-hep": "https://inspirehep.net/literature?q=texkey:CMS:2019bbr",
-    "author": "CMS Collaboration",
+    "inspire-hep": "[CMS:2019bbr](https://inspirehep.net/literature/1761656)",
+    "author": "Sirunyan, Albert M and others",
     "collaboration": "CMS",
-    "title": "CMS:2019bbr",
-    "arxiv": "",
-    "time": "2019.01.01",
-    "abstract": "",
-    "pdf": "",
+    "title": "Measurement of properties of $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decays and search for $B^0 \\\\to \\\\mu^+ \\\\mu^-$ with the CMS experiment",
+    "arxiv": "[1910.12127v2](https://arxiv.org/pdf/1910.12127)",
+    "time": "2019.10.28",
+    "abstract": "Results are reported for the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction and effective lifetime and from a search for the decay $B^0 \\\\to \\\\mu^+ \\\\mu^-$. The analysis uses data samples of proton-proton collisions accumulated by the CMS experiment in 2011, 2012, and 2016. The branching fraction of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decay is measured to be $[2.9^{+0.7}_{-0.6} (\\\\text{exp}) \\\\pm 0.2 (\\\\text{frag})] \\\\times 10^{-9}$. The effective lifetime is measured to be $1.70^{+0.61}_{-0.44} \\\\pm 0.05$ ps. An upper limit of $3.6 \\\\times 10^{-10}$ is set on the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction at 95% confidence level.",
+    "pdf": "https://arxiv.org/pdf/1910.12127",
     "data": [
         {
-            "raw_yaml_key": "CMS Bs->mumu effective lifetime 2019",
-            "distribution": null
+            "obs@1": {
+                "name": "Br(Bs0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "2.9e-09",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.7e-09",
+                "type@1_err_down": "0.6e-09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.2e-09",
+                "type@2_err_down": "0.2e-09"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "3.6e-10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "3.6e-10"
+            },
+            "obs@3": {
+                "name": "Tau(Bs0.2.mup.mu-)",
+                "latex": "$\\\\tau(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "1.70",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.61",
+                "type@1_err_down": "0.44",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "unit": "ps"
+            }
         }
     ],
-    "transition-mode": "flavor changing neutral current"
+    "transition-mode": "rare decay"
 }

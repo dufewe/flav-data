@@ -1,0 +1,56 @@
+{
+    "inspire-hep": "1245028",
+    "author": "Aaltonen, Timo Antero and others",
+    "collaboration": "CDF, D0",
+    "title": "Combination of CDF and D0 W-Boson Mass Measurements",
+    "arxiv": "[1307.7627v2](https://arxiv.org/pdf/1307.7627.pdf)",
+    "year": "2013",
+    "time": "2013-07-29",
+    "abstract": "Combination of direct measurements of the W boson mass in ppbar collisions at sqrt(s)=1.96 TeV from CDF and D0 experiments. The Tevatron average is MW = 80387 +/- 19 MeV. Combined with LEP: MW = 80385 +/- 15 MeV.",
+    "pdf": "https://arxiv.org/pdf/1307.7627.pdf",
+    "transition-mode": "w-mass-combination",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mW(p.pbar.2.W.2.l.nu)",
+                "latex": "$m_{W}^{\\text{Tevatron}}$",
+                "value": "80387",
+                "tot_err_up": "19",
+                "tot_err_down": "19",
+                "unit": "MeV"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mW(p.pbar.2.W.2.l.nu.world)",
+                "latex": "$m_{W}^{\\text{world}}$",
+                "value": "80385",
+                "tot_err_up": "15",
+                "tot_err_down": "15",
+                "unit": "MeV"
+            },
+            "obs@2": {
+                "name": "mW(p.pbar.2.W.2.l.nu.CDF)",
+                "latex": "$m_{W}^{\\text{CDF}}$",
+                "value": "80387",
+                "sta_err_up": "12",
+                "sta_err_down": "12",
+                "type@1_err": "syst",
+                "type@1_err_up": "15",
+                "type@1_err_down": "15",
+                "unit": "MeV"
+            },
+            "obs@3": {
+                "name": "mW(p.pbar.2.W.2.l.nu.D0)",
+                "latex": "$m_{W}^{\\text{D0}}$",
+                "value": "80367",
+                "sta_err_up": "13",
+                "sta_err_down": "13",
+                "type@1_err": "syst",
+                "type@1_err_up": "22",
+                "type@1_err_down": "22",
+                "unit": "MeV"
+            }
+        }
+    ]
+}

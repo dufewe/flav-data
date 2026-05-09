@@ -1,0 +1,62 @@
+{
+    "inspire-hep": "1479453",
+    "author": "Aaij, Roel and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of forward W->e nu production in pp collisions at sqrt(s)=8 TeV",
+    "arxiv": "[1608.01484v2](https://arxiv.org/pdf/1608.01484.pdf)",
+    "year": "2016",
+    "time": "2016-08-04",
+    "abstract": "A measurement of the cross-section for W->e nu production in pp collisions using 2 fb-1 at sqrt(s)=8 TeV. The inclusive W production cross-sections are measured to be sigma(W+)=1124.4 pb and sigma(W-)=809.0 pb. The ratio B(W->e nu)/B(W->mu nu)=1.020 +/- 0.002 +/- 0.019.",
+    "pdf": "https://arxiv.org/pdf/1608.01484.pdf",
+    "transition-mode": "w-production",
+    "data": [
+        {
+            "obs@1": {
+                "name": "sigma_Wpenu(p.p.2.W+.2.e+.nu)",
+                "latex": "$\\sigma(W^{+} \\to e^{+}\\nu)$",
+                "value": "1124.4",
+                "sta_err_up": "2.1",
+                "sta_err_down": "2.1",
+                "type@1_err": "syst",
+                "type@1_err_up": "21.5",
+                "type@1_err_down": "21.5",
+                "type@2_err": "beam",
+                "type@2_err_up": "11.2",
+                "type@2_err_down": "11.2",
+                "type@3_err": "lumi",
+                "type@3_err_up": "13.0",
+                "type@3_err_down": "13.0",
+                "unit": "pb"
+            },
+            "obs@2": {
+                "name": "sigma_Wmenu(p.p.2.W-.2.e-.nubar)",
+                "latex": "$\\sigma(W^{-} \\to e^{-}\\bar{\\nu})$",
+                "value": "809.0",
+                "sta_err_up": "1.9",
+                "sta_err_down": "1.9",
+                "type@1_err": "syst",
+                "type@1_err_up": "18.1",
+                "type@1_err_down": "18.1",
+                "type@2_err": "beam",
+                "type@2_err_up": "7.0",
+                "type@2_err_down": "7.0",
+                "type@3_err": "lumi",
+                "type@3_err_up": "9.4",
+                "type@3_err_down": "9.4",
+                "unit": "pb"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "RWenu2Wmumu(W.2.e.nu[mu/nue])",
+                "latex": "$\\mathcal{B}(W \\to e\\nu)/\\mathcal{B}(W \\to \\mu\\nu)$",
+                "value": "1.020",
+                "sta_err_up": "0.002",
+                "sta_err_down": "0.002",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.019",
+                "type@1_err_down": "0.019"
+            }
+        }
+    ]
+}

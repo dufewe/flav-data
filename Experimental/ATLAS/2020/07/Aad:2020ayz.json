@@ -1,0 +1,26 @@
+{
+    "inspire-hep": "1885958",
+    "author": "Aad, Georges and others",
+    "collaboration": "ATLAS",
+    "title": "Test of the universality of tau and mu lepton couplings in W-boson decays with the ATLAS detector",
+    "arxiv": "[2007.14040v2](https://arxiv.org/pdf/2007.14040.pdf)",
+    "year": "2020",
+    "time": "2020-07-28",
+    "abstract": "Using 139 fb-1 of proton-proton collisions at sqrt(s)=13 TeV, we report a measurement of the ratio R(tau/mu) = B(W->tau nu_tau)/B(W->mu nu_mu) from di-leptonic ttbar events. The measured value is R(tau/mu) = 0.992 +/- 0.013 [+/-0.007 (stat) +/- 0.011 (syst)], in agreement with lepton-flavour universality.",
+    "pdf": "https://arxiv.org/pdf/2007.14040.pdf",
+    "transition-mode": "w-decay-ratio",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Rtaumu(W.2.tau.nutau[mu/nutau])",
+                "latex": "$R(\\tau/\\mu)$",
+                "value": "0.992",
+                "sta_err_up": "0.007",
+                "sta_err_down": "0.007",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.011",
+                "type@1_err_down": "0.011"
+            }
+        }
+    ]
+}

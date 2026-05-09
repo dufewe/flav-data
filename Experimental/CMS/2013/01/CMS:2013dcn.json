@@ -1,17 +1,33 @@
 {
-    "inspire-hep": "https://inspirehep.net/literature?q=texkey:CMS:2013dcn",
-    "author": "CMS Collaboration",
-    "collaboration": "CMS",
-    "title": "CMS:2013dcn",
-    "arxiv": "",
-    "time": "2013.01.01",
-    "abstract": "",
-    "pdf": "",
+    "inspire-hep": "[CMS:2013dcn](https://inspirehep.net/literature/1300393)",
+    "author": "CMS and LHCb Collaborations",
+    "collaboration": "CMS, LHCb",
+    "title": "Combination of results on the rare decays $B^0_{(s)} \\\\to \\\\mu^+ \\\\mu^-$ from the CMS and LHCb experiments",
+    "arxiv": "[CMS-PAS-BPH-13-007v1](http://cds.cern.ch/record/1564324)",
+    "time": "2013.07.01",
+    "abstract": "A combination of results on the rare decays $B^0_{(s)} \\\\to \\\\mu^+ \\\\mu^-$ from the CMS and LHCb experiments is performed. The analysis is based on data collected in 2011 and 2012. The branching fraction of the $B^0_s \\\\to \\\\mu^+ \\\\mu^-$ decay is measured to be $(2.8 \\\\pm 0.7) \\\\times 10^{-9}$, and an upper limit of $3.4 \\\\times 10^{-10}$ is set on the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction at 95% confidence level.",
+    "pdf": "http://cds.cern.ch/record/1564324",
     "data": [
         {
-            "raw_yaml_key": "CMS Bs->mumu 2013",
-            "distribution": "multivariate_numerical"
+            "obs@1": {
+                "name": "Br(Bs0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B_s^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "2.8e-09",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.7e-09",
+                "type@1_err_down": "0.7e-09",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.0e-09",
+                "type@2_err_down": "0.0e-09"
+            },
+            "obs@2": {
+                "name": "Br(B0.2.mup.mu-)",
+                "latex": "$\\\\mathcal{B}(B^0 \\\\to \\\\mu^+ \\\\mu^-)$",
+                "value": "3.4e-10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "3.4e-10"
+            }
         }
     ],
-    "transition-mode": "flavor changing neutral current"
+    "transition-mode": "rare decay"
 }
