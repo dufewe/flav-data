@@ -1,0 +1,52 @@
+{
+    "inspire-hep": "1383128",
+    "author": "Aad, Georges and others",
+    "collaboration": "ATLAS",
+    "title": "Measurements of the Higgs boson production and decay rates and coupling strengths using pp collision data at sqrt(s)=7 and 8 TeV in the ATLAS experiment",
+    "arxiv": "[1507.04548v1](https://arxiv.org/pdf/1507.04548.pdf)",
+    "year": "2015",
+    "time": "2015-07-16",
+    "abstract": "Combined analyses of the Higgs boson production and decay rates and coupling strengths to vector bosons and fermions using 4.7 fb-1 at 7 TeV and 20.3 fb-1 at 8 TeV. The global signal strength is mu = 1.18 +0.15-0.14. Production mode signal strengths: mu_ggF=1.23, mu_VBF=1.23.",
+    "pdf": "https://arxiv.org/pdf/1507.04548.pdf",
+    "transition-mode": "higgs-couplings",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_H(g.g.2.H.2.f.fbar)",
+                "latex": "$\\mu$",
+                "value": "1.18",
+                "sta_err_up": "0.10",
+                "sta_err_down": "0.10",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.07",
+                "type@1_err_down": "0.07",
+                "type@2_err": "theo",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.07"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mu_ggF(g.g.2.H.2.all)",
+                "latex": "$\\mu_{ggF}$",
+                "value": "1.23",
+                "tot_err_up": "0.23",
+                "tot_err_down": "0.20"
+            },
+            "obs@2": {
+                "name": "mu_VBF(q.q.2.H.2.all)",
+                "latex": "$\\mu_{VBF}$",
+                "value": "1.23",
+                "tot_err_up": "0.32",
+                "tot_err_down": "0.32"
+            },
+            "obs@3": {
+                "name": "mu_VH(q.qbar.2.V.2.H.2.all)",
+                "latex": "$\\mu_{VH}$",
+                "value": "1.02",
+                "tot_err_up": "0.31",
+                "tot_err_down": "0.27"
+            }
+        }
+    ]
+}

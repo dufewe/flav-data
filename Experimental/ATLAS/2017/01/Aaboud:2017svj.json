@@ -1,0 +1,40 @@
+{
+    "inspire-hep": "1510564",
+    "author": "Aaboud, Morad and others",
+    "collaboration": "ATLAS",
+    "title": "Measurement of the W-boson mass in pp collisions at sqrt(s)=7 TeV with the ATLAS detector",
+    "arxiv": "[1701.07240v2](https://arxiv.org/pdf/1701.07240.pdf)",
+    "year": "2017",
+    "time": "2017-01-25",
+    "abstract": "A measurement of the W boson mass based on 4.6 fb-1 of pp collisions at sqrt(s)=7 TeV. The W-boson mass is obtained from template fits to the charged lepton transverse momentum and the W boson transverse mass in the electron and muon decay channels: mW = 80370 +/- 7 (stat.) +/- 11 (exp. syst.) +/- 14 (mod. syst.) MeV. The W+ and W- mass difference yields mW+ - mW- = -29 +/- 28 MeV.",
+    "pdf": "https://arxiv.org/pdf/1701.07240.pdf",
+    "transition-mode": "w-mass",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mW(p.p.2.W.2.l.nu)",
+                "latex": "$m_{W}$",
+                "value": "80370",
+                "sta_err_up": "7",
+                "sta_err_down": "7",
+                "type@1_err": "exp",
+                "type@1_err_up": "11",
+                "type@1_err_down": "11",
+                "type@2_err": "mod",
+                "type@2_err_up": "14",
+                "type@2_err_down": "14",
+                "unit": "MeV"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "dmW(p.p.2.W+.2.l+.nu[p.p.2.W-.2.l-.nu])",
+                "latex": "$m_{W^{+}} - m_{W^{-}}$",
+                "value": "-29",
+                "tot_err_up": "28",
+                "tot_err_down": "28",
+                "unit": "MeV"
+            }
+        }
+    ]
+}

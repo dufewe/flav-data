@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "1312169",
+    "author": "Aad, Georges and others",
+    "collaboration": "ATLAS",
+    "title": "Search for the lepton flavor violating decay Z->e mu in pp collisions at sqrt(s)=8 TeV with the ATLAS detector",
+    "arxiv": "[1408.5774v1](https://arxiv.org/pdf/1408.5774.pdf)",
+    "year": "2014",
+    "time": "2014-08-25",
+    "abstract": "The ATLAS detector is used to search for the lepton flavor violating process Z->e mu in pp collisions using 20.3 fb-1 of data collected at sqrt(s)=8 TeV. There is no evidence of an enhancement at the Z boson mass, resulting in an upper limit on the branching fraction, B(Z->e mu) < 7.5e-7 at the 95% confidence level.",
+    "pdf": "https://arxiv.org/pdf/1408.5774.pdf",
+    "transition-mode": "z-lfv",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Z.2.e.mu)",
+                "latex": "$\\mathcal{B}(Z \\to e^{\\pm}\\mu^{\\mp})$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "7.5e-7"
+            }
+        }
+    ]
+}

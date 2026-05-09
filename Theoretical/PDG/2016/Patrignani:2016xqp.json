@@ -1,0 +1,65 @@
+{
+    "inspire-hep": "1489868",
+    "author": "Patrignani, C. and others",
+    "collaboration": "Particle Data Group",
+    "title": "Review of Particle Physics",
+    "arxiv": "no arxiv (published in Chin.Phys.C)",
+    "year": "2016",
+    "time": "2016-10-01",
+    "abstract": "The Review summarizes much of particle physics and cosmology. Using data from previous editions, plus 3,062 new measurements from 721 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons.",
+    "pdf": "https://pdg.lbl.gov/2016/reviews/rpp2016-rev-standard-model.pdf",
+    "transition-mode": "z-pole-combination",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mZ(e+.e-.2.Z.2.all)",
+                "latex": "$m_{Z}$",
+                "value": "91.1876",
+                "tot_err_up": "0.0021",
+                "tot_err_down": "0.0021",
+                "unit": "GeV"
+            },
+            "obs@2": {
+                "name": "GammaZ(e+.e-.2.Z.2.all)",
+                "latex": "$\\Gamma_{Z}$",
+                "value": "2.4952",
+                "tot_err_up": "0.0023",
+                "tot_err_down": "0.0023",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "sigma_had0(e+.e-.2.Z.2.had)",
+                "latex": "$\\sigma_{had}^{0}$",
+                "value": "41.541",
+                "tot_err_up": "0.037",
+                "tot_err_down": "0.037",
+                "unit": "nb"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mW(p.pbar.2.W.2.f.fbar)",
+                "latex": "$m_{W}$",
+                "value": "80.385",
+                "tot_err_up": "0.015",
+                "tot_err_down": "0.015",
+                "unit": "GeV"
+            },
+            "obs@2": {
+                "name": "GammaW(p.pbar.2.W.2.f.fbar)",
+                "latex": "$\\Gamma_{W}$",
+                "value": "2.085",
+                "tot_err_up": "0.042",
+                "tot_err_down": "0.042",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "sin2theta_eff_lept(Z.2.l+.l-)",
+                "latex": "$\\sin^{2}\\theta_{eff}^{lept}$",
+                "value": "0.23153",
+                "tot_err_up": "0.00016",
+                "tot_err_down": "0.00016"
+            }
+        }
+    ]
+}

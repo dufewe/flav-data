@@ -1,0 +1,34 @@
+{
+    "inspire-hep": "424628",
+    "author": "Abreu, P. and others",
+    "collaboration": "DELPHI",
+    "title": "Search for lepton flavor number violating Z0 decays",
+    "arxiv": "no arxiv (published in Z.Phys.C)",
+    "year": "1996",
+    "time": "1996-01-01",
+    "abstract": "A search for lepton flavour number violating Z0 decays in the channels Z0 -> mu tau, Z0 -> e tau, Z0 -> e mu, using the DELPHI detector with data collected during the 1991-94 LEP runs. No signal was found. Upper limits at 95% CL for the respective branching fractions of 1.2e-5, 2.2e-5, and 0.25e-5 were obtained.",
+    "pdf": "https://link.springer.com/article/10.1007/s002880050313",
+    "transition-mode": "z-lfv",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(Z.2.mu.tau)",
+                "latex": "$\\mathcal{B}(Z \\to \\mu^{\\pm}\\tau^{\\mp})$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "1.2e-5"
+            },
+            "obs@2": {
+                "name": "Br(Z.2.e.tau)",
+                "latex": "$\\mathcal{B}(Z \\to e^{\\pm}\\tau^{\\mp})$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "2.2e-5"
+            },
+            "obs@3": {
+                "name": "Br(Z.2.e.mu)",
+                "latex": "$\\mathcal{B}(Z \\to e^{\\pm}\\mu^{\\mp})$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "0.25e-5"
+            }
+        }
+    ]
+}
