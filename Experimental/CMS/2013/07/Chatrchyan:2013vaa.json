@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "1243861",
+    "author": "Chatrchyan, Serguei and others",
+    "collaboration": "CMS",
+    "title": "Search for a Higgs Boson Decaying into a Z and a Photon in pp Collisions at sqrt(s) = 7 and 8 TeV",
+    "arxiv": "[1307.5515v3](https://arxiv.org/pdf/1307.5515.pdf)",
+    "year": "2013",
+    "time": "2013-07-19",
+    "abstract": "A search for a Higgs boson decaying into a Z boson and a photon is described using 5.0 fb-1 at 7 TeV and 19.6 fb-1 at 8 TeV. No excess is found. The observed limits at 95% CL are between about 4 and 25 times the SM cross section times branching fraction in the 120-160 GeV mass range. At 125 GeV, the observed limit is about 7.3 times the SM prediction.",
+    "pdf": "https://arxiv.org/pdf/1307.5515.pdf",
+    "transition-mode": "higgs-rare-decay",
+    "data": [
+        {
+            "obs@1": {
+                "name": "R_HZg(H.2.Z.gamma)[mH=125GeV]",
+                "latex": "$\\sigma \\cdot \\mathcal{B}(H \\to Z\\gamma) / (\\sigma \\cdot \\mathcal{B})_{SM}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "7.3"
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "inspire-hep": "1599399",
+    "author": "Aaboud, Morad and others",
+    "collaboration": "ATLAS",
+    "title": "Search for the dimuon decay of the Higgs boson in pp collisions at sqrt(s)=13 TeV with the ATLAS detector",
+    "arxiv": "[1705.04582v2](https://arxiv.org/pdf/1705.04582.pdf)",
+    "year": "2017",
+    "time": "2017-05-12",
+    "abstract": "A search for the dimuon decay of the Higgs boson using 36.1 fb-1 at 13 TeV. No significant excess is observed. The observed (expected) upper limit on the cross section times branching ratio is 3.0 (3.1) times the SM prediction at 95% CL for mH=125 GeV. When combined with Run 1 data, the observed (expected) limit is 2.8 (2.9) times the SM prediction.",
+    "pdf": "https://arxiv.org/pdf/1705.04582.pdf",
+    "transition-mode": "higgs-fermion-coupling",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_Hmumu(H.2.mu+.mu-)[13TeV]",
+                "latex": "$\\mu_{H\\to\\mu\\mu}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "3.0"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mu_Hmumu(H.2.mu+.mu-)[comb]",
+                "latex": "$\\mu_{H\\to\\mu\\mu}^{\\mathrm{comb}}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "2.8"
+            }
+        }
+    ]
+}

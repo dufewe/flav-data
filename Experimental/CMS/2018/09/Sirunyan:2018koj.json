@@ -1,0 +1,161 @@
+{
+    "inspire-hep": "1696607",
+    "author": "Sirunyan, Albert M and others",
+    "collaboration": "CMS",
+    "title": "Combined measurements of Higgs boson couplings in proton-proton collisions at sqrt(s)=13 TeV",
+    "arxiv": "[1809.10733v2](https://arxiv.org/pdf/1809.10733.pdf)",
+    "year": "2018",
+    "time": "2018-09-27",
+    "abstract": "Combined measurements of the production and decay rates of the Higgs boson, as well as its couplings to vector bosons and fermions, using 35.9 fb-1 at 13 TeV. Based on analyses of H->gamma gamma, ZZ, WW, tau tau, bb, and mu mu. The global signal strength and per-mode signal strengths are measured.",
+    "pdf": "https://arxiv.org/pdf/1809.10733.pdf",
+    "transition-mode": "higgs-couplings",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_ggF(g.g.2.H.2.f.fbar)",
+                "latex": "$\\mu_{ggH}$",
+                "value": "1.22",
+                "sta_err_up": "0.08",
+                "sta_err_down": "0.08",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.10"
+            },
+            "obs@2": {
+                "name": "mu_VBF(q.q.2.H.2.f.fbar)",
+                "latex": "$\\mu_{VBF}$",
+                "value": "0.73",
+                "sta_err_up": "0.24",
+                "sta_err_down": "0.23",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.17",
+                "type@1_err_down": "0.15"
+            },
+            "obs@3": {
+                "name": "mu_WH(q.qbar.2.W.2.H.2.f.fbar)",
+                "latex": "$\\mu_{WH}$",
+                "value": "2.18",
+                "sta_err_up": "0.46",
+                "sta_err_down": "0.45",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.34",
+                "type@1_err_down": "0.32"
+            },
+            "obs@4": {
+                "name": "mu_ZH(q.qbar.2.Z.2.H.2.f.fbar)",
+                "latex": "$\\mu_{ZH}$",
+                "value": "0.87",
+                "sta_err_up": "0.39",
+                "sta_err_down": "0.38",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.20",
+                "type@1_err_down": "0.18"
+            },
+            "obs@5": {
+                "name": "mu_ttH(t.tbar.2.t.tbar.H.2.f.fbar)",
+                "latex": "$\\mu_{ttH}$",
+                "value": "1.18",
+                "sta_err_up": "0.16",
+                "sta_err_down": "0.16",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.26",
+                "type@1_err_down": "0.21"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mu_bb(H.2.b.bbar)",
+                "latex": "$\\mu_{H\\to b\\bar{b}}$",
+                "value": "1.12",
+                "sta_err_up": "0.19",
+                "sta_err_down": "0.18",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.22",
+                "type@1_err_down": "0.22"
+            },
+            "obs@2": {
+                "name": "mu_tautau(H.2.tau.tau)",
+                "latex": "$\\mu_{H\\to\\tau\\tau}$",
+                "value": "1.02",
+                "sta_err_up": "0.15",
+                "sta_err_down": "0.15",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.21",
+                "type@1_err_down": "0.19"
+            },
+            "obs@3": {
+                "name": "mu_WW(H.2.W.W)",
+                "latex": "$\\mu_{H\\to WW}$",
+                "value": "1.28",
+                "sta_err_up": "0.09",
+                "sta_err_down": "0.09",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.13"
+            },
+            "obs@4": {
+                "name": "mu_ZZ(H.2.Z.Z)",
+                "latex": "$\\mu_{H\\to ZZ}$",
+                "value": "1.06",
+                "sta_err_up": "0.16",
+                "sta_err_down": "0.15",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.08"
+            },
+            "obs@5": {
+                "name": "mu_gammagamma(H.2.gamma.gamma)",
+                "latex": "$\\mu_{H\\to\\gamma\\gamma}$",
+                "value": "1.20",
+                "sta_err_up": "0.13",
+                "sta_err_down": "0.11",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.09"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "kappa_Z(H.2.Z.Z)",
+                "latex": "$\\kappa_{Z}$",
+                "value": "1.09",
+                "tot_err_up": "0.07",
+                "tot_err_down": "0.07"
+            },
+            "obs@2": {
+                "name": "kappa_W(H.2.W.W)",
+                "latex": "$\\kappa_{W}$",
+                "value": "1.01",
+                "tot_err_up": "0.06",
+                "tot_err_down": "0.07"
+            },
+            "obs@3": {
+                "name": "kappa_b(H.2.b.bbar)",
+                "latex": "$\\kappa_{b}$",
+                "value": "1.03",
+                "sta_err_up": "0.18",
+                "sta_err_down": "0.18",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.18",
+                "type@1_err_down": "0.17"
+            },
+            "obs@4": {
+                "name": "kappa_tau(H.2.tau.tau)",
+                "latex": "$\\kappa_{\\tau}$",
+                "value": "1.01",
+                "tot_err_up": "0.12",
+                "tot_err_down": "0.12"
+            },
+            "obs@5": {
+                "name": "kappa_t(H.gg.2.t.tbar)",
+                "latex": "$\\kappa_{t}$",
+                "value": "1.05",
+                "sta_err_up": "0.12",
+                "sta_err_down": "0.12",
+                "type@1_err": "syst",
+                "type@1_err_up": "0.09",
+                "type@1_err_down": "0.08"
+            }
+        }
+    ]
+}

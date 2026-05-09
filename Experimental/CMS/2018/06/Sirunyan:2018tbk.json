@@ -1,0 +1,30 @@
+{
+    "inspire-hep": "1678088",
+    "author": "Sirunyan, Albert M and others",
+    "collaboration": "CMS",
+    "title": "Search for the decay of a Higgs boson in the ll gamma channel in proton-proton collisions at sqrt(s)=13 TeV",
+    "arxiv": "[1806.05996v2](https://arxiv.org/pdf/1806.05996.pdf)",
+    "year": "2018",
+    "time": "2018-06-15",
+    "abstract": "Search for H->Z gamma and H->gamma* gamma -> mu mu gamma using 35.9 fb-1 at 13 TeV. The observed (expected) combined 95% CL upper limit for mH=125 GeV is 3.9 (2.0) times the SM cross section. The H->Z gamma limit varies between 6.1 and 11.4.",
+    "pdf": "https://arxiv.org/pdf/1806.05996.pdf",
+    "transition-mode": "higgs-rare-decay",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_HZg(H.2.Z.gamma)[13TeV]",
+                "latex": "$\\mu_{H\\to Z\\gamma}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "6.6"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "mu_HZg_HgammaMuMu(H.2.Z.gamma+gamma.mu.mu)[13TeV]",
+                "latex": "$\\mu_{H\\to Z\\gamma, \\gamma^*\\gamma\\to\\mu\\mu\\gamma}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "3.9"
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "1743892",
+    "author": "Sirunyan, Albert M and others",
+    "collaboration": "CMS",
+    "title": "Search for the standard model Higgs boson decaying to charm quarks",
+    "arxiv": "no arxiv (CMS-PAS-HIG-18-012)",
+    "year": "2019",
+    "time": "2019-03-15",
+    "abstract": "A direct search for the standard model Higgs boson produced in association with a W or Z boson and decaying to a charm quark pair, using 35.9 fb-1 at 13 TeV. The observed (expected) upper limit on the signal strength is 31 (29) at 95% CL for mH=125 GeV.",
+    "pdf": "https://cds.cern.ch/record/2670327",
+    "transition-mode": "higgs-fermion-coupling",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_VHcc(VH.2.H.2.c.cbar)",
+                "latex": "$\\mu_{VH\\to c\\bar{c}}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "31"
+            }
+        }
+    ]
+}

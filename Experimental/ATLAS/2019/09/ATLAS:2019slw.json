@@ -1,0 +1,109 @@
+{
+    "inspire-hep": "1726182",
+    "author": "Aad, Georges and others",
+    "collaboration": "ATLAS",
+    "title": "Combined measurements of Higgs boson production and decay using up to 80 fb-1 of proton-proton collision data at sqrt(s)=13 TeV collected with the ATLAS experiment",
+    "arxiv": "[1909.02845v2](https://arxiv.org/pdf/1909.02845.pdf)",
+    "year": "2019",
+    "time": "2019-09-06",
+    "abstract": "Combined measurements of Higgs boson production cross sections and branching fractions using up to 79.8 fb-1 at 13 TeV. The global signal strength is mu = 1.11 +0.09/-0.08. Coupling modifiers: kappa_Z=1.10+/-0.08, kappa_W=1.05+/-0.08, kappa_b=1.06+0.19/-0.18, kappa_t=1.02+0.11/-0.10, kappa_tau=1.07+/-0.15, kappa_mu < 1.53.",
+    "pdf": "https://arxiv.org/pdf/1909.02845.pdf",
+    "transition-mode": "higgs-couplings",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mu_H(g.g.2.H.2.f.fbar)",
+                "latex": "$\\mu$",
+                "value": "1.11",
+                "sta_err_up": "0.08",
+                "sta_err_down": "0.09",
+                "tot_err_up": "0.09",
+                "tot_err_down": "0.08"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "kappa_Z(g.g.2.H.2.Z.Z)",
+                "latex": "$\\kappa_{Z}$",
+                "value": "1.10",
+                "tot_err_up": "0.08",
+                "tot_err_down": "0.08"
+            },
+            "obs@2": {
+                "name": "kappa_W(H.2.W.W)",
+                "latex": "$\\kappa_{W}$",
+                "value": "1.05",
+                "tot_err_up": "0.08",
+                "tot_err_down": "0.08"
+            },
+            "obs@3": {
+                "name": "kappa_b(g.g.2.H.2.b.bbar)",
+                "latex": "$\\kappa_{b}$",
+                "value": "1.06",
+                "type@1_err_up": "0.19",
+                "type@1_err_down": "0.18",
+                "type@1_err": "syst"
+            },
+            "obs@4": {
+                "name": "kappa_t(g.g.2.H.2.t.tbar)",
+                "latex": "$\\kappa_{t}$",
+                "value": "1.02",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.10",
+                "type@1_err": "syst"
+            },
+            "obs@5": {
+                "name": "kappa_tau(g.g.2.H.2.tau.tau)",
+                "latex": "$\\kappa_{\\tau}$",
+                "value": "1.07",
+                "tot_err_up": "0.15",
+                "tot_err_down": "0.15"
+            },
+            "obs@6": {
+                "name": "kappa_mu(H.2.mu+.mu-)",
+                "latex": "$\\kappa_{\\mu}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "1.53"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "kappa_gZ(g.g.2.H.2.Z.Z)",
+                "latex": "$\\kappa_{gZ}$",
+                "value": "1.06",
+                "tot_err_up": "0.07",
+                "tot_err_down": "0.07"
+            },
+            "obs@2": {
+                "name": "lambda_tg(kappa.t.2.kappa.g)",
+                "latex": "$\\lambda_{tg}$",
+                "value": "1.10",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.14",
+                "type@1_err": "syst"
+            },
+            "obs@3": {
+                "name": "lambda_Zg(kappa.Z.2.kappa.g)",
+                "latex": "$\\lambda_{Zg}$",
+                "value": "1.12",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.13",
+                "type@1_err": "syst"
+            },
+            "obs@4": {
+                "name": "lambda_WZ(kappa.W.2.kappa.Z)",
+                "latex": "$\\lambda_{WZ}$",
+                "value": "0.95",
+                "tot_err_up": "0.08",
+                "tot_err_down": "0.08"
+            },
+            "obs@5": {
+                "name": "lambda_gammaZ(kappa.gamma.2.kappa.Z)",
+                "latex": "$\\lambda_{\\gamma Z}$",
+                "value": "0.94",
+                "tot_err_up": "0.07",
+                "tot_err_down": "0.07"
+            }
+        }
+    ]
+}

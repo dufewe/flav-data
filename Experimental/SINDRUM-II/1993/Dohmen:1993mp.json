@@ -1,0 +1,28 @@
+{
+    "inspire-hep": "364817",
+    "author": "Dohmen, R. and others",
+    "collaboration": "SINDRUM II",
+    "title": "Test of lepton flavor conservation in mu -> e conversion on titanium",
+    "arxiv": "no arxiv (published in Phys.Lett.B)",
+    "year": "1993",
+    "time": "1993-01-01",
+    "abstract": "A search for mu->e conversion in muonic atoms using the SINDRUM II spectrometer at PSI. A first measurement on Ti gives upper limits on the branching ratios for ground-state transitions of R(mu- Ti -> e- Ti g.s.) / R(mu- Ti capture) < 4.3e-12 and R(mu- Ti -> e+ Ca g.s.) / R(mu- Ti capture) < 4.3e-12 (90% CL).",
+    "pdf": "https://doi.org/10.1016/0370-2693(93)91383-X",
+    "transition-mode": "lfv-mu-e",
+    "data": [
+        {
+            "obs@1": {
+                "name": "R_mue_conv(mu-.Ti.2.e-.Ti)",
+                "latex": "$\\frac{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to e^{-}\\mathrm{Ti})}{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to \\nu_{\\mu}\\mathrm{Sc})}$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "4.3e-12"
+            },
+            "obs@2": {
+                "name": "R_muconv(mu-.Ti.2.e+.Ca)",
+                "latex": "$\\frac{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to e^{+}\\mathrm{Ca})}{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to \\nu_{\\mu}\\mathrm{Sc})}$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "4.3e-12"
+            }
+        }
+    ]
+}
