@@ -1,0 +1,55 @@
+{
+    "inspire-hep": "1854186",
+    "author": "E. Cortina Gil et al.",
+    "collaboration": "NA62",
+    "title": "Measurement of the very rare $K^+ \\to \\pi^+ \\nu \\bar{\\nu}$ decay",
+    "arxiv": "2103.15389v2 [hep-ex]",
+    "time": "2021-07-01",
+    "abstract": "The NA62 experiment reports the branching ratio measurement $\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu}) = (10.6^{+4.0}_{-3.4}|_{\\rm stat} \\pm 0.9_{\\rm syst}) \\times 10^{-11}$ at 68% CL, based on the observation of 20 signal candidates with an expected background of 7.0 events from the total data sample collected at the CERN SPS during 2016--2018. This provides evidence for the very rare $K^+ \\to \\pi^+ \\nu \\bar{\\nu}$ decay, observed with a significance of $3.4\\sigma$. The experiment achieves a single event sensitivity of $(0.839 \\pm 0.054) \\times 10^{-11}$.",
+    "pdf": "https://arxiv.org/pdf/2103.15389.pdf",
+    "transition-mode": "kaon-rare-decay",
+    "data": [
+        {
+            "obs@1": {
+                "name": "BR(K+.2.pi+.nu.nubar)",
+                "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$",
+                "value": "10.6e-11",
+                "type@1_err": "3.8e-11",
+                "type@1_err_up": "4.1e-11",
+                "type@1_err_down": "3.5e-11",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "SES(K+.2.pi+.nu.nubar)",
+                "latex": "Single Event Sensitivity",
+                "value": "0.839e-11",
+                "type@1_err": "0.054e-11",
+                "type@1_err_up": "0.054e-11",
+                "type@1_err_down": "0.054e-11",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "N_obs(K+.2.pi+.nu.nubar)",
+                "latex": "$N_{\\rm obs}$",
+                "value": "20",
+                "type@1_err": "0",
+                "type@1_err_up": "0",
+                "type@1_err_down": "0",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@4": {
+                "name": "N_bg(K+.2.pi+.nu.nubar)",
+                "latex": "$N_{\\rm bg}$",
+                "value": "7.0",
+                "type@1_err": "0",
+                "type@1_err_up": "0",
+                "type@1_err_down": "0",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

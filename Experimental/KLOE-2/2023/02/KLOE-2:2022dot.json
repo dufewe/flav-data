@@ -1,0 +1,59 @@
+{
+    "inspire-hep": "2138787",
+    "author": "D. Babusci et al.",
+    "collaboration": "KLOE-2",
+    "title": "Measurement of the $K_{S}\\to \\pi e \\nu$ branching fraction with the KLOE experiment",
+    "arxiv": "2208.04872v4 [hep-ex]",
+    "time": "2023-02-01",
+    "abstract": "The ratio $\\mathcal{R} = \\Gamma(K_{S}\\to \\pi e \\nu)/\\Gamma(K_{S}\\to \\pi^+ \\pi^-)$ has been measured with a sample of 300 million $K_{S}$ mesons produced in $\\phi \\to K_{L} K_{S}$ decays recorded by the KLOE experiment at the DA$\\Phi$NE $e^+ e^-$ collider. With $49647 \\pm 316$ signal events we measure $\\mathcal{R} = (1.0421 \\pm 0.0066_{\\rm stat} \\pm 0.0075_{\\rm syst}) \\times 10^{-3}$. The combination with our previous measurement gives $\\mathcal{R} = (1.0338 \\pm 0.0054_{\\rm stat} \\pm 0.0064_{\\rm syst}) \\times 10^{-3}$. From this value we derive the branching fraction $\\mathcal{B}(K_{S} \\to \\pi e \\nu) = (7.153 \\pm 0.037_{\\rm stat} \\pm 0.044_{\\rm syst}) \\times 10^{-4}$ and $f_+(0)|V_{us}| = 0.2170 \\pm 0.0009$.",
+    "pdf": "https://arxiv.org/pdf/2208.04872.pdf",
+    "transition-mode": "kaon-semileptonic",
+    "data": [
+        {
+            "condition": "New measurement",
+            "obs@1": {
+                "name": "R(K0S.2.pi-.e+.nue/K0S.2.pi+.pi-)",
+                "latex": "$\\mathcal{R} = \\Gamma(K_S \\to \\pi e \\nu)/\\Gamma(K_S \\to \\pi^+ \\pi^-)$",
+                "value": "1.0421e-3",
+                "type@1_err": "0.0100e-3",
+                "type@1_err_up": "0.0100e-3",
+                "type@1_err_down": "0.0100e-3",
+                "unit": "",
+                "ref": ""
+            }
+        },
+        {
+            "condition": "Combined with previous measurement",
+            "obs@1": {
+                "name": "R(K0S.2.pi-.e+.nue/K0S.2.pi+.pi-)",
+                "latex": "$\\mathcal{R} = \\Gamma(K_S \\to \\pi e \\nu)/\\Gamma(K_S \\to \\pi^+ \\pi^-)$",
+                "value": "1.0338e-3",
+                "type@1_err": "0.0084e-3",
+                "type@1_err_up": "0.0084e-3",
+                "type@1_err_down": "0.0084e-3",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "BR(K0S.2.pi-.e+.nue)",
+                "latex": "$\\mathcal{B}(K_S \\to \\pi e \\nu)$",
+                "value": "7.153e-4",
+                "type@1_err": "0.058e-4",
+                "type@1_err_up": "0.058e-4",
+                "type@1_err_down": "0.058e-4",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "Vus.f+(K0S.2.pi-.e+.nue)",
+                "latex": "$f_+(0)|V_{us}|_{K_S \\to \\pi e \\nu}$",
+                "value": "0.2170",
+                "type@1_err": "0.0009",
+                "type@1_err_up": "0.0009",
+                "type@1_err_down": "0.0009",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "inspire-hep": "1377200",
+    "author": "A. Aguilar-Arevalo et al.",
+    "collaboration": "PiENu",
+    "title": "Improved Measurement of the $\\pi \\to e \\nu$ Branching Ratio",
+    "arxiv": "1506.05845v2 [hep-ex]",
+    "time": "2015-08-24",
+    "abstract": "A new measurement of the branching ratio $R_{e/\\mu} = \\Gamma(\\pi^+ \\to e^+ \\nu + \\pi^+ \\to e^+ \\nu \\gamma)/\\Gamma(\\pi^+ \\to \\mu^+ \\nu + \\pi^+ \\to \\mu^+ \\nu \\gamma)$ resulted in $R^{\\rm exp}_{e/\\mu} = (1.2344 \\pm 0.0023_{\\rm stat} \\pm 0.0019_{\\rm syst}) \\times 10^{-4}$. This is in agreement with the standard model prediction and improves the test of electron-muon universality to the level of 0.1\\%.",
+    "pdf": "https://arxiv.org/pdf/1506.05845.pdf",
+    "transition-mode": "pion-leptonic",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Re/mu(pi+.2.e+.nue/pi+.2.mu+.numu)",
+                "latex": "$R_{e/\\mu} = \\frac{\\Gamma(\\pi^+ \\to e^+ \\nu(\\gamma))}{\\Gamma(\\pi^+ \\to \\mu^+ \\nu(\\gamma))}$",
+                "value": "1.2344e-4",
+                "type@1_err": "0.0030e-4",
+                "type@1_err_up": "0.0030e-4",
+                "type@1_err_down": "0.0030e-4",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "ge/gmu",
+                "latex": "$g_e / g_\\mu$",
+                "value": "0.9996",
+                "type@1_err": "0.0012",
+                "type@1_err_up": "0.0012",
+                "type@1_err_down": "0.0012",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

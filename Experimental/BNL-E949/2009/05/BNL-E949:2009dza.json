@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "814428",
+    "author": "A. V. Artamonov et al.",
+    "collaboration": "BNL-E949",
+    "title": "Study of the decay $K^+ \\to \\pi^+ \\nu \\bar{\\nu}$ in the momentum region $140 < P_\\pi < 199$ MeV/c",
+    "arxiv": "0903.0030v1 [hep-ex]",
+    "time": "2009-05-15",
+    "abstract": "Experiment E949 at Brookhaven National Laboratory has observed three new events consistent with the decay $K^+ \\to \\pi^+ \\nu \\bar{\\nu}$ in the pion momentum region $140 < P_\\pi < 199$ MeV/c in an exposure of $1.71 \\times 10^{12}$ stopped kaons with an estimated total background of $0.93 \\pm 0.17^{+0.32}_{-0.24}$ events. This brings the total number of observed $K^+ \\to \\pi^+ \\nu \\bar{\\nu}$ events to seven. Combining this observation with previous results, assuming the pion spectrum predicted by the standard model, results in a branching ratio of $(1.73^{+1.15}_{-1.05}) \\times 10^{-10}$.",
+    "pdf": "https://arxiv.org/pdf/0903.0030.pdf",
+    "transition-mode": "kaon-rare-decay",
+    "data": [
+        {
+            "condition": "Combined E787+E949 result",
+            "obs@1": {
+                "name": "BR(K+.2.pi+.nu.nubar)",
+                "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$",
+                "value": "1.73e-10",
+                "type@1_err_up": "1.15e-10",
+                "type@1_err_down": "1.05e-10",
+                "unit": "",
+                "ref": "",
+                "type@1_err": "1.10e-10"
+            }
+        },
+        {
+            "condition": "This analysis only (E949 pi nu nu(2) region)",
+            "obs@1": {
+                "name": "BR(K+.2.pi+.nu.nubar)",
+                "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$",
+                "value": "7.89e-10",
+                "type@1_err_up": "9.26e-10",
+                "type@1_err_down": "5.10e-10",
+                "unit": "",
+                "ref": "",
+                "type@1_err": "1.10e-10"
+            }
+        }
+    ]
+}
