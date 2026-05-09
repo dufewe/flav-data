@@ -1,0 +1,32 @@
+{
+    "inspire-hep": "2687002",
+    "author": "Aguillard, D. P. and others",
+    "collaboration": "Muon g-2",
+    "title": "Measurement of the Positive Muon Anomalous Magnetic Moment to 0.20 ppm",
+    "arxiv": "[2308.06236v1](https://arxiv.org/pdf/2308.06236.pdf)",
+    "year": "2023",
+    "time": "2023-08-10",
+    "abstract": "We present a new measurement of the positive muon magnetic anomaly, a_mu, from the Fermilab Muon g-2 Experiment using data collected in 2019 and 2020. ... Combining this result with our previous result from the 2018 data, we obtain a_mu(FNAL) = 116592055(24) x 10^-11 (0.20 ppm). The new experimental world average is a_mu(exp) = 116592059(22) x 10^-11 (0.19 ppm), which represents a factor of 2 improvement in precision.",
+    "pdf": "https://arxiv.org/pdf/2308.06236.pdf",
+    "transition-mode": "muon-anomaly",
+    "data": [
+        {
+            "obs@1": {
+                "name": "a_mu(mu.2.mu.gamma)[FNAL.Combined]",
+                "latex": "$a_{\\mu}^{\\mathrm{FNAL}}$",
+                "value": "116592055",
+                "tot_err_up": "24",
+                "tot_err_down": "24",
+                "unit": "10^{-11}"
+            },
+            "obs@2": {
+                "name": "a_mu(mu.2.mu.gamma)[World.Average]",
+                "latex": "$a_{\\mu}^{\\mathrm{exp}}$",
+                "value": "116592059",
+                "tot_err_up": "22",
+                "tot_err_down": "22",
+                "unit": "10^{-11}"
+            }
+        }
+    ]
+}

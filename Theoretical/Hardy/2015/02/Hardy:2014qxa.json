@@ -1,0 +1,45 @@
+{
+    "inspire-hep": "1329630",
+    "author": "J. C. Hardy, I. S. Towner",
+    "collaboration": "",
+    "title": "Superallowed $0^+\\to 0^+$ nuclear $\\beta$ decays: 2014 critical survey, with precise results for $V_{ud}$ and CKM unitarity",
+    "arxiv": "1411.5987v1 [nucl-ex]",
+    "time": "2015-02-03",
+    "abstract": "A new critical survey is presented of all half-life, decay-energy, and branching-ratio measurements related to 20 superallowed $0^+\\to 0^+$ $\\beta$ decays. Included are 222 individual measurements of comparable precision obtained from 177 published references. We obtain world-average ft values for each of the eighteen transitions that have a complete set of data, then apply radiative and isospin-symmetry-breaking corrections to extract \"corrected\" Ft values. The resultant average Ft value, when combined with the muon lifetime, yields the up-down quark-mixing element of the CKM matrix, $V_{ud} = 0.97417 \\pm 0.00021$. The unitarity test on the top row of the matrix becomes $|V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2 = 0.99978 \\pm 0.00055$ if the Particle Data Group recommended value for $V_{us}$ is used.",
+    "pdf": "https://arxiv.org/pdf/1411.5987.pdf",
+    "transition-mode": "beta-decay-superallowed",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Ft(0+.2.0+.e+.nu)",
+                "latex": "$\\mathcal{F}t$",
+                "value": "3072.27",
+                "type@1_err": "0.72",
+                "type@1_err_up": "0.72",
+                "type@1_err_down": "0.72",
+                "unit": "s",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "Vud(0+.2.0+.e+.nu)",
+                "latex": "$|V_{ud}|$",
+                "value": "0.97417",
+                "type@1_err": "0.00021",
+                "type@1_err_up": "0.00021",
+                "type@1_err_down": "0.00021",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "CKM.unitarity(0+.2.0+.e+.nu)",
+                "latex": "$|V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2$",
+                "value": "0.99978",
+                "type@1_err": "0.00055",
+                "type@1_err_up": "0.00055",
+                "type@1_err_down": "0.00055",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "inspire-hep": "1513486",
+    "author": "Misiak, Mikolaj and Steinhauser, Matthias",
+    "collaboration": "",
+    "title": "Weak radiative decays of the B meson and bounds on MH± in the Two-Higgs-Doublet Model",
+    "arxiv": "[1702.04571v1](https://arxiv.org/pdf/1702.04571.pdf)",
+    "year": "2017",
+    "time": "2017-02-15",
+    "abstract": "In a recent publication, the Belle collaboration updated their analysis of the inclusive weak radiative B-meson decay. Their result for the branching ratio is now below the Standard Model prediction, though it remains consistent with it. However, bounds on the charged Higgs boson mass in the Two-Higgs-Doublet Model get affected in a significant manner. In the so-called Model-II, the 95% C.L. lower bound on MH± is now in the 570–800 GeV range.",
+    "pdf": "https://arxiv.org/pdf/1702.04571.pdf",
+    "transition-mode": "b-radiative",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Bsmu_gamma(B.2.Xs.gamma)",
+                "latex": "$\\mathcal{B}(B \\to X_s \\gamma)_{E_\\gamma > 1.6 \\text{ GeV}}$",
+                "value": "3.31",
+                "tot_err_up": "0.22",
+                "tot_err_down": "0.22",
+                "unit": "10^{-4}"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Bsmu_gamma_exp(B.2.Xs.gamma)",
+                "latex": "$\\mathcal{B}(B \\to X_s \\gamma)_{E_\\gamma > 1.6 \\text{ GeV}}^{\\text{exp}}$",
+                "value": "3.22",
+                "tot_err_up": "0.15",
+                "tot_err_down": "0.15",
+                "unit": "10^{-4}"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "MHpm_bound(b.2.s.gamma)",
+                "latex": "$M_{H^\\pm}$",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "580",
+                "unit": "GeV"
+            }
+        }
+    ]
+}

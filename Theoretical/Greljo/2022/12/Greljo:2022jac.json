@@ -1,0 +1,44 @@
+{
+    "inspire-hep": "2616316",
+    "author": "Greljo, Admir and Salko, Jakub and Smolkovic, Aleks and Stangl, Peter",
+    "collaboration": "",
+    "title": "Rare b decays meet high-mass Drell-Yan",
+    "arxiv": "[2212.10497v2](https://arxiv.org/pdf/2212.10497.pdf)",
+    "year": "2022",
+    "time": "2022-12-20",
+    "abstract": "Rare b hadron decays are considered excellent probes of new semileptonic four-fermion interactions of microscopic origin. However, the same interactions also correct the high-mass Drell-Yan tails. In this work, we revisit the first statement in the context of this complementarity and chart the space of short-distance new physics that could show up in rare b decays. We analyze the latest b -> q l l measurements, where q = d or s and l = e or mu, including the most recent LHCb RK(*) update, together with the latest charged and neutral current high-mass Drell-Yan data. For the rare B decays global fit, the Gaussian approximation at the best-fit point is Cuniv.9 = -Cuniv.10 = -0.29 +/- 0.13, DeltaCbsmumu.9 = -DeltaCbsmumu.10 = -0.08 +/- 0.07.",
+    "pdf": "https://arxiv.org/pdf/2212.10497.pdf",
+    "transition-mode": "bsmumu",
+    "data": [
+        {
+            "obs@1": {
+                "name": "C9_univ(bs.2.mu+.mu-)",
+                "latex": "$C_9^{\\text{univ}}$",
+                "value": "-0.29",
+                "tot_err_up": "0.13",
+                "tot_err_down": "0.13"
+            },
+            "obs@2": {
+                "name": "C10_univ(bs.2.mu+.mu-)",
+                "latex": "$C_{10}^{\\text{univ}}$",
+                "value": "0.29",
+                "tot_err_up": "0.13",
+                "tot_err_down": "0.13"
+            },
+            "obs@3": {
+                "name": "DeltaC9_bs(bs.2.mu+.mu-)",
+                "latex": "$\\Delta C_9^{bs\\mu\\mu}$",
+                "value": "-0.08",
+                "tot_err_up": "0.07",
+                "tot_err_down": "0.07"
+            },
+            "obs@4": {
+                "name": "DeltaC10_bs(bs.2.mu+.mu-)",
+                "latex": "$\\Delta C_{10}^{bs\\mu\\mu}$",
+                "value": "0.08",
+                "tot_err_up": "0.07",
+                "tot_err_down": "0.07"
+            }
+        }
+    ]
+}

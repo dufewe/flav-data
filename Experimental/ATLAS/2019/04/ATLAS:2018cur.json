@@ -1,0 +1,57 @@
+{
+    "inspire-hep": "1707605",
+    "author": "ATLAS Collaboration",
+    "collaboration": "ATLAS",
+    "title": "Study of the rare decays of $B^0_s$ and $B^0$ mesons into muon pairs using data collected during 2015 and 2016 with the ATLAS detector",
+    "arxiv": "1812.03017v2 [hep-ex]",
+    "time": "2019-04-23",
+    "abstract": "A study of the decays $B^0_s \\to \\mu^+ \\mu^-$ and $B^0 \\to \\mu^+ \\mu^-$ has been performed using 26.3 fb$^{-1}$ of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016. Since the detector resolution in $\\mu^+ \\mu^-$ invariant mass is comparable to the $B^0_s$--$B^0$ mass difference, a single fit determines the signal yields for both decay modes. This results in a measurement of the branching fraction $\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-) = (3.2^{+1.1}_{-1.0}) \\times 10^{-9}$ and an upper limit $\\mathcal{B}(B^0 \\to \\mu^+ \\mu^-) < 4.3 \\times 10^{-10}$ at 95% confidence level. The result is combined with the Run 1 ATLAS result, yielding $\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-) = (2.8^{+0.8}_{-0.7}) \\times 10^{-9}$ and $\\mathcal{B}(B^0 \\to \\mu^+ \\mu^-) < 2.1 \\times 10^{-10}$ at 95% confidence level.",
+    "pdf": "https://arxiv.org/pdf/1812.03017.pdf",
+    "transition-mode": "b-decay-rare",
+    "data": [
+        {
+            "condition": "Run 2 (2015-2016) only",
+            "obs@1": {
+                "name": "BR(B0s.2.mu+.mu-)",
+                "latex": "$\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-)$",
+                "value": "3.2e-9",
+                "type@1_err": "1.05e-9",
+                "type@1_err_up": "1.1e-9",
+                "type@1_err_down": "1.0e-9",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "BR(B0.2.mu+.mu-)",
+                "latex": "$\\mathcal{B}(B^0 \\to \\mu^+ \\mu^-)$",
+                "value": "4.3e-10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "4.3e-10",
+                "unit": "",
+                "ref": ""
+            }
+        },
+        {
+            "condition": "Run 1 + Run 2 combined",
+            "obs@1": {
+                "name": "BR(B0s.2.mu+.mu-)",
+                "latex": "$\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-)$",
+                "value": "2.8e-9",
+                "type@1_err": "0.75e-9",
+                "type@1_err_up": "0.8e-9",
+                "type@1_err_down": "0.7e-9",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "BR(B0.2.mu+.mu-)",
+                "latex": "$\\mathcal{B}(B^0 \\to \\mu^+ \\mu^-)$",
+                "value": "2.1e-10",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "2.1e-10",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

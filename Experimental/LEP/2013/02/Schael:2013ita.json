@@ -6,13 +6,13 @@
     "arxiv": "[1302.3415v1](https://arxiv.org/pdf/1302.3415.pdf)",
     "year": "2013",
     "time": "2013-02-14",
-    "abstract": "Electroweak measurements performed with data taken at LEP from 1995 to 2000 at centre-of-mass energies from 130 GeV to 209 GeV. The combined data set corresponds to about 3 fb-1. The mass and width of the W boson are determined to be mW = 80.376 +/- 0.033 GeV and GammaW = 2.195 +/- 0.083 GeV. The branching fraction B(W->had) = 67.41 +/- 0.27%.",
+    "abstract": "Electroweak measurements performed with data taken at the electron-positron collider LEP at CERN from 1995 to 2000 are reported. The combined data set corresponds to a total luminosity of about 3 fb-1 collected by the four LEP experiments ALEPH, DELPHI, L3 and OPAL, at centre-of-mass energies ranging from 130 GeV to 209 GeV. The mass and width of the W boson, mW and GammaW, the branching fraction of W decays to hadrons, B(W->had), and the trilinear gauge-boson self-couplings gZ1, kappa_gamma and lambda_gamma are determined to be: mW = 80.376 +/- 0.033 GeV, GammaW = 2.195 +/- 0.083 GeV, B(W->had) = 67.41 +/- 0.27 %.",
     "pdf": "https://arxiv.org/pdf/1302.3415.pdf",
-    "transition-mode": "w-mass-combination",
+    "transition-mode": "w-properties",
     "data": [
         {
             "obs@1": {
-                "name": "mW(e+.e-.2.W+.2.W-.2.l.nu.qq)",
+                "name": "mW(e+.e-.2.W+.2.W-.2.l.nu)",
                 "latex": "$m_{W}$",
                 "value": "80.376",
                 "tot_err_up": "0.033",
@@ -20,7 +20,7 @@
                 "unit": "GeV"
             },
             "obs@2": {
-                "name": "GammaW(e+.e-.2.W+.2.W-.2.l.nu.qq)",
+                "name": "GammaW(e+.e-.2.W+.2.W-.2.l.nu)",
                 "latex": "$\\Gamma_{W}$",
                 "value": "2.195",
                 "tot_err_up": "0.083",

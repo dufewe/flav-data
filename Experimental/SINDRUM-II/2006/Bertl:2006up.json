@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "716542",
+    "author": "Bertl, W. and others",
+    "collaboration": "SINDRUM II",
+    "title": "A search for muon to electron conversion in muonic gold",
+    "arxiv": "no arxiv (published in Eur.Phys.J.C)",
+    "year": "2006",
+    "time": "2006-05-01",
+    "abstract": "A search for muon to electron conversion in muonic gold was performed with the SINDRUM II spectrometer at PSI. The measurement resulted in an upper limit of 7 x 10^-13 at 90% CL for the ratio of the conversion rate to the muon capture rate.",
+    "pdf": "https://cds.cern.ch/record/855676",
+    "transition-mode": "lfv-mu-e",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Rmue(mu.Au.2.e.Au)",
+                "latex": "$\\frac{\\Gamma(\\mu^- \\mathrm{Au} \\to e^- \\mathrm{Au})}{\\Gamma_{\\mathrm{capt}}(\\mu^- \\mathrm{Au} \\to \\nu_\\mu \\mathrm{Au})}$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "7e-13"
+            }
+        }
+    ]
+}

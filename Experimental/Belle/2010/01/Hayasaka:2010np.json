@@ -1,0 +1,52 @@
+{
+    "inspire-hep": "843249",
+    "author": "Hayasaka, K. and others",
+    "collaboration": "Belle",
+    "title": "Search for Lepton Flavor Violating Tau Decays into Three Leptons with 719 Million Produced Tau+ Tau- Pairs",
+    "arxiv": "[1001.3221v1](https://arxiv.org/pdf/1001.3221.pdf)",
+    "year": "2010",
+    "time": "2010-01-19",
+    "abstract": "We search for lepton-flavor-violating tau decays into three leptons using 782 fb-1 of data. No signal is observed. Upper limits on branching fractions are set in the range (1.5-2.7) x 10^-8 at 90% CL.",
+    "pdf": "https://arxiv.org/pdf/1001.3221.pdf",
+    "transition-mode": "lfv-tau",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Br(tau.2.e.e.e)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to e^- e^+ e^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "2.7e-8"
+            },
+            "obs@2": {
+                "name": "Br(tau.2.mu.mu.mu)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to \\mu^- \\mu^+ \\mu^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "2.1e-8"
+            },
+            "obs@3": {
+                "name": "Br(tau.2.e.mu.mu)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to e^- \\mu^+ \\mu^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "2.7e-8"
+            },
+            "obs@4": {
+                "name": "Br(tau.2.mu.e.e)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to \\mu^- e^+ e^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "1.8e-8"
+            },
+            "obs@5": {
+                "name": "Br(tau.2.e+.mu-.mu-)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to e^+ \\mu^- \\mu^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "1.7e-8"
+            },
+            "obs@6": {
+                "name": "Br(tau.2.mu+.e-.e-)",
+                "latex": "$\\mathcal{B}(\\tau^- \\to \\mu^+ e^- e^-)$",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "1.5e-8"
+            }
+        }
+    ]
+}

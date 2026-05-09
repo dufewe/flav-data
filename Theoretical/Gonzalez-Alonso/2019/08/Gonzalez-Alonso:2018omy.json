@@ -1,0 +1,59 @@
+{
+    "inspire-hep": "1663953",
+    "author": "M. Gonzalez-Alonso, O. Naviliat-Cuncic, N. Severijns",
+    "collaboration": "",
+    "title": "New physics searches in nuclear and neutron $\\beta$ decay",
+    "arxiv": "1803.08732v3 [hep-ph]",
+    "time": "2019-08-28",
+    "abstract": "The status of tests of the standard electroweak model and of searches for new physics in allowed nuclear $\\beta$ decay and neutron decay is reviewed including both theoretical and experimental developments. A new global fit of available $\\beta$-decay data is performed incorporating, for the first time in a consistent way, superallowed $0^+ \\to 0^+$ transitions, neutron decay and nuclear decays. The constraints on exotic scalar and tensor couplings involving left- or right-handed neutrinos are determined. The values of the vector and axial-vector couplings, which are associated within the standard model to $V_{ud}$ and $g_A$ respectively, are also updated. The ratio between the axial and vector couplings obtained from the fit under standard model assumptions is $C_A/C_V = -1.27510(66)$.",
+    "pdf": "https://arxiv.org/pdf/1803.08732.pdf",
+    "transition-mode": "beta-decay-global-fit",
+    "data": [
+        {
+            "condition": "SM fit (Ft + neutron data)",
+            "obs@1": {
+                "name": "Vud(n.2.p.e-.nuebar)",
+                "latex": "$|V_{ud}|$",
+                "value": "0.97416",
+                "type@1_err": "0.00021",
+                "type@1_err_up": "0.00021",
+                "type@1_err_down": "0.00021",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "lambda(n.2.p.e-.nuebar)",
+                "latex": "$\\lambda = C_A/C_V$",
+                "value": "-1.27510",
+                "type@1_err": "0.00066",
+                "type@1_err_up": "0.00066",
+                "type@1_err_down": "0.00066",
+                "unit": "",
+                "ref": ""
+            }
+        },
+        {
+            "condition": "Left-handed fit (with scalar & tensor)",
+            "obs@1": {
+                "name": "CS/CV(n.2.p.e-.nuebar)",
+                "latex": "$C_S/C_V$",
+                "value": "0.0014",
+                "type@1_err": "0.0012",
+                "type@1_err_up": "0.0012",
+                "type@1_err_down": "0.0012",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "CT/CA(n.2.p.e-.nuebar)",
+                "latex": "$C_T/C_A$",
+                "value": "0.0020",
+                "type@1_err": "0.0022",
+                "type@1_err_up": "0.0022",
+                "type@1_err_down": "0.0022",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}
