@@ -1,0 +1,50 @@
+{
+    "inspire-hep": 1097109,
+    "author": "Mund, D., Maerkisch, B., Deissenroth, M., Krempel, J., Schumann, M., Abele, H., Petoukhov, A., Soldner, T.",
+    "collaboration": "",
+    "title": "Determination of the Weak Axial Vector Coupling lambda = gA/gV from a Measurement of the beta-Asymmetry Parameter A in Neutron Beta Decay",
+    "arxiv": "1204.0013v1",
+    "time": "2013-03",
+    "abstract": "We report on a new measurement of the neutron beta-asymmetry parameter A with the instrument Perkeo II. Main advancements are the high neutron polarization of P = 99.7(1)% from a novel arrangement of super mirror polarizers and reduced background from improvements in beam line and shielding. Leading corrections were thus reduced by a factor of 4, pushing them below the level of statistical error and resulting in a significant reduction of systematic uncertainty compared to our previous experiments.",
+    "pdf": "https://arxiv.org/pdf/1204.0013.pdf",
+    "transition-mode": "beta-decay-neutron",
+    "data": [
+        {
+            "obs@1": {
+                "name": "A0(n.2.p.e-.nuebar)",
+                "latex": "$A_0$",
+                "value": "-0.11996",
+                "type@1_err": "0.00058",
+                "type@1_err_up": "0.00058",
+                "type@1_err_down": "0.00058"
+            },
+            "obs@2": {
+                "name": "lambda(n.2.p.e-.nuebar)",
+                "latex": "$\\lambda = g_A/g_V$",
+                "value": "-1.2767",
+                "type@1_err": "0.0016",
+                "type@1_err_up": "0.0016",
+                "type@1_err_down": "0.0016"
+            }
+        },
+        {
+            "condition": "Combined with previous Perkeo II experiments [8,21]",
+            "obs@1": {
+                "name": "A0(n.2.p.e-.nuebar)",
+                "latex": "$A_0$",
+                "value": "-0.11951",
+                "type@1_err": "0.00050",
+                "type@1_err_up": "0.00050",
+                "type@1_err_down": "0.00050"
+            },
+            "obs@2": {
+                "name": "lambda(n.2.p.e-.nuebar)",
+                "latex": "$\\lambda = g_A/g_V$",
+                "value": "-1.2755",
+                "type@1_err": "0.0013",
+                "type@1_err_up": "0.0013",
+                "type@1_err_down": "0.0013"
+            }
+        }
+    ]
+}

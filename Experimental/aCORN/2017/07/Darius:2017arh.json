@@ -1,0 +1,23 @@
+{
+    "inspire-hep": 1613729,
+    "author": "Darius, G. et al.",
+    "collaboration": "aCORN",
+    "title": "Measurement of the Electron-Antineutrino Angular Correlation in Neutron Beta Decay",
+    "arxiv": "no arxiv (published in PRL)",
+    "time": "2017-07",
+    "abstract": "We report the first result for the electron-antineutrino angular correlation (a coefficient) in free neutron beta decay from the aCORN experiment. aCORN uses a novel method in which the a coefficient is proportional to an asymmetry in proton time of flight for events where the beta electron and recoil proton are detected in delayed coincidence.",
+    "pdf": "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.119.042502",
+    "transition-mode": "beta-decay-neutron",
+    "data": [
+        {
+            "obs@1": {
+                "name": "an(n.2.p.e-.nuebar)",
+                "latex": "$a_n$",
+                "value": "-0.1090",
+                "type@1_err": "0.0041",
+                "type@1_err_up": "0.0041",
+                "type@1_err_down": "0.0041"
+            }
+        }
+    ]
+}

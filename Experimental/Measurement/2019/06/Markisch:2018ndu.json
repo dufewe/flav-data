@@ -1,0 +1,52 @@
+{
+    "inspire-hep": 1708714,
+    "author": "Markisch, B. et al.",
+    "collaboration": "",
+    "title": "Measurement of the Weak Axial-Vector Coupling Constant in the Decay of Free Neutrons Using a Pulsed Cold Neutron Beam",
+    "arxiv": "1812.04666v1",
+    "time": "2019-06",
+    "abstract": "We present a precision measurement of the axial-vector coupling constant gA in the decay of polarized free neutrons. For the first time, a pulsed cold neutron beam was used for this purpose. By this method, leading sources of systematic uncertainty are suppressed. From the electron spectra we obtain lambda = gA/gV = -1.27641(45)stat(33)sys which confirms recent measurements with improved precision.",
+    "pdf": "https://arxiv.org/pdf/1812.04666.pdf",
+    "transition-mode": "beta-decay-neutron",
+    "data": [
+        {
+            "obs@1": {
+                "name": "A0(n.2.p.e-.nuebar)",
+                "latex": "$A_0$",
+                "value": "-0.11985",
+                "type@1_err": "0.00021",
+                "type@1_err_up": "0.00021",
+                "type@1_err_down": "0.00021"
+            },
+            "obs@2": {
+                "name": "lambda(n.2.p.e-.nuebar)",
+                "latex": "$\\lambda = g_A/g_V$",
+                "value": "-1.27641",
+                "type@1_err": "0.00056",
+                "type@1_err_up": "0.00056",
+                "type@1_err_down": "0.00056"
+            }
+        },
+        {
+            "condition": "Derived from lambda and tau_n = 879.7(8) s",
+            "obs@1": {
+                "name": "Vud(n.2.p.e-.nuebar)",
+                "latex": "$|V_{ud}|$",
+                "value": "0.97351",
+                "type@1_err": "0.00060",
+                "type@1_err_up": "0.00060",
+                "type@1_err_down": "0.00060"
+            }
+        },
+        {
+            "condition": "95% CL limit on left-handed tensor interaction",
+            "obs@1": {
+                "name": "CT/CA(n.2.p.e-.nuebar)",
+                "latex": "$C_T/C_A$",
+                "value": "-0.0044",
+                "type@1_upper_limit": "95%@CL",
+                "type@1_level": "-0.0044"
+            }
+        }
+    ]
+}

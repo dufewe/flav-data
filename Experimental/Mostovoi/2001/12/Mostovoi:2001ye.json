@@ -1,0 +1,23 @@
+{
+    "inspire-hep": 571153,
+    "author": "Mostovoi, Yu. A. et al.",
+    "collaboration": "",
+    "title": "Experimental value of G(A)/G(V) from a measurement of both P-odd correlations in free-neutron decay",
+    "arxiv": "no arxiv (published in Phys. Atom. Nucl.)",
+    "time": "2001-12",
+    "abstract": "A new experimental value of the fundamental weak-interaction parameter lambda = G_A/G_V (-1.2686 +/- 0.0046) is obtained for the first time by an original method that consists in measuring both P-odd correlations in free-neutron decay.",
+    "pdf": "https://inspirehep.net/files/8c67d785c3a6785368553c108e156c2c",
+    "transition-mode": "beta-decay-neutron",
+    "data": [
+        {
+            "obs@1": {
+                "name": "lambda(n.2.p.e-.nuebar)",
+                "latex": "$\\lambda = g_A/g_V$",
+                "value": "-1.2686",
+                "type@1_err": "0.0046",
+                "type@1_err_up": "0.0046",
+                "type@1_err_down": "0.0046"
+            }
+        }
+    ]
+}

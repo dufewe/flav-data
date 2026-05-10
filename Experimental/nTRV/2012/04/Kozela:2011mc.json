@@ -1,0 +1,31 @@
+{
+    "inspire-hep": 946877,
+    "author": "Kozela, A. et al.",
+    "collaboration": "nTRV",
+    "title": "Measurement of transverse polarization of electrons emitted in free neutron decay",
+    "arxiv": "1111.4695v1",
+    "time": "2012-04",
+    "abstract": "The final analysis of the experiment determining both components of the transverse polarization of electrons (sigma_T1, sigma_T2) emitted in the beta-decay of polarized, free neutrons is presented. The T-odd, P-odd correlation coefficient quantifying sigma_T2, perpendicular to the neutron polarization and electron momentum, was found to be R = 0.004(12)(5).",
+    "pdf": "https://arxiv.org/pdf/1111.4695.pdf",
+    "transition-mode": "beta-decay-neutron",
+    "data": [
+        {
+            "obs@1": {
+                "name": "N(n.2.p.e-.nuebar)",
+                "latex": "$N$",
+                "value": "0.067",
+                "type@1_err": "0.012",
+                "type@1_err_up": "0.012",
+                "type@1_err_down": "0.012"
+            },
+            "obs@2": {
+                "name": "R(n.2.p.e-.nuebar)",
+                "latex": "$R$",
+                "value": "0.004",
+                "type@1_err": "0.013",
+                "type@1_err_up": "0.013",
+                "type@1_err_down": "0.013"
+            }
+        }
+    ]
+}
