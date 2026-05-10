@@ -1,0 +1,25 @@
+{
+    "inspire-hep": "1299973",
+    "author": "Moulson, M.",
+    "collaboration": "FlaviaNet",
+    "title": "Experimental determination of $V_{us}$ from kaon decays",
+    "arxiv": "1411.5252v1 [hep-ex]",
+    "time": "2014-11-01",
+    "abstract": "The current status of the experimental determination of $|V_{us}|$ from kaon decays is reviewed. The combination of $K_{e3}$ and $K_{\\mu3}$ decay rates yields $|V_{us}| f_+(0) = 0.2165(4)$.",
+    "pdf": "https://arxiv.org/pdf/1411.5252.pdf",
+    "transition-mode": "kaon-semileptonic",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Vus.f+(K.2.pi.l.nu)",
+                "latex": "$|V_{us}| f_+(0)$",
+                "value": "0.2165",
+                "type@1_err": "0.0004",
+                "type@1_err_up": "0.0004",
+                "type@1_err_down": "0.0004",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "inspire-hep": "1391138",
+    "author": "Ablikim, M. and others",
+    "collaboration": "BESIII",
+    "title": "Study of Dynamics of $D^0 \\to K^- e^+ \\nu_{e}$ and $D^0\\to\\pi^- e^+ \\nu_{e}$ Decays",
+    "arxiv": "1508.07560v1 [hep-ex]",
+    "time": "2015-11-06",
+    "abstract": "In an analysis of a 2.92 fb-1 data sample taken at 3.773 GeV with the BESIII detector operated at the BEPCII collider, we measure the absolute decay branching fractions B(D0->K-e+nu_e)=(3.505+/-0.014+/-0.033)% and B(D0->pi-e+nu_e)=(0.295+/-0.004+/-0.003)%. From a study of the differential decay rates we obtain the hadronic form factors f+K(0)=0.7368+/-0.0026+/-0.0036 and f+pi(0)=0.6372+/-0.0080+/-0.0044.",
+    "pdf": "https://arxiv.org/pdf/1508.07560.pdf",
+    "transition-mode": "c-semileptonic",
+    "data": [
+        {
+            "condition": "D0 -> K- e+ nu_e",
+            "obs@1": {
+                "name": "BR(D0.2.K-.e+.nue)",
+                "latex": "$\\mathcal{B}(D^0 \\to K^- e^+ \\nu_e)$",
+                "value": "0.03505",
+                "type@1_err": "0.00036",
+                "type@1_err_up": "0.00036",
+                "type@1_err_down": "0.00036",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "f+(D0.2.K-.e+.nue).Vcs",
+                "latex": "$f_+^K(0)|V_{cs}|$",
+                "value": "0.7209",
+                "type@1_err": "0.0041",
+                "type@1_err_up": "0.0041",
+                "type@1_err_down": "0.0041",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "Vcs(D0.2.K-.e+.nue)",
+                "latex": "$|V_{cs}|$",
+                "value": "0.9601",
+                "type@1_err": "0.0241",
+                "type@1_err_up": "0.0241",
+                "type@1_err_down": "0.0241",
+                "unit": "",
+                "ref": ""
+            }
+        },
+        {
+            "condition": "D0 -> pi- e+ nu_e",
+            "obs@1": {
+                "name": "BR(D0.2.pi-.e+.nue)",
+                "latex": "$\\mathcal{B}(D^0 \\to \\pi^- e^+ \\nu_e)$",
+                "value": "0.00295",
+                "type@1_err": "0.00005",
+                "type@1_err_up": "0.00005",
+                "type@1_err_down": "0.00005",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "f+(D0.2.pi-.e+.nue).Vcd",
+                "latex": "$f_+^\\pi(0)|V_{cd}|$",
+                "value": "0.1475",
+                "type@1_err": "0.0015",
+                "type@1_err_up": "0.0015",
+                "type@1_err_down": "0.0015",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "Vcd(D0.2.pi-.e+.nue)",
+                "latex": "$|V_{cd}|$",
+                "value": "0.2155",
+                "type@1_err": "0.0097",
+                "type@1_err_up": "0.0097",
+                "type@1_err_down": "0.0097",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

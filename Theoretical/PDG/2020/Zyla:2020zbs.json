@@ -1,12 +1,12 @@
 {
-    "inspire-hep": "1688995",
-    "author": "Tanabashi, M. and others",
+    "inspire-hep": "1812251",
+    "author": "Zyla, P.A. and others",
     "collaboration": "Particle Data Group",
     "title": "Review of Particle Physics",
-    "arxiv": "no arxiv (published in PRD)",
-    "time": "2018-08-17",
-    "abstract": "The Review of Particle Physics summarizes much of particle physics and cosmology. Using data from previous editions, plus 3,238 new measurements from 867 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons.",
-    "pdf": "https://pdg.lbl.gov/2018/reviews/rpp2018-rev-standard-model.pdf",
+    "arxiv": "no arxiv (published in PTEP)",
+    "time": "2020-08-01",
+    "abstract": "The Review of Particle Physics summarizes much of particle physics and cosmology. Using data from previous editions, plus 3,428 new measurements from 877 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons.",
+    "pdf": "https://pdg.lbl.gov/2020/reviews/rpp2020-rev-standard-model.pdf",
     "transition-mode": "sm-parameters",
     "data": [
         {

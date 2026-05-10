@@ -1,0 +1,55 @@
+{
+    "inspire-hep": "634264",
+    "author": "O. P. Yushchenko et al.",
+    "collaboration": "ISTRA+",
+    "title": "High statistic study of the $K^- \\to \\pi^0 \\mu^- \\nu$ decay",
+    "arxiv": "hep-ex/0312004v1 [hep-ex]",
+    "time": "2003-11-30",
+    "abstract": "The decay $K^- \\to \\pi^0 \\mu^- \\nu$ has been studied using in-flight decays detected with the ISTRA+ spectrometer. About 540K events were collected for the analysis. The $\\lambda_+$ and $\\lambda_0$ slope parameters of the decay form-factors $f_+(t)$, $f_0(t)$ have been measured: $\\lambda_+ = 0.0277 \\pm 0.0013(\\text{stat}) \\pm 0.0009(\\text{syst})$, $\\lambda_0 = 0.0183 \\pm 0.0011(\\text{stat}) \\pm 0.0006(\\text{syst})$. The limits on the possible tensor and scalar couplings have been derived.",
+    "pdf": "https://arxiv.org/pdf/hep-ex/0312004.pdf",
+    "transition-mode": "kaon-semileptonic",
+    "data": [
+        {
+            "obs@1": {
+                "name": "lambda+(K-.2.pi0.mu-.numu)",
+                "latex": "$\\lambda_+$",
+                "value": "0.0277",
+                "type@1_err": "0.0016",
+                "type@1_err_up": "0.0016",
+                "type@1_err_down": "0.0016",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "lambda0(K-.2.pi0.mu-.numu)",
+                "latex": "$\\lambda_0$",
+                "value": "0.0183",
+                "type@1_err": "0.0012",
+                "type@1_err_up": "0.0012",
+                "type@1_err_down": "0.0012",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "fT/f+(K-.2.pi0.mu-.numu)",
+                "latex": "$f_T/f_+(0)$",
+                "value": "-0.0007",
+                "type@1_err": "0.0073",
+                "type@1_err_up": "0.0073",
+                "type@1_err_down": "0.0073",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@4": {
+                "name": "fS/f+(K-.2.pi0.mu-.numu)",
+                "latex": "$f_S/f_+(0)$",
+                "value": "0.0017",
+                "type@1_err": "0.0017",
+                "type@1_err_up": "0.0017",
+                "type@1_err_down": "0.0017",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}
