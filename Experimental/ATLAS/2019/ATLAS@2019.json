@@ -1,8 +1,12 @@
 {
-    "09": [
-        "ATLAS:2019slw"
-    ],
     "04": [
         "ATLAS:2018cur"
+    ],
+    "07": [
+        "ATLAS:2019erb"
+    ],
+    "09": [
+        "ATLAS:2019lsy",
+        "ATLAS:2019slw"
     ]
 }

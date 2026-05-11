@@ -1,0 +1,179 @@
+{
+    "inspire-hep": "1609250",
+    "author": "Aaboud, Morad and others",
+    "collaboration": "ATLAS",
+    "title": "Search for new high-mass phenomena in the dilepton final state using 36 fb^{-1} of proton-proton collision data at sqrt(s)=13 TeV with the ATLAS detector",
+    "arxiv": "1707.02424v2",
+    "time": "2017-10-26",
+    "abstract": "A search is conducted for new resonant and non-resonant high-mass phenomena in dielectron and dimuon final states. The search uses 36.1 fb^{-1} of proton-proton collision data, collected at sqrt(s)=13 TeV by the ATLAS experiment at the LHC in 2015 and 2016. No significant deviation from the Standard Model prediction is observed. Upper limits at 95% credibility level are set on the cross-section times branching ratio for resonances decaying into dileptons, which are converted to lower limits on the resonance mass, up to 4.1 TeV for the E6-motivated Z'_{chi}. Lower limits on the qqll contact interaction scale are set between 2.4 TeV and 40 TeV, depending on the model.",
+    "pdf": "https://inspirehep.net/files/c4c5e42c47e36ce7301f7f9d3be98bf9",
+    "transition-mode": "zprime-search",
+    "data": [
+        {
+            "condition": "ee + mumu combined, 36.1 fb^{-1} at sqrt(s)=13 TeV",
+            "obs@1": {
+                "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{SSM}}^{obs}$",
+                "value": "4.5",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@2": {
+                "name": "m_exp_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{SSM}}^{exp}$",
+                "value": "4.3",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@3": {
+                "name": "m_obs_Zp_chi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\chi}}^{obs}$",
+                "value": "4.1",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@4": {
+                "name": "m_exp_Zp_chi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\chi}}^{exp}$",
+                "value": "3.9",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@5": {
+                "name": "m_obs_Zp_psi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\psi}}^{obs}$",
+                "value": "3.8",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@6": {
+                "name": "m_exp_Zp_psi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\psi}}^{exp}$",
+                "value": "3.9",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@7": {
+                "name": "m_obs_Zp_3R(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{3R}}^{obs}$",
+                "value": "4.2",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@8": {
+                "name": "m_obs_Zp_BL(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{B-L}}^{obs}$",
+                "value": "4.1",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            }
+        },
+        {
+            "condition": "CI lower limits on Lambda, ee + mumu combined, 36.1 fb^{-1} at sqrt(s)=13 TeV, 1/Lambda^2 prior",
+            "obs@1": {
+                "name": "Lambda_CI_LL_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LL}^{const}$",
+                "value": "40",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@2": {
+                "name": "Lambda_CI_LL_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LL}^{dest}$",
+                "value": "32",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@3": {
+                "name": "Lambda_CI_LR_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LR}^{const}$",
+                "value": "38",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@4": {
+                "name": "Lambda_CI_LR_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LR}^{dest}$",
+                "value": "29",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@5": {
+                "name": "Lambda_CI_RL_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RL}^{const}$",
+                "value": "37",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@6": {
+                "name": "Lambda_CI_RL_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RL}^{dest}$",
+                "value": "28",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@7": {
+                "name": "Lambda_CI_RR_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RR}^{const}$",
+                "value": "37",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            },
+            "obs@8": {
+                "name": "Lambda_CI_RR_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RR}^{dest}$",
+                "value": "24",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[ATLAS:2017fih](https://inspirehep.net/literature/1609250)"
+            }
+        }
+    ]
+}

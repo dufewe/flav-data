@@ -1,0 +1,278 @@
+{
+    "inspire-hep": "1849964",
+    "author": "Sirunyan, Albert M and others",
+    "collaboration": "CMS",
+    "title": "Search for resonant and nonresonant new phenomena in high-mass dilepton final states at sqrt(s) = 13 TeV",
+    "arxiv": "2103.02708v2",
+    "time": "2021-07-27",
+    "abstract": "A search is presented for physics beyond the standard model (SM) using electron or muon pairs with high invariant mass. A data set of proton-proton collisions collected by the CMS experiment at the LHC at sqrt(s) = 13 TeV from 2016 to 2018 corresponding to a total integrated luminosity of up to 140 fb^{-1} is analyzed. No significant deviation is observed with respect to the SM background expectations. Upper limits are presented on the ratio of the product of the production cross section and the branching fraction to dileptons of a new narrow resonance to that of the Z boson. These provide the most stringent lower limits to date on the masses for various spin-1 particles, spin-2 gravitons in the Randall-Sundrum model, as well as spin-1 mediators between the SM and dark matter particles.",
+    "pdf": "https://inspirehep.net/files/2f7e5ea670e43ed58c0916942ed983d1",
+    "transition-mode": "zprime-search",
+    "data": [
+        {
+            "condition": "ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV, narrow width (0.6%)",
+            "obs@1": {
+                "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{SSM}}^{obs}$",
+                "value": "5.15",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@2": {
+                "name": "m_exp_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{SSM}}^{exp}$",
+                "value": "4.95",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@3": {
+                "name": "m_obs_Zp_psi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\psi}}^{obs}$",
+                "value": "4.56",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@4": {
+                "name": "m_exp_Zp_psi(p.p.2.Zp.2.l+.l-)[ee_mumu]",
+                "latex": "$m_{Z'_{\\psi}}^{exp}$",
+                "value": "4.45",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            }
+        },
+        {
+            "condition": "Spin-2 graviton RS, ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV",
+            "obs@1": {
+                "name": "m_obs_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.01]",
+                "latex": "$m_{G^*}^{obs}$",
+                "value": "2.47",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@2": {
+                "name": "m_exp_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.01]",
+                "latex": "$m_{G^*}^{exp}$",
+                "value": "2.40",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@3": {
+                "name": "m_obs_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.05]",
+                "latex": "$m_{G^*}^{obs}$",
+                "value": "4.10",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@4": {
+                "name": "m_exp_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.05]",
+                "latex": "$m_{G^*}^{exp}$",
+                "value": "4.00",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@5": {
+                "name": "m_obs_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.10]",
+                "latex": "$m_{G^*}^{obs}$",
+                "value": "4.78",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@6": {
+                "name": "m_exp_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.10]",
+                "latex": "$m_{G^*}^{exp}$",
+                "value": "4.60",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            }
+        },
+        {
+            "condition": "CI lower limits on Lambda, ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV",
+            "obs@1": {
+                "name": "Lambda_CI_LL_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LL}^{const}$",
+                "value": "36.4",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@2": {
+                "name": "Lambda_CI_LL_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LL}^{dest}$",
+                "value": "27.5",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@3": {
+                "name": "Lambda_CI_LR_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LR}^{const}$",
+                "value": "34.5",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@4": {
+                "name": "Lambda_CI_LR_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{LR}^{dest}$",
+                "value": "23.8",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@5": {
+                "name": "Lambda_CI_RL_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RL}^{const}$",
+                "value": "33.4",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@6": {
+                "name": "Lambda_CI_RL_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RL}^{dest}$",
+                "value": "23.9",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@7": {
+                "name": "Lambda_CI_RR_const(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RR}^{const}$",
+                "value": "33.4",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@8": {
+                "name": "Lambda_CI_RR_dest(p.p.2.l.l.q.q)[ee_mumu]",
+                "latex": "$\\Lambda_{RR}^{dest}$",
+                "value": "24.2",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            }
+        },
+        {
+            "condition": "DM mediator, ee + mumu combined, mDM large (mediator decays dominantly to leptons)",
+            "obs@1": {
+                "name": "m_obs_med_vector(p.p.2.med.2.l+.l-)[DM_large_mDM]",
+                "latex": "$m_{med}^{obs}$",
+                "value": "1.92",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@2": {
+                "name": "m_obs_med_axial(p.p.2.med.2.l+.l-)[DM_large_mDM]",
+                "latex": "$m_{med}^{obs}$",
+                "value": "4.64",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@3": {
+                "name": "m_obs_med_vector(p.p.2.med.2.l+.l-)[DM_mDM_0]",
+                "latex": "$m_{med}^{obs}$",
+                "value": "1.04",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@4": {
+                "name": "m_obs_med_axial(p.p.2.med.2.l+.l-)[DM_mDM_0]",
+                "latex": "$m_{med}^{obs}$",
+                "value": "3.41",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            }
+        },
+        {
+            "condition": "ADD large extra dimensions, ee + mumu combined",
+            "obs@1": {
+                "name": "Lambda_T_ADD_GRW(p.p.2.Gstar.2.l+.l-)[ee_mumu]",
+                "latex": "$\\Lambda_T^{GRW}$",
+                "value": "8.9",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@2": {
+                "name": "Lambda_T_ADD_Hewett(p.p.2.Gstar.2.l+.l-)[ee_mumu]",
+                "latex": "$\\Lambda_T^{Hewett}$",
+                "value": "7.6",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            },
+            "obs@3": {
+                "name": "Lambda_T_ADD_HLZ(p.p.2.Gstar.2.l+.l-)[ee_mumu]",
+                "latex": "$\\Lambda_T^{HLZ}$",
+                "value": "5.9",
+                "type@1_err": "0.0",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0",
+                "unit": "TeV",
+                "ref": "[CMS:2021ctt](https://inspirehep.net/literature/1849964)"
+            }
+        }
+    ]
+}
