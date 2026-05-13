@@ -1,116 +1,117 @@
-# 工作流案例: 添加 LHCb:2015svh (B0->K*mumu 角分析)
+# Workflow Example: Importing LHCb:2015svh
 
-## 案例概述
+This document walks through the complete process of importing data from a real paper into the flav-data database.
 
-- **论文**: Angular analysis of the B0→K*0μ+μ- decay (LHCb:2015svh)
-- **arXiv**: 1512.04442
-- **Inspire**: 1409497
-- **HEPData**: ins1409497 (83 张表)
-- **发表**: JHEP 02 (2016) 104
+**Paper**: Angular analysis of the B⁰→K*⁰μ⁺μ⁻ decay
+**arXiv**: 1512.04442 | **Inspire recid**: 1409497 | **HEPData**: 83 tables | **Published**: JHEP 02 (2016) 104
 
----
+## Step 1: Search for Existing Entry
 
-## 完整执行流程
-
-### 步骤 1: 文件搜索 (检查是否已存在)
+Check whether this paper's data is already in the database:
 
 ```python
-# 搜索索引文件
 import json, os
+
 base = 'Experimental/LHCb'
+target = 'LHCb:2015svh'
+
 for year in sorted(os.listdir(base)):
     if year.isdigit():
-        idx = os.path.join(base, year, f'LHCb@{year}.json')
-        if os.path.exists(idx):
-            with open(idx) as f:
-                data = json.load(f)
-            for m, files in data.items():
-                if 'LHCb:2015svh' in files:
-                    print(f"已存在: {year}/{m}/LHCb:2015svh.json")
+        idx_path = os.path.join(base, year, f'LHCb@{year}.json')
+        if os.path.exists(idx_path):
+            index = json.load(open(idx_path))
+            for month, files in index.items():
+                if target in files:
+                    print(f"Already exists: {year}/{month}/{target}.json")
+                    break
 ```
 
-结果: 未发现 → 需要添加
+**Result**: Not found → proceed with import.
 
-### 步骤 2: 获取元数据 (InspireHEP API)
+## Step 2: Retrieve Metadata
+
+### From InspireHEP
 
 ```bash
 curl -s -H 'Accept: application/json' \
   'https://inspirehep.net/api/literature?q=eprint:1512.04442'
 ```
 
-提取关键信息:
+Extract:
 - `texkey`: `"LHCb:2015svh"`
-- `control_number`: `1409497`
+- `recid`: `1409497`
 - `preprint_date`: `"2015-12-14"` → `time: "2015.12.14"`
 - `collaborations`: `[{"value": "LHCb"}]`
-- `authors`: 500+ 人 → `"Aaij, Roel and others"`
 - `titles` (arXiv source): `"Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay"`
-- `abstracts` (arXiv source): "An angular analysis of the..."
+- `abstracts` (arXiv source): `"An angular analysis of the..."`
+- `authors`: 500+ → `author: "Aaij, Roel and others"`
 
-### 步骤 3: 获取提交日期 (arXiv API)
+### From arXiv
 
 ```bash
 curl -sL "https://export.arxiv.org/api/query?id_list=1512.04442"
 ```
 
-提取:
-- `published`: `"2015-12-14T16:00:00Z"` → 确认 `time: "2015.12.14"`
+Extract:
+- `published`: `"2015-12-14T16:00:00Z"` → confirms `time: "2015.12.14"`
+- `primary_category`: `"hep-ex"`
+- `<atom:id>`: `"http://arxiv.org/abs/1512.04442v1"` → version `v1`
 
-### 步骤 4: 获取实验数据 (HEPData)
+Construct the `arxiv` field: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`
+
+## Step 3: Retrieve Data from HEPData
 
 ```bash
 HEPDATA_CLI="/hepdata-cli"
 
-# 获取表格列表
+# List tables
 $HEPDATA_CLI fetch-names -i inspire 1409497
-# 返回: ["Table 1", "Table 2", ..., "Table 83"]
+# Returns: ["Table 1", "Table 2", ..., "Table 83"]
 
-# 下载元数据
+# Download metadata
 $HEPDATA_CLI download -f json -i inspire 1409497 -d /tmp/hepdata_1512
 ```
 
-识别表格类型:
-- Table 1-8: 各 q² bin 的观测值 (FL, S3-S9, A3-A9, P1-P3, P'4, P'5, P'8)
-- Table 9-18: Likelihood correlation matrices (Appendix C)
-- Table 19-28: Likelihood correlation matrices (Appendix D)
-- Table 29-38: Likelihood correlation matrices (Appendix E)
-- Table 39-53: Bootstrap correlation matrices (Appendix F)
-- Table 54-68: Bootstrap correlation matrices (Appendix G)
-- Table 69-83: Bootstrap correlation matrices (Appendix H)
+**Table classification**:
+- Tables 1–8: Angular observables per q² bin (FL, S3–S9, A3–A9, P1–P3, P'₄, P'₅, P'₈)
+- Tables 9–18: Likelihood correlation matrices (Appendix C) — 8 bins × 1 matrix each
+- Tables 19–28: Likelihood correlation matrices (Appendix D)
+- Tables 29–38: Likelihood correlation matrices (Appendix E)
+- Tables 39–53: Bootstrap correlation matrices (Appendix F)
+- Tables 54–68: Bootstrap correlation matrices (Appendix G)
+- Tables 69–83: Bootstrap correlation matrices (Appendix H)
 
-### 步骤 5: 下载具体数据
+**Download individual tables** (URL-encode spaces):
 
 ```bash
-# 下载 Table 1 (观测值，低 q² bin)
 curl -sL -A "Mozilla/5.0" \
   "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml" \
   > /tmp/table1.yaml
 
-# 下载 Table 9 (关联矩阵, 0.1 < q² < 0.98)
 curl -sL -A "Mozilla/5.0" \
   "https://www.hepdata.net/download/table/ins1409497/Table%209/yaml" \
   > /tmp/table9.yaml
 ```
 
-### 步骤 6: 解析并构建 JSON
+## Step 4: Build JSON
 
-从 YAML 解析为 flav-data JSON 格式:
+Parse the YAML tables and construct the JSON entry:
 
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Angular analysis of the $B^0\\to K^{*0}\\mu^+\\mu^-$ decay",
-    "arxiv": "[1512.04442v1](https://arxiv.org/pdf/1512.04442)",
+    "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
+    "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
-    "abstract": "An angular analysis of the $B^{0}\\rightarrow K^{*0}(\\rightarrow K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
+    "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
     "data": [
         {
             "obs@1": {
                 "name": "FL(B0.2.Kst0.mu+.mu-)",
-                "latex": "$F_L(B^0\\to K^{*0}\\mu^+\\mu^-)$",
+                "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
                 "value": "0.69",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.035",
@@ -123,7 +124,7 @@ curl -sL -A "Mozilla/5.0" \
             },
             "obs@2": {
                 "name": "S3(B0.2.Kst0.mu+.mu-)",
-                "latex": "$S_3(B^0\\to K^{*0}\\mu^+\\mu^-)$",
+                "latex": "$S_3(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
                 "value": "0.012",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.038",
@@ -135,66 +136,66 @@ curl -sL -A "Mozilla/5.0" \
                 "q2max": "1.1"
             },
             "...": "...",
-            "tot_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
+            "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }
 ```
 
-### 步骤 7: 写入文件并更新索引
+Each q² bin from the paper becomes a separate `data[]` entry. The correlation matrix from Table 9 goes into the first entry (low q² bin), Table 10 into the second, and so on.
+
+## Step 5: Write File and Update Index
 
 ```bash
-# 创建目录
+# Create directory structure
 mkdir -p Experimental/LHCb/2015/12
 
-# 写入 JSON 文件
+# Write JSON file
 # → Experimental/LHCb/2015/12/LHCb:2015svh.json
-
-# 更新年度索引文件
-# 编辑 Experimental/LHCb/2015/LHCb@2015.json，添加月份键和 file_id:
 ```
 
-索引文件更新后 (`LHCb@2015.json`):
+**Update the annual index** at `Experimental/LHCb/2015/LHCb@2015.json`:
+
 ```json
 {
     "12": ["LHCb:2015svh"]
 }
 ```
 
-手动更新索引时的注意事项:
-- 键为零填充月份字符串 ("01" 到 "12")
-- 值为 file_id 数组（不含 `.json` 后缀）
-- 月份内 file_id 按 arXiv v1 提交日期排序
-- 如果该月份已存在，将新 file_id 追加到对应数组并重新排序
+If the index already had entries for other months, preserve them and add month "12".
 
-### 步骤 8: 验证
+## Step 6: Validate
 
 ```bash
-python3 scripts/json-valid.py Experimental/LHCb/2015/12/LHCb:2015svh.json
+python3 scripts/json-valid.py \
+  Experimental/LHCb/2015/12/LHCb:2015svh.json
 ```
 
-期望输出:
+Expected output:
 ```
-验证: Experimental/LHCb/2015/12/LHCb:2015svh.json
-  [OK] JSON 格式正确
-  [OK] 顶层字段完整
-  [OK] 所有检查通过
-所有文件验证通过。
+Validating: Experimental/LHCb/2015/12/LHCb:2015svh.json
+  [OK] JSON format correct
+  [OK] Top-level fields complete
+  [OK] All checks passed
+All files validated successfully.
 ```
 
-### 步骤 9: 清除缓存
+## Step 7: Cleanup
 
 ```bash
 rm -rf /tmp/hepdata_1512 /tmp/table*.yaml
 ```
 
----
+Remove all temporary PDFs, YAML files, and intermediate JSONs.
 
-## 关键经验
+## Key Lessons
 
-1. **HEPData 有 83 张表** — 需要区分观测值表和关联矩阵表
-2. **多个附录的关联矩阵** — Appendix C/H 分别对应不同的拟合方法 (likelihood vs bootstrap)
-3. **q² bin 很多** — 需要为每个 bin 创建一个 data entry
-4. **观测值名称** — 使用新规范 `FL(B0.2.Kst0.mu+.mu-)`: 观测量缩写 + (跃迁道)
-5. **LaTeX 双反斜杠** — JSON 文件中 `$B^0\\to K^{*0}\\mu^+\\mu^-$`
+1. **HEPData has 83 tables** — distinguish observable tables from correlation matrices by description.
+2. **Multiple correlation matrix sets** — Appendices C–H each provide matrices for all q² bins using different statistical methods (likelihood vs bootstrap).
+3. **Many q² bins** — each bin requires its own `data[]` entry.
+4. **Observable naming** — use `FL(B0.2.Kst0.mu+.mu-)`: abbreviation + (transition).
+5. **LaTeX escaping** — `\\to` in JSON (double backslash), becomes `\to` after parsing.
+6. **arxiv field** — must include primary category and version: `[hep-ex/1512.04442v1](...)`.
+7. **transition-mode** — use property-based names like "semileptonic decay", never "rare decay".
+8. **Folder naming** — `Experimental/LHCb/` (collaboration name only).

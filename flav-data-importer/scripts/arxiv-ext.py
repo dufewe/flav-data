@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-从 arXiv API 提取论文信息并下载 PDF 文件。
+Extract paper information from the arXiv API and download PDF files.
 
 Usage:
     python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir]
@@ -21,15 +21,15 @@ import re
 
 
 def get_arxiv_info(arxiv_id):
-    """从 arXiv API 获取论文信息。"""
+    """Fetch paper information from the arXiv API."""
     url = f'https://export.arxiv.org/api/query?id_list={arxiv_id}'
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
         response = urllib.request.urlopen(req, timeout=15)
     except urllib.error.HTTPError as e:
-        raise ValueError(f"arXiv API 请求失败 (HTTP {e.code}): {e.reason}")
+        raise ValueError(f"arXiv API request failed (HTTP {e.code}): {e.reason}")
     except urllib.error.URLError as e:
-        raise ValueError(f"arXiv API 连接失败: {e.reason}")
+        raise ValueError(f"arXiv API connection failed: {e.reason}")
     xml_data = response.read().decode('utf-8')
 
     root = ET.fromstring(xml_data)
@@ -38,9 +38,15 @@ def get_arxiv_info(arxiv_id):
 
     entry = root.find('atom:entry', ns)
     if entry is None:
-        raise ValueError(f"No entry found for arXiv ID: {arxiv_id}")
+        # arXiv returns HTTP 200 even for non-existent IDs; check <total>
+        total_elem = root.find('atom:total', ns)
+        total = total_elem.text if total_elem is not None else 'unknown'
+        raise ValueError(
+            f"No entry found for arXiv ID: {arxiv_id} "
+            f"(API returned total={total})"
+        )
 
-    # 基本信息 (安全检查: 元素可能缺失)
+    # Basic info (safe checks: elements may be missing)
     published_elem = entry.find('atom:published', ns)
     published = published_elem.text if published_elem is not None else ''
     updated_elem = entry.find('atom:updated', ns)
@@ -50,20 +56,20 @@ def get_arxiv_info(arxiv_id):
     summary_elem = entry.find('atom:summary', ns)
     summary = summary_elem.text.strip() if summary_elem is not None else ''
 
-    # 作者
+    # Authors
     authors = [a.find('atom:name', ns).text for a in entry.findall('atom:author', ns)]
 
-    # PDF 链接和 ID URL
+    # PDF link and ID URL
     pdf_link = None
-    id_url = entry.find('atom:id', ns).text  # e.g. "http://arxiv.org/abs/1512.04442v1"
-    
+    id_url = entry.find('atom:id', ns).text  # e.g., "http://arxiv.org/abs/1512.04442v1"
+
     for link in entry.findall('atom:link', ns):
         if link.get('title') == 'pdf':
             pdf_link = link.get('href')
             break
 
-    # 从 id_url 提取带版本号的 arxiv_id
-    # id_url 格式: "http://arxiv.org/abs/1512.04442v1"
+    # Extract versioned arxiv_id from id_url
+    # id_url format: "http://arxiv.org/abs/1512.04442v1"
     version_match = re.search(r'abs/(\d+\.\d+)(v\d+)?', id_url)
     if version_match:
         base_id = version_match.group(1)
@@ -72,14 +78,24 @@ def get_arxiv_info(arxiv_id):
     else:
         arxiv_id_with_version = arxiv_id
 
-    # 分类
+    # Primary category
+    primary_category_elem = entry.find('arxiv:primary_category', ns)
+    primary_category = (
+        primary_category_elem.get('term', '')
+        if primary_category_elem is not None else ''
+    )
+    if not primary_category:
+        categories = [c.get('term') for c in entry.findall('atom:category', ns)]
+        primary_category = categories[0] if categories else ''
+
+    # Categories
     categories = [c.get('term') for c in entry.findall('atom:category', ns)]
 
-    # 备注
+    # Comments
     comment_elem = entry.find('arxiv:comment', ns)
     comment = comment_elem.text if comment_elem is not None else ''
 
-    # 期刊引用
+    # Journal reference
     journal_ref_elem = entry.find('arxiv:journal_ref', ns)
     journal_ref = journal_ref_elem.text if journal_ref_elem is not None else ''
 
@@ -90,19 +106,26 @@ def get_arxiv_info(arxiv_id):
     return {
         'arxiv_id': arxiv_id,
         'arxiv_id_with_version': arxiv_id_with_version,
-        'id_url': id_url,              # arXiv 唯一标识 URL (含版本号)
-        'published': published,          # e.g. "2015-12-14T16:00:00Z"
+        'primary_category': primary_category,
+        'id_url': id_url,
+        'published': published,
         'updated': updated,
         'title': title,
         'abstract': summary,
         'authors': authors,
-        'author_str': f"{authors[0]} and others" if len(authors) > 1 else (authors[0] if authors else ''),
+        'author_str': (
+            f"{authors[0]} and others"
+            if len(authors) > 1
+            else (authors[0] if authors else '')
+        ),
         'pdf_url': pdf_link,
         'abs_url': f'https://arxiv.org/abs/{arxiv_id}',
-        # Markdown 链接 (用于 JSON 文件)
-        'arxiv_link': f'[{arxiv_id_with_version}](https://arxiv.org/pdf/{arxiv_id})',
+        # Markdown link for JSON arxiv field
+        'arxiv_link': (
+            f'[{primary_category}/{arxiv_id_with_version}]'
+            f'(https://arxiv.org/pdf/{arxiv_id})'
+        ),
         'categories': categories,
-        'primary_category': categories[0] if categories else '',
         'comment': comment,
         'journal_ref': journal_ref,
         'doi': doi,
@@ -111,7 +134,7 @@ def get_arxiv_info(arxiv_id):
 
 
 def download_pdf(arxiv_id, output_dir):
-    """下载 PDF 文件到指定目录。"""
+    """Download the PDF file to the specified directory."""
     os.makedirs(output_dir, exist_ok=True)
     pdf_url = f'https://arxiv.org/pdf/{arxiv_id}'
     pdf_path = os.path.join(output_dir, f'{arxiv_id}.pdf')
@@ -125,20 +148,23 @@ def download_pdf(arxiv_id, output_dir):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='提取 arXiv 论文信息并下载 PDF')
-    parser.add_argument('arxiv_id', help='arXiv ID (如 1512.04442)')
-    parser.add_argument('--output_dir', '-o', default='.', help='输出目录')
-    parser.add_argument('--no-pdf', action='store_true', help='不下载 PDF')
+    parser = argparse.ArgumentParser(
+        description='Extract arXiv paper information and download PDF'
+    )
+    parser.add_argument('arxiv_id', help='arXiv ID (e.g., 1512.04442)')
+    parser.add_argument('--output_dir', '-o', default='.', help='Output directory')
+    parser.add_argument('--no-pdf', action='store_true', help='Skip PDF download')
     args = parser.parse_args()
 
     print(f"Fetching arXiv info for: {args.arxiv_id}")
     info = get_arxiv_info(args.arxiv_id)
 
-    # 打印结果
+    # Print results
     print(f"\nTitle: {info['title']}")
     print(f"Authors: {info['author_str']}")
     print(f"Published: {info['published']}")
     print(f"Time (v1): {info['time']}")
+    print(f"Primary category: {info['primary_category']}")
     print(f"arXiv ID (with version): {info['arxiv_id_with_version']}")
     print(f"Categories: {', '.join(info['categories'])}")
     if info['journal_ref']:
@@ -150,7 +176,7 @@ def main():
     print(f"\nPDF URL: {info['pdf_url']}")
     print(f"Abstract URL: {info['abs_url']}")
 
-    # 输出 JSON
+    # Save JSON output
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
     json_path = os.path.join(output_dir, f'{args.arxiv_id}_arxiv.json')
@@ -158,7 +184,7 @@ def main():
         json.dump(info, f, indent=4, ensure_ascii=False)
     print(f"\nJSON saved to: {json_path}")
 
-    # 下载 PDF
+    # Download PDF
     if not args.no_pdf:
         print(f"\nDownloading PDF...")
         pdf_path = download_pdf(args.arxiv_id, output_dir)

@@ -1,8 +1,10 @@
-# JSON 元数据结构
+# JSON Metadata Structure
 
-## 顶层结构
+This document is the authoritative specification for the flav-data JSON format. Every JSON file in the database must conform to this structure.
 
-每个实验数据论文对应一个 JSON 文件，结构如下：
+## Top-Level Structure
+
+Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 
 ```json
 {
@@ -10,7 +12,7 @@
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
-    "arxiv": "[1512.04442v1](https://arxiv.org/pdf/1512.04442)",
+    "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
@@ -18,108 +20,98 @@
         {
             "obs@1": { ... },
             "obs@2": { ... },
-            "tot_correlation": [[1.0, 0.5], [0.5, 1.0]]
+            "type@1_correlation": [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]]
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }
 ```
 
-## 顶层元数据字段
+## Top-Level Metadata Fields
 
-| 字段 | 类型 | 必填 | 说明 | 示例 |
-|------|------|------|------|------|
-| `inspire-hep` | string | 是 | Markdown 链接: `[TexKey](https://inspirehep.net/literature/{recid})` | `[LHCb:2015svh](https://inspirehep.net/literature/1409497)` |
-| `author` | string | 是 | 第一作者 + " and others" | `Aaij, Roel and others` |
-| `collaboration` | string | 是 | 实验合作组名称 | `LHCb`, `ATLAS`, `CMS`, `Belle` |
-| `title` | string | 是 | 论文标题 (LaTeX 格式，双反斜杠转义) | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
-| `arxiv` | string | 是 | Markdown 链接: `[arxiv_id_with_version](https://arxiv.org/pdf/{id})`，**必须带版本号** | `[1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
-| `time` | string | 是 | arXiv v1 首次提交日期 YYYY.MM.DD | `2015.12.14` |
-| `abstract` | string | 是 | 论文摘要 (LaTeX 格式) | `An angular analysis of the...` |
-| `pdf` | string | 是 | PDF URL | `https://arxiv.org/pdf/1512.04442` |
-| `data` | array | 是 | 数据条目数组 (每个 q² 区间或数据集一个条目) | 见下方 |
-| `transition-mode` | string | 是 | 跃迁模式分类 | `semi-leptonic decay`, `leptonic decay` 等 |
+| Field | Type | Required | Description | Example |
+|-------|------|----------|-------------|---------|
+| `inspire-hep` | string | Yes | Markdown link: `[TexKey](https://inspirehep.net/literature/{recid})`. TexKey is the InspireHEP BibTeX citation key; recid is the control number. Always verify via InspireHEP API. | `[LHCb:2015svh](https://inspirehep.net/literature/1409497)` |
+| `author` | string | Yes | Format: `"name1 and others"` where name1 is the first author's full name from InspireHEP. If no person names are found (e.g., some older records), fall back to `"{group} collaboration"`. | `Aaij, Roel and others` |
+| `collaboration` | string | Yes | The experimental collaboration or theory group name. For multi-collaboration papers, use comma-separated names (e.g., `"ATLAS, CMS"`). | `LHCb` |
+| `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
+| `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
+| `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
+| `abstract` | string | Yes | The complete abstract from the latest arXiv version. Must preserve LaTeX for any formulas. If no arXiv abstract is available, use the journal abstract. | `An angular analysis of the...` |
+| `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
+| `data` | array | Yes | Array of data entries, one per q² bin, dataset, or measurement group. Each entry contains `obs@N` observables and optionally correlation/covariance matrices. **Only `obs@N`, `type@N_correlation`, and `type@N_covariance` fields are allowed inside each entry.** | See Data Entries section |
+| `transition-mode` | string | Yes | **Must be the last field in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
 
-## 数据条目 (data[])
+## Data Entries (data[])
 
-`data` 数组包含多个条目，每个条目对应一个 q² 区间、数据集或测量组：
+Each element in the `data` array represents one measurement context — typically one q² bin, one dataset, or one fit scenario. Different q² bins of the same observable go into separate `data[]` entries with identical `name` fields but different `q2min`/`q2max` values.
 
-### 观测量条目 (obs@N)
+### Standard Measurement Format
 
-#### 标准测量值格式 (有中心值和误差)
+Use this format when the paper reports a central value with component errors (statistical, systematic, etc.):
 
 ```json
-{
-    "obs@1": {
-        "name": "FL(B0.2.Kst0.mu+.mu-)",
-        "latex": "$F_L(B^0\\to K^{*0}\\mu^+\\mu^-)$",
-        "value": "0.69",
-        "type@1_err": "stat",
-        "type@1_err_up": "0.12",
-        "type@1_err_down": "0.12",
-        "type@2_err": "syst",
-        "type@2_err_up": "0.06",
-        "type@2_err_down": "0.06",
-        "q2min": "0.1",
-        "q2max": "1.1"
-    }
+"obs@1": {
+    "name": "FL(B0.2.Kst0.mu+.mu-)",
+    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
+    "value": "0.69",
+    "type@1_err": "stat",
+    "type@1_err_up": "0.035",
+    "type@1_err_down": "0.036",
+    "type@2_err": "syst",
+    "type@2_err_up": "0.017",
+    "type@2_err_down": "0.017",
+    "q2min": "0.1",
+    "q2max": "1.1"
 }
 ```
 
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| `name` | string | 是 | 观测量标识符: `OBS(transition)[condition]` |
-| `latex` | string | 是 | LaTeX 表示 (JSON 中双反斜杠) |
-| `value` | string | 是 | 中心值 (必须为字符串!) |
-| `type@1_err` | string | 是 | 误差类型1 (通常 "stat") |
-| `type@1_err_up` | string | 是 | 上误差1 (字符串) |
-| `type@1_err_down` | string | 是 | 下误差1 (字符串) |
-| `type@2_err` | string | 否 | 误差类型2 (通常 "syst") |
-| `type@2_err_up` | string | 否 | 上误差2 (字符串) |
-| `type@2_err_down` | string | 否 | 下误差2 (字符串) |
-| `type@N_err` | string | 否 | 第 N 种误差类型 (如 "lumi", "norm", "theo") |
-| `type@N_err_name` | string | 视情况 | 当误差类型名与编号不一致时使用 |
-| `q2min`/`q2max` | string | 视情况 | q² 区间 (或其他运动学变量) |
-| `pTmin`/`pTmax` | string | 视情况 | pT 区间 |
-| `etamin`/`etamax` | string | 视情况 | 赝快度区间 |
-| `unit` | string | 视情况 | 单位 (有量纲量必须) |
-| `ref` | string | 视情况 | 外部参考来源的 Markdown 链接。**必须通过原文引用编号找到 arXiv 号后在 InspireHEP 上搜索获取正确 TexKey**，严禁凭空猜测 |
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `name` | Yes | string | Observable identifier in `OBS(transition)[condition]` format. Symbolic notation only — no full expression definitions. |
+| `latex` | Yes | string | LaTeX representation of the observable name. Use `\\` for backslashes in JSON (becomes single `\` after parsing). |
+| `value` | Yes | string | Central value. Must be a string, even for integers. |
+| `type@1_err` | Yes | string | Error type label for the first error component (usually `"stat"`). |
+| `type@1_err_up` | Yes | string | Upper error bound for type 1. For symmetric errors, equals `type@1_err_down`. |
+| `type@1_err_down` | Yes | string | Lower error bound for type 1. |
+| `type@N_err` | No | string | Additional error type labels (e.g., `"syst"`, `"lumi"`, `"norm"`, `"theo"`). Each additional error type requires its own `_err`, `_err_up`, and `_err_down` triplet. |
+| `type@N_err_up` | No | string | Upper error for type N. |
+| `type@N_err_down` | No | string | Lower error for type N. |
+| `q2min` | Conditional | string | Lower kinematic boundary (usually q² in GeV²). If only an upper bound exists, use the literal string `"q2min"`. |
+| `q2max` | Conditional | string | Upper kinematic boundary. If only a lower bound exists, use the literal string `"q2max"`. |
+| `pTmin`/`pTmax` | Conditional | string | Transverse momentum boundaries. Use instead of q² for non-decay processes. |
+| `etamin`/`etamax` | Conditional | string | Pseudorapidity boundaries. |
+| `unit` | Conditional | string | Physical unit (e.g., `"GeV"`, `"ps"`, `"fb"`). Omit for dimensionless observables. |
+| `ref` | Conditional | string | External reference as Markdown link for cited values. Look up the arXiv ID in the paper's references, then search InspireHEP for the correct TexKey. Never guess. |
 
-**注意**:
-- 对称误差时 `err_up` = `err_down`
-- 对于非 q² 分 bin 的数据 (如 W 截面)，使用 `pTmin/pTmax` 或 `etamin/etamax` 代替
-- 误差类型: `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, `tot` 等
+### Upper Limit Format
 
-#### 上限格式 (Upper Limit)
-
-当论文给出的是置信度上限而非中心值时:
+Use this format when the paper reports a confidence-level upper limit rather than a measured central value:
 
 ```json
-{
-    "obs@1": {
-        "name": "Br(B0.2.Kst0.tau-.e+)",
-        "latex": "$\\mathcal{B}(B^0\\to K^{*0} \\tau^- e^+)$",
-        "type@1_upper_limit": "5.9e-6",
-        "type@1_level": "90%@CLs",
-        "type@2_upper_limit": "7.1e-6",
-        "type@2_level": "95%@CLs"
-    }
+"obs@1": {
+    "name": "Br(B0.2.Kst0.tau-.e+)",
+    "latex": "$\\mathcal{B}(B^{0}\\to K^{*0} \\tau^{-} e^{+})$",
+    "type@1_upper_limit": "5.9e-6",
+    "type@1_level": "90%@CLs"
 }
 ```
 
-| 字段 | 说明 |
-|------|------|
-| `type@N_upper_limit` | 第 N 种误差类型对应的上限值 (字符串) |
-| `type@N_level` | 置信度水平，格式 `"xx%@CLs"` |
+| Field | Description |
+|-------|-------------|
+| `type@N_upper_limit` | The numeric upper limit value (string). This is the observable's maximum allowed value at the given confidence level. |
+| `type@N_level` | The confidence level as a string, e.g., `"90%@CLs"`, `"95%@CL"`, `"90%@CL"`. |
 
-#### 总误差格式 (无外部参考)
+**Critical:** `upper_limit` is the numeric value, `level` is the confidence — do not swap these fields. Do NOT use `type@N_err_up` for upper limits.
 
-当论文给出总误差 (统计+系统合并) 但不是来自外部参考时:
+### Total Error Format
+
+Use this format when the paper reports a single combined (total) error without separate stat/syst breakdown, and the data comes from the current paper itself (not an external reference):
 
 ```json
 {
     "name": "FL(B0.2.Kst0.mu+.mu-)",
-    "latex": "$F_L(B^0\\to K^{*0}\\mu^+\\mu^-)$",
+    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
     "value": "0.69",
     "tot_err_up": "0.039",
     "tot_err_down": "0.039",
@@ -128,11 +120,9 @@
 }
 ```
 
-与外部参考值格式的区别: 没有 `ref` 字段，数据来自当前论文本身。
+### External Reference Format
 
-#### 外部参考值格式
-
-来自 PDG 或其他论文的参考值使用不同的误差格式:
+Use this format for values taken from external sources (PDG world averages, HFLAV combinations, earlier papers):
 
 ```json
 {
@@ -145,92 +135,63 @@
 }
 ```
 
-| 字段 | 说明 |
-|------|------|
-| `tot_err_up` | 总上误差 (对称误差时上=下) |
-| `tot_err_down` | 总下误差 |
-| `ref` | 外部参考来源的 Markdown 链接 (需通过 InspireHEP 搜索获取正确 TexKey 和 Inspire ID) |
+The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look up the source paper's arXiv ID from the reference list, then search InspireHEP.
 
-示例:
-```json
-{
-    ...,
-    "ref": "[{TexKey}](https://inspirehep.net/literature/{Inspire ID})"
-}
-```
+## Correlation and Covariance Matrices
 
-### 关联矩阵 (tot_correlation / type@N_correlation)
+### Correlation Matrix (`type@N_correlation`)
 
-关联矩阵放在数据条目层级 (不在 obs@N 内):
+Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 
 ```json
-{
-    "obs@1": { ... },
-    "obs@2": { ... },
-    "obs@3": { ... },
-    "tot_correlation": [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]]
-}
+"type@1_correlation": [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]]
 ```
 
-按误差类型分别指定关联矩阵:
+**Rules:**
+- **Diagonal elements must be 1.0** (correlation of an observable with itself).
+- **Matrix must be symmetric**: `M[i][j] == M[j][i]`.
+- **Dimension**: matrix size (N×N) must equal the number of `obs@N` entries in the same data entry.
+- **Order**: matrix indices correspond to obs@N numbering order (obs@1 → index 0, obs@2 → index 1, etc.).
+- **Naming**: use `type@1_correlation` to match `type@1_err` (stat), `type@2_correlation` to match `type@2_err` (syst), etc.
+- **Format**: matrix elements are floats (not strings).
+- If no correlation matrix is available, **omit the field entirely** (do not set to `null`).
+
+### Covariance Matrix (`type@N_covariance`)
 
 ```json
-{
-    "obs@1": {
-        ...,
-        "type@1_err": "stat",
-        "type@1_err_up": ...,
-        "type@1_err_down": ...,
-        ...
-    },
-    "obs@2": {
-        ...,
-        "type@1_err": "stat",
-        "type@1_err_up": ...,
-        "type@1_err_down": ...
-    },
-    "type@1_correlation": [[1.0, 0.015], [0.015, 1.0]]
-}
+"type@1_covariance": [[0.01, 0.005], [0.005, 0.01]]
 ```
 
-**规则**:
-- 压缩为单行数组格式
-- 关联矩阵: 对角线必须为 1.0，矩阵必须对称
-- 协方差矩阵: 对角线为各观测量对应误差类型的方差 (err²)
-- 如果没有关联矩阵或协方差矩阵，省略该字段 (不要设为 null)
-- 矩阵维度 = 同一条目中 obs@N 的数量
-- 矩阵的顺序必须与 obs@N 的编号顺序一致
-- 矩阵名称与误差类型对应: `tot_correlation` (总), `type@1_correlation` (stat), `type@2_correlation` (syst) 等; `tot_correlation` 用于总误差关联矩阵，`type@N_correlation` 用于按误差类型分别指定
+**Rules:**
+- **Matrix must be symmetric**.
+- **Diagonal elements** are the variances (error squared) for each observable. These must be manually verified against the reported errors.
+- **Dimension and order** follow the same rules as correlation matrices.
+- Matrix elements are floats.
+- Omit the field if not available.
 
-### 协方差矩阵 (covariance)
+## transition-mode Values
 
-当提供协方差而非关联矩阵时:
+The `transition-mode` field classifies the physical process. Only two top-level categories are valid: **decay** and **scattering**. Subdivide by specific property.
 
-```json
-{
-    "obs@1": { ... },
-    "obs@2": { ... },
-    "covariance": [[0.01, 0.005], [0.005, 0.01]]
-}
-```
+| Value | Use For | Examples |
+|-------|---------|----------|
+| `leptonic decay` | Pure leptonic decays | $B \to \ell\ell$, $\tau \to \mu\mu\mu$ |
+| `semileptonic decay` | Semileptonic decays | $B \to K^{(*)}\ell\ell$, $\Lambda \to p\ell\nu$ |
+| `non-leptonic decay` | Hadronic (non-leptonic) decays | $B \to J/\psi\, p\,\pi$, $B \to D\pi$ |
+| `radiative decay` | Radiative decays | $B \to K^*\gamma$, $B \to X_s\gamma$ |
+| `neutron beta decay` | Neutron decay observables | $n \to p\,e^-\,\bar{\nu}_e$ correlations |
+| `Higgs decay` | Higgs boson decays | $H \to \gamma\gamma$, $H \to ZZ^*$ |
+| `scattering` | Scattering and production processes | $pp \to W$, $pp \to t\bar{t}$, $e^+e^- \to \mu^+\mu^-$ |
 
-## transition-mode 常见值
+**Do NOT use** non-property descriptors such as "rare decay", "flavor-changing", "BSM search", etc.
 
-| 值 | 说明 |
-|----|------|
-| `semi-leptonic decay` | 半轻衰变 (B → K(*)ℓℓ, Λ → pℓν 等) |
-| `leptonic decay` | 纯轻衰变 (B → ℓℓ, τ → μμμ 等) |
-| `non-leptonic decay` | 非轻衰变 (B → J/ψ p π 等) |
-| `radiative decay` | 辐射衰变 (B → ργ, B → J/ψ γ 等) |
-| `scattering` | 散射过程 (pp → W, pp → tt̄ 等) |
+## Key Constraints
 
-## 关键约束
-
-1. **所有数值必须是字符串** — `"0.25"` 而不是 `0.25` (适用于 value/error/q2min/unit 等字段; 关联/协方差矩阵元素应为浮点数)
-2. **LaTeX 双反斜杠** — JSON 文件中 `\\to` 而不是 `\to`
-3. **4 空格缩进** — JSON 使用 4 空格缩进
-4. **字段顺序** — 按照上述文档顺序排列字段
-5. **关联矩阵** — 对称、对角线 = 1.0、维度匹配 obs 数量
-6. **arxiv 必须带版本号** — `[1512.04442v1]` 而非 `[1512.04442]`
-7. **跃迁符号** — 符合 `A.B.2.C.D` 约定，粒子按电荷 + - 0 排序
-8. **观测量命名** — 符合 `OBS(transition)[condition]` 约定
+1. **All numeric values are strings** — `"0.25"` not `0.25`. Applies to `value`, `q2min`, `q2max`, `pTmin`, `pTmax`, all error fields, and `unit`. Exception: correlation/covariance matrix elements are floats.
+2. **LaTeX uses double backslash** — `\\to` in the JSON file. After `json.load()`, this becomes `\to` in Python.
+3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
+4. **Field order** — Top-level fields follow the order documented in the Top-Level Fields table. Within obs@N, follow the field order shown in the Standard Measurement table.
+5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
+6. **No `year` field** — The database does not support a top-level `year` field.
+7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
+8. **transition-mode last** — This field must always be the final key in the JSON object.

@@ -1,127 +1,110 @@
-# hepdata-cli 使用方法
+# hepdata-cli Reference
 
-## 基本信息
+This document describes how to use the `hepdata-cli` binary to access HEPData structured data.
 
-- **路径**: `/hepdata-cli`
-- **用途**: 通过 HEPData API 获取高能物理实验数据
-- **优势**: 绕过 Cloudflare 防护，直接访问 HEPData 结构化数据
+## Overview
 
-## 可用命令
+- **Path**: `/hepdata-cli`
+- **Purpose**: Fetch high-energy physics experimental data from HEPData, bypassing Cloudflare protection.
+- **Input**: InspireHEP control number (recid) or HEPData record ID.
+- **Output**: JSON metadata and YAML table data.
+
+## Commands
 
 ```bash
 hepdata-cli --help
 
 Commands:
-  download     下载 HEPData 记录数据
-  fetch-names  获取表格名称列表
-  find         搜索 HEPData 记录
-  upload       上传数据到 HEPData
+  download     Download HEPData record data (metadata + table URLs)
+  fetch-names  List available table names for a record
+  find         Search HEPData records by keyword or ID
+  upload       Upload data to HEPData (not used in this workflow)
 ```
 
-## fetch-names (获取表格列表)
+## Workflow
+
+### Step 1: List Available Tables
 
 ```bash
 hepdata-cli fetch-names -i inspire 1409497
 ```
 
-返回 JSON 数组:
+Returns a JSON array of table names:
 ```json
 ["Table 1", "Table 2", "Table 3", ..., "Table 83"]
 ```
 
-## download (下载元数据)
+### Step 2: Download Metadata
 
 ```bash
 hepdata-cli download -f json -i inspire 1409497 -d /tmp/hepdata_out
 ```
 
-下载的 metadata JSON 包含:
+Downloads a JSON file containing:
 
-### 顶层字段
+| Field | Description |
+|-------|-------------|
+| `recid` | HEPData record ID |
+| `inspire_id` | Corresponding InspireHEP control number |
+| `hepdata_doi` | HEPData DOI for the record |
+| `record` | Paper metadata (title, arXiv ID, DOI, collaborations, year, abstract) |
+| `data_tables` | Array of table objects with names, descriptions, and download URLs |
 
-| 字段 | 说明 |
-|------|------|
-| `recid` | HEPData 记录 ID |
-| `inspire_id` | 对应 InspireHEP 控制号 |
-| `data_tables` | 表格列表 (含下载 URL) |
-| `record` | 论文元数据 (标题、摘要、DOI、合作组等) |
-
-### record 字段
-
-```json
-"record": {
-  "title": "Angular analysis of the $B^{0}\\rightarrow K^{*0}\\mu^{+}\\mu^{-}$ decay",
-  "arxiv_id": "arXiv:1512.04442",
-  "doi": "10.1007/JHEP02(2016)104",
-  "collaborations": ["LHCb"],
-  "abstract": "...",
-  "year": 2016,
-  "hepdata_doi": "10.17182/hepdata.74247.v1"
-}
-```
-
-### data_tables 字段
-
-每个表格包含:
-
+Each table in `data_tables`:
 ```json
 {
   "name": "Table 1",
-  "description": "CP-averaged angular observables...",
+  "description": "CP-averaged angular observables in the low q² bin",
   "location": "Data from Appendix A, Table 3",
   "doi": "10.17182/hepdata.74247.v1/t1",
   "data": {
     "csv": "https://www.hepdata.net/download/table/ins1409497/Table 1/csv",
     "json": "https://www.hepdata.net/download/table/ins1409497/Table 1/json",
-    "yaml": "https://www.hepdata.net/download/table/ins1409497/Table 1/yaml",
-    ...
+    "yaml": "https://www.hepdata.net/download/table/ins1409497/Table 1/yaml"
   }
 }
 ```
 
-## 下载具体表格数据
+### Step 3: Download Individual Tables
 
-metadata 只包含 URL，需要额外 curl 下载:
-
-> 注意: metadata 中的 URL 路径部分 (如 "Table 1") 含有空格等特殊字符，
-> 用于 curl 时需要进行 URL 编码 (空格 → `%20`)。
+The metadata JSON contains URLs but not the actual data. Download tables via curl:
 
 ```bash
-# 下载观测值数据 (YAML 格式推荐)
-curl -sL -A "Mozilla/5.0" "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml"
-
-# 下载关联矩阵
-curl -sL -A "Mozilla/5.0" "https://www.hepdata.net/download/table/ins1409497/Table%209/yaml"
+# URL-encode table names (spaces → %20, + → %2B, # → %23)
+curl -sL -A "Mozilla/5.0" \
+  "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml"
 ```
 
-## YAML 数据格式
+**Why YAML**: YAML preserves the structured hierarchy of observables, qualifiers, and errors better than CSV or JSON for HEPData's nested format.
 
-### 观测值数据
+## YAML Data Structure
+
+### Observable Tables
 
 ```yaml
 dependent_variables:
-- header: {name: '$F_L$'}          # 可观测量名
+- header: {name: '$F_L$'}              # Observable name (LaTeX)
   qualifiers:
-  - {name: RE, value: 'P P --> B0 < K*...'}
-  - {name: SQRT(S), units: GeV, value: '7000.0'}
+  - {name: RE, value: 'P P --> B0 < K*0 ...'}   # Reaction
+  - {name: SQRT(S), units: GeV, value: '7000.0'} # Center-of-mass energy
   values:
   - errors:
     - asymerror: {minus: -0.036, plus: 0.035}
       label: stat
     - {label: sys, symerror: 0.017}
-    value: 0.69                          # 中心值
+    value: 0.69                          # Central value
 ```
 
-关键字段:
-- `dependent_variables[].header.name` — 可观测量名 (LaTeX)
-- `dependent_variables[].values[].value` — 中心值
-- `dependent_variables[].values[].errors[].label` — 误差类型 (stat/sys)
-- `dependent_variables[].values[].errors[].symerror` — 对称误差
-- `dependent_variables[].values[].errors[].asymerror` — 非对称误差 (plus/minus)
-- `qualifiers[].name` — 运动学变量名 (如 $q^2$)
-- `qualifiers[].value` — 运动学变量值 (如 0.1-0.98)
+**Key fields:**
+- `dependent_variables[].header.name` — Observable name in LaTeX
+- `dependent_variables[].values[].value` — Central value
+- `dependent_variables[].values[].errors[].label` — Error type (`stat`, `sys`, etc.)
+- `dependent_variables[].values[].errors[].symerror` — Symmetric error value
+- `dependent_variables[].values[].errors[].asymerror` — Asymmetric error with `plus` and `minus`
+- `qualifiers[].name` — Kinematic variable name (e.g., $q^2$, RE, SQRT(S))
+- `qualifiers[].value` — Kinematic variable value or range (e.g., `0.1-0.98`)
 
-### 关联矩阵
+### Correlation/Covariance Matrices
 
 ```yaml
 dependent_variables:
@@ -135,20 +118,17 @@ dependent_variables:
   ...
 ```
 
-- values 按行展开的矩阵元素
-- 需要根据矩阵大小重组成二维数组
+Values are listed in row-major order. To reconstruct the N×N matrix:
+```python
+n = int(len(values) ** 0.5)
+matrix = [values[i*n:(i+1)*n] for i in range(n)]
+```
 
-## 常见 LHCb 论文 HEPData 对照表
+## Notes
 
-| arXiv | Inspire ID | HEPData Record | 说明 |
-|-------|-----------|----------------|------|
-| 1512.04442 | 1409497 | ins1409497 | B0->K*mumu 角分析 (LHCb:2015svh) |
-
-## 注意事项
-
-1. **必须使用 hepdata-cli** — 直接 curl hepdata.net 会被 Cloudflare 阻挡
-2. **理论论文通常无 HEPData** — 纯理论论文没有实验数据条目
-3. **URL 中的空格需要编码** — "Table 1" → "Table%201"
-4. **units 字段** — 可能包含 "10^-8" 等字符串，需要转换
-5. **"-" 值** — 某些 bin 的 `val` 可能为 `"-"` (无效值)，需跳过
-6. **User-Agent** — curl 时需要设置 User-Agent 头
+1. **Must use hepdata-cli** — Direct curl to hepdata.net will be blocked by Cloudflare.
+2. **Theory papers** typically lack HEPData entries — fall through to PDF extraction.
+3. **URL-encode table names** — "Table 1" → "Table%201", "Table 3 (low)" → "Table%203%20(low)".
+4. **Invalid values** — Some bins may have `value: "-"` (meaning no measurement). Skip these.
+5. **Units** — The `units` field may contain strings like `"10^-8"` that need conversion.
+6. **User-Agent** — Always set a User-Agent header in curl requests to hepdata.net.

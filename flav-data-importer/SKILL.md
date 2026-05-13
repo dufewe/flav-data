@@ -1,171 +1,237 @@
 ---
 name: flav-data-importer
-description: 用于从味物理实验组或理论组数据文章中抽取结构化数据并保存为完整的 json 文件。当用户说要从某篇文章或某个网站中提取、更新、删除、验证数据时使用该技能
+description: Extract structured flavor physics data from papers and save as flav-data standard JSON. Use this skill when the user wants to import, update, delete, or verify data from a paper or website.
 category: data-science
 tags: [flavor-physics, data-collecting, json-importer, hepdata]
 ---
 
 # flav-data Importer
 
-从味物理实验/理论论文中提取结构化数据，导入为 flav-data 标准 JSON 格式。
+Extract structured data from flavor physics papers into the flav-data standard JSON format. This skill governs the complete lifecycle of data management — from discovering papers to building validated JSON entries and maintaining the database index.
 
-## 文件夹结构
+## Directory Overview
 
 ```
 flav-data-importer/
-├── SKILL.md                              # 本文件 (主技能文档)
-├── references/                           # 参考资料
-│   ├── file-index.md                     # 目录结构和文件索引规则
-│   ├── obs-abbr.md                       # 跃迁符号约定、衰变模式缩写与观测量命名
-│   ├── json-meta.md                      # JSON 元数据格式规范
-│   ├── data-source.md                    # 数据源优先级与使用指南
-│   ├── arxiv-api.md                      # arXiv API 使用方法
-│   ├── inspirehep-api.md                 # InspireHEP API 使用方法
-│   └── hepdata-cli.md                    # hepdata-cli 使用方法
-├── scripts/                              # Python 脚本
-│   ├── arxiv-ext.py                      # 从 arXiv 提取论文信息并下载 PDF
-│   ├── hepdata-ext.py                    # 从 HEPData 提取数据
-│   ├── inspirehep-ext.py                 # 从 InspireHEP 提取论文元数据
-│   └── json-valid.py                     # 验证 JSON 文件格式
-└── assets/                               # 工作流案例
-    └── workflow-lhcb-2015svh.md          # B0->K*mumu 角分析数据导入完整流程
+├── SKILL.md                          # This file — workflow, conventions, pitfalls, tool reference
+├── references/
+│   ├── json-meta.md                  # JSON field specification (the authority on structure)
+│   ├── obs-abbr.md                   # Transition symbols, observable naming, LaTeX mappings
+│   ├── file-index.md                 # Directory layout, indexing rules, query patterns
+│   ├── data-source.md                # Data source priority, scope limitations, extraction guides
+│   ├── arxiv-api.md                  # arXiv API extraction — fields, parsing, examples
+│   ├── inspirehep-api.md             # InspireHEP API extraction — fields, queries, examples
+│   └── hepdata-cli.md                # HEPData CLI usage — commands, YAML structure, parsing
+├── scripts/
+│   ├── arxiv-ext.py                  # Extract arXiv metadata and download PDF
+│   ├── inspirehep-ext.py             # Extract InspireHEP metadata
+│   ├── hepdata-ext.py                # Extract and parse HEPData tables
+│   └── json-valid.py                 # Validate JSON format compliance
+└── assets/
+    └── workflow-lhcb-2015svh.md      # End-to-end import example (B0→K*μμ)
 ```
 
-> 注: 本目录树展示的是 `flav-data-importer` 工具自身结构。
-> 数据库根目录为 `flav-data/`，数据文件存储在 `flav-data/Experimental/` 和 `flav-data/Theoretical/` 下。
+Database root: `flav-data/`
+- Experimental: `flav-data/Experimental/{group}/{year}/{month}/{file_id}.json`
+- Theoretical: `flav-data/Theoretical/{group}/{year}/{month}/{file_id}.json`
 
-## 什么时候使用
+## Scope
 
-- **数据添加**: 将新的实验/理论测量数据导入数据库
-- **数据更新**: 用论文新版本或 HEPData 更新替换已有数据
-- **数据删除**: 从数据库中移除错误/过时的数据文件
-- **数据验证**: 检查已有 JSON 文件是否符合格式规范 (不修改文件)
+| Supported | Not Supported |
+|-----------|--------------|
+| Pure experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Phenomenological fits of theoretical parameters using experimental data |
+| Theoretical calculations (HPQCD, RBC/UKQCD, FNAL/MILC, etc.) | Conference papers and report papers |
+| arXiv preprints and peer-reviewed journal papers | Informal non-peer-reviewed results |
 
-## 数据库位置
+**Rules:**
+- If the user requests importing unsupported data, respond with "This data is not supported for import," or find the corresponding formal paper on arXiv/InspireHEP and import from that instead.
+- When multiple arXiv papers describe the same measurement (e.g., a conference note + full paper, or a short letter + detailed analysis), merge all data into a single JSON file. Retain all papers' Inspire IDs, arXiv IDs, and DOIs in the metadata fields.
+- When a measurement involves multiple experimental collaborations (e.g., ATLAS+CMS combination), fill the corresponding data for all involved groups in the database under their respective directories.
 
-数据库根目录: `flav-data/`
+## Workflow
 
-实验数据存储在: `flav-data/Experimental/`
-理论数据存储在: `flav-data/Theoretical/`
+### Step 1: Search and Confirm
 
-实验目录结构: `Experimental/{group}/{year}/{month}/{file_id}.json`
-- `group`: ATLAS, BaBar, Belle, BESIII, CDF, CMS, HFLAV, LEP, LHCb, PDG 等
-- `file_id`: InspireHEP texkey (如 `LHCb:2015svh`)
-- 年度索引: `Experimental/{group}/{year}/{group}@{year}.json`
+Before creating any file, check whether the data already exists in the database:
 
-理论目录结构: `Theoretical/{group}/{year}/{month}/{file_id}.json`
-- `group`: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD 等
-- `file_id`: InspireHEP texkey (如 `LHCb:2015svh`)
-- 年度索引: `Theoretical/{group}/{year}/{group}@{year}.json`
+1. **Identify the paper** — get the arXiv ID, Inspire ID, or full title from the user.
+2. **Query the InspireHEP API** to obtain the TexKey and control number. See `references/inspirehep-api.md`.
+3. **Search the database index** using the TexKey. See `references/file-index.md` for query patterns.
+4. **Decision**:
+   - File exists → compare versions. If the user wants an update, proceed to Step 2 with the new data. If not, skip.
+   - File not found → proceed to Step 2.
 
-详细索引规则参见 `references/file-index.md`。
+**Tip**: Always use the collaboration-level TexKey (e.g., `LHCb:2015svh`) not the author-level one (e.g., `Aaij:2015oid`) for filenames and indices. If both exist, pick the collaboration-level one.
 
-## 工作流
+### Step 2: Retrieve Metadata
 
-### 步骤一: 搜索确认
+You need metadata from two sources:
 
-1. 根据 arXiv ID / Inspire ID / 论文标题在数据库索引中搜索
-2. 确认是否已存在该数据文件
-3. 参考 `references/file-index.md` 进行索引查询
+| Source | Fields Retrieved | Tool | Reference |
+|--------|-----------------|------|-----------|
+| arXiv API | v1 submission date, title, abstract, first author, primary category, PDF URL | `scripts/arxiv-ext.py` | `references/arxiv-api.md` |
+| InspireHEP API | TexKey, control number (recid), collaboration, DOI, journal info, full author list | `scripts/inspirehep-ext.py` | `references/inspirehep-api.md` |
 
-### 步骤二: 获取数据
+**Important field mappings:**
+- `time` ← arXiv `<published>` date as `YYYY.MM.DD`. If no arXiv v1 date, use the journal acceptance date.
+- `title` ← InspireHEP `titles[]` with `source: "arXiv"` (preserves LaTeX). Fallback to any available title.
+- `abstract` ← InspireHEP `abstracts[]` with `source: "arXiv"`. Fallback to any available abstract.
+- `author` ← First author + `" and others"`. If no person names found, use `"{collaboration} collaboration"`.
+- `inspire-hep` ← `[{texkey}](https://inspirehep.net/literature/{recid})`
+- `arxiv` ← `[{primary_category}/{arxiv_id}v{N}](https://arxiv.org/pdf/{id})`. Use `null` if no arXiv ID.
 
-按 `references/data-source.md` 中的数据源优先级获取数据:
+### Step 3: Retrieve Data
 
-1. **HEPData** (首选) → 使用 `scripts/hepdata-ext.py` 或 hepdata-cli
-2. **CDS** → curl 搜索 CERN 文档服务器
-3. **LHCb Public Pages** → 分析结果页面
-4. **arXiv PDF** → 使用 pymupdf 从 PDF 提取 (作为备选)
-5. **ar5iv HTML** → `https://ar5iv.labs.arxiv.org/html/<arxiv_id>` 表格解析
-6. **vision_analyze** → 用户提供表格截图时使用
+Data sources in priority order. Try each in sequence until usable data is found:
 
-同时获取论文元数据:
-- **arXiv API** → v1 提交日期、标题、摘要、作者
-  - 使用 `scripts/arxiv-ext.py`
-  - 参考 `references/arxiv-api.md`
-- **InspireHEP API** → Inspire ID、DOI、期刊信息、合作组
-  - 使用 `scripts/inspirehep-ext.py`
-  - 参考 `references/inspirehep-api.md`
+1. **HEPData** (preferred — structured, machine-readable)
+   - Use `scripts/hepdata-ext.py` or the `hepdata-cli` binary at `/hepdata-cli`.
+   - Run `hepdata-cli fetch-names -i inspire <recid>` to list available tables.
+   - Run `hepdata-cli download -f json -i inspire <recid> -d /tmp/out` to download metadata.
+   - Download individual tables via curl (URL-encode table names: "Table 1" → "Table%201").
+   - See `references/hepdata-cli.md` for YAML parsing details.
+   - Note: Theory papers and many BSM search papers do not have HEPData entries. Fall through quickly.
 
-### 步骤三: 数据操作
+2. **CDS** (CERN Document Server)
+   - Search by arXiv ID: `curl -sL "https://cds.cern.ch/search?f=reportnumber&p1=<arxiv_id>"`
+   - Useful for CMS PAS records and supplementary materials.
 
-#### 数据添加
-1. 按 `references/file-index.md` 确定文件路径
-2. 按 `references/obs-abbr.md` 确定跃迁符号和观测量命名
-3. 按 `references/json-meta.md` 构建 JSON 元数据
-4. 从数据源提取数值填充到 JSON
-5. 写入文件到 `Experimental/{group}/{year}/{month}/` 或 `Theoretical/{group}/{year}/{month}/`
-6. 更新年度索引文件
+3. **LHCb Public Analysis Pages**
+   - URL pattern: `https://lbfence.cern.ch/alcm/public/analysis/full-details/<ANALYSIS_ID>/`
+   - Contains YAML/JSON data with correlation matrices.
 
-#### 数据更新
-1. 找到已有的 `xxxx.json` 文件
-2. 对比新旧数据
-3. 更新有变化的字段
+4. **arXiv PDF** (last resort)
+   - Download: `curl -sL -O "https://arxiv.org/pdf/<arxiv_id>.pdf"`
+   - Extract with pymupdf: `python3 -c "import pymupdf; doc=pymupdf.open('paper.pdf'); [print(p.get_text()) for p in doc]"`
+   - pymupdf is at `/python/site-packages` — run via terminal, not execute_code sandbox.
+   - Parsing values from PDF tables is error-prone; cross-check against paper text.
 
-#### 数据删除
-1. 找到对应的 `xxxx.json` 文件并删除
-2. 从年度索引文件中移除该 file_id
+5. **ar5iv HTML** (alternative to PDF)
+   - URL: `https://ar5iv.labs.arxiv.org/html/<arxiv_id>`
+   - Easier to parse tables from HTML than from PDF text. May not be the latest version.
 
-#### 数据验证
-1. 找到 `xxxx.json` 文件
-2. 使用 `scripts/json-valid.py` 验证
-3. 与源论文数据对比 (不修改文件)
+6. **vision_analyze** (table screenshots)
+   - Use when the user provides screenshots of tables from a paper.
 
-### 步骤四: 验证
+### Step 4: Build JSON
+
+Construct the JSON file following these references:
+- **File path and index rules** → `references/file-index.md`
+- **Transition symbol** → `references/obs-abbr.md` §1
+- **Observable naming** → `references/obs-abbr.md` §2
+- **JSON structure and field rules** → `references/json-meta.md`
+
+**Key decisions during construction:**
+- One `data[]` entry per q² bin / dataset / measurement group.
+- Each entry contains `obs@1`, `obs@2`, ... for all observables measured in that bin.
+- Use `q2min`/`q2max` for kinematic binning. Do NOT use `[condition]` for different bins.
+- Include `type@N_correlation` or `type@N_covariance` at the entry level if available.
+- For upper limits, use `type@N_upper_limit` + `type@N_level`. Do NOT use `err_up` for limits.
+
+### Step 5: Validate
 
 ```bash
 python3 scripts/json-valid.py <path/to/file.json>
 ```
 
-检查项:
-- JSON 可解析
-- 顶层字段完整 (inspire-hep, author, collaboration, title, arxiv, time, abstract, pdf, data, transition-mode)
-- obs@N 有必填字段: 标准值 (name, latex, value, type@1_err, type@1_err_up, type@1_err_down)、上限值 (name, latex, type@1_upper_limit, type@1_level)、总误差 (name, latex, value, tot_err_up, tot_err_down) 或外部参考值 (name, latex, value, tot_err_up, tot_err_down, ref)
-- 数值字段为字符串
-- 关联矩阵: 对角线必须为 1.0，矩阵必须对称
-- 协方差矩阵: 只需对称（对角线为误差平方，需人工核对）
-- LaTeX 非空
-- 跃迁符号符合 `A.B.2.C.D` 约定
-- 观测量命名符合 `OBS(transition)[condition]` 约定
+The validator checks:
+- JSON parseability
+- All required top-level fields present
+- Each obs@N has required fields for its format (standard, upper limit, total error, external ref)
+- Numeric fields are strings (except matrix elements)
+- Correlation matrices: symmetric, diagonal = 1.0, dimension matches obs count
+- Covariance matrices: symmetric
+- LaTeX fields non-empty
+- Transition symbols conform to `A.B.2.C.D`
+- arxiv field format correct (`[category/idvN](url)` or `null`)
+- transition-mode contains "decay" or "scattering"
 
-### 步骤五: 清除缓存
+### Step 6: Update Index and Cleanup
 
-完成操作后清除所有临时文件，保持数据库整洁。
+1. **Update the annual index** at `{group}/{year}/{group}@{year}.json`:
+   - Add the file_id to the appropriate month key (zero-padded: "01"–"12").
+   - If the month key doesn't exist, create it.
+   - Sort file_ids within each month by arXiv v1 submission date.
 
-## 核心规范摘要
+2. **Verify index integrity**:
+   ```python
+   import json, os
+   # Compare indexed files vs actual files on disk
+   ```
+   See `references/file-index.md` for the full script.
 
-### 跃迁符号约定 (`A.B.2.C.D`)
+3. **Clean up** all temporary files (PDFs, YAML downloads, intermediate JSONs) from `/tmp`.
 
-对于 $A + B \to C + D$ 跃迁模式，简写为 `A.B.2.C.D`，其中 $\to$ 写为 `2` 以区分初末态。
+## Core Conventions
 
-- 粒子按电荷 `+`、`-`、`0` 顺序排列
-- 反粒子记为 `Bar` (如 `B0Bar`)，带电粒子直接用电荷标记
-- 中微子不需要带味道
-- 示例: `$B^0 \to e^+ e^-$` → `B0.2.e+.e-`，`$W^- \to \mu^- \bar{\nu}_\mu$` → `W-.2.mu-.nuBar`
+### Transition Symbol: `A.B.2.C.D`
 
-详见 `references/obs-abbr.md` 第 1 节。
+The transition `A + B → C + D` is written as `A.B.2.C.D`:
+- `2` replaces the arrow to clearly separate initial and final states.
+- Particles within each state are ordered by charge: `+`, `-`, `0`.
+- Antiparticles: particle name + `Bar` suffix (e.g., `B0Bar`). Exception: charged particles use their charge directly (`W-` not `WBar`).
+- Neutrinos: no flavor indicator — always `nu` or `nuBar`.
+- Multi-step processes use multiple `2` separators: `p.p.2.W+.2.mu+.nu`.
+- Intermediate resonances decaying to dileptons: `(2.l+.l-)` suffix, e.g., `B0.2.Kst0.J/psi(2.l+.l-)`.
 
-### 观测量命名 (`OBS(transition)[condition]`)
+Examples:
+| LaTeX | Symbol |
+|-------|--------|
+| $B^0 \to K^{*0} \mu^+ \mu^-$ | `B0.2.Kst0.mu+.mu-` |
+| $B^+ \to K^+ \mu^+ \mu^-$ | `B+.2.K+.mu+.mu-` |
+| $\bar{B}^0 \to e^+ e^-$ | `B0Bar.2.e+.e-` |
+| $pp \to Z \to \mu^+ \mu^-$ | `p.p.2.Z.2.mu+.mu-` |
 
-- `OBS` 为观测量缩写，按观测属性分为: 分支比、衰变宽度、寿命、质量、截面、角分布系数、CP 不对称、优化观测量、比值、CKM 参数等
-- `transition` 为跃迁符号
-- `condition` 为可选条件 (如 `[mu/e]` 表示轻子味比值), 单跃迁道过程一般不使用
-- 多跃迁道共用粒子用 `l1`, `l2`, `q1`, `q2`, `nu1`, `nu2`, `h1`, `h2` 等表示
-- 示例: `$\mathcal{B}(B^0 \to \mu^+\mu^-)/\mathcal{B}(B^0 \to e^+e^-)$` → `R(B0.2.l+.l-)[mu/e]`
+Full particle table → `references/obs-abbr.md` §1.
 
-详见 `references/obs-abbr.md` 第 2 节。
+### Observable Naming: `OBS(transition)[condition]`
 
-### 数值格式
+- **OBS**: symbolic abbreviation only (e.g., `Br`, `FL`, `ACP`). Never write full expression definitions.
+- **transition**: the `A.B.2.C.D` symbol from above.
+- **condition**: optional qualifier in square brackets, used ONLY for multi-transition ratios (e.g., `[mu/e]` for lepton flavor universality tests). Not used for different q² bins of the same observable.
 
-- **所有数值必须为字符串** — `"0.69"` 而非 `0.69`
-- 误差格式: `type@N_err`, `type@N_err_up`, `type@N_err_down` (N=1,2,3...)
-- 上限格式: `type@N_upper_limit`, `type@N_level` (如 `"90%@CLs"`)
-- 运动学条件: `q2min`/`q2max`, `pTmin`/`pTmax`, `etamin`/`etamax` 等
-- 有量纲量必须有 `unit` 字段 (如 `"unit": "MeV"`, `"unit": "GeV"`, `"unit": "ps"`)
-- 引用数据需加 `ref` 字段 (Markdown 链接)
-- JSON 文件使用 **4 空格缩进**
+**Special patterns:**
+- Observable differences: `DeltaOBS(transition)[condition]`, LaTeX: `$\Delta_{OBS}^{condition}(transition)$`
+- Observable ratios: `ROBS(transition)[condition]`, LaTeX: `$R_{OBS}^{condition}(transition)$`
+- CKM parameters $r$ and $\delta$: the B meson and final-state meson carry negative charge in the transition (e.g., `B-.2.D0.K-`).
 
-### JSON 格式示例
+Full observable table → `references/obs-abbr.md` §2–3.
+
+### Numeric Format
+
+- **All values are strings**: `"0.69"` not `0.69`. This includes `value`, `q2min`, `q2max`, all error fields, and `unit`. Exception: correlation/covariance matrix elements are floats.
+- **Component errors preferred**: When a paper reports separate statistical and systematic errors, record each as a separate `type@N_err` group. Do NOT pre-combine them into a total error.
+- **Symmetric errors**: `err_up` = `err_down` (both required even when equal).
+- **Upper limits**: `type@N_upper_limit` = numeric value (string), `type@N_level` = confidence level (e.g., `"90%@CLs"`). Do not swap these fields. Do NOT use `err_up` for limits.
+- **Single boundary**: If only one kinematic boundary exists (e.g., $q^2 > 14.0$ GeV²), fill the other with the literal string: `"q2min": "14.0"`, `"q2max": "q2max"`.
+- **unit**: Fill only for dimensional observables (e.g., `"unit": "GeV"`, `"unit": "ps"`). Dimensionless observables omit this field entirely.
+- **LaTeX escaping**: Use `\\to` in JSON files (double backslash). After `json.load()`, this becomes `\to` in Python strings — which is correct.
+- **Indentation**: 4 spaces.
+
+### Folder Naming
+
+- Experimental folders use the collaboration name: `Experimental/LHCb/`, `Experimental/ATLAS/`, `Experimental/CMS/`, `Experimental/BaBar/`, `Experimental/Belle/`, `Experimental/PDG/`, `Experimental/HFLAV/`, `Experimental/LEP/`.
+- Theoretical folders use just the group name: `Theoretical/HPQCD/`, `Theoretical/RBC-UKQCD/`.
+- **Data files and index filenames always use only the collaboration name**: `LHCb:2015svh.json`, `LHCb@2015.json`.
+
+## Common Pitfalls
+
+| Pitfall | Correct Approach |
+|---------|-----------------|
+| Using `[condition]` for different q² bins | Use separate `data[]` entries with `q2min`/`q2max` |
+| Guessing TexKey for `ref` fields | Look up arXiv ID in the paper's references → search InspireHEP → use the verified TexKey |
+| `type@1_err` missing when `_up`/`_down` exist | Add `type@1_err` with the average or symmetric component |
+| `upper_limit` and `level` swapped | `upper_limit` = numeric value, `level` = confidence string |
+| Non-property transition-mode (e.g., "rare decay") | Use property-based names: "semileptonic decay", "leptonic decay", "scattering" |
+| Annual index with outdated texkey | Always verify the latest texkey on InspireHEP before writing the index |
+| Empty fields as empty strings | Omit the key entirely; only `arxiv` uses `null` when absent |
+| `year` field in JSON | Not supported — omit it |
+| `tot_correlation` instead of `type@1_correlation` | Use `type@N_correlation` matching the error type label |
+| Matrix dimension mismatch with obs count | Ensure matrix size = number of obs@N in the same entry |
+| Using author-level texkey for filenames | Always use the collaboration-level texkey (e.g., `LHCb:2015svh` not `Aaij:2015oid`) |
+| Double-escaping LaTeX (`\\\\to` instead of `\\to`) | Use single double-backslash `\\to` in the JSON file text |
+
+## JSON Example
 
 ```json
 {
@@ -173,9 +239,9 @@ python3 scripts/json-valid.py <path/to/file.json>
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
-    "arxiv": "[1512.04442v1](https://arxiv.org/pdf/1512.04442)",
+    "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
-    "abstract": "...",
+    "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
     "data": [
         {
@@ -193,52 +259,23 @@ python3 scripts/json-valid.py <path/to/file.json>
                 "q2max": "1.1"
             },
             "obs@2": { ... },
-            "tot_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
+            "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }
 ```
 
-完整格式规范参见 `references/json-meta.md`。
+Full specification → `references/json-meta.md`
 
-## 必备工具
+## Required Tools
 
-| 工具 | 用途 | 路径/说明 |
-|------|------|----------|
-| arXiv API | 获取 v1 提交日期、标题、摘要 | `https://export.arxiv.org/api/query` |
-| InspireHEP API | 获取 Inspire ID、DOI、期刊信息 | `https://inspirehep.net/api/literature` |
-| hepdata-cli | 获取 HEPData 机器可读数据 | `/hepdata-cli` |
-| web-search / web-extract | 搜索和提取网页内容 | |
-| vision_analyze | 表格图片数据提取 | |
-| pymupdf | PDF 文本提取 | `/python/site-packages` (不在沙箱中，需 terminal 运行) |
-| terminal | 运行 Python 脚本 | |
-
-## 常见问题
-
-### 新观测量
-当论文中出现 `obs-abbr.md` 中没有的新观测量时，按命名规则添加到 `references/obs-abbr.md`。
-
-### 新数据信息
-当论文中出现 `json-meta.md` 中没有的新字段时，总结归纳后添加到 `references/json-meta.md`。
-
-### 关联矩阵/协方差矩阵不匹配
-矩阵维度必须等于同一 data entry 中 obs@N 的数量，顺序也要一致。关联矩阵对角线为 1.0，协方差矩阵为误差值的平方。
-
-### 理论论文无 HEPData
-纯理论计算论文通常没有 HEPData 条目，需要从 PDF 中提取理论曲线数据。
-
-### ref 字段
-当 data entry 需要 `ref` 字段引用来源文献 (如组合结果引用前期论文) 时，**必须**从论文原文的引用列表中找到该文献的 arXiv 号或 Inspire 编号，然后在 **InspireHEP 上搜索获取正确的 TexKey 和 Inspire ID**。**严禁凭空猜测** TexKey。
-
-正确流程:
-1. 从论文原文引用列表找到文献的 arXiv 号
-2. 在 InspireHEP 搜索该 arXiv 号
-3. 获取 TexKey 和 Inspire ID 
-4. 写为 Markdown 链接
-
-### LaTeX 转义
-JSON 文件中 LaTeX 使用双反斜杠，如 `\\to` 而非 `\to`。Python 解析后变成单反斜杠是正常的。
-
-### 索引文件更新
-每次添加新文件后必须更新年度索引文件，如 `LHCb@2025.json`，月份键必须零填充 ("01" 到 "12")。
+| Tool | Purpose | Path / URL | Notes |
+|------|---------|-----------|-------|
+| arXiv API | Metadata: v1 date, title, abstract, primary category | `https://export.arxiv.org/api/query` | Atom XML format |
+| InspireHEP API | Metadata: texkey, recid, collaboration, DOI | `https://inspirehep.net/api/literature` | JSON format, needs `Accept` header |
+| hepdata-cli | Machine-readable HEPData (bypasses Cloudflare) | `/hepdata-cli` | Binary, not a Python package |
+| pymupdf | PDF text extraction | `/python/site-packages` | Run via terminal, not execute_code |
+| web-search / web-extract | Supplementary web content | — | Built-in tools |
+| vision_analyze | Table image extraction | — | Built-in tool |
+| terminal | Run Python scripts and shell commands | — | Built-in tool |

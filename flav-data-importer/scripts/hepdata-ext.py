@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-从 HEPData 提取论文数据信息。
+Extract paper data from HEPData.
 
 Usage:
     python3 hepdata-ext.py <inspire_id> [--output_dir /path/to/dir]
@@ -27,7 +27,7 @@ HEPDATA_CLI = "/hepdata-cli"
 
 
 def fetch_table_names(inspire_id):
-    """获取 HEPData 可用的表格名称列表。"""
+    """Get the list of available table names from HEPData."""
     result = subprocess.run(
         [HEPDATA_CLI, 'fetch-names', '-i', 'inspire', str(inspire_id)],
         capture_output=True, text=True, timeout=60
@@ -38,15 +38,16 @@ def fetch_table_names(inspire_id):
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:
-        print(f"Warning: Could not parse table names as JSON")
+        print("Warning: Could not parse table names as JSON")
         return result.stdout.strip().split('\n') if result.stdout.strip() else []
 
 
 def download_metadata(inspire_id, output_dir):
-    """下载 HEPData 元数据 JSON。"""
+    """Download HEPData metadata JSON."""
     os.makedirs(output_dir, exist_ok=True)
     result = subprocess.run(
-        [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire', str(inspire_id), '-d', output_dir],
+        [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire',
+         str(inspire_id), '-d', output_dir],
         capture_output=True, text=True, timeout=120
     )
     if result.returncode != 0:
@@ -60,26 +61,27 @@ def download_metadata(inspire_id, output_dir):
 
 
 def download_table_yaml(inspire_id, table_name):
-    """下载指定表格的 YAML 数据。"""
-    # 完整 URL 编码表格名 (处理空格、+、# 等特殊字符)
+    """Download YAML data for a specific table."""
     from urllib.parse import quote
     encoded_name = quote(table_name, safe='')
-    url = f'https://www.hepdata.net/download/table/ins{inspire_id}/{encoded_name}/yaml'
+    url = (
+        f'https://www.hepdata.net/download/table/'
+        f'ins{inspire_id}/{encoded_name}/yaml'
+    )
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     response = urllib.request.urlopen(req, timeout=30)
     return response.read().decode('utf-8')
 
 
 def parse_metadata(meta_path):
-    """解析 HEPData 元数据 JSON，提取关键信息。"""
+    """Parse HEPData metadata JSON, extracting key information."""
     with open(meta_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    # record 信息
     record = data.get('record', {})
     tables = data.get('data_tables', [])
 
-    # 分类表格
+    # Classify tables
     observable_tables = []
     correlation_tables = []
 
@@ -109,26 +111,26 @@ def parse_metadata(meta_path):
 
 
 def parse_yaml_observables(yaml_text):
-    """解析观测值 YAML 数据。
-    
-    返回: (observables, qualifiers)
+    """Parse observable YAML data.
+
+    Returns: (observables, qualifiers)
     observables: list of {header, value, errors, qualifiers}
     """
     if not HAS_YAML:
         print("Warning: PyYAML not installed. Install with: pip install pyyaml")
         return [], {}
-    
+
     data = yaml.safe_load(yaml_text)
     if not data or 'dependent_variables' not in data:
         return [], {}
-    
+
     observables = []
     global_qualifiers = data.get('independent_variables', [])
-    
+
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '')
         qualifiers = var.get('qualifiers', [])
-        
+
         for val in var.get('values', []):
             raw_value = val.get('value')
             obs = {
@@ -137,7 +139,7 @@ def parse_yaml_observables(yaml_text):
                 'errors': [],
                 'qualifiers': qualifiers,
             }
-            
+
             for err in val.get('errors', []):
                 err_info = {
                     'label': err.get('label', ''),
@@ -147,38 +149,44 @@ def parse_yaml_observables(yaml_text):
                     err_info['symerror'] = str(se) if se is not None else ''
                 elif 'asymerror' in err:
                     ae = err['asymerror']
-                    err_info['plus'] = str(ae.get('plus', '')) if ae.get('plus') is not None else ''
-                    err_info['minus'] = str(ae.get('minus', '')) if ae.get('minus') is not None else ''
+                    err_info['plus'] = (
+                        str(ae.get('plus', ''))
+                        if ae.get('plus') is not None else ''
+                    )
+                    err_info['minus'] = (
+                        str(ae.get('minus', ''))
+                        if ae.get('minus') is not None else ''
+                    )
                 obs['errors'].append(err_info)
-            
+
             observables.append(obs)
-    
+
     return observables, {'global': global_qualifiers}
 
 
 def parse_yaml_correlation(yaml_text):
-    """解析关联/协方差矩阵 YAML 数据。
-    
-    返回: (matrix_type, matrix, qualifiers)
-    matrix_type: 'correlation' 或 'covariance'
-    matrix: 二维列表
+    """Parse correlation/covariance matrix YAML data.
+
+    Returns: (matrix_type, matrix, qualifiers)
+    matrix_type: 'correlation' or 'covariance'
+    matrix: 2D list
     """
     if not HAS_YAML:
         return 'unknown', [], {}
-    
+
     data = yaml.safe_load(yaml_text)
     if not data or 'dependent_variables' not in data:
         return 'unknown', [], {}
-    
-    # 判断矩阵类型
+
+    # Determine matrix type
     matrix_type = 'correlation'
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '').lower()
         if 'covariance' in header:
             matrix_type = 'covariance'
             break
-    
-    # 提取矩阵值 (按行展开)
+
+    # Extract matrix values (row-major order)
     values = []
     qualifiers = {}
     for var in data.get('dependent_variables', []):
@@ -193,26 +201,32 @@ def parse_yaml_correlation(yaml_text):
                 continue
         for q in var.get('qualifiers', []):
             qualifiers[q.get('name', '')] = q.get('value', '')
-    
-    # 重组为二维矩阵
+
+    # Reconstruct into 2D matrix
     n = int(len(values) ** 0.5)
     if n * n != len(values):
         print(f"Warning: Matrix size {len(values)} is not a perfect square")
         return matrix_type, [], qualifiers
-    
+
     matrix = []
     for i in range(n):
-        row = values[i*n:(i+1)*n]
+        row = values[i * n:(i + 1) * n]
         matrix.append(row)
-    
+
     return matrix_type, matrix, qualifiers
 
 
 def main():
-    parser = argparse.ArgumentParser(description='提取 HEPData 论文数据')
+    parser = argparse.ArgumentParser(
+        description='Extract HEPData paper data'
+    )
     parser.add_argument('inspire_id', help='InspireHEP control number')
-    parser.add_argument('--output_dir', '-o', default='/tmp/hepdata_out', help='输出目录')
-    parser.add_argument('--table', '-t', help='只下载指定表格')
+    parser.add_argument(
+        '--output_dir', '-o', default='/tmp/hepdata_out', help='Output directory'
+    )
+    parser.add_argument(
+        '--table', '-t', help='Download only the specified table'
+    )
     args = parser.parse_args()
 
     inspire_id = args.inspire_id
@@ -220,7 +234,7 @@ def main():
 
     print(f"Fetching HEPData for Inspire ID: {inspire_id}")
 
-    # Step 1: 获取表格列表
+    # Step 1: Get table list
     print("\n=== Step 1: Available Tables ===")
     tables = fetch_table_names(inspire_id)
     if tables:
@@ -229,11 +243,13 @@ def main():
             if len(tables) <= 20:
                 print(", ".join(tables))
             else:
-                print(", ".join(tables[:10]) + f", ... ({len(tables)} total)")
+                print(
+                    ", ".join(tables[:10]) + f", ... ({len(tables)} total)"
+                )
         else:
             print(tables)
 
-    # Step 2: 下载元数据
+    # Step 2: Download metadata
     print("\n=== Step 2: Downloading Metadata ===")
     meta_path = download_metadata(inspire_id, output_dir)
     if not meta_path:
@@ -242,7 +258,7 @@ def main():
 
     print(f"Metadata saved to: {meta_path}")
 
-    # Step 3: 解析元数据
+    # Step 3: Parse metadata
     print("\n=== Step 3: Metadata Summary ===")
     info = parse_metadata(meta_path)
 
@@ -254,36 +270,46 @@ def main():
     print(f"  Observable tables: {len(info['observable_tables'])}")
     print(f"  Correlation tables: {len(info['correlation_tables'])}")
 
-    # 打印关联矩阵的 q² 区间
+    # Print correlation matrix q² bins
     if info['correlation_tables']:
         print(f"\nCorrelation/Covariance matrix bins:")
         for t in info['correlation_tables'][:5]:
             print(f"  {t['name']}: {t['description'][:80]}...")
         if len(info['correlation_tables']) > 5:
-            print(f"  ... and {len(info['correlation_tables']) - 5} more")
+            print(
+                f"  ... and {len(info['correlation_tables']) - 5} more"
+            )
 
-    # Step 4: 下载指定表格 (可选)
+    # Step 4: Download specific table (optional)
     if args.table:
         print(f"\n=== Step 4: Downloading {args.table} ===")
         yaml_data = download_table_yaml(inspire_id, args.table)
-        yaml_path = os.path.join(output_dir, f'{args.table.replace(" ", "_")}.yaml')
+        yaml_path = os.path.join(
+            output_dir, f'{args.table.replace(" ", "_")}.yaml'
+        )
         with open(yaml_path, 'w') as f:
             f.write(yaml_data)
         print(f"YAML saved to: {yaml_path}")
-        
-        # 尝试解析
+
+        # Attempt to parse
         if 'correlation' in args.table.lower() or 'covariance' in args.table.lower():
             mtype, matrix, quals = parse_yaml_correlation(yaml_data)
             print(f"Matrix type: {mtype}")
-            print(f"Matrix size: {len(matrix)}x{len(matrix[0]) if matrix else 0}")
+            print(
+                f"Matrix size: {len(matrix)}x"
+                f"{len(matrix[0]) if matrix else 0}"
+            )
             print(f"Qualifiers: {quals}")
         else:
             observables, quals = parse_yaml_observables(yaml_data)
             print(f"Found {len(observables)} observables")
             for obs in observables[:3]:
-                print(f"  {obs['header']}: {obs['value']} (errors: {len(obs['errors'])})")
+                print(
+                    f"  {obs['header']}: {obs['value']} "
+                    f"(errors: {len(obs['errors'])})"
+                )
 
-    # 输出 JSON 摘要
+    # Save JSON summary
     summary_path = os.path.join(output_dir, 'hepdata_summary.json')
     with open(summary_path, 'w', encoding='utf-8') as f:
         json.dump(info, f, indent=4, ensure_ascii=False)

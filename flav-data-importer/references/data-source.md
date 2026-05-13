@@ -1,44 +1,96 @@
-# 数据源优先级与使用指南
+# Data Source Priority and Scope
 
-## 数据源优先级 (从高到低)
+This document defines which data sources to use, in what order, and what data is eligible for import into the flav-data database.
 
-### 1. HEPData (首选 — 机器可读)
+## Scope
 
-- **适用**: 有 HEPData 条目的实验论文
-- **数据格式**: YAML/JSON，结构化，可直接解析
-- **工具**: `hepdata-cli` (绕过 Cloudflare)
-- **限制**: 纯理论论文通常没有 HEPData 条目
+### Supported for Import
+- **Experimental measurements** from recognized collaborations: LHCb, CMS, ATLAS, Belle, BaBar, BESIII, CDF, D0, HFLAV, LEP, NA62, KOTO, etc.
+- **Theoretical calculations** from established groups: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD, etc.
+- **arXiv preprints** and **peer-reviewed journal papers**
 
+### Not Supported for Import
+- **Phenomenological fits** — results from fitting theoretical parameters (Wilson coefficients, form factors, etc.) to experimental data. These are interpretations, not primary measurements.
+- **Conference papers** — results presented only at conferences without a formal arXiv preprint or journal publication.
+- **Report papers** — preliminary notes, conference contributions, or internal reports without peer review.
+- **Informal non-peer-reviewed results** — blog posts, personal web pages, unpublished notes.
+
+**Handling unsupported requests**: If a user asks to import unsupported data, respond with "This data is not supported for import." Then, if applicable, search arXiv and InspireHEP for the corresponding formal paper and offer to import from that instead.
+
+**Multi-paper merging**: When multiple arXiv papers describe the same measurement (e.g., a conference note superseded by a full paper, or a short letter followed by a detailed analysis), merge all data into a single JSON file. Retain metadata (Inspire IDs, arXiv IDs, DOIs) from all contributing papers.
+
+## Data Source Priority
+
+Try sources in the following order. Move to the next source only if the current one does not yield usable data.
+
+### 1. HEPData (Preferred)
+
+**Why**: Machine-readable, structured data with proper error breakdowns and correlation matrices.
+
+**When to use**: Experimental papers that have uploaded their data to HEPData. Most LHC and many Belle/BaBar papers have HEPData entries.
+
+**How to access**:
 ```bash
 HEPDATA_CLI="/hepdata-cli"
-$HEPDATA_CLI fetch-names -i inspire <inspire_id>
-$HEPDATA_CLI download -f json -i inspire <inspire_id> -d /tmp/out
+
+# List available tables for a paper
+$HEPDATA_CLI fetch-names -i inspire <inspire_recid>
+
+# Download metadata (contains table URLs and paper info)
+$HEPDATA_CLI download -f json -i inspire <inspire_recid> -d /tmp/hepdata_out
 ```
+
+**Downloading specific tables**:
+```bash
+# URL-encode the table name (spaces → %20)
+curl -sL -A "Mozilla/5.0" \
+  "https://www.hepdata.net/download/table/ins<recid>/Table%201/yaml"
+```
+
+**Limitations**:
+- Theory papers almost never have HEPData entries.
+- Many BSM search papers (mass limits, exclusion contours) do not upload tabulated data.
+- Fall through to PDF extraction quickly for these cases.
+
+See `references/hepdata-cli.md` for detailed YAML parsing guidance.
 
 ### 2. CDS (CERN Document Server)
 
-- **适用**: 论文在 CDS 有补充材料
-- **数据格式**: YAML/JSON/ROOT
-- **URL**: `https://cds.cern.ch/record/<RECORD_ID>/`
-- **搜索**: 按 arXiv ID 或论文标题搜索
+**Why**: Contains supplementary materials, additional data tables, and CMS Physics Analysis Summaries (PAS).
 
+**When to use**: CERN-based experiments (ATLAS, CMS, LHCb) that have supplementary materials on CDS but no HEPData entry.
+
+**How to search**:
 ```bash
+# Search by arXiv ID
 curl -sL "https://cds.cern.ch/search?f=reportnumber&p1=<arxiv_id>"
+
+# Search by paper title
+curl -sL "https://cds.cern.ch/search?f=title&p1=<paper_title>"
 ```
+
+**Note**: Some CDS URLs may redirect to authentication pages. Check the downloaded file size — a real PDF will be >100KB; an HTML login page will be <20KB.
 
 ### 3. LHCb Public Analysis Pages
 
-- **适用**: LHCb 官方分析结果页面
-- **URL**: `https://lbfence.cern.ch/alcm/public/analysis/full-details/<ANALYSIS_ID>/`
-- **数据格式**: YAML/JSON，含关联矩阵
+**Why**: LHCb publishes official analysis result pages with structured data including correlation matrices.
 
-### 4. arXiv PDF (最后手段)
+**When to use**: LHCb analyses that have public pages but no HEPData entry.
 
-- **适用**: 以上数据源都没有数据时
-- **工具**: `pymupdf` (文本型 PDF) 或 `marker-pdf` (扫描型 PDF)
-- **限制**: 需要从表格文本中解析数值，容易出错
+**URL pattern**: `https://lbfence.cern.ch/alcm/public/analysis/full-details/<ANALYSIS_ID>/`
 
+### 4. arXiv PDF (Last Resort)
+
+**Why**: Every paper has an arXiv PDF. This is the fallback when no structured data source is available.
+
+**When to use**: All other sources have been exhausted.
+
+**How to extract**:
 ```bash
+# Download the PDF
+curl -sL -O "https://arxiv.org/pdf/<arxiv_id>.pdf"
+
+# Extract text with pymupdf
 python3 -c "
 import pymupdf
 doc = pymupdf.open('paper.pdf')
@@ -47,37 +99,53 @@ for page in doc:
 "
 ```
 
-**注意**: `pymupdf` 不在 execute_code 沙箱中，需要用 terminal 运行。
+**Important**: pymupdf is located at `/python/site-packages` and must be run via terminal, not the execute_code sandbox.
 
-### 5. ar5iv HTML (替代方案)
+**Limitations**:
+- Table extraction from PDF text is error-prone. Column alignment may be lost.
+- Cross-check extracted values against the paper's text and summary tables.
+- For scanned PDFs (rare in HEP), use `marker-pdf` instead of pymupdf.
 
-- **适用**: HTML 格式比 PDF 更容易解析表格时
-- **URL**: `https://ar5iv.labs.arxiv.org/html/<arxiv_id>`
-- **限制**: 论文版本可能不是最新的
+### 5. ar5iv HTML (Alternative to PDF)
 
+**Why**: HTML format preserves table structure better than PDF text extraction.
+
+**When to use**: When PDF extraction yields garbled or incomplete table data.
+
+**URL**: `https://ar5iv.labs.arxiv.org/html/<arxiv_id>`
+
+**How to extract tables**:
 ```bash
 curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 ```
 
-### 6. InspireHEP API (仅元数据)
+**Limitations**: The HTML version may not be the latest paper version.
 
-- **适用**: 获取论文元数据 (标题、作者、日期等)，不获取实验数据
-- **工具**: `curl` + JSON 解析
+### 6. InspireHEP API (Metadata Only)
 
-### 7. 视觉模型 (表格图片)
+**Why**: Provides paper metadata (title, authors, collaboration, texkey, DOI) but NOT experimental data values.
 
-- **适用**: 用户提供论文中的表格截图
-- **工具**: `vision_analyze`
-- **输出**: 直接解析为结构化数据
+**When to use**: Always — for metadata extraction, not for data values.
 
-## 各数据源适用场景
+See `references/inspirehep-api.md` for query details.
 
-| 场景 | 首选数据源 |
-|------|-----------|
-| LHCb 角分析论文 | HEPData |
-| LHCb 分支比测量 | HEPData 或 CDS |
-| Belle/BaBar 数据 | HEPData 或论文 PDF |
-| PDG 综合值 | PDG 网站或 HEPData |
-| HFLAV 平均 | HFLAV 网站 |
-| 理论计算值 | 论文 PDF (pymupdf) |
-| 表格截图 | vision_analyze |
+### 7. vision_analyze (Table Screenshots)
+
+**Why**: Can read values directly from table images.
+
+**When to use**: The user provides screenshots of tables from a paper.
+
+## Scenario Guide
+
+| Scenario | Best Source | Notes |
+|----------|------------|-------|
+| LHCb angular analysis | HEPData | Usually has full angular observables + correlation matrices |
+| LHCb branching fraction | HEPData or CDS | Check both |
+| Belle/BaBar data | HEPData or PDF | Many older Belle papers lack HEPData |
+| BESIII data | PDF (pymupdf) or HEPData | Some BESIII papers have HEPData; many don't |
+| CDF/D0 data | InspireHEP files or PDF | Older Tevatron papers often lack HEPData |
+| PDG world averages | PDG website or HEPData | PDG review PDFs at pdg.lbl.gov |
+| HFLAV averages | HFLAV website | Dedicated combination results |
+| Theory calculations | PDF (pymupdf) | Theory papers rarely have HEPData |
+| Table screenshots | vision_analyze | User-provided images |
+| CMS PAS | CDS | CMS preliminary analyses on CDS |

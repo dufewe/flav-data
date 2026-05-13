@@ -1,251 +1,160 @@
-# InspireHEP API 使用方法
+# InspireHEP API Reference
 
-## 基本信息
+This document describes how to use the InspireHEP API to extract paper metadata — the authoritative source for TexKeys, collaboration names, and citation information.
 
-- **端点**: `https://inspirehep.net/api/literature`
-- **格式**: JSON
-- **请求头**: 必须包含 `Accept: application/json`
-- **限制**: 每页默认 10 条，最多 1000 条
+## Endpoints
 
-## 查询方式
+| Query Type | URL | Example |
+|------------|-----|---------|
+| By arXiv ID | `https://inspirehep.net/api/literature?q=eprint:{id}` | `...?q=eprint:1512.04442` |
+| By control number (recid) | `https://inspirehep.net/api/literature/{recid}` | `.../literature/1409497` |
+| By TexKey | `https://inspirehep.net/api/literature?q={texkey}` | `...?q=LHCb:2015svh` |
+| By DOI | `https://inspirehep.net/api/literature?q={doi}` | `...?q=10.1007/JHEP02(2016)104` |
+| By collaboration + year | `https://inspirehep.net/api/literature?q=collaboration:LHCb%20and%20earliest_date:2025` | Search results |
 
-### 按 arXiv ID 查询 (最常用)
+**Required header**: `Accept: application/json`
 
 ```bash
 curl -s -H 'Accept: application/json' \
   'https://inspirehep.net/api/literature?q=eprint:1512.04442'
 ```
 
-### 按 InspireHEP 控制号直接查询
+## Response Structure
 
-```bash
-curl -s -H 'Accept: application/json' \
-  'https://inspirehep.net/api/literature/1409497'
-```
-
-### 按合作组和年份搜索
-
-```bash
-curl -s -H 'Accept: application/json' \
-  'https://inspirehep.net/api/literature?q=collaboration:LHCb%20and%20earliest_date:2025'
-```
-
-## 返回字段解析
-
-### 顶层结构
+### Search Response (by arXiv ID, TexKey, DOI)
 
 ```json
 {
   "hits": {
     "hits": [{
-      "id": "1409497",                     // control_number (字符串)
-      "metadata": { ... }                  // 详细元数据
+      "id": 1409497,           // control_number
+      "metadata": { ... }      // Full paper metadata
     }],
     "total": 1
   }
 }
 ```
 
-### metadata 核心字段
-
-| 字段 | 类型 | 说明 | 示例 |
-|------|------|------|------|
-| `control_number` | int | InspireHEP 数据库主键 | `1409497` |
-| `texkeys` | string[] | BibTeX 引用标识符 | `["LHCb:2015svh"]` |
-| `preprint_date` | string | 预印本提交日期 | `"2015-12-14"` |
-| `earliest_date` | string | 最早日期 | `"2015-12-14"` |
-| `document_type` | string[] | 文档类型 | `["article"]` |
-| `citation_count` | int | 被引用次数 | (实际数值) |
-| `author_count` | int | 作者数量 | `500+` |
-
-### 标题 (titles 数组)
+### Direct Response (by recid)
 
 ```json
-"titles": [
-  {"source": "arXiv", "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay"},
-  {"source": "JHEP", "title": "Angular analysis of the B0 to K*0 mu+ mu- decay"}
-]
+{
+  "id": 1409497,
+  "metadata": { ... }          // Full paper metadata (no hits wrapper)
+}
 ```
 
-- 优先用 arXiv 来源的标题 (保留完整 LaTeX)
+## Key Metadata Fields
 
-### 作者 (authors 数组)
+| Field | Path | Type | Use |
+|-------|------|------|-----|
+| **control_number** | `id` (search) or `metadata.control_number` (direct) | int | `recid` for InspireHEP URLs |
+| **texkeys** | `metadata.texkeys[]` | string[] | BibTeX citation keys. Use the first (collaboration-level) one for filenames. |
+| **titles** | `metadata.titles[]` | object[] | Paper titles in various formats. Prefer entries with `source: "arXiv"` (preserves LaTeX). |
+| **abstracts** | `metadata.abstracts[]` | object[] | Abstracts in various formats. Prefer `source: "arXiv"`. |
+| **authors** | `metadata.authors[].full_name` | string[] | Full author list. Use first author + " and others" for the `author` field. |
+| **first_author** | `metadata.first_author` | object | First author with email and affiliation info. |
+| **collaborations** | `metadata.collaborations[].value` | string[] | Collaboration name(s). |
+| **preprint_date** | `metadata.preprint_date` | string | arXiv v1 submission date (YYYY-MM-DD). |
+| **arxiv_eprints** | `metadata.arxiv_eprints[].value` | string | arXiv ID (without version number). |
+| **dois** | `metadata.dois[].value` | string[] | DOI(s). |
+| **publication_info** | `metadata.publication_info[]` | object[] | Journal title, volume, issue, article ID, year. |
+| **keywords** | `metadata.keywords[].value` | string[] | Author and INSPIRE keywords. |
+| **citation_count** | `metadata.citation_count` | int | Total citation count. |
+| **citation_count_without_self_citations** | `metadata.citation_count_without_self_citations` | int | Citations excluding self-citations. |
 
-```json
-"authors": [
-  {
-    "full_name": "Aaij, Roel",
-    "affiliations": [{"value": "Nikhef, Amsterdam"}]
-  },
-  ...
-]
-```
-
-`first_author` 对象还包含邮箱信息。
-
-### 发表信息 (publication_info)
-
-```json
-"publication_info": [{
-  "journal_title": "JHEP",
-  "journal_volume": "02",
-  "artid": "104",
-  "year": 2016
-}]
-```
-
-### DOI
-
-```json
-"dois": [
-  {"source": "JHEP", "value": "10.1007/JHEP02(2016)104"}
-]
-```
-
-### arXiv 信息
-
-```json
-"arxiv_eprints": [{
-  "value": "1512.04442",
-  "categories": ["hep-ex"]
-}]
-```
-
-### 摘要 (abstracts 数组)
-
-```json
-"abstracts": [
-  {"source": "arXiv", "value": "An angular analysis of the $B^0 \\to K^{*0}(\\to K^+\\pi^-)\\mu^+\\mu^-$ decay..."},
-  {"source": "Springer", "value": "An angular analysis of the B0 to K*0 mu+ mu- decay..."}
-]
-```
-
-- 优先用 arXiv 来源的摘要 (保留 LaTeX 格式)
-
-### 关键词
-
-```json
-"keywords": [
-  {"source": "author", "value": "angular analysis"},
-  {"schema": "INSPIRE", "value": "rare B-meson decays"}
-]
-```
-
-### 额外返回字段
-
-除上述核心字段外，`inspirehep-ext.py` 还返回以下辅助字段:
-
-| 字段 | 说明 |
-|------|------|
-| `arxiv_categories` | arXiv 分类列表 |
-| `journal_year` | 期刊发表年份 |
-| `journal_volume` | 期刊卷号 |
-| `journal_issue` | 期刊期号 |
-| `citation_without_self` | 排除自引后的引用次数 |
-| `inspire_hep_link` | 构建好的 Markdown 链接 (用于 JSON 文件的 `inspire-hep` 字段) |
-| `arxiv_link` | 构建好的 Markdown 链接 (不含版本号，需配合 arxiv-ext.py 补充) |
-
-## Python 提取示例
+## Python Extraction
 
 ```python
 import urllib.request
 import json
 
 def get_inspire_info(arxiv_id):
+    """Fetch paper metadata from InspireHEP by arXiv ID.
+
+    Returns a dict with fields mapped to flav-data JSON requirements.
+    """
     url = f'https://inspirehep.net/api/literature?q=eprint:{arxiv_id}'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    response = urllib.request.urlopen(req, timeout=15)
-    data = json.loads(response.read().decode('utf-8'))
+    data = json.loads(urllib.request.urlopen(req, timeout=15).read())
 
     hit = data['hits']['hits'][0]
     meta = hit['metadata']
-    recid = hit['id']  # control_number as string
+    recid = hit['id']
 
-    # texkey (Inspire ID)
+    # TexKey (prefer collaboration-level, usually first)
     texkey = meta.get('texkeys', [''])[0]
 
-    # 标题
-    for t in meta.get('titles', []):
-        if t.get('source') == 'arXiv':
-            title = t['title']
-            break
-    else:
-        title = meta.get('titles', [{}])[0].get('title', '')
+    # Title — prefer arXiv source (preserves LaTeX)
+    title = next(
+        (t['title'] for t in meta.get('titles', [])
+         if t.get('source') == 'arXiv'),
+        meta.get('titles', [{}])[0].get('title', '')
+    )
 
-    # 摘要
-    for a in meta.get('abstracts', []):
-        if a.get('source') == 'arXiv':
-            abstract = a['value']
-            break
-    else:
-        abstract = meta.get('abstracts', [{}])[0].get('value', '')
+    # Abstract — prefer arXiv source (preserves LaTeX)
+    abstract = next(
+        (a['value'] for a in meta.get('abstracts', [])
+         if a.get('source') == 'arXiv'),
+        meta.get('abstracts', [{}])[0].get('value', '')
+    )
 
-    # 作者
+    # Author
     authors = meta.get('authors', [])
     if len(authors) > 1:
         author_str = f"{authors[0]['full_name']} and others"
     elif authors:
         author_str = authors[0]['full_name']
     else:
-        author_str = ''
+        # Fallback: use collaboration name
+        collabs = meta.get('collaborations', [])
+        author_str = f"{collabs[0]['value']} collaboration" if collabs else ''
 
-    # 合作组
-    collaborations = meta.get('collaborations', [])
-    collaboration = collaborations[0]['value'] if collaborations else ''
+    # Collaboration
+    collabs = meta.get('collaborations', [])
+    collaboration = collabs[0]['value'] if collabs else ''
 
-    # 日期
+    # Date
     preprint_date = meta.get('preprint_date', '')
     time_str = preprint_date.replace('-', '.') if preprint_date else ''
 
-    # 期刊信息
-    pub_info = meta.get('publication_info', [{}])[0]
-    journal = pub_info.get('journal_title', '')
-    year = pub_info.get('year', '')
-    volume = pub_info.get('journal_volume', '')
-    artid = pub_info.get('artid', '')
-
-    # DOI
-    dois = meta.get('dois', [])
-    doi = dois[0]['value'] if dois else ''
-
     return {
         'texkey': texkey,
-        'recid': recid,
+        'recid': str(recid),
         'title': title,
         'abstract': abstract,
-        'author': author_str,
+        'author_str': author_str,
         'collaboration': collaboration,
         'time': time_str,
-        'journal': journal,
-        'year': year,
-        'volume': volume,
-        'artid': artid,
-        'doi': doi,
+        'inspire_hep_link': f'[{texkey}](https://inspirehep.net/literature/{recid})',
     }
 ```
 
-## 构建 Markdown 链接
+## Direct Query by recid
 
 ```python
-# inspire-hep 字段
-inspire_link = f"[{texkey}](https://inspirehep.net/literature/{recid})"
-# 示例: "[LHCb:2015svh](https://inspirehep.net/literature/1409497)"
-
-# arxiv 字段 (注意: InspireHEP API 不返回版本号，此链接为 v1 占位)
-# 实际使用时应配合 arxiv-ext.py 获取真实版本号后替换
-arxiv_link = f"[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})"
-# 示例: "[1512.04442v1](https://arxiv.org/pdf/1512.04442)"
+def get_inspire_by_recid(recid):
+    """Fetch paper metadata directly by InspireHEP control number."""
+    url = f'https://inspirehep.net/api/literature/{recid}'
+    req = urllib.request.Request(url, headers={'Accept': 'application/json'})
+    return json.loads(urllib.request.urlopen(req, timeout=15).read())
 ```
 
-> 注意: InspireHEP API 的 `arxiv_eprints.value` 字段不包含版本号。
-> 要构建带版本号的 arxiv 链接，需先用 `arxiv-ext.py` 获取版本号，再拼接。
+## Two ID Types
 
-## 两种 ID 的区别
+| Name | Example | Type | Purpose |
+|------|---------|------|---------|
+| **control_number (recid)** | `1409497` | Integer | Database primary key. Used in InspireHEP URLs. |
+| **TexKey** | `LHCb:2015svh` | String | BibTeX citation key. Format: `collaboration:year+hash`. Used for display and filenames. |
 
-| 名称 | 示例 | 类型 | 说明 |
-|------|------|------|------|
-| **control_number (recid)** | `1409497` | 整数 | 数据库自增主键，用于 URL |
-| **texkey** | `LHCb:2015svh` | 字符串 | `合作组:年份+hash` 格式，用于 BibTeX 和显示 |
+The URL uses recid: `https://inspirehep.net/literature/1409497`
+The display text uses TexKey: `[LHCb:2015svh](https://inspirehep.net/literature/1409497)`
 
-- URL 用 control_number: `https://inspirehep.net/literature/1409497`
-- 显示文本用 texkey: `[LHCb:2015svh]`
+## Notes
+
+1. **Always prefer arXiv-sourced titles and abstracts** — they preserve LaTeX formatting. Journal-sourced versions often strip LaTeX.
+2. **Author fallback**: If the `authors` array is empty or missing, construct the author field as `"{collaboration} collaboration"`.
+3. **Multiple TexKeys**: A paper may have both a collaboration-level TexKey (e.g., `LHCb:2015svh`) and an author-level one (e.g., `Aaij:2015oid`). Always use the collaboration-level one for filenames and indices.
+4. **Annual indices**: Always verify the latest TexKey on InspireHEP before writing or updating annual indices. TexKeys can change when papers are updated.
+5. **API reliability**: The InspireHEP API can intermittently return empty responses or timeout, especially for very large records (e.g., PDG reviews). If you get a `JSONDecodeError` or empty hits array, retry after a 2-second delay, or use the bibtex endpoint as fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
+6. **`arxiv_eprints.value` does not include the version number** — use the arXiv API to get the version.
