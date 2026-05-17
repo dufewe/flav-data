@@ -5,111 +5,271 @@ with open('./defs.py', 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
-# Fundamental conventions
+# Flavor Physics Observable Descriptions
 # ---------------------------------------------------------
 st.markdown('''
-# 基本符号约定
-本flav-data库的相关符号约定展示如下：
-- 对于一般的跃迁或衰变道(`transition`)，例如$A + B  \\to C + D$跃迁模式，我们将markdown文本简写为`A.B.2.C.D`形式以辨别该跃迁模式中所有的初、末态粒子并将跃迁符号$\\to$写为`2`
-- 粒子态表示成其英文字符串和其电荷属性的组合形式，其中粒子态的电荷属性有`+`、`-`和`0`三种，分别表示正电荷、负电荷和电中性
-- 在各跃迁模式中，初、末态粒子按照其电荷`+`、`-`、`0`的顺序进行排列
-- 反粒子标记为正粒子名称后加`Bar`，而带电粒子则直接用其电荷进行标记
-- 中微子符号不带味道指标，统一用`nu`或`nuBar`表示
-''')
+# 跃迁符号约定：`A.B.2.C.D`
 
-st.markdown('''
-# 观测量命名规则
-本flav-data库中观测量命名规则展示如下：
-- 观测量统一写为`OBS(transition)[condition]`的形式，其中`OBS`为观测量名称简写、`transition`表示该观测量所属的跃迁模式，而`condition`则是观测量中多跃迁模式间的关联条件（注：`condition`只在涉及多跃迁模式的观测量中表示出来）
-- 
-''')
+每个衰变或散射过程编码为跃迁符号 `A.B.2.C.D`，表示 $A + B \\to C + D$。数字 `2` 代替箭头 $\\to$，作为初末态之间的机器可解析分隔符。
 
+**命名规则：**
+1. **粒子名称**：使用英文名称或标准缩写（见下方粒子表）
+2. **电荷标识**：每个粒子必须携带电荷：`+`、`-` 或 `0`
+3. **排序**：同一态内粒子按电荷顺序排列：`+` → `-` → `0`
+4. **反粒子**：粒子名后加 `Bar`（如 `B0Bar`）。**例外**：带电粒子直接用电荷（如 `W-` 而非 `WBar`）
+5. **中微子**：无味道标识，统一用 `nu` 或 `nuBar`
+6. **多步过程**：用额外 `2` 分隔：`p.p.2.W+.2.mu+.nu`
+7. **中间共振态**：衰变到双轻子时加 `(2.l+.l-)` 后缀：`B0.2.Kst0.J/psi(2.l+.l-)`
+
+**示例：**
+
+| 过程 | LaTeX | 符号 | 说明 |
+|------|-------|------|------|
+| $B^0 \\to e^+ e^-$ | Leptonic decay | `B0.2.e+.e-` | 标准：+ 后 - |
+| $\\bar{B}^0 \\to e^+ e^-$ | Leptonic decay | `B0Bar.2.e+.e-` | 反粒子用 Bar |
+| $B^+ \\to K^+ \\mu^+ \\mu^-$ | Semileptonic | `B+.2.K+.mu+.mu-` | 末态排序 |
+| $W^- \\to \\mu^- \\bar{\\nu}_\\mu$ | Leptonic decay | `W-.2.mu-.nuBar` | 带电 W 用自身电荷 |
+| $B_s^0 \\to \\phi \\mu^+ \\mu^-$ | Semileptonic | `Bs0.2.phi.mu+.mu-` | Bs 介子记号 |
+| $\\Lambda_b^0 \\to J/\\psi\\, p\\, \\pi^-$ | Non-leptonic | `Lambdab0.2.J/psi.p.pi-` | 重子衰变 |
+| $pp \\to Z \\to \\mu^+ \\mu^-$ | Scattering | `p.p.2.Z.2.mu+.mu-` | 两步过程 |
+| $e^+ e^- \\to \\mu^+ \\mu^-$ | Scattering | `e+.e-.2.mu+.mu-` | 对撞机过程 |
+''')
 
 # ---------------------------------------------------------
-# Fundamental observable definitions
+# Particle Abbreviation Tables
 # ---------------------------------------------------------
 st.markdown('''
-# Fundamental observables in flavor physics
+# 粒子缩写表
 
+## 介子 (Mesons)
 
+| 粒子 | 符号 | 说明 |
+|------|------|------|
+| $B^0$, $B^+$, $B^-$ | `B0`, `B+`, `B-` | 带电粒子用电荷标识 |
+| $\\bar{B}^0$ | `B0Bar` | 中性反粒子用 Bar |
+| $B_s^0$, $\\bar{B}_s^0$ | `Bs0`, `Bs0Bar` | |
+| $K^+$, $K^0$, $K_S^0$ | `K+`, `K0`, `KS0` | |
+| $K^{*0}$, $\\bar{K}^{*0}$ | `Kst0`, `Kst0Bar` | K 星共振态 |
+| $D^0$, $D^+$ | `D0`, `D+` | |
+| $D^{*0}$, $D^{*+}$ | `Dst0`, `Dst+` | D 星共振态 |
+| $\\pi^0$, $\\pi^+$, $\\pi^-$ | `pi0`, `pi+`, `pi-` | |
+| $\\rho^0$, $\\rho^+$, $\\rho^-$ | `rho0`, `rho+`, `rho-` | |
+| $\\phi$ | `phi` | 中性矢量介子 |
+| $J/\\psi$ | `J/psi` | 粲偶素 |
+| $\\psi(2S)$ | `psi(2S)` | 粲偶素激发态 |
+| $\\eta$, $\\eta'$ | `eta`, `etaprime` | |
 
+## 重子 (Baryons)
 
+| 粒子 | 符号 | 说明 |
+|------|------|------|
+| $\\Lambda$, $\\Lambda_c^+$, $\\Lambda_b^0$ | `Lambda`, `Lambdac+`, `Lambdab0` | |
+| $\\Sigma^+$, $\\Sigma^0$, $\\Sigma^-$ | `Sigma+`, `Sigma0`, `Sigma-` | |
+| $\\Xi_c^0$, $\\Xi_b^0$ | `Xic0`, `Xib0` | |
+| $\\Omega_c^0$ | `Omegac0` | |
+| $p$, $n$ | `p`, `n` | 质子和中子 |
 
+## 轻子与玻色子 (Leptons & Bosons)
+
+| 粒子 | 符号 | 说明 |
+|------|------|------|
+| $e^+$, $e^-$ | `e+`, `e-` | |
+| $\\mu^+$, $\\mu^-$ | `mu+`, `mu-` | |
+| $\\tau^+$, $\\tau^-$ | `tau+`, `tau-` | |
+| $\\nu$（任意味道）, $\\bar{\\nu}$ | `nu`, `nuBar` | 无味道标签 |
+| $W^+$, $W^-$, $Z$ | `W+`, `W-`, `Z` | |
+| $\\gamma$ | `gamma` | 光子 |
+| $t$, $\\bar{t}$ | `t`, `tBar` | 顶夸克 |
 ''')
 
+# ---------------------------------------------------------
+# Observable Naming Convention
+# ---------------------------------------------------------
 st.markdown('''
-for charged-current beauty processes $B\\to M\\ell\\nu$, the observables include
-1. forward-backward asymmetry:
-            
-$$A_{FB}(q^2) \\equiv \\left(\\int_0^1 \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2d\\cos\\theta} d\\cos\\theta - \\int_{-1}^0 \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2d\\cos\\theta} d\\cos\\theta \\right) \\bigg/ \\int_{-1}^1 \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2d\\cos\\theta} d\\cos\\theta$$
-            
-2. polarization asymmetry of lepton (left-right asymmetry?):
-            
-$$P_\\ell (q^2) \\equiv \\left(\\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2} \\bigg|_{\\lambda_\ell = +1/2} - \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2} \\bigg|_{\\lambda_\ell = -1/2}\\right) \\bigg/ \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2}$$
-            
-3. longitudinal polarization fraction of vector meson $M$: 
-    
-$$F_L^M (q^2) \\equiv \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2} \\bigg|_{\\lambda_M = 0} \\bigg/ \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2}$$
+# 观测量命名规则：`OBS(transition)[condition]`
 
-4. branching ratio: 
-        
-$$\\mathcal{B}(B\\to M\\ell\\nu) \\equiv \\Gamma(B\\to M\\ell\\nu) \\bigg/ \\Gamma_B^{\\rm tot}$$
+每个测量量使用模式 `OBS(transition)[condition]` 命名：
 
-5. lepton flavor universality violation observable with $\\ell = \\mu, e$:
-            
-$$R_M^{\\tau\\ell} \\equiv \\int_{m_\\tau^2}^{(m_B-m_M)^2} \\frac{d\\Gamma(B\\to M\\tau\\nu)}{dq^2} dq^2 \\bigg/ \\int_0^{(m_B^2 - m_M)^2} \\frac{d\\Gamma(B\\to M\\ell\\nu)}{dq^2} dq^2$$
+- **OBS**：观测量符号缩写（见下表）。**仅用符号，不写完整表达式定义**
+- **transition**：`A.B.2.C.D` 跃迁符号
+- **condition**：可选限定符（方括号），**仅**用于多跃迁可观测量（如不同轻子味道比值）。**不**用于区分不同 q² 区间的测量——使用独立 `data[]` 条目配合 `q2min`/`q2max`
 
-
-for neutral-current beauty processes $B\\to M\\ell\\ell$, the observables include
-1. lepton flavor universality violation observable:
-            
-$$R_M^{\\mu e} \\equiv \\int_0^{(m_B-m_M)^2} \\frac{d\\Gamma(B\\to M\\mu\\mu)}{dq^2} dq^2 \\bigg/ \\int_0^{(m_B-m_M)^2} \\frac{d\\Gamma(B\\to Mee)}{dq^2} dq^2$$
-
-2. CP-averaged isospin asymmetry of $B\\to K^{(\\ast)}\\mu\\mu$:
-            
-$$A_I \\equiv \\frac{\\Gamma(B^0\\to K^{(\\ast)0}\\mu\\mu) - \\Gamma(B^+\\to K^{(\\ast)+}\\mu\\mu)}{\\Gamma(B^0\\to K^{(\\ast)0}\\mu\\mu) + \\Gamma(B^+\\to K^{(\\ast)+}\\mu\\mu)}$$
-            
-3. differential branching fraction:
-            
-$$\\frac{d\\mathcal{B}(B\\to M\\ell\\ell)}{dq^2}$$
-
-4. S-wave fraction (see 1606.04731):
-            
-$$F_S$$
-            
-5. angular observable:
-            
-$$F_L,S_3,S_4,S_7,A_5,A_{FB},A_6,A_8,A_9$$
-$$F_L,A_3,A_4,A_5,A_{6s},A_7,A_8,A_9$$
-$$F_L,S_3,S_4,S_5,A_{FB},S_7,S_8,S_9$$
-$$F_L,P_1,P_2,P_3,P_4^\\prime,P_5^\\prime,P_6^\\prime,P_8^\\prime$$
-$$F_L,A_T^{\\rm Re},A_T^{(2)},A_T^{\\rm Im}$$ (see 2010.06011, 1501.03038)
-$$A_{FB}^\\ell,A_{FB}^h,f_L,A_{FB}^{\\ell h}$$ (see 1503.07138, 1808.00264)
-            
-$$K_1,K_2,K_{3-34}$$ (see 1710.00746, 1808.00264)
-            
-$$F_H,A_{FB}$$
-            
-$$A_{CP}$$
-            
-$$\\Sigma A_{FB}, \\Delta A_{FB}$$ (2502.04013)
-
+**特殊模式：**
+- 观测量差值：`DeltaOBS(transition)[condition]`，LaTeX：$\\Delta_{OBS}^{condition}(transition)$
+- 观测量比值：`ROBS(transition)[condition]`，LaTeX：$R_{OBS}^{condition}(transition)$
+- CKM 参数 $r$ 和 $\\delta$：B 介子和末态介子带负电荷（如 `B-.2.D0.K-`）
 ''')
 
+# ---------------------------------------------------------
+# Observable Abbreviation Tables
+# ---------------------------------------------------------
+st.markdown('''
+# 观测量缩写表
 
-'''
-    "+,0,-"
-    "heavy,light"
+## 分支比与衰变宽度
 
-    
-    "inspire-hep": "[LHCb:2026dan](https://inspirehep.net/literature/3144939)",
-    "author": "Aaij, Roel and others",
-    "collaboration": "LHCb",
-    "title": "Measurement of the $W$-boson production cross-sections in $pp$ collisions at $\\sqrt{s}$ = 13 TeV in the forward region",
-    "arxiv": "[hep-ex/2604.12706v1](https://arxiv.org/pdf/2604.12706)",
-    "year": "2026",
-    "abstract": "a precision measurement of the $W$-boson production cross-section, using the $W \\to \\mu\\nu$ decay channel, based on a sample of proton-proton collision data collected by the LHCb experiment at $\\sqrt{s} = 13$ TeV and corresponding to an integrated luminosity of 5.1 fb$^{−1}$",
-    "pdf": "https://arxiv.org/pdf/2604.12706",
-    "data": [
-    ]
-'''
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `Br` | $\\mathcal{B}$ | 分支比 |
+| `dBr/dq2` | $d\\mathcal{B}/dq^2$ | 微分分支比 |
+| `Gamma` | $\\Gamma$ | 衰变宽度（部分或总） |
+
+## 寿命
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `Tau` | $\\tau$ | 粒子寿命 |
+
+## 质量与混合参数
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `Mass` | $M_f$ | 壳上质量（大写），写为 `Mass(f)` |
+| `mass` | $m$ | $\\overline{\\text{MS}}$ 质量（小写） |
+| `DeltaMass` | $\\Delta M$ | 质量差 / 中性介子混合参数 |
+
+## 散射截面
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `Sigma` | $\\sigma$ | 总或置信截面 |
+| `dSigma/dpT` | $d\\sigma/dp_T$ | 微分截面（横向动量） |
+| `dSigma/deta` | $d\\sigma/d\\eta$ | 微分截面（赝快度） |
+
+## 角系数（CP 平均）
+
+| 缩写 | LaTeX | 说明 | 典型范围 |
+|------|-------|------|----------|
+| `FL` | $F_L$ | 矢量介子纵向极化分数 | [0, 1] |
+| `S3` | $S_3$ | T-奇角系数 | [-0.5, 0.5] |
+| `S4` | $S_4$ | 角系数 | [-1, 1] |
+| `S5` | $S_5$ | 角系数 | [-1, 1] |
+| `AFB` | $A_{FB}$ | 双轻子系统前后不对称性 | [-1, 1] |
+| `S7` | $S_7$ | T-奇角系数 | [-1, 1] |
+| `S8` | $S_8$ | T-奇角系数 | [-1, 1] |
+| `S9` | $S_9$ | T-奇角系数 | [-0.5, 0.5] |
+| `FH` | $F_H$ | 角分布平坦项 (B → Kℓℓ) | [-1, 1] |
+
+## CP 不对称观测量
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `ACP` | $A_{CP}$ | 直接 CP 不对称性 |
+| `DeltaACP` | $\\Delta A_{CP}$ | 两种模式间 CP 不对称性差值 |
+| `SigmaAFB` | $\\Sigma A_{FB}$ | CP 平均前后不对称性：$(A_{FB} + \\bar{A}_{FB})/2$ |
+| `DeltaAFB` | $\\Delta A_{FB}$ | CP 不对称前后不对称性：$(A_{FB} - \\bar{A}_{FB})/2$ |
+| `A3` | $A_3$ | S3 的 CP 不对称性 |
+| `A4` | $A_4$ | S4 的 CP 不对称性 |
+| `A5` | $A_5$ | S5 的 CP 不对称性 |
+| `A6s` | $A_{6s}$ | S6s 的 CP 不对称性 (Bs → ϕℓℓ) |
+| `A7` | $A_7$ | S7 的 CP 不对称性 |
+| `A8` | $A_8$ | S8 的 CP 不对称性 |
+| `A9` | $A_9$ | S9 的 CP 不对称性 |
+
+## 优化观测量 (P)
+
+| 缩写 | LaTeX | 定义 |
+|------|-------|------|
+| `P1` | $P_1$ | $S_3 / (1 - F_L)$ |
+| `P2` | $P_2$ | $\\beta / [2(1 - F_L)]$，其中 $\\beta$ 与 AFB 相关 |
+| `P3` | $P_3$ | $\\mathrm{Im}(G_\\perp G_\\parallel^*) / (1 - F_L)$ |
+| `P4p` | $P_4^\\prime$ | S4 的优化版本（`p` 表示 prime） |
+| `P5p` | $P_5^\\prime$ | S5 的优化版本 |
+| `P6p` | $P_6^\\prime$ | S6 的优化版本 |
+| `P8p` | $P_8^\\prime$ | S8 的优化版本 |
+
+## 简化不对称观测量
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `A6p` | $A_6^\\prime$ | 简化前后不对称性：$A_6/(1 - F_L)$，用于 $B_s \\to \\phi\\ell\\ell$ |
+
+## 时间依赖 CP 参数
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `C` | $C$ | 时间依赖分析中的直接 CP 破坏参数 |
+| `S` | $S$ | 混合诱导 CP 破坏参数 |
+
+## LFU 差值观测量 (Q)
+
+| 缩写 | LaTeX | 定义 |
+|------|-------|------|
+| `QFL` | $Q_{F_L}$ | $F_L^{\\mu} - F_L^{e}$ |
+| `Q1` | $Q_1$ | $P_1^{\\mu} - P_1^{e}$ |
+| `Q2` | $Q_2$ | $P_2^{\\mu} - P_2^{e}$ |
+| `Q3` | $Q_3$ | $P_3^{\\mu} - P_3^{e}$ |
+| `Q4` | $Q_4$ | $P_4^{\\prime\\mu} - P_4^{\\prime e}$ |
+| `Q5` | $Q_5$ | $P_5^{\\prime\\mu} - P_5^{\\prime e}$ |
+| `Q6` | $Q_6$ | $P_6^{\\prime\\mu} - P_6^{\\prime e}$ |
+| `Q8` | $Q_8$ | $P_8^{\\prime\\mu} - P_8^{\\prime e}$ |
+
+## 比值与归一化
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `R` | $R$ | LFU 检验的分支比比值 |
+| `r` | $r$ | 归一化比值（如 $r_{J/\\psi}$ 粲偶素归一化） |
+
+## 不对称性与分数
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `S1` | $S_1$ | 一般不对称性参数 |
+| `AC` | $A_C$ | 电荷不对称性 |
+| `f` | $f$ | 分数或比例（如碎裂分数） |
+
+## CKM 参数
+
+| 缩写 | LaTeX | 说明 |
+|------|-------|------|
+| `gammaCKM` | $\\gamma_{CKM}$ | CKM 幺正三角形角 $\\gamma$（也称 $\\phi_3$） |
+| `r` | $r$ | 振幅比值（需在跃迁中指定衰变道） |
+| `delta` | $\\delta$ | 强相位差（需在跃迁中指定衰变道） |
+''')
+
+# ---------------------------------------------------------
+# Multi-Transition Observables
+# ---------------------------------------------------------
+st.markdown('''
+# 多跃迁观测量
+
+对于比较两个或更多跃迁的观测量（如轻子味道普适性检验）：
+
+- **transition** 使用多跃迁过程的共享部分
+- 共享粒子用通用记号：`l1`/`l2`（轻子），`q1`/`q2`（夸克），`nu1`/`nu2`（中微子），`h1`/`h2`（强子）
+- **condition** 编码味道映射，如 `[mu/e]` 表示 l1 = μ，l2 = e
+
+**示例：**
+
+| 观测量 | LaTeX | 符号 | 说明 |
+|--------|-------|------|------|
+| $R_{K^*} = \\frac{\\mathcal{B}(B^0 \\to K^{*0}\\mu^+\\mu^-)}{\\mathcal{B}(B^0 \\to K^{*0}e^+e^-)}$ | $R$ | `R(B0.2.Kst0.l+.l-)[mu/e]` | 轻子味道比值 |
+| $R_K = \\frac{\\mathcal{B}(B^+ \\to K^+\\mu^+\\mu^-)}{\\mathcal{B}(B^+ \\to K^+e^+e^-)}$ | $R$ | `R(B+.2.K+.l+.l-)[mu/e]` | |
+| $A_{CP}(\\mu) - A_{CP}(e)$ | $\\Delta A_{CP}$ | `DeltaACP(B-.2.l-.nuBar)[mu-e]` | CP 不对称性差值 |
+| $r = \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $r$ | `r(B-.2.D0.K-)` | 振幅比值 (GLW/ADS) |
+| $\\delta = \\arg \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $\\delta$ | `delta(B-.2.D0.K-)` | 强相位差 |
+
+**差值与比值统一约定：**
+
+| 类型 | 符号 | LaTeX | 示例 |
+|------|------|-------|------|
+| 差值 | `DeltaOBS(transition)[condition]` | $\\Delta_{OBS}^{condition}(transition)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu/e]` |
+| 比值 | `ROBS(transition)[condition]` | $R_{OBS}^{condition}(transition)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` |
+''')
+
+# ---------------------------------------------------------
+# Common q² Intervals
+# ---------------------------------------------------------
+st.markdown('''
+# 常见 q² 区间 (GeV²)
+
+以下为 B → K(*)ℓℓ 分析中最常用的 q² 区间边界。**始终使用论文中报告的具体数值**。
+
+| 区域 | 区间 |
+|------|------|
+| 极低 q²（电子模式） | [0.0008, 0.257], [0.002, 1.12] |
+| 低 q² | [0.06, 0.98], [0.1, 1.1], [1.1, 2.5], [1.1, 4.0], [1.1, 6.0], [2.0, 3.0], [2.0, 4.0], [3.0, 4.0], [4.0, 5.0], [4.0, 6.0], [5.0, 6.0], [6.0, 7.0], [6.0, 8.0] |
+| 粲偶素 veto | [8.0, 11.0], [11.0, 12.5] — 通常因共振排除 |
+| 高 q² | [14.0, 22.0], [14.3, ∞], [15.0, 17.0], [15.0, 19.0], [16.0, 17.0], [17.0, 19.0], [18.0, 19.0] |
+''')
