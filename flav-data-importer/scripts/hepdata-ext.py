@@ -7,7 +7,7 @@ Usage:
 
 Example:
     python3 hepdata-ext.py 1409497
-    python3 hepdata-ext.py 1409497 -o /tmp/hepdata_out --table "Table 1"
+    python3 hepdata-ext.py 1409497 -o <output_dir> --table "Table 1"
 """
 
 import json
@@ -16,6 +16,7 @@ import subprocess
 import sys
 import argparse
 import urllib.request
+import shutil
 
 try:
     import yaml
@@ -23,7 +24,23 @@ try:
 except ImportError:
     HAS_YAML = False
 
-HEPDATA_CLI = "/hepdata-cli"
+# Resolve hepdata-cli path: check PATH first, then common venv locations
+HEPDATA_CLI: str = shutil.which('hepdata-cli') or ''
+if not HEPDATA_CLI:
+    # Fallback: check Python venv bin, user-local bin, and system-wide locations
+    venv_bin = os.path.join(sys.prefix, 'bin', 'hepdata-cli')
+    candidates = [
+        venv_bin,
+        os.path.join(os.path.expanduser('~/.local/bin'), 'hepdata-cli'),
+        '/opt/homebrew/bin/hepdata-cli',
+        '/usr/local/bin/hepdata-cli',
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            HEPDATA_CLI = candidate
+            break
+    if not HEPDATA_CLI:
+        HEPDATA_CLI = 'hepdata-cli'  # Let subprocess search PATH at runtime
 
 
 def fetch_table_names(inspire_id):
@@ -36,10 +53,19 @@ def fetch_table_names(inspire_id):
         print(f"Error: {result.stderr}")
         return None
     try:
-        return json.loads(result.stdout)
+        tables = json.loads(result.stdout)
     except json.JSONDecodeError:
-        print("Warning: Could not parse table names as JSON")
-        return result.stdout.strip().split('\n') if result.stdout.strip() else []
+        # hepdata-cli 0.3.x outputs Python repr (single quotes), not JSON
+        try:
+            import ast
+            tables = ast.literal_eval(result.stdout)
+        except (ValueError, SyntaxError):
+            print("Warning: Could not parse table names")
+            return result.stdout.strip().split('\n') if result.stdout.strip() else []
+    # Flatten nested list if hepdata-cli wraps output in extra array
+    if isinstance(tables, list) and tables and isinstance(tables[0], list):
+        tables = tables[0]
+    return tables
 
 
 def download_metadata(inspire_id, output_dir):
@@ -95,7 +121,7 @@ def parse_metadata(meta_path):
 
     return {
         'recid': data.get('recid', ''),
-        'inspire_id': data.get('inspire_id', ''),
+        'inspire_id': data.get('inspire_id') or '',
         'hepdata_doi': data.get('hepdata_doi', ''),
         'record': {
             'title': record.get('title', ''),
@@ -222,7 +248,7 @@ def main():
     )
     parser.add_argument('inspire_id', help='InspireHEP control number')
     parser.add_argument(
-        '--output_dir', '-o', default='/tmp/hepdata_out', help='Output directory'
+        '--output_dir', '-o', default=None, help='Output directory (default: <cwd>/hepdata_out)'
     )
     parser.add_argument(
         '--table', '-t', help='Download only the specified table'
@@ -230,7 +256,7 @@ def main():
     args = parser.parse_args()
 
     inspire_id = args.inspire_id
-    output_dir = args.output_dir
+    output_dir = args.output_dir or os.path.join(os.getcwd(), 'hepdata_out')
 
     print(f"Fetching HEPData for Inspire ID: {inspire_id}")
 

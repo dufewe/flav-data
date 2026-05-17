@@ -62,14 +62,14 @@ Construct the `arxiv` field: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.0
 ## Step 3: Retrieve Data from HEPData
 
 ```bash
-HEPDATA_CLI="/hepdata-cli"
+HEPDATA_CLI="hepdata-cli"
 
 # List tables
 $HEPDATA_CLI fetch-names -i inspire 1409497
 # Returns: ["Table 1", "Table 2", ..., "Table 83"]
 
 # Download metadata
-$HEPDATA_CLI download -f json -i inspire 1409497 -d /tmp/hepdata_1512
+$HEPDATA_CLI download -f json -i inspire 1409497 -d <output_dir>
 ```
 
 **Table classification**:
@@ -86,11 +86,11 @@ $HEPDATA_CLI download -f json -i inspire 1409497 -d /tmp/hepdata_1512
 ```bash
 curl -sL -A "Mozilla/5.0" \
   "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml" \
-  > /tmp/table1.yaml
+  > <output_dir>/table1.yaml
 
 curl -sL -A "Mozilla/5.0" \
   "https://www.hepdata.net/download/table/ins1409497/Table%209/yaml" \
-  > /tmp/table9.yaml
+  > <output_dir>/table9.yaml
 ```
 
 ## Step 4: Build JSON
@@ -184,7 +184,7 @@ All files validated successfully.
 ## Step 7: Cleanup
 
 ```bash
-rm -rf /tmp/hepdata_1512 /tmp/table*.yaml
+rm -rf <output_dir>
 ```
 
 Remove all temporary PDFs, YAML files, and intermediate JSONs.

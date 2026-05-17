@@ -4,7 +4,8 @@ This document describes how to use the `hepdata-cli` binary to access HEPData st
 
 ## Overview
 
-- **Path**: `/hepdata-cli`
+- **Path**: Resolved automatically by `hepdata-ext.py`. Searches: `$PATH`, Python venv bin, user-local bin, Homebrew, and system-wide install.
+- **Install**: `pip install hepdata-cli` (commonly in a Python virtual environment or user-local bin)
 - **Purpose**: Fetch high-energy physics experimental data from HEPData, bypassing Cloudflare protection.
 - **Input**: InspireHEP control number (recid) or HEPData record ID.
 - **Output**: JSON metadata and YAML table data.
@@ -37,7 +38,7 @@ Returns a JSON array of table names:
 ### Step 2: Download Metadata
 
 ```bash
-hepdata-cli download -f json -i inspire 1409497 -d /tmp/hepdata_out
+hepdata-cli download -f json -i inspire 1409497 -d <output_dir>
 ```
 
 Downloads a JSON file containing:

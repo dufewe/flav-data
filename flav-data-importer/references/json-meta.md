@@ -39,8 +39,23 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
 | `abstract` | string | Yes | The complete abstract from the latest arXiv version. Must preserve LaTeX for any formulas. If no arXiv abstract is available, use the journal abstract. | `An angular analysis of the...` |
 | `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
-| `data` | array | Yes | Array of data entries, one per q² bin, dataset, or measurement group. Each entry contains `obs@N` observables and optionally correlation/covariance matrices. **Only `obs@N`, `type@N_correlation`, and `type@N_covariance` fields are allowed inside each entry.** | See Data Entries section |
+| `data` | array | Yes | Array of data entries, one per q² bin, dataset, or measurement group. Each entry contains `obs@N` observables and optionally correlation/covariance matrices. **Allowed fields: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`.** | See Data Entries section |
 | `transition-mode` | string | Yes | **Must be the last field in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
+
+## Metadata Field Sources
+
+| Field | Source | Notes |
+|-------|--------|-------|
+| `inspire-hep` | InspireHEP BibTeX info | `[TexKey](https://inspirehep.net/literature/{recid})` |
+| `author` | InspireHEP BibTeX info | `"name1 and others"` format |
+| `collaboration` | InspireHEP BibTeX info | Collaboration name |
+| `title` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
+| `abstract` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
+| `arxiv` | arXiv webpage | `[primary_category/arxiv_idvN](url)` |
+| `time` | arXiv webpage | v1 submission date, `YYYY.MM.DD` |
+| `pdf` | arXiv webpage (preferred) | Fallback to InspireHEP or journal link |
+| `transition-mode` | Paper information | Property-based decay/scattering name |
+| `data` | Extracted from data source | HEPData, CDS, PDF, etc. |
 
 ## Data Entries (data[])
 
@@ -137,7 +152,7 @@ Use this format for values taken from external sources (PDG world averages, HFLA
 
 The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look up the source paper's arXiv ID from the reference list, then search InspireHEP.
 
-## Correlation and Covariance Matrices
+### Correlation and Covariance Matrices
 
 ### Correlation Matrix (`type@N_correlation`)
 
@@ -155,6 +170,16 @@ Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 - **Naming**: use `type@1_correlation` to match `type@1_err` (stat), `type@2_correlation` to match `type@2_err` (syst), etc.
 - **Format**: matrix elements are floats (not strings).
 - If no correlation matrix is available, **omit the field entirely** (do not set to `null`).
+
+### Total Error Correlation/Covariance (`tot_correlation`, `tot_covariance`)
+
+When using the total error format (`tot_err_up`/`tot_err_down` without separate `type@N_err` components), the matrix fields use the `tot_` prefix:
+
+```json
+"tot_correlation": [[1.0, 0.5], [0.5, 1.0]]
+```
+
+**Rules:** Same as `type@N_correlation`/`type@N_covariance` above. The `tot_` prefix corresponds to the `tot_err` naming. Do NOT use `tot_correlation` when component errors (`type@N_err`) are present — use `type@N_correlation` matching the specific error type instead.
 
 ### Covariance Matrix (`type@N_covariance`)
 

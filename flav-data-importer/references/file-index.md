@@ -61,9 +61,9 @@ Theoretical folders use the group name: `HPQCD`, `RBC-UKQCD`, `FNAL-MILC`, `JLQC
 
 ### Data Files
 
-Format: `{group}:{TexKey}.json`
+Format: `{Collaboration}:{TexKey}.json`
 
-The filename uses the collaboration name and TexKey from InspireHEP: `{group}:{TexKey}.json`.
+The filename uses the collaboration name (same as the `{group}` folder) and TexKey from InspireHEP.
 
 | Example | Description |
 |---------|-------------|

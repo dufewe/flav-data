@@ -64,6 +64,8 @@ Example: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`
 2. Extract the versioned ID from `<atom:id>` (format: `http://arxiv.org/abs/1512.04442v1`). Use regex `abs/(\d+\.\d+)(v\d+)?` to capture `1512.04442` and `v1`.
 3. If the paper has no arXiv page (e.g., some older journal-only papers), set `arxiv` to `null`.
 
+**Note on versions**: The arXiv API `<atom:id>` contains the **latest** version number (e.g., `v2`), not `v1`. The `vN` in the `arxiv` field should match the version from which data was cited. For most papers, the latest version is appropriate since it contains corrections. Use `<atom:id>` to extract the version.
+
 ## Python Extraction
 
 ```python
@@ -114,6 +116,7 @@ def get_arxiv_info(arxiv_id):
     id_url = entry.find('atom:id', ns).text
     vm = re.search(r'abs/(\d+\.\d+)(v\d+)?', id_url)
     arxiv_id_v = f"{vm.group(1)}{vm.group(2) or ''}" if vm else arxiv_id
+    # Note: <atom:id> contains the latest version (e.g., v2), not v1
 
     # Primary category
     pc = entry.find('arxiv:primary_category', ns)

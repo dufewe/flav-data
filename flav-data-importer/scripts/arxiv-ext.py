@@ -7,7 +7,7 @@ Usage:
 
 Example:
     python3 arxiv-ext.py 1512.04442
-    python3 arxiv-ext.py 1512.04442 --output_dir /tmp/arxiv_out
+    python3 arxiv-ext.py 1512.04442 --output_dir <output_dir>
 """
 
 import urllib.request

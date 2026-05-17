@@ -153,7 +153,7 @@ The display text uses TexKey: `[LHCb:2015svh](https://inspirehep.net/literature/
 ## Notes
 
 1. **Always prefer arXiv-sourced titles and abstracts** — they preserve LaTeX formatting. Journal-sourced versions often strip LaTeX.
-2. **Author fallback**: If the `authors` array is empty or missing, construct the author field as `"{collaboration} collaboration"`.
+2. **Author fallback**: If the `authors` array is empty or missing, construct the author field as `"{group} collaboration"`.
 3. **Multiple TexKeys**: A paper may have both a collaboration-level TexKey (e.g., `LHCb:2015svh`) and an author-level one (e.g., `Aaij:2015oid`). Always use the collaboration-level one for filenames and indices.
 4. **Annual indices**: Always verify the latest TexKey on InspireHEP before writing or updating annual indices. TexKeys can change when papers are updated.
 5. **API reliability**: The InspireHEP API can intermittently return empty responses or timeout, especially for very large records (e.g., PDG reviews). If you get a `JSONDecodeError` or empty hits array, retry after a 2-second delay, or use the bibtex endpoint as fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.

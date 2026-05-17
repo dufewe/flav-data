@@ -83,15 +83,17 @@ Every measured quantity is named using the pattern `OBS(transition)[condition]`:
 
 For observables measuring a single process, no condition is needed:
 
-| Observable | LaTeX | Symbol |
-|------------|-------|--------|
-| Branching fraction $\mathcal{B}(B^0 \to e^+ e^-)$ | $\mathcal{B}$ | `Br(B0.2.e+.e-)` |
-| Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma(Kst0.2.K+.pi-)` |
-| Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2(B0.2.Xs.gamma)` |
-| Mass $M_t$ | $M_f$ | `Mass(t)` |
-| Lifetime $\tau_{e^-}$ | $\tau$ | `Tau(e-)` |
-| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma$ | `Sigma(p.p.2.e+.e-)` |
-| Mass difference $\Delta M_s$ | $\Delta M$ | `DeltaMass(Bs0.2.Bs0Bar)` |
+| Observable | LaTeX | Symbol | Notes |
+|------------|-------|--------|-------|
+| Branching fraction $\mathcal{B}(B^0 \to e^+ e^-)$ | $\mathcal{B}$ | `Br(B0.2.e+.e-)` | Standard decay |
+| Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma(Kst0.2.K+.pi-)` | Partial width |
+| Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2(B0.2.Xs.gamma)` | |
+| Mass $M_t$ | $M_f$ | `Mass(t)` | On-shell mass |
+| Mass $M_Z$ | $M_Z$ | `Mass(Z)` | On-shell mass of a resonance |
+| Lifetime $\tau_{e^-}$ | $\tau$ | `Tau(e-)` | |
+| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma$ | `Sigma(p.p.2.e+.e-)` | |
+| Mass difference $\Delta M_s$ | $\Delta M$ | `DeltaMass(Bs0.2.Bs0Bar)` | |
+| Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f$ | `f(Z.2.mu+.mu-)` | Branching fraction of a resonance |
 
 ### Multi-Transition Observables
 
@@ -258,10 +260,13 @@ Differences of angular coefficients between muon and electron modes: $Q_X = X^{\
 
 ## 4. LaTeX Mapping
 
-Use this mapping to construct the `latex` field from the observable abbreviation. In JSON files, all backslashes are doubled (`\\`). The `$...$` delimiters are added when constructing the full `latex` field, wrapping the complete expression including the transition.
+Use this mapping to construct the `latex` field from the observable abbreviation. The `$...$` delimiters are added when constructing the full `latex` field, wrapping the complete expression including the transition.
+
+**Important**: The dict values below are Python string literals. In Python source, `\\to` represents two backslash characters. In the JSON file text, each backslash is escaped, so `\\to` appears as `\\\\to`. After `json.load()`, Python recovers the original two-character `\\to` sequence. The validator (`json-valid.py`) checks the in-memory representation.
 
 ```python
 # Abbreviation → LaTeX symbol (no $ delimiters)
+# Values below are Python string literals (each \\ represents one backslash in memory).
 OBSERVABLE_LATEX = {
     # Branching fractions and decay widths
     'Br': '\\mathcal{B}',        'dBr/dq2': 'd\\mathcal{B}/dq^2',

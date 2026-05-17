@@ -31,13 +31,13 @@ Try sources in the following order. Move to the next source only if the current 
 
 **How to access**:
 ```bash
-HEPDATA_CLI="/hepdata-cli"
+HEPDATA_CLI="hepdata-cli"
 
 # List available tables for a paper
 $HEPDATA_CLI fetch-names -i inspire <inspire_recid>
 
 # Download metadata (contains table URLs and paper info)
-$HEPDATA_CLI download -f json -i inspire <inspire_recid> -d /tmp/hepdata_out
+$HEPDATA_CLI download -f json -i inspire <inspire_recid> -d <output_dir>
 ```
 
 **Downloading specific tables**:
@@ -71,7 +71,7 @@ curl -sL "https://cds.cern.ch/search?f=title&p1=<paper_title>"
 
 **Note**: Some CDS URLs may redirect to authentication pages. Check the downloaded file size — a real PDF will be >100KB; an HTML login page will be <20KB.
 
-### 3. LHCb Public Analysis Pages
+### 3. LHCb Public Pages
 
 **Why**: LHCb publishes official analysis result pages with structured data including correlation matrices.
 
@@ -99,7 +99,7 @@ for page in doc:
 "
 ```
 
-**Important**: pymupdf is located at `/python/site-packages` and must be run via terminal, not the execute_code sandbox.
+**Important**: pymupdf must be available in the Python environment. Run via terminal, not the execute_code sandbox.
 
 **Limitations**:
 - Table extraction from PDF text is error-prone. Column alignment may be lost.
@@ -125,9 +125,11 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 
 **Why**: Provides paper metadata (title, authors, collaboration, texkey, DOI) but NOT experimental data values.
 
-**When to use**: Always — for metadata extraction, not for data values.
+**When to use**: Always — for metadata extraction, not for data values. Use this in parallel with Steps 1–5 (which extract data values), not as a sequential fallback.
 
-See `references/inspirehep-api.md` for query details.
+**How to use**: Query by arXiv ID, recid, TexKey, or DOI. See `references/inspirehep-api.md` for query details and Python extraction code.
+
+**Note**: InspireHEP metadata is retrieved independently of the data source priority chain. You will always need it regardless of which data source (HEPData, CDS, PDF, etc.) provides the actual measurement values.
 
 ### 7. vision_analyze (Table Screenshots)
 
