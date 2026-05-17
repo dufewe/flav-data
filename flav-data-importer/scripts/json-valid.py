@@ -73,8 +73,19 @@ DATA_ENTRY_ALLOWED_PATTERNS = ['obs@', '_correlation', '_covariance']
 
 
 def validate_transition_symbol(name):
-    """Check that the observable name contains a valid transition symbol A.B.2.C.D."""
+    """Check that the observable name contains a valid transition symbol A.B.2.C.D.
+
+    Single-particle observables (lifetimes, masses) use OBS(particle) format
+    without transitions — e.g. Tau(e-), Mass(Z), Mass(t) — and are exempt.
+    See obs-abbr.md Section 2, Single-Transition Observables table.
+    """
     issues = []
+    # Extract OBS prefix (e.g. "Tau", "Mass", "Br", "FL")
+    obs_prefix = name.split('(', 1)[0] if '(' in name else ''
+    # Single-particle observables: no transition symbol needed
+    if obs_prefix in ('Tau', 'Mass', 'mass', 'dSigma', 'Sigma', 'dSigma/dpT', 'dSigma/deta', 'AC'):
+        return issues
+
     match = re.search(r'\(([^)]+)\)', name)
     if match:
         transition = match.group(1)

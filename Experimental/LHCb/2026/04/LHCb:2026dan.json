@@ -2,16 +2,16 @@
     "inspire-hep": "[LHCb:2026dan](https://inspirehep.net/literature/3144939)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Measurement of the $W$-boson production cross-sections in $pp$ collisions at $\\sqrt{s}$ = 13 TeV in the forward region",
+    "title": "Measurement of the $W$-boson production cross-sections in $pp$ collisions at $\\sqrt{s} = 13$ TeV in the forward region",
     "arxiv": "[hep-ex/2604.12706v1](https://arxiv.org/pdf/2604.12706)",
     "time": "2026.04.14",
-    "abstract": "a precision measurement of the $W$-boson production cross-section, using the $W \\to \\mu\\nu$ decay channel, based on a sample of proton-proton collision data collected by the LHCb experiment at $\\sqrt{s} = 13$ TeV and corresponding to an integrated luminosity of 5.1 fb$^{−1}$",
+    "abstract": "A precision measurement of the $W$-boson production cross-section is performed using the $W \\to \\mu \\nu$ decay channel, based on a sample of proton-proton collision data collected by the LHCb experiment at $\\sqrt{s} = 13$ TeV and corresponding to an integrated luminosity of 5.1 fb$^{-1}$. The cross-section is measured for muons with transverse momentum between 25 and 55 GeV and pseudorapidity between 2.0 and 4.5. The integrated production cross-sections of $W$ bosons are measured to be $\\sigma(W^+ \\to \\mu^+ \\nu) = 1754.2 \\pm 1.5 \\pm 11.9 \\pm 35.1$ pb and $\\sigma(W^- \\to \\mu^- \\bar{\\nu}) = 1178.1 \\pm 1.3 \\pm 9.7 \\pm 23.6$ pb, where the first uncertainties are statistical, the second are systematic, and the third are due to the luminosity determination.",
     "pdf": "https://arxiv.org/pdf/2604.12706",
     "data": [
         {
             "obs@1": {
-                "name": "Sigma(W+.2.mu+.nu)",
-                "latex": "$\\sigma(W^+\\to \\mu^+ \\nu)$",
+                "name": "Sigma(p.p.2.W+.2.mu+.nu)",
+                "latex": "$\\sigma(pp \\to W^+ \\to \\mu^+ \\nu)$",
                 "value": "1754.2",
                 "type@1_err": "stat",
                 "type@1_err_up": "1.5",
@@ -19,14 +19,14 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "11.9",
                 "type@2_err_down": "11.9",
-                "type@3_err_name": "lumi",
+                "type@3_err": "lumi",
                 "type@3_err_up": "35.1",
                 "type@3_err_down": "35.1",
                 "unit": "pb"
             },
             "obs@2": {
-                "name": "Sigma(W-.2.mu-.nubar)",
-                "latex": "$\\sigma(W^-\\to \\mu^- \\bar{\\nu})$",
+                "name": "Sigma(p.p.2.W-.2.mu-.nuBar)",
+                "latex": "$\\sigma(pp \\to W^- \\to \\mu^- \\bar{\\nu})$",
                 "value": "1178.1",
                 "type@1_err": "stat",
                 "type@1_err_up": "1.3",
@@ -34,12 +34,12 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "9.7",
                 "type@2_err_down": "9.7",
-                "type@3_err_name": "lumi",
+                "type@3_err": "lumi",
                 "type@3_err_up": "23.6",
                 "type@3_err_down": "23.6",
                 "unit": "pb"
             }
         }
     ],
-    "transition-mode": "leptonic decay"
+    "transition-mode": "scattering"
 }

@@ -2,16 +2,16 @@
     "inspire-hep": "[LHCb:2025ilq](https://inspirehep.net/literature/2918595)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Measurement of the branching fraction ratio R$_{K}$ at large dilepton invariant mass",
+    "title": "Measurement of the branching fraction ratio $R_K$ at large dilepton invariant mass",
     "arxiv": "[hep-ex/2505.03483v4](https://arxiv.org/pdf/2505.03483)",
     "time": "2025.05.06",
-    "abstract": "a test of lepton universality between muons and electrons, using $B^+ \\to K^+ \\ell^+ \\ell^−$ decays (where $\\ell = e, \\mu$), in the dilepton invariant-mass-squared region above 14.3 GeV$^2/c^4$, in proton-proton collisions corresponding to an integrated luminosity of 9 fb$^{−1}$ collected by the LHCb experiment between 2011 and 2018",
+    "abstract": "A test of lepton universality between muons and electrons is performed using $B^+ \\to K^+ \\ell^+ \\ell^-$ decays (where $\\ell = e$, $\\mu$), in the dilepton invariant-mass-squared region above 14.3 GeV$^2/c^4$. The data used for the measurement consists of beauty meson decays produced in proton-proton collisions, corresponding to an integrated luminosity of 9 fb$^{-1}$, collected by the LHCb experiment between 2011 and 2018. The ratio of branching fractions for $B^+ \\to K^+ \\mu^+ \\mu^-$ and $B^+ \\to K^+ e^+ e^-$ decays is measured to be $R_K = 1.08^{+0.11}_{-0.09}\\,(\\text{stat})\\,^{+0.04}_{-0.04}\\,(\\text{syst})$, which is consistent with the Standard Model prediction of unity. This constitutes the most precise test of lepton flavour universality using $B^+ \\to K^+ \\ell^+ \\ell^-$ decays with dilepton invariant-mass-squared above the $\\psi(2S)$ mass, whilst being the first of its kind at a hadron collider.",
     "pdf": "https://arxiv.org/pdf/2505.03483",
     "data": [
         {
             "obs@1": {
-                "name": "r(B+.2.K+)[J/psi]",
-                "latex": "$r_{B^+\\to K^+}^{J/\\psi}$",
+                "name": "r(B+.2.K+.l+.l-)[J/psi]",
+                "latex": "$r_{B^+ \\to K^+ \\ell^+ \\ell^-}^{J/\\psi}$",
                 "value": "0.997",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.003",
@@ -21,8 +21,8 @@
                 "type@2_err_down": "0.055"
             },
             "obs@2": {
-                "name": "R(B+.2.K+)[psi(2S)]",
-                "latex": "$R_{B^+\\to K^+}^{\\psi(2S)}$",
+                "name": "R(B+.2.K+.l+.l-)[psi(2S)]",
+                "latex": "$R_{B^+ \\to K^+ \\ell^+ \\ell^-}^{\\psi(2S)}$",
                 "value": "1.002",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.009",
@@ -32,8 +32,8 @@
                 "type@2_err_down": "0.004"
             },
             "obs@3": {
-                "name": "R(B+.2.K+)[mu/e]",
-                "latex": "$R_{B^+\\to K^+}^{[\\mu/e]}$",
+                "name": "R(B+.2.K+.l+.l-)[mu/e]",
+                "latex": "$R_{B^+ \\to K^+ \\ell^+ \\ell^-}^{\\mu/e}$",
                 "value": "1.08",
                 "type@1_err": "stat",
                 "type@1_err_up": "0.11",
@@ -45,6 +45,5 @@
             }
         }
     ],
-    "transition-mode": "semi-leptonic decay"
-
+    "transition-mode": "semileptonic decay"
 }

@@ -5,13 +5,13 @@
     "title": "Search for resonance-enhanced CP and angular asymmetries in the $\\Lambda_c^+ \\to p \\mu^+ \\mu^-$ decay at LHCb",
     "arxiv": "[hep-ex/2502.04013v2](https://arxiv.org/pdf/2502.04013)",
     "time": "2025.02.06",
-    "abstract": "the first measurement of the CP asymmetry of the decay rate ($A_{CP}$) and the CP average ($\\Sigma A_{FB}$) and CP asymmetry ($\\Delta A_{FB}$) of the forward-backward asymmetry in the muon system of $\\Lambda^+_c \\to p \\mu^+ \\mu^−$ decays, using a data sample of proton-proton collisions recorded by the LHCb experiment from 2016 to 2018 at a center-of-mass energy of 13 TeV, which corresponds to an integrated luminosity of 5.4 fb$^{−1}$",
+    "abstract": "The first measurement of the $CP$ asymmetry of the decay rate ($A_{CP}$) and the $CP$ average ($\\Sigma A_{FB}$) and $CP$ asymmetry ($\\Delta A_{FB}$) of the forward-backward asymmetry in the muon system of $\\Lambda_c^+ \\to p \\mu^+ \\mu^-$ decays is reported. The measurement is performed using a data sample of proton-proton collisions, recorded by the LHCb experiment from 2016 to 2018 at a center-of-mass energy of 13 TeV, which corresponds to an integrated luminosity of 5.4 fb$^{-1}$. The asymmetries are measured in two regions of dimuon mass near the $\\phi$-meson mass peak. The dimuon-mass integrated results are $A_{CP} = (-1.1 \\pm 4.0 \\pm 0.5)\\%$, $\\Sigma A_{FB} = (3.9 \\pm 4.0 \\pm 0.6)\\%$, and $\\Delta A_{FB} = (3.1 \\pm 4.0 \\pm 0.4)\\%$, where the first uncertainty is statistical and the second systematic. The results are consistent with the conservation of $CP$ symmetry and the Standard Model expectations.",
     "pdf": "https://arxiv.org/pdf/2502.04013",
     "data": [
         {
             "obs@1": {
                 "name": "ACP(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$A_{CP}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$A_{CP}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "-1.1e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "4.0e-2",
@@ -22,7 +22,7 @@
             },
             "obs@2": {
                 "name": "SigmaAFB(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$\\Sigma A_{FB}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$\\Sigma A_{FB}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "3.9e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "4.0e-2",
@@ -33,7 +33,7 @@
             },
             "obs@3": {
                 "name": "DeltaAFB(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$\\Delta A_{FB}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$\\Delta A_{FB}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "3.1e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "4.0e-2",
@@ -46,7 +46,7 @@
         {
             "obs@1": {
                 "name": "ACP(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$A_{CP}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$A_{CP}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "-0.8e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "6.2e-2",
@@ -59,7 +59,7 @@
             },
             "obs@2": {
                 "name": "ACP(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$A_{CP}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$A_{CP}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "-1.4e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "5.3e-2",
@@ -72,7 +72,7 @@
             },
             "obs@3": {
                 "name": "AFB(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$A_{FB}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$A_{FB}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "11.7e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "8.5e-2",
@@ -85,7 +85,7 @@
             },
             "obs@4": {
                 "name": "AFB(LambdacBar-.2.pBar.mu+.mu-)",
-                "latex": "$A_{FB}(\\bar{\\Lambda}_c^-\\to \\bar{p}\\mu^+\\mu^-)$",
+                "latex": "$A_{FB}(\\bar{\\Lambda}_c^- \\to \\bar{p} \\mu^+ \\mu^-)$",
                 "value": "2.2e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "8.7e-2",
@@ -98,7 +98,7 @@
             },
             "obs@5": {
                 "name": "AFB(Lambdac+.2.p.mu+.mu-)",
-                "latex": "$A_{FB}(\\Lambda_c^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$A_{FB}(\\Lambda_c^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "3.5e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "7.2e-2",
@@ -111,7 +111,7 @@
             },
             "obs@6": {
                 "name": "AFB(LambdacBar-.2.pBar.mu+.mu-)",
-                "latex": "$A_{FB}(\\bar{\\Lambda}_c^-\\to \\bar{p}\\mu^+\\mu^-)$",
+                "latex": "$A_{FB}(\\bar{\\Lambda}_c^- \\to \\bar{p} \\mu^+ \\mu^-)$",
                 "value": "-0.3e-2",
                 "type@1_err": "stat",
                 "type@1_err_up": "7.4e-2",
@@ -132,5 +132,5 @@
             ]
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }

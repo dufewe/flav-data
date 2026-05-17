@@ -11,22 +11,12 @@
         {
             "obs@1": {
                 "name": "Br(Sigma+.2.p.mu+.mu-)",
-                "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
+                "latex": "$\\mathcal{B}(\\Sigma^+ \\to p \\mu^+ \\mu^-)$",
                 "value": "1.08e-8",
                 "tot_err_up": "0.17e-8",
                 "tot_err_down": "0.17e-8"
             }
-        },
-        {
-            "obs@1": {
-                "name": "Br(Sigma+.2.p.mu+.mu-)",
-                "latex": "$\\mathcal{B}(\\Sigma^+\\to p\\mu^+\\mu^-)$",
-                "value": "1.09e-8",
-                "tot_err_up": "0.17e-8",
-                "tot_err_down": "0.17e-8",
-                "ref": "[He:2018yzu](https://inspirehep.net/literature/1678871)"
-            }
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }

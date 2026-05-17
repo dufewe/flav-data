@@ -1,11 +1,11 @@
 {
     "inspire-hep": "[LHCb:2025wld](https://inspirehep.net/literature/3084776)",
-    "author": "Aaij, R. and others",
+    "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
     "title": "Branching fraction measurement of the $\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu$ decay",
     "arxiv": "[hep-ex/2511.15681v2](https://arxiv.org/pdf/2511.15681)",
     "time": "2025.11.19",
-    "abstract": "a measurement of the branching fraction for the decay $\\Lambda \\to p \\mu^- \\bar{\\nu}_\\mu$, using $pp$ collision data collected by the LHCb experiment at a centre-of-mass energy of 13 TeV, based on data recorded between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb$^{−1}$",
+    "abstract": "A measurement of the branching fraction for the decay $\\mathit{\\Lambda} \\to p \\mu^- \\overline{\\nu}_\\mu$ is presented using $pp$ collision data collected by the LHCb experiment at a centre-of-mass energy of 13 TeV. The analysis is based on data recorded between 2016 and 2018, corresponding to an integrated luminosity of $5.4 \\text{ fb}^{-1}$. The result is obtained using $\\mathit{\\Lambda} \\to p \\pi^-$ decays as a normalisation channel. The measured branching fraction is $\\mathcal{B}(\\mathit{\\Lambda} \\to p \\mu^- \\overline{\\nu}_\\mu) = (1.462 \\pm 0.016 \\pm 0.100 \\pm 0.011) \\times 10^{-4}$, where the uncertainties are statistical, systematic, and due to the limited knowledge of the normalisation mode branching fraction, respectively. This result improves the precision of the branching fraction measurement by a factor of two compared to the previous best measurement and sets a more stringent bound on lepton flavour universality in $s \\to u$ quark transitions. It is consistent with previous measurements, and the extracted lepton flavour universality test observable, $\\mathcal{R}^{\\mu/e} = \\Gamma(\\mathit{\\Lambda} \\to p \\mu^- \\overline{\\nu}_\\mu)/\\Gamma(\\mathit{\\Lambda} \\to p e^- \\overline{\\nu}_e) = 0.175 \\pm 0.012$, agrees with the Standard Model prediction.",
     "pdf": "https://arxiv.org/pdf/2511.15681",
     "data": [
         {
@@ -24,14 +24,13 @@
                 "type@3_err_down": "0.011e-4"
             },
             "obs@2": {
-                "name": "R(Lambda.2.p)[mu/e]",
+                "name": "R(Lambda.2.p.l-.nuBar)[mu/e]",
                 "latex": "$\\mathcal{R}_{\\Lambda \\to p}^{\\mu/e}$",
                 "value": "0.175",
                 "tot_err_up": "0.012",
-                "tot_err_down": "0.012",
-                "ref": "[ParticleDataGroup:2024cfk](https://inspirehep.net/literature/2817040)"
+                "tot_err_down": "0.012"
             }
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }

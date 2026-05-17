@@ -1,11 +1,11 @@
 {
     "inspire-hep": "[LHCb:2025pxz](https://inspirehep.net/literature/2880313)",
-    "author": "Aaij, R. and others",
+    "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of $B^0 \\to K^{*0} e^+ e^-$ decays",
     "arxiv": "[hep-ex/2502.10291v2](https://arxiv.org/pdf/2502.10291)",
     "time": "2025.02.14",
-    "abstract": "an angular analysis of $B^0 \\to K^{*0} e^+ e^-$ decays and a test of lepton flavour universality by comparing the obtained angular observables with those measured in $B^0 \\to K^{*0} \\mu^+ \\mu^-$ decays, using proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8 and 13TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$, and performed in the region of the dilepton invariant mass squared of 1.1-6.0 GeV$^2/c^4$ as well as 1.1-7.0 GeV$^2/c^4$",
+    "abstract": "An angular analysis of $B^0 \\to K^{*0} e^+ e^-$ decays is presented using proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The analysis is performed in the region of the dilepton invariant mass squared of 1.1--6.0 GeV$^2/c^4$. In addition, a test of lepton flavour universality is performed by comparing the obtained angular observables with those measured in $B^0 \\to K^{*0} \\mu^+ \\mu^-$ decays. In general, the angular observables are found to be consistent with the Standard Model expectations as well as with global analyses of other $b \\to s \\ell^+ \\ell^-$ processes, where $\\ell$ is either a muon or an electron. No sign of lepton-flavour-violating effects is observed.",
     "pdf": "https://arxiv.org/pdf/2502.10291",
     "data": [
         {
@@ -1116,32 +1116,6 @@
                 "q2max": "6.0"
             },
             "obs@3": {
-                "name": "Q4(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_4^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "-0.07",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.17",
-                "type@1_err_down": "0.17",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.13",
-                "type@2_err_down": "0.13",
-                "q2min": "1.1",
-                "q2max": "6.0"
-            },
-            "obs@4": {
-                "name": "Q5(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_5^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "0.05",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.13",
-                "type@1_err_down": "0.13",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.11",
-                "type@2_err_down": "0.11",
-                "q2min": "1.1",
-                "q2max": "6.0"
-            },
-            "obs@5": {
                 "name": "Q2(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_2^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "0.07",
@@ -1154,7 +1128,46 @@
                 "q2min": "1.1",
                 "q2max": "6.0"
             },
+            "obs@4": {
+                "name": "Q3(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_3^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "0.22",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.14",
+                "type@1_err_down": "0.14",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.11",
+                "type@2_err_down": "0.11",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
+            "obs@5": {
+                "name": "Q4(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_4^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "-0.07",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.17",
+                "type@1_err_down": "0.17",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.13",
+                "type@2_err_down": "0.13",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
             "obs@6": {
+                "name": "Q5(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_5^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "0.05",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.13",
+                "type@1_err_down": "0.13",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.11",
+                "type@2_err_down": "0.11",
+                "q2min": "1.1",
+                "q2max": "6.0"
+            },
+            "obs@7": {
                 "name": "Q6(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_6^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "-0.05",
@@ -1167,7 +1180,7 @@
                 "q2min": "1.1",
                 "q2max": "6.0"
             },
-            "obs@7": {
+            "obs@8": {
                 "name": "Q8(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_8^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "-0.28",
@@ -1177,19 +1190,6 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "0.14",
                 "type@2_err_down": "0.14",
-                "q2min": "1.1",
-                "q2max": "6.0"
-            },
-            "obs@8": {
-                "name": "Q3(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_3^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "0.22",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.14",
-                "type@1_err_down": "0.14",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.11",
-                "type@2_err_down": "0.11",
                 "q2min": "1.1",
                 "q2max": "6.0"
             }
@@ -1222,32 +1222,6 @@
                 "q2max": "7.0"
             },
             "obs@3": {
-                "name": "Q4(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_4^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "-0.13",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.15",
-                "type@1_err_down": "0.15",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.11",
-                "type@2_err_down": "0.11",
-                "q2min": "1.1",
-                "q2max": "7.0"
-            },
-            "obs@4": {
-                "name": "Q5(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_5^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "-0.01",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.12",
-                "type@1_err_down": "0.12",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.10",
-                "type@2_err_down": "0.10",
-                "q2min": "1.1",
-                "q2max": "7.0"
-            },
-            "obs@5": {
                 "name": "Q2(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_2^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "0.11",
@@ -1260,7 +1234,46 @@
                 "q2min": "1.1",
                 "q2max": "7.0"
             },
+            "obs@4": {
+                "name": "Q3(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_3^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "0.21",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.13",
+                "type@1_err_down": "0.13",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.09",
+                "type@2_err_down": "0.09",
+                "q2min": "1.1",
+                "q2max": "7.0"
+            },
+            "obs@5": {
+                "name": "Q4(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_4^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "-0.13",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.15",
+                "type@1_err_down": "0.15",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.11",
+                "type@2_err_down": "0.11",
+                "q2min": "1.1",
+                "q2max": "7.0"
+            },
             "obs@6": {
+                "name": "Q5(B0.2.Kst0.l+.l-)[mu-e]",
+                "latex": "$Q_5^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
+                "value": "-0.01",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.12",
+                "type@1_err_down": "0.12",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.10",
+                "type@2_err_down": "0.10",
+                "q2min": "1.1",
+                "q2max": "7.0"
+            },
+            "obs@7": {
                 "name": "Q6(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_6^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "-0.08",
@@ -1273,7 +1286,7 @@
                 "q2min": "1.1",
                 "q2max": "7.0"
             },
-            "obs@7": {
+            "obs@8": {
                 "name": "Q8(B0.2.Kst0.l+.l-)[mu-e]",
                 "latex": "$Q_8^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
                 "value": "-0.15",
@@ -1285,21 +1298,8 @@
                 "type@2_err_down": "0.10",
                 "q2min": "1.1",
                 "q2max": "7.0"
-            },
-            "obs@8": {
-                "name": "Q3(B0.2.Kst0.l+.l-)[mu-e]",
-                "latex": "$Q_3^{\\mu-e}(B^0\\to K^{*0}\\ell^+\\ell^-)$",
-                "value": "0.21",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.13",
-                "type@1_err_down": "0.13",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.09",
-                "type@2_err_down": "0.09",
-                "q2min": "1.1",
-                "q2max": "7.0"
             }
         }
     ],
-    "transition-mode": "semi-leptonic decay"
+    "transition-mode": "semileptonic decay"
 }
