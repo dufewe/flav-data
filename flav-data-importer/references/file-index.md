@@ -9,7 +9,7 @@ Experimental folders use the `Lab-Collaboration` format (实验室-实验组). D
 ```
 flav-data/
 ├── Experimental/                          # Experimental measurement data
-│   ├── LHC-LHCb/                          # Lab-Collaboration folder
+│   ├── CERN-LHCb/                         # Lab-Collaboration folder
 │   │   ├── LHCb.py                        # Collaboration-specific loader (keeps collaboration name)
 │   │   ├── 2015/
 │   │   │   ├── LHCb@2015.json             # Annual index (collaboration name only)
@@ -21,15 +21,15 @@ flav-data/
 │   │       ├── LHCb@2025.json
 │   │       └── 03/
 │   │           └── LHCb:2025xyz.json
-│   ├── LHC-ATLAS/
-│   ├── LHC-CMS/
-│   ├── PEPII-BaBar/
+│   ├── CERN-ATLAS/
+│   ├── CERN-CMS/
+│   ├── SLAC-BaBar/
 │   ├── KEK-Belle/
-│   ├── BEPCII-BESIII/
-│   ├── Tevatron-CDF/
-│   ├── Tevatron-D0/
+│   ├── IHEP-BESIII/
+│   ├── Fermilab-CDF/
+│   ├── Fermilab-D0/
 │   ├── HFLAV/
-│   ├── LEP/
+│   ├── CERN-LEP/
 │   └── PDG/
 └── Theoretical/                           # Theoretical calculation data
     └── HPQCD/
@@ -47,17 +47,17 @@ Experimental directories use the `Lab-Collaboration` format (实验室-实验组
 
 | Folder | Lab | Collaboration | Notes |
 |--------|-----|--------------|-------|
-| `LHC-LHCb` | LHC | LHCb | |
-| `LHC-ATLAS` | LHC | ATLAS | |
-| `LHC-CMS` | LHC | CMS | |
-| `PEPII-BaBar` | PEP-II | BaBar | |
-| `KEK-Belle` | KEKB | Belle | Rename from `Belle` |
-| `BEPCII-BESIII` | BEPCII | BESIII | |
-| `Tevatron-CDF` | Tevatron | CDF | |
-| `Tevatron-D0` | Tevatron | D0 | |
+| `CERN-LHCb` | CERN | LHCb | |
+| `CERN-ATLAS` | CERN | ATLAS | |
+| `CERN-CMS` | CERN | CMS | |
+| `SLAC-BaBar` | SLAC | BaBar | |
+| `KEK-Belle` | KEK | Belle | |
+| `IHEP-BESIII` | IHEP | BESIII | |
+| `Fermilab-CDF` | Fermilab | CDF | |
+| `Fermilab-D0` | Fermilab | D0 | |
 | `HFLAV` | — | HFLAV | No parent lab |
 | `PDG` | — | PDG | No parent lab |
-| `LEP` | — | LEP | Combined LEP experiments |
+| `CERN-LEP` | CERN | LEP | Combined LEP experiments |
 
 Theoretical folders use the group name directly: `HPQCD`, `RBC-UKQCD`, `FNAL-MILC`, `JLQCD`, etc.
 
@@ -65,7 +65,7 @@ Theoretical folders use the group name directly: `HPQCD`, `RBC-UKQCD`, `FNAL-MIL
 
 Format: `{Collaboration}:{TexKey}.json`
 
-The filename uses the collaboration name (same as the `{group}` folder) and TexKey from InspireHEP.
+The filename uses only the collaboration name (not the full `Lab-Collaboration` folder name). For example, under `Experimental/CERN-LHCb/`, the data file is `LHCb:2015svh.json`. TexKey comes from InspireHEP.
 
 | Example | Description |
 |---------|-------------|
@@ -77,9 +77,9 @@ The filename uses the collaboration name (same as the `{group}` folder) and TexK
 
 ### Annual Index Files
 
-Format: `{group}@{year}.json`
+Format: `{Collaboration}@{year}.json` — uses the collaboration name only (e.g., `LHCb@2015.json`).
 
-Location: `Experimental/{group}/{year}/` or `Theoretical/{group}/{year}/`
+Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Experimental/CERN-LHCb/2015/LHCb@2015.json`).
 
 ```json
 {
@@ -102,7 +102,7 @@ Location: `Experimental/{group}/{year}/` or `Theoretical/{group}/{year}/`
 ```python
 import json, os
 
-base = 'Experimental/LHC-LHCb'
+base = 'Experimental/CERN-LHCb'
 target = 'LHCb:2025xyz'
 
 for year in sorted(os.listdir(base)):
@@ -123,7 +123,7 @@ Compare indexed entries against actual files on disk to detect discrepancies:
 ```python
 import json, os
 
-base = 'Experimental/LHC-LHCb/2015'
+base = 'Experimental/CERN-LHCb/2015'
 index = json.load(open(f'{base}/LHCb@2015.json'))
 
 # Collect all file_ids from the index

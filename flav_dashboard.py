@@ -9,7 +9,7 @@ with open('defs.py', 'r', encoding='utf-8') as f:
 # Loads all selected JSON files into memory at once to avoid repetitive I/O
 # ---------------------------------------------------------
 @st.cache_data(ttl = 3600)
-def get_cached_data(group, years, months, _get_json_func, base_path = 'Experimental'):
+def get_cached_data(lab, group, years, months, _get_json_func, base_path):
     """
     Traverse all selected years and months, load JSON details into a list.
     Returns a list of dictionaries, each representing one paper/entry.
@@ -17,13 +17,13 @@ def get_cached_data(group, years, months, _get_json_func, base_path = 'Experimen
     data_pool = []
     
     for year in years:
-        index_path = f'{base_path}/{group}/{year}/{group}@{year}.json'
+        index_path = f'{base_path}/{lab}-{group}/{year}/{group}@{year}.json'
         try:
             json_index = _get_json_func(index_path)
             for m_key, item_ids in json_index.items():
                 if int(m_key) in months:
                     for fid in item_ids:
-                        detail_path = f'{base_path}/{group}/{year}/{m_key}/{fid}.json'
+                        detail_path = f'{base_path}/{lab}-{group}/{year}/{m_key}/{fid}.json'
                         detail = _get_json_func(detail_path)
                         if detail:
                             # Inject metadata for subsequent sorting and grouping
@@ -38,11 +38,11 @@ def get_cached_data(group, years, months, _get_json_func, base_path = 'Experimen
 # ---------------------------------------------------------
 # Detect available years (Lightweight detection, does not load content)
 # ---------------------------------------------------------
-def detect_years(group, year_min, year_max, get_json_func, base_path = 'Experimental'):
+def detect_years(lab, group, year_min, year_max, get_json_func, base_path):
     years = []
     for year in range(year_min, year_max + 1):
         try:
-            get_json_func(f'{base_path}/{group}/{year}/{group}@{year}.json')
+            get_json_func(f'{base_path}/{lab}-{group}/{year}/{group}@{year}.json')
             years.append(year)
         except FileNotFoundError:
             continue
@@ -52,14 +52,14 @@ def detect_years(group, year_min, year_max, get_json_func, base_path = 'Experime
 # ---------------------------------------------------------
 # Display the full dashboard UI
 # ---------------------------------------------------------
-def run_dashboard(group, year_min, year_max, get_json_func, month_label = None, base_path = 'Experimental'):
+def run_dashboard(lab, group, year_min, year_max, get_json_func, month_label = None, base_path = 'Experimental'):
     if month_label is None: month_label = {}
     
     ## Detect available years
-    exp_year_list = detect_years(group, year_min, year_max, get_json_func, base_path)
+    exp_year_list = detect_years(lab, group, year_min, year_max, get_json_func, base_path)
         
     if not exp_year_list:
-        st.warning(f"No {group} data found in {base_path}/{group}/")
+        st.warning(f"No {group} data found in {base_path}/{lab}-{group}/")
         return
     
     ## Sidebar Settings & Filtering
@@ -91,7 +91,7 @@ def run_dashboard(group, year_min, year_max, get_json_func, month_label = None, 
         selected_months = list(range(month_range[0], month_range[1] + 1))
 
         ### Pre-load all data (One-time I/O)
-        raw_data = get_cached_data(group, selected_years, selected_months, get_json_func, base_path)
+        raw_data = get_cached_data(lab, group, selected_years, selected_months, get_json_func, base_path)
 
         ### Transition filter
         transition_set = set(mode.get("transition-mode") for mode in raw_data if "transition-mode" in mode)

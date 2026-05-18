@@ -116,13 +116,13 @@ Retrieve metadata from two sources:
 | `transition-mode` | Paper information |
 
 #### Data Add
-1. Build file path per `references/file-index.md` — note the **Lab-Collaboration** folder structure: `Experimental/LHC-LHCb/2015/12/LHCb:2015svh.json` (folder uses `Lab-Collaboration`, data file uses collaboration-only name)
-2. Create year and month directories if they don't exist (`mkdir -p Experimental/LHC-LHCb/2015/12`)
+1. Build file path per `references/file-index.md` — note the **Lab-Collaboration** folder structure: `Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json` (folder uses `Lab-Collaboration`, data file uses collaboration-only name)
+2. Create year and month directories if they don't exist (`mkdir -p Experimental/CERN-LHCb/2015/12`)
 3. Determine transition symbol and observable naming per `references/obs-abbr.md`
 4. Build JSON metadata per `references/json-meta.md`
 5. Extract numerical values and populate the JSON
 6. Write the JSON file to the month subdirectory
-7. Update the annual index at `Experimental/LHC-LHCb/2015/LHCb@2015.json`
+7. Update the annual index at `Experimental/CERN-LHCb/2015/LHCb@2015.json`
 
 #### Data Update
 1. Locate the existing `xxxx.json` file via the index
@@ -200,7 +200,7 @@ The matrix naming must match the error type: component errors use `type@N_*`, to
 
 ### Folder Naming
 
-- Experimental folders use the `Lab-Collaboration` format (实验室-实验组): `Experimental/LHC-LHCb/`, `Experimental/LHC-ATLAS/`, `Experimental/LHC-CMS/`, `Experimental/PEPII-BaBar/`, `Experimental/KEK-Belle/`, `Experimental/BEPCII-BESIII/`, `Experimental/PDG/`, `Experimental/HFLAV/`, `Experimental/LEP/`.
+- Experimental folders use the `Lab-Collaboration` format (实验室-实验组): `Experimental/CERN-LHCb/`, `Experimental/CERN-ATLAS/`, `Experimental/CERN-CMS/`, `Experimental/SLAC-BaBar/`, `Experimental/KEK-Belle/`, `Experimental/IHEP-BESIII/`, `Experimental/Fermilab-CDF/`, `Experimental/Fermilab-D0/`, `Experimental/CERN-LEP/`, `Experimental/PDG/`, `Experimental/HFLAV/`.
 - When no parent lab exists, use the collaboration/group name directly (e.g., `HFLAV`, `PDG`).
 - Theoretical folders use the group name: `Theoretical/HPQCD/`, `Theoretical/RBC-UKQCD/`.
 - Data files and index filenames always use only the collaboration name: `LHCb:2015svh.json`, `LHCb@2015.json`.

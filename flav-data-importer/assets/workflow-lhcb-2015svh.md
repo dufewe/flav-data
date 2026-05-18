@@ -12,7 +12,7 @@ Check whether this paper's data is already in the database:
 ```python
 import json, os
 
-base = 'Experimental/LHC-LHCb'
+base = 'Experimental/CERN-LHCb'
 target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
@@ -149,13 +149,13 @@ Each q² bin from the paper becomes a separate `data[]` entry. The correlation m
 
 ```bash
 # Create directory structure
-mkdir -p Experimental/LHC-LHCb/2015/12
+mkdir -p Experimental/CERN-LHCb/2015/12
 
 # Write JSON file
-# → Experimental/LHC-LHCb/2015/12/LHCb:2015svh.json
+# → Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
 ```
 
-**Update the annual index** at `Experimental/LHC-LHCb/2015/LHCb@2015.json`:
+**Update the annual index** at `Experimental/CERN-LHCb/2015/LHCb@2015.json`:
 
 ```json
 {
@@ -169,12 +169,12 @@ If the index already had entries for other months, preserve them and add month "
 
 ```bash
 python3 scripts/json-valid.py \
-  Experimental/LHC-LHCb/2015/12/LHCb:2015svh.json
+  Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
 ```
 
 Expected output:
 ```
-Validating: Experimental/LHC-LHCb/2015/12/LHCb:2015svh.json
+Validating: Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
   [OK] JSON format correct
   [OK] Top-level fields complete
   [OK] All checks passed
@@ -198,4 +198,4 @@ Remove all temporary PDFs, YAML files, and intermediate JSONs.
 5. **LaTeX escaping** — `\\to` in JSON (double backslash), becomes `\to` after parsing.
 6. **arxiv field** — must include primary category and version: `[hep-ex/1512.04442v1](...)`.
 7. **transition-mode** — use property-based names like "semileptonic decay", never "rare decay".
-8. **Folder naming** — `Experimental/LHC-LHCb/` (Lab-Collaboration), data file uses collaboration name only.
+8. **Folder naming** — `Experimental/CERN-LHCb/` (Lab-Collaboration), data file uses collaboration name only.
