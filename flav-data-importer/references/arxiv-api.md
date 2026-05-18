@@ -66,6 +66,8 @@ Example: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`
 
 **Note on versions**: The arXiv API `<atom:id>` contains the **latest** version number (e.g., `v2`), not `v1`. The `vN` in the `arxiv` field should match the version from which data was cited. For most papers, the latest version is appropriate since it contains corrections. Use `<atom:id>` to extract the version.
 
+**Version priority for data values**: When arXiv has multiple versions (v1, v2, v3...), data values in the JSON should come from the latest submitted version (vN). The `time` field always uses v1 submission date. When HEPData tabulated values differ from the arXiv PDF, HEPData takes priority; if no HEPData entry exists, use the PDF body text.
+
 ## Python Extraction
 
 ```python

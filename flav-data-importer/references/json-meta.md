@@ -37,9 +37,9 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
 | `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
 | `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
-| `abstract` | string | Yes | The complete abstract from the latest arXiv version. Must preserve LaTeX for any formulas. If no arXiv abstract is available, use the journal abstract. | `An angular analysis of the...` |
+| `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. | `An angular analysis of the...` |
 | `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
-| `data` | array | Yes | Array of data entries, one per q² bin, dataset, or measurement group. Each entry contains `obs@N` observables and optionally correlation/covariance matrices. **Allowed fields: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`.** | See Data Entries section |
+| `data` | array | Yes | Array of data groups. Each group is bounded by a correlation/covariance matrix — all observables linked by the same matrix belong together. Observables without a matrix can share a group. Allowed fields within each group: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. | See Data Entries section |
 | `transition-mode` | string | Yes | **Must be the last field in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
 
 ## Metadata Field Sources
@@ -59,7 +59,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 
 ## Data Entries (data[])
 
-Each element in the `data` array represents one measurement context — typically one q² bin, one dataset, or one fit scenario. Different q² bins of the same observable go into separate `data[]` entries with identical `name` fields but different `q2min`/`q2max` values.
+Each element in the `data` array is a **data group** — a set of observables linked by a common correlation/covariance matrix (see Data Grouping below). Different q² bins of the same observable go into separate groups with identical `name` but different `q2min`/`q2max` values.
 
 ### Standard Measurement Format
 
@@ -84,7 +84,7 @@ Use this format when the paper reports a central value with component errors (st
 | Field | Required | Type | Description |
 |-------|----------|------|-------------|
 | `name` | Yes | string | Observable identifier in `OBS(transition)[condition]` format. Symbolic notation only — no full expression definitions. |
-| `latex` | Yes | string | LaTeX representation of the observable name. Use `\\` for backslashes in JSON (becomes single `\` after parsing). |
+| `latex` | Yes | string | LaTeX representation of the observable. Double backslash for JSON escaping; after json.load(), Python reads single backslash. |
 | `value` | Yes | string | Central value. Must be a string, even for integers. |
 | `type@1_err` | Yes | string | Error type label for the first error component (usually `"stat"`). |
 | `type@1_err_up` | Yes | string | Upper error bound for type 1. For symmetric errors, equals `type@1_err_down`. |
@@ -98,6 +98,16 @@ Use this format when the paper reports a central value with component errors (st
 | `etamin`/`etamax` | Conditional | string | Pseudorapidity boundaries. |
 | `unit` | Conditional | string | Physical unit (e.g., `"GeV"`, `"ps"`, `"fb"`). Omit for dimensionless observables. |
 | `ref` | Conditional | string | External reference as Markdown link for cited values. Look up the arXiv ID in the paper's references, then search InspireHEP for the correct TexKey. Never guess. |
+
+**Standard error type labels** (`type@N_err`):
+| Label | Meaning |
+|-------|---------|
+| `stat` | Statistical uncertainty |
+| `syst` | Systematic uncertainty |
+| `lumi` | Luminosity uncertainty |
+| `norm` | Normalisation uncertainty |
+| `theo` | Theoretical uncertainty |
+| `expe` | Experimental uncertainty (combined stat+syst when not split) |
 
 ### Upper Limit Format
 
@@ -154,7 +164,7 @@ Use this format for values taken from external sources (PDG world averages, HFLA
 
 The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look up the source paper's arXiv ID from the reference list, then search InspireHEP.
 
-### Correlation and Covariance Matrices
+## Correlation and Covariance Matrices
 
 ### Correlation Matrix (`type@N_correlation`)
 
@@ -175,13 +185,7 @@ Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 
 ### Total Error Correlation/Covariance (`tot_correlation`, `tot_covariance`)
 
-When using the total error format (`tot_err_up`/`tot_err_down` without separate `type@N_err` components), the matrix fields use the `tot_` prefix:
-
-```json
-"tot_correlation": [[1.0, 0.5], [0.5, 1.0]]
-```
-
-**Rules:** Same as `type@N_correlation`/`type@N_covariance` above. The `tot_` prefix corresponds to the `tot_err` naming. Do NOT use `tot_correlation` when component errors (`type@N_err`) are present — use `type@N_correlation` matching the specific error type instead.
+When using total error format (`tot_err_up`/`tot_err_down`), use the `tot_` prefix for matrices: `tot_correlation` or `tot_covariance`. Same rules as `type@N_correlation`/`type@N_covariance`. Do NOT mix `tot_correlation` with component errors (`type@N_err`).
 
 ### Covariance Matrix (`type@N_covariance`)
 
@@ -195,6 +199,22 @@ When using the total error format (`tot_err_up`/`tot_err_down` without separate 
 - **Dimension and order** follow the same rules as correlation matrices.
 - Matrix elements are floats.
 - Omit the field if not available.
+
+### Data Grouping
+
+Each element in the `data[]` array is a **data group** — a set of observables that share a common measurement context:
+
+- **Group boundary**: defined by a correlation or covariance matrix. All observables linked by the same matrix belong to one group.
+- **Matrix dimension**: the N×N matrix covers exactly N observables (`obs@1` through `obs@N`).
+- **No matrix**: observables without a correlation/covariance matrix can be placed together in the same group, or split across groups as appropriate.
+
+### Combined Kinematic Bins
+
+When measurements are performed across non-contiguous regions and combined into a single result:
+
+- `q2min` and `q2max` (and similarly `pTmin`/`pTmax`, `etamin`/`etamax`) accept **comma-separated multi-interval** strings.
+- Ranges must be paired one-to-one: `"q2min": "11.0,17.5"` with `"q2max": "15.0,+inf"`.
+- `"+inf"` denotes an unbounded upper limit. Example: two non-contiguous bins covering [11.0, 15.0] ∪ [17.5, +∞).
 
 ## transition-mode Values
 

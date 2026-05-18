@@ -17,6 +17,7 @@ Checks:
     9. arxiv field includes primary category and version, or is null
     10. transition-mode contains only scattering/decay categories
     11. data block contains only obs@N, type@N_correlation, type@N_covariance, tot_correlation, tot_covariance fields
+    12. err_up/down fields are paired for each error type
 """
 
 import json
@@ -351,6 +352,23 @@ def validate_json(file_path):
             # Check transition symbol
             if 'name' in obs:
                 all_issues.extend(validate_transition_symbol(obs['name']))
+
+            # Check err_up/down paired for each error type
+            for key in list(obs.keys()):
+                if key.endswith('_err_up'):
+                    base = key[:-7]  # strip '_err_up'
+                    down_key = f'{base}_err_down'
+                    if down_key not in obs:
+                        all_issues.append(
+                            f"  {obs_key}: '{key}' present but missing '{down_key}'"
+                        )
+                elif key.endswith('_err_down'):
+                    base = key[:-9]  # strip '_err_down'
+                    up_key = f'{base}_err_up'
+                    if up_key not in obs:
+                        all_issues.append(
+                            f"  {obs_key}: '{key}' present but missing '{up_key}'"
+                        )
 
         # Check correlation/covariance matrices
         for corr_key in entry:

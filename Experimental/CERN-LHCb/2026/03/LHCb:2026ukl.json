@@ -5,7 +5,7 @@
     "title": "First measurement of time-dependent $CP$ violation in the flavor-changing neutral-current decay $B^{0} \\to K_{S}^{0} \\mu^{+} \\mu^{-}$",
     "arxiv": "[hep-ex/2603.13223v3](https://arxiv.org/pdf/2603.13223)",
     "time": "2026.03.13",
-    "abstract": "A flavor-tagged time-dependent analysis of $B^{0} \\to K_{S}^{0} \\mu^{+} \\mu^{-}$ decays is performed across the full dimuon mass range excluding the $J/\\psi$ and $\\psi(2S)$ resonance regions. The analysis uses proton-proton collision data collected by the LHCb experiment in 2011–2018 at center-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The $CP$ violation parameters are determined to be $C = -0.13 \\pm 0.32 \\pm 0.04$ and $S = +0.82 \\pm 0.29 \\pm 0.05$, where the first uncertainties are statistical and the second systematic. The statistical correlation between $C$ and $S$ is found to be 0.50.",
+    "abstract": "A flavor-tagged time-dependent analysis of $B^{0} \\to K_{S}^{0} \\mu^{+} \\mu^{-}$ decays is performed across the full dimuon mass range excluding the $J/\\psi$ and $\\psi(2S)$ resonance regions. The analysis uses proton-proton collision data collected by the LHCb experiment in 2011–2018 at center-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The $CP$ violation parameters are determined to be $C = -0.13 \\pm 0.32 \\pm 0.04$ and $S = +0.82 \\pm 0.29 \\pm 0.05$, where the first uncertainties are statistical and the second systematic. The results are consistent with the Standard Model prediction. This is the first experimental study of time-dependent CP violation in $b \\to s \\ell^+ \\ell^-$ processes.",
     "pdf": "https://arxiv.org/pdf/2603.13223",
     "data": [
         {
@@ -67,7 +67,7 @@
                 "type@1_err_up": "0.47",
                 "type@1_err_down": "0.47",
                 "q2min": "11.0,17.5",
-                "q2max": "15.0,inf"
+                "q2max": "15.0,+inf"
             },
             "obs@2": {
                 "name": "S(B0.2.KS0.mu+.mu-)",
@@ -77,7 +77,7 @@
                 "type@1_err_up": "0.47",
                 "type@1_err_down": "0.47",
                 "q2min": "11.0,17.5",
-                "q2max": "15.0,inf"
+                "q2max": "15.0,+inf"
             }
         }
     ],

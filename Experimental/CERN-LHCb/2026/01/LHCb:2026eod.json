@@ -12,6 +12,9 @@
             "obs@1": {
                 "name": "Br(tau-.2.mu+.mu-.mu-)",
                 "latex": "$\\mathcal{B}(\\tau^- \\to \\mu^+ \\mu^- \\mu^-)$",
+                "value": "-0.1e-8",
+                "tot_err_up": "1.1e-8",
+                "tot_err_down": "1.1e-8",
                 "type@1_upper_limit": "1.9e-8",
                 "type@1_level": "90%@CLs",
                 "type@2_upper_limit": "2.3e-8",

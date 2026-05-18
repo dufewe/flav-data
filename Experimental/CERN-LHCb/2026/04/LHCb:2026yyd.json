@@ -20,7 +20,7 @@
             "obs@2": {
                 "name": "Br(B0.2.J/psi.gamma)",
                 "latex": "$\\mathcal{B}(B^0 \\to J/\\psi \\gamma)$",
-                "type@1_upper_limit": "2.5e-6",
+                "type@1_upper_limit": "2.6e-6",
                 "type@1_level": "90%@CLs",
                 "type@2_upper_limit": "3.5e-6",
                 "type@2_level": "95%@CLs"
