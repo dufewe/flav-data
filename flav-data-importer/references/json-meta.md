@@ -117,6 +117,8 @@ Use this format when the paper reports a confidence-level upper limit rather tha
 | `type@N_upper_limit` | The numeric upper limit value (string). This is the observable's maximum allowed value at the given confidence level. |
 | `type@N_level` | The confidence level as a string, e.g., `"90%@CLs"`, `"95%@CL"`, `"90%@CL"`. |
 
+**Multiple confidence levels**: When a paper reports upper limits at multiple CLs (e.g., 90% and 95%), use `type@1_*` for the primary (typically lowest) CL and `type@2_*` for the secondary CL. Each requires its own `_upper_limit` + `_level` pair.
+
 **Critical:** `upper_limit` is the numeric value, `level` is the confidence — do not swap these fields. Do NOT use `type@N_err_up` for upper limits.
 
 ### Total Error Format
@@ -220,3 +222,18 @@ The `transition-mode` field classifies the physical process. Only two top-level 
 6. **No `year` field** — The database does not support a top-level `year` field.
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
 8. **transition-mode last** — This field must always be the final key in the JSON object.
+
+## Extending This Specification
+
+When a paper introduces metadata or data structures not covered by this document:
+
+1. **Identify the new pattern** — is it a new field, a new error type, a new kinematic variable, or a new data format?
+2. **Check existing conventions** — review this document and `references/obs-abbr.md` for naming patterns that can be extended.
+3. **Add the new pattern** to the relevant section of this document.
+4. **Update the validator** (`scripts/json-valid.py`) if the new pattern requires structural checks.
+5. **Keep it consistent** — use the same naming conventions, string types, and ordering rules as existing fields.
+
+Examples of extensions:
+- New kinematic boundary: add `{var}min`/`{var}max` to the Numeric Field Patterns list
+- New error type: add `type@N_err` triplet with a descriptive label
+- New data format (e.g., asymmetric confidence intervals): document as a new subsection under Data Entries

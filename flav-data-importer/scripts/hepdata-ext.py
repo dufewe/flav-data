@@ -27,10 +27,14 @@ except ImportError:
 # Resolve hepdata-cli path: check PATH first, then common venv locations
 HEPDATA_CLI: str = shutil.which('hepdata-cli') or ''
 if not HEPDATA_CLI:
-    # Fallback: check Python venv bin, user-local bin, and system-wide locations
+    # Fallback: check Python venv bin, user-local bin, Hermes venv, and system-wide locations
     venv_bin = os.path.join(sys.prefix, 'bin', 'hepdata-cli')
+    hermes_venv = os.path.join(
+        os.path.expanduser('~/.hermes/hermes-agent/venv/bin'), 'hepdata-cli'
+    )
     candidates = [
         venv_bin,
+        hermes_venv,
         os.path.join(os.path.expanduser('~/.local/bin'), 'hepdata-cli'),
         '/opt/homebrew/bin/hepdata-cli',
         '/usr/local/bin/hepdata-cli',

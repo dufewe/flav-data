@@ -48,12 +48,15 @@ Every decay or scattering process is encoded as a transition symbol using the fo
 | $J/\psi$ | `J/psi` | Charmonium |
 | $\psi(2S)$ | `psi(2S)` | Charmonium excited state |
 | $\eta$, $\eta'$ | `eta`, `etaprime` | |
+| $D_s^+$, $D_s^{*+}$ | `Ds+`, `Dsst+` | Strange charmed meson |
+| $B_c^+$ | `Bc+` | Bottom-charmed meson |
+| $X_s$ | `Xs` | Inclusive strange hadronic system |
 
 #### Baryons
 
 | Particle | Symbol | Notes |
 |----------|--------|-------|
-| $\Lambda$, $\Lambda_c^+$, $\Lambda_b^0$ | `Lambda`, `Lambdac+`, `Lambdab0` | |
+| $\Lambda$, $\Lambda_c^+$, $\Lambda_b^0$ | `Lambda`, `Lambdac+`, `Lambdab0` | Anti-baryons: `LambdaBar`, `LambdacBar-`, `LambdabBar0` |
 | $\Sigma^+$, $\Sigma^0$, $\Sigma^-$ | `Sigma+`, `Sigma0`, `Sigma-` | |
 | $\Xi_c^0$, $\Xi_b^0$ | `Xic0`, `Xib0` | |
 | $\Omega_c^0$ | `Omegac0` | |
@@ -92,6 +95,7 @@ For observables measuring a single process, no condition is needed:
 | Mass $M_Z$ | $M_Z$ | `Mass(Z)` | On-shell mass of a resonance |
 | Lifetime $\tau_{e^-}$ | $\tau$ | `Tau(e-)` | |
 | Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma$ | `Sigma(p.p.2.e+.e-)` | |
+| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C$ | `AC` | Single-particle observable (no transition needed) |
 | Mass difference $\Delta M_s$ | $\Delta M$ | `DeltaMass(Bs0.2.Bs0Bar)` | |
 | Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f$ | `f(Z.2.mu+.mu-)` | Branching fraction of a resonance |
 
@@ -102,6 +106,8 @@ For observables comparing two or more transitions (e.g., lepton flavor universal
 - **transition** uses the shared part of the multi-transition process.
 - Shared particles are denoted generically: `l1`/`l2` (leptons), `q1`/`q2` (quarks), `nu1`/`nu2` (neutrinos), `h1`/`h2` (hadrons).
 - **condition** encodes the flavor mapping, e.g., `[mu/e]` means l1 = μ, l2 = e.
+  - **`/` (slash)** in condition → ratio: `R(B0.2.Kst0.l+.l-)[mu/e]` = $\mathcal{B}(\mu\mu)/\mathcal{B}(ee)$.
+  - **`-` (dash)** in condition → difference: `DeltaACP(B-.2.l-.nuBar)[mu-e]` = $A_{CP}(\mu) - A_{CP}(e)$.
 
 | Observable | LaTeX | Symbol | Notes |
 |------------|-------|--------|-------|
@@ -165,17 +171,44 @@ Examples:
 
 Angular coefficients parameterize the angular distribution of decay products. They are the coefficients in the Legendre polynomial expansion of the differential decay rate.
 
+For $B^0 \to K^{*0}(\to K^+ \pi^-) \mu^+ \mu^-$, the standard basis uses 12 angular observables per q² bin (plus S-wave and CP-asymmetric extensions).
+
 | Abbr | LaTeX | Description | Typical Range |
 |------|-------|-------------|--------------|
-| `FL` | $F_L$ | Longitudinal polarization fraction of the vector meson | [0, 1] |
+| `S1c` | $S_1^c$ | Longitudinal amplitude coefficient | [0, 1] |
+| `S2c` | $S_2^c$ | Transverse amplitude coefficient | [-1, 0] |
+| `S2s` | $S_2^s$ | Transverse amplitude coefficient (sine component) | [-1, 0] |
 | `S3` | $S_3$ | T-odd angular coefficient | [-0.5, 0.5] |
 | `S4` | $S_4$ | Angular coefficient | [-1, 1] |
 | `S5` | $S_5$ | Angular coefficient | [-1, 1] |
+| `S6c` | $S_{6c}$ | Angular coefficient (c-component) | [-1, 1] |
 | `AFB` | $A_{FB}$ | Forward-backward asymmetry of the dilepton system | [-1, 1] |
 | `S7` | $S_7$ | T-odd angular coefficient | [-1, 1] |
 | `S8` | $S_8$ | T-odd angular coefficient | [-1, 1] |
 | `S9` | $S_9$ | T-odd angular coefficient | [-0.5, 0.5] |
+| `FL` | $F_L$ | Longitudinal polarization fraction of the vector meson | [0, 1] |
+| `FS` | $F_S$ | S-wave fraction | [0, 1] |
 | `FH` | $F_H$ | Angular distribution flat term (B → Kℓℓ) | [-1, 1] |
+| `S1ac` | $S_{1a}^c$ | Additional longitudinal coefficient | — |
+| `S1bcre` | $S_{1bc}^{\mathrm{Re}}$ | Interference coefficient (real part) | — |
+| `S1bcim` | $S_{1bc}^{\mathrm{Im}}$ | Interference coefficient (imaginary part) | — |
+
+### S-wave Observables
+
+When the $K^+ \pi^-$ system includes non-resonant S-wave contributions (not purely $K^{*0}$), additional observables are measured:
+
+| Abbr | LaTeX | Description |
+|------|-------|-------------|
+| `SS1re` | $S_{S1}^{\mathrm{Re}}$ | S-wave interference (real part) |
+| `SS1im` | $S_{S1}^{\mathrm{Im}}$ | S-wave interference (imaginary part) |
+| `SS2re` | $S_{S2}^{\mathrm{Re}}$ | S-wave interference (real part) |
+| `SS2im` | $S_{S2}^{\mathrm{Im}}$ | S-wave interference (imaginary part) |
+| `SS3re` | $S_{S3}^{\mathrm{Re}}$ | S-wave interference (real part) |
+| `SS3im` | $S_{S3}^{\mathrm{Im}}$ | S-wave interference (imaginary part) |
+| `SS4re` | $S_{S4}^{\mathrm{Re}}$ | S-wave interference (real part) |
+| `SS4im` | $S_{S4}^{\mathrm{Im}}$ | S-wave interference (imaginary part) |
+| `SS5re` | $S_{S5}^{\mathrm{Re}}$ | S-wave interference (real part) |
+| `SS5im` | $S_{S5}^{\mathrm{Im}}$ | S-wave interference (imaginary part) |
 
 ### CP Asymmetry Observables
 
@@ -183,15 +216,32 @@ Angular coefficients parameterize the angular distribution of decay products. Th
 |------|-------|-------------|
 | `ACP` | $A_{CP}$ | Direct CP asymmetry |
 | `DeltaACP` | $\Delta A_{CP}$ | Difference in CP asymmetry between two modes |
-| `SigmaAFB` | $\Sigma A_{FB}$ | CP-averaged forward-backward asymmetry: $(A_{FB} + \bar{A}_{FB})/2$ |
-| `DeltaAFB` | $\Delta A_{FB}$ | CP-asymmetric forward-backward asymmetry: $(A_{FB} - \bar{A}_{FB})/2$ |
-| `A3` | $A_3$ | CP asymmetry of S3 |
-| `A4` | $A_4$ | CP asymmetry of S4 |
-| `A5` | $A_5$ | CP asymmetry of S5 |
-| `A6s` | $A_{6s}$ | CP asymmetry of S6s (Bs → ϕℓℓ) |
-| `A7` | $A_7$ | CP asymmetry of S7 |
-| `A8` | $A_8$ | CP asymmetry of S8 |
-| `A9` | $A_9$ | CP asymmetry of S9 |
+| `AFB_CP` | $A_{CP}^{FB}$ | CP asymmetry of forward-backward asymmetry |
+| `AFS` | $A_{CP}^{FS}$ | CP asymmetry of S-wave fraction |
+| `A1c` | $A_{1c}$ | CP asymmetry of $S_1^c$ |
+| `A2s` | $A_{2s}$ | CP asymmetry of $S_2^s$ |
+| `A3` | $A_3$ | CP asymmetry of $S_3$ |
+| `A4` | $A_4$ | CP asymmetry of $S_4$ |
+| `A5` | $A_5$ | CP asymmetry of $S_5$ |
+| `A6c` | $A_{6c}$ | CP asymmetry of $S_{6c}$ |
+| `A7` | $A_7$ | CP asymmetry of $S_7$ |
+| `A8` | $A_8$ | CP asymmetry of $S_8$ |
+| `A9` | $A_9$ | CP asymmetry of $S_9$ |
+
+### CP-Asymmetric S-wave Observables
+
+| Abbr | LaTeX | Description |
+|------|-------|-------------|
+| `AS1im` | $A_{S1}^{\mathrm{Im}}$ | CP asymmetry of S-wave interference |
+| `AS1re` | $A_{S1}^{\mathrm{Re}}$ | CP asymmetry of S-wave interference |
+| `AS2im` | $A_{S2}^{\mathrm{Im}}$ | CP asymmetry of S-wave interference |
+| `AS2re` | $A_{S2}^{\mathrm{Re}}$ | CP asymmetry of S-wave interference |
+| `AS3im` | $A_{S3}^{\mathrm{Im}}$ | CP asymmetry of S-wave interference |
+| `AS3re` | $A_{S3}^{\mathrm{Re}}$ | CP asymmetry of S-wave interference |
+| `AS4im` | $A_{S4}^{\mathrm{Im}}$ | CP asymmetry of S-wave interference |
+| `AS4re` | $A_{S4}^{\mathrm{Re}}$ | CP asymmetry of S-wave interference |
+| `AS5im` | $A_{S5}^{\mathrm{Im}}$ | CP asymmetry of S-wave interference |
+| `AS5re` | $A_{S5}^{\mathrm{Re}}$ | CP asymmetry of S-wave interference |
 
 ### Optimized Observables (P)
 
@@ -205,6 +255,7 @@ These are constructed to reduce theoretical uncertainties from hadronic form fac
 | `P4p` | $P_4^\prime$ | Optimized version of S4 (prime denoted by `p`) |
 | `P5p` | $P_5^\prime$ | Optimized version of S5 |
 | `P6p` | $P_6^\prime$ | Optimized version of S6 |
+| `P6cp` | $P_{6c}^\prime$ | Optimized version of S6c |
 | `P8p` | $P_8^\prime$ | Optimized version of S8 |
 
 ### Reduced Asymmetry Observables
@@ -241,6 +292,13 @@ Differences of angular coefficients between muon and electron modes: $Q_X = X^{\
 |------|-------|-------------|
 | `R` | $R$ | Branching fraction ratio for LFU tests |
 | `r` | $r$ | Normalized ratio (e.g., $r_{J/\psi}$ for charmonium normalization) |
+| `rel_BF_pwave` | $\mathcal{B}_P$ | Branching fraction relative to $B^0 \to J/\psi(\to \mu^+\mu^-) K^{*0}$ (P-wave) |
+
+### Differential Observables
+
+| Abbr | LaTeX | Description |
+|------|-------|-------------|
+| `dBF/dq2` | $d\mathcal{B}/dq^2$ | Differential branching fraction (relative to normalization mode) |
 
 ### Asymmetries and Fractions
 
@@ -262,49 +320,69 @@ Differences of angular coefficients between muon and electron modes: $Q_X = X^{\
 
 Use this mapping to construct the `latex` field from the observable abbreviation. The `$...$` delimiters are added when constructing the full `latex` field, wrapping the complete expression including the transition.
 
-**Important**: The dict values below are Python string literals. In Python source, `\\to` represents two backslash characters. In the JSON file text, each backslash is escaped, so `\\to` appears as `\\\\to`. After `json.load()`, Python recovers the original two-character `\\to` sequence. The validator (`json-valid.py`) checks the in-memory representation.
+**JSON escaping**: Backslashes in LaTeX must be doubled in JSON. For example, `\to` becomes `\\to` in the JSON file. After `json.load()`, Python sees `\to`.
 
 ```python
 # Abbreviation → LaTeX symbol (no $ delimiters)
-# Values below are Python string literals (each \\ represents one backslash in memory).
+# Use raw strings (r'...') in Python source for clarity.
 OBSERVABLE_LATEX = {
-    # Branching fractions and decay widths
-    'Br': '\\mathcal{B}',        'dBr/dq2': 'd\\mathcal{B}/dq^2',
-    'Gamma': '\\Gamma',
+    'Br': r'\mathcal{B}',        'dBr/dq2': r'd\mathcal{B}/dq^2',
+    'Gamma': r'\Gamma',
+    'rel_BF_pwave': r'\mathcal{B}_P',
+    'dBF/dq2': r'd\mathcal{B}/dq^2',
     # Lifetimes
-    'Tau': '\\tau',
+    'Tau': r'\tau',
     # Masses and mixing
     'Mass': 'M_f',              'mass': 'm',
-    'DeltaMass': '\\Delta M',
+    'DeltaMass': r'\Delta M',
     # Cross sections
-    'Sigma': '\\sigma',
-    'dSigma/dpT': 'd\\sigma/dp_T', 'dSigma/deta': 'd\\sigma/d\\eta',
+    'Sigma': r'\sigma',
+    'dSigma/dpT': r'd\sigma/dp_T', 'dSigma/deta': r'd\sigma/d\eta',
     # Angular coefficients (CP-averaged)
-    'FL': 'F_L',    'S3': 'S_3', 'S4': 'S_4', 'S5': 'S_5',
-    'AFB': 'A_{FB}', 'S7': 'S_7', 'S8': 'S_8', 'S9': 'S_9',
-    'FH': 'F_H',
+    'S1c': r'S_1^c',  'S2c': r'S_2^c',  'S2s': r'S_2^s',
+    'S3': 'S_3',     'S4': 'S_4',     'S5': 'S_5',
+    'S6c': r'S_{6c}', 'AFB': r'A_{FB}',
+    'S7': 'S_7',     'S8': 'S_8',     'S9': 'S_9',
+    'FL': 'F_L',     'FS': 'F_S',     'FH': 'F_H',
+    'S1ac': r'S_{1a}^c',
+    'S1bcre': r'S_{1bc}^{\mathrm{Re}}',
+    'S1bcim': r'S_{1bc}^{\mathrm{Im}}',
+    # S-wave interference
+    'SS1re': r'S_{S1}^{\mathrm{Re}}', 'SS1im': r'S_{S1}^{\mathrm{Im}}',
+    'SS2re': r'S_{S2}^{\mathrm{Re}}', 'SS2im': r'S_{S2}^{\mathrm{Im}}',
+    'SS3re': r'S_{S3}^{\mathrm{Re}}', 'SS3im': r'S_{S3}^{\mathrm{Im}}',
+    'SS4re': r'S_{S4}^{\mathrm{Re}}', 'SS4im': r'S_{S4}^{\mathrm{Im}}',
+    'SS5re': r'S_{S5}^{\mathrm{Re}}', 'SS5im': r'S_{S5}^{\mathrm{Im}}',
     # CP asymmetries
-    'ACP': 'A_{CP}', 'DeltaACP': '\\Delta A_{CP}',
-    'SigmaAFB': '\\Sigma A_{FB}', 'DeltaAFB': '\\Delta A_{FB}',
+    'ACP': r'A_{CP}', 'DeltaACP': r'\Delta A_{CP}',
+    'AFB_CP': r'A_{CP}^{FB}', 'AFS': r'A_{CP}^{FS}',
+    'A1c': r'A_{1c}', 'A2s': r'A_{2s}',
     'A3': 'A_3', 'A4': 'A_4', 'A5': 'A_5',
-    'A6s': 'A_{6s}', 'A7': 'A_7', 'A8': 'A_8', 'A9': 'A_9',
+    'A6c': r'A_{6c}', 'A7': 'A_7', 'A8': 'A_8', 'A9': 'A_9',
+    # CP-asymmetric S-wave
+    'AS1re': r'A_{S1}^{\mathrm{Re}}', 'AS1im': r'A_{S1}^{\mathrm{Im}}',
+    'AS2re': r'A_{S2}^{\mathrm{Re}}', 'AS2im': r'A_{S2}^{\mathrm{Im}}',
+    'AS3re': r'A_{S3}^{\mathrm{Re}}', 'AS3im': r'A_{S3}^{\mathrm{Im}}',
+    'AS4re': r'A_{S4}^{\mathrm{Re}}', 'AS4im': r'A_{S4}^{\mathrm{Im}}',
+    'AS5re': r'A_{S5}^{\mathrm{Re}}', 'AS5im': r'A_{S5}^{\mathrm{Im}}',
     # Optimized observables
     'P1': 'P_1', 'P2': 'P_2', 'P3': 'P_3',
-    'P4p': "P_4^\\prime", 'P5p': "P_5^\\prime",
-    'P6p': "P_6^\\prime", 'P8p': "P_8^\\prime",
+    'P4p': r"P_4^{\prime}", 'P5p': r"P_5^{\prime}",
+    'P6p': r"P_6^{\prime}", 'P6cp': r"P_{6c}^{\prime}",
+    'P8p': r"P_8^{\prime}",
     # Reduced asymmetry
-    'A6p': "A_6^\\prime",
+    'A6p': r"A_6^{\prime}",
     # Time-dependent CP
     'C': 'C', 'S': 'S',
     # LFU differences (Q)
-    'QFL': 'Q_{F_L}', 'Q1': 'Q_1', 'Q2': 'Q_2', 'Q3': 'Q_3',
+    'QFL': r'Q_{F_L}', 'Q1': 'Q_1', 'Q2': 'Q_2', 'Q3': 'Q_3',
     'Q4': 'Q_4', 'Q5': 'Q_5', 'Q6': 'Q_6', 'Q8': 'Q_8',
     # Ratios and normalizations
     'R': 'R', 'r': 'r',
     # Asymmetries and fractions
     'S1': 'S_1', 'AC': 'A_C', 'f': 'f',
     # CKM
-    'gammaCKM': '\\gamma_{CKM}', 'delta': '\\delta',
+    'gammaCKM': r'\gamma_{CKM}', 'delta': r'\delta',
 }
 
 # Usage: wrap the full expression with $...$
@@ -314,16 +392,32 @@ OBSERVABLE_LATEX = {
 
 ## 5. Common q² Intervals (GeV²)
 
-These are the most frequently used q² bin boundaries in B → K(*)ℓℓ analyses. Always use the exact values reported in the paper.
+These are the most frequently used q² bin boundaries in B → K(*)ℓℓ analyses. **Always use the exact values reported in the paper** — this table is a quick reference only; paper-specific binning takes precedence.
 
 | Region | Intervals |
 |--------|-----------|
 | Very low (electron mode) | [0.0008, 0.257], [0.002, 1.12] |
 | Low q² | [0.06, 0.98], [0.1, 1.1], [1.1, 2.5], [1.1, 4.0], [1.1, 6.0], [2.0, 3.0], [2.0, 4.0], [3.0, 4.0], [4.0, 5.0], [4.0, 6.0], [5.0, 6.0], [6.0, 7.0], [6.0, 8.0] |
+| Fine binning (comprehensive analyses) | [0.06, 0.54], [0.54, 0.98], [1.1, 1.8], [1.8, 2.5], [2.5, 3.25], [3.25, 4.0], [4.0, 5.0], [5.0, 6.0], [6.0, 7.0], [7.0, 8.0], [11.0, 11.75], [11.75, 12.5], [15.0, 16.0], [16.0, 17.0], [17.0, 18.0], [18.0, 19.0] |
 | Charmonium veto | [8.0, 11.0], [11.0, 12.5] — usually excluded due to resonances |
 | High q² | [14.0, 22.0], [14.3, ∞], [15.0, 17.0], [15.0, 19.0], [16.0, 17.0], [17.0, 19.0], [18.0, 19.0] |
 
-## 6. Adding New Observables
+## 6. B⁰ → K*⁰μ⁺μ⁻ Comprehensive Analysis Structure
+
+For comprehensive angular analyses (e.g., LHCb:2025mqb), the data is typically organized across multiple `data[]` entries:
+
+| Entry | Content | Observable Count | Notes |
+|-------|---------|-----------------|-------|
+| data[0] | CP-averaged S observables (coarse bins) | ~225 | 10 q² bins × ~22-27 obs/bin |
+| data[1] | CP-averaged P observables (coarse bins) | ~225 | Same bins, different observable basis |
+| data[2] | CP-averaged with S2s (coarse bins) | ~243 | Extended basis including S2s |
+| data[3] | CP-asymmetric observables + S-wave | ~422 | 10 bins × ~41-53 obs/bin |
+| data[4] | Alternative P parameterization | ~210 | Different observable set |
+| data[5] | CP-averaged (fine bins) | ~362 | 16 q² bins × ~22-27 obs/bin |
+
+Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits the standard bins into sub-intervals for higher resolution.
+
+## 7. Adding New Observables
 
 When a paper introduces an observable not listed in this document:
 

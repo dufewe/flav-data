@@ -158,6 +158,8 @@ def extract_metadata(hit):
         'citation_count': citation_count,
         'citation_without_self': citation_without_self,
         # Markdown links (for JSON files)
+        # NOTE: arxiv_link is a simplified link — the full 'arxiv' JSON field
+        # requires primary_category and version, obtainable from arxiv-ext.py.
         'inspire_hep_link': f'[{texkey}](https://inspirehep.net/literature/{recid})',
         'arxiv_link': f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})',
         'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}',

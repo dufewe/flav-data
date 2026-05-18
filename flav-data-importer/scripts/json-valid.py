@@ -16,7 +16,7 @@ Checks:
     8. Transition symbols conform to A.B.2.C.D format
     9. arxiv field includes primary category and version, or is null
     10. transition-mode contains only scattering/decay categories
-    11. data block contains only obs@N, type@N_correlation, type@N_covariance fields
+    11. data block contains only obs@N, type@N_correlation, type@N_covariance, tot_correlation, tot_covariance fields
 """
 
 import json
@@ -194,7 +194,7 @@ def validate_data_entry_fields(entry, entry_idx):
             issues.append(
                 f"  data[{entry_idx}]: disallowed field '{key}'; "
                 f"data block may only contain obs@N, type@N_correlation, "
-                f"or type@N_covariance"
+                f"type@N_covariance, tot_correlation, or tot_covariance"
             )
     return issues
 
@@ -228,6 +228,11 @@ def validate_json(file_path):
     except json.JSONDecodeError as e:
         print(f"  [FAIL] JSON parse error: {e}")
         return [f"JSON parse error: {e}"]
+
+    # 1b. Check top-level type (must be dict, not list)
+    if not isinstance(data, dict):
+        print(f"  [FAIL] Top-level JSON must be an object, got {type(data).__name__}")
+        return [f"Top-level JSON must be an object, got {type(data).__name__}"]
 
     # 2. Check top-level fields
     for field in REQUIRED_TOP_FIELDS:

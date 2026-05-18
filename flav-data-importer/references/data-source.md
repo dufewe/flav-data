@@ -31,6 +31,8 @@ Try sources in the following order. Move to the next source only if the current 
 
 **How to access**:
 ```bash
+# hepdata-cli is installed in the Hermes venv:
+#   ~/.hermes/hermes-agent/venv/bin/hepdata-cli
 HEPDATA_CLI="hepdata-cli"
 
 # List available tables for a paper

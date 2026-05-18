@@ -4,28 +4,30 @@ This document specifies the directory layout, file naming conventions, and annua
 
 ## Directory Layout
 
+Experimental folders use the `Lab-Collaboration` format (实验室-实验组). Data file and index filenames inside keep only the collaboration name.
+
 ```
 flav-data/
 ├── Experimental/                          # Experimental measurement data
-│   ├── LHCb/                              # Collaboration name
-│   │   ├── LHCb.py                        # LHCb-specific data loading script
+│   ├── LHC-LHCb/                          # Lab-Collaboration folder
+│   │   ├── LHCb.py                        # Collaboration-specific loader (keeps collaboration name)
 │   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json             # Annual index file
+│   │   │   ├── LHCb@2015.json             # Annual index (collaboration name only)
 │   │   │   ├── 06/                        # Month subdirectory (zero-padded)
-│   │   │   │   └── LHCb:2015svh.json     # Data file
+│   │   │   │   └── LHCb:2015svh.json     # Data file (collaboration:texkey)
 │   │   │   └── 12/
 │   │   │       └── LHCb:2015abc.json
 │   │   └── 2025/
 │   │       ├── LHCb@2025.json
 │   │       └── 03/
 │   │           └── LHCb:2025xyz.json
-│   ├── ATLAS/
-│   ├── CMS/
-│   ├── BaBar/
-│   ├── Belle/
-│   ├── BESIII/
-│   ├── CDF/
-│   ├── D0/
+│   ├── LHC-ATLAS/
+│   ├── LHC-CMS/
+│   ├── PEPII-BaBar/
+│   ├── KEK-Belle/
+│   ├── BEPCII-BESIII/
+│   ├── Tevatron-CDF/
+│   ├── Tevatron-D0/
 │   ├── HFLAV/
 │   ├── LEP/
 │   └── PDG/
@@ -41,23 +43,23 @@ flav-data/
 
 ### Folder Names
 
-Experimental directories use the collaboration name directly:
+Experimental directories use the `Lab-Collaboration` format (实验室-实验组). When there is no parent lab, use the collaboration/group name directly. Data files and annual index files inside the folder retain only the collaboration name.
 
-| Folder | Description |
-|--------|-------------|
-| `LHCb` | LHCb collaboration |
-| `ATLAS` | ATLAS collaboration |
-| `CMS` | CMS collaboration |
-| `BaBar` | BaBar collaboration |
-| `Belle` | Belle collaboration |
-| `BESIII` | BESIII collaboration |
-| `CDF` | CDF collaboration |
-| `D0` | D0 collaboration |
-| `HFLAV` | Heavy Flavor Averaging Group |
-| `PDG` | Particle Data Group |
-| `LEP` | LEP experiments combination |
+| Folder | Lab | Collaboration | Notes |
+|--------|-----|--------------|-------|
+| `LHC-LHCb` | LHC | LHCb | |
+| `LHC-ATLAS` | LHC | ATLAS | |
+| `LHC-CMS` | LHC | CMS | |
+| `PEPII-BaBar` | PEP-II | BaBar | |
+| `KEK-Belle` | KEKB | Belle | Rename from `Belle` |
+| `BEPCII-BESIII` | BEPCII | BESIII | |
+| `Tevatron-CDF` | Tevatron | CDF | |
+| `Tevatron-D0` | Tevatron | D0 | |
+| `HFLAV` | — | HFLAV | No parent lab |
+| `PDG` | — | PDG | No parent lab |
+| `LEP` | — | LEP | Combined LEP experiments |
 
-Theoretical folders use the group name: `HPQCD`, `RBC-UKQCD`, `FNAL-MILC`, `JLQCD`, etc.
+Theoretical folders use the group name directly: `HPQCD`, `RBC-UKQCD`, `FNAL-MILC`, `JLQCD`, etc.
 
 ### Data Files
 
@@ -100,7 +102,7 @@ Location: `Experimental/{group}/{year}/` or `Theoretical/{group}/{year}/`
 ```python
 import json, os
 
-base = 'Experimental/LHCb'
+base = 'Experimental/LHC-LHCb'
 target = 'LHCb:2025xyz'
 
 for year in sorted(os.listdir(base)):
@@ -121,7 +123,7 @@ Compare indexed entries against actual files on disk to detect discrepancies:
 ```python
 import json, os
 
-base = 'Experimental/LHCb/2015'
+base = 'Experimental/LHC-LHCb/2015'
 index = json.load(open(f'{base}/LHCb@2015.json'))
 
 # Collect all file_ids from the index

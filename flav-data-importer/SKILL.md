@@ -61,7 +61,7 @@ flav-data-importer/
 |----------|------|---------|
 | Network | arXiv API | Get v1 submission date, title, abstract, primary category |
 | Network | InspireHEP API | Get texkey, recid, collaboration, DOI, authors |
-| Network | hepdata-cli | Get machine-readable HEPData (bypasses Cloudflare) |
+| Network | hepdata-cli | Get machine-readable HEPData (bypasses Cloudflare). Installed in Hermes venv. |
 | Network | web-search / web-extract | Search and extract supplementary web content |
 | File reading | pymupdf | PDF text extraction (run via terminal) |
 | File reading | vision_analyze | Table image data extraction |
@@ -116,13 +116,13 @@ Retrieve metadata from two sources:
 | `transition-mode` | Paper information |
 
 #### Data Add
-1. Build file path per `references/file-index.md` — note the **month subdirectory** structure: `Experimental/LHCb/2015/12/LHCb:2015svh.json`
-2. Create year and month directories if they don't exist (`mkdir -p Experimental/LHCb/2015/12`)
+1. Build file path per `references/file-index.md` — note the **Lab-Collaboration** folder structure: `Experimental/LHC-LHCb/2015/12/LHCb:2015svh.json` (folder uses `Lab-Collaboration`, data file uses collaboration-only name)
+2. Create year and month directories if they don't exist (`mkdir -p Experimental/LHC-LHCb/2015/12`)
 3. Determine transition symbol and observable naming per `references/obs-abbr.md`
 4. Build JSON metadata per `references/json-meta.md`
 5. Extract numerical values and populate the JSON
 6. Write the JSON file to the month subdirectory
-7. Update the annual index at `Experimental/LHCb/2015/LHCb@2015.json`
+7. Update the annual index at `Experimental/LHC-LHCb/2015/LHCb@2015.json`
 
 #### Data Update
 1. Locate the existing `xxxx.json` file via the index
@@ -146,36 +146,32 @@ Remove all temporary files (PDFs, YAML downloads, intermediate JSONs) from your 
 
 ### Transition Symbol: `A.B.2.C.D`
 
-The transition `A + B → C + D` is written as `A.B.2.C.D`:
-- `2` replaces the arrow to clearly separate initial and final states.
-- Particles within each state are ordered by charge: `+`, `-`, `0`.
-- Antiparticles: particle name + `Bar` suffix (e.g., `B0Bar`). Exception: charged particles use their charge directly (`W-` not `WBar`).
-- Neutrinos: no flavor indicator — always `nu` or `nuBar`.
-- Multi-step processes use multiple `2` separators: `p.p.2.W+.2.mu+.nu`.
-- Intermediate resonances decaying to dileptons: `(2.l+.l-)` suffix, e.g., `B0.2.Kst0.J/psi(2.l+.l-)`.
+$A + B \to C + D$ → `A.B.2.C.D`. Core rules (full spec in `references/obs-abbr.md` §1):
+- Particles ordered by charge: `+`, `-`, `0`
+- Antiparticles: `Bar` suffix (except charged: `W-` not `WBar`)
+- Neutrinos: no flavor — `nu` / `nuBar`
+- Cascade: `p.p.2.W+.2.mu+.nu`; dilepton resonance: `J/psi(2.l+.l-)`
 
-Examples:
-| LaTeX | Symbol |
-|-------|--------|
+Quick reference:
+| Process | Symbol |
+|---------|--------|
 | $B^0 \to e^+ e^-$ | `B0.2.e+.e-` |
 | $\bar{B}^0 \to e^+ e^-$ | `B0Bar.2.e+.e-` |
 | $W^- \to \mu^- \bar{\nu}_\mu$ | `W-.2.mu-.nuBar` |
 | $pp \to Z \to \mu^+ \mu^-$ | `p.p.2.Z.2.mu+.mu-` |
 
-Full particle table → `references/obs-abbr.md` §1.
-
 ### Observable Naming: `OBS(transition)[condition]`
 
-- **OBS**: symbolic abbreviation only (e.g., `Br`, `FL`, `ACP`). Never write full expression definitions.
+- **OBS**: abbreviation only (never full expressions). Full table → `references/obs-abbr.md` §2–3.
 - **transition**: the `A.B.2.C.D` symbol.
-- **condition**: optional qualifier in square brackets, used ONLY for multi-transition ratios (e.g., `[mu/e]`). Not used for different q² bins.
+- **`[condition]`**: used ONLY for multi-transition observables; NOT for q² bins (use separate `data[]` entries).
+  - `/` → ratio: `R(B0.2.Kst0.l+.l-)[mu/e]`
+  - `-` → difference: `DeltaACP(B-.2.l-.nuBar)[mu-e]`
 
-**Special patterns:**
-- Observable differences: `DeltaOBS(transition)[condition]`, LaTeX: `$\Delta_{OBS}^{condition}(transition)$`
-- Observable ratios: `ROBS(transition)[condition]`, LaTeX: `$R_{OBS}^{condition}(transition)$`
-- CKM parameters $r$ and $\delta$: the B meson and final-state meson carry negative charge (e.g., `B-.2.D0.K-`).
-
-Full observable table → `references/obs-abbr.md` §2–3.
+Special patterns (see `references/obs-abbr.md` §2 for full details):
+- Differences: `DeltaOBS(transition)[condition]`, LaTeX: $\Delta_{OBS}^{condition}(transition)$
+- Ratios: `ROBS(transition)[condition]`, LaTeX: $R_{OBS}^{condition}(transition)$
+- CKM $r$/$\delta$: B meson + final-state meson carry **negative** charge (`B-.2.D0.K-`)
 
 ### Numeric Format
 
@@ -186,7 +182,7 @@ Full observable table → `references/obs-abbr.md` §2–3.
 - **Upper limits**: `type@N_upper_limit` = numeric value, `type@N_level` = confidence level (e.g., `"90%@CLs"`). Do NOT swap or use `err_up`.
 - **Single boundary**: Fill the missing boundary with the literal string (`"q2min"` or `"q2max"`).
 - **unit**: Only for dimensional observables. Omit for dimensionless.
-- **LaTeX escaping**: `\\to` in JSON (double backslash). After `json.load()`, this becomes `\to` in Python.
+- **LaTeX escaping**: `\\to` in JSON file text. After `json.load()`, this becomes `\to` in Python.
 - **Indentation**: 4 spaces.
 
 ### Data Entry Field Whitelist
@@ -204,7 +200,8 @@ The matrix naming must match the error type: component errors use `type@N_*`, to
 
 ### Folder Naming
 
-- Experimental folders use the collaboration name: `Experimental/LHCb/`, `Experimental/ATLAS/`, `Experimental/CMS/`, `Experimental/BaBar/`, `Experimental/Belle/`, `Experimental/PDG/`, `Experimental/HFLAV/`, `Experimental/LEP/`.
+- Experimental folders use the `Lab-Collaboration` format (实验室-实验组): `Experimental/LHC-LHCb/`, `Experimental/LHC-ATLAS/`, `Experimental/LHC-CMS/`, `Experimental/PEPII-BaBar/`, `Experimental/KEK-Belle/`, `Experimental/BEPCII-BESIII/`, `Experimental/PDG/`, `Experimental/HFLAV/`, `Experimental/LEP/`.
+- When no parent lab exists, use the collaboration/group name directly (e.g., `HFLAV`, `PDG`).
 - Theoretical folders use the group name: `Theoretical/HPQCD/`, `Theoretical/RBC-UKQCD/`.
 - Data files and index filenames always use only the collaboration name: `LHCb:2015svh.json`, `LHCb@2015.json`.
 
@@ -223,9 +220,37 @@ The matrix naming must match the error type: component errors use `type@N_*`, to
 | Using `tot_correlation` with component errors | Use `type@N_correlation` matching the error type (e.g., `type@1_correlation` for `type@1_err`). `tot_correlation` is only valid with `tot_err_up`/`tot_err_down` format. |
 | Matrix dimension mismatch with obs count | Ensure matrix size = number of obs@N in the same entry |
 | Using author-level texkey for filenames | Always use the collaboration-level texkey (e.g., `LHCb:2015svh` not `Aaij:2015oid`) |
-| Double-escaping LaTeX (`\\\\to` instead of `\\to`) | Use single double-backslash `\\to` in the JSON file text |
+| Double-escaping LaTeX (`\\to` instead of `\to`) | Use `\\to` in the JSON file text (double backslash) |
+| Author name with initials | Use full first name: `"Aaij, Roel and others"`, not `"Aaij, R. and others"` |
+| Abstract starting with lowercase | Must match arXiv exactly; typically starts with capital letter (e.g., "A measurement...") |
+| Hyphenated transition-mode | No hyphens: use `"semileptonic decay"`, not `"semi-leptonic decay"` |
+| `unit` field as empty string | Omit the `unit` key entirely for dimensionless observables |
+| Adding `comment` or custom fields in data entries | Not allowed — data entries may only contain `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, or `tot_covariance` |
+| `transition-mode` not as last field | Must be the final key in the JSON object |
+| Observable name includes q² bin | The `name` field should only contain `OBS(transition)[condition]` — q² bins go in `q2min`/`q2max` fields |
+| arXiv link text missing version number | Must include version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
+| Correlation matrix diagonal ≠ 1.0 | If diagonal is not 1.0, it's a covariance matrix — use `*_covariance` instead |
+
+### Matrix Format
+
+Matrices (correlation/covariance) use compact row-per-line format:
+
+```json
+"type@1_correlation": [
+    [1.0, 0.06, 0.02],
+    [0.06, 1.0, 0.03],
+    [0.02, 0.03, 1.0]
+]
+```
+
+**Correlation vs Covariance**: 
+- `tot_correlation`: diagonal = 1.0, off-diagonal ∈ [-1, 1]
+- `tot_covariance`: diagonal = variance (error²), off-diagonal = covariance
+- If diagonal elements are not 1.0, use `*_covariance` naming
 
 ## JSON Example
+
+Standard measurement with component errors:
 
 ```json
 {

@@ -4,7 +4,7 @@ This document describes how to use the `hepdata-cli` binary to access HEPData st
 
 ## Overview
 
-- **Path**: Resolved automatically by `hepdata-ext.py`. Searches: `$PATH`, Python venv bin, user-local bin, Homebrew, and system-wide install.
+- **Path**: Installed in Hermes venv at `~/.hermes/hermes-agent/venv/bin/hepdata-cli`. Script `hepdata-ext.py` resolves it automatically via PATH and venv bin search.
 - **Install**: `pip install hepdata-cli` (commonly in a Python virtual environment or user-local bin)
 - **Purpose**: Fetch high-energy physics experimental data from HEPData, bypassing Cloudflare protection.
 - **Input**: InspireHEP control number (recid) or HEPData record ID.
