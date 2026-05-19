@@ -2,10 +2,10 @@
     "inspire-hep": "[LHCb:2025bfy](https://inspirehep.net/literature/2877057)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Search for resonance-enhanced CP and angular asymmetries in the $\\Lambda_c^+ \\to p \\mu^+ \\mu^-$ decay at LHCb",
+    "title": "Search for resonance-enhanced $CP$ and angular asymmetries in the $\\Lambda^+_{c}\\to p\\mu^+\\mu^-$ decay at LHCb",
     "arxiv": "[hep-ex/2502.04013v2](https://arxiv.org/pdf/2502.04013)",
     "time": "2025.02.06",
-    "abstract": "The first measurement of the $CP$ asymmetry of the decay rate ($A_{CP}$) and the $CP$ average ($\\Sigma A_{FB}$) and $CP$ asymmetry ($\\Delta A_{FB}$) of the forward-backward asymmetry in the muon system of $\\Lambda_c^+ \\to p \\mu^+ \\mu^-$ decays is reported. The measurement is performed using a data sample of proton-proton collisions, recorded by the LHCb experiment from 2016 to 2018 at a center-of-mass energy of 13 TeV, which corresponds to an integrated luminosity of 5.4 fb$^{-1}$. The asymmetries are measured in two regions of dimuon mass near the $\\phi$-meson mass peak. The dimuon-mass integrated results are $A_{CP} = (-1.1 \\pm 4.0 \\pm 0.5)\\%$, $\\Sigma A_{FB} = (3.9 \\pm 4.0 \\pm 0.6)\\%$, and $\\Delta A_{FB} = (3.1 \\pm 4.0 \\pm 0.4)\\%$, where the first uncertainty is statistical and the second systematic. The results are consistent with the conservation of $CP$ symmetry and the Standard Model expectations.",
+    "abstract": "The first measurement of the $CP$ asymmetry of the decay rate ($A_{CP}$) and the $CP$ average ($\\Sigma A_{\\text{FB}}$) and $CP$ asymmetry ($\\Delta A_{\\text{FB}}$) of the forward-backward asymmetry in the muon system of $\\mathit{\\Lambda}^+_c\\to p\\mu^+\\mu^-$ decays is reported. The measurement is performed using a data sample of proton-proton collisions, recorded by the LHCb experiment from 2016 to 2018 at a center-of-mass energy of 13$\\text{ TeV}$, which corresponds to an integrated luminosity of 5.4$\\text{ fb}^{-1}$. The asymmetries are measured in two regions of dimuon mass near the $\\phi$-meson mass peak. The dimuon-mass integrated results are \\begin{align*} A_{CP} &= (-1.1 \\pm 4.0 \\pm 0.5)\\%,\\\\ \\Sigma A_{\\text{FB}} &= (\\phantom{-}3.9 \\pm 4.0 \\pm 0.6)\\%,\\\\ \\Delta A_{\\text{FB}} &= (\\phantom{-}3.1 \\pm 4.0 \\pm 0.4)\\%, \\end{align*} where the first uncertainty is statistical and the second systematic. The results are consistent with the conservation of $CP$ symmetry and the Standard Model expectations.",
     "pdf": "https://arxiv.org/pdf/2502.04013",
     "data": [
         {
@@ -123,12 +123,54 @@
                 "q2max": "1.05946"
             },
             "type@2_correlation": [
-                [1, 0.43, 0, 0, 0, 0],
-                [0.43, 1, 0, 0, 0, 0],
-                [0, 0, 1, 0.28, 0, 0],
-                [0, 0, 0.28, 1, 0, 0],
-                [0, 0, 0, 0, 1, 0.34],
-                [0, 0, 0, 0, 0.34, 1]
+                [
+                    1,
+                    0.43,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0.43,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    1,
+                    0.28,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0.28,
+                    1,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0.34
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0.34,
+                    1
+                ]
             ]
         }
     ],

@@ -2,10 +2,10 @@
     "inspire-hep": "[LHCb:2025pxz](https://inspirehep.net/literature/2880313)",
     "author": "Aaij, Roel and others",
     "collaboration": "LHCb",
-    "title": "Angular analysis of $B^0 \\to K^{*0} e^+ e^-$ decays",
+    "title": "Angular analysis of $B^0\\rightarrow K^{*0}e^{+}e^{-}$ decays",
     "arxiv": "[hep-ex/2502.10291v2](https://arxiv.org/pdf/2502.10291)",
     "time": "2025.02.14",
-    "abstract": "An angular analysis of $B^0 \\to K^{*0} e^+ e^-$ decays is presented using proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The analysis is performed in the region of the dilepton invariant mass squared of 1.1--6.0 GeV$^2/c^4$. In addition, a test of lepton flavour universality is performed by comparing the obtained angular observables with those measured in $B^0 \\to K^{*0} \\mu^+ \\mu^-$ decays. In general, the angular observables are found to be consistent with the Standard Model expectations as well as with global analyses of other $b \\to s \\ell^+ \\ell^-$ processes, where $\\ell$ is either a muon or an electron. No sign of lepton-flavour-violating effects is observed.",
+    "abstract": "An angular analysis of $B^0\\rightarrow K^{*0}e^{+}e^{-}$ decays is presented using proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The analysis is performed in the region of the dilepton invariant mass squared of 1.1-6.0 GeV$^{2}/c^{4}$. In addition, a test of lepton flavour universality is performed by comparing the obtained angular observables with those measured in $B^0\\rightarrow K^{*0}μ^{+}μ^{-}$ decays. In general, the angular observables are found to be consistent with the Standard Model expectations as well as with global analyses of other $b \\rightarrow s \\ell^{+} \\ell^{-}$ processes, where $\\ell$ is either a muon or an electron. No sign of lepton-flavour-violating effects is observed.",
     "pdf": "https://arxiv.org/pdf/2502.10291",
     "data": [
         {
