@@ -17,13 +17,13 @@ def get_cached_data(lab, group, years, months, _get_json_func, base_path):
     data_pool = []
     
     for year in years:
-        index_path = f'{base_path}/{lab}-{group}/{year}/{group}@{year}.json'
+        index_path = fr'{base_path}/{lab}-{group}/{year}/{group}@{year}.json'
         try:
             json_index = _get_json_func(index_path)
             for m_key, item_ids in json_index.items():
                 if int(m_key) in months:
                     for fid in item_ids:
-                        detail_path = f'{base_path}/{lab}-{group}/{year}/{m_key}/{fid}.json'
+                        detail_path = fr'{base_path}/{lab}-{group}/{year}/{m_key}/{fid}.json'
                         detail = _get_json_func(detail_path)
                         if detail:
                             # Inject metadata for subsequent sorting and grouping
@@ -42,7 +42,7 @@ def detect_years(lab, group, year_min, year_max, get_json_func, base_path):
     years = []
     for year in range(year_min, year_max + 1):
         try:
-            get_json_func(f'{base_path}/{lab}-{group}/{year}/{group}@{year}.json')
+            get_json_func(fr'{base_path}/{lab}-{group}/{year}/{group}@{year}.json')
             years.append(year)
         except FileNotFoundError:
             continue
@@ -59,7 +59,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func, month_label = N
     exp_year_list = detect_years(lab, group, year_min, year_max, get_json_func, base_path)
         
     if not exp_year_list:
-        st.warning(f"No {group} data found in {base_path}/{lab}-{group}/")
+        st.warning(fr"No {group} data found in {base_path}/{lab}-{group}/")
         return
     
     ## Sidebar Settings & Filtering
@@ -134,7 +134,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func, month_label = N
     
         #### Generate header text, consistent with the original version
         month_name = month_label.get(str(month_key), month_key)
-        header_text = f'# {group} Data from {month_name} {year}'
+        header_text = fr'# {group} Data from {month_name} {year}'
     
         if header_text != current_header:
             st.markdown(header_text)
@@ -142,19 +142,15 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func, month_label = N
 
         #### Display data with {key: value}
         with st.container(border = True):
-            st.markdown(f"### {json_detail.get('title', 'Untitled')}")
-            col1, col2 = st.columns(2)
+            st.markdown(fr"### {json_detail.get('title', 'Untitled')}")
+            col1, col2 = st.columns([1,3])
 
             with col1:
-                for items in ['author', 'inspire-hep', 'arxiv', 'collaboration', 'time', 'abstract']:
-                    st.markdown(f'- **{items.upper()}**: {json_detail.get(items, "N/A")}')
+                for items in ['author', 'inspire-hep', 'arxiv', 'collaboration', 'time']:
+                    st.markdown(fr'- **{items.upper()}**: {json_detail.get(items, "N/A")}')
         
             with col2:
-                pdf_path = json_detail.get('pdf')
-                if pdf_path:
-                    # PDF lazy loading optimization: prevents freezing from rendering many PDFs at once
-                    # if st.checkbox("Preview PDF", key = f"pdf_{year}_{month_key}_{json_detail.get('title', 'raw')}"):
-                        st.pdf(pdf_path, height = 300)
+                st.markdown(fr'- **{"abstract".upper()}**: {json_detail.get("abstract", "N/A")}')
                         
             ##### Show details (Expander)
             with st.expander('View Data'):
@@ -175,7 +171,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func, month_label = N
                                 obs1 = data_value.get("obs@1", {})
                                 err_key = key.replace("correlation", "err")
                                 err_name = obs1.get(err_key, "Unknown")
-                                st.markdown(f'- **{err_name.upper()}-CORRELATION**')
+                                st.markdown(fr'- **{err_name.upper()}-CORRELATION**')
                                 st.table(data_value[key])
                             except Exception:
                                 pass                            

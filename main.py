@@ -23,7 +23,7 @@ main_pages = {
         st.Page(f"Observable/{obs}.py", title=f"{obs}") for obs in OBSGROUP
     ],
     "Experimental": [
-        st.Page(f"Experimental/{exp}/{exp}.py", title=f"{exp}") for exp in EXPEGROUP
+        st.Page(f"Experimental/{lab}-{exp}/{exp}.py", title=f"{lab}-{exp}") for exp, lab in EXPEGROUP.items()
     ],
     "Theoretical": [
         st.Page(f"Theoretical/{theo}/{theo}.py", title=f"{theo}") for theo in THEOGROUP

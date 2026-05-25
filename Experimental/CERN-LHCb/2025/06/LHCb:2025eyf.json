@@ -5,7 +5,7 @@
     "title": "Search for the lepton-flavour-violating decays $B^0 \\to K^{\\ast0} \\tau^{\\pm} e^{\\mp}$",
     "arxiv": "[hep-ex/2506.15347v2](https://arxiv.org/pdf/2506.15347)",
     "time": "2025.06.18",
-    "abstract": "A first search at LHCb for the lepton-flavour-violating decays B0 → K*0 τ± e∓ is presented. The analysis is performed using a sample of proton-proton collision data, collected with the LHCb detector at a centre-of-mass energy of 13 TeV between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb⁻¹. No significant signal is observed, and upper limits on the branching fractions are determined to be B(B0 → K*0 τ⁻ e⁺) < 5.9 (7.1) × 10⁻⁶ and B(B0 → K*0 τ⁺ e⁻) < 4.9 (5.9) × 10⁻⁶ at the 90% (95%) confidence level. These results correspond to the current most stringent upper limits for b → sτℓ transitions.",
+    "abstract": "A first search for the lepton-flavour-violating decays $B^0\\to K^{*0}\\tau^\\pm e^\\mp$ is presented. The analysis is performed using a sample of proton-proton collision data, collected with the LHCb detector at a centre-of-mass energy of 13 TeV between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb$^{-1}$. No significant signal is observed, and upper limits on the branching fractions are determined to be $\\cal{B}$$(B^0 \\to K^{*0}\\tau^-e^+)< 5.9$ $(7.1)\\times 10^{-6}$ and $\\cal{B}$$(B^0 \\to K^{*0}\\tau^+e^-)< 4.9$ $(5.9)\\times 10^{-6}$ at the 90% (95%) confidence level. These results correspond to the current most stringent upper limits for $b \\to s\\tau\\ell$ transitions.",
     "pdf": "https://arxiv.org/pdf/2506.15347",
     "data": [
         {

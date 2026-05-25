@@ -143,9 +143,9 @@ Unless otherwise specified, differences and ratios between observables follow th
 Examples:
 | LaTeX | Symbol | Description |
 |-------|--------|-------------|
-| $\Delta_{ACP}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaACP(B0.2.Kst0.l+.l-)[mu-e]` | CP asymmetry difference |
-| $R_{FL}^{\mu/e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` | Longitudinal polarization ratio |
-| $\Delta_{Br}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu-e]` | Branching fraction difference |
+| $\Delta_{A_{CP}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaACP(B0.2.Kst0.l+.l-)[mu-e]` | CP asymmetry difference |
+| $R_{F_L}^{\mu/e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` | Longitudinal polarization ratio |
+| $\Delta_{\mathcal{B}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu-e]` | Branching fraction difference |
 
 ## 3. Observable Abbreviations
 
@@ -292,14 +292,14 @@ Differences of angular coefficients between muon and electron modes, used to tes
 
 | Abbr | LaTeX | Paper Notation | Definition |
 |------|-------|---------------|-----------|
-| `DeltaFL` | $\Delta F_L$ | $Q_{F_L}$ | $F_L^{\mu} - F_L^{e}$ |
-| `DeltaP1` | $\Delta P_1$ | $Q_1$ | $P_1^{\mu} - P_1^{e}$ |
-| `DeltaP2` | $\Delta P_2$ | $Q_2$ | $P_2^{\mu} - P_2^{e}$ |
-| `DeltaP3` | $\Delta P_3$ | $Q_3$ | $P_3^{\mu} - P_3^{e}$ |
-| `DeltaP4p` | $\Delta P_4^{\prime}$ | $Q_4$ | $P_4^{\prime\mu} - P_4^{\prime e}$ |
-| `DeltaP5p` | $\Delta P_5^{\prime}$ | $Q_5$ | $P_5^{\prime\mu} - P_5^{\prime e}$ |
-| `DeltaP6p` | $\Delta P_6^{\prime}$ | $Q_6$ | $P_6^{\prime\mu} - P_6^{\prime e}$ |
-| `DeltaP8p` | $\Delta P_8^{\prime}$ | $Q_8$ | $P_8^{\prime\mu} - P_8^{\prime e}$ |
+| `DeltaFL` | $\Delta_{F_L}^{\mu-e}$ | $Q_{F_L}$ | $F_L^{\mu} - F_L^{e}$ |
+| `DeltaP1` | $\Delta_{P_1}^{\mu-e}$ | $Q_1$ | $P_1^{\mu} - P_1^{e}$ |
+| `DeltaP2` | $\Delta_{P_2}^{\mu-e}$ | $Q_2$ | $P_2^{\mu} - P_2^{e}$ |
+| `DeltaP3` | $\Delta_{P_3}^{\mu-e}$ | $Q_3$ | $P_3^{\mu} - P_3^{e}$ |
+| `DeltaP4p` | $\Delta_{P_4^{\prime}}^{\mu-e}$ | $Q_4$ | $P_4^{\prime\mu} - P_4^{\prime e}$ |
+| `DeltaP5p` | $\Delta_{P_5^{\prime}}^{\mu-e}$ | $Q_5$ | $P_5^{\prime\mu} - P_5^{\prime e}$ |
+| `DeltaP6p` | $\Delta_{P_6^{\prime}}^{\mu-e}$ | $Q_6$ | $P_6^{\prime\mu} - P_6^{\prime e}$ |
+| `DeltaP8p` | $\Delta_{P_8^{\prime}}^{\mu-e}$ | $Q_8$ | $P_8^{\prime\mu} - P_8^{\prime e}$ |
 
 ### Ratios and Normalizations
 

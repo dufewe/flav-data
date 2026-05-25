@@ -29,6 +29,6 @@ month_label = {
     "12": "Dec."
 }
 
-EXPEGROUP = ["ATLAS","CMS", "LHCb", "Belle", "BaBar"]
+EXPEGROUP = {"ATLAS":"CERN", "CMS":"CERN", "LHCb":"CERN"}
 THEOGROUP = ["HPQCD"]
 OBSGROUP = ["Flavor", "EWPO"]
