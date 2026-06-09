@@ -7,7 +7,7 @@
     "time": "2020-04-01",
     "abstract": "Based on a sample of 300 million $K_S$ mesons produced in $\\phi \\to K_L K_S$ decays recorded by the KLOE experiment at the DA$\\Phi$NE $e^+ e^-$ collider we have measured the branching fraction for the decay $K_S \\to \\pi \\mu \\nu$. The $K_S$ mesons are identified by the interaction of $K_L$ mesons in the detector. A fit to the reconstructed muon mass distribution finds $7223 \\pm 180$ signal events. Normalising to the $K_S \\to \\pi^+ \\pi^-$ decay events the result for the branching fraction is $\\mathcal{B}(K_S \\to \\pi \\mu \\nu) = (4.56 \\pm 0.11_{\\rm stat} \\pm 0.17_{\\rm syst}) \\times 10^{-4}$. It is the first measurement of this decay mode and the result allows an independent determination of $|V_{us}|$ and a test of the lepton-flavour universality.",
     "pdf": "https://arxiv.org/pdf/1912.05990.pdf",
-    "transition-mode": "kaon-semileptonic",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {

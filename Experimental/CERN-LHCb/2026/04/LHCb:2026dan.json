@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026dan](https://inspirehep.net/literature/3144939)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Measurement of the $W$-boson production cross-sections in $pp$ collisions at $\\sqrt{s} = 13$ TeV in the forward region",
     "arxiv": "[hep-ex/2604.12706v1](https://arxiv.org/pdf/2604.12706)",
     "time": "2026.04.14",
     "abstract": "A precision measurement of the $W$-boson production cross-section is performed using the $W \\to \\mu \\nu$ decay channel, based on a sample of proton-proton collision data collected by the LHCb experiment at $\\sqrt{s} = 13$ TeV and corresponding to an integrated luminosity of 5.1 fb$^{-1}$. The cross-section is measured for muons with transverse momentum between 25 and 55 GeV and pseudorapidity between 2.0 and 4.5. The integrated production cross-sections of $W$ bosons are measured to be $\\sigma(W^+ \\to \\mu^+ \\nu) = 1754.2 \\pm 1.5 \\pm 11.9 \\pm 35.1$ pb and $\\sigma(W^- \\to \\mu^- \\bar{\\nu}) = 1178.1 \\pm 1.3 \\pm 9.7 \\pm 23.6$ pb, where the first uncertainties are statistical, the second are systematic, and the third are due to the luminosity determination.",
     "pdf": "https://arxiv.org/pdf/2604.12706",
+    "transition-mode": "scattering",
     "data": [
         {
             "obs@1": {
@@ -40,6 +41,5 @@
                 "unit": "pb"
             }
         }
-    ],
-    "transition-mode": "scattering"
+    ]
 }

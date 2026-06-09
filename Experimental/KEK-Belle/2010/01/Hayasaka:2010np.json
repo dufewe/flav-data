@@ -3,12 +3,11 @@
     "author": "Hayasaka, K. and others",
     "collaboration": "Belle",
     "title": "Search for Lepton Flavor Violating Tau Decays into Three Leptons with 719 Million Produced Tau+ Tau- Pairs",
-    "arxiv": "[1001.3221v1](https://arxiv.org/pdf/1001.3221.pdf)",
-    "year": "2010",
+    "arxiv": "[hep-ex/1001.3221v1](https://arxiv.org/pdf/1001.3221.pdf)",
     "time": "2010-01-19",
     "abstract": "We search for lepton-flavor-violating tau decays into three leptons using 782 fb-1 of data. No signal is observed. Upper limits on branching fractions are set in the range (1.5-2.7) x 10^-8 at 90% CL.",
     "pdf": "https://arxiv.org/pdf/1001.3221.pdf",
-    "transition-mode": "lfv-tau",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

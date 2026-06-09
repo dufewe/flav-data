@@ -3,10 +3,11 @@
     "author": "Dungel, W. and others",
     "collaboration": "Belle",
     "title": "Measurement of the form factors of the decay $B^0 \\to D^{*-} \\ell^+ \\nu$ and determination of the CKM matrix element $|V_{cb}|$",
-    "arxiv": "[1010.3238v2](https://arxiv.org/pdf/1010.3238)",
+    "arxiv": "[hep-ex/1010.3238v2](https://arxiv.org/pdf/1010.3238)",
     "time": "2010.10.15",
     "abstract": "This article reports a measurement of the form factors of the decay $B^0 \\to D^{*-} \\ell^+ \\nu$ and a determination of the CKM matrix element $|V_{cb}|$. The results are based on a data sample of 652 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find $|V_{cb}| = (39.34 \\pm 0.63 (\\text{stat}) \\pm 1.08 (\\text{syst})) \\times 10^{-3}$.",
     "pdf": "https://arxiv.org/pdf/1010.3238",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -23,19 +24,6 @@
             }
         },
         {
-            "obs@1": {
-                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
-                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "16.45",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.95",
-                "type@1_err_down": "0.95",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.57",
-                "type@2_err_down": "0.57",
-                "w_min": "1.00",
-                "w_max": "1.05"
-            },
             "obs@2": {
                 "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
                 "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
@@ -153,20 +141,22 @@
                 "w_min": "1.45",
                 "w_max": "1.50"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "16.45",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.95",
+                "type@1_err_down": "0.95",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.57",
+                "type@2_err_down": "0.57",
+                "w_min": "1.00",
+                "w_max": "1.05",
+                "unit": "1e-15 GeV"
+            }
         },
         {
-            "obs@1": {
-                "name": "rho2(B0.2.Dst.l.nu)",
-                "latex": "$\\rho^2 (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
-                "value": "1.206",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.034",
-                "type@1_err_down": "0.034",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.024",
-                "type@2_err_down": "0.024"
-            },
             "obs@2": {
                 "name": "R1(B0.2.Dst.l.nu)",
                 "latex": "$R_1(1) (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
@@ -189,8 +179,18 @@
                 "type@2_err_up": "0.026",
                 "type@2_err_down": "0.026"
             },
-            "note": "CLN fit. Correlation matrix: (Vcb,rho2)=-0.81, (Vcb,R1)=-0.33, (Vcb,R2)=-0.20, (rho2,R1)=0.51, (rho2,R2)=0.40, (R1,R2)=-0.03"
+            "obs@1": {
+                "name": "rho2(B0.2.Dst.l.nu)",
+                "latex": "$\\rho^2 (\\bar{B} \\to D^{*} \\ell \\bar{\\nu})$",
+                "value": "1.206",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.034",
+                "type@1_err_down": "0.034",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.024",
+                "type@2_err_down": "0.024",
+                "note": "CLN fit. Correlation matrix: (Vcb,rho2)=-0.81, (Vcb,R1)=-0.33, (Vcb,R2)=-0.20, (rho2,R1)=0.51, (rho2,R2)=0.40, (R1,R2)=-0.03"
+            }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

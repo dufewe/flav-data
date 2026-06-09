@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1696607",
-    "author": "Sirunyan, Albert M and others",
+    "author": "Sirunyan, A.M. and others",
     "collaboration": "CMS",
     "title": "Combined measurements of Higgs boson couplings in proton-proton collisions at sqrt(s)=13 TeV",
-    "arxiv": "[1809.10733v2](https://arxiv.org/pdf/1809.10733.pdf)",
-    "year": "2018",
+    "arxiv": "[hep-ex/1809.10733v2](https://arxiv.org/pdf/1809.10733.pdf)",
     "time": "2018-09-27",
     "abstract": "Combined measurements of the production and decay rates of the Higgs boson, as well as its couplings to vector bosons and fermions, using 35.9 fb-1 at 13 TeV. Based on analyses of H->gamma gamma, ZZ, WW, tau tau, bb, and mu mu. The global signal strength and per-mode signal strengths are measured.",
     "pdf": "https://arxiv.org/pdf/1809.10733.pdf",
-    "transition-mode": "higgs-couplings",
+    "transition-mode": "Higgs decay",
     "data": [
         {
             "obs@1": {

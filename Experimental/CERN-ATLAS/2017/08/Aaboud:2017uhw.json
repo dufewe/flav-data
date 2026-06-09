@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1613896",
-    "author": "Aaboud, Morad and others",
+    "author": "Aaboud, M. and others",
     "collaboration": "ATLAS",
     "title": "Searches for the Z gamma decay mode of the Higgs boson and for new high-mass resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector",
-    "arxiv": "[1708.00212v2](https://arxiv.org/pdf/1708.00212.pdf)",
-    "year": "2017",
+    "arxiv": "[hep-ex/1708.00212v2](https://arxiv.org/pdf/1708.00212.pdf)",
     "time": "2017-08-01",
     "abstract": "Searches for the Z gamma decay of the Higgs boson using 36.1 fb-1 at 13 TeV. The observed (expected) upper limit on the production cross section times branching ratio is 6.6 (5.2) times the SM prediction at 95% CL for mH=125.09 GeV.",
     "pdf": "https://arxiv.org/pdf/1708.00212.pdf",
-    "transition-mode": "higgs-rare-decay",
+    "transition-mode": "Higgs decay",
     "data": [
         {
             "obs@1": {

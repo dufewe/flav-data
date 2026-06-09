@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2014nhe](https://inspirehep.net/literature/1298985)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Observation of the $\\Lambda_b^0 \\to J/\\psi p \\pi^-$ decay",
     "arxiv": "[hep-ex/1406.0755v3](https://arxiv.org/pdf/1406.0755)",
     "time": "2014.06.03",
     "abstract": "the ﬁrst observation of the Cabibbo-suppressed decay $\\Lambda^0_b \\to J/\\psi p \\pi^-$, using a data sample of proton-proton collisions at 7 and 8 TeV, corresponding to an integrated luminosity of 3 fb$^{−1}$",
     "pdf": "https://arxiv.org/pdf/1406.0755",
+    "transition-mode": "non-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -32,6 +33,5 @@
                 "type@2_err_down": "1.2e-2"
             }
         }
-    ],
-    "transition-mode": "non-leptonic decay"
+    ]
 }

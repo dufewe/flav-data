@@ -1,16 +1,15 @@
 {
     "inspire-hep": "1725190",
-    "author": "Aad, Georges and others",
+    "author": "Aad, G. and others",
     "collaboration": "ATLAS",
     "title": "Search for high-mass dilepton resonances using 139 fb^{-1} of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector",
-    "arxiv": "1903.06248v3",
+    "arxiv": "[hep-ex/1903.06248v3](https://arxiv.org/pdf/1903.06248v3)",
     "time": "2019-07-19",
     "abstract": "A search for high-mass dielectron and dimuon resonances in the mass range of 250 GeV to 6 TeV is presented. The data were recorded by the ATLAS experiment in proton-proton collisions at a centre-of-mass energy of sqrt(s)=13 TeV during Run 2 of the Large Hadron Collider and correspond to an integrated luminosity of 139 fb^{-1}. A functional form is fitted to the dilepton invariant-mass distribution to model the contribution from background processes, and a generic signal shape is used to determine the significance of observed deviations from this background estimate. No significant deviation is observed and upper limits are placed at the 95% confidence level on the fiducial cross-section times branching ratio for various resonance width hypotheses. The derived limits are shown to be applicable to spin-0, spin-1 and spin-2 signal hypotheses. For a set of benchmark models, the limits are converted into lower limits on the resonance mass and reach 4.5 TeV for the E6-motivated Z'_{psi} boson. Also presented are limits on Heavy Vector Triplet model couplings.",
     "pdf": "https://arxiv.org/pdf/1903.06248.pdf",
-    "transition-mode": "zprime-search",
+    "transition-mode": "scattering",
     "data": [
         {
-            "condition": "ee + mumu combined, 139 fb^{-1} at sqrt(s)=13 TeV",
             "obs@1": {
                 "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
                 "latex": "$m_{Z'_{SSM}}^{obs}$",
@@ -73,7 +72,6 @@
             }
         },
         {
-            "condition": "ee channel only, 139 fb^{-1} at sqrt(s)=13 TeV",
             "obs@1": {
                 "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee]",
                 "latex": "$m_{Z'_{SSM}}^{obs}$",
@@ -116,7 +114,6 @@
             }
         },
         {
-            "condition": "mumu channel only, 139 fb^{-1} at sqrt(s)=13 TeV",
             "obs@1": {
                 "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[mumu]",
                 "latex": "$m_{Z'_{SSM}}^{obs}$",

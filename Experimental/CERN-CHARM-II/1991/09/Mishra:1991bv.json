@@ -4,11 +4,10 @@
     "collaboration": "CHARM-II",
     "title": "A measurement of the weak mixing angle from nu_mu e elastic scattering",
     "arxiv": "no arxiv (published in Phys.Lett.B)",
-    "year": "1991",
     "time": "1991-09-01",
     "abstract": "A final measurement of the weak mixing angle from nu_mu e elastic scattering in the CHARM-II experiment. The combined result is sin^2theta_W = 0.2324 +/- 0.0058 (stat) +/- 0.0051 (syst).",
     "pdf": "https://cds.cern.ch/record/2728096/files/p111.pdf",
-    "transition-mode": "electroweak-precision",
+    "transition-mode": "scattering",
     "data": [
         {
             "obs@1": {

@@ -3,10 +3,11 @@
     "author": "Huschle, M. and others",
     "collaboration": "Belle",
     "title": "Measurement of the branching ratio of $\\bar{B} \\to D^{(*)} \\tau^- \\bar{\\nu}_\\tau$ relative to $\\bar{B} \\to D^{(*)} \\ell^- \\bar{\\nu}_\\ell$ decays with hadronic tagging at Belle",
-    "arxiv": "[1507.03233v1](https://arxiv.org/pdf/1507.03233)",
+    "arxiv": "[hep-ex/1507.03233v1](https://arxiv.org/pdf/1507.03233)",
     "time": "2015.07.12",
     "abstract": "We report a measurement of the branching fraction ratios $R(D^{(*)}) = \\mathcal{B}(\\bar{B} \\to D^{(*)} \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(\\bar{B} \\to D^{(*)} \\ell^- \\bar{\\nu}_\\ell)$ ($\\ell = e$ or $\\mu$) using the full Belle data sample of 772 $\\times 10^6$ $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider.",
     "pdf": "https://arxiv.org/pdf/1507.03233",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -206,6 +207,10 @@
             }
         },
         {
+            "tot_correlation": [
+                [1.0, -0.05],
+                [-0.05, 1.0]
+            ],
             "obs@1": {
                 "name": "R(B.2.D.tau.nu)",
                 "latex": "$R(D) = \\frac{\\mathcal{B}(\\bar{B} \\to D \\tau^- \\bar{\\nu}_\\tau)}{\\mathcal{B}(\\bar{B} \\to D \\ell^- \\bar{\\nu}_\\ell)}$",
@@ -227,32 +232,9 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "0.015",
                 "type@2_err_down": "0.015"
-            },
-            "tot_correlation": [
-                [
-                    1.0,
-                    -0.05
-                ],
-                [
-                    -0.05,
-                    1.0
-                ]
-            ]
+            }
         },
         {
-            "obs@1": {
-                "name": "dBr/dq2(Bbar.2.Dst.tau.nu)[5.2-6.8]",
-                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B} \\to D^{*} \\tau \\bar{\\nu})$",
-                "value": "0.60",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.32",
-                "type@1_err_down": "0.32",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.08",
-                "type@2_err_down": "0.08",
-                "q2min": "5.2",
-                "q2max": "6.8"
-            },
             "obs@2": {
                 "name": "dBr/dq2(Bbar.2.Dst.tau.nu)[6.8-8.4]",
                 "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B} \\to D^{*} \\tau \\bar{\\nu})$",
@@ -396,8 +378,20 @@
                 "q2min": "22.8",
                 "q2max": "24.4"
             },
-            "unit": "1e-3"
+            "obs@1": {
+                "name": "dBr/dq2(Bbar.2.Dst.tau.nu)[5.2-6.8]",
+                "latex": "$\\frac{d\\mathcal{B}}{dq^2}(\\bar{B} \\to D^{*} \\tau \\bar{\\nu})$",
+                "value": "0.60",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.32",
+                "type@1_err_down": "0.32",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.08",
+                "type@2_err_down": "0.08",
+                "q2min": "5.2",
+                "q2max": "6.8",
+                "unit": "1e-3"
+            }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

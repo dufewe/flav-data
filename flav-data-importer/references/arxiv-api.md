@@ -70,6 +70,18 @@ Example: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`
 
 ## Python Extraction
 
+The canonical implementation lives in `scripts/arxiv-ext.py`. It
+applies two transforms from `Test/improve.md` rules 3 + 4 before
+returning the metadata dict:
+
+- **Rule 3 (BibTeX author)**: `_to_bibtex()` converts `"Aaij, Roel"` →
+  `"Aaij, R."` (passes through already-initials form like `"A.M."`).
+- **Rule 4 (Unicode → LaTeX)**: `_unicode_to_latex()` rewrites Greek
+  letters, math symbols, and typographic punctuation to their LaTeX
+  equivalents in the title and abstract.
+
+For clarity, the bare extraction flow (no transforms) is shown below:
+
 ```python
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -100,12 +112,12 @@ def get_arxiv_info(arxiv_id):
     title = entry.find('atom:title', ns).text.strip()
     abstract = entry.find('atom:summary', ns).text.strip()
 
-    # Authors
+    # Authors (full names; convert first to BibTeX form for `author_str`)
     authors = [a.find('atom:name', ns).text
                for a in entry.findall('atom:author', ns)]
-    author_str = (f"{authors[0]} and others"
+    author_str = (f"{_to_bibtex(authors[0])} and others"
                   if len(authors) > 1
-                  else (authors[0] if authors else ''))
+                  else (_to_bibtex(authors[0]) if authors else ''))
 
     # PDF link
     pdf_link = None
@@ -142,7 +154,9 @@ def get_arxiv_info(arxiv_id):
 ## Notes
 
 1. **`published` is v1 time**, `updated` is the latest version time. Always use `published` for the `time` field.
-2. **Author truncation**: Use "FirstAuthor and others" when more than one author exists.
-3. **Title LaTeX**: The arXiv API returns titles with `$...$` LaTeX delimiters. These may need escaping for JSON (double backslashes).
-4. **Network access**: The arXiv API may be unreachable from restricted environments. Use the local terminal for requests.
-5. **Error handling**: The API returns HTTP 200 even for non-existent IDs, but with `<total>0</total>`. Check for `<atom:entry>` existence.
+2. **Author truncation**: Use "FirstAuthor and others" when more than one author exists. **Convert to InspireHEP BibTeX format** (initials only) before storing — see `Test/improve.md` rule 3 and `inspirehep-api.md` for the `_to_bibtex` helper.
+3. **Title LaTeX**: The arXiv API returns titles with `$...$` LaTeX delimiters. These may need escaping for JSON (double backslashes). All Unicode characters in the original title must be converted to LaTeX (e.g. `μ` → `\mu`, `Δ` → `\Delta`).
+4. **Abstract = single line**: The arXiv API may return abstracts with multi-line `\\begin{align*} ... \\end{align*}` blocks. These must be collapsed to a single line of LaTeX (line breaks become `, `, with `and` before the last entry). See `Test/improve.md` rule 2.
+5. **Network access**: The arXiv API may be unreachable from restricted environments. Use the local terminal for requests.
+6. **Error handling**: The API returns HTTP 200 even for non-existent IDs, but with `<total>0</total>`. Check for `<atom:entry>` existence.
+7. **Unicode escaping**: Strip any remaining Unicode characters from extracted data (title, abstract, author) and replace with LaTeX equivalents. See `Test/improve.md` rule 4.

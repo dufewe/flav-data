@@ -3,10 +3,11 @@
     "author": "Abdesselam, A. and others",
     "collaboration": "Belle",
     "title": "Test of Lepton-Flavor Universality in ${B\\to K^*\\ell^+\\ell^-}$ Decays at Belle",
-    "arxiv": "[1904.02440v3](https://arxiv.org/pdf/1904.02440)",
+    "arxiv": "[hep-ex/1904.02440v3](https://arxiv.org/pdf/1904.02440)",
     "time": "2019.04.04",
     "abstract": "We present a test of lepton-flavor universality in $B \\to K^*\\ell^+\\ell^-$ decays, where $\\ell$ is either an electron or a muon. The analysis is based on a data sample of 711 fb$^{-1}$, containing $772\\times 10^6$ $B\\bar{B}$ events, recorded at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+e^-$ collider. We measure the ratio of branching fractions $R_{K^*} = \\mathcal{B}(B \\to K^*\\mu^+\\mu^-)/\\mathcal{B}(B \\to K^*e^+e^-)$ in four bins of the squared dilepton invariant mass, $q^2$. We find the results to be consistent with Standard Model expectations. We also report absolute branching fractions for the individual modes in bins of $q^2$.",
     "pdf": "https://arxiv.org/pdf/1904.02440",
+    "transition-mode": "rare decay",
     "data": [
         {
             "obs@1": {
@@ -209,6 +210,5 @@
                 "type@2_err_down": "0.08"
             }
         }
-    ],
-    "transition-mode": "rare decay"
+    ]
 }

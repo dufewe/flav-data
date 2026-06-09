@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026luq](https://inspirehep.net/literature/3142508)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for the lepton-flavour violating decays $B^+ \\to \\pi^+ \\mu^\\pm e^\\mp$",
     "arxiv": "[hep-ex/2604.08396v1](https://arxiv.org/pdf/2604.08396)",
     "time": "2026.04.09",
     "abstract": "The first search for the lepton-flavour violating decays $B^+ \\to \\pi^+ \\mu^\\pm e^\\mp$ in proton-proton collisions is presented, using data collected by the LHCb experiment between 2011 and 2018, corresponding to an integrated luminosity of 9 fb$^{-1}$. No significant signal is observed and an upper limit on the branching fraction is set at $\\mathcal{B}(B^+ \\to \\pi^+ \\mu^\\pm e^\\mp) < 1.8 \\times 10^{-9}$ at the 90\\% confidence level, two orders of magnitude more restrictive than the current world average. This is the first constraint on lepton-flavour violating $b \\to d$ quark transitions at the LHC and also sets the most stringent upper limits to date on $b \\to d \\mu^\\pm e^\\mp$ transitions.",
     "pdf": "https://arxiv.org/pdf/2604.08396",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -26,6 +27,5 @@
                 "type@2_level": "95%@CLs"
             }
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }

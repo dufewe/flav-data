@@ -125,7 +125,7 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 
 ### 6. InspireHEP API (Metadata Only)
 
-**Why**: Provides paper metadata (title, authors, collaboration, texkey, DOI) but NOT experimental data values.
+**Why**: Provides paper metadata (title, authors, collaboration, TexKey, DOI) but NOT experimental data values.
 
 **When to use**: Always — for metadata extraction, not for data values. Use this in parallel with Steps 1–5 (which extract data values), not as a sequential fallback.
 
@@ -153,3 +153,24 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 | Theory calculations | PDF (pymupdf) | Theory papers rarely have HEPData |
 | Table screenshots | vision_analyze | User-provided images |
 | CMS PAS | CDS | CMS preliminary analyses on CDS |
+
+## Output Formatting Rules
+
+When writing the extracted data to a JSON file, apply these 4 formatting
+rules (canonical reference: `Test/improve.md`):
+
+1. **Matrix layout**: each `*_correlation` / `*_covariance` row is on a
+   single line in the JSON file; do NOT put each matrix element on its
+   own line.
+2. **Abstract = single line**: convert multi-line `\\begin{align*} ...
+   \\end{align*}` blocks in abstracts to single-line LaTeX. Line breaks
+   become `, ` separators, with `and` before the last entry.
+3. **Author format**: use InspireHEP BibTeX format — first author
+   `Surname, Initials.` (e.g. `"Aaij, R. and others"`), NOT full first
+   name (`"Aaij, Roel"`).
+4. **No Unicode**: replace all Unicode chars in extracted data with
+   LaTeX equivalents (`μ` → `\mu`, `Δ` → `\Delta`, `±` → `\pm`,
+   `→` → `\to`, smart quotes → `` ` ``/`'`/`` `` ``/`''`, etc.).
+
+A reference migration script for these rules is at
+`/Users/dufewe/Backup/Selia/projects/2HDM-SMEFT/Fitting/Streamlit/flav-data/.hermes/migrate-rules.py`.

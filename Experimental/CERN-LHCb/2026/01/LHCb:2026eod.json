@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026eod](https://inspirehep.net/literature/3112537)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for $\\tau^- \\to \\mu^- \\mu^+ \\mu^-$ decays at the LHCb experiment with Run 2 data",
     "arxiv": "[hep-ex/2601.20785v1](https://arxiv.org/pdf/2601.20785)",
     "time": "2026.01.28",
     "abstract": "A search for the lepton-flavour-violating decay $\\tau^- \\to \\mu^- \\mu^+ \\mu^-$ is carried out using data collected by the LHCb experiment between 2016 and 2018 in proton-proton collisions at the LHC at a centre-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 5.4 fb$^{-1}$. An upper limit of $1.9\\,(2.3)\\times 10^{-8}$ is set at the 90\\% (95\\%) confidence level on the branching fraction of the decay.",
     "pdf": "https://arxiv.org/pdf/2601.20785",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -21,6 +22,5 @@
                 "type@2_level": "95%@CLs"
             }
         }
-    ],
-    "transition-mode": "leptonic decay"
+    ]
 }

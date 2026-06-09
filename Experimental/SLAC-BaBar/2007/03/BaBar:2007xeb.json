@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[BaBar:2007xeb](https://inspirehep.net/literature/746136)",
-    "author": "Aubert, Bernard and others",
+    "author": "Aubert, B. and others",
     "collaboration": "BaBar",
     "title": "Search for the Rare Decay $B \\to \\pi \\ell^{+} \\ell^{-}$",
     "arxiv": "[hep-ex/0703018v1](https://arxiv.org/pdf/hep-ex/0703018)",
     "time": "2007.03.07",
     "abstract": "We have performed a search for the flavor-changing neutral-current decays $B \\to \\pi \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$, using a sample of 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance. We observe no evidence of a signal and measure the upper limit on the isospin-averaged branching fraction to be $\\mathcal{B}(B \\to \\pi \\ell^{+} \\ell^{-}) < 9.1 \\times 10^{-8}$ at 90% confidence level. We also search for the lepton-flavor-violating decays $B \\to \\pi e^{\\pm} \\mu^{\\mp}$ and measure an upper limit on the isospin-averaged branching fraction of $\\mathcal{B}(B \\to \\pi e^{\\pm} \\mu^{\\mp}) < 9.2 \\times 10^{-8}$ at 90% confidence level.",
     "pdf": "https://arxiv.org/pdf/hep-ex/0703018",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -70,6 +71,5 @@
                 "type@1_level": "90%@CL"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

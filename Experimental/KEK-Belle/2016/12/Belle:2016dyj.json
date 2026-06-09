@@ -3,12 +3,17 @@
     "author": "Hirose, S. and others",
     "collaboration": "Belle",
     "title": "Measurement of the $\\tau$ Lepton Polarization and $R(D^{*})$ in the Decay $\\bar{B} \\to D^{*} \\tau^{-} \\bar{\\nu}_{\\tau}$",
-    "arxiv": "[1612.00529v2](https://arxiv.org/pdf/1612.00529)",
+    "arxiv": "[hep-ex/1612.00529v2](https://arxiv.org/pdf/1612.00529)",
     "time": "2016.12.02",
     "abstract": "We report the first measurement of the $\\tau$ lepton polarization $P_{\\tau}(D^{*})$ in the decay $\\bar{B} \\to D^{*} \\tau^{-} \\bar{\\nu}_{\\tau}$ as well as a new measurement of $R(D^{*})$ using the full Belle data sample of $772 \\times 10^{6}$ $B\\bar{B}$ pairs. We obtain $R(D^{*}) = 0.270 \\pm 0.035 \\pm 0.028$ and $P_{\\tau}(D^{*}) = -0.38 \\pm 0.51 \\pm 0.21$, where the first uncertainty is statistical and the second is systematic.",
     "pdf": "https://arxiv.org/pdf/1612.00529",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
+            "tot_correlation": [
+                [1.0, 0.33],
+                [0.33, 1.0]
+            ],
             "obs@1": {
                 "name": "R(Bbar.2.Dst.tau.nu)(Bbar.2.Dst.l.nu)",
                 "latex": "$R(D^{*}) = \\frac{\\mathcal{B}(\\bar{B}\\to D^{*}\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu}_{\\ell})}$",
@@ -30,18 +35,7 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "0.21",
                 "type@2_err_down": "0.21"
-            },
-            "tot_correlation": [
-                [
-                    1.0,
-                    0.33
-                ],
-                [
-                    0.33,
-                    1.0
-                ]
-            ]
+            }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

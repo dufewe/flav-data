@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026evs](https://inspirehep.net/literature/3103133)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for lepton-number-violating $B^- \\to D^{(*)+} \\mu^- \\mu^-$ decays",
     "arxiv": "[hep-ex/2601.07657v1](https://arxiv.org/pdf/2601.07657)",
     "time": "2026.01.12",
     "abstract": "A search is performed for lepton-number-violating $B^- \\to D^{(*)+} \\mu^- \\mu^-$ decays, using data collected by the LHCb experiment in proton-proton collisions at a center-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 5.4 fb$^{-1}$. No significant signal is observed, and upper limits are set on the branching fractions, ${\\cal B}(B^- \\to D^{+} \\mu^- \\mu^-) < 4.6 \\times 10^{-8}$ and ${\\cal B}(B^- \\to D^{*+} \\mu^- \\mu^-) < 5.9 \\times 10^{-8}$, at the 95\\% confidence level.",
     "pdf": "https://arxiv.org/pdf/2601.07657",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -26,6 +27,5 @@
                 "type@2_level": "95%@CLs"
             }
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }

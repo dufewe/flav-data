@@ -7,7 +7,7 @@
     "time": "2015-08-24",
     "abstract": "A new measurement of the branching ratio $R_{e/\\mu} = \\Gamma(\\pi^+ \\to e^+ \\nu + \\pi^+ \\to e^+ \\nu \\gamma)/\\Gamma(\\pi^+ \\to \\mu^+ \\nu + \\pi^+ \\to \\mu^+ \\nu \\gamma)$ resulted in $R^{\\rm exp}_{e/\\mu} = (1.2344 \\pm 0.0023_{\\rm stat} \\pm 0.0019_{\\rm syst}) \\times 10^{-4}$. This is in agreement with the standard model prediction and improves the test of electron-muon universality to the level of 0.1\\%.",
     "pdf": "https://arxiv.org/pdf/1506.05845.pdf",
-    "transition-mode": "pion-leptonic",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

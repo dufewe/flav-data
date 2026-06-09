@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[ATLAS:2018gqc](https://inspirehep.net/literature/1672475)",
-    "author": "Aaboud, Morad and others",
+    "author": "Aaboud, M. and others",
     "collaboration": "ATLAS",
     "title": "Angular analysis of $B^{0}_{d}\\\\to K^{*}\\\\mu^{+}\\\\mu^{-}$ decays in $pp$ collisions at $\\\\sqrt{s}= 8$ TeV with the ATLAS detector",
-    "arxiv": "[1805.04000v1](https://arxiv.org/pdf/1805.04000)",
+    "arxiv": "[hep-ex/1805.04000v1](https://arxiv.org/pdf/1805.04000)",
     "time": "2018.05.10",
     "abstract": "An angular analysis of the decay $B^{0}_{d} \\\\to K^{*}\\\\mu^{+}\\\\mu^{-}$ is presented, based on proton-proton collision data recorded by the ATLAS experiment at the LHC. The study is using 20.3 fb$^{-1}$ of integrated luminosity collected during 2012 at centre-of-mass energy of $\\\\sqrt{s}=8$ TeV. Measurements of the angular observables $F_L$, $S_{3}$, $S_{4}$, $S_{5}$, $S_{7}$, $S_{8}$ and the optimised observables $P_1$, $P_4^{\\\\prime}$, $P_5^{\\\\prime}$, $P_6^{\\\\prime}$, $P_8^{\\\\prime}$ are performed in three $q^2$ bins of the dimuon invariant mass squared: [0.04, 2.0], [2.0, 4.0], and [4.0, 6.0] GeV$^2$. The results are consistent with the Standard Model predictions.",
     "pdf": "https://arxiv.org/pdf/1805.04000",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -443,6 +444,5 @@
                 "q2max": "6.0"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

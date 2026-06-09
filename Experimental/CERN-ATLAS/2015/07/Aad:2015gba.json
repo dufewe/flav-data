@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1383128",
-    "author": "Aad, Georges and others",
+    "author": "Aad, G. and others",
     "collaboration": "ATLAS",
     "title": "Measurements of the Higgs boson production and decay rates and coupling strengths using pp collision data at sqrt(s)=7 and 8 TeV in the ATLAS experiment",
-    "arxiv": "[1507.04548v1](https://arxiv.org/pdf/1507.04548.pdf)",
-    "year": "2015",
+    "arxiv": "[hep-ex/1507.04548v1](https://arxiv.org/pdf/1507.04548.pdf)",
     "time": "2015-07-16",
     "abstract": "Combined analyses of the Higgs boson production and decay rates and coupling strengths to vector bosons and fermions using 4.7 fb-1 at 7 TeV and 20.3 fb-1 at 8 TeV. The global signal strength is mu = 1.18 +0.15-0.14. Production mode signal strengths: mu_ggF=1.23, mu_VBF=1.23.",
     "pdf": "https://arxiv.org/pdf/1507.04548.pdf",
-    "transition-mode": "higgs-couplings",
+    "transition-mode": "Higgs decay",
     "data": [
         {
             "obs@1": {

@@ -1,16 +1,15 @@
 {
     "inspire-hep": "1849964",
-    "author": "Sirunyan, Albert M and others",
+    "author": "Sirunyan, A.M. and others",
     "collaboration": "CMS",
     "title": "Search for resonant and nonresonant new phenomena in high-mass dilepton final states at sqrt(s) = 13 TeV",
-    "arxiv": "2103.02708v2",
+    "arxiv": "[hep-ex/2103.02708v2](https://arxiv.org/pdf/2103.02708v2)",
     "time": "2021-07-27",
     "abstract": "A search is presented for physics beyond the standard model (SM) using electron or muon pairs with high invariant mass. A data set of proton-proton collisions collected by the CMS experiment at the LHC at sqrt(s) = 13 TeV from 2016 to 2018 corresponding to a total integrated luminosity of up to 140 fb^{-1} is analyzed. No significant deviation is observed with respect to the SM background expectations. Upper limits are presented on the ratio of the product of the production cross section and the branching fraction to dileptons of a new narrow resonance to that of the Z boson. These provide the most stringent lower limits to date on the masses for various spin-1 particles, spin-2 gravitons in the Randall-Sundrum model, as well as spin-1 mediators between the SM and dark matter particles.",
     "pdf": "https://inspirehep.net/files/2f7e5ea670e43ed58c0916942ed983d1",
-    "transition-mode": "zprime-search",
+    "transition-mode": "scattering",
     "data": [
         {
-            "condition": "ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV, narrow width (0.6%)",
             "obs@1": {
                 "name": "m_obs_Zp_SSM(p.p.2.Zp.2.l+.l-)[ee_mumu]",
                 "latex": "$m_{Z'_{SSM}}^{obs}$",
@@ -53,7 +52,6 @@
             }
         },
         {
-            "condition": "Spin-2 graviton RS, ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV",
             "obs@1": {
                 "name": "m_obs_Gstar(p.p.2.Gstar.2.l+.l-)[k_Mpl_0.01]",
                 "latex": "$m_{G^*}^{obs}$",
@@ -116,7 +114,6 @@
             }
         },
         {
-            "condition": "CI lower limits on Lambda, ee + mumu combined, 140 fb^{-1} at sqrt(s)=13 TeV",
             "obs@1": {
                 "name": "Lambda_CI_LL_const(p.p.2.l.l.q.q)[ee_mumu]",
                 "latex": "$\\Lambda_{LL}^{const}$",
@@ -199,7 +196,6 @@
             }
         },
         {
-            "condition": "DM mediator, ee + mumu combined, mDM large (mediator decays dominantly to leptons)",
             "obs@1": {
                 "name": "m_obs_med_vector(p.p.2.med.2.l+.l-)[DM_large_mDM]",
                 "latex": "$m_{med}^{obs}$",
@@ -242,7 +238,6 @@
             }
         },
         {
-            "condition": "ADD large extra dimensions, ee + mumu combined",
             "obs@1": {
                 "name": "Lambda_T_ADD_GRW(p.p.2.Gstar.2.l+.l-)[ee_mumu]",
                 "latex": "$\\Lambda_T^{GRW}$",

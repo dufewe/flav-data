@@ -1,13 +1,13 @@
 {
     "inspire-hep": 823313,
-    "author": "Besson, D. et al.",
+    "author": "Besson, D.E.A.",
     "collaboration": "CLEO",
     "title": "Improved measurements of D meson semileptonic decays to pi and K mesons",
-    "arxiv": "0906.2983v1",
+    "arxiv": "[hep-ex/0906.2983v1](https://arxiv.org/pdf/0906.2983v1)",
     "time": "2009-06",
     "abstract": "Using the entire CLEO-c psi(3770) -> D Dbar event sample, corresponding to an integrated luminosity of 818 pb-1 and approximately 5.4 million D Dbar events, we present a study of the decays D0 -> pi- e+ nu_e, D0 -> K- e+ nu_e, D+ -> pi0 e+ nu_e, and D+ -> K0bar e+ nu_e. Via a tagged analysis technique, partial rates for semileptonic decays by the other D are measured in several q2 bins. We fit these rates using several form factor parameterizations and report the results.",
     "pdf": "https://arxiv.org/pdf/0906.2983.pdf",
-    "transition-mode": "c-semileptonic",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -44,7 +44,6 @@
             }
         },
         {
-            "condition": "Individual 3-par. series fits",
             "obs@1": {
                 "name": "f+(D0.2.pi-.e+.nue).Vcd",
                 "latex": "$f_+^\\pi(0)|V_{cd}|$",
@@ -79,7 +78,6 @@
             }
         },
         {
-            "condition": "Isospin-combined 3-par. series fits",
             "obs@1": {
                 "name": "f+(D.2.pi.e.nu).Vcd",
                 "latex": "$f_+^\\pi(0)|V_{cd}|$",
@@ -134,7 +132,6 @@
             }
         },
         {
-            "condition": "Individual 3-par. series r1/r2",
             "obs@1": {
                 "name": "r1(D0.2.pi-.e+.nue)",
                 "latex": "$r_1(D^0 \\to \\pi^- e^+ \\nu_e)$",
@@ -169,7 +166,6 @@
             }
         },
         {
-            "condition": "Individual 3-par. series r1/r2 (charged D)",
             "obs@1": {
                 "name": "r1(D+.2.pi0.e+.nue)",
                 "latex": "$r_1(D^+ \\to \\pi^0 e^+ \\nu_e)$",
@@ -204,7 +200,6 @@
             }
         },
         {
-            "condition": "Isospin-combined 3-par. series r1/r2",
             "obs@1": {
                 "name": "r1(D.2.pi.e.nu)",
                 "latex": "$r_1(D \\to \\pi e \\nu)$",

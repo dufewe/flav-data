@@ -10,7 +10,6 @@
     "transition-mode": "kaon-rare-decay",
     "data": [
         {
-            "condition": "2016+2017 Preliminary Result",
             "obs@1": {
                 "name": "BR(K+.2.pi+.nu.nubar)",
                 "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$ 68% band",

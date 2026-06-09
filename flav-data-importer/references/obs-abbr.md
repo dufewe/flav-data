@@ -12,7 +12,7 @@ Every decay or scattering process is encoded as a transition symbol using the fo
 2. **Charge indicators**: Every particle must carry its charge: `+`, `-`, or `0`. This applies to all particles without exception.
 3. **Ordering**: Within each state (initial or final), particles are ordered by charge: `+` first, then `-`, then `0`.
 4. **Antiparticles**: Append `Bar` to the particle name. **For neutral mesons**: `Bar` replaces `0` if present, then appends: `B0Bar`, `Kst0Bar`. **For baryons** (heavy): `Bar` goes at the very end after any charge indicator: `Lambdac+Bar`, `Lambdab0Bar`, `Sigma-Bar`, `pBar`. **Exception — charged particles** (mesons, leptons, bosons): the charge indicator alone denotes the antiparticle (e.g., `B+`/`B-`, `W+`/`W-`, `mu+`/`mu-`); do NOT add `Bar` to these.
-5. **Neutrinos**: No flavor indicator — always use `nu` or `nuBar` regardless of the specific neutrino type ($\nu_e$, $\nu_\mu$, $\nu_\tau$).
+5. **Neutrinos**: No flavor indicator — always use `nu` or `nuBar` regardless of the specific neutrino type ($\nu_e$, $\nu_\mu$, $\nu_\tau$). **Exception**: when the experimental signature is flavor-specific (e.g., tagging a muon-neutrino via inverse muon decay, or reconstructing a $\tau^\pm$ from a $\nu_\tau$), the **flavor symbol** (`nue`, `numu`, `nutau`, plus `Bar` for antiparticle) is allowed in the transition. Most legacy data uses this convention; new imports should prefer the `nu`/`nuBar` form with flavor encoded in the `[condition]`.
 6. **Multi-step processes**: Use additional `2` separators for cascade processes: `p.p.2.W+.2.mu+.nu` represents $pp \to W^+ \to \mu^+ \nu$.
 7. **Intermediate resonances**: When an intermediate state decays to a dilepton pair, append `(2.l+.l-)` to the resonance name: `B0.2.Kst0.J/psi(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$.
 
@@ -29,22 +29,42 @@ Every decay or scattering process is encoded as a transition symbol using the fo
 | $pp \to Z \to \mu^+ \mu^-$ | Scattering | `p.p.2.Z.2.mu+.mu-` | Two-step process |
 | $e^+ e^- \to \mu^+ \mu^-$ | Scattering | `e+.e-.2.mu+.mu-` | Collider process |
 
+### 1.5 Compact Form (Legacy)
+
+A **compact transition symbol** is an older, shorter notation that concatenates particles without the `.2.` separator. It appears in many legacy data files and is **accepted by the validator for backward compatibility**. **New imports should use the standard form** (§1.1–§1.2). The two forms differ as follows:
+
+| Standard form | Compact form | Decay |
+|---------------|--------------|-------|
+| `B0.2.e+.e-` | `B02ee` | $B^0 \to e^+ e^-$ |
+| `B+.2.K+.mu+.mu-` | `B+2K+mumu` | $B^+ \to K^+ \mu^+ \mu^-$ |
+| `B0.2.Kst0.mu+.mu-` | `B02Kstmumu` | $B^0 \to K^{*0} \mu^+ \mu^-$ |
+| `Bs0.2.phi.e+.e-` | `Bs02phiee` | $B_s^0 \to \phi\, e^+ e^-$ |
+
+**Compact-form conventions**:
+- The arrow `→` is dropped (concatenation implies decay order).
+- Charged-particle signs use single-letter suffixes: `p` = `+`, `m` = `-`. Examples: `Bp` = $B^+$, `Bm` = $B^-$, `pip` = $\pi^+$, `pim` = $\pi^-$, `Dstp` = $D^{*+}$, `Dstm` = $D^{*-}$.
+- Particle count is implied by physical mass/momentum balance. E.g. `mumu` = `mu+.mu-`; `nuebar` = $\bar{\nu}_e$.
+
+When the validator cannot resolve a transition symbol unambiguously, it falls back to compact-form rules. The compact form is **not** preferred for new imports because it omits the explicit `2` separator that distinguishes initial from final states.
+
 ### Particle Abbreviations
 
 #### Mesons
-
 | Particle | Symbol | Notes |
 |----------|--------|-------|
 | $B^0$, $B^+$, $B^-$ | `B0`, `B+`, `B-` | Charged particles always use charge indicator |
 | $\bar{B}^0$ | `B0Bar` | Neutral antiparticles use Bar |
 | $B_s^0$, $\bar{B}_s^0$ | `Bs0`, `Bs0Bar` | |
-| $K^+$, $K^0$, $K_S^0$ | `K+`, `K0`, `KS0` | |
+| $K^+$, $K^0$, $K_S^0$, $K_L^0$ | `K+`, `K0`, `KS0`, `K0L` | K-short (`KS0`) and K-long (`K0L`) tracked separately for CP eigenstates ||
 | $K^{*0}$, $\bar{K}^{*0}$ | `Kst0`, `Kst0Bar` | K-star resonance |
 | $D^0$, $D^+$ | `D0`, `D+` | |
-| $D^{*0}$, $D^{*+}$ | `Dst0`, `Dst+` | D-star resonance |
+| $D^{*0}$, $D^{*+}$, $D^{*-}$ | `Dst0`, `Dst+`, `Dst-` | D-star resonance (anti-particle is the charged `Dst-`) |
+| $D^{*\pm}_{\text{generic}}$ | `Dst` | D-star (no charge specified, context-dependent) |
 | $\pi^0$, $\pi^+$, $\pi^-$ | `pi0`, `pi+`, `pi-` | |
 | $\rho^0$, $\rho^+$, $\rho^-$ | `rho0`, `rho+`, `rho-` | |
 | $\phi$ | `phi` | Neutral vector meson |
+| $\omega$ | `omega` | Neutral vector meson |
+| $\omega^-$ | `omegal` | (compact form, see §1.5) |
 | $J/\psi$ | `J/psi` | Charmonium |
 | $\psi(2S)$ | `psi(2S)` | Charmonium excited state |
 | $\eta$, $\eta'$ | `eta`, `etaprime` | |
@@ -131,7 +151,7 @@ For observables comparing two or more transitions (e.g., lepton flavor universal
 
 **CKM parameters**: $r$ and $\delta$ are defined via $B^-$ decay amplitude ratios ($b \to u$ suppressed relative to $b \to c$ favored). The B meson and final-state meson in the transition must carry **negative charge**: `B-.2.D0.K-`, `B-.2.D0.pi-`.
 
-### Observable Differences and Ratios (Unified Convention)
+### 2.3 Observable Differences and Ratios (Unified Convention)
 
 Unless otherwise specified, differences and ratios between observables follow these patterns:
 
@@ -306,15 +326,15 @@ Differences of angular coefficients between muon and electron modes, used to tes
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
 | `R` | $R$ | $R_X$ | Ratio prefix — always followed by the observable being compared (e.g., `RBr`, `RFL`, `RAFB`). See §2 for naming. |
-| `r` | $r$ | $r_{J/\psi}$ | Normalized ratio (e.g., charmonium normalization) |
+| `r` | $r$ | $r_{J/\psi}$ | Charmonium normalization ratio (e.g., $R_K = r_{J/\psi} \cdot R_{K,J/\psi}$). For the CKM amplitude ratio in $B \to DK$ decays, see **CKM Parameters** below. |
 
 ### Asymmetries and Fractions
 
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
-| `S1` | $S_1$ | $S_1$ | General asymmetry parameter |
+| `S1` | $S_1$ | $S_1$ | Generic scalar asymmetry parameter (not the same as the specific `S1c` angular coefficient) |
 | `AC` | $A_C$ | $A_C$ | Charge asymmetry |
-| `f` | $f$ | $f$ | Fraction or proportion (e.g., fragmentation fraction) |
+| `f` | $f$ | $f$ | Generic fraction or proportion: decay fraction, fragmentation fraction, or any dimensionless ratio |
 
 ### CKM Parameters
 
@@ -350,9 +370,9 @@ These are the most frequently used q² bin boundaries in B → K(*)ℓℓ analys
 | Charmonium veto | [8.0, 11.0], [11.0, 12.5] — usually excluded due to resonances |
 | High q² | [14.0, 22.0], [14.3, ∞], [15.0, 17.0], [15.0, 19.0], [16.0, 17.0], [17.0, 19.0], [18.0, 19.0] |
 
-## 6. B⁰ → K*⁰μ⁺μ⁻ Comprehensive Analysis Structure
+## 6. Comprehensive Analysis Structure (Example: $B^0 \to K^{*0}\mu^+\mu^-$)
 
-For comprehensive angular analyses (e.g., LHCb:2025mqb), the data is typically organized across multiple `data[]` entries:
+For comprehensive angular analyses, the data is typically organized across multiple `data[]` entries, each with its own correlation matrix. The following breakdown is taken from LHCb:2025mqb (the latest comprehensive LHCb analysis) as a representative example:
 
 | Entry | Content | Observable Count | Notes |
 |-------|---------|-----------------|-------|
@@ -363,7 +383,7 @@ For comprehensive angular analyses (e.g., LHCb:2025mqb), the data is typically o
 | data[4] | Alternative P parameterization | ~210 | Different observable set |
 | data[5] | CP-averaged (fine bins) | ~362 | 16 q² bins × ~22-27 obs/bin |
 
-Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits the standard bins into sub-intervals for higher resolution.
+Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits the standard bins into sub-intervals for higher resolution. The exact split and observable choice may differ across analyses; this table is an illustrative example, not a strict template.
 
 ## 7. Adding New Observables
 

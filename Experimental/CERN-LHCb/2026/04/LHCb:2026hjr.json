@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026hjr](https://inspirehep.net/literature/3143463)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Test of lepton flavour universality with $B^0 \\to K^{*0} \\ell^+ \\ell^-$ decays at large dilepton invariant mass",
     "arxiv": "[hep-ex/2604.08631v1](https://arxiv.org/pdf/2604.08631)",
     "time": "2026.04.09",
     "abstract": "Muon-electron universality is tested in $B^0 \\to K^{*0} \\ell^+ \\ell^-$ decays, in the dilepton-invariant-mass region above the $\\psi(2S)$ resonance. The analysis uses beauty mesons produced in proton-proton collisions recorded by the LHCb detector at center-of-mass energies of 7, 8, and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The ratio of branching fractions between the muon and electron channels, $R_{K^{*0}}$, is measured to be $1.08\\,^{+0.14}_{-0.12}\\text{(stat)} \\pm 0.07\\text{(syst)}$ for a dilepton-invariant-mass squared above 14.0 GeV$^2/c^4$, consistent with the Standard Model prediction. This result represents the most precise measurement of $R_{K^{*0}}$ in this region and the first such measurement performed at a hadron collider.",
     "pdf": "https://arxiv.org/pdf/2604.08631",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -45,6 +46,5 @@
                 "q2max": "22.0"
             }
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }

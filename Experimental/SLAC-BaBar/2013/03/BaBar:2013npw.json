@@ -3,10 +3,11 @@
     "author": "Lees, J.P. and others",
     "collaboration": "BaBar",
     "title": "Search for B --> K(*) nu nubar and invisible quarkonium decays",
-    "arxiv": "[1303.7465v1](https://arxiv.org/pdf/1303.7465)",
+    "arxiv": "[hep-ex/1303.7465v1](https://arxiv.org/pdf/1303.7465)",
     "time": "2013.03.29",
     "abstract": "We present a search for the rare flavor-changing neutral current decays B --> K(*) nu nubar using a sample of 471 x 10^6 B Bbar pairs collected with the BABAR detector at the PEP-II asymmetric-energy B Factory. We use a hadronic tagging method to fully reconstruct one B meson in the event and search for the signal decay in the remaining particles. No significant excess is observed. We set 90% confidence level upper limits on the branching fractions: B(B+ --> K+ nu nubar) < 3.7 x 10^-5, B(B0 --> K0 nu nubar) < 8.1 x 10^-5, B(B+ --> K*+ nu nubar) < 11.6 x 10^-5, and B(B0 --> K*0 nu nubar) < 9.3 x 10^-5.",
     "pdf": "https://arxiv.org/pdf/1303.7465",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -34,6 +35,5 @@
                 "type@1_level": "90%@CL"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

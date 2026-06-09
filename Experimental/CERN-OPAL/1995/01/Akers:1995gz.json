@@ -4,11 +4,10 @@
     "collaboration": "OPAL",
     "title": "A Search for lepton flavor violating Z0 decays",
     "arxiv": "no arxiv (published in Z.Phys.C)",
-    "year": "1995",
     "time": "1995-01-01",
     "abstract": "A search for lepton flavour violating Z0->e mu, Z0->e tau and Z0->mu tau decays in a sample of 4.0e6 visible Z0 decays collected with the OPAL detector at LEP during 1991 to 1994. No candidates are found. Upper limits at 95% CL for the respective branching fractions of 0.25e-5, 2.2e-5, and 1.2e-5 were obtained.",
     "pdf": "https://link.springer.com/article/10.1007/s002880050313",
-    "transition-mode": "z-lfv",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

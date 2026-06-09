@@ -10,27 +10,29 @@ Experimental folders use the `Lab-Collaboration` format (实验室-实验组). D
 flav-data/
 ├── Experimental/                          # Experimental measurement data
 │   ├── CERN-LHCb/                         # Lab-Collaboration folder
-│   │   ├── LHCb.py                        # Collaboration-specific loader (keeps collaboration name)
+│   │   ├── LHCb.py                        # Streamlit dashboard page
 │   │   ├── 2015/
 │   │   │   ├── LHCb@2015.json             # Annual index (collaboration name only)
 │   │   │   ├── 06/                        # Month subdirectory (zero-padded)
-│   │   │   │   └── LHCb:2015svh.json     # Data file (collaboration:texkey)
+│   │   │   │   └── LHCb:2015svh.json     # Data file (collaboration:TexKey)
 │   │   │   └── 12/
 │   │   │       └── LHCb:2015abc.json
 │   │   └── 2025/
 │   │       ├── LHCb@2025.json
 │   │       └── 03/
 │   │           └── LHCb:2025xyz.json
-│   ├── CERN-ATLAS/
-│   ├── CERN-CMS/
-│   ├── SLAC-BaBar/
-│   ├── KEK-Belle/
-│   ├── IHEP-BESIII/
-│   ├── Fermilab-CDF/
-│   ├── Fermilab-D0/
-│   ├── HFLAV/
-│   ├── CERN-LEP/
-│   └── PDG/
+│   ├── CERN-ATLAS/, CERN-CMS/, CERN-DELPHI/, CERN-OPAL/,
+│   ├── CERN-LEP/                          # Combined LEP (ALEPH+DELPHI+L3+OPAL)
+│   ├── CERN-NA62/, CERN-CHARM-II/
+│   ├── KEK-Belle/, KEK-KOTO/
+│   ├── SLAC-BaBar/, SLAC-SLD/
+│   ├── Fermilab-CDF/, Fermilab-D0/, Fermilab-Tevatron/, Fermilab-Muong-2/
+│   ├── IHEP-BESIII/, IHEP-ISTRA+/
+│   ├── INFN-KLOE-2/
+│   ├── BNL-E949/, Cornell-CLEO/, TRIUMF-PiENu/
+│   ├── PSI-SINDRUM-II/, PSI-nTRV/
+│   ├── LANL-UCNA/, NIST-aCORN/
+│   └── HFLAV/, PDG/                                # No-lab aggregation
 └── Theoretical/                           # Theoretical calculation data
     └── HPQCD/
         └── 2023/
@@ -43,23 +45,52 @@ flav-data/
 
 ### Folder Names
 
-Experimental directories use the `Lab-Collaboration` format (实验室-实验组). When there is no parent lab, use the collaboration/group name directly. Data files and annual index files inside the folder retain only the collaboration name.
+Experimental directories use the `Lab-Collaboration` format (实验室-实验组).
+When there is no parent lab (aggregation groups like HFLAV/PDG, or
+standalone individual measurements), the collaboration/group name is
+used directly as the folder. Data files and annual index files inside
+the folder retain only the collaboration name (not the lab prefix).
 
 | Folder | Lab | Collaboration | Notes |
 |--------|-----|--------------|-------|
 | `CERN-LHCb` | CERN | LHCb | |
 | `CERN-ATLAS` | CERN | ATLAS | |
 | `CERN-CMS` | CERN | CMS | |
-| `SLAC-BaBar` | SLAC | BaBar | |
+| `CERN-DELPHI` | CERN | DELPHI | LEP |
+| `CERN-OPAL` | CERN | OPAL | LEP |
+| `CERN-LEP` | CERN | LEP | Combined LEP experiments (ALEPH+DELPHI+L3+OPAL) |
+| `CERN-NA62` | CERN | NA62 | Kaon rare decays |
+| `CERN-CHARM-II` | CERN | CHARM-II | Neutrino experiment |
 | `KEK-Belle` | KEK | Belle | |
-| `IHEP-BESIII` | IHEP | BESIII | |
-| `Fermilab-CDF` | Fermilab | CDF | |
-| `Fermilab-D0` | Fermilab | D0 | |
-| `HFLAV` | — | HFLAV | No parent lab |
-| `PDG` | — | PDG | No parent lab |
-| `CERN-LEP` | CERN | LEP | Combined LEP experiments |
+| `KEK-KOTO` | KEK | KOTO | J-PARC |
+| `SLAC-BaBar` | SLAC | BaBar | |
+| `SLAC-SLD` | SLAC | SLD | |
+| `Fermilab-CDF` | Fermilab | CDF | Tevatron |
+| `Fermilab-D0` | Fermilab | D0 | Tevatron |
+| `Fermilab-Tevatron` | Fermilab | Tevatron | Combined CDF+D0 |
+| `Fermilab-Muong-2` | Fermilab | Muong-2 | |
+| `IHEP-BESIII` | IHEP | BESIII | Beijing Spectrometer |
+| `IHEP-ISTRA+` | IHEP | ISTRA+ | |
+| `INFN-KLOE-2` | INFN | KLOE-2 | LNF Frascati DAΦNE |
+| `BNL-E949` | BNL | E949 | K+ rare decays |
+| `Cornell-CLEO` | Cornell | CLEO | CESR |
+| `TRIUMF-PiENu` | TRIUMF | PiENu | |
+| `PSI-SINDRUM-II` | PSI | SINDRUM-II | Mu-e conversion |
+| `PSI-nTRV` | PSI | nTRV | Neutron trimer |
+| `LANL-UCNA` | LANL | UCNA | |
+| `NIST-aCORN` | NIST | aCORN | |
+| `HFLAV` | — | HFLAV | No parent lab; non-standard schema |
+| `PDG` | — | PDG | No parent lab; non-standard schema |
 
-Theoretical folders use the group name directly: `HPQCD`, `RBC-UKQCD`, `FNAL-MILC`, `JLQCD`, etc.
+Theoretical folders use the group name directly: `HPQCD`, `UKQCD`, `Akeroyd`, `Altmannshofer`, `Greljo`, etc. (only those registered in `defs.THEOGROUP` are linked from the Streamlit sidebar).
+
+**Special cases**:
+
+- **HFLAV** and **PDG** use a non-standard flav-data schema (one
+  snapshot JSON per year whose keys are subgroup names containing
+  nested observables). See `references/json-meta.md` for details.
+  When importing data into these groups, build a single year-level
+  snapshot file rather than per-paper JSONs.
 
 ### Data Files
 
@@ -69,11 +100,11 @@ The filename uses only the collaboration name (not the full `Lab-Collaboration` 
 
 | Example | Description |
 |---------|-------------|
-| `LHCb:2015svh.json` | LHCb paper, texkey LHCb:2015svh |
-| `CMS:2023abc.json` | CMS paper, texkey CMS:2023abc |
-| `Belle:2019dgy.json` | Belle paper, texkey Belle:2019dgy |
+| `LHCb:2015svh.json` | LHCb paper, TexKey LHCb:2015svh |
+| `CMS:2023abc.json` | CMS paper, TexKey CMS:2023abc |
+| `Belle:2019dgy.json` | Belle paper, TexKey Belle:2019dgy |
 
-**TexKey selection**: Papers often have multiple texkeys (collaboration-level + author-level). Always use the collaboration-level texkey for the filename. For example, if a paper has texkeys `["LHCb:2015svh", "Aaij:2015oid"]`, use `LHCb:2015svh.json`.
+**TexKey selection**: Papers often have multiple TexKeys (collaboration-level + author-level). Always use the collaboration-level TexKey for the filename. For example, if a paper has TexKeys `["LHCb:2015svh", "Aaij:2015oid"]`, use `LHCb:2015svh.json`.
 
 ### Annual Index Files
 
@@ -93,7 +124,7 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Expe
 - **Values**: Arrays of file_ids (without the `.json` extension).
 - **Month ordering**: Keys in ascending order.
 - **File ordering**: Within each month, file_ids sorted by arXiv v1 submission date.
-- **Texkey freshness**: Always use the latest TexKey version from InspireHEP when updating indices.
+- **TexKey freshness**: Always use the latest TexKey version from InspireHEP when updating indices.
 
 ## Index Operations
 
@@ -169,8 +200,8 @@ When removing a file:
 ### Multi-Collaboration Papers
 
 When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS combination):
-- Use the primary collaboration (first in the texkey) for the directory.
-- The texkey reflects all collaborations.
+- Use the primary collaboration (first in the TexKey) for the directory.
+- The TexKey reflects all collaborations.
 - Fill corresponding data entries for all involved groups in their respective database directories.
 
 ## Notes

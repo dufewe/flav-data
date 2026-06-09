@@ -7,6 +7,7 @@
     "time": "2005.03.17",
     "abstract": "We present an improved measurement of the branching fraction for the electroweak penguin process $B \\to X_s \\ell^+ \\ell^-$, where $\\ell$ is an electron or a muon and $X_s$ is a hadronic state with strangeness $S = -1$. Averaging over both lepton flavors, the inclusive branching fraction is measured to be $\\mathcal{B}(B \\to X_s \\ell^+ \\ell^-) = (4.11 \\pm 0.83 {+0.85 \\atop -0.81}) \\times 10^{-6}$ for $M_{\\ell^+ \\ell^-} > 0.2$ GeV/$c^2$.",
     "pdf": "https://arxiv.org/pdf/hep-ex/0503044",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -122,7 +123,8 @@
                 "type@3_err_down": "0.34e-7",
                 "mxs_min": "0.4",
                 "mxs_max": "0.6",
-                "type@1_err": "stat"
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@2": {
                 "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
@@ -134,7 +136,8 @@
                 "type@2_err_down": "0.08e-7",
                 "mxs_min": "0.6",
                 "mxs_max": "0.8",
-                "type@1_err": "stat"
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@3": {
                 "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
@@ -146,7 +149,8 @@
                 "type@2_err_down": "0.67e-7",
                 "mxs_min": "0.8",
                 "mxs_max": "1.0",
-                "type@1_err": "stat"
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@4": {
                 "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
@@ -158,7 +162,8 @@
                 "type@2_err_down": "2.00e-7",
                 "mxs_min": "1.0",
                 "mxs_max": "1.4",
-                "type@1_err": "stat"
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@5": {
                 "name": "dBr/dMxs(Bbar.2.XsBar.l+.l-)",
@@ -170,9 +175,9 @@
                 "type@2_err_down": "10.94e-7",
                 "mxs_min": "1.4",
                 "mxs_max": "2.0",
-                "type@1_err": "stat"
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

@@ -3,10 +3,11 @@
     "author": "Glattauer, F. and others",
     "collaboration": "Belle",
     "title": "Measurement of the decay $B\\to D\\ell\\nu_\\ell$ in fully reconstructed events and determination of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$",
-    "arxiv": "[1510.03657v1](https://arxiv.org/pdf/1510.03657)",
+    "arxiv": "[hep-ex/1510.03657v1](https://arxiv.org/pdf/1510.03657)",
     "time": "2015.10.13",
     "abstract": "We present a determination of the magnitude of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$ using the decay $B\\to D\\ell\\nu_\\ell$ ($\\ell=e,\\mu$) in a data sample of $711 \\, \\mathrm{fb}^{-1}$ collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+e^-$ collider. We find $|V_{cb}| = (40.44 \\pm 0.86 (\\text{stat}) \\pm 0.87 (\\text{syst})) \\times 10^{-3}$.",
     "pdf": "https://arxiv.org/pdf/1510.03657",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -23,19 +24,6 @@
             }
         },
         {
-            "obs@1": {
-                "name": "dGdw(B0Bar.2.D+.l-.nuBar)",
-                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^+ \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "0.68",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.21",
-                "type@1_err_down": "0.21",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.05",
-                "type@2_err_down": "0.05",
-                "w_min": "1.00",
-                "w_max": "1.06"
-            },
             "obs@2": {
                 "name": "dGdw(B0Bar.2.D+.l-.nuBar)",
                 "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^+ \\ell^- \\bar{\\nu}_\\ell)$",
@@ -153,7 +141,20 @@
                 "w_min": "1.54",
                 "w_max": "1.59055"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdw(B0Bar.2.D+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^+ \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "0.68",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.21",
+                "type@1_err_down": "0.21",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.05",
+                "type@2_err_down": "0.05",
+                "w_min": "1.00",
+                "w_max": "1.06",
+                "unit": "1e-15 GeV"
+            }
         },
         {
             "obs@1": {
@@ -163,10 +164,9 @@
                 "type@1_err": "stat",
                 "type@1_err_up": "1.34",
                 "type@1_err_down": "1.34",
-                "note": "CLN: eta_EW G(1)|Vcb| = (42.31 +- 1.41)e-3, G(1)=1.0541 +- 0.0083, rho2 = 1.180 +- 0.153"
-            },
-            "unit": "1e-3"
+                "note": "CLN: eta_EW G(1)|Vcb| = (42.31 +- 1.41)e-3, G(1)=1.0541 +- 0.0083, rho2 = 1.180 +- 0.153",
+                "unit": "1e-3"
+            }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

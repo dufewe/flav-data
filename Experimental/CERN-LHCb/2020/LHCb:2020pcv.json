@@ -1,50 +1,51 @@
 {
-    "inspirehep": "LHCb:2020pcv",
-    "author": "Aaij, Roel and others",
+    "inspire-hep": "LHCb:2020pcv",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for the Rare Decays $B^0_s\\to e^+e^-$ and $B^0\\to e^+e^-$",
-    "arxiv": "hep-ex/2003.03999",
-    "year": "2020",
+    "arxiv": "[hep-ex/2003.03999](https://arxiv.org/pdf/2003.03999)",
+    "time": "2020.01.01",
     "abstract": "a search for the decays $B^0_s \\to e^+ e^−$ and $B^0 \\to e^+ e^−$, using data collected in proton-proton collisions at center-of-mass energies of 7, 8 and 13 TeV and corresponding to integrated luminosities of 1, 2 and 2 fb$^{−1}$, respectively",
     "pdf": "https://arxiv.org/pdf/2003.03999",
+    "transition-mode": "leptonic decay",
     "data": [
         {
+            "tot_correlation": null,
             "obs@1": {
                 "name": "Br(Bs02ee)",
                 "latex": "$\\mathcal{B}(B_s^0 \\to e^+ e^-)$",
-                "value": null,
-                "tot_err_up": 9.4e-9,
-                "tot_err_down": null,
+                "value": "",
+                "tot_err_up": "9.4e-09",
+                "tot_err_down": "",
                 "level": "90%@CL"
             },
             "obs@2": {
                 "name": "Br(Bs02ee)",
                 "latex": "$\\mathcal{B}(B_s^0 \\to e^+ e^-)$",
-                "value": null,
-                "tot_err_up": 11.2e-9,
-                "tot_err_down": null,
+                "value": "",
+                "tot_err_up": "1.12e-08",
+                "tot_err_down": "",
                 "level": "95%@CL"
-            },
-            "correlation": null
+            }
         },
         {
+            "tot_correlation": null,
             "obs@1": {
                 "name": "Br(B02ee)",
                 "latex": "$\\mathcal{B}(B^0 \\to e^+ e^-)$",
-                "value": null,
-                "tot_err_up": 2.5e-9,
-                "tot_err_down": null,
+                "value": "",
+                "tot_err_up": "2.5e-09",
+                "tot_err_down": "",
                 "level": "90%@CL"
             },
             "obs@2": {
                 "name": "Br(B02ee)",
                 "latex": "$\\mathcal{B}(B^0 \\to e^+ e^-)$",
-                "value": null,
-                "tot_err_up": 3.0e-9,
-                "tot_err_down": null,
+                "value": "",
+                "tot_err_up": "3e-09",
+                "tot_err_down": "",
                 "level": "95%@CL"
-            },
-            "correlation": null
+            }
         }
     ]
 }

@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[BaBar:2007ddh](https://inspirehep.net/literature/771234)",
-    "author": "Aubert, Bernard and others",
+    "author": "Aubert, B. and others",
     "collaboration": "BaBar",
     "title": "A Measurement of the Branching Fractions of Exclusive $\\bar{B} \\to D^{(*)}(\\pi)\\ell^{-}\\bar{\\nu}_{\\ell}$ Decays in Events with a Fully Reconstructed $B$ Meson",
-    "arxiv": "[0712.3503v1](https://arxiv.org/pdf/0712.3503)",
+    "arxiv": "[hep-ex/0712.3503v1](https://arxiv.org/pdf/0712.3503)",
     "time": "2007.12.20",
     "abstract": "We report a measurement of the branching fractions for $\\bar{B} \\to D^{(*)}(\\pi)\\ell^{-}\\bar{\\nu}_{\\ell}$ decays based on 341.1 fb$^{-1}$ of data collected at the $\\Upsilon(4S)$ resonance with the BaBar detector at the PEP-II $e^{+}e^{-}$ storage rings. Events are tagged by fully reconstructing one of the $B$ mesons in a hadronic decay mode. We measure the branching fractions relative to the inclusive semileptonic branching fraction.",
     "pdf": "https://arxiv.org/pdf/0712.3503",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -132,6 +133,5 @@
                 "unit": "%"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

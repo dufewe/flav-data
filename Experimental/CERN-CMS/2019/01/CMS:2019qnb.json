@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[CMS:2019qnb](https://inspirehep.net/literature/1748024)",
-    "author": "Sirunyan, Albert M and others",
+    "author": "Sirunyan, A.M. and others",
     "collaboration": "CMS",
     "title": "Measurement of properties of $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decays and search for $B^0 \\\\to \\\\mu^+ \\\\mu^-$ with the CMS experiment",
-    "arxiv": "[1910.12127v2](https://arxiv.org/pdf/1910.12127)",
+    "arxiv": "[hep-ex/1910.12127v2](https://arxiv.org/pdf/1910.12127)",
     "time": "2019.10.28",
     "abstract": "Results are reported for the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction and effective lifetime and from a search for the decay $B^0 \\\\to \\\\mu^+ \\\\mu^-$. The analysis uses data samples of proton-proton collisions accumulated by the CMS experiment in 2011, 2012, and 2016. The branching fraction of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decay is measured to be $[2.9^{+0.7}_{-0.6} (\\\\text{exp}) \\\\pm 0.2 (\\\\text{frag})] \\\\times 10^{-9}$. The effective lifetime is measured to be $1.70^{+0.61}_{-0.44} \\\\pm 0.05$ ps. An upper limit of $3.6 \\\\times 10^{-10}$ is set on the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction at 95% confidence level.",
     "pdf": "https://arxiv.org/pdf/1910.12127",
+    "transition-mode": "rare decay",
     "data": [
         {
             "obs@1": {
@@ -40,6 +41,5 @@
                 "unit": "ps"
             }
         }
-    ],
-    "transition-mode": "rare decay"
+    ]
 }

@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[ATLAS:2018cur](https://inspirehep.net/literature/1707605)",
-    "author": "Aaboud, Morad and others",
+    "author": "Aaboud, M. and others",
     "collaboration": "ATLAS",
     "title": "Study of the rare decays of $B_{s}^{0}$ and $B^{0}$ mesons into muon pairs using data collected during 2015 and 2016 with the ATLAS detector",
-    "arxiv": "[1812.03017v1](https://arxiv.org/pdf/1812.03017)",
+    "arxiv": "[hep-ex/1812.03017v1](https://arxiv.org/pdf/1812.03017)",
     "time": "2018.12.07",
     "abstract": "A study of the decays $B_{s}^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ and $B^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ has been performed using 26.3 fb$^{-1}$ of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016. The measured branching fraction for $B_{s}^{0} \\\\to \\\\mu^{+}\\\\mu^{-}$ is $\\\\mathcal{B}(B_{s}^{0}\\\\to\\\\mu^{+}\\\\mu^{-}) = (3.2 \\\\pm 0.9) \\\\times 10^{-9}$ and an upper limit of $\\\\mathcal{B}(B^{0}\\\\to\\\\mu^{+}\\\\mu^{-}) < 4.3 \\\\times 10^{-10}$ at 95% CL is set. A combination with the ATLAS Run 1 results is also performed.",
     "pdf": "https://arxiv.org/pdf/1812.03017",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -56,6 +57,5 @@
                 "type@1_level": "95%@CL"
             }
         }
-    ],
-    "transition-mode": "leptonic decay"
+    ]
 }

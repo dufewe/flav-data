@@ -1,14 +1,13 @@
 {
     "inspire-hep": "528730",
-    "author": "Abe, Koya and others",
+    "author": "Abe, K. and others",
     "collaboration": "SLD",
     "title": "First direct measurement of the parity-violating coupling of the Z0 to the s-quark",
     "arxiv": "[hep-ex/0006019v1](https://arxiv.org/pdf/hep-ex/0006019.pdf)",
-    "year": "2000",
     "time": "2000-06-14",
     "abstract": "We have made the first direct measurement of the parity-violating coupling of the Z0 boson to the strange quark, As, using ~550,000 e+e- -> Z0 -> hadrons events produced with a polarized electron beam and recorded by the SLD experiment. Z0 -> s sbar events were tagged by the absence of B or D hadrons and the presence in each hemisphere of a high-momentum K+- or K0s. From the polar angle distributions of the strangeness-signed thrust axis, we obtained As = 0.895 +- 0.066(stat.) +- 0.062(syst.).",
     "pdf": "https://arxiv.org/pdf/hep-ex/0006019.pdf",
-    "transition-mode": "z-pole-asymmetry",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

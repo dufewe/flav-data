@@ -3,10 +3,11 @@
     "author": "Grygier, J. and others",
     "collaboration": "Belle",
     "title": "Search for $\\boldsymbol{B \\to h \\nu \\bar{\\nu}}$ Decays with Semileptonic Tagging at Belle",
-    "arxiv": "[1702.03224v3](https://arxiv.org/pdf/1702.03224)",
+    "arxiv": "[hep-ex/1702.03224v3](https://arxiv.org/pdf/1702.03224)",
     "time": "2017.02.10",
     "abstract": "We present the results of a search for the rare decays $B \\to h \\nu \\overline{\\nu}$, where $h$ stands for $K^+,$ $K^0_{\\mathrm{S}},$ $K^{*+},$ $K^{*0},$ $\\pi^+,$ $\\pi^0,$ $\\rho^+$ and $\\rho^0$, using the full Belle data sample of $772 \\times 10^6$ $B \\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find no significant signal and set upper limits on the branching fractions.",
     "pdf": "https://arxiv.org/pdf/1702.03224",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -98,6 +99,5 @@
                 "type@1_level": "90%@CL"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

@@ -7,10 +7,9 @@
     "time": "2015-11-06",
     "abstract": "In an analysis of a 2.92 fb-1 data sample taken at 3.773 GeV with the BESIII detector operated at the BEPCII collider, we measure the absolute decay branching fractions B(D0->K-e+nu_e)=(3.505+/-0.014+/-0.033)% and B(D0->pi-e+nu_e)=(0.295+/-0.004+/-0.003)%. From a study of the differential decay rates we obtain the hadronic form factors f+K(0)=0.7368+/-0.0026+/-0.0036 and f+pi(0)=0.6372+/-0.0080+/-0.0044.",
     "pdf": "https://arxiv.org/pdf/1508.07560.pdf",
-    "transition-mode": "c-semileptonic",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
-            "condition": "D0 -> K- e+ nu_e",
             "obs@1": {
                 "name": "BR(D0.2.K-.e+.nue)",
                 "latex": "$\\mathcal{B}(D^0 \\to K^- e^+ \\nu_e)$",
@@ -43,7 +42,6 @@
             }
         },
         {
-            "condition": "D0 -> pi- e+ nu_e",
             "obs@1": {
                 "name": "BR(D0.2.pi-.e+.nue)",
                 "latex": "$\\mathcal{B}(D^0 \\to \\pi^- e^+ \\nu_e)$",

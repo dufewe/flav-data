@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[Sirunyan:2017dhj](https://inspirehep.net/literature/1629160)",
-    "author": "Sirunyan, Albert M and others",
+    "author": "Sirunyan, A.M. and others",
     "collaboration": "CMS",
     "title": "Measurement of the $P_1$ and $P_5'$ angular parameters of the decay $\\\\mathrm{B}^0 \\\\to \\\\mathrm{K}^{*0} \\\\mu^+ \\\\mu^-$ in proton-proton collisions at $\\\\sqrt{s}=8~\\\\mathrm{TeV}$",
-    "arxiv": "[1710.02846v2](https://arxiv.org/pdf/1710.02846)",
+    "arxiv": "[hep-ex/1710.02846v2](https://arxiv.org/pdf/1710.02846)",
     "time": "2017.10.09",
     "abstract": "A measurement of the $P_1$ and $P_5'$ angular parameters in the decay $B^0 \\\\to K^{*0} \\\\mu^+ \\\\mu^-$ is performed using proton-proton collision data at $\\\\sqrt{s} = 8$ TeV, corresponding to an integrated luminosity of 20.5 fb$^{-1}$ collected by the CMS experiment. The observables are extracted from a simultaneous fit to the four-dimensional distribution of the decay products in seven bins of the dimuon invariant mass squared. The results are consistent with predictions from the Standard Model.",
     "pdf": "https://arxiv.org/pdf/1710.02846",
+    "transition-mode": "rare decay",
     "data": [
         {
             "obs@1": {
@@ -192,6 +193,5 @@
                 "type@2_err_down": "0.05"
             }
         }
-    ],
-    "transition-mode": "rare decay"
+    ]
 }

@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[BaBar:2006tnv](https://inspirehep.net/literature/713779)",
-    "author": "Aubert, Bernard and others",
+    "author": "Aubert, B. and others",
     "collaboration": "BaBar",
     "title": "Measurements of Branching Fractions, Rate Asymmetries, and Angular Distributions in the Rare Decays $B \\to K \\ell^{+} \\ell^{-}$ and $B \\to K^{*} \\ell^{+} \\ell^{-}$",
     "arxiv": "[hep-ex/0604007v1](https://arxiv.org/pdf/hep-ex/0604007)",
     "time": "2006.04.05",
     "abstract": "We present measurements of the flavor-changing neutral current decays $B \\to K \\ell^{+} \\ell^{-}$ and $B \\to K^{*} \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either an $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$ pair. The data sample comprises 229 million $B \\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the BaBar detector. We measure the total branching fractions $\\mathcal{B}(B \\to K \\ell^{+} \\ell^{-}) = (0.34 \\pm 0.07 \\pm 0.02) \\times 10^{-6}$ and $\\mathcal{B}(B \\to K^{*} \\ell^{+} \\ell^{-}) = (0.78^{+0.19}_{-0.17} \\pm 0.11) \\times 10^{-6}$.",
     "pdf": "https://arxiv.org/pdf/hep-ex/0604007",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -123,6 +124,5 @@
                 "q2max": "22.0"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1468068",
-    "author": "Khachatryan, Vardan and others",
+    "author": "Khachatryan, V. and others",
     "collaboration": "ATLAS, CMS",
     "title": "Measurements of the Higgs boson production and decay rates and constraints on its couplings from a combined ATLAS and CMS analysis of the LHC pp collision data at sqrt(s)=7 and 8 TeV",
-    "arxiv": "[1606.02266v1](https://arxiv.org/pdf/1606.02266.pdf)",
-    "year": "2016",
+    "arxiv": "[hep-ex/1606.02266v1](https://arxiv.org/pdf/1606.02266.pdf)",
     "time": "2016-06-07",
     "abstract": "Combined ATLAS and CMS measurements of the Higgs boson production and decay rates, as well as constraints on its couplings to vector bosons and fermions. The combined signal yield relative to the SM prediction is measured to be 1.09 +/- 0.11. The combination uses 5 fb-1 at 7 TeV and 20 fb-1 at 8 TeV per experiment.",
     "pdf": "https://arxiv.org/pdf/1606.02266.pdf",
-    "transition-mode": "higgs-couplings",
+    "transition-mode": "Higgs decay",
     "data": [
         {
             "obs@1": {

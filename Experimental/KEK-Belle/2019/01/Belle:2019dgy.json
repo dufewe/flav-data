@@ -3,10 +3,11 @@
     "author": "Adamczyk, K. and others",
     "collaboration": "Belle",
     "title": "Measurement of the $\\tau$ lepton polarization in $B \\to D^* \\tau \\nu$ decays with one-prong hadronic $\\tau$ decays at Belle",
-    "arxiv": "[1901.06380v1](https://arxiv.org/pdf/1901.06380)",
+    "arxiv": "[hep-ex/1901.06380v1](https://arxiv.org/pdf/1901.06380)",
     "time": "2019.01.18",
     "abstract": "We report the first measurement of the $\\tau$ lepton polarization $P_\\tau(D^*)$ in the decay $B \\to D^* \\tau \\nu$ as well as a new determination of $R(D^*) = \\mathcal{B}(B \\to D^* \\tau \\nu)/\\mathcal{B}(B \\to D^* \\ell \\nu)$ using a data sample of 772 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We reconstruct the signal $B$ meson in the $D^{*-} \\tau^+ \\nu_\\tau$ mode with the $\\tau^+$ decaying to $\\pi^+ \\bar{\\nu}_\\tau$ or $\\rho^+ \\bar{\\nu}_\\tau$. The hadronic $\\tau$ decays are accompanied by a missing neutrino, which prevents full reconstruction of the event. We use the kinematic properties of the signal to extract the $\\tau$ polarization. We find $P_\\tau(D^*) = -0.38 \\pm 0.51 \\text{(stat)} {}^{+0.21}_{-0.16} \\text{(syst)}$ and $R(D^*) = 0.270 \\pm 0.035 \\text{(stat)} {}^{+0.028}_{-0.025} \\text{(syst)}$, consistent with Standard Model predictions.",
     "pdf": "https://arxiv.org/pdf/1901.06380",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -32,6 +33,5 @@
                 "type@2_err_down": "0.025"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

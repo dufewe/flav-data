@@ -1,16 +1,15 @@
 {
     "inspire-hep": "1739784",
-    "author": "Aad, Georges and others",
+    "author": "Aad, G. and others",
     "collaboration": "ATLAS",
     "title": "Search for a heavy charged boson in events with a charged lepton and missing transverse momentum from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector",
-    "arxiv": "1906.05609v2",
+    "arxiv": "[hep-ex/1906.05609v2](https://arxiv.org/pdf/1906.05609v2)",
     "time": "2019-09-23",
     "abstract": "A search for a heavy charged-boson resonance decaying into a charged lepton (electron or muon) and a neutrino is reported. A data sample of 139 fb^{-1} of proton-proton collisions at sqrt(s)=13 TeV collected with the ATLAS detector at the LHC during 2015-2018 is used in the search. The observed transverse mass distribution computed from the lepton and missing transverse momenta is consistent with the distribution expected from the Standard Model, and upper limits on the cross section for pp to W' to l nu are extracted (l = e or mu). These vary between 1.3 pb and 0.05 fb depending on the resonance mass in the range between 0.15 and 7.0 TeV at 95% confidence level for the electron and muon channels combined. Gauge bosons with a mass below 6.0 and 5.1 TeV are excluded in the electron and muon channels, respectively, in a model with a resonance that has couplings to fermions identical to those of the Standard Model W boson.",
     "pdf": "https://inspirehep.net/files/02cf5513c8bef0082dd2e96c2be414bd",
-    "transition-mode": "wprime-search",
+    "transition-mode": "scattering",
     "data": [
         {
-            "condition": "e + mu combined, 139 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[e_mu]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",
@@ -33,7 +32,6 @@
             }
         },
         {
-            "condition": "e channel only, 139 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[e]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",
@@ -56,7 +54,6 @@
             }
         },
         {
-            "condition": "mu channel only, 139 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[mu]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",

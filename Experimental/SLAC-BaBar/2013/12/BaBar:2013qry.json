@@ -3,10 +3,11 @@
     "author": "Lees, J.P. and others",
     "collaboration": "BaBar",
     "title": "Measurement of the B --> X(s) l+ l- branching fraction and search for direct CP violation from a sum of exclusive final states",
-    "arxiv": "[1312.5364v1](https://arxiv.org/pdf/1312.5364)",
+    "arxiv": "[hep-ex/1312.5364v1](https://arxiv.org/pdf/1312.5364)",
     "time": "2013.12.18",
     "abstract": "We present a measurement of the total branching fraction of the flavor-changing neutral-current process B --> X(s) l+ l-, along with partial branching fractions in bins of dilepton and hadronic system mass, using a sample of 471 x 10^6 Upsilon(4S) --> B Bbar events recorded with the BaBar detector. We measure a lepton-flavor-averaged inclusive branching fraction BF(B --> X(s) l+ l-) = (6.73 +0.70-0.64[stat] +0.34-0.25[exp syst] +/- 0.50[model syst]) x 10^-6 for m(l+ l-)^2 > 0.1 GeV^2/c^4.",
     "pdf": "https://arxiv.org/pdf/1312.5364",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -271,6 +272,5 @@
                 "type@2_err_down": "0.01"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

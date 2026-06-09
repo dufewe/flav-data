@@ -10,7 +10,6 @@
     "transition-mode": "b-decay-rare",
     "data": [
         {
-            "condition": "Run 2 (2015-2016) only",
             "obs@1": {
                 "name": "BR(B0s.2.mu+.mu-)",
                 "latex": "$\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-)$",
@@ -32,7 +31,6 @@
             }
         },
         {
-            "condition": "Run 1 + Run 2 combined",
             "obs@1": {
                 "name": "BR(B0s.2.mu+.mu-)",
                 "latex": "$\\mathcal{B}(B^0_s \\to \\mu^+ \\mu^-)$",

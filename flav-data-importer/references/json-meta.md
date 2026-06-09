@@ -9,7 +9,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
@@ -20,7 +20,11 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
         {
             "obs@1": { ... },
             "obs@2": { ... },
-            "type@1_correlation": [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]]
+            "type@1_correlation": [
+                [1.0, 0.5, 0.1],
+                [0.5, 1.0, 0.2],
+                [0.1, 0.2, 1.0]
+            ]
         }
     ],
     "transition-mode": "semileptonic decay"
@@ -32,12 +36,12 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | Field | Type | Required | Description | Example |
 |-------|------|----------|-------------|---------|
 | `inspire-hep` | string | Yes | Markdown link: `[TexKey](https://inspirehep.net/literature/{recid})`. TexKey is the InspireHEP BibTeX citation key; recid is the control number. Always verify via InspireHEP API. | `[LHCb:2015svh](https://inspirehep.net/literature/1409497)` |
-| `author` | string | Yes | Format: `"name1 and others"` where name1 is the first author's full name from InspireHEP. If no person names are found (e.g., some older records), fall back to `"{group} collaboration"`. | `Aaij, Roel and others` |
+| `author` | string | Yes | InspireHEP BibTeX format: first author `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials, NOT full first name. If no person names are found (e.g., some older records), fall back to `"{group} collaboration"`. | `Aaij, R. and others` |
 | `collaboration` | string | Yes | The experimental collaboration or theory group name. For multi-collaboration papers, use comma-separated names (e.g., `"ATLAS, CMS"`). | `LHCb` |
-| `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
+| `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. All Unicode characters in the original title (Greek letters, math symbols, etc.) must be converted to LaTeX. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
 | `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
 | `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
-| `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. | `An angular analysis of the...` |
+| `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
 | `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
 | `data` | array | Yes | Array of data groups. Each group is bounded by a correlation/covariance matrix — all observables linked by the same matrix belong together. Observables without a matrix can share a group. Allowed fields within each group: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. | See Data Entries section |
 | `transition-mode` | string | Yes | **Must be the last field in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
@@ -47,7 +51,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | Field | Source | Notes |
 |-------|--------|-------|
 | `inspire-hep` | InspireHEP BibTeX info | `[TexKey](https://inspirehep.net/literature/{recid})` |
-| `author` | InspireHEP BibTeX info | `"name1 and others"` format |
+| `author` | InspireHEP BibTeX info | `"Surname, Initials. and others"` format (e.g. `"Aaij, R. and others"`) |
 | `collaboration` | InspireHEP BibTeX info | Collaboration name |
 | `title` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
 | `abstract` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
@@ -171,7 +175,11 @@ The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look 
 Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 
 ```json
-"type@1_correlation": [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]]
+"type@1_correlation": [
+    [1.0, 0.5, 0.1],
+    [0.5, 1.0, 0.2],
+    [0.1, 0.2, 1.0]
+]
 ```
 
 **Rules:**
@@ -181,6 +189,7 @@ Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 - **Order**: matrix indices correspond to obs@N numbering order (obs@1 → index 0, obs@2 → index 1, etc.).
 - **Naming**: use `type@1_correlation` to match `type@1_err` (stat), `type@2_correlation` to match `type@2_err` (syst), etc.
 - **Format**: matrix elements are floats (not strings).
+- **Layout**: each matrix row is on a single line; do **not** put each element on its own line. This applies to all `*_correlation` and `*_covariance` fields. (See `Test/improve.md` rule 1.)
 - If no correlation matrix is available, **omit the field entirely** (do not set to `null`).
 
 ### Total Error Correlation/Covariance (`tot_correlation`, `tot_covariance`)
@@ -190,7 +199,10 @@ When using total error format (`tot_err_up`/`tot_err_down`), use the `tot_` pref
 ### Covariance Matrix (`type@N_covariance`)
 
 ```json
-"type@1_covariance": [[0.01, 0.005], [0.005, 0.01]]
+"type@1_covariance": [
+    [0.01, 0.005],
+    [0.005, 0.01]
+]
 ```
 
 **Rules:**
@@ -232,6 +244,74 @@ The `transition-mode` field classifies the physical process. Only two top-level 
 
 **Do NOT use** non-property descriptors such as "rare decay", "flavor-changing", "BSM search", etc.
 
+## Non-Standard Schemas: HFLAV and PDG
+
+The aggregation groups **HFLAV** and **PDG** do not follow the
+per-paper schema above. They store one snapshot JSON per year
+whose top-level keys are subgroup names (e.g. `PDG@W`, `PDG@Z`,
+`HFLAV@B02pilnu`, `HFLAV@RD[tau/l]-RDst[tau/l]`). Each subgroup
+is a flat dict of `obs@N` entries with `name`/`value`/`error`
+(or `tot_err_up`/`tot_err_down`)/`unit` fields, plus an optional
+`correlation` matrix.
+
+Example (PDG snapshot):
+
+```json
+{
+    "inspire-hep": "ParticleDataGroup:2024cfk",
+    "author": "Navas, S. and others",
+    "title": "Review of Particle Physics",
+    "year": "2024",
+    "data": {
+        "PDG@W": {
+            "obs@1": { "name": "MW", "value": 80.3692, "error": 0.0133, "unit": "GeV" },
+            "obs@27": { "name": "Br(W2lnu)", "value": 0.1086, "error": 0.0009 },
+            "obs@28": { "name": "Br(W2enu)", "value": 0.1071, "error": 0.0009 },
+            ...
+            "correlation": null
+        },
+        "PDG@Z": { ... },
+        "PDG@Higgs": { ... }
+    }
+}
+```
+
+Example (HFLAV snapshot):
+
+```json
+{
+    "HFLAV@overview": {
+        "group": "HFLAV",
+        "arxiv": "2411.18639",
+        "inspire-hep": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+        "description": "overview of popular observables",
+        "observables": [
+            { "name": "Tau(B0)", "value": 1.517, ... },
+            ...
+        ]
+    },
+    "HFLAV@B02pilnu": { ... }
+}
+```
+
+**Differences from the standard schema**:
+
+- `data` is a **dict keyed by subgroup name**, not a list of data
+  entries. The standard `obs@N`-inside-`data[i]` model does not apply.
+- There is no `transition-mode` field (each subgroup is a different
+  physical process).
+- `obs@N` keys are **flat inside each subgroup**, not nested inside
+  per-entry dicts.
+- The `error` field is a single number (no `stat`/`syst` breakdown).
+  Use `error` (scalar) or `tot_err_up`/`tot_err_down` (pair) — both
+  are accepted; do not use `type@N_err` triplets.
+- The `unit` field is a free-form string (e.g. `"GeV"`, `"ps"`, `"fb"`).
+- Optional `correlation` matrix (square, N×N) is at the subgroup level.
+
+The HFLAV and PDG pages in the Streamlit app render these snapshots
+directly (bypassing `run_dashboard`) and do not pass through
+`scripts/json-valid.py`.
+
 ## Key Constraints
 
 1. **All numeric values are strings** — `"0.25"` not `0.25`. Applies to `value`, `q2min`, `q2max`, `pTmin`, `pTmax`, all error fields, and `unit`. Exception: correlation/covariance matrix elements are floats.
@@ -242,6 +322,10 @@ The `transition-mode` field classifies the physical process. Only two top-level 
 6. **No `year` field** — The database does not support a top-level `year` field.
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
 8. **transition-mode last** — This field must always be the final key in the JSON object.
+9. **Matrix layout: row-per-line** — Each `*_correlation` / `*_covariance` matrix row is on a single line; do not put each element on its own line. (See `Test/improve.md` rule 1.)
+10. **Author format** — First author in InspireHEP BibTeX form: `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials only, not full first names. (See `Test/improve.md` rule 3.)
+11. **Abstract = single line** — Multi-line `align*`/`gather*`/etc. blocks must be collapsed to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last entry. (See `Test/improve.md` rule 2.)
+12. **No Unicode in extracted fields** — All Unicode characters (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, etc.) must be replaced with their LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). (See `Test/improve.md` rule 4.)
 
 ## Extending This Specification
 

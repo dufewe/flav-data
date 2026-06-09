@@ -1,13 +1,13 @@
 {
     "inspire-hep": 1519425,
-    "author": "Ablikim, M. et al.",
+    "author": "Ablikim, M.E.A.",
     "collaboration": "BESIII",
     "title": "Analysis of D+ -> K0bar e+ nu_e and D+ -> pi0 e+ nu_e Semileptonic Decays",
-    "arxiv": "1703.09084v1",
+    "arxiv": "[hep-ex/1703.09084v1](https://arxiv.org/pdf/1703.09084v1)",
     "time": "2017-07",
     "abstract": "Using 2.93 fb-1 of data taken at 3.773 GeV with the BESIII detector operated at the BEPCII collider, we study the semileptonic decays D+ -> K0bar e+ nu_e and D+ -> pi0 e+ nu_e. We measure the absolute decay branching fractions and the differential decay rates, and determine the form factors and CKM matrix elements.",
     "pdf": "https://arxiv.org/pdf/1703.09084.pdf",
-    "transition-mode": "c-semileptonic",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -82,7 +82,6 @@
             }
         },
         {
-            "condition": "Single pole model fit",
             "obs@1": {
                 "name": "mpole(D+.2.K0bar.e+.nue)",
                 "latex": "$m_{pole}(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
@@ -101,7 +100,6 @@
             }
         },
         {
-            "condition": "Modified pole model fit",
             "obs@1": {
                 "name": "alpha(D+.2.K0bar.e+.nue)",
                 "latex": "$\\alpha(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
@@ -120,7 +118,6 @@
             }
         },
         {
-            "condition": "Two-parameter series expansion fit (nominal)",
             "obs@1": {
                 "name": "r1(D+.2.K0bar.e+.nue)",
                 "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
@@ -139,7 +136,6 @@
             }
         },
         {
-            "condition": "Three-parameter series expansion fit",
             "obs@1": {
                 "name": "r1(D+.2.K0bar.e+.nue)",
                 "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",

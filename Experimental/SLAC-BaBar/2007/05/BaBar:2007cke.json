@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[BaBar:2007cke](https://inspirehep.net/literature/751589)",
-    "author": "Aubert, Bernard and others",
+    "author": "Aubert, B. and others",
     "collaboration": "BaBar",
     "title": "Determination of the Form Factors for the Decay $B^{0} \\to D^{*-}\\ell^{+}\\nu_{\\ell}$ and of the CKM Matrix Element $|V_{cb}|$",
-    "arxiv": "[0705.4008v2](https://arxiv.org/pdf/0705.4008)",
+    "arxiv": "[hep-ex/0705.4008v2](https://arxiv.org/pdf/0705.4008)",
     "time": "2007.05.28",
     "abstract": "We present a combined measurement of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{cb}|$ and of the parameters $\\rho^{2}$, $R_{1}(1)$, and $R_{2}(1)$, which fully characterize the form factors for the $B^{0} \\to D^{*-}\\ell^{+}\\nu_{\\ell}$ decay in the framework of heavy-quark effective theory. The results, based on a selected sample of 185018 $B^{0} \\to D^{*-}(\\to \\bar{D}^{0}\\pi^{-})\\ell^{+}\\nu_{\\ell}$ candidates from 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance, are $\\rho^{2} = 1.157 \\pm 0.094 \\pm 0.027$, $R_{1}(1) = 1.327 \\pm 0.131 \\pm 0.043$, $R_{2}(1) = 0.859 \\pm 0.077 \\pm 0.021$, and $\\mathcal{F}(1)|V_{cb}| = (34.7 \\pm 0.4 \\pm 1.0) \\times 10^{-3}$.",
     "pdf": "https://arxiv.org/pdf/0705.4008",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -82,6 +83,5 @@
                 "unit": "%"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

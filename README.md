@@ -127,15 +127,19 @@ Represents $A + B \to C + D$ with `2` replacing the arrow.
 ```
 flav-data/
 ├── Experimental/
-│   ├── LHCb/
-│   │   ├── LHCb.py                  # Streamlit dashboard
+│   ├── CERN-LHCb/                  # Lab-Collaboration folder
+│   │   ├── LHCb.py                 # Streamlit dashboard page
 │   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json       # Annual index
+│   │   │   ├── LHCb@2015.json      # Annual index
 │   │   │   └── 12/
-│   │   │       └── LHCb:2015svh.json  # Data file
+│   │   │       └── LHCb:2015svh.json   # Data file
 │   │   └── 2025/
 │   │       └── ...
-│   └── ATLAS/, CMS/, Belle/, ...
+│   ├── CERN-ATLAS/, CERN-CMS/
+│   ├── KEK-Belle/
+│   ├── SLAC-BaBar/
+│   ├── Fermilab-CDF/
+│   └── ...                         # Other groups (HFLAV, PDG, NA62, ...)
 ├── Theoretical/
 │   └── HPQCD/
 │       └── ...
@@ -147,6 +151,48 @@ flav-data/
 ├── flav_dashboard.py                # Dashboard component
 └── defs.py                          # Shared definitions
 ```
+
+The full Lab-Collaboration folder convention is:
+
+| Folder | Lab | Collaboration | Notes |
+|--------|-----|---------------|-------|
+| `CERN-LHCb` | CERN | LHCb | |
+| `CERN-ATLAS` | CERN | ATLAS | |
+| `CERN-CMS` | CERN | CMS | |
+| `CERN-DELPHI` | CERN | DELPHI | LEP |
+| `CERN-OPAL` | CERN | OPAL | LEP |
+| `CERN-LEP` | CERN | LEP | Combined LEP (ALEPH+DELPHI+L3+OPAL) |
+| `CERN-NA62` | CERN | NA62 | Kaon rare decays |
+| `CERN-CHARM-II` | CERN | CHARM-II | Neutrino experiment |
+| `KEK-Belle` | KEK | Belle | |
+| `KEK-KOTO` | KEK | KOTO | J-PARC |
+| `SLAC-BaBar` | SLAC | BaBar | |
+| `SLAC-SLD` | SLAC | SLD | |
+| `Fermilab-CDF` | Fermilab | CDF | Tevatron |
+| `Fermilab-D0` | Fermilab | D0 | Tevatron |
+| `Fermilab-Tevatron` | Fermilab | Tevatron | Combined CDF+D0 |
+| `Fermilab-Muong-2` | Fermilab | Muong-2 | |
+| `IHEP-BESIII` | IHEP | BESIII | Beijing Spectrometer |
+| `IHEP-ISTRA+` | IHEP | ISTRA+ | |
+| `INFN-KLOE-2` | INFN | KLOE-2 | LNF Frascati DAΦNE |
+| `BNL-E949` | BNL | E949 | K+ rare decays |
+| `Cornell-CLEO` | Cornell | CLEO | CESR |
+| `TRIUMF-PiENu` | TRIUMF | PiENu | |
+| `PSI-SINDRUM-II` | PSI | SINDRUM-II | Mu-e conversion |
+| `PSI-nTRV` | PSI | nTRV | Neutron trimer |
+| `LANL-UCNA` | LANL | UCNA | |
+| `NIST-aCORN` | NIST | aCORN | |
+| `HFLAV` | — | HFLAV | Aggregation, non-standard schema (uses `run_dashboard`-bypassing custom page) |
+| `PDG` | — | PDG | Aggregation, non-standard schema |
+
+### Special cases
+
+- **HFLAV** and **PDG** store data in a non-standard flav-data schema
+  (one snapshot JSON per year whose keys are subgroup names containing
+  nested observables). They have their own dedicated Streamlit pages
+  (`HFLAV/HFLAV.py`, `PDG/PDG.py`) that bypass `run_dashboard`.
+
+The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) create `Experimental/<folder>/<group>.py` calling `run_dashboard(lab=..., group=...)` (or pass `folder_override=` if needed), (3) drop data into `Experimental/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index.
 
 ### Index File Format
 

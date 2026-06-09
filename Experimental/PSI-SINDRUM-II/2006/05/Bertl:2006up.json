@@ -4,11 +4,10 @@
     "collaboration": "SINDRUM II",
     "title": "A search for muon to electron conversion in muonic gold",
     "arxiv": "no arxiv (published in Eur.Phys.J.C)",
-    "year": "2006",
     "time": "2006-05-01",
     "abstract": "A search for muon to electron conversion in muonic gold was performed with the SINDRUM II spectrometer at PSI. The measurement resulted in an upper limit of 7 x 10^-13 at 90% CL for the ratio of the conversion rate to the muon capture rate.",
     "pdf": "https://cds.cern.ch/record/855676",
-    "transition-mode": "lfv-mu-e",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

@@ -1,16 +1,15 @@
 {
     "inspire-hep": "2618188",
-    "author": "Tumasyan, Armen and others",
+    "author": "Tumasyan, A. and others",
     "collaboration": "CMS",
     "title": "Search for new physics in the lepton plus missing transverse momentum final state in proton-proton collisions at sqrt(s) = 13 TeV",
-    "arxiv": "2202.06075v2",
+    "arxiv": "[hep-ex/2202.06075v2](https://arxiv.org/pdf/2202.06075v2)",
     "time": "2022-07-15",
     "abstract": "A search for physics beyond the standard model (SM) in final states with an electron or muon and missing transverse momentum is presented. The analysis uses data from proton-proton collisions at a centre-of-mass energy of 13 TeV, collected with the CMS detector at the LHC in 2016-2018 and corresponding to an integrated luminosity of 138 fb^{-1}. No significant deviation from the SM prediction is observed. Model-independent limits are set on the production cross section of W' bosons decaying into lepton-plus-neutrino final states. Within the framework of the sequential standard model, with the combined results from the electron and muon decay channels a W' boson with mass less than 5.7 TeV is excluded at 95% confidence level. Results on a SM precision test, the determination of the oblique electroweak W parameter, are presented using LHC data for the first time.",
     "pdf": "https://arxiv.org/pdf/2202.06075.pdf",
-    "transition-mode": "wprime-search",
+    "transition-mode": "scattering",
     "data": [
         {
-            "condition": "e + mu combined, 138 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[e_mu]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",
@@ -33,7 +32,6 @@
             }
         },
         {
-            "condition": "e channel only, 138 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[e]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",
@@ -56,7 +54,6 @@
             }
         },
         {
-            "condition": "mu channel only, 138 fb^{-1} at sqrt(s)=13 TeV, SSM W'",
             "obs@1": {
                 "name": "m_obs_Wp_SSM(p.p.2.Wp.2.l.nu)[mu]",
                 "latex": "$m_{W'_{SSM}}^{obs}$",
@@ -79,7 +76,6 @@
             }
         },
         {
-            "condition": "split-UED, 1/R lower limit, mu=2 TeV, e + mu combined",
             "obs@1": {
                 "name": "invR_obs_UED(p.p.2.WKK.2.l.nu)[mu_2TeV]",
                 "latex": "$(1/R)^{obs}$",
@@ -102,7 +98,6 @@
             }
         },
         {
-            "condition": "RPV SUSY, lambda_231 upper limit, lambda'_3ij=0.5, Me_tau approx 1 TeV",
             "obs@1": {
                 "name": "lambda_231_obs(p.p.2.tau.sneutrino.2.e.nu)[lambda_prime_0.5]",
                 "latex": "$\\lambda_{231}^{obs}$",
@@ -125,7 +120,6 @@
             }
         },
         {
-            "condition": "Oblique W parameter measurement, e + mu combined, 2017-2018 (101 fb^{-1})",
             "obs@1": {
                 "name": "W_param(p.p.2.W.2.l.nu)[e_mu_101fb]",
                 "latex": "$W$",
@@ -138,7 +132,6 @@
             }
         },
         {
-            "condition": "Composite Higgs, m* lower limit, SSM W' assumption, e + mu combined",
             "obs@1": {
                 "name": "m_star_obs(p.p.2.Wp.2.l.nu)[composite_SSM]",
                 "latex": "$m_*^{obs}$",

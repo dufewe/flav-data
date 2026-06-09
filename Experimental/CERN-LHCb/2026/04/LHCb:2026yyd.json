@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2026yyd](https://inspirehep.net/literature/3139204)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for the decays $B_{(s)}^0 \\to J/\\psi \\gamma$ at LHCb",
     "arxiv": "[hep-ex/2604.02933v1](https://arxiv.org/pdf/2604.02933)",
     "time": "2026.04.03",
     "abstract": "A search for the rare decays $B_{(s)}^0 \\to J/\\psi \\gamma$ is performed with proton-proton collision data collected by the LHCb experiment, corresponding to integrated luminosities of 3 fb$^{-1}$ at centre-of-mass energies of 7 and 8 TeV, and 6 fb$^{-1}$ at 13 TeV. Assuming no contribution from $B^0 \\to J/\\psi \\gamma$ decay, an upper limit is set on the branching fraction $\\mathcal{B}(B_s^0 \\to J/\\psi \\gamma) < 2.9 \\times 10^{-6}$ at the 90\\% confidence level. If instead no contribution from $B_s^0 \\to J/\\psi \\gamma$ decay is assumed, the limit is $\\mathcal{B}(B^0 \\to J/\\psi \\gamma) < 2.5 \\times 10^{-6}$ at the 90\\% confidence level. These results supersede the previous LHCb results, with the limit for $B_s^0 \\to J/\\psi \\gamma$ improved by a factor of 2.5.",
     "pdf": "https://arxiv.org/pdf/2604.02933",
+    "transition-mode": "radiative decay",
     "data": [
         {
             "obs@1": {
@@ -26,6 +27,5 @@
                 "type@2_level": "95%@CLs"
             }
         }
-    ],
-    "transition-mode": "radiative decay"
+    ]
 }

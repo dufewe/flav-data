@@ -4,11 +4,10 @@
     "collaboration": "DELPHI",
     "title": "Search for lepton flavor number violating Z0 decays",
     "arxiv": "no arxiv (published in Z.Phys.C)",
-    "year": "1996",
     "time": "1996-01-01",
     "abstract": "A search for lepton flavour number violating Z0 decays in the channels Z0 -> mu tau, Z0 -> e tau, Z0 -> e mu, using the DELPHI detector with data collected during the 1991-94 LEP runs. No signal was found. Upper limits at 95% CL for the respective branching fractions of 1.2e-5, 2.2e-5, and 0.25e-5 were obtained.",
     "pdf": "https://link.springer.com/article/10.1007/s002880050313",
-    "transition-mode": "z-lfv",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

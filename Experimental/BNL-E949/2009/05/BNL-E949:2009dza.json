@@ -10,7 +10,6 @@
     "transition-mode": "kaon-rare-decay",
     "data": [
         {
-            "condition": "Combined E787+E949 result",
             "obs@1": {
                 "name": "BR(K+.2.pi+.nu.nubar)",
                 "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$",
@@ -23,7 +22,6 @@
             }
         },
         {
-            "condition": "This analysis only (E949 pi nu nu(2) region)",
             "obs@1": {
                 "name": "BR(K+.2.pi+.nu.nubar)",
                 "latex": "$\\mathcal{B}(K^+ \\to \\pi^+ \\nu \\bar{\\nu})$",

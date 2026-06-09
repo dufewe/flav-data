@@ -45,9 +45,9 @@ flav-data-importer/
 
 | Supported | Not Supported |
 |-----------|--------------|
-| Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Phenomenological fits to experimental data |
-| Theoretical calculations (HPQCD, RBC/UKQCD, FNAL/MILC, etc.) | Conference/report papers |
-| arXiv preprints and journal papers | Informal non-peer-reviewed results |
+| Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Conference/report papers (no formal preprint) |
+| Theoretical calculations (HPQCD, RBC/UKQCD, FNAL/MILC, etc.) | Informal non-peer-reviewed results |
+| arXiv preprints and journal papers | Phenomenological fits to experimental data |
 
 **Rules:**
 - For unsupported data: reply "This data is not supported for import" or find the formal paper on arXiv/InspireHEP.
@@ -82,13 +82,24 @@ flav-data-importer/
 | `transition-mode` | Paper content |
 
 #### Add
-1. Build path per `references/file-index.md` — `Lab-Collaboration` folders, collaboration-only filenames
-2. `mkdir -p Experimental/CERN-LHCb/2015/12`
-3. Determine transition symbol + observable naming → `references/obs-abbr.md`
-4. Build JSON metadata → `references/json-meta.md`
-5. Extract values and populate JSON
-6. Write JSON to month subdirectory
-7. Update annual index at `Experimental/CERN-LHCb/2015/LHCb@2015.json`
+1. **Determine the target folder** by looking up the group in the
+   `Lab-Collaboration` table in `references/file-index.md` §1. If the
+   group is not listed yet, add a new entry to that table **first**
+   (commit it separately) and then proceed.
+2. Build path per `references/file-index.md` — `<Lab>-<Collaboration>`
+   folder, collaboration-only filename
+3. `mkdir -p Experimental/<Lab>-<Collaboration>/<year>/<month>`
+4. Determine transition symbol + observable naming → `references/obs-abbr.md`
+5. Build JSON metadata → `references/json-meta.md`
+6. Extract values and populate JSON
+7. Write JSON to month subdirectory
+8. Update annual index at `Experimental/<Lab>-<Collaboration>/<year>/<Collaboration>@<year>.json`
+
+**Special cases**:
+- **HFLAV / PDG** use a non-standard schema (one snapshot per year).
+  Do **not** create per-paper JSONs — write a single year-level file
+  matching the existing schema (see `references/json-meta.md` for
+  the subgroup structure).
 
 #### Update
 1. Locate existing file via index
@@ -137,6 +148,60 @@ Full spec → `references/json-meta.md`. Key rules:
 - **LaTeX in JSON**: double backslash (two backslash characters) in JSON file text; Python reads single backslash after json.load()
 - **Indentation**: 4 spaces
 
+### Import Conventions (from `Test/improve.md`)
+
+Four rules govern how data must be formatted when importing from
+arXiv/InspireHEP/HEPData:
+
+1. **Matrix format (row-per-line, NOT element-per-line)**:
+   ```json
+   "tot_correlation": [
+       [1.0, 0.5, 0.3],
+       [0.5, 1.0, 0.2],
+       [0.3, 0.2, 1.0]
+   ]
+   ```
+   Each matrix row is on a single line; do **not** put each element
+   on its own line. This applies to any `*_correlation` or
+   `*_covariance` field under a `data[]` entry.
+
+2. **Abstract multi-line formula conversion**: arXiv abstracts may
+   contain multi-line `\\begin{align*} ... \\end{align*}` blocks.
+   Convert to single-line LaTeX so the abstract is one line. Example:
+   ```
+   $$\begin{align*} A_{CP} &= (-1.1 \pm 4.0 \pm 0.5)\%, \\
+                          \Sigma A_{\text{FB}} &= (3.9 \pm 4.0 \pm 0.6)\%, \\
+                          \Delta A_{\text{FB}} &= (3.1 \pm 4.0 \pm 0.4)\%, \end{align*}$$
+   ```
+   becomes:
+   ```
+   $A_{CP} = (-1.1 \pm 4.0 \pm 0.5)\%$, $\Sigma A_{\text{FB}} = (3.9 \pm 4.0 \pm 0.6)\%$, and $\Delta A_{\text{FB}} = (3.1 \pm 4.0 \pm 0.4)\%$
+   ```
+   Note: line breaks (`\\`) become `, ` separators, with `and` before
+   the last entry for natural English.
+
+3. **Author format = InspireHEP BibTeX**: `author` field must use
+   InspireHEP's BibTeX-style format — first author surname + initials
+   (NOT full first name), followed by `and others` for multi-author
+   papers. Example:
+   - ✓ Correct: `"Aaij, R. and others"`
+   - ✗ Wrong: `"Aaij, Roel and others"` (full first name)
+   - ✗ Wrong: `"Roel Aaij"` (wrong order)
+   - Fallback (no authors): `"{group} collaboration"`,
+     e.g. `"LHCb collaboration"`.
+
+4. **Unicode → LaTeX**: Any Unicode character in extracted data
+   must be replaced with its LaTeX equivalent:
+   - `μ` → `\mu`, `Δ` → `\Delta`, `Σ` → `\Sigma`, etc. (all Greek
+     letters)
+   - `±` → `\pm`, `×` → `\times`, `→` → `\to`, `≤` → `\leq`, etc.
+     (math symbols)
+   - `--`/`---` (en/em dashes) → `--`/`---` (LaTeX escape)
+   - Smart quotes (`'`'`/`"``/`'"`/`'"`) → `` ` `` / `'` / `` `` `` / `''`
+   - Degree symbol `°` → `^{\circ}`
+   - The `bar` character (`¯`) → `\bar{}` (used for anti-particles
+     like `\bar{p}`)
+
 ### Data Entry Whitelist
 
 Each `data[]` element may contain ONLY: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. Matrix naming matches error type: component = `type@N_*`, total = `tot_*`.
@@ -144,8 +209,24 @@ Each `data[]` element may contain ONLY: `obs@N`, `type@N_correlation`, `type@N_c
 ### Folder Naming
 
 `Lab-Collaboration` (实验室-实验组, institution-based):
-`Experimental/CERN-LHCb/`, `Experimental/CERN-ATLAS/`, `Experimental/SLAC-BaBar/`, `Experimental/KEK-Belle/`, `Experimental/IHEP-BESIII/`, `Experimental/Fermilab-CDF/`, `Experimental/CERN-LEP/`, `Experimental/HFLAV/`, `Experimental/PDG/`.
-Theoretical: `Theoretical/HPQCD/`, `Theoretical/RBC-UKQCD/`.
+`Experimental/CERN-LHCb/`, `Experimental/CERN-ATLAS/`, `Experimental/CERN-CMS/`,
+`Experimental/CERN-DELPHI/`, `Experimental/CERN-OPAL/`, `Experimental/CERN-LEP/`,
+`Experimental/CERN-NA62/`, `Experimental/CERN-CHARM-II/`,
+`Experimental/KEK-Belle/`, `Experimental/KEK-KOTO/`,
+`Experimental/SLAC-BaBar/`, `Experimental/SLAC-SLD/`,
+`Experimental/Fermilab-CDF/`, `Experimental/Fermilab-D0/`,
+`Experimental/Fermilab-Tevatron/`, `Experimental/Fermilab-Muong-2/`,
+`Experimental/IHEP-BESIII/`, `Experimental/IHEP-ISTRA+/`,
+`Experimental/INFN-KLOE-2/`, `Experimental/BNL-E949/`,
+`Experimental/Cornell-CLEO/`, `Experimental/TRIUMF-PiENu/`,
+`Experimental/PSI-SINDRUM-II/`, `Experimental/PSI-nTRV/`,
+`Experimental/LANL-UCNA/`, `Experimental/NIST-aCORN/`.
+
+No-lab folders (bare group name, used for aggregation groups
+with no parent lab): `Experimental/HFLAV/`, `Experimental/PDG/`.
+
+Theoretical: `Theoretical/HPQCD/`, `Theoretical/UKQCD/`.
+
 Data files always use collaboration name only: `LHCb:2015svh.json`.
 
 ## Common Pitfalls
@@ -157,14 +238,14 @@ Data files always use collaboration name only: `LHCb:2015svh.json`.
 | `type@1_err` missing when `_up`/`_down` present | Add `type@1_err` label (e.g., `"stat"`) — all three are required |
 | `upper_limit` and `level` swapped | `upper_limit` = numeric, `level` = confidence string |
 | Non-property transition-mode (`"rare decay"`) | Property-based: `"semileptonic decay"`, `"leptonic decay"`, `"scattering"` |
-| Annual index with outdated texkey | Verify latest texkey on InspireHEP before writing index |
+| Annual index with outdated TexKey | Verify latest TexKey on InspireHEP before writing index |
 | Empty fields as empty strings | Omit key entirely; only `arxiv` uses `null` |
 | `year` field present | Not supported — remove |
 | `tot_correlation` with component errors | Use `type@N_correlation` matching the error type label |
 | Matrix dimension ≠ obs count | Matrix N×N must equal number of obs@N in that entry |
-| Author-level texkey for filenames | Collaboration-level only: `LHCb:2015svh` |
+| Author-level TexKey for filenames | Collaboration-level only: `LHCb:2015svh` |
 | Single backslash in JSON LaTeX | Two backslash characters required in JSON file text |
-| Author name with initials | Full first name: `"Aaij, Roel and others"` |
+| Author name with full first name (`"Aaij, Roel and others"`) | Use InspireHEP BibTeX format: `"Aaij, R. and others"` (initials only) — see rule 3 |
 | Abstract starting lowercase | Match arXiv exactly; typically capital |
 | Hyphenated transition-mode | No hyphens: `"semileptonic decay"` |
 | `unit` field as empty string | Omit for dimensionless observables |
@@ -188,14 +269,16 @@ Data files always use collaboration name only: `LHCb:2015svh.json`.
 
 - `*_correlation`: diagonal = 1.0, off-diagonal ∈ [-1, 1]
 - `*_covariance`: diagonal = error², off-diagonal = covariance
-- Compact row-per-line; matrix elements are floats
+- **Layout**: each matrix row is on a single line (per `Test/improve.md`
+  rule 1; do **not** put each element on its own line)
+- Matrix elements are floats (not strings, unlike `value`/`err_*`)
 
 ## JSON Example
 
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
@@ -218,7 +301,10 @@ Data files always use collaboration name only: `LHCb:2015svh.json`.
                 "q2max": "1.1"
             },
             "obs@2": { "...": "..." },
-            "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
+            "type@1_correlation": [
+                [1.0, 0.06],
+                [0.06, 1.0]
+            ]
         }
     ],
     "transition-mode": "semileptonic decay"

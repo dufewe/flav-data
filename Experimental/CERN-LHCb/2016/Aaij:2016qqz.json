@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1479453",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Measurement of forward W->e nu production in pp collisions at sqrt(s)=8 TeV",
-    "arxiv": "[1608.01484v2](https://arxiv.org/pdf/1608.01484.pdf)",
-    "year": "2016",
+    "arxiv": "[hep-ex/1608.01484v2](https://arxiv.org/pdf/1608.01484.pdf)",
     "time": "2016-08-04",
     "abstract": "A measurement of the cross-section for W->e nu production in pp collisions using 2 fb-1 at sqrt(s)=8 TeV. The inclusive W production cross-sections are measured to be sigma(W+)=1124.4 pb and sigma(W-)=809.0 pb. The ratio B(W->e nu)/B(W->mu nu)=1.020 +/- 0.002 +/- 0.019.",
     "pdf": "https://arxiv.org/pdf/1608.01484.pdf",
-    "transition-mode": "w-production",
+    "transition-mode": "scattering",
     "data": [
         {
             "obs@1": {

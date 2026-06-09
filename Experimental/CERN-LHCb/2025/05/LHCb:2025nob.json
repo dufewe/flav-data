@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2025nob](https://inspirehep.net/literature/2923439)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Measurement of the Z-boson Mass",
     "arxiv": "[hep-ex/2505.15582v2](https://arxiv.org/pdf/2505.15582)",
     "time": "2025.05.21",
     "abstract": "The first dedicated $Z$-boson mass measurement at the LHC with $Z \\to \\mu^+\\mu^-$ decays is reported. The dataset uses proton-proton collisions at a centre-of-mass energy of $13$ TeV, recorded in 2016 by the LHCb experiment, and corresponds to an integrated luminosity of $1.7$ fb$^{-1}$. A template fit to the $\\mu^+\\mu^-$ mass distribution yields the following result for the $Z$-boson mass, $m_Z = 91185.7 \\pm 8.3 \\pm 3.9$ MeV, where the first uncertainty is statistical and the second systematic. This result is consistent with previous measurements and predictions from global electroweak fits.",
     "pdf": "https://arxiv.org/pdf/2505.15582",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -22,6 +23,5 @@
                 "unit": "MeV"
             }
         }
-    ],
-    "transition-mode": "leptonic decay"
+    ]
 }

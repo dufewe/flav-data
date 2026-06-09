@@ -1,829 +1,828 @@
 {
-  "inspirehep": "ParticleDataGroup:2024cfk",
-  "author": "Navas, S. and others",
-  "collaboration": "Particle Data Group",
-  "title": "{Review of particle physics}",
-  "year": "2024",
-  "data": {
-    "PDG@inputs": {
-      "obs@1": {
-        "name": "GF",
-        "latex": "$G_F$",
-        "value": 1.1663788e-5,
-        "tot_err_up": 0.0000006e-5,
-        "tot_err_down": 0.0000006e-5,
-        "unit": "GeV-2"
-      },
-      "obs@2": {
-        "name": "alphas(MZ)",
-        "latex": "$\\alpha_s(M_Z)$",
-        "value": 0.1180,
-        "tot_err_up": 0.0009,
-        "tot_err_down": 0.0009
-      },
-      "obs@3": {
-        "name": "Mpi+",
-        "latex": "$M_{\\pi^+}$",
-        "value": 139.57039e-3,
-        "tot_err_up": 0.00018e-3,
-        "tot_err_down": 0.00018e-3,
-        "unit": "GeV"
-      },
-      "obs@4": {
-        "name": "Mpi0",
-        "latex": "$M_{\\pi^0}$",
-        "value": 134.9768e-3,
-        "tot_err_up": 0.0005e-3,
-        "tot_err_down": 0.0005e-3,
-        "unit": "GeV"
-      },
-      "obs@5": {
-        "name": "Meta",
-        "latex": "$M_\\eta$",
-        "value": 547.862e-3,
-        "tot_err_up": 0.017e-3,
-        "tot_err_down": 0.017e-3,
-        "unit": "GeV"
-      },
-      "obs@6": {
-        "name": "Mrho0",
-        "latex": "$M_{\\rho^0}$",
-        "value": 775.26e-3,
-        "tot_err_up": 0.23e-3,
-        "tot_err_down": 0.23e-3,
-        "unit": "GeV"
-      },
-      "obs@7": {
-        "name": "Mrho+",
-        "latex": "$M_{\\rho^+}$",
-        "value": 775.26e-3,
-        "tot_err_up": 0.23e-3,
-        "tot_err_down": 0.23e-3,
-        "unit": "GeV"
-      },
-      "obs@8": {
-        "name": "Momega",
-        "latex": "$M_\\omega$",
-        "value": 782.66e-3,
-        "tot_err_up": 0.13e-3,
-        "tot_err_down": 0.13e-3,
-        "unit": "GeV"
-      },
-      "obs@9": {
-        "name": "Metaprime",
-        "latex": "$M_{\\eta^\\prime}$",
-        "value": 957.78e-3,
-        "tot_err_up": 0.06e-3,
-        "tot_err_down": 0.06e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Mphi",
-        "value": 1019.461e-3,
-        "error": 0.016e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MK+",
-        "value": 493.677e-3,
-        "error": 0.015e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MK0",
-        "value": 497.611e-3,
-        "error": 0.013e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MKst",
-        "value": 891.67e-3,
-        "error": 0.26e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MD+",
-        "value": 1869.66e-3,
-        "error": 0.05e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MD0",
-        "value": 1864.84e-3,
-        "error": 0.05e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MDst0",
-        "value": 2006.85e-3,
-        "error": 0.05e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MDst+",
-        "value": 2010.26e-3,
-        "error": 0.05e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MDs+",
-        "value": 1968.35e-3,
-        "error": 0.07e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MDsts+",
-        "value": 2112.2e-3,
-        "error": 0.4e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MJ/psi",
-        "value": 3096.900e-3,
-        "error": 0.006e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "|Vub|",
-        "value": 0.00382,
-        "error": 0.00020
-      },
-      {
-        "name": "|Vcb|",
-        "value": 0.0411,
-        "error": 0.0012
-      },
-      {
-        "name": "lambda@global",
-        "value": 0.22501,
-        "error": 0.00068
-      },
-      {
-        "name": "A@global",
-        "value": 0.826,
-        "error_up": 0.016,
-        "error_down": 0.015
-      },
-      {
-        "name": "rhobar@global",
-        "value": 0.1591,
-        "error": 0.0094
-      },
-      {
-        "name": "etabar@global",
-        "value": 0.3523,
-        "error_up": 0.0073,
-        "error_down": 0.0071
-      },
-      "correlation": null
-    },
-    "PDG@W": {
-      "obs@1": {
-        "name": "MW",
-        "value": 80.3692,
-        "error": 0.0133,
-        "unit": "GeV"
-      },
-      {
-        "name": "Br(W2lnu)",
-        "value": 0.1086,
-        "error": 0.0009
-      },
-      {
-        "name": "Br(W2enu)",
-        "value": 0.1071,
-        "error": 0.0016
-      },
-      {
-        "name": "Br(W2munu)",
-        "value": 0.1063,
-        "error": 0.0015
-      },
-      {
-        "name": "Br(W2taunu)",
-        "value": 0.1138,
-        "error": 0.0021
-      },
-      "correlation": null
-    },
-    "PDG@Z": {
-      "obs@1": {
-        "name": "MZ",
-        "value": 91.1880,
-        "error": 0.0020,
-        "unit": "GeV"
-      },
-      {
-        "name": "GammaZ",
-        "value": 2.4955,
-        "error": 0.0023
-      },
-      {
-        "name": "Ae",
-        "value": 0.1515,
-        "error": 0.0019
-      },
-      {
-        "name": "Amu",
-        "value": 0.142,
-        "error": 0.015
-      },
-      {
-        "name": "Atau",
-        "value": 0.143,
-        "error": 0.004
-      },
-      {
-        "name": "As",
-        "value": 0.90,
-        "error": 0.09
-      },
-      {
-        "name": "Ac",
-        "value": 0.670,
-        "error": 0.027
-      },
-      {
-        "name": "Ab",
-        "value": 0.923,
-        "error": 0.020
-      },
-      {
-        "name": "AFB(0l)",
-        "value": 1.71e-2,
-        "error": 0.10e-2
-      },
-      {
-        "name": "AFB(0u)",
-        "value": 4e-2,
-        "error": 7e-2
-      },
-      {
-        "name": "AFB(0s)",
-        "value": 9.8e-2,
-        "error": 1.1e-2
-      },
-      {
-        "name": "AFB(0c)",
-        "value": 7.07e-2,
-        "error": 0.35e-2
-      },
-      {
-        "name": "AFB(0b)",
-        "value": 9.92e-2,
-        "error": 0.16e-2
-      },
-      {
-        "name": "Br(Z2ee)",
-        "value": 3.3632e-2,
-        "error": 0.0042e-2
-      },
-      {
-        "name": "Br(Z2mumu)",
-        "value": 3.3662e-2,
-        "error": 0.0066e-2
-      },
-      {
-        "name": "Br(Z2tautau)",
-        "value": 3.3696e-2,
-        "error": 0.0083e-2
-      },
-      {
-        "name": "Br(Z2ll)",
-        "value": 3.3658e-2,
-        "error": 0.0023e-2
-      },
-      {
-        "name": "Br(Z2invisible)",
-        "value": 20.000e-2,
-        "error": 0.055e-2
-      },
-      {
-        "name": "Br(Z2hadrons)",
-        "value": 69.911e-2,
-        "error": 0.056e-2
-      },
-      "correlation": null
-    },
-    "PDG@Higgs": {
-      "obs@1": {
-        "name": "Mh",
-        "value": 125.20,
-        "error": 0.11,
-        "unit": "GeV"
-      },
-      {
-        "name": "Gammah",
-        "value": 3.7e-3,
-        "error_up": 1.9e-3,
-        "error_down": 1.4e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Br(h2WWst)",
-        "value": 25.7e-2,
-        "error": 2.5e-2
-      },
-      {
-        "name": "Br(h2ZZst)",
-        "value": 2.80e-2,
-        "error": 0.30e-2
-      },
-      {
-        "name": "Br(h2gammagamma)",
-        "value": 2.50e-3,
-        "error": 0.20e-3
-      },
-      {
-        "name": "Br(h2bbbar)",
-        "value": 53e-2,
-        "error": 8e-2
-      },
-      {
-        "name": "Br(h2mumu)",
-        "value": 2.6e-4,
-        "error": 1.3e-4
-      },
-      {
-        "name": "Br(h2tautau)",
-        "value": 6.0e-2,
-        "error_up": 0.8e-2,
-        "error_down": 0.7e-2
-      },
-      {
-        "name": "Br(h2Zgamma)",
-        "value": 3.4e-3,
-        "error": 1.1e-3
-      },
-      "correlation": null
-    },
-    "PDG@lepton": {
-      "obs@1": {
-        "name": "Me",
-        "value": 0.510999e-3,
-        "error": 0.000000e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Mmu",
-        "value": 105.6583755e-3,
-        "error": 0.0000023e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(mu)",
-        "value": 2.1969811e-6,
-        "error": 0.0000022e-6,
-        "unit": "s"
-      },
-      {
-        "name": "Mtau",
-        "value": 1776.93e-3,
-        "error": 0.09e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(tau)",
-        "value": 290.3e-15,
-        "error": 0.5e-15,
-        "unit": "s"
-      },
-      {
-        "name": "Br(tau2mununu)",
-        "value": 17.39e-2,
-        "error": 0.04e-2
-      },
-      {
-        "name": "Br(tau2enunu)",
-        "value": 17.82e-2,
-        "error": 0.04e-2
-      },
-      "correlation": null
-    },
-    "PDG@quark": {
-      "obs@1": {
-        "name": "mu",
-        "value": 2.16e-3,
-        "error": 0.07e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "md",
-        "value": 4.70e-3,
-        "error": 0.07e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "ms",
-        "value": 93.5e-3,
-        "error": 0.8e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "mc",
-        "value": 1.2730,
-        "error": 0.0046,
-        "unit": "GeV"
-      },
-      {
-        "name": "mb",
-        "value": 4.183,
-        "error": 0.007,
-        "unit": "GeV"
-      },
-      {
-        "name": "Mt",
-        "value": 172.57,
-        "error": 0.29,
-        "unit": "GeV"
-      },
-      {
-        "name": "Gammat",
-        "value": 1.42,
-        "error_up": 0.19,
-        "error_down": 0.15,
-        "unit": "GeV"
-      },
-      {
-        "name": "Br(t2enub)",
-        "value": 11.10e-2,
-        "error": 0.30e-2
-      },
-      {
-        "name": "Br(t2munub)",
-        "value": 11.40e-2,
-        "error": 0.20e-2
-      },
-      {
-        "name": "Br(t2taunub)",
-        "value": 10.7e-2,
-        "error": 0.5e-2
-      },
-      {
-        "name": "Br(t2qqbarb)",
-        "value": 66.5e-2,
-        "error": 1.4e-2
-      },
-      "correlation": null
-    },
-    "PDG@b-meson": {
-      "obs@1": {
-        "name": "MB+",
-        "value": 5279.41e-3,
-        "error": 0.07e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(B+)",
-        "value": 1.638e-12,
-        "error": 0.004e-12,
-        "unit": "s"
-      },
-      {
-        "name": "Br(B+2Xcenu)",
-        "value": 10.8e-2,
-        "error": 0.4e-2
-      },
-      {
-        "name": "Br(B+2Xulnu)",
-        "value": 1.65e-3,
-        "error": 0.21e-3
-      },
-      {
-        "name": "Br(B+2D0lnu)",
-        "value": 2.21e-2,
-        "error": 0.06e-2
-      },
-      {
-        "name": "Br(B+2D0taunu)",
-        "value": 7.7e-3,
-        "error": 2.5e-3
-      },
-      {
-        "name": "Br(B+2Dst0lnu)",
-        "value": 5.53e-2,
-        "error": 0.22e-2
-      },
-      {
-        "name": "Br(B+2Dst0taunu)",
-        "value": 1.88e-2,
-        "error": 0.20e-2
-      },
-      {
-        "name": "Br(B+2pi0lnu)",
-        "value": 7.80e-5,
-        "error": 0.27e-5
-      },
-      {
-        "name": "Br(B+2etalnu)",
-        "value": 3.5e-5,
-        "error": 0.4e-5
-      },
-      {
-        "name": "Br(B+2etaprimelnu)",
-        "value": 2.4e-5,
-        "error": 0.7e-5
-      },
-      {
-        "name": "Br(B+2omegalnu)",
-        "value": 1.19e-4,
-        "error": 0.09e-4
-      },
-      {
-        "name": "Br(B+2rho0lnu)",
-        "value": 1.58e-4,
-        "error": 0.11e-4
-      },
-      {
-        "name": "Br(B+2taunu)",
-        "value": 1.09e-4,
-        "error": 0.24e-4
-      },
-      {
-        "name": "Br(B+2Kst+gamma)",
-        "value": 3.92e-5,
-        "error": 0.22e-5
-      },
-      {
-        "name": "Br(B+2rho+gamma)",
-        "value": 9.8e-7,
-        "error": 2.5e-7
-      },
-      {
-        "name": "Br(B+2pi+mumu)",
-        "value": 1.78e-8,
-        "error": 0.23e-8
-      },
-      {
-        "name": "Br(B+2K+ll)",
-        "value": 4.7e-7,
-        "error": 0.5e-7
-      },
-      {
-        "name": "Br(B+2K+ee)",
-        "value": 5.6e-7,
-        "error": 0.6e-7
-      },
-      {
-        "name": "Br(B+2K+mumu)",
-        "value": 4.53e-7,
-        "error": 0.35e-7
-      },
-      {
-        "name": "Br(B+2Kst+ll)",
-        "value": 1.01e-6,
-        "error": 0.11e-6
-      },
-      {
-        "name": "Br(B+2Kst+ee)",
-        "value": 1.55e-6,
-        "error_up": 0.40e-6,
-        "error_down": 0.31e-6
-      },
-      {
-        "name": "Br(B+2Kst+mumu)",
-        "value": 9.6e-7,
-        "error": 1.0e-7
-      },
-      {
-        "name": "MB0",
-        "value": 5279.72e-3,
-        "error": 0.08e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(B0)",
-        "value": 1.517e-12,
-        "error": 0.004e-12,
-        "unit": "s"
-      },
-      {
-        "name": "DeltaMd",
-        "value": 0.5069,
-        "error": 0.0019,
-        "unit": "ps-1"
-      },
-      {
-        "name": "Br(B02Xcenu)",
-        "value": 10.1e-2,
-        "error": 0.4e-2
-      },
-      {
-        "name": "Br(B02Xulnu)",
-        "value": 1.51e-3,
-        "error": 0.19e-3
-      },
-      {
-        "name": "Br(B02D+lnu)",
-        "value": 2.12e-2,
-        "error": 0.06e-2
-      },
-      {
-        "name": "Br(B02D+taunu)",
-        "value": 9.9e-3,
-        "error": 2.1e-3
-      },
-      {
-        "name": "Br(B02Dst+lnu)",
-        "value": 4.90e-2,
-        "error": 0.12e-2
-      },
-      {
-        "name": "Br(B02Dst+taunu)",
-        "value": 1.45e-2,
-        "error": 0.10e-2
-      },
-      {
-        "name": "Br(B02rho+lnu)",
-        "value": 2.94e-4,
-        "error": 0.21e-4
-      },
-      {
-        "name": "Br(B02pi+lnu)",
-        "value": 1.50e-4,
-        "error": 0.06e-4
-      },
-      {
-        "name": "Br(B02Kst0gamma)",
-        "value": 4.18e-5,
-        "error": 0.25e-5
-      },
-      {
-        "name": "Br(B02rho0gamma)",
-        "value": 8.6e-7,
-        "error": 1.5e-7
-      },
-      {
-        "name": "Br(B02omegagamma)",
-        "value": 4.4e-7,
-        "error_up": 1.8e-7,
-        "error_down": 1.6e-7
-      },
-      {
-        "name": "Br(B02K0ll)",
-        "value": 3.3e-7,
-        "error": 0.6e-7
-      },
-      {
-        "name": "Br(B02K0ee)",
-        "value": 2.5e-7,
-        "error_up": 1.1e-7,
-        "error_down": 0.9e-7
-      },
-      {
-        "name": "Br(B02K0mumu)",
-        "value": 3.39e-7,
-        "error": 0.35e-7
-      },
-      {
-        "name": "Br(B02Kst0ll)",
-        "value": 9.9e-7,
-        "error_up": 1.2e-7,
-        "error_down": 1.1e-7
-      },
-      {
-        "name": "Br(B02Kst0ee)",
-        "value": 1.03e-6,
-        "error_up": 0.19e-6,
-        "error_down": 0.17e-6
-      },
-      {
-        "name": "Br(B02Kst0mumu)",
-        "value": 9.4e-7,
-        "error": 0.5e-7
-      },
-      {
-        "name": "MBs0",
-        "value": 5366.93e-3,
-        "error": 0.10e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(Bs0)",
-        "value": 1.520e-12,
-        "error": 0.005e-12,
-        "unit": "s"
-      },
-      {
-        "name": "DeltaMs",
-        "value": 17.765,
-        "error": 0.006,
-        "unit": "ps-1"
-      },
-      {
-        "name": "Br(Bs02Ds+munu)",
-        "value": 2.31e-2,
-        "error": 0.21e-2
-      },
-      {
-        "name": "Br(Bs02Dsts+munu)",
-        "value": 5.2e-2,
-        "error": 0.5e-2
-      },
-      {
-        "name": "Br(Bs02K+munu)",
-        "value": 1.06e-4,
-        "error": 0.09e-4
-      },
-      {
-        "name": "Br(Bs02phigamma)",
-        "value": 3.4e-5,
-        "error": 0.4e-5
-      },
-      {
-        "name": "Br(Bs02mumu)",
-        "value": 3.34e-9,
-        "error": 0.27e-9
-      },
-      {
-        "name": "Br(Bs02Kst0mumu)",
-        "value": 2.9e-8,
-        "error": 1.1e-8
-      },
-      {
-        "name": "Br(Bs02phimumu)",
-        "value": 8.4e-7,
-        "error": 0.4e-7
-      },
-      {
-        "name": "MBc",
-        "value": 6274.47e-3,
-        "error": 0.32e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(Bc)",
-        "value": 0.510e-12,
-        "error": 0.009e-12,
-        "unit": "s"
-      },
-      "correlation": null
-    },
-    "PDG@baryon": {
-      "obs@1": {
-        "name": "Mp",
-        "value": 938.27208816e-3,
-        "error": 0.00000029e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Mn",
-        "value": 939.5654205e-3,
-        "error": 0.0000005e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MLambda",
-        "value": 1115.683e-3,
-        "error": 0.006e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MLambdac",
-        "value": 2286.46e-3,
-        "error": 0.14e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "MLambdab",
-        "value": 5619.60e-3,
-        "error": 0.17e-3,
-        "unit": "GeV"
-      },
-      {
-        "name": "Tau(Lambdab)",
-        "value": 1.471e-12,
-        "error": 0.009e-12,
-        "unit": "s"
-      },
-      {
-        "name": "Br(Lambdab2Lambdaclnu)",
-        "value": 6.2e-2,
-        "error_up": 1.4e-2,
-        "error_down": 1.3e-2
-      },
-      {
-        "name": "Br(Lambdab2Lambdactaunu)",
-        "value": 1.9e-2,
-        "error": 0.5e-2
-      },
-      {
-        "name": "Br(Lambdab2pmunu)",
-        "value": 4.1e-4,
-        "error": 1.0e-4
-      },
-      {
-        "name": "Br(Lambdab2Lambdamumu)",
-        "value": 1.08e-6,
-        "error": 0.28e-6
-      },
-      {
-        "name": "Br(Lambdab2Lambdagamma)",
-        "value": 7.1e-6,
-        "error": 1.7e-6
-      },
-      "correlation": null
+    "inspire-hep": "ParticleDataGroup:2024cfk",
+    "author": "Navas, S. and others",
+    "collaboration": "Particle Data Group",
+    "title": "{Review of particle physics}",
+    "year": "2024",
+    "data": {
+        "PDG@inputs": {
+            "obs@1": {
+                "name": "GF",
+                "latex": "$G_F$",
+                "value": 1.1663788e-05,
+                "tot_err_up": 6e-12,
+                "tot_err_down": 6e-12,
+                "unit": "GeV-2"
+            },
+            "obs@2": {
+                "name": "alphas(MZ)",
+                "latex": "$\\alpha_s(M_Z)$",
+                "value": 0.118,
+                "tot_err_up": 0.0009,
+                "tot_err_down": 0.0009
+            },
+            "obs@3": {
+                "name": "Mpi+",
+                "latex": "$M_{\\pi^+}$",
+                "value": 0.13957039,
+                "tot_err_up": 1.8e-07,
+                "tot_err_down": 1.8e-07,
+                "unit": "GeV"
+            },
+            "obs@4": {
+                "name": "Mpi0",
+                "latex": "$M_{\\pi^0}$",
+                "value": 0.1349768,
+                "tot_err_up": 5e-07,
+                "tot_err_down": 5e-07,
+                "unit": "GeV"
+            },
+            "obs@5": {
+                "name": "Meta",
+                "latex": "$M_\\eta$",
+                "value": 0.547862,
+                "tot_err_up": 1.7e-05,
+                "tot_err_down": 1.7e-05,
+                "unit": "GeV"
+            },
+            "obs@6": {
+                "name": "Mrho0",
+                "latex": "$M_{\\rho^0}$",
+                "value": 0.77526,
+                "tot_err_up": 0.00023,
+                "tot_err_down": 0.00023,
+                "unit": "GeV"
+            },
+            "obs@7": {
+                "name": "Mrho+",
+                "latex": "$M_{\\rho^+}$",
+                "value": 0.77526,
+                "tot_err_up": 0.00023,
+                "tot_err_down": 0.00023,
+                "unit": "GeV"
+            },
+            "obs@8": {
+                "name": "Momega",
+                "latex": "$M_\\omega$",
+                "value": 0.78266,
+                "tot_err_up": 0.00013,
+                "tot_err_down": 0.00013,
+                "unit": "GeV"
+            },
+            "obs@9": {
+                "name": "Metaprime",
+                "latex": "$M_{\\eta^\\prime}$",
+                "value": 0.95778,
+                "tot_err_up": 6e-05,
+                "tot_err_down": 6e-05,
+                "unit": "GeV"
+            },
+            "obs@10": {
+                "name": "Mphi",
+                "value": 1.019461,
+                "error": 1.6e-05,
+                "unit": "GeV"
+            },
+            "obs@11": {
+                "name": "MK+",
+                "value": 0.493677,
+                "error": 1.5e-05,
+                "unit": "GeV"
+            },
+            "obs@12": {
+                "name": "MK0",
+                "value": 0.497611,
+                "error": 1.3e-05,
+                "unit": "GeV"
+            },
+            "obs@13": {
+                "name": "MKst",
+                "value": 0.89167,
+                "error": 0.00026,
+                "unit": "GeV"
+            },
+            "obs@14": {
+                "name": "MD+",
+                "value": 1.86966,
+                "error": 5e-05,
+                "unit": "GeV"
+            },
+            "obs@15": {
+                "name": "MD0",
+                "value": 1.86484,
+                "error": 5e-05,
+                "unit": "GeV"
+            },
+            "obs@16": {
+                "name": "MDst0",
+                "value": 2.00685,
+                "error": 5e-05,
+                "unit": "GeV"
+            },
+            "obs@17": {
+                "name": "MDst+",
+                "value": 2.01026,
+                "error": 5e-05,
+                "unit": "GeV"
+            },
+            "obs@18": {
+                "name": "MDs+",
+                "value": 1.96835,
+                "error": 7e-05,
+                "unit": "GeV"
+            },
+            "obs@19": {
+                "name": "MDsts+",
+                "value": 2.1122,
+                "error": 0.0004,
+                "unit": "GeV"
+            },
+            "obs@20": {
+                "name": "MJ/psi",
+                "value": 3.0969,
+                "error": 6e-06,
+                "unit": "GeV"
+            },
+            "obs@21": {
+                "name": "|Vub|",
+                "value": 0.00382,
+                "error": 0.0002
+            },
+            "obs@22": {
+                "name": "|Vcb|",
+                "value": 0.0411,
+                "error": 0.0012
+            },
+            "obs@23": {
+                "name": "lambda@global",
+                "value": 0.22501,
+                "error": 0.00068
+            },
+            "obs@24": {
+                "name": "A@global",
+                "value": 0.826,
+                "error_up": 0.016,
+                "error_down": 0.015
+            },
+            "obs@25": {
+                "name": "rhobar@global",
+                "value": 0.1591,
+                "error": 0.0094
+            },
+            "obs@26": {
+                "name": "etabar@global",
+                "value": 0.3523,
+                "error_up": 0.0073,
+                "error_down": 0.0071
+            },
+            "correlation": null
+        },
+        "PDG@W": {
+            "obs@1": {
+                "name": "MW",
+                "value": 80.3692,
+                "error": 0.0133,
+                "unit": "GeV"
+            },
+            "obs@27": {
+                "name": "Br(W2lnu)",
+                "value": 0.1086,
+                "error": 0.0009
+            },
+            "obs@28": {
+                "name": "Br(W2enu)",
+                "value": 0.1071,
+                "error": 0.0016
+            },
+            "obs@29": {
+                "name": "Br(W2munu)",
+                "value": 0.1063,
+                "error": 0.0015
+            },
+            "obs@30": {
+                "name": "Br(W2taunu)",
+                "value": 0.1138,
+                "error": 0.0021
+            },
+            "correlation": null
+        },
+        "PDG@Z": {
+            "obs@1": {
+                "name": "MZ",
+                "value": 91.188,
+                "error": 0.002,
+                "unit": "GeV"
+            },
+            "obs@31": {
+                "name": "GammaZ",
+                "value": 2.4955,
+                "error": 0.0023
+            },
+            "obs@32": {
+                "name": "Ae",
+                "value": 0.1515,
+                "error": 0.0019
+            },
+            "obs@33": {
+                "name": "Amu",
+                "value": 0.142,
+                "error": 0.015
+            },
+            "obs@34": {
+                "name": "Atau",
+                "value": 0.143,
+                "error": 0.004
+            },
+            "obs@35": {
+                "name": "As",
+                "value": 0.9,
+                "error": 0.09
+            },
+            "obs@36": {
+                "name": "Ac",
+                "value": 0.67,
+                "error": 0.027
+            },
+            "obs@37": {
+                "name": "Ab",
+                "value": 0.923,
+                "error": 0.02
+            },
+            "obs@38": {
+                "name": "AFB(0l)",
+                "value": 0.0171,
+                "error": 0.001
+            },
+            "obs@39": {
+                "name": "AFB(0u)",
+                "value": 0.04,
+                "error": 0.07
+            },
+            "obs@40": {
+                "name": "AFB(0s)",
+                "value": 0.098,
+                "error": 0.011
+            },
+            "obs@41": {
+                "name": "AFB(0c)",
+                "value": 0.0707,
+                "error": 0.0035
+            },
+            "obs@42": {
+                "name": "AFB(0b)",
+                "value": 0.0992,
+                "error": 0.0016
+            },
+            "obs@43": {
+                "name": "Br(Z2ee)",
+                "value": 0.033632,
+                "error": 4.2e-05
+            },
+            "obs@44": {
+                "name": "Br(Z2mumu)",
+                "value": 0.033662,
+                "error": 6.6e-05
+            },
+            "obs@45": {
+                "name": "Br(Z2tautau)",
+                "value": 0.033696,
+                "error": 8.3e-05
+            },
+            "obs@46": {
+                "name": "Br(Z2ll)",
+                "value": 0.033658,
+                "error": 2.3e-05
+            },
+            "obs@47": {
+                "name": "Br(Z2invisible)",
+                "value": 0.2,
+                "error": 0.00055
+            },
+            "obs@48": {
+                "name": "Br(Z2hadrons)",
+                "value": 0.69911,
+                "error": 0.00056
+            },
+            "correlation": null
+        },
+        "PDG@Higgs": {
+            "obs@1": {
+                "name": "Mh",
+                "value": 125.2,
+                "error": 0.11,
+                "unit": "GeV"
+            },
+            "obs@49": {
+                "name": "Gammah",
+                "value": 0.0037,
+                "error_up": 0.0019,
+                "error_down": 0.0014,
+                "unit": "GeV"
+            },
+            "obs@50": {
+                "name": "Br(h2WWst)",
+                "value": 0.257,
+                "error": 0.025
+            },
+            "obs@51": {
+                "name": "Br(h2ZZst)",
+                "value": 0.028,
+                "error": 0.003
+            },
+            "obs@52": {
+                "name": "Br(h2gammagamma)",
+                "value": 0.0025,
+                "error": 0.0002
+            },
+            "obs@53": {
+                "name": "Br(h2bbbar)",
+                "value": 0.53,
+                "error": 0.08
+            },
+            "obs@54": {
+                "name": "Br(h2mumu)",
+                "value": 0.00026,
+                "error": 0.00013
+            },
+            "obs@55": {
+                "name": "Br(h2tautau)",
+                "value": 0.06,
+                "error_up": 0.008,
+                "error_down": 0.007
+            },
+            "obs@56": {
+                "name": "Br(h2Zgamma)",
+                "value": 0.0034,
+                "error": 0.0011
+            },
+            "correlation": null
+        },
+        "PDG@lepton": {
+            "obs@1": {
+                "name": "Me",
+                "value": 0.000510999,
+                "error": 0.0,
+                "unit": "GeV"
+            },
+            "obs@57": {
+                "name": "Mmu",
+                "value": 0.1056583755,
+                "error": 2.3e-09,
+                "unit": "GeV"
+            },
+            "obs@58": {
+                "name": "Tau(mu)",
+                "value": 2.1969811e-06,
+                "error": 2.2e-12,
+                "unit": "s"
+            },
+            "obs@59": {
+                "name": "Mtau",
+                "value": 1.77693,
+                "error": 9e-05,
+                "unit": "GeV"
+            },
+            "obs@60": {
+                "name": "Tau(tau)",
+                "value": 2.903e-13,
+                "error": 5e-16,
+                "unit": "s"
+            },
+            "obs@61": {
+                "name": "Br(tau2mununu)",
+                "value": 0.1739,
+                "error": 0.0004
+            },
+            "obs@62": {
+                "name": "Br(tau2enunu)",
+                "value": 0.1782,
+                "error": 0.0004
+            },
+            "correlation": null
+        },
+        "PDG@quark": {
+            "obs@1": {
+                "name": "mu",
+                "value": 0.00216,
+                "error": 7e-05,
+                "unit": "GeV"
+            },
+            "obs@63": {
+                "name": "md",
+                "value": 0.0047,
+                "error": 7e-05,
+                "unit": "GeV"
+            },
+            "obs@64": {
+                "name": "ms",
+                "value": 0.0935,
+                "error": 0.0008,
+                "unit": "GeV"
+            },
+            "obs@65": {
+                "name": "mc",
+                "value": 1.273,
+                "error": 0.0046,
+                "unit": "GeV"
+            },
+            "obs@66": {
+                "name": "mb",
+                "value": 4.183,
+                "error": 0.007,
+                "unit": "GeV"
+            },
+            "obs@67": {
+                "name": "Mt",
+                "value": 172.57,
+                "error": 0.29,
+                "unit": "GeV"
+            },
+            "obs@68": {
+                "name": "Gammat",
+                "value": 1.42,
+                "error_up": 0.19,
+                "error_down": 0.15,
+                "unit": "GeV"
+            },
+            "obs@69": {
+                "name": "Br(t2enub)",
+                "value": 0.111,
+                "error": 0.003
+            },
+            "obs@70": {
+                "name": "Br(t2munub)",
+                "value": 0.114,
+                "error": 0.002
+            },
+            "obs@71": {
+                "name": "Br(t2taunub)",
+                "value": 0.107,
+                "error": 0.005
+            },
+            "obs@72": {
+                "name": "Br(t2qqbarb)",
+                "value": 0.665,
+                "error": 0.014
+            },
+            "correlation": null
+        },
+        "PDG@b-meson": {
+            "obs@1": {
+                "name": "MB+",
+                "value": 5.27941,
+                "error": 7e-05,
+                "unit": "GeV"
+            },
+            "obs@73": {
+                "name": "Tau(B+)",
+                "value": 1.638e-12,
+                "error": 4e-15,
+                "unit": "s"
+            },
+            "obs@74": {
+                "name": "Br(B+2Xcenu)",
+                "value": 0.108,
+                "error": 0.004
+            },
+            "obs@75": {
+                "name": "Br(B+2Xulnu)",
+                "value": 0.00165,
+                "error": 0.00021
+            },
+            "obs@76": {
+                "name": "Br(B+2D0lnu)",
+                "value": 0.0221,
+                "error": 0.0006
+            },
+            "obs@77": {
+                "name": "Br(B+2D0taunu)",
+                "value": 0.0077,
+                "error": 0.0025
+            },
+            "obs@78": {
+                "name": "Br(B+2Dst0lnu)",
+                "value": 0.0553,
+                "error": 0.0022
+            },
+            "obs@79": {
+                "name": "Br(B+2Dst0taunu)",
+                "value": 0.0188,
+                "error": 0.002
+            },
+            "obs@80": {
+                "name": "Br(B+2pi0lnu)",
+                "value": 7.8e-05,
+                "error": 2.7e-06
+            },
+            "obs@81": {
+                "name": "Br(B+2etalnu)",
+                "value": 3.5e-05,
+                "error": 4e-06
+            },
+            "obs@82": {
+                "name": "Br(B+2etaprimelnu)",
+                "value": 2.4e-05,
+                "error": 7e-06
+            },
+            "obs@83": {
+                "name": "Br(B+2omegalnu)",
+                "value": 0.000119,
+                "error": 9e-06
+            },
+            "obs@84": {
+                "name": "Br(B+2rho0lnu)",
+                "value": 0.000158,
+                "error": 1.1e-05
+            },
+            "obs@85": {
+                "name": "Br(B+2taunu)",
+                "value": 0.000109,
+                "error": 2.4e-05
+            },
+            "obs@86": {
+                "name": "Br(B+2Kst+gamma)",
+                "value": 3.92e-05,
+                "error": 2.2e-06
+            },
+            "obs@87": {
+                "name": "Br(B+2rho+gamma)",
+                "value": 9.8e-07,
+                "error": 2.5e-07
+            },
+            "obs@88": {
+                "name": "Br(B+2pi+mumu)",
+                "value": 1.78e-08,
+                "error": 2.3e-09
+            },
+            "obs@89": {
+                "name": "Br(B+2K+ll)",
+                "value": 4.7e-07,
+                "error": 5e-08
+            },
+            "obs@90": {
+                "name": "Br(B+2K+ee)",
+                "value": 5.6e-07,
+                "error": 6e-08
+            },
+            "obs@91": {
+                "name": "Br(B+2K+mumu)",
+                "value": 4.53e-07,
+                "error": 3.5e-08
+            },
+            "obs@92": {
+                "name": "Br(B+2Kst+ll)",
+                "value": 1.01e-06,
+                "error": 1.1e-07
+            },
+            "obs@93": {
+                "name": "Br(B+2Kst+ee)",
+                "value": 1.55e-06,
+                "error_up": 4e-07,
+                "error_down": 3.1e-07
+            },
+            "obs@94": {
+                "name": "Br(B+2Kst+mumu)",
+                "value": 9.6e-07,
+                "error": 1e-07
+            },
+            "obs@95": {
+                "name": "MB0",
+                "value": 5.27972,
+                "error": 8e-05,
+                "unit": "GeV"
+            },
+            "obs@96": {
+                "name": "Tau(B0)",
+                "value": 1.517e-12,
+                "error": 4e-15,
+                "unit": "s"
+            },
+            "obs@97": {
+                "name": "DeltaMd",
+                "value": 0.5069,
+                "error": 0.0019,
+                "unit": "ps-1"
+            },
+            "obs@98": {
+                "name": "Br(B02Xcenu)",
+                "value": 0.101,
+                "error": 0.004
+            },
+            "obs@99": {
+                "name": "Br(B02Xulnu)",
+                "value": 0.00151,
+                "error": 0.00019
+            },
+            "obs@100": {
+                "name": "Br(B02D+lnu)",
+                "value": 0.0212,
+                "error": 0.0006
+            },
+            "obs@101": {
+                "name": "Br(B02D+taunu)",
+                "value": 0.0099,
+                "error": 0.0021
+            },
+            "obs@102": {
+                "name": "Br(B02Dst+lnu)",
+                "value": 0.049,
+                "error": 0.0012
+            },
+            "obs@103": {
+                "name": "Br(B02Dst+taunu)",
+                "value": 0.0145,
+                "error": 0.001
+            },
+            "obs@104": {
+                "name": "Br(B02rho+lnu)",
+                "value": 0.000294,
+                "error": 2.1e-05
+            },
+            "obs@105": {
+                "name": "Br(B02pi+lnu)",
+                "value": 0.00015,
+                "error": 6e-06
+            },
+            "obs@106": {
+                "name": "Br(B02Kst0gamma)",
+                "value": 4.18e-05,
+                "error": 2.5e-06
+            },
+            "obs@107": {
+                "name": "Br(B02rho0gamma)",
+                "value": 8.6e-07,
+                "error": 1.5e-07
+            },
+            "obs@108": {
+                "name": "Br(B02omegagamma)",
+                "value": 4.4e-07,
+                "error_up": 1.8e-07,
+                "error_down": 1.6e-07
+            },
+            "obs@109": {
+                "name": "Br(B02K0ll)",
+                "value": 3.3e-07,
+                "error": 6e-08
+            },
+            "obs@110": {
+                "name": "Br(B02K0ee)",
+                "value": 2.5e-07,
+                "error_up": 1.1e-07,
+                "error_down": 9e-08
+            },
+            "obs@111": {
+                "name": "Br(B02K0mumu)",
+                "value": 3.39e-07,
+                "error": 3.5e-08
+            },
+            "obs@112": {
+                "name": "Br(B02Kst0ll)",
+                "value": 9.9e-07,
+                "error_up": 1.2e-07,
+                "error_down": 1.1e-07
+            },
+            "obs@113": {
+                "name": "Br(B02Kst0ee)",
+                "value": 1.03e-06,
+                "error_up": 1.9e-07,
+                "error_down": 1.7e-07
+            },
+            "obs@114": {
+                "name": "Br(B02Kst0mumu)",
+                "value": 9.4e-07,
+                "error": 5e-08
+            },
+            "obs@115": {
+                "name": "MBs0",
+                "value": 5.36693,
+                "error": 0.0001,
+                "unit": "GeV"
+            },
+            "obs@116": {
+                "name": "Tau(Bs0)",
+                "value": 1.52e-12,
+                "error": 5e-15,
+                "unit": "s"
+            },
+            "obs@117": {
+                "name": "DeltaMs",
+                "value": 17.765,
+                "error": 0.006,
+                "unit": "ps-1"
+            },
+            "obs@118": {
+                "name": "Br(Bs02Ds+munu)",
+                "value": 0.0231,
+                "error": 0.0021
+            },
+            "obs@119": {
+                "name": "Br(Bs02Dsts+munu)",
+                "value": 0.052,
+                "error": 0.005
+            },
+            "obs@120": {
+                "name": "Br(Bs02K+munu)",
+                "value": 0.000106,
+                "error": 9e-06
+            },
+            "obs@121": {
+                "name": "Br(Bs02phigamma)",
+                "value": 3.4e-05,
+                "error": 4e-06
+            },
+            "obs@122": {
+                "name": "Br(Bs02mumu)",
+                "value": 3.34e-09,
+                "error": 2.7e-10
+            },
+            "obs@123": {
+                "name": "Br(Bs02Kst0mumu)",
+                "value": 2.9e-08,
+                "error": 1.1e-08
+            },
+            "obs@124": {
+                "name": "Br(Bs02phimumu)",
+                "value": 8.4e-07,
+                "error": 4e-08
+            },
+            "obs@125": {
+                "name": "MBc",
+                "value": 6.27447,
+                "error": 0.00032,
+                "unit": "GeV"
+            },
+            "obs@126": {
+                "name": "Tau(Bc)",
+                "value": 5.1e-13,
+                "error": 9e-15,
+                "unit": "s"
+            },
+            "correlation": null
+        },
+        "PDG@baryon": {
+            "obs@1": {
+                "name": "Mp",
+                "value": 0.93827208816,
+                "error": 2.9e-10,
+                "unit": "GeV"
+            },
+            "obs@127": {
+                "name": "Mn",
+                "value": 0.9395654205,
+                "error": 5e-10,
+                "unit": "GeV"
+            },
+            "obs@128": {
+                "name": "MLambda",
+                "value": 1.115683,
+                "error": 6e-06,
+                "unit": "GeV"
+            },
+            "obs@129": {
+                "name": "MLambdac",
+                "value": 2.28646,
+                "error": 0.00014,
+                "unit": "GeV"
+            },
+            "obs@130": {
+                "name": "MLambdab",
+                "value": 5.6196,
+                "error": 0.00017,
+                "unit": "GeV"
+            },
+            "obs@131": {
+                "name": "Tau(Lambdab)",
+                "value": 1.471e-12,
+                "error": 9e-15,
+                "unit": "s"
+            },
+            "obs@132": {
+                "name": "Br(Lambdab2Lambdaclnu)",
+                "value": 0.062,
+                "error_up": 0.014,
+                "error_down": 0.013
+            },
+            "obs@133": {
+                "name": "Br(Lambdab2Lambdactaunu)",
+                "value": 0.019,
+                "error": 0.005
+            },
+            "obs@134": {
+                "name": "Br(Lambdab2pmunu)",
+                "value": 0.00041,
+                "error": 0.0001
+            },
+            "obs@135": {
+                "name": "Br(Lambdab2Lambdamumu)",
+                "value": 1.08e-06,
+                "error": 2.8e-07
+            },
+            "obs@136": {
+                "name": "Br(Lambdab2Lambdagamma)",
+                "value": 7.1e-06,
+                "error": 1.7e-06
+            },
+            "correlation": null
+        }
     }
-  }
 }
-

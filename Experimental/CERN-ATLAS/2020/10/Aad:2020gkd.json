@@ -1,14 +1,13 @@
 {
     "inspire-hep": "1821688",
-    "author": "Aad, Georges and others",
+    "author": "Aad, G. and others",
     "collaboration": "ATLAS",
     "title": "Search for charged-lepton-flavour violation in Z-boson decays with the ATLAS detector",
-    "arxiv": "[2010.02566v2](https://arxiv.org/pdf/2010.02566.pdf)",
-    "year": "2020",
+    "arxiv": "[hep-ex/2010.02566v2](https://arxiv.org/pdf/2010.02566.pdf)",
     "time": "2020-10-06",
     "abstract": "A search for Z-boson decays into a tau lepton and another lepton of different flavour using 139 fb-1 at sqrt(s)=13 TeV and 20.3 fb-1 at sqrt(s)=8 TeV. Upper limits at 95% CL for the branching fractions: B(Z->e tau) < 8.1e-6, B(Z->mu tau) < 9.5e-6 (combined Run 1+Run 2).",
     "pdf": "https://arxiv.org/pdf/2010.02566.pdf",
-    "transition-mode": "z-lfv",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {

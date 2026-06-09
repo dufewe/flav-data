@@ -3,10 +3,11 @@
     "author": "Abdesselam, A. and others",
     "collaboration": "Belle",
     "title": "Precise determination of the CKM matrix element $\\left| V_{cb}\\right|$ with $\\bar B^0 \\to D^{*\\,+} \\, \\ell^- \\, \\bar \\nu_\\ell$ decays with hadronic tagging at Belle",
-    "arxiv": "[1702.01521v1](https://arxiv.org/pdf/1702.01521)",
+    "arxiv": "[hep-ex/1702.01521v1](https://arxiv.org/pdf/1702.01521)",
     "time": "2017.02.06",
     "abstract": "The precise determination of the CKM matrix element $\\left| V_{cb}\\right|$ is important for carrying out tests of the flavour sector of the Standard Model. We present a determination of $|V_{cb}|$ using a data sample of $772 \\times 10^6 B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector.",
     "pdf": "https://arxiv.org/pdf/1702.01521",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -36,16 +37,6 @@
             }
         },
         {
-            "obs@1": {
-                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
-                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "1.32",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.11",
-                "type@1_err_down": "0.11",
-                "w_min": "1.00",
-                "w_max": "1.05"
-            },
             "obs@2": {
                 "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
                 "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
@@ -136,19 +127,19 @@
                 "w_min": "1.45",
                 "w_max": "1.50"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdw(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/dw(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.32",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.11",
+                "w_min": "1.00",
+                "w_max": "1.05",
+                "unit": "1e-15 GeV"
+            }
         },
         {
-            "obs@1": {
-                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
-                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "2.80",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.20",
-                "type@1_err_down": "0.20",
-                "cos_min": "-1.00",
-                "cos_max": "-0.80"
-            },
             "obs@2": {
                 "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
                 "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
@@ -239,19 +230,19 @@
                 "cos_min": "0.80",
                 "cos_max": "1.00"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdcosthetav(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_V(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "2.80",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.20",
+                "type@1_err_down": "0.20",
+                "cos_min": "-1.00",
+                "cos_max": "-0.80",
+                "unit": "1e-15 GeV"
+            }
         },
         {
-            "obs@1": {
-                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
-                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "0.73",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.07",
-                "type@1_err_down": "0.07",
-                "cos_min": "-1.00",
-                "cos_max": "-0.80"
-            },
             "obs@2": {
                 "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
                 "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
@@ -342,19 +333,19 @@
                 "cos_min": "0.80",
                 "cos_max": "1.00"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdcosthetall(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\cos\\theta_\\ell(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "0.73",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.07",
+                "type@1_err_down": "0.07",
+                "cos_min": "-1.00",
+                "cos_max": "-0.80",
+                "unit": "1e-15 GeV"
+            }
         },
         {
-            "obs@1": {
-                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
-                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
-                "value": "1.86",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.16",
-                "type@1_err_down": "0.16",
-                "chi_min": "0.00",
-                "chi_max": "0.314"
-            },
             "obs@2": {
                 "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
                 "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
@@ -445,7 +436,17 @@
                 "chi_min": "2.827",
                 "chi_max": "3.142"
             },
-            "unit": "1e-15 GeV"
+            "obs@1": {
+                "name": "dGdchi(B0Bar.2.Dst+.l-.nuBar)",
+                "latex": "$d\\Gamma/d\\chi(\\bar{B}^0 \\to D^{*+} \\ell^- \\bar{\\nu}_\\ell)$",
+                "value": "1.86",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.16",
+                "type@1_err_down": "0.16",
+                "chi_min": "0.00",
+                "chi_max": "0.314",
+                "unit": "1e-15 GeV"
+            }
         },
         {
             "obs@1": {
@@ -455,10 +456,9 @@
                 "type@1_err": "stat",
                 "type@1_err_up": "1.5",
                 "type@1_err_down": "1.5",
-                "note": "CLN unfolded: rho2=1.17 +- 0.15, R1(1)=1.39 +- 0.09, R2(1)=0.91 +- 0.08"
-            },
-            "unit": "1e-3"
+                "note": "CLN unfolded: rho2=1.17 +- 0.15, R1(1)=1.39 +- 0.09, R2(1)=0.91 +- 0.08",
+                "unit": "1e-3"
+            }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

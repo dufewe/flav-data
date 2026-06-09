@@ -7,6 +7,7 @@
     "time": "2012.06.28",
     "abstract": "We study the flavor-changing neutral current (FCNC) decays $B^+ \\\\to K^+\\\\mu^+\\\\mu^-$, $B^0 \\\\to K^{*}(892)^0\\\\mu^+\\\\mu^-$, $B_s^0 \\\\to \\\\phi(1020)\\\\mu^+\\\\mu^-$, $B^0 \\\\to K_S^0\\\\mu^+\\\\mu^-$, $B^+ \\\\to K^{*}(892)^+\\\\mu^+\\\\mu^-$, and $\\\\Lambda_b^0 \\\\to \\\\Lambda\\\\mu^+\\\\mu^-$ in 9.6 fb$^{-1}$ of data collected by the CDF detector. Besides the total branching fraction and the differential branching fraction measurements, we measure the isospin asymmetry $A_I$ between neutral and charged $B$ mesons. We also measure the muon forward-backward asymmetry $A_{FB}$, $K^*$ longitudinal polarization $F_L$, the transverse polarization asymmetry $A_T^{(2)}$, and time-reversal-odd charge-and-parity asymmetry $A_{im}$ from the angular distributions in $B \\\\to K^{(*)}\\\\mu^+\\\\mu^-$ decays, as a function of $q^2 = M_{\\\\mu\\\\mu}^2 c^2$. No deviations from the standard model predictions are observed.",
     "pdf": "https://inspirehep.net/files/4e57b65db46b7d8328b605f50325a876",
+    "transition-mode": "rare decay",
     "data": [
         {
             "obs@1": {
@@ -470,6 +471,5 @@
                 "type@2_err_down": "0.05"
             }
         }
-    ],
-    "transition-mode": "rare decay"
+    ]
 }

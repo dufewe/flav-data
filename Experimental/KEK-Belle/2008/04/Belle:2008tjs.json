@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[Belle:2008tjs](https://inspirehep.net/literature/784045)",
-    "author": "Chen, C. H. and others",
+    "author": "Chen, C.H. and others",
     "collaboration": "Belle",
     "title": "Search for the Rare Decay $B^+ \\to \\pi^+ e^+ e^-$",
-    "arxiv": "[0804.3656v1](https://arxiv.org/pdf/0804.3656)",
+    "arxiv": "[hep-ex/0804.3656v1](https://arxiv.org/pdf/0804.3656)",
     "time": "2008.04.23",
     "abstract": "We report the results of a search for the rare decay $B^+ \\to \\pi^+ e^+ e^-$ in a sample of 657 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider. We find no evidence for the decay and set an upper limit on the branching fraction.",
     "pdf": "https://arxiv.org/pdf/0804.3656",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -22,6 +23,5 @@
                 "unit": "1e-8"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

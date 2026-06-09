@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2025mnp](https://inspirehep.net/literature/3121180)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "First evidence of CP violation in beauty baryon to charmonium decays",
     "arxiv": "[hep-ex/2509.16103v2](https://arxiv.org/pdf/2509.16103)",
     "time": "2025.09.19",
     "abstract": "A study of the difference in the CP asymmetries between $\\Lambda^0_b \\rightarrow J/\\psi p \\pi^-$ and $\\Lambda^0_b \\rightarrow J/\\psi p K^-$ decays, $\\Delta {\\cal A}_{CP}$, is performed using proton-proton collision data collected by the LHCb experiment in the years 2015--2018, corresponding to an integrated luminosity of $6 \\,{\\rm fb}^{-1}$. This quantity is measured to be $\\Delta {\\cal A}_{CP} = (4.03 \\pm 1.18 \\pm 0.23)\\%$, where the first uncertainty is statistical and the second is systematic. When combined with the previous LHCb result, a value of $\\Delta {\\cal A}_{CP} = (4.31 \\pm 1.06 \\pm 0.28)\\%$ is obtained, corresponding to a significance of $3.9\\sigma$ against the CP symmetry hypothesis. Studies of triple-product asymmetries, which provide an additional probe of CP violation, show no significant deviation from CP symmetry.",
     "pdf": "https://arxiv.org/pdf/2509.16103",
+    "transition-mode": "non-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -44,6 +45,5 @@
                 "type@2_err_down": "0.21e-2"
             }
         }
-    ],
-    "transition-mode": "non-leptonic decay"
+    ]
 }

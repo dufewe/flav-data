@@ -3,10 +3,11 @@
     "author": "Sato, Y. and others",
     "collaboration": "Belle",
     "title": "Measurement of the Lepton Forward-Backward Asymmetry in Inclusive $B \\rightarrow X_s \\ell^+ \\ell^-$ Decays",
-    "arxiv": "[1402.7134v2](https://arxiv.org/pdf/1402.7134)",
+    "arxiv": "[hep-ex/1402.7134v2](https://arxiv.org/pdf/1402.7134)",
     "time": "2014.02.28",
     "abstract": "We report the first measurement of the lepton forward-backward asymmetry $A_{FB}$ as a function of the squared four-momentum of the dilepton system, $q^2$, for the electroweak penguin process $B \\rightarrow X_s \\ell^+ \\ell^-$ with the sum of exclusive hadronic final states containing a light kaon and at most two pions and a kaon. The data sample corresponds to an integrated luminosity of 772 fb$^{-1}$ containing $772 \\times 10^6 B \\bar{B}$ pairs obtained at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+ e^-$ collider.",
     "pdf": "https://arxiv.org/pdf/1402.7134",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -75,6 +76,5 @@
                 "q2max": "11.8"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

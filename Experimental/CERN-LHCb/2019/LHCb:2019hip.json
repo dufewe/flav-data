@@ -1,66 +1,75 @@
 {
-    "inspirehep": "LHCb:2019hip",
-    "author": "Aaij, Roel and others",
+    "inspire-hep": "LHCb:2019hip",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for lepton-universality violation in $B^+\\to K^+\\ell^+\\ell^-$ decays",
-    "arxiv": "hep-ex/1903.09252",
-    "year": "2019",
+    "arxiv": "[hep-ex/1903.09252](https://arxiv.org/pdf/1903.09252)",
+    "time": "2019.01.01",
     "abstract": "a measurement of the ratio of branching fractions of the decays $B^+ \\to K^+ \\mu^+ \\mu^−$ and $B^+ \\to K^+ e^+ e^−$ with the proton-proton collision data corresponding to an integrated luminosity of 5.0 fb$^{−1}$ recorded at centre-of-mass energies of 7, 8 and 13 TeV",
     "pdf": "https://arxiv.org/pdf/1903.09252",
+    "transition-mode": "leptonic decay",
     "data": [
         {
+            "tot_correlation": null,
             "obs@1": {
                 "name": "RK+[mu/e]",
                 "latex": "$R_{K^+}^{\\mu/e}$",
-                "value": 0.846,
-                "sta_err_up": 0.06,
-                "sta_err_down": 0.054,
-                "sys_err_up": 0.016,
-                "sys_err_down": 0.014,
-                "tot_err_up": null,
-                "tot_err_down": null,
-                "dataset": "run1+run2"
+                "value": "0.846",
+                "tot_err_up": "",
+                "tot_err_down": "",
+                "dataset": "run1+run2",
+                "type@1_err_up": "0.06",
+                "type@1_err_down": "0.054",
+                "type@2_err_up": "0.016",
+                "type@2_err_down": "0.014",
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@2": {
                 "name": "RK+[mu/e]",
                 "latex": "$R_{K^+}^{\\mu/e}$",
-                "value": 0.717,
-                "sta_err_up": 0.083,
-                "sta_err_down": 0.071,
-                "sys_err_up": 0.017,
-                "sys_err_down": 0.016,
-                "tot_err_up": null,
-                "tot_err_down": null,
-                "dataset": "run1"
+                "value": "0.717",
+                "tot_err_up": "",
+                "tot_err_down": "",
+                "dataset": "run1",
+                "type@1_err_up": "0.083",
+                "type@1_err_down": "0.071",
+                "type@2_err_up": "0.017",
+                "type@2_err_down": "0.016",
+                "type@1_err": "stat",
+                "type@2_err": "syst"
             },
             "obs@3": {
                 "name": "RK+[mu/e]",
                 "latex": "$R_{K^+}^{\\mu/e}$",
-                "value": 0.928,
-                "sta_err_up": 0.089,
-                "sta_err_down": 0.076,
-                "sys_err_up": 0.02,
-                "sys_err_down": 0.017,
-                "tot_err_up": null,
-                "tot_err_down": null,
-                "dataset": "run2"
-            },
-            "correlation": null
+                "value": "0.928",
+                "tot_err_up": "",
+                "tot_err_down": "",
+                "dataset": "run2",
+                "type@1_err_up": "0.089",
+                "type@1_err_down": "0.076",
+                "type@2_err_up": "0.02",
+                "type@2_err_down": "0.017",
+                "type@1_err": "stat",
+                "type@2_err": "syst"
+            }
         },
         {
+            "tot_correlation": null,
             "obs@1": {
                 "name": "dBr/dq2(B+2K+ee)",
                 "latex": "$d\\mathcal{B}/dq^2(B^+\\to K^+ e^+ e^-)$",
-                "value": 28.6e-9,
-                "sta_err_up": 2.0e-9,
-                "sta_err_down": 1.7e-9,
-                "sys_err_up": 1.4e-9,
-                "sys_err_down": 1.4e-9,
-                "q2min": 1.1,
-                "q2max": 6.0,
-                "unit": "GeV-2"
-            },
-            "correlation": null
+                "value": "2.86e-08",
+                "q2min": "1.1",
+                "q2max": "6.0",
+                "unit": "GeV-2",
+                "type@1_err_up": "2e-09",
+                "type@1_err_down": "1.7e-09",
+                "type@2_err_up": "1.4e-09",
+                "type@2_err_down": "1.4e-09",
+                "type@1_err": "stat",
+                "type@2_err": "syst"
+            }
         }
     ]
 }

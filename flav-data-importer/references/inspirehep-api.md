@@ -52,7 +52,7 @@ curl -s -H 'Accept: application/json' \
 | **texkeys** | `metadata.texkeys[]` | string[] | BibTeX citation keys. Use the first (collaboration-level) one for filenames. |
 | **titles** | `metadata.titles[]` | object[] | Paper titles in various formats. Prefer entries with `source: "arXiv"` (preserves LaTeX). |
 | **abstracts** | `metadata.abstracts[]` | object[] | Abstracts in various formats. Prefer `source: "arXiv"`. |
-| **authors** | `metadata.authors[].full_name` | string[] | Full author list. Use first author + " and others" for the `author` field. |
+| **authors** | `metadata.authors[].full_name` | string[] | Full author list (form: `"Surname, Full First Name"`). Use first author + " and others" for the `author` field, but **convert to InspireHEP BibTeX format first** (initials only, e.g. `"Aaij, R. and others"`). See the `Test/improve.md` rule 3 + the `_to_bibtex` helper in the code example. |
 | **first_author** | `metadata.first_author` | object | First author with email and affiliation info. |
 | **collaborations** | `metadata.collaborations[].value` | string[] | Collaboration name(s). |
 | **preprint_date** | `metadata.preprint_date` | string | arXiv v1 submission date (YYYY-MM-DD). |
@@ -99,12 +99,38 @@ def get_inspire_info(arxiv_id):
         meta.get('abstracts', [{}])[0].get('value', '')
     )
 
-    # Author
+    # Author — InspireHEP BibTeX format: "Surname, Initials. and others"
+    # (e.g. "Aaij, R. and others"). The `full_name` field from the API
+    # is the **full first name** form ("Aaij, Roel") and must be
+    # converted to initials. For multi-author papers, take the first
+    # author + " and others".
     authors = meta.get('authors', [])
+
+    def _to_bibtex(full_name):
+        """Convert 'Surname, Full First Name' to 'Surname, F.' (initials).
+
+        Pass-through if the given name is already in initials form
+        (e.g. ``"A.M."``, ``"R."``, ``"J.R.R."``) — return as-is.
+        """
+        if ',' not in full_name:
+            return full_name
+        surname, given = full_name.rsplit(',', 1)
+        surname = surname.strip()
+        given = given.strip()
+        if not given:
+            return surname
+        # Initials: take first letter of each whitespace/hyphen-separated part
+        parts = re.split(r'[\s\-]+', given)
+        # Pass through if all parts are already initials (e.g. "A.M.")
+        if all(re.fullmatch(r'([A-Z]\.)+', p) for p in parts if p):
+            return full_name
+        initials = '.'.join(p[0].upper() for p in parts if p) + '.'
+        return f"{surname}, {initials}"
+
     if len(authors) > 1:
-        author_str = f"{authors[0]['full_name']} and others"
+        author_str = f"{_to_bibtex(authors[0]['full_name'])} and others"
     elif authors:
-        author_str = authors[0]['full_name']
+        author_str = _to_bibtex(authors[0]['full_name'])
     else:
         # Fallback: use collaboration name
         collabs = meta.get('collaborations', [])

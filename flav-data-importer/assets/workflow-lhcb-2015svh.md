@@ -38,13 +38,13 @@ curl -s -H 'Accept: application/json' \
 ```
 
 Extract:
-- `texkey`: `"LHCb:2015svh"`
+- `TexKey`: `"LHCb:2015svh"`
 - `recid`: `1409497`
 - `preprint_date`: `"2015-12-14"` → `time: "2015.12.14"`
 - `collaborations`: `[{"value": "LHCb"}]`
 - `titles` (arXiv source): `"Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay"`
 - `abstracts` (arXiv source): `"An angular analysis of the..."`
-- `authors`: 500+ → `author: "Aaij, Roel and others"`
+- `authors`: 500+ → `author: "Aaij, R. and others"` (InspireHEP BibTeX form; convert from `"Aaij, Roel and others"`)
 
 ### From arXiv
 
@@ -100,7 +100,7 @@ Parse the YAML tables and construct the JSON entry:
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",

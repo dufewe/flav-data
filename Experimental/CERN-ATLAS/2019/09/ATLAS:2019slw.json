@@ -1,24 +1,24 @@
 {
     "inspire-hep": "1726182",
-    "author": "Aad, Georges and others",
+    "author": "Aad, G. and others",
     "collaboration": "ATLAS",
     "title": "Combined measurements of Higgs boson production and decay using up to 80 fb-1 of proton-proton collision data at sqrt(s)=13 TeV collected with the ATLAS experiment",
-    "arxiv": "[1909.02845v2](https://arxiv.org/pdf/1909.02845.pdf)",
-    "year": "2019",
+    "arxiv": "[hep-ex/1909.02845v2](https://arxiv.org/pdf/1909.02845.pdf)",
     "time": "2019-09-06",
     "abstract": "Combined measurements of Higgs boson production cross sections and branching fractions using up to 79.8 fb-1 at 13 TeV. The global signal strength is mu = 1.11 +0.09/-0.08. Coupling modifiers: kappa_Z=1.10+/-0.08, kappa_W=1.05+/-0.08, kappa_b=1.06+0.19/-0.18, kappa_t=1.02+0.11/-0.10, kappa_tau=1.07+/-0.15, kappa_mu < 1.53.",
     "pdf": "https://arxiv.org/pdf/1909.02845.pdf",
-    "transition-mode": "higgs-couplings",
+    "transition-mode": "Higgs decay",
     "data": [
         {
             "obs@1": {
                 "name": "mu_H(g.g.2.H.2.f.fbar)",
                 "latex": "$\\mu$",
                 "value": "1.11",
-                "sta_err_up": "0.08",
-                "sta_err_down": "0.09",
                 "tot_err_up": "0.09",
-                "tot_err_down": "0.08"
+                "tot_err_down": "0.08",
+                "type@1_err_up": "0.08",
+                "type@1_err_down": "0.09",
+                "type@1_err": "stat"
             }
         },
         {

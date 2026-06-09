@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[BaBar:2008zui](https://inspirehep.net/literature/795646)",
-    "author": "Aubert, Bernard and others",
+    "author": "Aubert, B. and others",
     "collaboration": "BaBar",
     "title": "Measurements of the Semileptonic Decays $\\bar{B}\\to D\\ell\\bar{\\nu}$ and $\\bar{B}\\to D^{*}\\ell\\bar{\\nu}$ Using a Global Fit to $DX\\ell\\bar{\\nu}$ Final States",
-    "arxiv": "[0809.0828v2](https://arxiv.org/pdf/0809.0828)",
+    "arxiv": "[hep-ex/0809.0828v2](https://arxiv.org/pdf/0809.0828)",
     "time": "2008.09.04",
     "abstract": "Semileptonic $\\bar{B}$ decays to $DX\\ell\\bar{\\nu}$ ($\\ell=e$ or $\\mu$) are selected by reconstructing $D^{0}\\ell$ and $D^{+}\\ell$ combinations from a sample of 230 million $\\Upsilon(4S) \\to B\\bar{B}$ decays recorded with the BaBar detector at the PEP-II $e^{+}e^{-}$ collider at SLAC. A global fit to these samples is used to extract the branching fractions $\\mathcal{B}(B^{-}\\to D^{0}\\ell\\bar{\\nu})$ and $\\mathcal{B}(B^{-}\\to D^{*0}\\ell\\bar{\\nu})$, the form-factor slope parameters $\\rho_{D}^{2}$ and $\\rho_{D^{*}}^{2}$, and the products $\\mathcal{G}(1)|V_{cb}|$ and $\\mathcal{F}(1)|V_{cb}|$.",
     "pdf": "https://arxiv.org/pdf/0809.0828",
+    "transition-mode": "semi-leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -81,7 +82,6 @@
             }
         },
         {
-            "|Vcb| values extracted": "derived",
             "obs@1": {
                 "name": "Vcb(Bbar.2.D.l-.nuBar)",
                 "latex": "$|V_{cb}|(\\bar{B}\\to D\\ell^{-}\\bar{\\nu})$",
@@ -113,6 +113,5 @@
                 "unit": "1e-3"
             }
         }
-    ],
-    "transition-mode": "semi-leptonic decay"
+    ]
 }

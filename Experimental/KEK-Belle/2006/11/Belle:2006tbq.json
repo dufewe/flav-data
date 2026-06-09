@@ -7,6 +7,7 @@
     "time": "2006.11.16",
     "abstract": "We present a search for the decays $B^{+} \\to \\mu^{+} \\nu_{\\mu}$ and $B^{+} \\to e^{+} \\nu_{e}$ in a 253 fb$^{-1}$ data sample collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric energy $e^{+} e^{-}$ collider. We observe no evidence for signal and set 90% confidence level upper limits of $\\mathcal{B}(B^{+} \\to \\mu^{+} \\nu_{\\mu}) < 1.7 \\times 10^{-6}$ and $\\mathcal{B}(B^{+} \\to e^{+} \\nu_{e}) < 9.8 \\times 10^{-7}$.",
     "pdf": "https://arxiv.org/pdf/hep-ex/0611045",
+    "transition-mode": "leptonic decay",
     "data": [
         {
             "obs@1": {
@@ -22,6 +23,5 @@
                 "type@1_level": "90%@CL"
             }
         }
-    ],
-    "transition-mode": "leptonic decay"
+    ]
 }

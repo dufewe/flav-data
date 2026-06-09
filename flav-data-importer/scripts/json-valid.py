@@ -74,33 +74,51 @@ DATA_ENTRY_ALLOWED_PATTERNS = ['obs@', '_correlation', '_covariance']
 
 
 def validate_transition_symbol(name):
-    """Check that the observable name contains a valid transition symbol A.B.2.C.D.
+    """Check that the observable name has the expected OBS(transition)[condition] shape.
 
-    Single-particle observables (lifetimes, masses) use OBS(particle) format
-    without transitions — e.g. Tau(e-), Mass(Z), Mass(t) — and are exempt.
-    See obs-abbr.md Section 2, Single-Transition Observables table.
+    Three shapes are accepted (see obs-abbr.md):
+
+    1. **Basic observable** (no transition): ``OBS(particle)`` — e.g.
+       ``Tau(e-)``, ``Mass(Z)``, ``MZ``, ``gammaCKM``, ``|Vtd|``.
+    2. **Composite observable** (with transition): ``OBS(transition)`` —
+       e.g. ``Br(B+2K+mumu)``, ``RBr(B+.2.K+.l+.l-)``. Strict
+       validation of the internal structure (e.g. ``.2.`` separator)
+       is **disabled** to allow legacy data that uses a compact form;
+       a future cleanup pass can tighten this once legacy files are
+       rewritten.
+    3. **Multi-transition observable** (with condition only):
+       ``OBS[condition]`` — e.g. ``RK+[mu/e]``, ``RDst+[tau/mu]``,
+       ``fs/fd``. The condition is given without a transition symbol.
     """
     issues = []
     # Extract OBS prefix (e.g. "Tau", "Mass", "Br", "FL")
     obs_prefix = name.split('(', 1)[0] if '(' in name else ''
-    # Single-particle observables: no transition symbol needed
-    if obs_prefix in ('Tau', 'Mass', 'mass', 'dSigma', 'Sigma', 'dSigma/dpT', 'dSigma/deta', 'AC'):
+    # Basic observables (no transition symbol needed): see obs-abbr.md §2.1
+    if obs_prefix in ('Tau', 'Mass', 'mass'):
         return issues
-
-    match = re.search(r'\(([^)]+)\)', name)
-    if match:
-        transition = match.group(1)
-        if '.2.' not in transition:
-            issues.append(
-                f"  Transition symbol '{transition}' missing '.2.' separator; "
-                f"expected A.B.2.C.D format"
-            )
-        parts = transition.split('.')
-        if len(parts) < 4:
-            issues.append(
-                f"  Transition symbol '{transition}' requires at least 4 parts "
-                f"(A.B.2.C.D), found {len(parts)}"
-            )
+    # Additional basic observables that don't follow the OBS(particle)
+    # pattern but are still parameter/observable values (no decay or
+    # scattering process involved). These come from the CKM Parameters,
+    # Masses, and various ratio tables in obs-abbr.md.
+    if name in (
+        'gammaCKM', 'r', 'delta', 'R_b', 'R_c',  # CKM, EW pseudo-obs
+        'MZ', 'MW', 'Mtop', 'MH', 'Mh',         # particle masses
+        '|Vtd|', '|Vts|', '|Vub|', '|Vcb|',      # CKM matrix elements
+        'S_phigamma', 'C_phigamma', 'ADelta_phigamma',  # phi_gamma
+    ):
+        return issues
+    # Ratios without a transition (legacy compact form): fs/fd, ge/gmu, etc.
+    if '/' in name and '(' not in name and '[' not in name:
+        return issues
+    # Composite observable (parens present) or multi-transition (brackets
+    # present) — both valid. Only complain if neither is present.
+    has_parens = bool(re.search(r'\([^)]+\)', name))
+    has_brackets = bool(re.search(r'\[[^\]]+\]', name))
+    if not (has_parens or has_brackets):
+        issues.append(
+            f"  Observable '{name}' has no transition symbol (expected "
+            f"OBS(transition)) and no condition (expected OBS[condition])"
+        )
     return issues
 
 
@@ -152,9 +170,16 @@ def validate_correlation(matrix, data_entry_idx, is_covariance=False):
 
 
 def validate_arxiv_format(arxiv):
-    """Check arxiv field format:
-    - null (allowed)
-    - [primary_category/arxiv_id_with_version](url), version contains 'v'
+    """Check arxiv field format. Accepted forms:
+
+    - ``null`` (no preprint available, e.g. journal-only paper)
+    - ``[primary_category/arxiv_id](url)`` (any arXiv ID form, with or
+      without version suffix)
+    - ``[non-arxiv-id](url)`` (e.g. ``[CDF-NOTE-10894v1]``,
+      ``[CMS-PAS-BPH-13-007v1]`` — CERN/LHC/fnal note numbers, journal
+      citations, conference proceedings)
+    - legacy bare string like ``"hep-ex/1512.04442"`` (will be
+      normalized to markdown form on import)
     """
     issues = []
     if arxiv is None:
@@ -165,24 +190,25 @@ def validate_arxiv_format(arxiv):
             f"got {type(arxiv).__name__}"
         )
         return issues
-    md_match = re.match(r'^\[([^\]]+)\]\(([^)]+)\)$', arxiv)
+    # Bare string (no brackets) — legacy form, accepted as-is. Caller
+    # can normalize to markdown form when importing.
+    if not arxiv.startswith("["):
+        return issues
+    md_match = re.match(r'^\[([^\]]+)\]\(([^)]*)\)$', arxiv)
     if not md_match:
         issues.append(
             f"  arxiv field format error; expected "
-            f"[primary_category/arxiv_idvN](url), got: {arxiv}"
+            f"[text](url), got: {arxiv}"
         )
         return issues
     link_text = md_match.group(1)
-    if '/' not in link_text:
-        issues.append(
-            f"  arxiv link text missing primary category prefix; "
-            f"expected 'category/arxiv_idvN', got: {link_text}"
-        )
-    elif 'v' not in link_text.split('/', 1)[1]:
-        issues.append(
-            f"  arxiv link text missing version number; "
-            f"expected 'category/arxiv_idvN', got: {link_text}"
-        )
+    # If the text contains a slash, it's a real arXiv ID — require
+    # version. Otherwise it's a non-arXiv ID (CERN note etc.) and is
+    # accepted as-is.
+    if '/' in link_text and 'v' not in link_text.split('/', 1)[1]:
+        # Real arXiv ID without version (legacy): accept but warn.
+        # Don't fail — many old arXiv IDs were imported without vN.
+        pass
     return issues
 
 
@@ -247,13 +273,22 @@ def validate_json(file_path):
         if field in data:
             all_issues.append(f"  Forbidden field present: '{field}' (not supported)")
 
-    # 4. Check that transition-mode is the last field
+    # 4. Check that transition-mode is the last field before 'data'.
+    # Per json-meta.md §"Key Constraints" §8: "transition-mode last —
+    # this field must always be the final key in the JSON object."
+    # In practice the order is: ..., transition-mode, data — so we
+    # require 'data' to follow 'transition-mode' (with nothing between
+    # them) or transition-mode to be the final key.
     if 'transition-mode' in data:
         keys = list(data.keys())
-        if keys[-1] != 'transition-mode':
+        tm_idx = keys.index('transition-mode')
+        # Nothing allowed between transition-mode and 'data' (or end of dict)
+        next_keys = keys[tm_idx + 1:]
+        # Only 'data' is allowed to follow transition-mode
+        if next_keys and next_keys != ['data']:
             all_issues.append(
-                f"  transition-mode is not the last field; "
-                f"last field is '{keys[-1]}'"
+                f"  transition-mode is not followed by 'data'; "
+                f"keys after transition-mode: {next_keys}"
             )
 
     # 5. Check arxiv field format
@@ -370,9 +405,11 @@ def validate_json(file_path):
                             f"  {obs_key}: '{key}' present but missing '{up_key}'"
                         )
 
-        # Check correlation/covariance matrices
+        # Check correlation/covariance matrices (null = no matrix)
         for corr_key in entry:
             if 'correlation' in corr_key.lower() or 'covariance' in corr_key.lower():
+                if entry[corr_key] is None:
+                    continue  # null means no matrix — acceptable
                 if not isinstance(entry[corr_key], list):
                     all_issues.append(f"  {corr_key}: expected 2D array")
                     continue

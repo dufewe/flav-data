@@ -1,12 +1,13 @@
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay is presented. The dataset corresponds to an integrated luminosity of 3.0 fb$^{-1}$ of $pp$ collision data collected at the LHCb experiment. The complete angular information from the decay is used to determine $CP$-averaged angular observables.",
     "pdf": "https://arxiv.org/pdf/1512.04442",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -235,6 +236,5 @@
                 "q2max": "3.0"
             }
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }
