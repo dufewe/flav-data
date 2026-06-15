@@ -29,7 +29,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
     ],
     "transition-mode": "semileptonic decay"
 }
-```
+```text
 
 ## Top-Level Metadata Fields
 
@@ -83,7 +83,7 @@ Use this format when the paper reports a central value with component errors (st
     "q2min": "0.1",
     "q2max": "1.1"
 }
-```
+```text
 
 | Field | Required | Type | Description |
 |-------|----------|------|-------------|
@@ -124,12 +124,12 @@ Use this format when the paper reports a confidence-level upper limit rather tha
     "type@1_upper_limit": "5.9e-6",
     "type@1_level": "90%@CLs"
 }
-```
+```text
 
 | Field | Description |
 |-------|-------------|
 | `type@N_upper_limit` | The numeric upper limit value (string). This is the observable's maximum allowed value at the given confidence level. |
-| `type@N_level` | The confidence level as a string, e.g., `"90%@CLs"`, `"95%@CL"`, `"90%@CL"`. |
+| `type@N_level` | The confidence level as a string, e.g., `"90%@CLs"`, `"95%@CLs"`. |
 
 **Multiple confidence levels**: When a paper reports upper limits at multiple CLs (e.g., 90% and 95%), use `type@1_*` for the primary (typically lowest) CL and `type@2_*` for the secondary CL. Each requires its own `_upper_limit` + `_level` pair.
 
@@ -149,7 +149,17 @@ Use this format when the paper reports a single combined (total) error without s
     "q2min": "0.1",
     "q2max": "1.1"
 }
-```
+```text
+
+### Combined Fit + Upper Limit Format
+
+Use this format when the paper reports both a fit result (central value + total
+uncertainty) and CLs upper limits. Common in BSM searches where the fit can return
+a central value near zero (or negative) while the CLs method sets a physical upper
+bound. Both sets of fields are required: `value` + `tot_err_up`/`tot_err_down`
+for the fit result, and `type@N_upper_limit` + `type@N_level` for each confidence
+level. They come from different statistical procedures and coexist in the same
+`obs@N` entry.
 
 ### External Reference Format
 
@@ -162,9 +172,9 @@ Use this format for values taken from external sources (PDG world averages, HFLA
     "value": "0.175",
     "tot_err_up": "0.012",
     "tot_err_down": "0.012",
-    "ref": "[ParticleDataGroup:2024cfk](https://inspirehep.net/literature/2817040)"
+    "ref": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)"
 }
-```
+```text
 
 The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look up the source paper's arXiv ID from the reference list, then search InspireHEP.
 
@@ -180,7 +190,7 @@ Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
     [0.5, 1.0, 0.2],
     [0.1, 0.2, 1.0]
 ]
-```
+```text
 
 **Rules:**
 - **Diagonal elements must be 1.0** (correlation of an observable with itself).
@@ -189,7 +199,7 @@ Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
 - **Order**: matrix indices correspond to obs@N numbering order (obs@1 → index 0, obs@2 → index 1, etc.).
 - **Naming**: use `type@1_correlation` to match `type@1_err` (stat), `type@2_correlation` to match `type@2_err` (syst), etc.
 - **Format**: matrix elements are floats (not strings).
-- **Layout**: each matrix row is on a single line; do **not** put each element on its own line. This applies to all `*_correlation` and `*_covariance` fields. (See `Test/improve.md` rule 1.)
+- **Layout**: each matrix row is on a single line; do **not** put each element on its own line. This applies to all `*_correlation` and `*_covariance` fields. (See SKILL.md "Import Conventions" rule 1.)
 - If no correlation matrix is available, **omit the field entirely** (do not set to `null`).
 
 ### Total Error Correlation/Covariance (`tot_correlation`, `tot_covariance`)
@@ -203,7 +213,7 @@ When using total error format (`tot_err_up`/`tot_err_down`), use the `tot_` pref
     [0.01, 0.005],
     [0.005, 0.01]
 ]
-```
+```text
 
 **Rules:**
 - **Matrix must be symmetric**.
@@ -256,9 +266,11 @@ is a flat dict of `obs@N` entries with `name`/`value`/`error`
 
 Example (PDG snapshot):
 
+Example (PDG-style snapshot):
+
 ```json
 {
-    "inspire-hep": "ParticleDataGroup:2024cfk",
+    "inspire-hep": "[PDG:2024](https://..."),
     "author": "Navas, S. and others",
     "title": "Review of Particle Physics",
     "year": "2024",
@@ -274,16 +286,16 @@ Example (PDG snapshot):
         "PDG@Higgs": { ... }
     }
 }
-```
+```text
 
-Example (HFLAV snapshot):
+Example (HFLAV-style snapshot):
 
 ```json
 {
     "HFLAV@overview": {
         "group": "HFLAV",
         "arxiv": "2411.18639",
-        "inspire-hep": "HeavyFlavorAveragingGroupHFLAV:2024ctg",
+        "inspire-hep": "[HFLAV:2024](https://...)",
         "description": "overview of popular observables",
         "observables": [
             { "name": "Tau(B0)", "value": 1.517, ... },
@@ -292,7 +304,7 @@ Example (HFLAV snapshot):
     },
     "HFLAV@B02pilnu": { ... }
 }
-```
+```text
 
 **Differences from the standard schema**:
 
@@ -308,33 +320,33 @@ Example (HFLAV snapshot):
 - The `unit` field is a free-form string (e.g. `"GeV"`, `"ps"`, `"fb"`).
 - Optional `correlation` matrix (square, N×N) is at the subgroup level.
 
-The HFLAV and PDG pages in the Streamlit app render these snapshots
-directly (bypassing `run_dashboard`) and do not pass through
-`scripts/json-valid.py`.
+The HFLAV and PDG snapshots use a slightly relaxed schema (see the
+HFLAV/PDG section above for differences) and are validated by hand
+rather than via `../scripts/json-valid.py`.
 
 ## Key Constraints
 
-1. **All numeric values are strings** — `"0.25"` not `0.25`. Applies to `value`, `q2min`, `q2max`, `pTmin`, `pTmax`, all error fields, and `unit`. Exception: correlation/covariance matrix elements are floats.
+1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, `q2min`/`q2max`, `pTmin`/`pTmax`, all error fields, and `unit`.
 2. **LaTeX uses double backslash** — `\\to` in the JSON file. After `json.load()`, this becomes `\to` in Python.
 3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
-4. **Field order** — Top-level fields follow the order documented in the Top-Level Fields table. Within obs@N, follow the field order shown in the Standard Measurement table.
+4. **Field order** — Top-level fields follow the Top-Level Fields table order; within `obs@N`, follow the Standard Measurement table.
 5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
 6. **No `year` field** — The database does not support a top-level `year` field.
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
 8. **transition-mode last** — This field must always be the final key in the JSON object.
-9. **Matrix layout: row-per-line** — Each `*_correlation` / `*_covariance` matrix row is on a single line; do not put each element on its own line. (See `Test/improve.md` rule 1.)
-10. **Author format** — First author in InspireHEP BibTeX form: `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials only, not full first names. (See `Test/improve.md` rule 3.)
-11. **Abstract = single line** — Multi-line `align*`/`gather*`/etc. blocks must be collapsed to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last entry. (See `Test/improve.md` rule 2.)
-12. **No Unicode in extracted fields** — All Unicode characters (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, etc.) must be replaced with their LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). (See `Test/improve.md` rule 4.)
+9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
+10. **Author format** — `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials only, not full names. (SKILL.md rule 3.)
+11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)
+12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). (SKILL.md rule 4.)
 
 ## Extending This Specification
 
 When a paper introduces metadata or data structures not covered by this document:
 
 1. **Identify the new pattern** — is it a new field, a new error type, a new kinematic variable, or a new data format?
-2. **Check existing conventions** — review this document and `references/obs-abbr.md` for naming patterns that can be extended.
+2. **Check existing conventions** — review this document and `../references/obs-abbr.md` for naming patterns that can be extended.
 3. **Add the new pattern** to the relevant section of this document.
-4. **Update the validator** (`scripts/json-valid.py`) if the new pattern requires structural checks.
+4. **Update the validator** (`../scripts/json-valid.py`) if the new pattern requires structural checks.
 5. **Keep it consistent** — use the same naming conventions, string types, and ordering rules as existing fields.
 
 Examples of extensions:

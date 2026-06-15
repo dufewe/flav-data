@@ -1,29 +1,15 @@
 #!/usr/bin/env python3
-"""
-Validate flav-data JSON file format and data completeness.
+"""Validate flav-data JSON files against the schema in references/json-meta.md.
 
 Usage:
-    python3 json-valid.py <path/to/file.json> [path/to/file2.json ...]
-
-Checks:
-    1. JSON is parseable
-    2. Required top-level fields are present
-    3. obs@N entries have required fields (name, latex, value/upper_limit)
-    4. Numeric fields must be strings
-    5. Correlation matrix is symmetric with diagonal = 1.0
-    6. Covariance matrix is symmetric
-    7. LaTeX fields are non-empty
-    8. Transition symbols conform to A.B.2.C.D format
-    9. arxiv field includes primary category and version, or is null
-    10. transition-mode contains only scattering/decay categories
-    11. data block contains only obs@N, type@N_correlation, type@N_covariance, tot_correlation, tot_covariance fields
-    12. err_up/down fields are paired for each error type
+    python3 json-valid.py <path/to/file.json> [path/to/file2.json ...] [--quiet]
 """
 
 import json
 import re
 import sys
 import os
+import argparse
 
 REQUIRED_TOP_FIELDS = [
     'inspire-hep', 'author', 'collaboration', 'title',
@@ -59,15 +45,24 @@ REQUIRED_OBS_FIELDS_WITH_TOT_ERR = [
 
 # Numeric field patterns (checked for string type)
 NUMERIC_FIELD_PATTERNS = [
-    'value', 'q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax',
+    'value', 'unit',
+    'q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax',
     'type@1_err_up', 'type@1_err_down', 'type@2_err_up', 'type@2_err_down',
     'type@3_err_up', 'type@3_err_down',
     'type@1_upper_limit', 'type@2_upper_limit', 'type@3_upper_limit',
     'tot_err_up', 'tot_err_down'
 ]
 
-# transition-mode must contain one of these keywords
-VALID_TRANSITION_KEYWORDS = ['decay', 'scattering']
+# transition-mode whitelist (json-meta.md §"transition-mode Values" table)
+VALID_TRANSITION_MODES = [
+    'leptonic decay',
+    'semileptonic decay',
+    'non-leptonic decay',
+    'radiative decay',
+    'neutron beta decay',
+    'Higgs decay',
+    'scattering',
+]
 
 # Allowed field patterns within data entries
 DATA_ENTRY_ALLOWED_PATTERNS = ['obs@', '_correlation', '_covariance']
@@ -175,8 +170,8 @@ def validate_arxiv_format(arxiv):
     - ``null`` (no preprint available, e.g. journal-only paper)
     - ``[primary_category/arxiv_id](url)`` (any arXiv ID form, with or
       without version suffix)
-    - ``[non-arxiv-id](url)`` (e.g. ``[CDF-NOTE-10894v1]``,
-      ``[CMS-PAS-BPH-13-007v1]`` — CERN/LHC/fnal note numbers, journal
+    - ``[non-arxiv-id](url)`` (e.g. ``[LHCb-NOTE-2015-001]``,
+      ``[LHCb-ANA-2015-001]`` — LHC note numbers, journal
       citations, conference proceedings)
     - legacy bare string like ``"hep-ex/1512.04442"`` (will be
       normalized to markdown form on import)
@@ -188,6 +183,14 @@ def validate_arxiv_format(arxiv):
         issues.append(
             f"  arxiv field must be a string or null, "
             f"got {type(arxiv).__name__}"
+        )
+        return issues
+    # The string ``"null"`` is almost always a hand-written mistake:
+    # JSON's actual null is the bare value ``null``, not the 4-char
+    # literal. Reject so the file is auto-fixable.
+    if arxiv == "null":
+        issues.append(
+            f"  arxiv field is the string '\"null\"'; use JSON null instead"
         )
         return issues
     # Bare string (no brackets) — legacy form, accepted as-is. Caller
@@ -206,9 +209,12 @@ def validate_arxiv_format(arxiv):
     # version. Otherwise it's a non-arXiv ID (CERN note etc.) and is
     # accepted as-is.
     if '/' in link_text and 'v' not in link_text.split('/', 1)[1]:
-        # Real arXiv ID without version (legacy): accept but warn.
-        # Don't fail — many old arXiv IDs were imported without vN.
-        pass
+        # Real arXiv ID without version (legacy): accept but warn so the
+        # importer / human notices (most modern papers should carry vN).
+        issues.append(
+            f"  arxiv field '{link_text}' is missing version suffix "
+            f"(e.g. 'v1', 'v2') — consider adding it"
+        )
     return issues
 
 
@@ -227,17 +233,16 @@ def validate_data_entry_fields(entry, entry_idx):
 
 
 def validate_transition_mode(value):
-    """Check that transition-mode contains 'decay' or 'scattering'."""
+    """Check that transition-mode matches one of the 7 valid values."""
     issues = []
     if not isinstance(value, str) or not value.strip():
         issues.append("  transition-mode must be a non-empty string")
         return issues
-    has_valid = any(kw in value.lower() for kw in VALID_TRANSITION_KEYWORDS)
-    if not has_valid:
+    if value.lower() not in VALID_TRANSITION_MODES:
         issues.append(
-            f"  transition-mode '{value}' does not contain 'decay' or "
-            f"'scattering'; use property-based names like 'semileptonic decay', "
-            f"'scattering', etc."
+            f"  transition-mode '{value}' is not in the allowed list: "
+            f"{VALID_TRANSITION_MODES}; use property-based names like "
+            f"'semileptonic decay', 'scattering', etc."
         )
     return issues
 
@@ -323,7 +328,24 @@ def validate_json(file_path):
                     )
                     continue
         obs_keys.sort(key=lambda x: x[0])
+        obs_nums = [n for n, _ in obs_keys]
         obs_keys = [k for _, k in obs_keys]
+
+        # Check contiguity: numbering must start at 1 and run 1..N
+        # with no gaps. A gap (e.g. obs@1, obs@3) almost always means
+        # the middle obs was deleted but the surrounding references
+        # (correlation/covariance matrix dimensions) were not updated.
+        if obs_nums:
+            expected = list(range(1, len(obs_nums) + 1))
+            if obs_nums != expected:
+                missing = [
+                    n for n in expected if n not in obs_nums
+                ]
+                all_issues.append(
+                    f"  data[{entry_idx}]: obs@N numbering is not "
+                    f"contiguous; found {obs_nums}, expected "
+                    f"1..{len(obs_nums)}; missing obs@{missing}"
+                )
 
         if not obs_keys:
             has_matrix = any(
@@ -347,12 +369,21 @@ def validate_json(file_path):
 
             # Priority:
             # 1. ref + tot_err + value → external reference
-            # 2. tot_err + value (no ref) → total error (paper's own combined error)
-            # 3. type@1_upper_limit → upper limit
-            # 4. value + type@1_err → standard measurement
+            # 2. tot_err + value + upper_limit → combined fit result + CLs limits
+            # 3. tot_err + value (no ref, no upper) → total error (paper's own combined error)
+            # 4. type@1_upper_limit → upper limit only
+            # 5. value + type@1_err → standard measurement
 
             if has_ref and has_value:
                 for field in REQUIRED_OBS_FIELDS_WITH_REF:
+                    if field not in obs:
+                        all_issues.append(f"  {obs_key}: missing required field: {field}")
+            elif has_tot_err and has_upper and has_value:
+                # Combined: profile likelihood fit result + CLs upper limits
+                for field in REQUIRED_OBS_FIELDS_WITH_TOT_ERR:
+                    if field not in obs:
+                        all_issues.append(f"  {obs_key}: missing required field: {field}")
+                for field in REQUIRED_OBS_FIELDS_WITH_UPPER:
                     if field not in obs:
                         all_issues.append(f"  {obs_key}: missing required field: {field}")
             elif has_tot_err and has_value:
@@ -439,19 +470,42 @@ def validate_json(file_path):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print(f"Usage: python3 {sys.argv[0]} <path/to/file.json> [path/to/file2.json ...]")
-        sys.exit(1)
+    """CLI entry point.
+
+    Examples
+    --------
+    >>> python3 scripts/json-valid.py path/to/file.json
+    >>> python3 scripts/json-valid.py a.json b.json c.json --quiet
+    >>> python3 scripts/json-valid.py --help
+    """
+    parser = argparse.ArgumentParser(
+        description=(
+            "Validate a flav-data JSON file against the schema defined "
+            "in references/json-meta.md. Pass one or more file paths."
+        )
+    )
+    parser.add_argument(
+        'paths', nargs='+',
+        help='One or more JSON files to validate.'
+    )
+    parser.add_argument(
+        '--quiet', '-q', action='store_true',
+        help='Suppress per-file OK/FAIL banners; only print issues + summary.'
+    )
+    args = parser.parse_args()
 
     total_issues = 0
-    for path in sys.argv[1:]:
+    for path in args.paths:
         if not os.path.exists(path):
             print(f"File not found: {path}")
             total_issues += 1
             continue
+        if not args.quiet:
+            print(f"Validating: {path}")
         issues = validate_json(path)
         total_issues += len(issues)
-        print()
+        if not args.quiet:
+            print()
 
     if total_issues == 0:
         print("All files validated successfully.")

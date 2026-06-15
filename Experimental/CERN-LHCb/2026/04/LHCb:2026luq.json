@@ -19,7 +19,7 @@
                 "type@2_level": "95%@CLs"
             },
             "obs@2": {
-                "name": "Br(B+.2.pi+.mu-.e+)",
+                "name": "Br(B+.2.pi+.e+.mu-)",
                 "latex": "$\\mathcal{B}(B^+ \\to \\pi^+ \\mu^- e^+)$",
                 "type@1_upper_limit": "1.8e-9",
                 "type@1_level": "90%@CLs",

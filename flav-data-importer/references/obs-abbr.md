@@ -352,7 +352,7 @@ The LaTeX symbol for each abbreviation is listed in §3 tables (column "LaTeX").
 # Build from the abbreviation and transition LaTeX
 # latex = f"${OBSERVABLE_LATEX[abbr]}({transition_latex})$"
 # Example: "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$"
-```
+```text
 
 **JSON escaping**: A single backslash in LaTeX (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
 
@@ -372,7 +372,9 @@ These are the most frequently used q² bin boundaries in B → K(*)ℓℓ analys
 
 ## 6. Comprehensive Analysis Structure (Example: $B^0 \to K^{*0}\mu^+\mu^-$)
 
-For comprehensive angular analyses, the data is typically organized across multiple `data[]` entries, each with its own correlation matrix. The following breakdown is taken from LHCb:2025mqb (the latest comprehensive LHCb analysis) as a representative example:
+Comprehensive angular analyses organize data across multiple `data[]` entries,
+each with its own correlation matrix. The table below illustrates the structure
+for $B^0 \to K^{*0}\mu^+\mu^-$ (same process as LHCb:2015svh):
 
 | Entry | Content | Observable Count | Notes |
 |-------|---------|-----------------|-------|
@@ -383,7 +385,9 @@ For comprehensive angular analyses, the data is typically organized across multi
 | data[4] | Alternative P parameterization | ~210 | Different observable set |
 | data[5] | CP-averaged (fine bins) | ~362 | 16 q² bins × ~22-27 obs/bin |
 
-Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits the standard bins into sub-intervals for higher resolution. The exact split and observable choice may differ across analyses; this table is an illustrative example, not a strict template.
+Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits
+standard bins into sub-intervals for higher resolution. The exact split and
+observable choice may differ across analyses — this is illustrative, not a template.
 
 ## 7. Adding New Observables
 

@@ -16,7 +16,7 @@
                 "value": "71.3",
                 "tot_err_up": "5.0",
                 "tot_err_down": "5.0",
-                "unit": "^{\\circ}"
+                "unit": "deg"
             },
             "obs@2": {
                 "name": "r(B-.2.D0.K-)",
@@ -31,7 +31,7 @@
                 "value": "121.6",
                 "tot_err_up": "5.6",
                 "tot_err_down": "5.9",
-                "unit": "^{\\circ}"
+                "unit": "deg"
             },
             "obs@4": {
                 "name": "r(B-.2.D0.pi-)",
@@ -46,7 +46,7 @@
                 "value": "311",
                 "tot_err_up": "17",
                 "tot_err_down": "20",
-                "unit": "^{\\circ}"
+                "unit": "deg"
             }
         }
     ]

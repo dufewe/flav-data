@@ -3,11 +3,11 @@
 Extract paper data from HEPData.
 
 Usage:
-    python3 hepdata-ext.py <inspire_id> [--output_dir /path/to/dir]
+    python3 hepdata-ext.py <inspire_id> [--output_dir /path/to/dir] [--table NAME]
 
 Example:
     python3 hepdata-ext.py 1409497
-    python3 hepdata-ext.py 1409497 -o <output_dir> --table "Table 1"
+    python3 hepdata-ext.py 1409497 -o /tmp/hd --table "Table 1"
 """
 
 import json
@@ -16,6 +16,7 @@ import subprocess
 import sys
 import argparse
 import urllib.request
+import urllib.error
 import shutil
 
 try:
@@ -24,37 +25,67 @@ try:
 except ImportError:
     HAS_YAML = False
 
-# Resolve hepdata-cli path: check PATH first, then common venv locations
-HEPDATA_CLI: str = shutil.which('hepdata-cli') or ''
-if not HEPDATA_CLI:
-    # Fallback: check Python venv bin, user-local bin, Hermes venv, and system-wide locations
-    venv_bin = os.path.join(sys.prefix, 'bin', 'hepdata-cli')
-    hermes_venv = os.path.join(
-        os.path.expanduser('~/.hermes/hermes-agent/venv/bin'), 'hepdata-cli'
-    )
+# Re-export shared helpers so callers can
+# `from hepdata_ext import to_bibtex, unicode_to_latex`.
+# See common.py for the canonical implementations and SKILL.md
+# "Import Conventions" rules 3 + 4 for the policies.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import unicode_to_latex, to_bibtex  # noqa: E402,F401
+
+def _resolve_hepdata_cli():
+    """Locate the ``hepdata-cli`` executable.
+
+    Search order: $PATH, active venv bin/, ~/.local/bin/, Homebrew prefixes.
+    Returns absolute path or empty string.
+    """
+    found = shutil.which('hepdata-cli')
+    if found:
+        return found
     candidates = [
-        venv_bin,
-        hermes_venv,
+        os.path.join(sys.prefix, 'bin', 'hepdata-cli'),
         os.path.join(os.path.expanduser('~/.local/bin'), 'hepdata-cli'),
         '/opt/homebrew/bin/hepdata-cli',
         '/usr/local/bin/hepdata-cli',
     ]
     for candidate in candidates:
         if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
-            HEPDATA_CLI = candidate
-            break
-    if not HEPDATA_CLI:
-        HEPDATA_CLI = 'hepdata-cli'  # Let subprocess search PATH at runtime
+            return candidate
+    return ''
+
+
+# Resolved once at import time. Empty string means "not installed".
+HEPDATA_CLI: str = _resolve_hepdata_cli()
+
+
+def _require_hepdata_cli():
+    """Raise :class:`RuntimeError` with install instructions if CLI is missing."""
+    if HEPDATA_CLI:
+        return
+    raise RuntimeError(
+        "hepdata-cli not found on PATH or in common install prefixes.\n"
+        "Install it with:\n"
+        "    pip install hepdata-cli\n"
+        "Then re-run this script. See references/hepdata-cli.md for details."
+    )
 
 
 def fetch_table_names(inspire_id):
-    """Get the list of available table names from HEPData."""
+    """Get available table names from HEPData for a given Inspire recid.
+
+    Returns list of table names, or None on CLI failure.
+    Raises RuntimeError if hepdata-cli is not installed.
+    """
+    _require_hepdata_cli()
     result = subprocess.run(
         [HEPDATA_CLI, 'fetch-names', '-i', 'inspire', str(inspire_id)],
         capture_output=True, text=True, timeout=60
     )
     if result.returncode != 0:
-        print(f"Error: {result.stderr}")
+        if not result.stdout.strip() and not result.stderr.strip():
+            print(f"Error: hepdata-cli returned no output (rc={result.returncode}). "
+                  f"Verify '{HEPDATA_CLI} fetch-names -i inspire {inspire_id}' works manually.")
+        else:
+            print(f"Error: {result.stderr or result.stdout}")
         return None
     try:
         tables = json.loads(result.stdout)
@@ -73,7 +104,21 @@ def fetch_table_names(inspire_id):
 
 
 def download_metadata(inspire_id, output_dir):
-    """Download HEPData metadata JSON."""
+    """Download HEPData metadata JSON.
+
+    Parameters
+    ----------
+    inspire_id : int or str
+        InspireHEP control number (recid).
+    output_dir : str
+        Directory to write the metadata file into (created if missing).
+
+    Returns
+    -------
+    str or None
+        Absolute path to the downloaded JSON file, or ``None`` on failure.
+    """
+    _require_hepdata_cli()
     os.makedirs(output_dir, exist_ok=True)
     result = subprocess.run(
         [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire',
@@ -81,7 +126,10 @@ def download_metadata(inspire_id, output_dir):
         capture_output=True, text=True, timeout=120
     )
     if result.returncode != 0:
-        print(f"Error: {result.stderr}")
+        if not result.stdout.strip() and not result.stderr.strip():
+            print(f"Error: hepdata-cli returned no output (rc={result.returncode}).")
+        else:
+            print(f"Error: {result.stderr or result.stdout}")
         return None
 
     for f in os.listdir(output_dir):
@@ -91,7 +139,7 @@ def download_metadata(inspire_id, output_dir):
 
 
 def download_table_yaml(inspire_id, table_name):
-    """Download YAML data for a specific table."""
+    """Download YAML data for a specific table via direct HTTP."""
     from urllib.parse import quote
     encoded_name = quote(table_name, safe='')
     url = (
@@ -99,7 +147,16 @@ def download_table_yaml(inspire_id, table_name):
         f'ins{inspire_id}/{encoded_name}/yaml'
     )
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    response = urllib.request.urlopen(req, timeout=30)
+    try:
+        response = urllib.request.urlopen(req, timeout=30)
+    except urllib.error.HTTPError as e:
+        raise ValueError(
+            f"HEPData table download failed (HTTP {e.code}): {e.reason}"
+        ) from e
+    except urllib.error.URLError as e:
+        raise ValueError(
+            f"HEPData table download connection failed: {e.reason}"
+        ) from e
     return response.read().decode('utf-8')
 
 
@@ -111,7 +168,6 @@ def parse_metadata(meta_path):
     record = data.get('record', {})
     tables = data.get('data_tables', [])
 
-    # Classify tables
     observable_tables = []
     correlation_tables = []
 
@@ -141,10 +197,47 @@ def parse_metadata(meta_path):
 
 
 def parse_yaml_observables(yaml_text):
-    """Parse observable YAML data.
+    """Parse observable YAML data from a HEPData ``dependent_variables`` table.
 
-    Returns: (observables, qualifiers)
-    observables: list of {header, value, errors, qualifiers}
+    A HEPData "observable table" describes one observable measured at one or
+    more kinematic points (e.g. ``F_L`` measured in 10 q² bins). In the YAML
+    schema, each ``dependent_variables`` entry is **one observable** whose
+    ``values`` list contains the data points for that observable.
+
+    This function preserves that structure: each returned entry represents
+    one observable, with a ``values`` list of data points (each having its
+    own value, errors, and per-point qualifiers). It is the caller's job to
+    decide whether to flatten this into the per-``obs@N`` JSON model
+    (one obs = one q² bin) or keep it as one obs = one observable.
+
+    Parameters
+    ----------
+    yaml_text : str
+        The raw YAML text of a HEPData table.
+
+    Returns
+    -------
+    tuple[list[dict], dict]
+        ``(observables, qualifiers)`` where:
+
+        * ``observables`` is a list with one entry per
+          ``dependent_variables`` element. Each entry has the shape::
+
+              {
+                "header": str,           # e.g. "$F_L$"
+                "qualifiers": [..],      # table-level qualifiers (shared)
+                "values": [              # one per data point / q² bin
+                    {
+                      "value": str,       # central value as string
+                      "errors": [..],    # [{label, symerror/asymerror{plus,minus}}]
+                      "qualifiers": [..] # per-point qualifiers (e.g. q² bin)
+                    },
+                    ...
+                ]
+              }
+
+        * ``qualifiers`` is ``{"global": <independent_variables> }`` —
+          currently a passthrough of the table-level independent variables.
     """
     if not HAS_YAML:
         print("Warning: PyYAML not installed. Install with: pip install pyyaml")
@@ -159,21 +252,19 @@ def parse_yaml_observables(yaml_text):
 
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '')
-        qualifiers = var.get('qualifiers', [])
+        table_qualifiers = var.get('qualifiers', [])
 
+        values = []
         for val in var.get('values', []):
             raw_value = val.get('value')
-            obs = {
-                'header': header,
+            point = {
                 'value': str(raw_value) if raw_value is not None else '',
                 'errors': [],
-                'qualifiers': qualifiers,
+                'qualifiers': val.get('qualifiers', []),
             }
 
             for err in val.get('errors', []):
-                err_info = {
-                    'label': err.get('label', ''),
-                }
+                err_info = {'label': err.get('label', '')}
                 if 'symerror' in err:
                     se = err['symerror']
                     err_info['symerror'] = str(se) if se is not None else ''
@@ -187,9 +278,15 @@ def parse_yaml_observables(yaml_text):
                         str(ae.get('minus', ''))
                         if ae.get('minus') is not None else ''
                     )
-                obs['errors'].append(err_info)
+                point['errors'].append(err_info)
 
-            observables.append(obs)
+            values.append(point)
+
+        observables.append({
+            'header': header,
+            'qualifiers': table_qualifiers,
+            'values': values,
+        })
 
     return observables, {'global': global_qualifiers}
 
@@ -208,7 +305,7 @@ def parse_yaml_correlation(yaml_text):
     if not data or 'dependent_variables' not in data:
         return 'unknown', [], {}
 
-    # Determine matrix type
+    # Determine matrix type from header
     matrix_type = 'correlation'
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '').lower()
@@ -247,6 +344,21 @@ def parse_yaml_correlation(yaml_text):
 
 
 def main():
+    """CLI entry point.
+
+    Fails fast with an actionable ``pip install hepdata-cli`` message if
+    the CLI is not installed.
+
+    Examples
+    --------
+    >>> python3 scripts/hepdata-ext.py 1409497
+    >>> python3 scripts/hepdata-ext.py 1409497 --output_dir /tmp/hd
+    >>> python3 scripts/hepdata-ext.py 1409497 --table "Table 1"
+    """
+    # Fail fast with a clear install message if the CLI is missing.
+    if not HEPDATA_CLI:
+        _require_hepdata_cli()  # always raises
+        sys.exit(1)  # unreachable; satisfies type checkers
     parser = argparse.ArgumentParser(
         description='Extract HEPData paper data'
     )
@@ -264,8 +376,8 @@ def main():
 
     print(f"Fetching HEPData for Inspire ID: {inspire_id}")
 
-    # Step 1: Get table list
-    print("\n=== Step 1: Available Tables ===")
+    # List tables
+    print("\n=== Available Tables ===")
     tables = fetch_table_names(inspire_id)
     if tables:
         if isinstance(tables, list):
@@ -279,8 +391,7 @@ def main():
         else:
             print(tables)
 
-    # Step 2: Download metadata
-    print("\n=== Step 2: Downloading Metadata ===")
+    print("\n=== Downloading Metadata ===")
     meta_path = download_metadata(inspire_id, output_dir)
     if not meta_path:
         print("Failed to download metadata.")
@@ -288,8 +399,8 @@ def main():
 
     print(f"Metadata saved to: {meta_path}")
 
-    # Step 3: Parse metadata
-    print("\n=== Step 3: Metadata Summary ===")
+    # Parse metadata
+    print("\n=== Metadata Summary ===")
     info = parse_metadata(meta_path)
 
     print(f"Title: {info['record']['title']}")
@@ -310,14 +421,14 @@ def main():
                 f"  ... and {len(info['correlation_tables']) - 5} more"
             )
 
-    # Step 4: Download specific table (optional)
+    # Download specific table (optional)
     if args.table:
         print(f"\n=== Step 4: Downloading {args.table} ===")
         yaml_data = download_table_yaml(inspire_id, args.table)
         yaml_path = os.path.join(
             output_dir, f'{args.table.replace(" ", "_")}.yaml'
         )
-        with open(yaml_path, 'w') as f:
+        with open(yaml_path, 'w', encoding='utf-8') as f:
             f.write(yaml_data)
         print(f"YAML saved to: {yaml_path}")
 
@@ -334,9 +445,12 @@ def main():
             observables, quals = parse_yaml_observables(yaml_data)
             print(f"Found {len(observables)} observables")
             for obs in observables[:3]:
+                n_points = len(obs.get('values', []))
+                first = obs['values'][0] if n_points else {}
                 print(
-                    f"  {obs['header']}: {obs['value']} "
-                    f"(errors: {len(obs['errors'])})"
+                    f"  {obs['header']}: {n_points} data point(s); "
+                    f"first value={first.get('value', 'N/A')!r} "
+                    f"(errors: {len(first.get('errors', []))})"
                 )
 
     # Save JSON summary
@@ -347,4 +461,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except RuntimeError as e:
+        # Surface actionable install / config errors without a traceback.
+        print(f"\nError: {e}", file=sys.stderr)
+        sys.exit(1)

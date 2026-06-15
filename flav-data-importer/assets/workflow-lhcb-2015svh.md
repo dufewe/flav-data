@@ -191,11 +191,11 @@ Remove all temporary PDFs, YAML files, and intermediate JSONs.
 
 ## Key Lessons
 
-1. **HEPData has 83 tables** — distinguish observable tables from correlation matrices by description.
-2. **Multiple correlation matrix sets** — Appendices C–H each provide matrices for all q² bins using different statistical methods (likelihood vs bootstrap).
-3. **Many q² bins** — each bin requires its own `data[]` entry.
+1. **HEPData has 83 tables** — distinguish observables from correlation matrices by description.
+2. **Multiple correlation matrix sets** — Appendices C–H provide matrices for all q² bins via likelihood vs bootstrap methods.
+3. **One `data[]` entry per q² bin** — each bin requires its own entry.
 4. **Observable naming** — use `FL(B0.2.Kst0.mu+.mu-)`: abbreviation + (transition).
-5. **LaTeX escaping** — `\\to` in JSON (double backslash), becomes `\to` after parsing.
+5. **LaTeX escaping** — `\\to` in JSON becomes `\to` after parsing.
 6. **arxiv field** — must include primary category and version: `[hep-ex/1512.04442v1](...)`.
-7. **transition-mode** — use property-based names like "semileptonic decay", never "rare decay".
+7. **transition-mode** — use property-based names (e.g. "semileptonic decay"), never "rare decay".
 8. **Folder naming** — `Experimental/CERN-LHCb/` (Lab-Collaboration), data file uses collaboration name only.

@@ -3,11 +3,11 @@
 Extract paper information from the arXiv API and download PDF files.
 
 Usage:
-    python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir]
+    python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir] [--no-pdf]
 
 Example:
     python3 arxiv-ext.py 1512.04442
-    python3 arxiv-ext.py 1512.04442 --output_dir <output_dir>
+    python3 arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
 """
 
 import urllib.request
@@ -19,78 +19,13 @@ import sys
 import argparse
 import re
 
-
-# Unicode -> LaTeX mapping (see Test/improve.md rule 4). Conservative:
-# only the most common HEP / math characters. For exotic chars,
-# manual review is required.
-_UNICODE_TO_LATEX = {
-    # Greek letters (lowercase)
-    "\u03b1": r"\alpha", "\u03b2": r"\beta", "\u03b3": r"\gamma",
-    "\u03b4": r"\delta", "\u03b5": r"\epsilon", "\u03b6": r"\zeta",
-    "\u03b7": r"\eta", "\u03b8": r"\theta", "\u03b9": r"\iota",
-    "\u03ba": r"\kappa", "\u03bb": r"\lambda", "\u03bc": r"\mu",
-    "\u03bd": r"\nu", "\u03be": r"\xi", "\u03c0": r"\pi",
-    "\u03c1": r"\rho", "\u03c3": r"\sigma", "\u03c4": r"\tau",
-    "\u03c5": r"\upsilon", "\u03c6": r"\phi", "\u03c7": r"\chi",
-    "\u03c8": r"\psi", "\u03c9": r"\omega",
-    # Greek letters (uppercase)
-    "\u0393": r"\Gamma", "\u0394": r"\Delta", "\u0398": r"\Theta",
-    "\u039b": r"\Lambda", "\u039e": r"\Xi", "\u03a0": r"\Pi",
-    "\u03a3": r"\Sigma", "\u03a5": r"\Upsilon", "\u03a6": r"\Phi",
-    "\u03a8": r"\Psi", "\u03a9": r"\Omega",
-    # Common math symbols
-    "\u00b1": r"\pm", "\u2213": r"\mp", "\u00d7": r"\times",
-    "\u00f7": r"\div", "\u221e": r"\infty", "\u2202": r"\partial",
-    "\u2207": r"\nabla", "\u2208": r"\in", "\u2200": r"\forall",
-    "\u2203": r"\exists", "\u2229": r"\cap", "\u222a": r"\cup",
-    "\u2264": r"\leq", "\u2265": r"\geq", "\u2260": r"\neq",
-    "\u2248": r"\approx", "\u2261": r"\equiv", "\u2192": r"\to",
-    "\u2190": r"\leftarrow", "\u21d2": r"\Rightarrow", "\u21d0": r"\Leftarrow",
-    # Common typographic
-    "\u2013": r"--",      # en-dash
-    "\u2014": r"---",     # em-dash
-    "\u2018": r"`",       # left single quote
-    "\u2019": r"'",       # right single quote
-    "\u201c": r"``",      # left double quote
-    "\u201d": r"''",      # right double quote
-    "\u00b0": r"^{\circ}",  # degree
-    "\u00a0": r"~",       # non-breaking space
-}
-_UNICODE_RE = re.compile("|".join(re.escape(k) for k in _UNICODE_TO_LATEX.keys()))
-
-
-def _unicode_to_latex(text):
-    """Replace Unicode chars with LaTeX equivalents (Test/improve.md rule 4)."""
-    if not text:
-        return text
-    return _UNICODE_RE.sub(lambda m: _UNICODE_TO_LATEX[m.group(0)], text)
-
-
-def _to_bibtex(full_name):
-    """Convert 'Surname, Full First Name' -> 'Surname, F.' (InspireHEP BibTeX form).
-
-    Per Test/improve.md rule 3, the ``author`` JSON field uses the
-    InspireHEP BibTeX format (initials only), not the full first name
-    form returned by the arXiv / InspireHEP API.
-
-    Pass-through case: if the given name is already in initials form
-    (e.g. ``"A.M."``, ``"R."``) — each whitespace-separated part is
-    1-2 chars followed by a period — return the input unchanged.
-    """
-    if not full_name or ',' not in full_name:
-        return full_name
-    surname, given = full_name.rsplit(',', 1)
-    surname = surname.strip()
-    given = given.strip()
-    if not given:
-        return surname
-    parts = re.split(r'[\s\-]+', given)
-    # Pass through if all parts are already initials (one or more
-    # capital-letter-then-period, e.g. "R.", "A.M.", "J.R.R.")
-    if all(re.fullmatch(r'([A-Z]\.)+', p) for p in parts if p):
-        return full_name
-    initials = '.'.join(p[0].upper() for p in parts if p) + '.'
-    return f"{surname}, {initials}"
+# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
+# See common.py for the canonical implementations and SKILL.md
+# "Import Conventions" rules 3 + 4 for the policies.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import unicode_to_latex as _unicode_to_latex  # noqa: E402
+from common import to_bibtex as _to_bibtex  # noqa: E402
+from common import unicode_to_latex, to_bibtex  # noqa: E402,F401  (public re-exports)
 
 
 def get_arxiv_info(arxiv_id):
@@ -120,7 +55,7 @@ def get_arxiv_info(arxiv_id):
         )
 
     # Basic info (safe checks: elements may be missing)
-    # Apply Unicode -> LaTeX to title/abstract (Test/improve.md rule 4)
+    # Apply Unicode -> LaTeX to title/abstract (rule 4 of SKILL.md "Import Conventions")
     published_elem = entry.find('atom:published', ns)
     published = published_elem.text if published_elem is not None else ''
     updated_elem = entry.find('atom:updated', ns)
@@ -130,12 +65,22 @@ def get_arxiv_info(arxiv_id):
     summary_elem = entry.find('atom:summary', ns)
     summary = _unicode_to_latex(summary_elem.text.strip()) if summary_elem is not None else ''
 
-    # Authors (full names; convert first to BibTeX form for `author_str`)
-    authors = [a.find('atom:name', ns).text for a in entry.findall('atom:author', ns)]
+    # Authors (full names; convert first to BibTeX form for `author_str`).
+    # Strip XML whitespace: arXiv payloads for collaboration papers wrap
+    # the author text in whitespace, which leaks into the final author_str
+    # and breaks the "Surname and others" rendering.
+    authors: list[str] = []
+    for a in entry.findall('atom:author', ns):
+        name_elem = a.find('atom:name', ns)
+        if name_elem is None or name_elem.text is None:
+            continue
+        name = name_elem.text.strip()
+        if name:
+            authors.append(name)
 
-    # PDF link and ID URL
+    # PDF + versioned ID from <atom:id> (e.g. ".../abs/1512.04442v1")
     pdf_link = None
-    id_url = entry.find('atom:id', ns).text  # e.g., "http://arxiv.org/abs/1512.04442v1"
+    id_url = entry.find('atom:id', ns).text
 
     for link in entry.findall('atom:link', ns):
         if link.get('title') == 'pdf':
@@ -187,7 +132,15 @@ def get_arxiv_info(arxiv_id):
         'title': title,
         'abstract': summary,
         'authors': authors,
-        # Test/improve.md rule 3: convert full first name to BibTeX initials form
+        # Per rule 3, the ``author`` JSON field uses the InspireHEP
+        # BibTeX format (initials only). This function does a quick
+        # name-only conversion (full first name -> initial) and only
+        # uses the first author plus "and others" for collaboration
+        # papers. For the canonical "Surname, F. and others" string
+        # (with proper affiliation / multi-author handling) run
+        # ``inspirehep-ext.py`` instead and use its ``author_str`` /
+        # ``bibtex_author`` output. See references/arxiv-api.md and
+        # references/inspirehep-api.md for the full data flow.
         'author_str': (
             f"{_to_bibtex(authors[0])} and others"
             if len(authors) > 1
@@ -209,13 +162,49 @@ def get_arxiv_info(arxiv_id):
 
 
 def download_pdf(arxiv_id, output_dir):
-    """Download the PDF file to the specified directory."""
+    """Download the arXiv PDF to ``<output_dir>/<arxiv_id>.pdf``.
+
+    Parameters
+    ----------
+    arxiv_id : str
+        arXiv identifier. May be bare (``"1512.04442"``) or
+        versioned (``"1512.04442v2"``). The downloaded file is named
+        after the full string passed in, including the version
+        suffix, so subsequent calls with a different version won't
+        collide.
+    output_dir : str
+        Directory to write the PDF to. Created if it does not exist.
+
+    Returns
+    -------
+    str
+        Absolute path to the saved PDF, e.g.
+        ``"/tmp/dl/1512.04442v2.pdf"``.
+
+    Raises
+    ------
+    urllib.error.URLError
+        If the network request fails.
+    ValueError
+        If the arXiv server returns an HTTP error (via urllib).
+    OSError
+        If the PDF cannot be written to disk.
+    """
     os.makedirs(output_dir, exist_ok=True)
     pdf_url = f'https://arxiv.org/pdf/{arxiv_id}'
     pdf_path = os.path.join(output_dir, f'{arxiv_id}.pdf')
 
     req = urllib.request.Request(pdf_url, headers={'User-Agent': 'Mozilla/5.0'})
-    response = urllib.request.urlopen(req, timeout=30)
+    try:
+        response = urllib.request.urlopen(req, timeout=30)
+    except urllib.error.HTTPError as e:
+        raise ValueError(
+            f"arXiv PDF download failed (HTTP {e.code}): {e.reason}"
+        ) from e
+    except urllib.error.URLError as e:
+        raise ValueError(
+            f"arXiv PDF download connection failed: {e.reason}"
+        ) from e
     with open(pdf_path, 'wb') as f:
         f.write(response.read())
 
@@ -223,6 +212,13 @@ def download_pdf(arxiv_id, output_dir):
 
 
 def main():
+    """CLI entry point.
+
+    Examples
+    --------
+    >>> python3 scripts/arxiv-ext.py 1512.04442
+    >>> python3 scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
+    """
     parser = argparse.ArgumentParser(
         description='Extract arXiv paper information and download PDF'
     )
@@ -234,7 +230,6 @@ def main():
     print(f"Fetching arXiv info for: {args.arxiv_id}")
     info = get_arxiv_info(args.arxiv_id)
 
-    # Print results
     print(f"\nTitle: {info['title']}")
     print(f"Authors: {info['author_str']}")
     print(f"Published: {info['published']}")
@@ -251,7 +246,7 @@ def main():
     print(f"\nPDF URL: {info['pdf_url']}")
     print(f"Abstract URL: {info['abs_url']}")
 
-    # Save JSON output
+    # Save JSON + download PDF
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
     json_path = os.path.join(output_dir, f'{args.arxiv_id}_arxiv.json')

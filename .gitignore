@@ -10,30 +10,12 @@ __pycache__/
 
 # Virtual environment
 .venv/
-venv/
-ENV/
-env/
 
 # IDE
 .vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
 
 # Testing
-.pytest_cache/
-.coverage
-htmlcov/
-Test/
+.reasonix
 
 # Streamlit
-.streamlit/
+.streamlit

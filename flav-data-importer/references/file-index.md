@@ -6,21 +6,15 @@ This document specifies the directory layout, file naming conventions, and annua
 
 Experimental folders use the `Lab-Collaboration` format (实验室-实验组). Data file and index filenames inside keep only the collaboration name.
 
-```
+```text
 flav-data/
 ├── Experimental/                          # Experimental measurement data
 │   ├── CERN-LHCb/                         # Lab-Collaboration folder
 │   │   ├── LHCb.py                        # Streamlit dashboard page
 │   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json             # Annual index (collaboration name only)
-│   │   │   ├── 06/                        # Month subdirectory (zero-padded)
-│   │   │   │   └── LHCb:2015svh.json     # Data file (collaboration:TexKey)
+│   │   │   ├── LHCb@2015.json             # Annual index
 │   │   │   └── 12/
-│   │   │       └── LHCb:2015abc.json
-│   │   └── 2025/
-│   │       ├── LHCb@2025.json
-│   │       └── 03/
-│   │           └── LHCb:2025xyz.json
+│   │   │       └── LHCb:2015svh.json     # Data file (Collaboration:TexKey)
 │   ├── CERN-ATLAS/, CERN-CMS/, CERN-DELPHI/, CERN-OPAL/,
 │   ├── CERN-LEP/                          # Combined LEP (ALEPH+DELPHI+L3+OPAL)
 │   ├── CERN-NA62/, CERN-CHARM-II/
@@ -33,13 +27,9 @@ flav-data/
 │   ├── PSI-SINDRUM-II/, PSI-nTRV/
 │   ├── LANL-UCNA/, NIST-aCORN/
 │   └── HFLAV/, PDG/                                # No-lab aggregation
-└── Theoretical/                           # Theoretical calculation data
-    └── HPQCD/
-        └── 2023/
-            ├── HPQCD@2023.json
-            └── 06/
-                └── HPQCD:2023abc.json
-```
+└── Theoretical/
+    └── ...                                          # Theory group folders (HPQCD, UKQCD, etc.)
+```text
 
 ## Naming Rules
 
@@ -88,7 +78,7 @@ Theoretical folders use the group name directly: `HPQCD`, `UKQCD`, `Akeroyd`, `A
 
 - **HFLAV** and **PDG** use a non-standard flav-data schema (one
   snapshot JSON per year whose keys are subgroup names containing
-  nested observables). See `references/json-meta.md` for details.
+  nested observables). See `../references/json-meta.md` for details.
   When importing data into these groups, build a single year-level
   snapshot file rather than per-paper JSONs.
 
@@ -101,8 +91,6 @@ The filename uses only the collaboration name (not the full `Lab-Collaboration` 
 | Example | Description |
 |---------|-------------|
 | `LHCb:2015svh.json` | LHCb paper, TexKey LHCb:2015svh |
-| `CMS:2023abc.json` | CMS paper, TexKey CMS:2023abc |
-| `Belle:2019dgy.json` | Belle paper, TexKey Belle:2019dgy |
 
 **TexKey selection**: Papers often have multiple TexKeys (collaboration-level + author-level). Always use the collaboration-level TexKey for the filename. For example, if a paper has TexKeys `["LHCb:2015svh", "Aaij:2015oid"]`, use `LHCb:2015svh.json`.
 
@@ -114,11 +102,9 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Expe
 
 ```json
 {
-    "03": ["LHCb:2025xyz"],
-    "06": ["LHCb:2015svh"],
-    "12": ["LHCb:2015abc", "LHCb:2015def"]
+    "12": ["LHCb:2015svh"]
 }
-```
+```text
 
 - **Keys**: Zero-padded month strings ("01" through "12").
 - **Values**: Arrays of file_ids (without the `.json` extension).
@@ -134,7 +120,7 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Expe
 import json, os
 
 base = 'Experimental/CERN-LHCb'
-target = 'LHCb:2025xyz'
+target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
     if year.isdigit():
@@ -145,7 +131,7 @@ for year in sorted(os.listdir(base)):
                 if target in files:
                     print(f"Found: {year}/{month}/{target}.json")
                     break
-```
+```text
 
 ### Verify Index Integrity
 
@@ -157,22 +143,22 @@ import json, os
 base = 'Experimental/CERN-LHCb/2015'
 index = json.load(open(f'{base}/LHCb@2015.json'))
 
-# Collect all file_ids from the index
+# Index file_ids
 indexed = set()
 for month_files in index.values():
     indexed.update(month_files)
 
-# Collect all file_ids from disk
+# Disk file_ids
 on_disk = set()
 for month_dir in sorted(os.listdir(base)):
     if month_dir.isdigit() and len(month_dir) == 2:
         for fname in os.listdir(f'{base}/{month_dir}'):
             if fname.endswith('.json') and '@' not in fname:
-                on_disk.add(fname[:-5])  # Remove .json extension
+                on_disk.add(fname[:-5])  # Strip .json
 
 # Report discrepancies
-missing_in_index = on_disk - indexed   # Files on disk but not in index
-missing_on_disk = indexed - on_disk    # Files in index but not on disk
+missing_in_index = on_disk - indexed
+missing_on_disk = indexed - on_disk
 
 if missing_in_index:
     print("Files on disk but missing from index:", sorted(missing_in_index))
@@ -180,7 +166,7 @@ if missing_on_disk:
     print("Files in index but missing from disk:", sorted(missing_on_disk))
 if not missing_in_index and not missing_on_disk:
     print("Index is consistent with disk.")
-```
+```text
 
 ### Update an Index
 
@@ -208,6 +194,6 @@ When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS 
 
 1. **Always update the index** after adding or deleting a JSON file.
 2. **Month assignment** is based on the arXiv v1 submission date.
-3. **File size limit**: Keep individual JSON files under 10MB. If correlation matrix data is very large, consider splitting into separate entries.
-4. **Always validate** with `python3 scripts/json-valid.py` after writing a new file.
+3. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
+4. **Validate** with `python3 scripts/json-valid.py` after writing.
 5. **Backup before modifying** — especially when updating indices or replacing existing files.

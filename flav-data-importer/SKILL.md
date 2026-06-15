@@ -1,19 +1,37 @@
 ---
 name: flav-data-importer
-description: Extract structured flavor physics data from papers and save as flav-data standard JSON. Use this skill when importing, updating, deleting, or verifying data from a paper or website.
+description: >-
+  Extract structured flavor physics data from arXiv / InspireHEP / HEPData
+  papers and save as flav-data standard JSON. Covers the full lifecycle:
+  metadata lookup, YAML parsing, transition-symbol + observable-name
+  construction, JSON schema validation, and index updates.
+  Works with LHCb / ATLAS / CMS / Belle / BaBar / BESIII / PDG
+  / HFLAV / theory groups.
+when_to_use: |
+  Use this skill to:
+  - Import, add, or update a flavor-physics paper
+  - Delete or remove a paper from the database
+  - Verify or validate an existing JSON file
+  - Maintain the paper index (add, check, rebuild)
+  - Build a JSON file from scratch following the flav-data schema
+  - Diagnose validation errors in a JSON file
+  Do NOT use for: general arXiv/InspireHEP browsing unrelated to
+  data extraction, fitting the imported data, or rendering the dashboard.
 category: data-science
-tags: [flavor-physics, data-collecting, json-importer, hepdata]
+tags: [flavor-physics, data-collecting, json-importer, hepdata, lhcb, b-decays, bsm]
+version: 1.0.0
 ---
 
 # flav-data Importer
 
-Extract structured data from flavor physics papers into the flav-data standard JSON format. Covers the complete lifecycle: discovery → extraction → validated JSON → index maintenance.
+Extract structured flavor-physics data from papers into standard JSON.
+Covers the full lifecycle: discovery → extraction → validation → index maintenance.
 
 ## Directory
 
-```
+```text
 flav-data-importer/
-├── SKILL.md                    # Workflow, conventions, pitfalls
+├── SKILL.md                    # Workflow, conventions, pitfalls (this file)
 ├── references/
 │   ├── json-meta.md            # JSON field spec (authority)
 │   ├── obs-abbr.md             # Transition symbols, observable naming, LaTeX
@@ -22,22 +40,23 @@ flav-data-importer/
 │   ├── arxiv-api.md            # arXiv API usage
 │   ├── inspirehep-api.md       # InspireHEP API usage
 │   └── hepdata-cli.md          # HEPData CLI usage
-├── scripts/
-│   ├── arxiv-ext.py            # arXiv metadata + PDF download
-│   ├── inspirehep-ext.py       # InspireHEP metadata
-│   ├── hepdata-ext.py          # HEPData table extraction
-│   └── json-valid.py           # JSON validation (12 checks)
-└── assets/
-    └── workflow-lhcb-2015svh.md # Full import example
+├── assets/
+│   └── workflow-lhcb-2015svh.md # Full import example
+└── scripts/
+    ├── common.py               # Shared: Unicode→LaTeX + BibTeX helpers
+    ├── arxiv-ext.py            # arXiv metadata + PDF download
+    ├── inspirehep-ext.py       # InspireHEP metadata
+    ├── hepdata-ext.py          # HEPData table extraction
+    └── json-valid.py           # JSON validation
 ```
 
 ## Tool Inventory
 
 | Tool | Use |
 |------|-----|
-| **arXiv API** | v1 date, title, abstract, primary category, PDF URL → `scripts/arxiv-ext.py` |
-| **InspireHEP API** | TexKey, recid, collaboration, DOI, authors → `scripts/inspirehep-ext.py` |
-| **hepdata-cli** | Machine-readable HEPData (bypasses Cloudflare). Installed in Hermes venv. → `scripts/hepdata-ext.py` |
+| **arXiv API** | v1 date, title, abstract, primary category, PDF URL → `references/arxiv-api.md` |
+| **InspireHEP API** | TexKey, recid, collaboration, DOI, authors → `references/inspirehep-api.md` |
+| **hepdata-cli** | Machine-readable HEPData. Install: `pip install hepdata-cli` → `references/hepdata-cli.md` |
 | **pymupdf** | PDF text extraction (fallback data source) |
 | **vision_analyze** | Table screenshot extraction |
 
@@ -50,9 +69,9 @@ flav-data-importer/
 | arXiv preprints and journal papers | Phenomenological fits to experimental data |
 
 **Rules:**
-- For unsupported data: reply "This data is not supported for import" or find the formal paper on arXiv/InspireHEP.
-- Multiple arXiv papers for one measurement → single JSON, retain all Inspire/arXiv IDs and DOIs.
-- Multi-collaboration measurements → fill data for all involved groups under their respective directories.
+- Unsupported data: reply "Not supported" or find the formal paper on arXiv/InspireHEP.
+- Multiple arXiv papers for one measurement → single JSON, retain all IDs and DOIs.
+- Multi-collaboration → fill data for all involved groups under their directories.
 
 ## Workflow
 
@@ -124,7 +143,7 @@ Remove all temporary files (PDFs, YAML, intermediate JSONs).
 
 Full spec → `references/obs-abbr.md` §1. Key rules:
 - Charge order: `+`, `-`, `0`
-- Antiparticles: neutral mesons = `B0Bar`; baryons = `Lambdac+Bar` (Bar at **end** after charge); charged mesons/leptons use charge only (`B+`/`B-`)
+- Antiparticles: neutral mesons → `B0Bar`; baryons → `Lambdac+Bar` (Bar at **end**); charged particles use charge alone (`B+`/`B-`)
 - Neutrinos: no flavor → `nu`/`nuBar`
 
 ### Observable Naming: `OBS(transition)[condition]`
@@ -139,176 +158,106 @@ Full spec → `references/obs-abbr.md` §2. Key rules:
 
 Full spec → `references/json-meta.md`. Key rules:
 - **All values are strings** (`"0.69"`). Exception: matrix elements are floats.
-- **Component errors preferred**: `type@N_err_up`/`_down` + `type@N_err` label. Never pre-combine.
+- **Component errors preferred**: `type@N_err_up`/`_down` + `type@N_err` label.
 - **Total error** (no stat/syst breakdown): `tot_err_up`/`tot_err_down`
-- **Symmetric errors**: `err_up` = `err_down` (both required)
-- **Upper limits**: `type@N_upper_limit` = value, `type@N_level` = `"90%@CLs"`. Do NOT swap.
-- **Single boundary**: literal `"q2min"` or `"q2max"`
-- **unit**: only dimensional observables; omit for dimensionless
-- **LaTeX in JSON**: double backslash (two backslash characters) in JSON file text; Python reads single backslash after json.load()
+- **Upper limits**: `type@N_upper_limit` = value, `type@N_level` = `"90%@CLs"`
+- **LaTeX in JSON**: double backslash (`\\to`) in JSON file text
 - **Indentation**: 4 spaces
 
-### Import Conventions (from `Test/improve.md`)
+> **Tip**: Do NOT use `[condition]` for q² bins — use `q2min`/`q2max` per obs.
+> Do NOT use property `"rare decay"` — use `"semileptonic decay"` etc.
+> When a paper reports fit results (value + errors) AND CLs upper limits, **import both**. They come from different statistical procedures and both belong in the JSON. See `references/json-meta.md` "Combined Fit + Upper Limit Format".
 
-Four rules govern how data must be formatted when importing from
-arXiv/InspireHEP/HEPData:
+Four formatting rules for imported data:
 
-1. **Matrix format (row-per-line, NOT element-per-line)**:
+1. **Matrix format (row-per-line)** — each matrix row on one line:
    ```json
    "tot_correlation": [
        [1.0, 0.5, 0.3],
        [0.5, 1.0, 0.2],
        [0.3, 0.2, 1.0]
    ]
-   ```
-   Each matrix row is on a single line; do **not** put each element
-   on its own line. This applies to any `*_correlation` or
-   `*_covariance` field under a `data[]` entry.
+```text
+   Applies to all `*_correlation` / `*_covariance` fields.
 
-2. **Abstract multi-line formula conversion**: arXiv abstracts may
-   contain multi-line `\\begin{align*} ... \\end{align*}` blocks.
-   Convert to single-line LaTeX so the abstract is one line. Example:
-   ```
-   $$\begin{align*} A_{CP} &= (-1.1 \pm 4.0 \pm 0.5)\%, \\
-                          \Sigma A_{\text{FB}} &= (3.9 \pm 4.0 \pm 0.6)\%, \\
-                          \Delta A_{\text{FB}} &= (3.1 \pm 4.0 \pm 0.4)\%, \end{align*}$$
-   ```
-   becomes:
-   ```
-   $A_{CP} = (-1.1 \pm 4.0 \pm 0.5)\%$, $\Sigma A_{\text{FB}} = (3.9 \pm 4.0 \pm 0.6)\%$, and $\Delta A_{\text{FB}} = (3.1 \pm 4.0 \pm 0.4)\%$
-   ```
-   Note: line breaks (`\\`) become `, ` separators, with `and` before
-   the last entry for natural English.
+2. **Abstract = single line** — collapse multi-line LaTeX blocks:
+   → `\\begin{align*}...\\end{align*}` becomes comma-separated inline LaTeX.
 
-3. **Author format = InspireHEP BibTeX**: `author` field must use
-   InspireHEP's BibTeX-style format — first author surname + initials
-   (NOT full first name), followed by `and others` for multi-author
-   papers. Example:
-   - ✓ Correct: `"Aaij, R. and others"`
-   - ✗ Wrong: `"Aaij, Roel and others"` (full first name)
-   - ✗ Wrong: `"Roel Aaij"` (wrong order)
-   - Fallback (no authors): `"{group} collaboration"`,
-     e.g. `"LHCb collaboration"`.
+3. **Author = InspireHEP BibTeX** — `"Aaij, R. and others"` (initials only).
+   ✗ `"Aaij, Roel and others"` (full name).
+   Fallback (no authors): `"{group} collaboration"`.
 
-4. **Unicode → LaTeX**: Any Unicode character in extracted data
-   must be replaced with its LaTeX equivalent:
-   - `μ` → `\mu`, `Δ` → `\Delta`, `Σ` → `\Sigma`, etc. (all Greek
-     letters)
-   - `±` → `\pm`, `×` → `\times`, `→` → `\to`, `≤` → `\leq`, etc.
-     (math symbols)
-   - `--`/`---` (en/em dashes) → `--`/`---` (LaTeX escape)
-   - Smart quotes (`'`'`/`"``/`'"`/`'"`) → `` ` `` / `'` / `` `` `` / `''`
-   - Degree symbol `°` → `^{\circ}`
-   - The `bar` character (`¯`) → `\bar{}` (used for anti-particles
-     like `\bar{p}`)
+4. **No Unicode** — replace with LaTeX equivalents:
+   `μ`→`\mu`, `Δ`→`\Delta`, `±`→`\pm`, `→`→`\to`,
+   `°`→`^{\circ}`, `¯`→`\bar{}`, smart quotes → `` ` ``/`'`/`` `` ``/`''`.
 
-### Data Entry Whitelist
 
-Each `data[]` element may contain ONLY: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. Matrix naming matches error type: component = `type@N_*`, total = `tot_*`.
+## Troubleshooting
 
-### Folder Naming
+### `hepdata-cli: command not found`
 
-`Lab-Collaboration` (实验室-实验组, institution-based):
-`Experimental/CERN-LHCb/`, `Experimental/CERN-ATLAS/`, `Experimental/CERN-CMS/`,
-`Experimental/CERN-DELPHI/`, `Experimental/CERN-OPAL/`, `Experimental/CERN-LEP/`,
-`Experimental/CERN-NA62/`, `Experimental/CERN-CHARM-II/`,
-`Experimental/KEK-Belle/`, `Experimental/KEK-KOTO/`,
-`Experimental/SLAC-BaBar/`, `Experimental/SLAC-SLD/`,
-`Experimental/Fermilab-CDF/`, `Experimental/Fermilab-D0/`,
-`Experimental/Fermilab-Tevatron/`, `Experimental/Fermilab-Muong-2/`,
-`Experimental/IHEP-BESIII/`, `Experimental/IHEP-ISTRA+/`,
-`Experimental/INFN-KLOE-2/`, `Experimental/BNL-E949/`,
-`Experimental/Cornell-CLEO/`, `Experimental/TRIUMF-PiENu/`,
-`Experimental/PSI-SINDRUM-II/`, `Experimental/PSI-nTRV/`,
-`Experimental/LANL-UCNA/`, `Experimental/NIST-aCORN/`.
+External package. Install once:
+```bash
+pip install hepdata-cli
+```
+Then re-run `scripts/hepdata-ext.py`. The script resolves the binary from:
+`$PATH` → venv `bin/` → `~/.local/bin/` → Homebrew prefixes.
 
-No-lab folders (bare group name, used for aggregation groups
-with no parent lab): `Experimental/HFLAV/`, `Experimental/PDG/`.
+### PyYAML not installed (`HAS_YAML = False`)
 
-Theoretical: `Theoretical/HPQCD/`, `Theoretical/UKQCD/`.
-
-Data files always use collaboration name only: `LHCb:2015svh.json`.
-
-## Common Pitfalls
-
-| Pitfall | Correct |
-|---------|---------|
-| `[condition]` for q² bins | Separate `data[]` entries with `q2min`/`q2max` |
-| Guessing TexKey for `ref` | Search arXiv ID → InspireHEP for verified TexKey |
-| `type@1_err` missing when `_up`/`_down` present | Add `type@1_err` label (e.g., `"stat"`) — all three are required |
-| `upper_limit` and `level` swapped | `upper_limit` = numeric, `level` = confidence string |
-| Non-property transition-mode (`"rare decay"`) | Property-based: `"semileptonic decay"`, `"leptonic decay"`, `"scattering"` |
-| Annual index with outdated TexKey | Verify latest TexKey on InspireHEP before writing index |
-| Empty fields as empty strings | Omit key entirely; only `arxiv` uses `null` |
-| `year` field present | Not supported — remove |
-| `tot_correlation` with component errors | Use `type@N_correlation` matching the error type label |
-| Matrix dimension ≠ obs count | Matrix N×N must equal number of obs@N in that entry |
-| Author-level TexKey for filenames | Collaboration-level only: `LHCb:2015svh` |
-| Single backslash in JSON LaTeX | Two backslash characters required in JSON file text |
-| Author name with full first name (`"Aaij, Roel and others"`) | Use InspireHEP BibTeX format: `"Aaij, R. and others"` (initials only) — see rule 3 |
-| Abstract starting lowercase | Match arXiv exactly; typically capital |
-| Hyphenated transition-mode | No hyphens: `"semileptonic decay"` |
-| `unit` field as empty string | Omit for dimensionless observables |
-| Custom fields in data entries | Only `obs@N`, `*_correlation`, `*_covariance` allowed |
-| `transition-mode` not last | Must be the final key in JSON |
-| Observable name includes q² bin | `name` = `OBS(transition)[condition]`; q² bins → `q2min`/`q2max` |
-| arXiv link missing version | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
-| Correlation diagonal ≠ 1.0 | It's a covariance matrix → `*_covariance` |
-| Anti-baryon `Bar` before charge (`LambdacBar-`) | `Bar` at end: `Lambdac+Bar`, `Lambdab0Bar`, `Sigma-Bar` |
-| Charge ordering wrong (`tau-.2.mu-.mu+.mu-`) | Final state ordered `+`, `-`, `0`: `tau-.2.mu+.mu-.mu-` (validator does NOT check this) |
-
-### Matrix Format
-
-```json
-"type@1_correlation": [
-    [1.0, 0.06, 0.02],
-    [0.06, 1.0, 0.03],
-    [0.02, 0.03, 1.0]
-]
+Optional for CLI wrappers, required for YAML parsers:
+```bash
+pip install pyyaml
 ```
 
-- `*_correlation`: diagonal = 1.0, off-diagonal ∈ [-1, 1]
-- `*_covariance`: diagonal = error², off-diagonal = covariance
-- **Layout**: each matrix row is on a single line (per `Test/improve.md`
-  rule 1; do **not** put each element on its own line)
-- Matrix elements are floats (not strings, unlike `value`/`err_*`)
+### arXiv / InspireHEP API returns errors
 
-## JSON Example
+Both APIs are unauthenticated and rate-limited:
+1. **Verify the ID** (e.g. `1512.04442`, not `hep-ex/1512.04442`).
+2. **Wait and retry** — arXiv ~1 req/3s; InspireHEP ~2 req/s.
+3. **Fall back** to PDF extraction if the API never returns.
 
-```json
-{
-    "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, R. and others",
-    "collaboration": "LHCb",
-    "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
-    "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
-    "time": "2015.12.14",
-    "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
-    "pdf": "https://arxiv.org/pdf/1512.04442",
-    "data": [
-        {
-            "obs@1": {
-                "name": "FL(B0.2.Kst0.mu+.mu-)",
-                "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
-                "value": "0.69",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.035",
-                "type@1_err_down": "0.036",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.017",
-                "type@2_err_down": "0.017",
-                "q2min": "0.1",
-                "q2max": "1.1"
-            },
-            "obs@2": { "...": "..." },
-            "type@1_correlation": [
-                [1.0, 0.06],
-                [0.06, 1.0]
-            ]
-        }
-    ],
-    "transition-mode": "semileptonic decay"
-}
-```
+### Validator reports issues
 
-Full specification → `references/json-meta.md`
+The validator never auto-fixes — it only reports.
+
+| Common Issue | Fix |
+|---|---|
+| `arxiv field is '"null"'` | Use JSON `null`, not the string `"null"` |
+| `obs@N numbering not contiguous` | Renumber after deletion |
+| `transition-mode not in allowed list` | Use a valid mode from json-meta.md |
+| `*_correlation: matrix not symmetric` | Ensure M[i][j] == M[j][i] |
+
+## Known Limitations
+
+1. **PDF extraction is best-effort.** The scripts focus on structured sources (arXiv, InspireHEP, HEPData). Image-based PDFs need `vision_analyze` + human review.
+
+2. **HEPData requires `hepdata-cli`.** Direct `curl` to hepdata.net is blocked by Cloudflare.
+
+3. **arXiv BibTeX is approximate.** `arxiv-ext.py` produces a best-effort author string. Use `inspirehep-ext.py` for the canonical InspireHEP version.
+
+4. **Unicode→LaTeX mapping is conservative.** Exotic characters (emoji, CJK) pass through unchanged — review titles/abstracts before commit.
+
+5. **No automatic index sync.** If the import crashes between writing the file and updating the index, re-run `Verify` (or check `file-index.md`) to detect the discrepancy.
+
+6. **Not a fit tool.** This skill produces JSON inputs for downstream fitting tools — it does not perform fits.
+
+## FAQ
+
+**Q: Can I import a paper with no arXiv ID (journal-only)?**
+A: Yes. Set `arxiv` to `null`.
+
+**Q: What if the paper has a CERN note number instead of an arXiv ID?**
+A: Use a Markdown link: `"[LHCb-NOTE-2015-001](https://...)"`. The validator accepts any non-arXiv-ID link.
+
+**Q: How to handle mixed q² bins across different obs entries?**
+A: Use `q2min`/`q2max` per `obs@N`. The `[condition]` syntax is for multi-decay-channel ratios only (e.g. `R(D)`).
+
+**Q: Validator complains about missing transition symbol — where to add it?**
+A: Rename the observable to `OBS(transition)[condition]` form. See `references/obs-abbr.md` for naming rules.
+
+**Q: Can I run both `arxiv-ext.py` and `inspirehep-ext.py` for the same paper?**
+A: Yes. arXiv provides version number and PDF URL; InspireHEP provides authoritative author list and DOI. Use InspireHEP for metadata, arXiv for PDF.
+
+**Q: Why is `texkey` missing from my JSON?**
+A: It comes from InspireHEP. If you built the JSON from arXiv only, re-run `inspirehep-ext.py` to populate it.

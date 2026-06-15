@@ -16,7 +16,14 @@
                 "type@1_upper_limit": "2.9e-6",
                 "type@1_level": "90%@CLs",
                 "type@2_upper_limit": "3.4e-6",
-                "type@2_level": "95%@CLs"
+                "type@2_level": "95%@CLs",
+                "value": "1.34",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.78",
+                "type@1_err_down": "0.78",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.33",
+                "type@2_err_down": "0.33"
             },
             "obs@2": {
                 "name": "Br(B0.2.J/psi.gamma)",
@@ -24,7 +31,14 @@
                 "type@1_upper_limit": "2.6e-6",
                 "type@1_level": "90%@CLs",
                 "type@2_upper_limit": "3.5e-6",
-                "type@2_level": "95%@CLs"
+                "type@2_level": "95%@CLs",
+                "value": "0.61",
+                "type@1_err": "stat",
+                "type@1_err_up": "0.50",
+                "type@1_err_down": "0.50",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.18",
+                "type@2_err_down": "0.18"
             }
         }
     ]

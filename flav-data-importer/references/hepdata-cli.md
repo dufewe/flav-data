@@ -1,21 +1,16 @@
 # hepdata-cli Reference
 
-This document describes how to use the `hepdata-cli` binary to access HEPData structured data.
+Access HEPData structured data via `hepdata-cli`, bypassing Cloudflare.
 
-## Overview
+**Install**: `pip install hepdata-cli`
 
-- **Path**: Installed in Hermes venv at `~/.hermes/hermes-agent/venv/bin/hepdata-cli`. Script `hepdata-ext.py` resolves it automatically via PATH and venv bin search.
-- **Install**: `pip install hepdata-cli` (commonly in a Python virtual environment or user-local bin)
-- **Purpose**: Fetch high-energy physics experimental data from HEPData, bypassing Cloudflare protection.
-- **Input**: InspireHEP control number (recid) or HEPData record ID.
-- **Output**: JSON metadata and YAML table data.
+Binary resolution order: `$PATH` → venv `bin/` → `~/.local/bin/` → Homebrew
+prefixes. Raises `RuntimeError` with install instructions if not found.
 
-## Commands
+## CLI Commands
 
 ```bash
 hepdata-cli --help
-
-Commands:
   download     Download HEPData record data (metadata + table URLs)
   fetch-names  List available table names for a record
   find         Search HEPData records by keyword or ID
@@ -28,11 +23,7 @@ Commands:
 
 ```bash
 hepdata-cli fetch-names -i inspire 1409497
-```
-
-Returns a JSON array of table names:
-```json
-["Table 1", "Table 2", "Table 3", ..., "Table 83"]
+# → ["Table 1", "Table 2", "Table 3", ..., "Table 83"]
 ```
 
 ### Step 2: Download Metadata
@@ -41,34 +32,12 @@ Returns a JSON array of table names:
 hepdata-cli download -f json -i inspire 1409497 -d <output_dir>
 ```
 
-Downloads a JSON file containing:
-
-| Field | Description |
-|-------|-------------|
-| `recid` | HEPData record ID |
-| `inspire_id` | Corresponding InspireHEP control number |
-| `hepdata_doi` | HEPData DOI for the record |
-| `record` | Paper metadata (title, arXiv ID, DOI, collaborations, year, abstract) |
-| `data_tables` | Array of table objects with names, descriptions, and download URLs |
-
-Each table in `data_tables`:
-```json
-{
-  "name": "Table 1",
-  "description": "CP-averaged angular observables in the low q² bin",
-  "location": "Data from Appendix A, Table 3",
-  "doi": "10.17182/hepdata.74247.v1/t1",
-  "data": {
-    "csv": "https://www.hepdata.net/download/table/ins1409497/Table 1/csv",
-    "json": "https://www.hepdata.net/download/table/ins1409497/Table 1/json",
-    "yaml": "https://www.hepdata.net/download/table/ins1409497/Table 1/yaml"
-  }
-}
-```
+The metadata JSON contains a `data_tables` array; each table has `name`,
+`description`, and download URLs (csv/json/yaml).
 
 ### Step 3: Download Individual Tables
 
-The metadata JSON contains URLs but not the actual data. Download tables via curl:
+The metadata JSON contains URLs but not the actual data. Download via curl:
 
 ```bash
 # URL-encode table names (spaces → %20, + → %2B, # → %23)
@@ -76,7 +45,8 @@ curl -sL -A "Mozilla/5.0" \
   "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml"
 ```
 
-**Why YAML**: YAML preserves the structured hierarchy of observables, qualifiers, and errors better than CSV or JSON for HEPData's nested format.
+YAML is preferred because it preserves the structured hierarchy of observables,
+qualifiers, and errors better than CSV or JSON for HEPData's nested format.
 
 ## YAML Data Structure
 
@@ -125,11 +95,48 @@ n = int(len(values) ** 0.5)
 matrix = [values[i*n:(i+1)*n] for i in range(n)]
 ```
 
+## Python API (`scripts/hepdata-ext.py`)
+
+The script wraps the `hepdata-cli` binary and exposes:
+
+| Function | Purpose |
+|---|---|
+| `fetch_table_names(inspire_id)` → `list[str] \| None` | List table names for a record |
+| `download_metadata(inspire_id, output_dir)` → `str \| None` | Download metadata JSON to dir |
+| `download_table_yaml(inspire_id, table_name)` → `str` | Direct HTTP download of YAML (may be blocked by Cloudflare) |
+| `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into structured entries |
+| `parse_yaml_correlation(yaml_text)` → `(str, list[list[float]], dict)` | Parse correlation/covariance matrix YAML |
+| `parse_metadata(metadata_path)` → `dict` | Parse downloaded metadata JSON |
+
+Constants: `HEPDATA_CLI` (absolute path to binary, or `''`) and
+`HAS_YAML` (whether PyYAML is available).
+
+**Loading the script** (hyphen in filename prevents direct import):
+```python
+import importlib.util, os
+spec = importlib.util.spec_from_file_location(
+    "hepdata_ext", "scripts/hepdata-ext.py",
+)
+hepdata_ext = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(hepdata_ext)
+
+tables = hepdata_ext.fetch_table_names(1409497)
+meta = hepdata_ext.parse_metadata(
+    hepdata_ext.download_metadata(1409497, "/tmp/hd")
+)
+```
+
+### CLI entry point
+
+```bash
+python3 scripts/hepdata-ext.py 1409497
+python3 scripts/hepdata-ext.py 1409497 -o /tmp/hd --table "Table 1"
+```
+
 ## Notes
 
-1. **Must use hepdata-cli** — Direct curl to hepdata.net will be blocked by Cloudflare.
-2. **Theory papers** typically lack HEPData entries — fall through to PDF extraction.
-3. **URL-encode table names** — "Table 1" → "Table%201", "Table 3 (low)" → "Table%203%20(low)".
-4. **Invalid values** — Some bins may have `value: "-"` (meaning no measurement). Skip these.
-5. **Units** — The `units` field may contain strings like `"10^-8"` that need conversion.
-6. **User-Agent** — Always set a User-Agent header in curl requests to hepdata.net.
+1. **Must use hepdata-cli** — direct curl is blocked by Cloudflare.
+2. **Theory papers** rarely have HEPData — fall through to PDF extraction.
+3. **URL-encode table names**: `"Table 1"` → `"Table%201"`.
+4. **Invalid values**: bins with `value: "-"` mean no measurement — skip.
+5. **PyYAML** required for YAML parsers (`pip install pyyaml`).

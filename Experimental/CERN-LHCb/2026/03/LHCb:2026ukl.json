@@ -10,10 +10,6 @@
     "transition-mode": "semileptonic decay",
     "data": [
         {
-            "type@1_correlation": [
-                [1.0, 0.5],
-                [0.5, 1.0]
-            ],
             "obs@1": {
                 "name": "C(B0.2.KS0.mu+.mu-)",
                 "latex": "$C(B^{0} \\to K_{S}^{0} \\mu^{+} \\mu^{-})$",
@@ -35,7 +31,11 @@
                 "type@2_err": "syst",
                 "type@2_err_up": "0.05",
                 "type@2_err_down": "0.05"
-            }
+            },
+            "type@1_correlation": [
+                [1.0, 0.5],
+                [0.5, 1.0]
+            ]
         },
         {
             "obs@1": {
