@@ -23,9 +23,10 @@ import re
 # See common.py for the canonical implementations and SKILL.md
 # "Import Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import unicode_to_latex as _unicode_to_latex  # noqa: E402
-from common import to_bibtex as _to_bibtex  # noqa: E402
-from common import unicode_to_latex, to_bibtex  # noqa: E402,F401  (public re-exports)
+from common import (  # noqa: E402
+    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
+    to_bibtex, to_bibtex as _to_bibtex,
+)
 
 
 def get_inspire_by_arxiv(arxiv_id):
@@ -126,6 +127,7 @@ def extract_metadata(hit):
     eprints = meta.get('arxiv_eprints', [{}])
     arxiv_id = eprints[0].get('value', '') if eprints else ''
     arxiv_categories = eprints[0].get('categories', []) if eprints else []
+    primary_cat = arxiv_categories[0] if arxiv_categories else ''
 
     # Publication info
     pub_info = (
@@ -170,10 +172,13 @@ def extract_metadata(hit):
         'citation_count': citation_count,
         'citation_without_self': citation_without_self,
         # Markdown links (for JSON files)
-        # NOTE: arxiv_link is a simplified link — the full 'arxiv' JSON field
-        # requires primary_category and version, obtainable from arxiv-ext.py.
+        # NOTE: arxiv_link includes primary category when available.
+        # The version number (vN) is only available from arXiv API (arxiv-ext.py).
         'inspire_hep_link': f'[{texkey}](https://inspirehep.net/literature/{recid})',
-        'arxiv_link': f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})',
+        'arxiv_link': (
+            f'[{primary_cat}/{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+            if primary_cat else f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+        ),
         'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}',
     }
 

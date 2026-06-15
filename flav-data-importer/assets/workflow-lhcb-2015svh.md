@@ -74,9 +74,9 @@ $HEPDATA_CLI download -f json -i inspire 1409497 -d <output_dir>
 
 **Table classification**:
 - Tables 1–8: Angular observables per q² bin (FL, S3–S9, A3–A9, P1–P3, P'₄, P'₅, P'₈)
-- Tables 9–18: Likelihood correlation matrices (Appendix C) — 8 bins × 1 matrix each
-- Tables 19–28: Likelihood correlation matrices (Appendix D)
-- Tables 29–38: Likelihood correlation matrices (Appendix E)
+- Tables 9–18: Likelihood correlation matrices (Appendix C) — 10 bins × 1 matrix each
+- Tables 19–28: Likelihood correlation matrices (Appendix D) — 10 bins × 1 matrix each
+- Tables 29–38: Likelihood correlation matrices (Appendix E) — 10 bins × 1 matrix each
 - Tables 39–53: Bootstrap correlation matrices (Appendix F)
 - Tables 54–68: Bootstrap correlation matrices (Appendix G)
 - Tables 69–83: Bootstrap correlation matrices (Appendix H)

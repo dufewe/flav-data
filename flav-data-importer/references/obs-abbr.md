@@ -55,7 +55,8 @@ When the validator cannot resolve a transition symbol unambiguously, it falls ba
 | $B^0$, $B^+$, $B^-$ | `B0`, `B+`, `B-` | Charged particles always use charge indicator |
 | $\bar{B}^0$ | `B0Bar` | Neutral antiparticles use Bar |
 | $B_s^0$, $\bar{B}_s^0$ | `Bs0`, `Bs0Bar` | |
-| $K^+$, $K^0$, $K_S^0$, $K_L^0$ | `K+`, `K0`, `KS0`, `K0L` | K-short (`KS0`) and K-long (`K0L`) tracked separately for CP eigenstates ||
+| $K^+$, $K^0$ | `K+`, `K0` | |
+| $K_S^0$, $K_L^0$ | `KS0`, `K0L` | K-short and K-long, tracked separately for CP eigenstates |
 | $K^{*0}$, $\bar{K}^{*0}$ | `Kst0`, `Kst0Bar` | K-star resonance |
 | $D^0$, $D^+$ | `D0`, `D+` | |
 | $D^{*0}$, $D^{*+}$, $D^{*-}$ | `Dst0`, `Dst+`, `Dst-` | D-star resonance (anti-particle is the charged `Dst-`) |
@@ -64,7 +65,7 @@ When the validator cannot resolve a transition symbol unambiguously, it falls ba
 | $\rho^0$, $\rho^+$, $\rho^-$ | `rho0`, `rho+`, `rho-` | |
 | $\phi$ | `phi` | Neutral vector meson |
 | $\omega$ | `omega` | Neutral vector meson |
-| $\omega^-$ | `omegal` | (compact form, see §1.5) |
+| $\Omega$ | `Omega` | Omega baryon |
 | $J/\psi$ | `J/psi` | Charmonium |
 | $\psi(2S)$ | `psi(2S)` | Charmonium excited state |
 | $\eta$, $\eta'$ | `eta`, `etaprime` | |
@@ -189,7 +190,7 @@ Each observable is listed with its flav-data abbreviation, LaTeX symbol, typical
 
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
-| `Mass` | $M_f$ | $M$ | On-shell mass (uppercase). Written as `Mass(f)` where $f$ is the particle symbol. |
+| `Mass` | $M_f$ | $M$ | On-shell mass (uppercase). Written as `Mass(f)` where $f$ is the particle symbol. Common single-token forms: `MZ`, `MW`, `Mtop`, `MH`, `Mh`. |
 | `mass` | $m$ | $m$ | $\overline{\text{MS}}$ mass (lowercase) |
 | `DeltaMass` | $\Delta M$ | $\Delta M_s$, $\Delta M_d$ | Mass difference / neutral meson mixing parameter |
 | `DeltaGamma` | $\Delta\Gamma$ | $\Delta\Gamma_s$, $\Delta\Gamma_d$ | Decay width difference / neutral meson mixing parameter |
@@ -336,11 +337,32 @@ Differences of angular coefficients between muon and electron modes, used to tes
 | `AC` | $A_C$ | $A_C$ | Charge asymmetry |
 | `f` | $f$ | $f$ | Generic fraction or proportion: decay fraction, fragmentation fraction, or any dimensionless ratio |
 
+### Electroweak and Other Pseudo-Observables
+
+| Abbr | LaTeX | Paper Notation | Description |
+|------|-------|---------------|-------------|
+| `R_b` | $R_b$ | $R_b$ | $Z \to b\bar{b}$ partial width ratio |
+| `R_c` | $R_c$ | $R_c$ | $Z \to c\bar{c}$ partial width ratio |
+| `S_phigamma` | $S_{\phi\gamma}$ | $S$ | CP-violating parameter in $B_s \to \phi\gamma$ |
+| `C_phigamma` | $C_{\phi\gamma}$ | $C$ | Direct CP asymmetry in $B_s \to \phi\gamma$ |
+| `ADelta_phigamma` | $\mathcal{A}^{\Delta}_{\phi\gamma}$ | $\mathcal{A}^{\Delta}$ | Time-dependent CP asymmetry in $B_s \to \phi\gamma$ |
+
+### Ratios Without Transition (Legacy)
+
+| Abbr | LaTeX | Paper Notation | Description |
+|------|-------|---------------|-------------|
+| `fs/fd` | $f_s/f_d$ | $f_s/f_d$ | Fragmentation ratio of $B_s$ to $B^0$ |
+| `ge/gmu` | $g_e/g_\mu$ | $g_e/g_\mu$ | Lepton coupling ratio |
+
 ### CKM Parameters
 
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
 | `gammaCKM` | $\gamma_{CKM}$ | $\gamma$, $\phi_3$ | CKM unitarity triangle angle |
+| `\|Vtd\|` | $\|V_{td}\|$ | $\|V_{td}\|$ | CKM matrix element magnitude |
+| `\|Vts\|` | $\|V_{ts}\|$ | $\|V_{ts}\|$ | CKM matrix element magnitude |
+| `\|Vub\|` | $\|V_{ub}\|$ | $\|V_{ub}\|$ | CKM matrix element magnitude |
+| `\|Vcb\|` | $\|V_{cb}\|$ | $\|V_{cb}\|$ | CKM matrix element magnitude |
 | `r` | $r$ | $r_B$, $r_D$ | Amplitude ratio (decay channel specified in transition) |
 | `delta` | $\delta$ | $\delta_B$, $\delta_D$ | Strong phase difference |
 

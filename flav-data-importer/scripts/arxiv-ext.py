@@ -23,9 +23,10 @@ import re
 # See common.py for the canonical implementations and SKILL.md
 # "Import Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import unicode_to_latex as _unicode_to_latex  # noqa: E402
-from common import to_bibtex as _to_bibtex  # noqa: E402
-from common import unicode_to_latex, to_bibtex  # noqa: E402,F401  (public re-exports)
+from common import (  # noqa: E402
+    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
+    to_bibtex, to_bibtex as _to_bibtex,
+)
 
 
 def get_arxiv_info(arxiv_id):

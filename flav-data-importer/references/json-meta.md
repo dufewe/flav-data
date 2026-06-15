@@ -44,7 +44,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
 | `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
 | `data` | array | Yes | Array of data groups. Each group is bounded by a correlation/covariance matrix — all observables linked by the same matrix belong together. Observables without a matrix can share a group. Allowed fields within each group: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. | See Data Entries section |
-| `transition-mode` | string | Yes | **Must be the last field in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
+| `transition-mode` | string | Yes | **Must be the last key before `data` in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
 
 ## Metadata Field Sources
 
@@ -167,8 +167,8 @@ Use this format for values taken from external sources (PDG world averages, HFLA
 
 ```json
 {
-    "name": "R(Lambda.2.p)[mu/e]",
-    "latex": "$\\mathcal{R}_{\\Lambda \\to p}^{\\mu/e}$",
+    "name": "RBr(Lambdac+.2.p.l+.nu)[mu/e]",
+    "latex": "$\\mathcal{R}_{\\Lambda_c \\to p}^{\\mu/e}$",
     "value": "0.175",
     "tot_err_up": "0.012",
     "tot_err_down": "0.012",
@@ -264,13 +264,11 @@ is a flat dict of `obs@N` entries with `name`/`value`/`error`
 (or `tot_err_up`/`tot_err_down`)/`unit` fields, plus an optional
 `correlation` matrix.
 
-Example (PDG snapshot):
-
 Example (PDG-style snapshot):
 
 ```json
 {
-    "inspire-hep": "[PDG:2024](https://..."),
+    "inspire-hep": "[PDG:2024](https://...)",
     "author": "Navas, S. and others",
     "title": "Review of Particle Physics",
     "year": "2024",
@@ -331,9 +329,9 @@ rather than via `../scripts/json-valid.py`.
 3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
 4. **Field order** — Top-level fields follow the Top-Level Fields table order; within `obs@N`, follow the Standard Measurement table.
 5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
-6. **No `year` field** — The database does not support a top-level `year` field.
+6. **No `year` field** — Standard schema does not support a top-level `year` field (HFLAV/PDG non-standard snapshots are the only exception; see §Non-Standard Schemas).
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
-8. **transition-mode last** — This field must always be the final key in the JSON object.
+8. **transition-mode before data** — Must be the key immediately before `data`; `data` itself must be the final key in the JSON object.
 9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
 10. **Author format** — `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials only, not full names. (SKILL.md rule 3.)
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)

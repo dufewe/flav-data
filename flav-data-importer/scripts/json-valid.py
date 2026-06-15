@@ -91,16 +91,8 @@ def validate_transition_symbol(name):
     # Basic observables (no transition symbol needed): see obs-abbr.md §2.1
     if obs_prefix in ('Tau', 'Mass', 'mass'):
         return issues
-    # Additional basic observables that don't follow the OBS(particle)
-    # pattern but are still parameter/observable values (no decay or
-    # scattering process involved). These come from the CKM Parameters,
-    # Masses, and various ratio tables in obs-abbr.md.
-    if name in (
-        'gammaCKM', 'r', 'delta', 'R_b', 'R_c',  # CKM, EW pseudo-obs
-        'MZ', 'MW', 'Mtop', 'MH', 'Mh',         # particle masses
-        '|Vtd|', '|Vts|', '|Vub|', '|Vcb|',      # CKM matrix elements
-        'S_phigamma', 'C_phigamma', 'ADelta_phigamma',  # phi_gamma
-    ):
+    # Basic observables without OBS(particle) pattern but documented in obs-abbr.md
+    if name in ('gammaCKM', 'r', 'delta'):  # CKM Parameters (§3)
         return issues
     # Ratios without a transition (legacy compact form): fs/fd, ge/gmu, etc.
     if '/' in name and '(' not in name and '[' not in name:
@@ -249,7 +241,6 @@ def validate_transition_mode(value):
 
 def validate_json(file_path):
     """Validate a single flav-data JSON file."""
-    print(f"Validating: {file_path}")
     all_issues = []
 
     # 1. Parse JSON
@@ -305,10 +296,17 @@ def validate_json(file_path):
         all_issues.extend(validate_transition_mode(data['transition-mode']))
 
     # 7. Check data array
+    if 'data' not in data:
+        all_issues.append("  Missing required field: data")
     data_entries = data.get('data', [])
     if not data_entries:
-        all_issues.append("  data array is empty")
-        print("  [WARN] data array is empty")
+        all_issues.append("  data array is empty or missing")
+    if not data_entries:
+        print("  [FAIL] data array is empty or missing")
+        print(f"  [FAIL] Found {len(all_issues)} issue(s):")
+        for issue in all_issues:
+            print(issue)
+        return all_issues
 
     for entry_idx, entry in enumerate(data_entries):
         # Check allowed fields in data block

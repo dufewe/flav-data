@@ -79,7 +79,10 @@ flav-data-importer/
 
 1. Query InspireHEP API for TexKey and recid → `references/inspirehep-api.md`
 2. Search database index by TexKey → `references/file-index.md`
-3. **Decision**: exists → compare versions; not found → Step 2
+3. **Decision**:
+   - **Found in index, file on disk** → compare versions (update if newer)
+   - **Found in index, file missing** → verify index integrity; rebuild file or remove stale index entry
+   - **Not found** → proceed to Step 2
 
 **Tip**: always use the collaboration-level TexKey (`LHCb:2015svh`), not author-level (`Aaij:2015oid`).
 
@@ -118,7 +121,8 @@ flav-data-importer/
 - **HFLAV / PDG** use a non-standard schema (one snapshot per year).
   Do **not** create per-paper JSONs — write a single year-level file
   matching the existing schema (see `references/json-meta.md` for
-  the subgroup structure).
+  the subgroup structure). **These files skip `json-valid.py`**
+  — validate them manually against the HFLAV/PDG schema in json-meta.md.
 
 #### Update
 1. Locate existing file via index
@@ -190,6 +194,9 @@ Four formatting rules for imported data:
 4. **No Unicode** — replace with LaTeX equivalents:
    `μ`→`\mu`, `Δ`→`\Delta`, `±`→`\pm`, `→`→`\to`,
    `°`→`^{\circ}`, `¯`→`\bar{}`, smart quotes → `` ` ``/`'`/`` `` ``/`''`.
+   (The mapping in `common.py` covers Greek letters, math symbols, superscripts,
+   and typographic punctuation. Unrecognized characters pass through unchanged —
+   review titles/abstracts before commit.)
 
 
 ## Troubleshooting
@@ -254,10 +261,10 @@ A: Use a Markdown link: `"[LHCb-NOTE-2015-001](https://...)"`. The validator acc
 A: Use `q2min`/`q2max` per `obs@N`. The `[condition]` syntax is for multi-decay-channel ratios only (e.g. `R(D)`).
 
 **Q: Validator complains about missing transition symbol — where to add it?**
-A: Rename the observable to `OBS(transition)[condition]` form. See `references/obs-abbr.md` for naming rules.
+A: If the observable is a decay or scattering measurement (e.g. branching fraction), rename to `OBS(transition)[condition]` form. Basic intrinsic properties (mass, lifetime, charge — e.g. `Mass(Z)`, `Tau(e-)`) do not need a transition symbol; the validator accepts them as-is. See `references/obs-abbr.md` for naming rules.
 
 **Q: Can I run both `arxiv-ext.py` and `inspirehep-ext.py` for the same paper?**
 A: Yes. arXiv provides version number and PDF URL; InspireHEP provides authoritative author list and DOI. Use InspireHEP for metadata, arXiv for PDF.
 
-**Q: Why is `texkey` missing from my JSON?**
-A: It comes from InspireHEP. If you built the JSON from arXiv only, re-run `inspirehep-ext.py` to populate it.
+**Q: I have `texkey` from InspireHEP but my JSON doesn't show it?**
+A: The JSON field is `inspire-hep` (a Markdown link `[TexKey](url)`), not a bare `texkey` key. Run `inspirehep-ext.py` to get the correct `inspire-hep` value. The `texkey` itself is embedded in that link.

@@ -186,14 +186,15 @@ When removing a file:
 ### Multi-Collaboration Papers
 
 When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS combination):
-- Use the primary collaboration (first in the TexKey) for the directory.
-- The TexKey reflects all collaborations.
-- Fill corresponding data entries for all involved groups in their respective database directories.
+- Use the primary collaboration (first in the TexKey) for the directory and filename.
+- The `collaboration` field in JSON lists all involved groups (e.g. `"ATLAS, CMS"`).
+- Fill corresponding data entries for all involved groups under their respective database directories — this means creating separate data files in each group's folder when each group's dataset differs, or a single file in the primary group's folder when the measurement is a joint combination.
 
 ## Notes
 
 1. **Always update the index** after adding or deleting a JSON file.
 2. **Month assignment** is based on the arXiv v1 submission date.
 3. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
-4. **Validate** with `python3 scripts/json-valid.py` after writing.
+4. **Validate** with `python3 scripts/json-valid.py` after writing (except HFLAV/PDG — see json-meta.md).
 5. **Backup before modifying** — especially when updating indices or replacing existing files.
+6. **Index file ordering**: Within each month array, file_ids are sorted by arXiv v1 submission date. Since the index file itself doesn't store dates, re-sort whenever adding a new entry — look up each file's `time` field from its JSON content, then sort.
