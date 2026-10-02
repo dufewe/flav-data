@@ -11,6 +11,9 @@
 # Load packages and definitions
 # ---------------------------------------------------------
 import json
+import os
+
+import streamlit as st
 
 with open('defs.py', 'r', encoding='utf-8') as f:
     exec(f.read())
@@ -92,12 +95,9 @@ def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, fold
     folder = _resolve_folder(lab, group, folder_override)
     years = []
     for year in range(year_min, year_max + 1):
-        idx = fr'{base_path}/{folder}/{year}/{group}@{year}.json'
-        try:
-            _get_json_func(idx)
+        idx = os.path.join(base_path, folder, str(year), f'{group}@{year}.json')
+        if os.path.isfile(idx):
             years.append(year)
-        except FileNotFoundError:
-            continue
     return years
 
 
@@ -172,7 +172,10 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                 step=1,
                 label_visibility="collapsed"
             )
-        selected_years = list(range(year_range[0], year_range[1] + 1))
+        selected_years = [
+            year for year in exp_year_list
+            if year_range[0] <= year <= year_range[1]
+        ]
 
         # Month range slider
         st.markdown("##### Select Month Range")
@@ -291,8 +294,11 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                             for key in data_cor:
                                 obs1 = data_value.get("obs@1", {})
                                 err_key = key.replace("correlation", "err")
-                                err_name = obs1.get(err_key, "Unknown")
+                                error_type = (
+                                    obs1.get(err_key, "Unknown")
+                                    if isinstance(obs1, dict) else "Unknown"
+                                )
                                 st.markdown(
-                                    fr'- **{err_name.upper()}-CORRELATION**'
+                                    fr'- **{str(error_type).upper()}-CORRELATION**'
                                 )
                                 st.table(data_value[key])
