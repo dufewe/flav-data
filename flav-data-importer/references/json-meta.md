@@ -16,6 +16,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": { ... },
@@ -26,8 +27,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
                 [0.1, 0.2, 1.0]
             ]
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }
 ```text
 
@@ -44,7 +44,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
 | `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
 | `data` | array | Yes | Array of data groups. Each group is bounded by a correlation/covariance matrix — all observables linked by the same matrix belong together. Observables without a matrix can share a group. Allowed fields within each group: `obs@N`, `type@N_correlation`, `type@N_covariance`, `tot_correlation`, `tot_covariance`. | See Data Entries section |
-| `transition-mode` | string | Yes | **Must be the last key before `data` in the JSON file.** Describes the physical process type. Only "scattering" and "decay" are valid top-level categories, subdivided by specific property. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
+| `transition-mode` | string | Yes | Must immediately precede `data`; `data` is the final top-level key. Describes the physical process type using a property-based category. Do NOT use non-property descriptors like "rare decay". | `semileptonic decay` |
 
 ## Metadata Field Sources
 
@@ -55,7 +55,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `collaboration` | InspireHEP BibTeX info | Collaboration name |
 | `title` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
 | `abstract` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
-| `arxiv` | arXiv webpage | `[primary_category/arxiv_idvN](url)` |
+| `arxiv` | arXiv webpage | `[primary_category/arxiv_idvN](https://arxiv.org/pdf/<id>)` |
 | `time` | arXiv webpage | v1 submission date, `YYYY.MM.DD` |
 | `pdf` | arXiv webpage (preferred) | Fallback to InspireHEP or journal link |
 | `transition-mode` | Paper information | Property-based decay/scattering name |
@@ -96,8 +96,8 @@ Use this format when the paper reports a central value with component errors (st
 | `type@N_err` | No | string | Additional error type labels (e.g., `"syst"`, `"lumi"`, `"norm"`, `"theo"`). Each additional error type requires its own `_err`, `_err_up`, and `_err_down` triplet. |
 | `type@N_err_up` | No | string | Upper error for type N. |
 | `type@N_err_down` | No | string | Lower error for type N. |
-| `q2min` | Conditional | string | Lower kinematic boundary (usually q² in GeV²). If only an upper bound exists, use the literal string `"q2min"`. |
-| `q2max` | Conditional | string | Upper kinematic boundary. If only a lower bound exists, use the literal string `"q2max"`. |
+| `q2min` | Conditional | string | Lower kinematic boundary (usually q² in GeV²). String-formatted float, e.g. `"0.1"`. If the lower bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
+| `q2max` | Conditional | string | Upper kinematic boundary. String-formatted float, e.g. `"1.1"`. If the upper bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
 | `pTmin`/`pTmax` | Conditional | string | Transverse momentum boundaries. Use instead of q² for non-decay processes. |
 | `etamin`/`etamax` | Conditional | string | Pseudorapidity boundaries. |
 | `unit` | Conditional | string | Physical unit (e.g., `"GeV"`, `"ps"`, `"fb"`). Omit for dimensionless observables. |
@@ -163,12 +163,12 @@ level. They come from different statistical procedures and coexist in the same
 
 ### External Reference Format
 
-Use this format for values taken from external sources (PDG world averages, HFLAV combinations, earlier papers):
+Use this format for values taken from external sources (PDG world averages, HFLAV combinations, earlier papers). Per `obs-abbr.md` §2.2.2, **ratio observable names must use the `R<OBS>(transition)[cond]` form** (e.g. `RBr`, `RFL`, `RDeltaGamma`); a bare `R(transition)[cond]` is not a valid flav-data ratio name:
 
 ```json
 {
     "name": "RBr(Lambdac+.2.p.l+.nu)[mu/e]",
-    "latex": "$\\mathcal{R}_{\\Lambda_c \\to p}^{\\mu/e}$",
+    "latex": "$\\mathcal{R}^{\\mu/e}_{\\Lambda_c^+\\to p\\ell\\nu}$",
     "value": "0.175",
     "tot_err_up": "0.012",
     "tot_err_down": "0.012",
@@ -292,7 +292,7 @@ Example (HFLAV-style snapshot):
 {
     "HFLAV@overview": {
         "group": "HFLAV",
-        "arxiv": "2411.18639",
+        "arxiv": null,
         "inspire-hep": "[HFLAV:2024](https://...)",
         "description": "overview of popular observables",
         "observables": [
@@ -331,7 +331,7 @@ rather than via `../scripts/json-valid.py`.
 5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
 6. **No `year` field** — Standard schema does not support a top-level `year` field (HFLAV/PDG non-standard snapshots are the only exception; see §Non-Standard Schemas).
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
-8. **transition-mode before data** — Must be the key immediately before `data`; `data` itself must be the final key in the JSON object.
+8. **Top-level key order** — `transition-mode` must immediately precede `data`, and `data` must be the final key in the JSON object.
 9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
 10. **Author format** — `Surname, Initials.` followed by ` and others` (e.g. `"Aaij, R. and others"`). Initials only, not full names. (SKILL.md rule 3.)
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)

@@ -72,25 +72,23 @@ $HEPDATA_CLI fetch-names -i inspire 1409497
 $HEPDATA_CLI download -f json -i inspire 1409497 -d <output_dir>
 ```
 
-**Table classification**:
-- Tables 1–8: Angular observables per q² bin (FL, S3–S9, A3–A9, P1–P3, P'₄, P'₅, P'₈)
-- Tables 9–18: Likelihood correlation matrices (Appendix C) — 10 bins × 1 matrix each
-- Tables 19–28: Likelihood correlation matrices (Appendix D) — 10 bins × 1 matrix each
-- Tables 29–38: Likelihood correlation matrices (Appendix E) — 10 bins × 1 matrix each
-- Tables 39–53: Bootstrap correlation matrices (Appendix F)
-- Tables 54–68: Bootstrap correlation matrices (Appendix G)
-- Tables 69–83: Bootstrap correlation matrices (Appendix H)
+**Table classification** (Tables 1–83 = 8 angular-observable tables + 75 correlation-matrix tables):
+- Tables 1–8: Angular observables per q² bin (FL, S3–S9, A3–A9, P1–P3, P'₄, P'₅, P'₈) — 8 angular tables, one per q² bin
+- Tables 9–18: Likelihood correlation matrices (Appendix C) — **10 bins** × 1 matrix each
+- Tables 19–28: Likelihood correlation matrices (Appendix D) — **10 bins**
+- Tables 29–38: Likelihood correlation matrices (Appendix E) — **10 bins**
+- Tables 39–53: Bootstrap correlation matrices (Appendix F) — **15 bins**
+- Tables 54–68: Bootstrap correlation matrices (Appendix G) — **15 bins**
+- Tables 69–83: Bootstrap correlation matrices (Appendix H) — **15 bins**
 
 **Download individual tables** (URL-encode spaces):
 
 ```bash
-curl -sL -A "Mozilla/5.0" \
-  "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml" \
-  > <output_dir>/table1.yaml
+python3 flav-data-importer/scripts/hepdata-ext.py 1409497 \
+  --output_dir <output_dir> --table "Table 1"
 
-curl -sL -A "Mozilla/5.0" \
-  "https://www.hepdata.net/download/table/ins1409497/Table%209/yaml" \
-  > <output_dir>/table9.yaml
+python3 flav-data-importer/scripts/hepdata-ext.py 1409497 \
+  --output_dir <output_dir> --table "Table 9"
 ```
 
 ## Step 4: Build JSON
@@ -107,6 +105,7 @@ Parse the YAML tables and construct the JSON entry:
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
+    "transition-mode": "semileptonic decay",
     "data": [
         {
             "obs@1": {
@@ -138,8 +137,7 @@ Parse the YAML tables and construct the JSON entry:
             "...": "...",
             "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
         }
-    ],
-    "transition-mode": "semileptonic decay"
+    ]
 }
 ```
 
@@ -168,12 +166,12 @@ If the index already had entries for other months, preserve them and add month "
 ## Step 6: Validate
 
 ```bash
-python3 scripts/json-valid.py \
+python3 flav-data-importer/scripts/json-valid.py \
   Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
 ```
 
 Expected output:
-```
+```console
 Validating: Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
   [OK] JSON format correct
   [OK] Top-level fields complete

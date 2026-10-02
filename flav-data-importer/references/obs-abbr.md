@@ -39,6 +39,8 @@ A **compact transition symbol** is an older, shorter notation that concatenates 
 | `B+.2.K+.mu+.mu-` | `B+2K+mumu` | $B^+ \to K^+ \mu^+ \mu^-$ |
 | `B0.2.Kst0.mu+.mu-` | `B02Kstmumu` | $B^0 \to K^{*0} \mu^+ \mu^-$ |
 | `Bs0.2.phi.e+.e-` | `Bs02phiee` | $B_s^0 \to \phi\, e^+ e^-$ |
+| `Lambdab0Bar.2.Lambdab0` | `Lbd0bar2Lbd0` | $\bar{\Lambda}_b^0 \to \Lambda_b^0$ (mixing) |
+| `Lambdab0.2.Lambdac+.pi-` | `Lbd2Lcpi` | $\Lambda_b^0 \to \Lambda_c^+ \pi^-$ |
 
 **Compact-form conventions**:
 - The arrow `→` is dropped (concatenation implies decay order).
@@ -64,8 +66,7 @@ When the validator cannot resolve a transition symbol unambiguously, it falls ba
 | $\pi^0$, $\pi^+$, $\pi^-$ | `pi0`, `pi+`, `pi-` | |
 | $\rho^0$, $\rho^+$, $\rho^-$ | `rho0`, `rho+`, `rho-` | |
 | $\phi$ | `phi` | Neutral vector meson |
-| $\omega$ | `omega` | Neutral vector meson |
-| $\Omega$ | `Omega` | Omega baryon |
+| $\omega$ | `omega` | Neutral vector meson (no charged $\omega^\pm$ exists) |
 | $J/\psi$ | `J/psi` | Charmonium |
 | $\psi(2S)$ | `psi(2S)` | Charmonium excited state |
 | $\eta$, $\eta'$ | `eta`, `etaprime` | |
@@ -113,6 +114,32 @@ Every measured quantity is named using the pattern `OBS(transition)[condition]`:
 | Mass $M_Z$ | $M_Z$ | `Mass(Z)` | On-shell mass of a resonance |
 | $\overline{\text{MS}}$ mass $m_t$ | $m_t$ | `mass(t)` | Running mass |
 | Lifetime $\tau_{e^-}$ | $\tau_f$ | `Tau(e-)` | Particle lifetime |
+
+**Short particle-mass shortcuts** — accepted by the validator for legacy data; new imports should use the generic `Mass(f)` form:
+
+| Symbol | Particle | Replaces |
+|--------|----------|----------|
+| `MZ` | $Z$ boson | `Mass(Z)` |
+| `MW` | $W$ boson | `Mass(W)` |
+| `Mtop`, `MH`, `Mh` | top quark, Higgs, light Higgs | `Mass(t)`, `Mass(H)`, `Mass(h)` |
+
+**CKM-related bare names** (no transition; see §3.5 CKM Parameters):
+
+| Symbol | Meaning | Notes |
+|--------|---------|-------|
+| `gammaCKM` | $\gamma_\text{CKM}$ | CKM unitarity triangle angle |
+| `r` | $r$ | Amplitude ratio (decay channel implied by adjacent data) |
+| `delta` | $\delta$ | Strong phase difference |
+| `R_b`, `R_c` | $R_b$, $R_c$ | LEP electroweak pseudo-observables |
+| `\|Vtd\|`, `\|Vts\|`, `\|Vub\|`, `\|Vcb\|` | CKM matrix elements | Magnitudes only |
+| `S_phigamma`, `C_phigamma`, `ADelta_phigamma` | $\phi_\gamma$ parameters | Time-dependent CP at $\phi_\gamma$ |
+
+**Bare ratio names** (no transition) — accepted for legacy LEP/PDG ratios where the underlying decay is conventional:
+
+| Symbol | Meaning |
+|--------|---------|
+| `fs/fd` | $f_s / f_d$ fragmentation ratio |
+| `ge/gmu`, `ge/gtau` | Lepton flavor ratios at $Z$ |
 
 ### 2.2 Composite Observables (With Transition)
 

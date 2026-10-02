@@ -160,66 +160,50 @@ st.markdown('''
 # ---------------------------------------------------------
 # Database Statistics
 # ---------------------------------------------------------
-st.divider()
-st.header("Database Statistics")
+@st.cache_data(ttl=300)
+def get_database_statistics(experimental_groups, theoretical_groups,
+                           experimental_base, theoretical_base):
+    total_files = 0
+    years = set()
 
-# Count indexed files dynamically. We walk every Lab-Collaboration
-# folder listed in EXPEGROUP plus every THEOGROUP entry.
-total_files = 0
-file_ids = []
+    def count_group(group, group_dir):
+        nonlocal total_files
+        if not os.path.isdir(group_dir):
+            return
+        for year in os.listdir(group_dir):
+            if not (year.isdigit() and len(year) == 4):
+                continue
+            idx_path = os.path.join(group_dir, year, f"{group}@{year}.json")
+            try:
+                index = get_json(idx_path)
+            except (FileNotFoundError, json.JSONDecodeError):
+                continue
+            total_files += sum(len(ids) for ids in index.values())
+            if any(ids for ids in index.values()):
+                years.add(year)
 
-for entry in EXPEGROUP:
-    lab, group = entry[0], entry[1]
-    # entry may be a 2-tuple (lab, group) or a 3-tuple
-    # (lab, group, folder_override). When the folder is overridden
-    # use that explicit path; otherwise build ``<lab>-<group>``,
-    # or the bare group name when lab is empty (aggregation
-    # groups like HFLAV and PDG).
-    if len(entry) >= 3 and entry[2]:
-        group_dir = os.path.join(EXPERIMENTAL_BASE, entry[2])
-    elif lab:
-        group_dir = os.path.join(EXPERIMENTAL_BASE, f"{lab}-{group}")
-    else:
-        group_dir = os.path.join(EXPERIMENTAL_BASE, group)
-    if not os.path.isdir(group_dir):
-        continue
-    for year in sorted(os.listdir(group_dir)):
-        if not (year.isdigit() and len(year) == 4):
-            continue
-        idx_path = os.path.join(group_dir, year, f"{group}@{year}.json")
-        if not os.path.exists(idx_path):
-            continue
-        try:
-            index = get_json(idx_path)
-        except (FileNotFoundError, json.JSONDecodeError):
-            continue
-        for _month, ids in index.items():
-            for fid in ids:
-                total_files += 1
-                file_ids.append(f"{group}:{year}")
+    for entry in experimental_groups:
+        lab, group = entry[0], entry[1]
+        if len(entry) >= 3 and entry[2]:
+            group_dir = os.path.join(experimental_base, entry[2])
+        elif lab:
+            group_dir = os.path.join(experimental_base, f"{lab}-{group}")
+        else:
+            group_dir = os.path.join(experimental_base, group)
+        count_group(group, group_dir)
 
-for group in THEOGROUP:
-    group_dir = os.path.join(THEORETICAL_BASE, group)
-    if not os.path.isdir(group_dir):
-        continue
-    for year in sorted(os.listdir(group_dir)):
-        if not (year.isdigit() and len(year) == 4):
-            continue
-        idx_path = os.path.join(group_dir, year, f"{group}@{year}.json")
-        if not os.path.exists(idx_path):
-            continue
-        try:
-            index = get_json(idx_path)
-        except (FileNotFoundError, json.JSONDecodeError):
-            continue
-        for _month, ids in index.items():
-            for fid in ids:
-                total_files += 1
-                file_ids.append(f"{group}:{year}")
+    for group in theoretical_groups:
+        count_group(group, os.path.join(theoretical_base, group))
 
+    return total_files, sorted(years)
+
+
+total_files, unique_years = get_database_statistics(
+    tuple(tuple(entry) for entry in EXPEGROUP),
+    tuple(THEOGROUP),
+    EXPERIMENTAL_BASE,
+    THEORETICAL_BASE,
+)
 st.metric("Total JSON Entries", total_files)
-
-# Year list comes from the year field embedded in `group:year` IDs
-unique_years = sorted({fid.split(":")[-1] for fid in file_ids if fid.split(":")[-1].isdigit()})
 if unique_years:
     st.caption(f"Spanning years: {', '.join(unique_years)}")

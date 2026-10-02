@@ -23,13 +23,13 @@ import re
 # See common.py for the canonical implementations and SKILL.md
 # "Import Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (  # noqa: E402
+from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
     to_bibtex, to_bibtex as _to_bibtex,
-)
+)  # noqa: E402,F401
 
 
-def get_inspire_by_arxiv(arxiv_id):
+def get_inspire_by_arxiv(arxiv_id: str) -> dict:
     """Query InspireHEP by arXiv ID."""
     url = f'https://inspirehep.net/api/literature?q=eprint:{arxiv_id}'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
@@ -41,13 +41,19 @@ def get_inspire_by_arxiv(arxiv_id):
         raise ValueError(f"InspireHEP API connection failed: {e.reason}")
     data = json.loads(response.read().decode('utf-8'))
 
-    if not data.get('hits', {}).get('hits'):
-        raise ValueError(f"No InspireHEP entry found for arXiv: {arxiv_id}")
+    hits = data.get('hits', {}).get('hits', [])
+    requested_id = arxiv_id.split('v', 1)[0]
+    for hit in hits:
+        metadata = hit.get('metadata', {})
+        eprints = metadata.get('arxiv_eprints', [])
+        if any(eprint.get('value', '').split('v', 1)[0] == requested_id
+               for eprint in eprints):
+            return hit
 
-    return data['hits']['hits'][0]
+    raise ValueError(f"No InspireHEP entry found for arXiv: {arxiv_id}")
 
 
-def get_inspire_by_recid(recid):
+def get_inspire_by_recid(recid: str) -> dict:
     """Query InspireHEP directly by control number."""
     url = f'https://inspirehep.net/api/literature/{recid}'
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
@@ -62,7 +68,7 @@ def get_inspire_by_recid(recid):
     return data
 
 
-def extract_metadata(hit):
+def extract_metadata(hit: dict) -> dict:
     """Extract structured metadata from an InspireHEP hit."""
     # Handle direct query (no hits wrapper) and search query
     if 'metadata' in hit:
@@ -183,32 +189,53 @@ def extract_metadata(hit):
     }
 
 
-def main():
+def main() -> None:
     """CLI entry point.
 
     Examples
     --------
     >>> python3 scripts/inspirehep-ext.py 1512.04442
+    >>> python3 scripts/inspirehep-ext.py --arxiv-id 1512.04442
     >>> python3 scripts/inspirehep-ext.py --recid 1409497
     >>> python3 scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
     """
     parser = argparse.ArgumentParser(
         description='Extract InspireHEP paper information'
     )
-    parser.add_argument('arxiv_id', nargs='?', help='arXiv ID')
+    parser.add_argument(
+        'arxiv_id', nargs='?',
+        help='arXiv ID (positional; equivalent to --arxiv-id)'
+    )
+    parser.add_argument(
+        '--arxiv-id', dest='arxiv_id_flag', default=None,
+        help='arXiv ID (explicit form, equivalent to positional arxiv_id)'
+    )
     parser.add_argument('--recid', help='InspireHEP control number')
-    parser.add_argument('--output_dir', '-o', default='.', help='Output directory')
+    parser.add_argument(
+        '--output_dir', '-o', default=None,
+        help='Output directory for the JSON dump. If omitted, no file is '
+             'written (only stdout summary). Specify a path (e.g. /tmp/meta) '
+             'to enable file output.'
+    )
+    parser.add_argument(
+        '--no-write', dest='no_write', action='store_true',
+        help='Skip writing the JSON file; print summary only. Default is to '
+             'not write unless --output_dir is given.'
+    )
     args = parser.parse_args()
 
-    if not args.arxiv_id and not args.recid:
-        parser.error("Either arxiv_id or --recid is required")
+    # Reconcile positional and explicit --arxiv-id (positional wins if both given)
+    arxiv_id = args.arxiv_id or args.arxiv_id_flag
+
+    if not arxiv_id and not args.recid:
+        parser.error("Either arxiv_id (positional or --arxiv-id) or --recid is required")
 
     if args.recid:
         print(f"Fetching InspireHEP record: {args.recid}")
         hit = get_inspire_by_recid(args.recid)
     else:
-        print(f"Searching InspireHEP for arXiv: {args.arxiv_id}")
-        hit = get_inspire_by_arxiv(args.arxiv_id)
+        print(f"Searching InspireHEP for arXiv: {arxiv_id}")
+        hit = get_inspire_by_arxiv(arxiv_id)
 
     info = extract_metadata(hit)
 
@@ -232,12 +259,16 @@ def main():
     print(f"ArXiv Link: {info['arxiv_link']}")
 
     output_dir = args.output_dir
-    os.makedirs(output_dir, exist_ok=True)
-    filename = f"{info['texkey'] or info['recid']}_inspire.json"
-    json_path = os.path.join(output_dir, filename)
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(info, f, indent=4, ensure_ascii=False)
-    print(f"\nJSON saved to: {json_path}")
+    if output_dir and not args.no_write:
+        os.makedirs(output_dir, exist_ok=True)
+        safe_texkey = re.sub(r'[^A-Za-z0-9._-]', '_', info['texkey']).strip('._-')
+        filename = f"{safe_texkey or info['recid']}_inspire.json"
+        json_path = os.path.join(output_dir, filename)
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, indent=4, ensure_ascii=False)
+        print(f"\nJSON saved to: {json_path}")
+    else:
+        print("\nNo file written (use --output_dir /path to save the JSON dump).")
 
 
 if __name__ == '__main__':

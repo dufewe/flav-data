@@ -18,6 +18,7 @@ import argparse
 import urllib.request
 import urllib.error
 import shutil
+import tempfile
 
 try:
     import yaml
@@ -30,9 +31,12 @@ except ImportError:
 # See common.py for the canonical implementations and SKILL.md
 # "Import Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import unicode_to_latex, to_bibtex  # noqa: E402,F401
+from common import (
+    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
+    to_bibtex, to_bibtex as _to_bibtex,
+)  # noqa: E402,F401
 
-def _resolve_hepdata_cli():
+def _resolve_hepdata_cli() -> str | None:
     """Locate the ``hepdata-cli`` executable.
 
     Search order: $PATH, active venv bin/, ~/.local/bin/, Homebrew prefixes.
@@ -57,7 +61,7 @@ def _resolve_hepdata_cli():
 HEPDATA_CLI: str = _resolve_hepdata_cli()
 
 
-def _require_hepdata_cli():
+def _require_hepdata_cli() -> None:
     """Raise :class:`RuntimeError` with install instructions if CLI is missing."""
     if HEPDATA_CLI:
         return
@@ -69,7 +73,7 @@ def _require_hepdata_cli():
     )
 
 
-def fetch_table_names(inspire_id):
+def fetch_table_names(inspire_id: str) -> list[str] | None:
     """Get available table names from HEPData for a given Inspire recid.
 
     Returns list of table names, or None on CLI failure.
@@ -103,7 +107,7 @@ def fetch_table_names(inspire_id):
     return tables
 
 
-def download_metadata(inspire_id, output_dir):
+def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     """Download HEPData metadata JSON.
 
     Parameters
@@ -120,6 +124,9 @@ def download_metadata(inspire_id, output_dir):
     """
     _require_hepdata_cli()
     os.makedirs(output_dir, exist_ok=True)
+    existing_json = {
+        f for f in os.listdir(output_dir) if f.endswith('.json')
+    }
     result = subprocess.run(
         [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire',
          str(inspire_id), '-d', output_dir],
@@ -132,13 +139,30 @@ def download_metadata(inspire_id, output_dir):
             print(f"Error: {result.stderr or result.stdout}")
         return None
 
-    for f in os.listdir(output_dir):
-        if f.endswith('.json'):
-            return os.path.join(output_dir, f)
+    downloaded = sorted(
+        f for f in os.listdir(output_dir)
+        if f.endswith('.json') and f not in existing_json
+    )
+    if downloaded:
+        return os.path.join(output_dir, downloaded[0])
+
+    # Some hepdata-cli versions overwrite an existing metadata filename.
+    candidates = sorted(
+        f for f in os.listdir(output_dir) if f.endswith('.json')
+    )
+    for filename in candidates:
+        path = os.path.join(output_dir, filename)
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                metadata = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            continue
+        if str(metadata.get('inspire_id', '')) == str(inspire_id):
+            return path
     return None
 
 
-def download_table_yaml(inspire_id, table_name):
+def download_table_yaml(inspire_id: str, table_name: str) -> str:
     """Download YAML data for a specific table via direct HTTP."""
     from urllib.parse import quote
     encoded_name = quote(table_name, safe='')
@@ -160,7 +184,7 @@ def download_table_yaml(inspire_id, table_name):
     return response.read().decode('utf-8')
 
 
-def parse_metadata(meta_path):
+def parse_metadata(meta_path: str) -> dict:
     """Parse HEPData metadata JSON, extracting key information."""
     with open(meta_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -196,7 +220,7 @@ def parse_metadata(meta_path):
     }
 
 
-def parse_yaml_observables(yaml_text):
+def parse_yaml_observables(yaml_text: str) -> dict:
     """Parse observable YAML data from a HEPData ``dependent_variables`` table.
 
     A HEPData "observable table" describes one observable measured at one or
@@ -291,7 +315,7 @@ def parse_yaml_observables(yaml_text):
     return observables, {'global': global_qualifiers}
 
 
-def parse_yaml_correlation(yaml_text):
+def parse_yaml_correlation(yaml_text: str) -> dict:
     """Parse correlation/covariance matrix YAML data.
 
     Returns: (matrix_type, matrix, qualifiers)
@@ -343,7 +367,7 @@ def parse_yaml_correlation(yaml_text):
     return matrix_type, matrix, qualifiers
 
 
-def main():
+def main() -> int:
     """CLI entry point.
 
     Fails fast with an actionable ``pip install hepdata-cli`` message if
@@ -364,7 +388,14 @@ def main():
     )
     parser.add_argument('inspire_id', help='InspireHEP control number')
     parser.add_argument(
-        '--output_dir', '-o', default=None, help='Output directory (default: <cwd>/hepdata_out)'
+        '--output_dir', '-o', default=None,
+        help='Output directory for downloaded YAML/JSON. If omitted, no '
+             'files are written (only stdout summary). Specify a path '
+             '(e.g. /tmp/hepdata) to enable file output.'
+    )
+    parser.add_argument(
+        '--no-write', dest='no_write', action='store_true',
+        help='Skip writing YAML/JSON files; print summary only.'
     )
     parser.add_argument(
         '--table', '-t', help='Download only the specified table'
@@ -372,7 +403,24 @@ def main():
     args = parser.parse_args()
 
     inspire_id = args.inspire_id
-    output_dir = args.output_dir or os.path.join(os.getcwd(), 'hepdata_out')
+    if not args.output_dir and not args.no_write:
+        names = fetch_table_names(inspire_id)
+        if names is None:
+            print('Failed to fetch table names.')
+            return 1
+        print(f"Available tables ({len(names)}):")
+        for name in names:
+            print(f"  - {name}")
+        return 0
+
+    if args.no_write:
+        temp_output = tempfile.TemporaryDirectory()
+        output_dir = temp_output.name
+        print('--no-write: temporary files will be removed')
+    else:
+        temp_output = None
+        output_dir = args.output_dir
+    os.makedirs(output_dir, exist_ok=True)
 
     print(f"Fetching HEPData for Inspire ID: {inspire_id}")
 
@@ -397,7 +445,8 @@ def main():
         print("Failed to download metadata.")
         sys.exit(1)
 
-    print(f"Metadata saved to: {meta_path}")
+    if not args.no_write:
+        print(f"Metadata saved to: {meta_path}")
 
     # Parse metadata
     print("\n=== Metadata Summary ===")
@@ -430,7 +479,8 @@ def main():
         )
         with open(yaml_path, 'w', encoding='utf-8') as f:
             f.write(yaml_data)
-        print(f"YAML saved to: {yaml_path}")
+        if not args.no_write:
+            print(f"YAML saved to: {yaml_path}")
 
         # Attempt to parse
         if 'correlation' in args.table.lower() or 'covariance' in args.table.lower():
@@ -454,10 +504,15 @@ def main():
                 )
 
     # Save JSON summary
-    summary_path = os.path.join(output_dir, 'hepdata_summary.json')
-    with open(summary_path, 'w', encoding='utf-8') as f:
-        json.dump(info, f, indent=4, ensure_ascii=False)
-    print(f"\nSummary saved to: {summary_path}")
+    if not args.no_write:
+        summary_path = os.path.join(output_dir, 'hepdata_summary.json')
+        with open(summary_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, indent=4, ensure_ascii=False)
+        print(f"\nSummary saved to: {summary_path}")
+
+    if temp_output:
+        temp_output.cleanup()
+    return 0
 
 
 if __name__ == '__main__':

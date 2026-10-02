@@ -10,6 +10,8 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
+import json
+
 with open('defs.py', 'r', encoding='utf-8') as f:
     exec(f.read())
 
@@ -57,13 +59,19 @@ def get_cached_data(lab, group, years, months, _get_json_func, base_path, folder
             continue
 
         for m_key, item_ids in json_index.items():
-            if int(m_key) not in months:
+            try:
+                month = int(m_key)
+            except (TypeError, ValueError):
+                continue
+            if month not in months or not 1 <= month <= 12:
                 continue
             for fid in item_ids:
                 detail_path = fr'{base_path}/{folder}/{year}/{m_key}/{fid}.json'
                 try:
                     detail = _get_json_func(detail_path)
                 except FileNotFoundError:
+                    continue
+                except json.JSONDecodeError:
                     continue
                 if detail:
                     # Inject metadata for downstream sorting/display
@@ -74,6 +82,7 @@ def get_cached_data(lab, group, years, months, _get_json_func, base_path, folder
     return data_pool
 
 
+@st.cache_data(ttl=300)
 def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, folder_override=None):
     """Return the list of years that have an annual index file for ``group``.
 
@@ -262,22 +271,24 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                 )
 
             # Expandable data view
-            with st.expander('View Data'):
-                data = json_detail.get('data', [])
-                for data_value in data:
-                    with st.container(border=True):
-                        # Observable list (rendered as a table)
-                        data_obs = [value for key, value in data_value.items()
-                                    if key.startswith("obs@")]
-                        if data_obs:
-                            st.markdown('- **OBSERVABLE**')
-                            st.table(data_obs)
+            expander = st.expander(
+                'View Data', on_change='rerun',
+                key=f"view_data_{group}_{json_detail.get('inspire-hep', json_detail.get('arxiv', json_detail.get('title', 'untitled')))}"
+            )
+            if expander.open:
+                with expander:
+                    data = json_detail.get('data', [])
+                    for data_value in data:
+                        with st.container(border=True):
+                            data_obs = [value for key, value in data_value.items()
+                                        if key.startswith("obs@")]
+                            if data_obs:
+                                st.markdown('- **OBSERVABLE**')
+                                st.table(data_obs)
 
-                        # Correlation/covariance matrices
-                        data_cor = [key for key in data_value
-                                    if "correlation" in key.lower()]
-                        for key in data_cor:
-                            try:
+                            data_cor = [key for key in data_value
+                                        if "correlation" in key.lower()]
+                            for key in data_cor:
                                 obs1 = data_value.get("obs@1", {})
                                 err_key = key.replace("correlation", "err")
                                 err_name = obs1.get(err_key, "Unknown")
@@ -285,7 +296,3 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                                     fr'- **{err_name.upper()}-CORRELATION**'
                                 )
                                 st.table(data_value[key])
-                            except Exception:
-                                # Defensive: never let a bad matrix block
-                                # the rest of the page
-                                pass

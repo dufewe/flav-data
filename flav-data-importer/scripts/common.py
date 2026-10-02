@@ -120,7 +120,7 @@ _MULTI_CHAR_REPLACEMENTS = [
 ]
 
 
-def unicode_to_latex(text):
+def unicode_to_latex(text: str) -> str:
     """Replace all supported Unicode characters in *text* with LaTeX equivalents.
 
     Applies the mapping defined in SKILL.md "Import Conventions" rule 4:
@@ -161,7 +161,7 @@ def unicode_to_latex(text):
 #   Already-initials form ("A.M.") passes through unchanged.
 #   Fallback (no person names): "{group} collaboration".
 
-def to_bibtex(full_name):
+def to_bibtex(full_name: str) -> str:
     """Convert an InspireHEP full author name to BibTeX initials form.
 
     InspireHEP stores authors as ``"Surname, Full First Name"``
@@ -220,3 +220,118 @@ def to_bibtex(full_name):
     initials = ''.join(initials_list)
 
     return f'{surname}, {initials}'
+
+
+# Mapping from compact observable abbreviation to its LaTeX symbol.
+# Covers the most common observables used in B → K(*)ℓℓ and B → DK analyses.
+# For full canonical list see references/obs-abbr.md §3.
+#
+# IMPORTANT: This dict does NOT cover compact transition-symbol expansion
+# (e.g. "B0.2.Kst0.mu+.mu-" → "B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}"). That
+# expansion is described in references/obs-abbr.md §1.2 and must be
+# applied separately, either by hand or via a more specialised parser.
+# latex_for_obs() below applies this dict for the OBSERVABLE ABBREVIATION
+# only; transition rendering falls through to the compact form verbatim.
+OBSERVABLE_LATEX = {
+    # Branching fractions and ratios
+    'Br': 'B',
+    'RBr': 'R',  # ratio of branching fractions (with [condition] suffix)
+    'ACP': 'A_{CP}',
+
+    # Angular coefficients (LHCb B → K* μμ angular analysis)
+    'FL': 'F_L',
+    'S3': 'S_3',
+    'S4': 'S_4',
+    'S5': 'S_5',
+    'S7': 'S_7',
+    'S8': 'S_8',
+    'S9': 'S_9',
+    'AFB': 'A_{FB}',
+    'P1': 'P_1',
+    'P2': 'P_2',
+    'P3': 'P_3',
+    'P4p': 'P_4^{\\prime}',
+    'P5p': 'P_5^{\\prime}',
+    'P6p': 'P_6^{\\prime}',
+    'P8p': 'P_8^{\\prime}',
+
+    # Asymmetries
+    'ASL': 'A_{SL}',
+
+    # CKM parameters (no transition needed)
+    'gammaCKM': '\\gamma',
+    'gamma': '\\gamma',
+    'r': 'r',
+    'delta': '\\delta',
+
+    # Masses, lifetimes, mixing (no transition)
+    'Mass': 'M',  # e.g. Mass(Bs) → "$M_{B_s}$"
+    'Tau': '\\tau',
+    'Width': '\\Gamma',
+    'dGamma_s': '\\Delta\\Gamma_s',
+    'dMs': '\\Delta M_s',
+    'dMd': '\\Delta M_d',
+
+    # EW parameters (no transition)
+    'MZ': 'M_Z',
+    'MW': 'M_W',
+    'Mtop': 'm_t',
+    'MH': 'M_H',
+    'sin2theta': '\\sin 2\\theta',
+    'alphaS': '\\alpha_s',
+    'alpha': '\\alpha_{\\rm QED}',
+    'GFermi': 'G_F',
+}
+
+
+def latex_for_obs(obs_name: str) -> str:
+    """Build the LaTeX string for an observable name.
+
+    The flav-data JSON schema requires every ``obs@N`` entry to carry a
+    ``latex`` field containing a dollar-sign-wrapped rendering of the same
+    expression as ``name``. For example::
+
+        latex_for_obs("gammaCKM")                  # → "$\\gamma$"
+        latex_for_obs("Mass(B0)")                  # → "$M_{B0}$"
+        latex_for_obs("FL(B0.2.Kst0.mu+.mu-)")     # → "$F_L(B0.2.Kst0.mu+.mu-)$"
+
+    **Limitations.** This helper applies the OBSERVABLE ABBREVIATION table
+    (e.g. ``FL`` → ``F_L``) but does NOT expand the compact transition
+    notation (e.g. ``B0.2.Kst0`` is NOT auto-expanded to
+    ``B^{0} \\to K^{*0}``). The compact form is left in place so the
+    downstream fitter can re-parse it. If you need fully expanded LaTeX,
+    see ``references/obs-abbr.md`` §1.2 for the rules and write the field
+    by hand, or extend this helper.
+
+    For an unknown abbreviation, falls back to wrapping the bare ``obs_name``
+    in ``$...$``.
+    """
+    import re
+
+    # Bare form (no transition): "gammaCKM", "Mass", "MZ" etc.
+    if obs_name in OBSERVABLE_LATEX:
+        return f'${OBSERVABLE_LATEX[obs_name]}$'
+
+    # Particle bare form: "Mass(B0)", "Tau(Bs)", "Mass(Z)" — the inner
+    # content is a single particle name (no '.2.' separator, no '+'/'−'/'*').
+    bare = re.match(r'^([A-Za-z][A-Za-z0-9]*)\(([^)]+)\)$', obs_name)
+    if bare:
+        inner = bare.group(2)
+        # Heuristic: bare form has no transition indicators
+        is_bare = ('.' not in inner and '+' not in inner and '-' not in inner
+                   and '*' not in inner and 'nu' not in inner)
+        if is_bare:
+            abbr, particle = bare.group(1), bare.group(2)
+            sym = OBSERVABLE_LATEX.get(abbr, abbr)
+            return f'${sym}_{{{particle}}}$'
+
+    # Transition form: "ABBR(transition)" or "ABBR(transition)[condition]"
+    # ABBR allows digits and lowercase (e.g. S3, P5p, dMs)
+    m = re.match(r'^([A-Za-z][A-Za-z0-9]*)\(([^)]*)\)(\[[^\]]*\])?$', obs_name)
+    if m:
+        abbr = m.group(1)
+        sym = OBSERVABLE_LATEX.get(abbr, abbr)
+        condition = m.group(3) or ''
+        return f'${sym}({m.group(2)}){condition}$'
+
+    return f'${obs_name}$'  # last-ditch fallback

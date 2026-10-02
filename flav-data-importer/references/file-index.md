@@ -92,7 +92,7 @@ The filename uses only the collaboration name (not the full `Lab-Collaboration` 
 |---------|-------------|
 | `LHCb:2015svh.json` | LHCb paper, TexKey LHCb:2015svh |
 
-**TexKey selection**: Papers often have multiple TexKeys (collaboration-level + author-level). Always use the collaboration-level TexKey for the filename. For example, if a paper has TexKeys `["LHCb:2015svh", "Aaij:2015oid"]`, use `LHCb:2015svh.json`.
+**TexKey selection**: When a paper has both a collaboration-level and an author-level TexKey, the collaboration-level TexKey is canonical for filenames, paper indexing, and cross-references throughout this database. The author-level key is kept for citation but is not used in paths.
 
 ### Annual Index Files
 
@@ -182,6 +182,79 @@ When removing a file:
 2. Remove the file_id from the appropriate month's array.
 3. If the month's array becomes empty, remove the month key.
 4. Write the updated index back.
+
+#### Concrete Recipe (add new paper)
+
+The index file (`Experimental/CERN-LHCb/2015/LHCb@2015.json`) does NOT
+store submission dates — only file_ids — so re-sorting requires reading
+each referenced JSON's `time` field. The most reliable workflow:
+
+```bash
+# Variables
+TEXKEY="LHCb:2015svh"
+COLLAB="LHCb"
+YEAR="2015"
+MONTH="12"  # zero-padded, from paper's arXiv v1 submission date
+FILE_ID="LHCb:2015svh"  # TexKey, equals filename without ".json"
+BASE="Experimental/CERN-LHCb/${YEAR}"
+INDEX="${BASE}/${COLLAB}@${YEAR}.json"
+PAPER="${BASE}/${MONTH}/${FILE_ID}.json"
+
+# 1. Confirm the paper JSON exists and parses
+python3 scripts/json-valid.py "${PAPER}"
+
+# 2. Create index file (or load existing) and add file_id to month array.
+#    Uses a small inline Python snippet — no separate script required.
+python3 - <<PYEOF
+import json, os
+index_path = "${INDEX}"
+paper_path = "${PAPER}"
+file_id    = "${FILE_ID}"
+month      = "${MONTH}"
+
+if os.path.exists(index_path):
+    with open(index_path) as f:
+        idx = json.load(f)
+else:
+    idx = {}
+
+# Add the file_id to its month (de-duplicate)
+month_list = idx.setdefault(month, [])
+if file_id not in month_list:
+    month_list.append(file_id)
+
+# Re-sort by arXiv v1 date (read 'time' field from each paper JSON)
+def v1_date(fid):
+    with open(os.path.join(os.path.dirname(paper_path), fid + '.json')) as f:
+        return json.load(f)['time']
+idx[month] = sorted(month_list, key=v1_date)
+
+os.makedirs(os.path.dirname(index_path), exist_ok=True)
+with open(index_path, 'w') as f:
+    json.dump(idx, f, indent=4, sort_keys=True)
+    f.write('\n')
+print(f'Updated {index_path}: month {month} now has {len(idx[month])} entries')
+PYEOF
+
+# 3. Confirm no orphan index entries
+python3 - <<PYEOF
+import json, os
+index_path = "${INDEX}"
+base_dir   = os.path.dirname(index_path)
+with open(index_path) as f:
+    idx = json.load(f)
+orphans = []
+for month, file_ids in idx.items():
+    for fid in file_ids:
+        paper = os.path.join(base_dir, month, fid + '.json')
+        if not os.path.exists(paper):
+            orphans.append(f'{month}/{fid}.json')
+if orphans:
+    print(f'ORPHAN INDEX ENTRIES: {orphans}')
+else:
+    print(f'Index clean — {sum(len(v) for v in idx.values())} entries verified')
+PYEOF
+```
 
 ### Multi-Collaboration Papers
 

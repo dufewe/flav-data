@@ -23,13 +23,13 @@ import re
 # See common.py for the canonical implementations and SKILL.md
 # "Import Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (  # noqa: E402
+from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
     to_bibtex, to_bibtex as _to_bibtex,
-)
+)  # noqa: E402,F401
 
 
-def get_arxiv_info(arxiv_id):
+def get_arxiv_info(arxiv_id: str) -> dict:
     """Fetch paper information from the arXiv API."""
     url = f'https://export.arxiv.org/api/query?id_list={arxiv_id}'
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -81,7 +81,10 @@ def get_arxiv_info(arxiv_id):
 
     # PDF + versioned ID from <atom:id> (e.g. ".../abs/1512.04442v1")
     pdf_link = None
-    id_url = entry.find('atom:id', ns).text
+    id_elem = entry.find('atom:id', ns)
+    if id_elem is None or not id_elem.text:
+        raise ValueError(f"arXiv API entry for {arxiv_id} is missing atom:id")
+    id_url = id_elem.text.strip()
 
     for link in entry.findall('atom:link', ns):
         if link.get('title') == 'pdf':
@@ -162,14 +165,14 @@ def get_arxiv_info(arxiv_id):
     }
 
 
-def download_pdf(arxiv_id, output_dir):
+def download_pdf(arxiv_id: str, output_dir: str) -> str:
     """Download the arXiv PDF to ``<output_dir>/<arxiv_id>.pdf``.
 
     Parameters
     ----------
     arxiv_id : str
         arXiv identifier. May be bare (``"1512.04442"``) or
-        versioned (``"1512.04442v2"``). The downloaded file is named
+        versioned (``"1512.04442v1"``). The downloaded file is named
         after the full string passed in, including the version
         suffix, so subsequent calls with a different version won't
         collide.
@@ -180,7 +183,7 @@ def download_pdf(arxiv_id, output_dir):
     -------
     str
         Absolute path to the saved PDF, e.g.
-        ``"/tmp/dl/1512.04442v2.pdf"``.
+        ``"/tmp/dl/1512.04442v1.pdf"``.
 
     Raises
     ------
@@ -212,7 +215,7 @@ def download_pdf(arxiv_id, output_dir):
     return pdf_path
 
 
-def main():
+def main() -> None:
     """CLI entry point.
 
     Examples
@@ -223,9 +226,22 @@ def main():
     parser = argparse.ArgumentParser(
         description='Extract arXiv paper information and download PDF'
     )
-    parser.add_argument('arxiv_id', help='arXiv ID (e.g., 1512.04442)')
-    parser.add_argument('--output_dir', '-o', default='.', help='Output directory')
-    parser.add_argument('--no-pdf', action='store_true', help='Skip PDF download')
+    parser.add_argument(
+        'arxiv_id', help='arXiv ID (e.g., 1512.04442)'
+    )
+    parser.add_argument(
+        '--output_dir', '-o', default=None,
+        help='Output directory for JSON dump and PDF. If omitted, no '
+             'files are written (only stdout summary). Specify a path '
+             '(e.g. /tmp/dl) to enable file output.'
+    )
+    parser.add_argument(
+        '--no-pdf', action='store_true', help='Skip PDF download'
+    )
+    parser.add_argument(
+        '--no-write', dest='no_write', action='store_true',
+        help='Skip writing JSON dump and PDF; print summary only.'
+    )
     args = parser.parse_args()
 
     print(f"Fetching arXiv info for: {args.arxiv_id}")
@@ -247,19 +263,21 @@ def main():
     print(f"\nPDF URL: {info['pdf_url']}")
     print(f"Abstract URL: {info['abs_url']}")
 
-    # Save JSON + download PDF
+    # Save JSON + download PDF (only when --output_dir is given and not --no-write)
     output_dir = args.output_dir
-    os.makedirs(output_dir, exist_ok=True)
-    json_path = os.path.join(output_dir, f'{args.arxiv_id}_arxiv.json')
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(info, f, indent=4, ensure_ascii=False)
-    print(f"\nJSON saved to: {json_path}")
+    if output_dir and not args.no_write:
+        os.makedirs(output_dir, exist_ok=True)
+        json_path = os.path.join(output_dir, f'{args.arxiv_id}_arxiv.json')
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, indent=4, ensure_ascii=False)
+        print(f"\nJSON saved to: {json_path}")
 
-    # Download PDF
-    if not args.no_pdf:
-        print(f"\nDownloading PDF...")
-        pdf_path = download_pdf(args.arxiv_id, output_dir)
-        print(f"PDF saved to: {pdf_path}")
+        if not args.no_pdf:
+            print(f"\nDownloading PDF...")
+            pdf_path = download_pdf(args.arxiv_id, output_dir)
+            print(f"PDF saved to: {pdf_path}")
+    else:
+        print("\nNo file written (use --output_dir /path to save JSON + PDF).")
 
 
 if __name__ == '__main__':

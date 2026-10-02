@@ -63,7 +63,7 @@ python3 scripts/inspirehep-ext.py --recid 1409497
 
 1. Always prefer arXiv-sourced titles/abstracts — they preserve LaTeX formatting. Journal-sourced versions often strip LaTeX.
 2. If no person authors, fall back to `"{group} collaboration"`.
-3. Use collaboration-level TexKey (`LHCb:2015svh`) not author-level (`Aaij:2015oid`).
+3. Use the collaboration-level TexKey for filenames and indices, not the author-level one.
 4. TexKeys can change when papers are updated — always verify before writing indices.
 5. On timeout/empty response, retry after 2s delay, or use the bibtex fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
 6. `arxiv_eprints.value` does NOT include version number — use arXiv API for that.

@@ -13,7 +13,7 @@ import argparse
 
 REQUIRED_TOP_FIELDS = [
     'inspire-hep', 'author', 'collaboration', 'title',
-    'arxiv', 'time', 'abstract', 'pdf', 'data', 'transition-mode'
+    'arxiv', 'time', 'abstract', 'pdf', 'transition-mode', 'data'
 ]
 
 # Fields that must NOT appear in the JSON
@@ -43,6 +43,13 @@ REQUIRED_OBS_FIELDS_WITH_TOT_ERR = [
     'tot_err_up', 'tot_err_down'
 ]
 
+# Snapshot (HFLAV/PDG) error scalar — single-number error without
+# stat/syst breakdown. See references/json-meta.md §"Non-Standard
+# Schemas". Validated only for snapshot files.
+REQUIRED_OBS_FIELDS_WITH_ERROR_SCALAR = [
+    'name', 'value', 'error'
+]
+
 # Numeric field patterns (checked for string type)
 NUMERIC_FIELD_PATTERNS = [
     'value', 'unit',
@@ -65,10 +72,18 @@ VALID_TRANSITION_MODES = [
 ]
 
 # Allowed field patterns within data entries
-DATA_ENTRY_ALLOWED_PATTERNS = ['obs@', '_correlation', '_covariance']
+DATA_ENTRY_ALLOWED_PATTERNS = [
+    'obs@',
+    '_correlation',
+    '_covariance',
+    # kinematic boundary fields (per json-meta.md §"Standard Measurement"):
+    'q2min', 'q2max',
+    'pTmin', 'pTmax',
+    'etamin', 'etamax',
+]
 
 
-def validate_transition_symbol(name):
+def validate_transition_symbol(name: str) -> str | None:
     """Check that the observable name has the expected OBS(transition)[condition] shape.
 
     Three shapes are accepted (see obs-abbr.md):
@@ -109,15 +124,58 @@ def validate_transition_symbol(name):
     return issues
 
 
-def validate_latex(text, field_name, obs_key):
-    """Check that the LaTeX field is non-empty."""
+def validate_latex(text: str, field_name: str, obs_key: str) -> list[str]:
+    """Check that the LaTeX field is non-empty and Unicode-free.
+
+    Per SKILL.md rule 4 and json-meta.md §"Key Constraints" rule 12,
+    every Unicode character must be replaced by its LaTeX equivalent
+    before writing the JSON. We blocklist the common offenders (Greek
+    letters, math operators, smart quotes, °, ±, →, ×, Δ). Unrecognised
+    Unicode chars pass through — that's the validator's conservative
+    fallback (see SKILL.md "No Unicode" note about unknown chars).
+    """
     issues = []
     if not text or not text.strip():
         issues.append(f"  {obs_key}.{field_name}: LaTeX field is empty")
+        return issues
+
+    # Blocklist of Unicode chars that MUST be replaced with LaTeX.
+    # If you find new offenders in the wild, add them here.
+    # See scripts/common.py for the canonical mapping.
+    forbidden = {
+        '\u03bc': '\\mu',     # μ
+        '\u0394': '\\Delta',  # Δ
+        '\u00b1': '\\pm',     # ±
+        '\u2192': '\\to',      # →
+        '\u00d7': '\\times',   # ×
+        '\u00b0': '^{\\circ}', # °
+        '\u00af': '\\bar{}',   # ¯
+        '\u2018': '`',         # '
+        '\u2019': "'",         # '
+        '\u201c': '``',        # "
+        '\u201d': "''",        # "
+        '\u03b1': '\\alpha',
+        '\u03b2': '\\beta',
+        '\u03b3': '\\gamma',
+        '\u03c0': '\\pi',
+        '\u03c3': '\\sigma',
+        '\u03c4': '\\tau',
+        '\u03a6': '\\Phi',
+        '\u03a8': '\\Psi',
+        '\u03a9': '\\Omega',
+        '\u221e': '\\infty',
+    }
+    found = sorted({c for c in text if c in forbidden})
+    if found:
+        chars = ', '.join(f'{c!r} → {forbidden[c]!r}' for c in found)
+        issues.append(
+            f"  {obs_key}.{field_name}: Unicode chars not converted to LaTeX ({chars}); "
+            f"see SKILL.md rule 4 (No Unicode) and scripts/common.py for the mapping"
+        )
     return issues
 
 
-def validate_correlation(matrix, data_entry_idx, is_covariance=False):
+def validate_correlation(matrix: list, data_entry_idx: int, is_covariance: bool = False) -> str | None:
     """Check correlation matrix: symmetric with diagonal = 1.0.
     Covariance matrix: only symmetry (diagonal = err², verified manually)."""
     issues = []
@@ -156,7 +214,7 @@ def validate_correlation(matrix, data_entry_idx, is_covariance=False):
     return issues
 
 
-def validate_arxiv_format(arxiv):
+def validate_arxiv_format(arxiv) -> str | None:
     """Check arxiv field format. Accepted forms:
 
     - ``null`` (no preprint available, e.g. journal-only paper)
@@ -210,8 +268,9 @@ def validate_arxiv_format(arxiv):
     return issues
 
 
-def validate_data_entry_fields(entry, entry_idx):
-    """Check that the data block contains only allowed field patterns."""
+def validate_data_entry_fields(entry: dict, entry_idx: int) -> list[str]:
+    """Check that the data block contains only allowed field patterns and that
+    kinematic boundary fields are well-formed."""
     issues = []
     for key in entry:
         allowed = any(pattern in key for pattern in DATA_ENTRY_ALLOWED_PATTERNS)
@@ -221,10 +280,34 @@ def validate_data_entry_fields(entry, entry_idx):
                 f"data block may only contain obs@N, type@N_correlation, "
                 f"type@N_covariance, tot_correlation, or tot_covariance"
             )
+    # Validate kinematic boundary fields (q2min/q2max, pTmin/pTmax, etamin/etamax)
+    # must be float-string (or comma-separated float-strings, or '+inf' for
+    # unbounded sides). Per json-meta.md §Combined Kinematic Bins.
+    for key in entry:
+        if key not in ('q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax'):
+            continue
+        if not isinstance(entry[key], str):
+            issues.append(
+                f"  data[{entry_idx}].{key}: must be a string (float-as-string, "
+                f"comma-separated list, or '+inf'); got {type(entry[key]).__name__}"
+            )
+            continue
+        for part in entry[key].split(','):
+            part = part.strip()
+            if part == '+inf':
+                continue
+            try:
+                float(part)
+            except ValueError:
+                issues.append(
+                    f"  data[{entry_idx}].{key}: part {part!r} is not a valid "
+                    f"float-as-string and not '+inf'; per json-meta.md "
+                    f"§Combined Kinematic Bins"
+                )
     return issues
 
 
-def validate_transition_mode(value):
+def validate_transition_mode(value: str) -> str | None:
     """Check that transition-mode matches one of the 7 valid values."""
     issues = []
     if not isinstance(value, str) or not value.strip():
@@ -239,7 +322,61 @@ def validate_transition_mode(value):
     return issues
 
 
-def validate_json(file_path):
+def _validate_snapshot(data: dict, file_path: str) -> list[str]:
+    """Validate an HFLAV/PDG snapshot JSON.
+
+    Snapshot schema: top-level dict with `data` as a dict of subgroups.
+    Each subgroup is a flat dict of obs@N entries using the scalar
+    `error` field (or `tot_err_up`/`tot_err_down` pair). No
+    transition-mode is required.
+
+    See references/json-meta.md §"Non-Standard Schemas".
+    """
+    print(f"Validating (snapshot): {file_path}")
+    all_issues = []
+    subgroups = data.get('data') or {}
+    if not subgroups:
+        all_issues.append("  data dict is empty")
+    for sub_name, sub in subgroups.items():
+        if not isinstance(sub, dict):
+            all_issues.append(
+                f"  data['{sub_name}']: must be an object of obs@N entries"
+            )
+            continue
+        for k, obs in sub.items():
+            if not k.startswith('obs@'):
+                all_issues.append(
+                    f"  data['{sub_name}']: unexpected key '{k}' "
+                    f"(only obs@N allowed)"
+                )
+                continue
+            if not isinstance(obs, dict):
+                all_issues.append(
+                    f"  data['{sub_name}'].{k}: must be an object"
+                )
+                continue
+            for f in ('name', 'value'):
+                if f not in obs:
+                    all_issues.append(
+                        f"  data['{sub_name}'].{k}: missing required field: {f}"
+                    )
+            has_error = 'error' in obs
+            has_tot = 'tot_err_up' in obs and 'tot_err_down' in obs
+            if not (has_error or has_tot):
+                all_issues.append(
+                    f"  data['{sub_name}'].{k}: missing 'error' "
+                    f"scalar or 'tot_err_up'/'tot_err_down' pair"
+                )
+    if all_issues:
+        print(f"  [FAIL] Found {len(all_issues)} issue(s):")
+        for issue in all_issues:
+            print(issue)
+    else:
+        print("  [OK] Snapshot validated")
+    return all_issues
+
+
+def validate_json(file_path: str) -> list[str]:
     """Validate a single flav-data JSON file."""
     all_issues = []
 
@@ -252,10 +389,18 @@ def validate_json(file_path):
         print(f"  [FAIL] JSON parse error: {e}")
         return [f"JSON parse error: {e}"]
 
-    # 1b. Check top-level type (must be dict, not list)
+    # Check top-level type before inspecting schema-specific fields.
     if not isinstance(data, dict):
         print(f"  [FAIL] Top-level JSON must be an object, got {type(data).__name__}")
         return [f"Top-level JSON must be an object, got {type(data).__name__}"]
+
+    # Detect non-standard schema (HFLAV / PDG snapshots).
+    is_snapshot = (
+        isinstance(data.get('data'), dict)
+        and 'transition-mode' not in data
+    )
+    if is_snapshot:
+        return _validate_snapshot(data, file_path)
 
     # 2. Check top-level fields
     for field in REQUIRED_TOP_FIELDS:
@@ -264,27 +409,25 @@ def validate_json(file_path):
     if not all_issues:
         print("  [OK] Top-level fields complete")
 
+    # 2b. Check Unicode-free LaTeX in title and abstract (per SKILL.md rule 4
+    # and json-meta.md §"Key Constraints" rule 12).
+    for field in ('title', 'abstract'):
+        if field in data and isinstance(data[field], str):
+            all_issues.extend(validate_latex(data[field], field, '<top-level>'))
+
     # 3. Check for forbidden fields
     for field in FORBIDDEN_FIELDS:
         if field in data:
             all_issues.append(f"  Forbidden field present: '{field}' (not supported)")
 
-    # 4. Check that transition-mode is the last field before 'data'.
-    # Per json-meta.md §"Key Constraints" §8: "transition-mode last —
-    # this field must always be the final key in the JSON object."
-    # In practice the order is: ..., transition-mode, data — so we
-    # require 'data' to follow 'transition-mode' (with nothing between
-    # them) or transition-mode to be the final key.
-    if 'transition-mode' in data:
+    # 4. transition-mode must immediately precede data, which is the final key.
+    if 'transition-mode' in data and 'data' in data:
         keys = list(data.keys())
         tm_idx = keys.index('transition-mode')
-        # Nothing allowed between transition-mode and 'data' (or end of dict)
-        next_keys = keys[tm_idx + 1:]
-        # Only 'data' is allowed to follow transition-mode
-        if next_keys and next_keys != ['data']:
+        if keys[tm_idx + 1:] != ['data']:
             all_issues.append(
-                f"  transition-mode is not followed by 'data'; "
-                f"keys after transition-mode: {next_keys}"
+                f"  expected 'transition-mode' immediately before final 'data'; "
+                f"keys after transition-mode: {keys[tm_idx + 1:]}"
             )
 
     # 5. Check arxiv field format
@@ -298,15 +441,12 @@ def validate_json(file_path):
     # 7. Check data array
     if 'data' not in data:
         all_issues.append("  Missing required field: data")
-    data_entries = data.get('data', [])
-    if not data_entries:
-        all_issues.append("  data array is empty or missing")
-    if not data_entries:
-        print("  [FAIL] data array is empty or missing")
-        print(f"  [FAIL] Found {len(all_issues)} issue(s):")
-        for issue in all_issues:
-            print(issue)
-        return all_issues
+        data_entries = []
+    else:
+        data_entries = data['data'] or []
+    if data_entries == []:
+        all_issues.append("  data array is empty")
+        print("  [WARN] data array is empty")
 
     for entry_idx, entry in enumerate(data_entries):
         # Check allowed fields in data block
@@ -467,7 +607,7 @@ def validate_json(file_path):
     return all_issues
 
 
-def main():
+def main() -> None:
     """CLI entry point.
 
     Examples

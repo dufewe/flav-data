@@ -37,13 +37,24 @@ The metadata JSON contains a `data_tables` array; each table has `name`,
 
 ### Step 3: Download Individual Tables
 
-The metadata JSON contains URLs but not the actual data. Download via curl:
+The metadata JSON contains URLs but not the actual data. Use the helper to download
+and parse a table; its direct HTTP request may be blocked by Cloudflare:
 
-```bash
-# URL-encode table names (spaces → %20, + → %2B, # → %23)
-curl -sL -A "Mozilla/5.0" \
-  "https://www.hepdata.net/download/table/ins1409497/Table%201/yaml"
+```python
+import importlib.util
+from pathlib import Path
+
+script = Path("flav-data-importer/scripts/hepdata-ext.py")
+spec = importlib.util.spec_from_file_location("hepdata_ext", script)
+hepdata_ext = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(hepdata_ext)
+yaml_text = hepdata_ext.download_table_yaml("1409497", "Table 1")
+observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
+matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
 ```
+
+If direct table download is blocked, fetch the record metadata with `hepdata-cli`
+and use the table URLs in its metadata or the browser-accessible HEPData record.
 
 YAML is preferred because it preserves the structured hierarchy of observables,
 qualifiers, and errors better than CSV or JSON for HEPData's nested format.
@@ -105,7 +116,7 @@ The script wraps the `hepdata-cli` binary and exposes:
 | `download_metadata(inspire_id, output_dir)` → `str \| None` | Download metadata JSON to dir |
 | `download_table_yaml(inspire_id, table_name)` → `str` | Direct HTTP download of YAML (may be blocked by Cloudflare) |
 | `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into structured entries |
-| `parse_yaml_correlation(yaml_text)` → `(str, list[list[float]], dict)` | Parse correlation/covariance matrix YAML |
+| `parse_yaml_correlation(yaml_text)` → `(matrix_type: str, matrix: list[list[float]], qualifiers: dict)` | Parse correlation/covariance matrix YAML |
 | `parse_metadata(metadata_path)` → `dict` | Parse downloaded metadata JSON |
 
 Constants: `HEPDATA_CLI` (absolute path to binary, or `''`) and
