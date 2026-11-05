@@ -1,0 +1,54 @@
+{
+    "inspire-hep": "1699929",
+    "author": "J. K. Ahn et al.",
+    "collaboration": "KOTO",
+    "title": "Search for the $K_L \\!\\to\\! \\pi^0 \\nu \\overline{\\nu}$ and $K_L \\!\\to\\! \\pi^0 X^0$ decays at the J-PARC KOTO experiment",
+    "arxiv": "1810.09655v2 [hep-ex]",
+    "time": "2019-02-26",
+    "abstract": "A search for the rare decay $K_L \\to \\pi^0 \\nu \\bar{\\nu}$ was performed. With the data collected in 2015, corresponding to $2.2 \\times 10^{19}$ protons on target, a single event was observed with an expected background of $0.42 \\pm 0.18$ events. An upper limit on the branching ratio of $\\mathcal{B}(K_L \\to \\pi^0 \\nu \\bar{\\nu}) < 4.9 \\times 10^{-9}$ at the 90% confidence level was obtained. The single event sensitivity was $(1.30 \\pm 0.01_{\\rm stat} \\pm 0.14_{\\rm syst}) \\times 10^{-9}$.",
+    "pdf": "https://arxiv.org/pdf/1810.09655.pdf",
+    "transition-mode": "kaon-rare-decay",
+    "data": [
+        {
+            "obs@1": {
+                "name": "BR(K0L.2.pi0.nu.nubar)",
+                "latex": "$\\mathcal{B}(K_L \\to \\pi^0 \\nu \\bar{\\nu})$",
+                "value": "4.9e-9",
+                "type@1_upper_limit": "90%@CL",
+                "type@1_level": "4.9e-9",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "SES(K0L.2.pi0.nu.nubar)",
+                "latex": "Single Event Sensitivity",
+                "value": "1.30e-9",
+                "type@1_err": "0.14e-9",
+                "type@1_err_up": "0.14e-9",
+                "type@1_err_down": "0.14e-9",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "N_obs(K0L.2.pi0.nu.nubar)",
+                "latex": "$N_{\\rm obs}$",
+                "value": "1",
+                "type@1_err": "0",
+                "type@1_err_up": "0",
+                "type@1_err_down": "0",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@4": {
+                "name": "N_bg(K0L.2.pi0.nu.nubar)",
+                "latex": "$N_{\\rm bg}$",
+                "value": "0.42",
+                "type@1_err": "0.18",
+                "type@1_err_up": "0.18",
+                "type@1_err_down": "0.18",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

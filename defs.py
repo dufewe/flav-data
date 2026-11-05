@@ -1,16 +1,36 @@
 # ---------------------------------------------------------
 # Shared definitions for the flav-data Streamlit app.
-# Loaded via `exec(open('defs.py').read())` from each page
-# so the same name bindings (get_json, EXPEGROUP, ...) are
-# available in every page's module scope. As a side effect
-# this also injects `streamlit` (as `st`), `json`, and `os`
-# into each page's globals, so HFLAV/PDG/home can call
-# `st.*` / `json.*` / `os.*` without re-importing.
+# Loaded via `exec` from each page (at the absolute path resolved
+# from the page's own location) so the same name bindings
+# (get_json, EXPEGROUP, ...) are available in every page's module
+# scope. As a side effect this also injects `streamlit` (as `st`),
+# `json`, and `os` into each page's globals, so HFLAV/PDG/home can
+# call `st.*` / `json.*` / `os.*` without re-importing.
 # ---------------------------------------------------------
 
 import streamlit as st
 import json
 import os
+from datetime import datetime
+
+# Project root resolved by walking up from the calling page (or the
+# working directory when __file__ is unavailable, e.g. under exec),
+# so pages and data paths do not depend on the launch directory.
+def _find_project_root():
+    try:
+        current = os.path.dirname(os.path.abspath(__file__))
+    except NameError:
+        current = os.getcwd()
+    while True:
+        if os.path.isfile(os.path.join(current, 'defs.py')):
+            return current
+        parent = os.path.dirname(current)
+        if parent == current:
+            return os.path.dirname(os.path.abspath('defs.py'))
+        current = parent
+
+
+PROJECT_ROOT = _find_project_root()
 
 # I/O ----------------------------------------------------------------
 
@@ -27,8 +47,8 @@ def get_json(file_path):
 # Configuration -------------------------------------------------------
 
 # Year range scanned when looking for annual index files. The
-# database is intended to start at 1995 (LEP-1 began that year).
-year_min, year_max = 1995, 2026
+# earliest indexed entry is CHARM-II 1990.
+year_min, year_max = 1990, datetime.now().year
 
 # Mapping from month-number string (zero-padded, as used in the
 # annual index file and the month subdirectory name) to the
@@ -98,6 +118,17 @@ THEOGROUP = [
 OBSGROUP = ["Flavor", "EWPO"]
 
 # Paths ---------------------------------------------------------------
-# Default to running from the project root. Each page can override.
-EXPERIMENTAL_BASE = "Experimental"
-THEORETICAL_BASE  = "Theoretical"
+# Absolute so pages work regardless of the launch directory.
+EXPERIMENTAL_BASE = os.path.join(PROJECT_ROOT, "Experimental")
+THEORETICAL_BASE  = os.path.join(PROJECT_ROOT, "Theoretical")
+
+
+def resolve_folder(lab, group, folder_override=None):
+    """Return the on-disk folder name for a group.
+
+    ``<Lab>-<Collaboration>`` for experimental groups, the bare group
+    name when ``lab`` is empty, or ``folder_override`` when given.
+    """
+    if folder_override:
+        return folder_override
+    return f"{lab}-{group}" if lab else group

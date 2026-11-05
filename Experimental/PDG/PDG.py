@@ -11,7 +11,11 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('defs.py', 'r', encoding='utf-8') as f:
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
@@ -38,7 +42,9 @@ if not os.path.isdir(base_dir):
     st.stop()
 
 year_dirs = sorted(
-    (d for d in os.listdir(base_dir) if d.isdigit() and len(d) == 4),
+    (d for d in os.listdir(base_dir)
+     if d.isdigit() and len(d) == 4
+     and os.path.isfile(os.path.join(base_dir, d, f"PDG@{d}.json"))),
     reverse=True,
 )
 
@@ -59,7 +65,7 @@ except (FileNotFoundError, json.JSONDecodeError) as e:
 col1, col2 = st.columns([1, 3])
 with col1:
     st.markdown(f"- **YEAR**: {latest_year}")
-    st.markdown(f"- **INPIRE-HEP**: {pdg.get('inspire-hep', 'N/A')}")
+    st.markdown(f"- **INSPIRE-HEP**: {pdg.get('inspire-hep', 'N/A')}")
     st.markdown(f"- **AUTHOR**: {pdg.get('author', 'N/A')}")
 with col2:
     st.markdown(f"- **TITLE**: {pdg.get('title', 'N/A')}")
@@ -82,7 +88,7 @@ if not data:
 with st.sidebar:
     st.markdown("# Filters")
     st.markdown("##### PDG Subgroup")
-    subgroup = st.radio(
+    subgroup = st.selectbox(
         "PDG Subgroup",
         list(data.keys()),
         label_visibility="collapsed",

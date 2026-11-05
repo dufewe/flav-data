@@ -6,7 +6,7 @@ A structured, machine-readable database of flavor physics measurements.
 
 **flav-data** curates experimental and theoretical results in flavor physics — branching fractions, angular observables, CP asymmetries, lepton flavor universality ratios, form factors, and more — into standardized JSON entries following a consistent naming convention and format specification.
 
-The database covers measurements from **1995** to the present, organized by collaboration/theory group and indexed by year.
+The database covers measurements from **1990** to the present, organized by collaboration/theory group and indexed by year.
 
 ## Supported Groups
 
@@ -31,6 +31,9 @@ The database covers measurements from **1995** to the present, organized by coll
 | Group | Scope |
 |-------|-------|
 | **HPQCD** | Lattice QCD calculations |
+
+Only **HPQCD** is currently registered in `THEOGROUP` and exposed in the
+navigation; other theoretical groups' data is not yet wired into the app.
 
 ## Data Format
 
@@ -127,25 +130,26 @@ Represents $A + B \to C + D$ with `2` replacing the arrow.
 ```
 flav-data/
 ├── Experimental/
-│   ├── CERN-LHCb/                  # Lab-Collaboration folder
+│   ├── CERN-LHCb/
 │   │   ├── LHCb.py                 # Streamlit dashboard page
-│   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json      # Annual index
-│   │   │   └── 12/
-│   │   │       └── LHCb:2015svh.json   # Data file
-│   │   └── 2025/
-│   │       └── ...
-│   ├── CERN-ATLAS/, CERN-CMS/
-│   ├── KEK-Belle/
-│   ├── SLAC-BaBar/
-│   ├── Fermilab-CDF/
-│   └── ...                         # Other groups (HFLAV, PDG, NA62, ...)
+│   │   └── ...                     # Year-indexed data directories
+│   ├── HFLAV/
+│   │   ├── HFLAV.py               # Snapshot dashboard page
+│   │   └── HFLAV@2024.json        # Flat snapshot (year subdirs also supported)
+│   ├── PDG/
+│   │   ├── PDG.py                 # Snapshot dashboard page
+│   │   └── 2024/PDG@2024.json
+│   └── ...                         # Other experimental groups
 ├── Theoretical/
 │   └── HPQCD/
 │       └── ...
 ├── Observable/
 │   ├── Flavor.py                    # Observable naming guide
 │   └── EWPO.py                      # EWPO naming guide
+├── tests/
+│   ├── test_importer_regressions.py
+│   ├── Experimental/                # Fixture data
+│   └── Theoretical/                 # Fixture data
 ├── main.py                          # Streamlit app entry
 ├── home.py                          # Homepage
 ├── flav_dashboard.py                # Dashboard component
@@ -189,8 +193,9 @@ The full Lab-Collaboration folder convention is:
 
 - **HFLAV** and **PDG** store data in a non-standard flav-data schema
   (one snapshot JSON per year whose keys are subgroup names containing
-  nested observables). They have their own dedicated Streamlit pages
-  (`HFLAV/HFLAV.py`, `PDG/PDG.py`) that bypass `run_dashboard`.
+  nested observables). They have dedicated Streamlit pages at
+  `Experimental/HFLAV/HFLAV.py` and `Experimental/PDG/PDG.py` that bypass
+  `run_dashboard`.
 
 The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) create `Experimental/<folder>/<group>.py` calling `run_dashboard(lab=..., group=...)` (or pass `folder_override=` if needed), (3) drop data into `Experimental/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index.
 
@@ -222,7 +227,7 @@ streamlit run main.py
 | **Home** | Database overview, format specification, statistics |
 | **Observable** → Flavor | Transition symbols, particle table, observable abbreviations |
 | **Observable** → EWPO | Electroweak precision observable definitions |
-| **Experimental** → [Group] | Interactive dashboard with timeline, filters, data export |
+| **Experimental** → [Group] | Interactive dashboard with year, month, and transition-mode filters |
 | **Theoretical** → [Group] | Theory group results browser |
 
 ## Contributing

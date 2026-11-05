@@ -17,7 +17,7 @@ This document defines which data sources to use, in what order, and what data is
 
 **Handling unsupported requests**: If a user asks to import unsupported data, respond with "This data is not supported for import." Then, if applicable, search arXiv and InspireHEP for the corresponding formal paper and offer to import from that instead.
 
-**Multi-paper merging**: When multiple arXiv papers describe the same measurement (e.g., a conference note superseded by a full paper, or a short letter followed by a detailed analysis), merge all data into a single JSON file. Retain metadata (Inspire IDs, arXiv IDs, DOIs) from all contributing papers.
+**Multi-paper merging**: When multiple arXiv papers describe the same measurement (e.g., a conference note superseded by a full paper, or a short letter followed by a detailed analysis), merge all data into a single JSON file. The schema stores a single `inspire-hep`/`arxiv`/`pdf` citation set, so use the **primary** (normally the peer-reviewed) paper for those fields and mention superseded identifiers in the abstract only when that context matters — do not add extra citation fields.
 
 ## Data Source Priority
 
@@ -41,14 +41,19 @@ $HEPDATA_CLI fetch-names -i inspire <inspire_recid>
 
 # Download metadata (contains table URLs and paper info)
 $HEPDATA_CLI download -f json -i inspire <inspire_recid> -d <output_dir>
-```text
+```
 
 **Downloading specific tables**:
 ```bash
-# URL-encode the table name (spaces → %20)
-curl -sL -A "Mozilla/5.0" \
-  "https://www.hepdata.net/download/table/ins<recid>/Table%201/yaml"
-```text
+# HEPData blocks plain HTTP clients (Cloudflare), so always go through
+# hepdata-cli rather than curl/wget.
+$HEPDATA_CLI download -f yaml -i inspire <inspire_recid> \
+  -t "Table 1" -d <output_dir>
+```
+`scripts/hepdata-ext.py` wraps this in `download_table_yaml()` and then
+parses the YAML with `parse_yaml_observables()` /
+`parse_yaml_correlation()`; `detect_table_type()` decides which parser
+to use from the table structure.
 
 **Limitations**:
 - Theory papers almost never have HEPData entries.
@@ -70,7 +75,7 @@ curl -sL "https://cds.cern.ch/search?f=reportnumber&p1=<arxiv_id>"
 
 # Search by paper title
 curl -sL "https://cds.cern.ch/search?f=title&p1=<paper_title>"
-```text
+```
 
 **Note**: Some CDS URLs may redirect to authentication pages. Check the downloaded file size — a real PDF will be >100KB; an HTML login page will be <20KB.
 
@@ -100,7 +105,7 @@ doc = pymupdf.open('paper.pdf')
 for page in doc:
     print(page.get_text())
 "
-```text
+```
 
 **Important**: pymupdf must be available in the Python environment. Run via terminal, not the execute_code sandbox.
 
@@ -120,7 +125,7 @@ for page in doc:
 **How to extract tables**:
 ```bash
 curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
-```text
+```
 
 **Limitations**: The HTML version may not be the latest paper version.
 
@@ -156,6 +161,7 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 
 ## Output Formatting Rules
 
-See SKILL.md "Import Conventions" — the 4 rules there (matrix layout,
-single-line abstract, InspireHEP author format, and LaTeX-only Unicode)
-apply to all JSON output.
+See SKILL.md "Core Conventions" — the 7 hard rules there (matrix layout,
+single-line abstract, InspireHEP author format, LaTeX-only Unicode,
+canonical transition order, category-separated dictionaries, and the
+transition-keyed `data` dictionary) apply to all JSON output.

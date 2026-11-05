@@ -37,8 +37,9 @@ The metadata JSON contains a `data_tables` array; each table has `name`,
 
 ### Step 3: Download Individual Tables
 
-The metadata JSON contains URLs but not the actual data. Use the helper to download
-and parse a table; its direct HTTP request may be blocked by Cloudflare:
+The metadata JSON lists table URLs but not the data itself. `download_table_yaml()`
+shells out to `hepdata-cli download -f yaml -t <table>`, so Cloudflare never sees a
+plain `curl` — do not re-implement it with `urllib`/`requests`.
 
 ```python
 import importlib.util
@@ -48,13 +49,14 @@ script = Path("flav-data-importer/scripts/hepdata-ext.py")
 spec = importlib.util.spec_from_file_location("hepdata_ext", script)
 hepdata_ext = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(hepdata_ext)
-yaml_text = hepdata_ext.download_table_yaml("1409497", "Table 1")
-observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
-matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
-```
 
-If direct table download is blocked, fetch the record metadata with `hepdata-cli`
-and use the table URLs in its metadata or the browser-accessible HEPData record.
+yaml_text = hepdata_ext.download_table_yaml("1409497", "Table 1")
+table_type = hepdata_ext.detect_table_type(yaml_text)  # 'observable' | 'correlation' | 'covariance'
+if table_type == 'observable':
+    observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
+else:
+    matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
+```
 
 YAML is preferred because it preserves the structured hierarchy of observables,
 qualifiers, and errors better than CSV or JSON for HEPData's nested format.
@@ -113,9 +115,10 @@ The script wraps the `hepdata-cli` binary and exposes:
 | Function | Purpose |
 |---|---|
 | `fetch_table_names(inspire_id)` → `list[str] \| None` | List table names for a record |
-| `download_metadata(inspire_id, output_dir)` → `str \| None` | Download metadata JSON to dir |
-| `download_table_yaml(inspire_id, table_name)` → `str` | Direct HTTP download of YAML (may be blocked by Cloudflare) |
-| `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into structured entries |
+| `download_metadata(inspire_id, output_dir)` → `str \| None` | Download (or reuse an existing matching) metadata JSON |
+| `download_table_yaml(inspire_id, table_name)` → `str` | Fetch one table's YAML through `hepdata-cli` |
+| `detect_table_type(yaml_text)` → `str` | `'observable'`, `'correlation'`, or `'covariance'` |
+| `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into per-point entries (incl. `q2min`/`q2max`) |
 | `parse_yaml_correlation(yaml_text)` → `(matrix_type: str, matrix: list[list[float]], qualifiers: dict)` | Parse correlation/covariance matrix YAML |
 | `parse_metadata(metadata_path)` → `dict` | Parse downloaded metadata JSON |
 
@@ -126,7 +129,7 @@ Constants: `HEPDATA_CLI` (absolute path to binary, or `''`) and
 ```python
 import importlib.util, os
 spec = importlib.util.spec_from_file_location(
-    "hepdata_ext", "scripts/hepdata-ext.py",
+    "hepdata_ext", "flav-data-importer/scripts/hepdata-ext.py",
 )
 hepdata_ext = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(hepdata_ext)
@@ -140,14 +143,15 @@ meta = hepdata_ext.parse_metadata(
 ### CLI entry point
 
 ```bash
-python3 scripts/hepdata-ext.py 1409497
-python3 scripts/hepdata-ext.py 1409497 -o /tmp/hd --table "Table 1"
+python3 flav-data-importer/scripts/hepdata-ext.py 1409497
+python3 flav-data-importer/scripts/hepdata-ext.py 1409497 -o /tmp/hd --table "Table 1"
 ```
 
 ## Notes
 
-1. **Must use hepdata-cli** — direct curl is blocked by Cloudflare.
+1. **Must use hepdata-cli** — direct `curl`/`urllib` is blocked by Cloudflare.
 2. **Theory papers** rarely have HEPData — fall through to PDF extraction.
-3. **URL-encode table names**: `"Table 1"` → `"Table%201"`.
-4. **Invalid values**: bins with `value: "-"` mean no measurement — skip.
+3. **Table names are passed verbatim** — `hepdata-cli` handles quoting/encoding.
+4. **Missing matrix entries**: `value: "-"` (or any non-numeric cell) is
+   substituted with `0.0` and reported as a warning, keeping the matrix square.
 5. **PyYAML** required for YAML parsers (`pip install pyyaml`).

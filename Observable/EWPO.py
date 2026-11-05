@@ -1,7 +1,11 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('./defs.py', 'r', encoding='utf-8') as f:
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------

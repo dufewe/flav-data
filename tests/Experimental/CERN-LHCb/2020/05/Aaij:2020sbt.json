@@ -1,0 +1,25 @@
+{
+    "inspire-hep": "1790297",
+    "author": "R. Aaij et al.",
+    "collaboration": "LHCb",
+    "title": "Test of lepton universality with $B^0 \\to K^{*0} \\ell^+ \\ell^-$ decays",
+    "arxiv": "2003.00303v2 [hep-ex]",
+    "time": "2020-05-01",
+    "abstract": "A test of lepton universality is performed by comparing the branching fractions of the decays $B^0 \\to K^{*0} \\mu^+ \\mu^-$ and $B^0 \\to K^{*0} e^+ e^-$ in the low dilepton mass squared region, $q^2 \\in [0.045, 1.100]$ GeV$^2$. The ratio of these branching fractions, $R_{K^{*0}}$, is measured to be $0.66^{+0.11}_{-0.07} \\pm 0.03$, consistent with the Standard Model prediction.",
+    "pdf": "https://arxiv.org/pdf/2003.00303.pdf",
+    "transition-mode": "b-decay-rare",
+    "data": [
+        {
+            "obs@1": {
+                "name": "RKstar(B0.2.Kstar0.e+.e-/B0.2.Kstar0.mu+.mu-)",
+                "latex": "$R_{K^{*0}} = \\frac{\\mathcal{B}(B^0 \\to K^{*0} e^+ e^-)}{\\mathcal{B}(B^0 \\to K^{*0} \\mu^+ \\mu^-)}$",
+                "value": "0.66",
+                "type@1_err": "0.11",
+                "type@1_err_up": "0.11",
+                "type@1_err_down": "0.07",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

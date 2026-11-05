@@ -1,0 +1,63 @@
+{
+    "inspire-hep": "[LHCb:2025oww](https://inspirehep.net/literature/2935115)",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $\\Omega_c^0$ and $\\Xi_c^0$ baryon lifetimes using hadronic $b$-baryon decays",
+    "arxiv": "[hep-ex/2506.13334v2](https://arxiv.org/pdf/2506.13334)",
+    "time": "2025.06.16",
+    "abstract": "The lifetimes of the $\\Omega_c^0$ and $\\Xi_c^0$ baryons are measured using a $pp$ collision dataset collected by the LHCb experiment, corresponding to an integrated luminosity of $9~\\rm{fb^{-1}}$. The charm baryons are produced in the fully reconstructed decay chains $\\Omega_b^- \\to \\Omega_c^0 (\\to pK^-K^-\\pi^+)\\,\\pi^-$ and $\\Xi_b^- \\to \\Xi_c^0 (\\to pK^-K^-\\pi^+)\\,\\pi^-$. The measurement uses topologically and kinematically similar $B^- \\to D^0(\\to K^-K^+\\pi^-\\pi^+)\\,\\pi^-$ decays for normalisation. The measured lifetimes are $\\tau_{\\Omega_c^0} = 276.3 \\pm 19.4\\;(\\rm{stat}) \\pm 1.8\\;(\\rm{syst}) \\pm 0.7\\;(\\tau_{D^0})\\;\\rm{fs}$ and $\\tau_{\\Xi_c^0} = 149.2 \\pm 2.5\\;(\\rm{stat}) \\pm 0.9\\;(\\rm{syst}) \\pm 0.4\\;(\\tau_{D^0})\\;\\rm{fs}$, consistent with previous measurements performed by the LHCb experiment. The results are combined with previous LHCb measurements to give $\\tau_{\\Omega_c^0} = 274.8 \\pm 10.5$ fs and $\\tau_{\\Xi_c^0} = 150.7 \\pm 1.6$ fs.",
+    "pdf": "https://arxiv.org/pdf/2506.13334",
+    "transition-mode": "non-leptonic decay",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Tau(Omegac0)",
+                "latex": "$\\tau(\\Omega_c^0)$",
+                "value": "276.3",
+                "type@1_err": "stat",
+                "type@1_err_up": "19.4",
+                "type@1_err_down": "19.4",
+                "type@2_err": "syst",
+                "type@2_err_up": "1.8",
+                "type@2_err_down": "1.8",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.7",
+                "type@3_err_down": "0.7",
+                "unit": "fs"
+            },
+            "obs@2": {
+                "name": "Tau(Xic0)",
+                "latex": "$\\tau(\\Xi_c^0)$",
+                "value": "149.2",
+                "type@1_err": "stat",
+                "type@1_err_up": "2.5",
+                "type@1_err_down": "2.5",
+                "type@2_err": "syst",
+                "type@2_err_up": "0.9",
+                "type@2_err_down": "0.9",
+                "type@3_err": "norm",
+                "type@3_err_up": "0.4",
+                "type@3_err_down": "0.4",
+                "unit": "fs"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "Tau(Omegac0)",
+                "latex": "$\\tau(\\Omega_c^0)$",
+                "value": "274.8",
+                "tot_err_up": "10.5",
+                "tot_err_down": "10.5",
+                "unit": "fs"
+            },
+            "obs@2": {
+                "name": "Tau(Xic0)",
+                "latex": "$\\tau(\\Xi_c^0)$",
+                "value": "150.7",
+                "tot_err_up": "1.6",
+                "tot_err_down": "1.6",
+                "unit": "fs"
+            }
+        }
+    ]
+}

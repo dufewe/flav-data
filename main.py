@@ -7,7 +7,14 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('defs.py', 'r', encoding='utf-8') as f:
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+os.chdir(HERE)
+sys.path.insert(0, HERE)
+
+with open(os.path.join(HERE, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
@@ -33,7 +40,7 @@ def _page_path(lab, exp, folder_override=None):
     if folder_override:
         folder = folder_override
     else:
-        folder = f"{lab}-{exp}" if lab else exp
+        folder = resolve_folder(lab, exp)
     return f"Experimental/{folder}/{exp}.py"
 
 

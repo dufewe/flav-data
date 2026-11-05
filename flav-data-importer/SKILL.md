@@ -51,7 +51,6 @@ Run from the project root; helper modules are loaded from `flav-data-importer/sc
 
 ```python
 import importlib.util
-import importlib.util
 from pathlib import Path
 
 scripts = Path("flav-data-importer/scripts")
@@ -68,22 +67,22 @@ to_bibtex = common.to_bibtex
 latex_for_obs = common.latex_for_obs
 
 # Unicode → LaTeX (86 single chars + 8 multi-char sequences)
-unicode_to_latex("B⁰ → K*⁰ μ⁺μ⁻")   # → "B^0 \\to K^{*0} \\mu^+\\mu^-"
+unicode_to_latex("B⁰ → K*⁰ μ⁺μ⁻")   # → "B^{0} \\to K*^{0} \\mu^{+}\\mu^{-}"
 
 # Author name → BibTeX initials
 to_bibtex("Aaij, Roel")               # → "Aaij, R."
 
 # Observable name → LaTeX field for obs@N.latex
-# (expands the OBSERVABLE abbreviation; leaves compact transition form intact)
+# (expands the OBSERVABLE abbreviation; does not expand the transition notation)
 latex_for_obs("FL(B0.2.Kst0.mu+.mu-)")  # → "$F_L(B0.2.Kst0.mu+.mu-)$"
 latex_for_obs("gammaCKM")               # → "$\\gamma$"
 latex_for_obs("Mass(B0)")               # → "$M_{B0}$"
 ```
 
-Note: `latex_for_obs` does **not** expand compact transition notation
+Note: `latex_for_obs` does **not** expand transition notation
 (`B0.2.Kst0.mu+.mu-` is left as-is). For the fully-expanded form (e.g.
 `$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$`), see `references/obs-abbr.md`
-§1.2 and write the `latex` field by hand.
+§4 and write the `latex` field by hand.
 
 ## Tool Inventory
 
@@ -101,11 +100,11 @@ Note: `latex_for_obs` does **not** expand compact transition notation
 
 | Script | Use |
 |--------|-----|
-| `scripts/common.py` | Unicode → LaTeX mapping (86 single + 8 multi-char) + BibTeX author-name conversion. Imported by every other script. |
-| `scripts/arxiv-ext.py` | arXiv API metadata + PDF download. `python3 scripts/arxiv-ext.py 1512.04442`. |
-| `scripts/inspirehep-ext.py` | InspireHEP API metadata. `python3 scripts/inspirehep-ext.py --arxiv-id 1512.04442`. |
-| `scripts/hepdata-ext.py` | HEPData table extraction (YAML parsing, matrix support). `python3 scripts/hepdata-ext.py <inspire_id>`. |
-| `scripts/json-valid.py` | JSON schema validator (standard + HFLAV/PDG snapshot modes). `python3 scripts/json-valid.py <file>`. |
+| `scripts/common.py` | Unicode → LaTeX mapping (86 single + 8 multi-char) + BibTeX author-name conversion (`to_bibtex`, `format_authors`). Imported by every other script. |
+| `scripts/arxiv-ext.py` | arXiv API metadata + PDF download. `python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442`. |
+| `scripts/inspirehep-ext.py` | InspireHEP API metadata. `python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442`. |
+| `scripts/hepdata-ext.py` | HEPData table extraction (YAML parsing, q² pairing, matrix detection). `python3 flav-data-importer/scripts/hepdata-ext.py <inspire_id>`. |
+| `scripts/json-valid.py` | JSON schema validator (standard + auto-detected HFLAV/PDG snapshots). `python3 flav-data-importer/scripts/json-valid.py <file>`. |
 
 ## Scope
 
@@ -113,7 +112,7 @@ Note: `latex_for_obs` does **not** expand compact transition notation
 |-----------|--------------|
 | Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Conference/report papers (no formal preprint) |
 | HFLAV/PDG snapshots (special schema) | Fits and global averages derived downstream |
-| Theoretical groups (HPQQCD, RBC/UKQCD, etc.) | Unpublished results, theses |
+| Theoretical groups (HPQCD, RBC/UKQCD, etc.) | Unpublished results, theses |
 | Multi-collaboration papers | Internal notes (CDS restricted) |
 
 ## Workflow
@@ -183,9 +182,16 @@ common = load_script("common")
    tables = hepdata_ext.fetch_table_names(meta['recid'])
    for table in tables:
        yaml_text = hepdata_ext.download_table_yaml(meta['recid'], table)
-       observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
-       matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
+       table_type = hepdata_ext.detect_table_type(yaml_text)
+       if table_type in ('correlation', 'covariance'):
+           matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
+       else:
+           observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
    ```
+   Table names (`"Table 9"`) carry no type information — always use
+   `detect_table_type()` rather than the name. Each observable data point
+   carries its own `q2min`/`q2max` (pairing is positional with
+   `independent_variables`), so one q² bin becomes one group in the transition's category list.
    If HEPData is unavailable or incomplete, fall back to the PDF + pymupdf.
    See `references/hepdata-cli.md` and `references/data-source.md`.
 
@@ -209,18 +215,38 @@ common = load_script("common")
        "pdf":             arxiv["pdf_url"],              # prefer arXiv over InspireHEP
        # ----- human-picked (per references/json-meta.md §"transition-mode Values") -----
        "transition-mode": "semileptonic decay",          # 7-value whitelist
-       "data": [
-           # each entry: {"obs@1": {...}, "obs@2": {...}, ..., "tot_correlation": [...]}
-           # for each obs@N:
-           #   "name":  "FL(B0.2.Kst0.mu+.mu-)"        # compact form (per obs-abbr.md)
-           #   "latex": "$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$"  # fully-expanded LaTeX
-           #   "value": "0.69"
-           #   "type@1_err":      "stat"
-           #   "type@1_err_up":   "0.035"
-           #   "type@1_err_down": "0.036"
-           # optionally: "q2min": "0.1", "q2max": "1.1", etc.
-       ],
+       "data": {
+           # transition channel -> observable category -> list of groups
+           "B0.2.Kst0.mu+.mu-": {
+               "angular": [
+                   # each group: {"obs@1": {...}, ..., "type@1_correlation": [...]}
+                   # for each obs@N:
+                   #   "name":  "FL(B0.2.Kst0.mu+.mu-)"        # canonical form (per obs-abbr.md §1)
+                   #   "latex": "$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$"  # fully-expanded LaTeX
+                   #   "value": "0.69"
+                   #   "type@1_err":      "stat"
+                   #   "type@1_err_up":   "0.035"
+                   #   "type@1_err_down": "0.036"
+                   # optionally: "q2min": "0.1", "q2max": "1.1", etc.
+               ]
+           }
+       },
    }
+   ```
+
+   `data` is a dictionary keyed by the transition channel (`A.B.2.C.D`,
+   or `no-transition` for basic observables such as `MZ` or `Tau(B0)`).
+   Each value is a dictionary of observable categories, and each category
+   holds a non-empty list of data groups. See rules 6 and 7 below and
+   `references/json-meta.md` §"Data Entries".
+
+   Legacy files still use the flat list form below; the validator accepts
+   it during migration, but new files must use the dictionary form:
+
+   ```json
+   "data": [
+       {"obs@1": {"...": "..."}, "type@1_correlation": [[1.0]]}
+   ]
    ```
 
    Field-source priorities when there are two candidates:
@@ -246,12 +272,20 @@ references in any index file.
 #### 2.4 Verify
 
 ```bash
-python3 scripts/json-valid.py <file>
+python3 flav-data-importer/scripts/json-valid.py <file>
 ```
 
-Runs the standard schema validator. For HFLAV/PDG snapshots, the validator
-auto-detects the snapshot schema (no `transition-mode` field, `data` is a
-dict of subgroups with `error` scalar per entry).
+Runs the standard schema validator. HFLAV and PDG snapshots are
+auto-detected by shape: PDG has a top-level `data` dict of `obs@N`
+subgroups; HFLAV has top-level `HFLAV@...` subgroup keys containing an
+`observables` list. Snapshots are validated against their own relaxed
+schema (see `references/json-meta.md` §"Non-Standard Schemas").
+
+For standard files the dict-shaped `data` schema is validated strictly
+(unknown observable fields, error triplets/labels, one measurement
+format, category membership, transition match, and particle masses);
+the legacy list schema is still accepted but only receives the older
+permissive checks until the file is migrated.
 
 ### Step 3: Cleanup
 
@@ -270,7 +304,7 @@ find Experimental/CERN-LHCb/2015 -mindepth 2 -maxdepth 2 -name 'LHCb:2015svh.jso
 
 ## Core Conventions
 
-These are the 4 hard rules for writing JSON files in this repo. Each
+These are the 7 hard rules for writing JSON files in this repo. Each
 reference doc points back to these.
 
 1. **Matrix format (row-per-line)** — each matrix row on one line:
@@ -293,7 +327,7 @@ reference doc points back to these.
    | Author count | Format | Example |
    |---|---|---|
    | **1** | `"Surname, I."` (no "and others") | `"Polchinski, J."` |
-   | **2–3** | List all, BibTeX form, separated by commas + "and" | `"Aaij, R., A. Oyanguren, and J. Smith"` |
+   | **2–3** | List all, BibTeX form, separated by commas + "and" | `"Aaij, R., Smith, J., and Oyanguren, A."` |
    | **4+** | `"Surname, I. and others"` | `"Aaij, R. and others"` |
    | **Group-only** (no person names) | `"{Collaboration} collaboration"` | `"HPQCD collaboration"` |
 
@@ -312,6 +346,50 @@ reference doc points back to these.
    if a character appears in a flav-data JSON that isn't in the mapping,
    convert it by hand.
 
+5. **Transition symbol order** — inside `OBS(transition)`, the transition
+   follows `obs-abbr.md` §1:
+   - `.2.` separates the initial state from the final state (repeat it for
+     cascades, e.g. `p.p.2.W+.2.mu+.nu`).
+   - Within each state, order by particle type:
+     **baryon → meson → charged lepton → neutral lepton**.
+   - Among particles of the same type, order by mass:
+     **heaviest → lightest** (e.g. `Lambdab0.2.p.J/psi.pi-`,
+     `B0.2.Kst0.tau-.e+`).
+   - Equal-mass particles of the same type follow charge order:
+     **`+` → `-` → `0`** (e.g. `e+.e-`, `mu+.mu-`).
+   - Neutral antiparticles append `Bar` (`B0Bar`, `Kst0Bar`); hadron
+     symbols start uppercase, while leptons and light mesons keep their
+     lowercase forms (`e+`, `mu-`, `pi-`, `nu`).
+
+   `json-valid.py` reports non-canonical order as a failure for dotted
+   transitions. Generic placeholders (`l+`, `q1`) and states containing
+   W/Z/γ particles are not order-checked; compact legacy forms without
+   `.2.` remain accepted. Mass values come from
+   `references/particle-masses.json` (PDG 2024). A particle with no mass
+   there is an error for a dict-schema transition key; add its PDG mass
+   (or list it under `non_orderable` when it cannot be ordered) before
+   using the transition.
+
+6. **Separate observable categories into separate dictionaries** — do not
+   mix unlike measurements in one list. Angular coefficients, differential
+   distributions, branching fractions, asymmetries, ratios, lifetimes,
+   mass/mixing parameters, cross sections, and miscellaneous quantities
+   each get their own category key. In particular, angular observables
+   (`FL`, `S3`, `P5p`, ...) and differential widths (`dBr/dq2`, `dGdw`,
+   ...) must never share a dictionary. Allowed categories:
+   `angular`, `differential`, `branching`, `asymmetry`, `ratio`,
+   `lifetime`, `mass-mixing`, `cross-section`, `other`.
+
+7. **`data` is a dictionary keyed by transition channel** — the top-level
+   `data` value is an object whose keys are the transition symbols
+   (`A.B.2.C.D`, or `no-transition` for observables without a transition);
+   each key maps to an object of categories (rule 6), and each category
+   maps to a non-empty list of data groups. Every observable inside a
+   transition's categories must carry that same transition in its `name`.
+   The flat-list form (`"data": [...]`) is legacy: the validator still
+   accepts it for existing files, but new and migrated files must use the
+   dictionary form.
+
 ## Decision Points
 
 **Q: What if the paper has a CERN note number instead of an arXiv ID?**
@@ -321,8 +399,9 @@ accepts any non-null Markdown link as the `inspire-hep` value.
 
 **Q: What if there's no HEPData entry for this paper?**
 A: Fall back to extracting from the source PDF via `pymupdf` (preferred)
-or table screenshots via `vision_analyze`. Mark `data` as `[]` only as a
-last resort — the validator will warn but not fail.
+or table screenshots via `vision_analyze`. An empty `data: []` fails
+validation, so a paper with no extractable data must not be committed
+until its data is filled in.
 
 **Q: arXiv vs InspireHEP — which metadata wins?**
 A: arXiv provides version number and PDF URL; InspireHEP provides
@@ -330,19 +409,20 @@ authoritative author list and DOI. Use InspireHEP for metadata, arXiv
 for PDF.
 
 **Q: How to handle mixed q² bins across different obs entries?**
-A: Use `q2min`/`q2max` per `obs@N`. The `[condition]` syntax is for
-multi-decay-channel ratios only (e.g.
-`RBr(B+.2.K+.l+.l-)[mu/e]`).
+A: Each q² bin is its own group (an element of the category list) carrying `q2min`/`q2max` (or
+per-`obs@N` boundaries when observables within one matrix use different
+bins). The `[condition]` syntax is for multi-decay-channel ratios only
+(e.g. `RBr(B+.2.K+.l+.l-)[mu/e]`).
 
 ## Troubleshooting
 
 ### Error: "JSON format correct" but obs fields missing
 
-Run `python3 scripts/json-valid.py <file>` and read all `[FAIL]` lines
-above the summary. Common ones:
+Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
+`[FAIL]` lines above the summary. Common ones:
 
 - `obs@N: missing required field: type@1_err` — add a `type@N_err` field
-  with one of `stat`, `syst`, `total`, `model`, `ext`.
+  with one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`.
 - `obs@N: missing required field: type@1_err_up`/`_down` — paired
   asymmetric error bars; both required if either present.
 - `transition-mode: invalid value` — must be one of:
@@ -363,11 +443,20 @@ parameters, EW parameters) do not take a transition — write them as
 If you see this error for an observable that should NOT have a transition,
 rename it to its basic-observable form, not to `OBS(transition)`.
 
-### Error: "ARXIV_FIELDS_MUST_BE_DICT"
+### Error: "data[...] must be an object" / "obs@N: must be an object"
 
-Each `data` entry must be a dict (`{"obs@1": {...}, "obs@2": {...}, ...}`),
-not a list. See `assets/workflow-lhcb-2015svh.md` Step 3 for the canonical
-shape.
+With the dict schema, `data[transition][category]` must be a **list** of
+dicts (`[{"obs@1": {...}, "obs@2": {...}, ...}]`), each dict a data group,
+and each `obs@N` value must itself be an object. See
+`assets/workflow-lhcb-2015svh.md` Step 4 for the canonical shape.
+
+### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet"
+
+New (dict-schema) files accept only the documented `obs@N` fields.
+Component errors must be a complete `type@N_err`, `type@N_err_up`,
+`type@N_err_down` triplet, and the label must be one of `stat`, `syst`,
+`lumi`, `norm`, `theo`, `expe`. Use `tot_err_up`/`tot_err_down` for a
+single combined error, and never mix component errors with total errors.
 
 ### Error: "HEPData 401 / Cloudflare blocked"
 
@@ -377,7 +466,7 @@ Direct `curl` to hepdata.net is blocked. Install `hepdata-cli`:
 pip install hepdata-cli
 ```
 
-Then re-run `scripts/hepdata-ext.py`. The script resolves the binary from
+Then re-run `flav-data-importer/scripts/hepdata-ext.py`. The script resolves the binary from
 `$PATH`, the active venv, `~/.local/bin/`, or Homebrew prefixes.
 
 ### Error: "I have TexKey from InspireHEP but JSON doesn't show it"
@@ -391,16 +480,20 @@ key. Run `inspirehep-ext.py` to get the correct `inspire-hep` value. The
 
 Before committing any new or updated JSON file:
 
-- [ ] File parses: `python3 flav-data-importer/scripts/json-valid.py <file>` returns no issues (the validator has a limited HFLAV/PDG snapshot check; review `json-meta.md` §"Non-Standard Schemas" manually as well)
+- [ ] File parses: `python3 flav-data-importer/scripts/json-valid.py <file>` returns no issues (HFLAV/PDG snapshots are auto-detected)
 - [ ] `time` field is v1 arXiv submission date in `YYYY.MM.DD` format
 - [ ] `arxiv` field is either `null` or a Markdown link with display text `primary_category/<id>v<N>` and target the arXiv PDF URL
 - [ ] `inspire-hep` is `[<TexKey>](https://inspirehep.net/literature/<recid>)` with verified TexKey
-- [ ] `author` is `Surname, Initials. and others` (initials only)
+- [ ] `author` follows the 1 / 2–3 / 4+ tier rule (initials only)
 - [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
-- [ ] `data` is a list (standard) or dict-of-subgroups (snapshot), each entry is a dict with `obs@N` keys
-- [ ] Each `obs@N` has `name`, `latex`, `value`, and a `type@N_err` family
+- [ ] `data` is a dict keyed by transition channel (`A.B.2.C.D` or `no-transition`), then by observable category, then a list of groups (legacy list schema only for unmigrated files)
+- [ ] Each `obs@N` has `name` and `latex`, plus exactly one measurement format
+      (`value` + complete `type@N_err`/`_err_up`/`_err_down` triplets,
+      `tot_err_up`/`tot_err_down`, upper limit, or snapshot `error`)
+- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; no unknown observable fields
+- [ ] Angular and differential observables are filed under separate categories
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
-- [ ] Unicode is fully escaped (no `μ`, `Δ`, `±`, `→`, smart quotes)
+- [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
 - [ ] Annual index file includes the new paper if added (or excludes if deleted)
 
 ## Known Limitations
@@ -425,7 +518,9 @@ Before committing any new or updated JSON file:
 A: `Experimental/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`.
 For a multi-collaboration paper, use the primary collaboration's directory
 and list all collaborations in the `Collaboration` field
-(`"LHCb, CMS"`). For HEPData-only updates, use the recid as the TexKey.
+(`"LHCb, CMS"`). If HEPData is the only source and no TexKey exists, use
+`<Collaboration>:<recid>` as the filename stem and record that in the
+annual index.
 
 **Q: Can I import a paper with no arXiv ID (journal-only)?**
 A: Yes. Set `arxiv` to `null`. Look up the paper by DOI or title on
@@ -441,10 +536,10 @@ A: Use `ACP(transition)` for time-integrated, or `ACP_bplus(transition)`
 for the B+ specific case. See `references/obs-abbr.md` §2.3.
 
 **Q: Why are there `obs@N` suffixes on field names?**
-A: To support multi-value observables (e.g. `obs@1`, `obs@2`, `obs@3`
-for three q² bins). The validator treats `obs@1` and `obs@2` as separate
-entries with their own errors. See `assets/workflow-lhcb-2015svh.md`
-for a worked example.
+A: To group the observables that share one correlation/covariance matrix
+inside a single data group. Different q² bins are **separate**
+groups (each with its own `q2min`/`q2max`), not extra `obs@N`
+keys. See `assets/workflow-lhcb-2015svh.md` for a worked example.
 
 **Q: What if I see `Heisenberg` or other implementation-detail fields?**
 A: Those are private to the fitting tools. Don't put them in the flav-data

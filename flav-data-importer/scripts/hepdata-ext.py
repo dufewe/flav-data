@@ -12,11 +12,10 @@ Example:
 
 import json
 import os
+import re
 import subprocess
 import sys
 import argparse
-import urllib.request
-import urllib.error
 import shutil
 import tempfile
 
@@ -29,7 +28,7 @@ except ImportError:
 # Re-export shared helpers so callers can
 # `from hepdata_ext import to_bibtex, unicode_to_latex`.
 # See common.py for the canonical implementations and SKILL.md
-# "Import Conventions" rules 3 + 4 for the policies.
+# "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
@@ -80,10 +79,17 @@ def fetch_table_names(inspire_id: str) -> list[str] | None:
     Raises RuntimeError if hepdata-cli is not installed.
     """
     _require_hepdata_cli()
-    result = subprocess.run(
-        [HEPDATA_CLI, 'fetch-names', '-i', 'inspire', str(inspire_id)],
-        capture_output=True, text=True, timeout=60
-    )
+    try:
+        result = subprocess.run(
+            [HEPDATA_CLI, 'fetch-names', '-i', 'inspire', str(inspire_id)],
+            capture_output=True, text=True, timeout=60
+        )
+    except subprocess.TimeoutExpired:
+        print(
+            "Error: hepdata-cli fetch-names timed out after 60s. "
+            "Check your network connection and retry."
+        )
+        return None
     if result.returncode != 0:
         if not result.stdout.strip() and not result.stderr.strip():
             print(f"Error: hepdata-cli returned no output (rc={result.returncode}). "
@@ -107,6 +113,23 @@ def fetch_table_names(inspire_id: str) -> list[str] | None:
     return tables
 
 
+def _metadata_matches(path: str, inspire_id: str) -> bool:
+    """Return True if a HEPData metadata JSON belongs to ``inspire_id``.
+
+    hepdata-cli stores the Inspire recid under ``record.inspire_id``; older
+    exports also put it at the top level.
+    """
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            metadata = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return False
+    if str(metadata.get('inspire_id', '')) == str(inspire_id):
+        return True
+    record = metadata.get('record') or {}
+    return str(record.get('inspire_id', '')) == str(inspire_id)
+
+
 def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     """Download HEPData metadata JSON.
 
@@ -124,14 +147,29 @@ def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     """
     _require_hepdata_cli()
     os.makedirs(output_dir, exist_ok=True)
+
+    # Reuse an existing download for the same record (idempotent re-runs).
+    for filename in sorted(os.listdir(output_dir)):
+        path = os.path.join(output_dir, filename)
+        if filename.endswith('.json') and _metadata_matches(path, inspire_id):
+            return path
+
     existing_json = {
         f for f in os.listdir(output_dir) if f.endswith('.json')
     }
-    result = subprocess.run(
-        [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire',
-         str(inspire_id), '-d', output_dir],
-        capture_output=True, text=True, timeout=120
-    )
+    try:
+        result = subprocess.run(
+            [HEPDATA_CLI, 'download', '-f', 'json', '-i', 'inspire',
+             str(inspire_id), '-d', output_dir],
+            capture_output=True, text=True, timeout=120
+        )
+    except subprocess.TimeoutExpired:
+        print(
+            "Error: hepdata-cli download timed out after 120s. "
+            "Check your network connection and retry."
+        )
+        return None
+
     if result.returncode != 0:
         if not result.stdout.strip() and not result.stderr.strip():
             print(f"Error: hepdata-cli returned no output (rc={result.returncode}).")
@@ -147,41 +185,46 @@ def download_metadata(inspire_id: str, output_dir: str) -> str | None:
         return os.path.join(output_dir, downloaded[0])
 
     # Some hepdata-cli versions overwrite an existing metadata filename.
-    candidates = sorted(
-        f for f in os.listdir(output_dir) if f.endswith('.json')
-    )
-    for filename in candidates:
+    for filename in sorted(os.listdir(output_dir)):
         path = os.path.join(output_dir, filename)
-        try:
-            with open(path, 'r', encoding='utf-8') as f:
-                metadata = json.load(f)
-        except (OSError, json.JSONDecodeError):
-            continue
-        if str(metadata.get('inspire_id', '')) == str(inspire_id):
+        if filename.endswith('.json') and _metadata_matches(path, inspire_id):
             return path
     return None
 
 
 def download_table_yaml(inspire_id: str, table_name: str) -> str:
-    """Download YAML data for a specific table via direct HTTP."""
-    from urllib.parse import quote
-    encoded_name = quote(table_name, safe='')
-    url = (
-        f'https://www.hepdata.net/download/table/'
-        f'ins{inspire_id}/{encoded_name}/yaml'
-    )
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    try:
-        response = urllib.request.urlopen(req, timeout=30)
-    except urllib.error.HTTPError as e:
-        raise ValueError(
-            f"HEPData table download failed (HTTP {e.code}): {e.reason}"
-        ) from e
-    except urllib.error.URLError as e:
-        raise ValueError(
-            f"HEPData table download connection failed: {e.reason}"
-        ) from e
-    return response.read().decode('utf-8')
+    """Download YAML data for a specific table via ``hepdata-cli``.
+
+    Direct HTTP access to hepdata.net is blocked by Cloudflare, so the CLI
+    is the supported path (see references/hepdata-cli.md).
+    """
+    _require_hepdata_cli()
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            result = subprocess.run(
+                [HEPDATA_CLI, 'download', '-f', 'yaml', '-i', 'inspire',
+                 str(inspire_id), '-t', table_name, '-d', tmp],
+                capture_output=True, text=True, timeout=180
+            )
+        except subprocess.TimeoutExpired as e:
+            raise ValueError(
+                f"HEPData table '{table_name}' download timed out "
+                f"after {e.timeout}s"
+            ) from e
+        if result.returncode != 0:
+            detail = (result.stderr or result.stdout or 'unknown error').strip()
+            raise ValueError(
+                f"HEPData table '{table_name}' download failed: {detail}"
+            )
+        yaml_files = sorted(
+            f for f in os.listdir(tmp) if f.endswith(('.yaml', '.yml'))
+        )
+        if not yaml_files:
+            raise ValueError(
+                f"HEPData table '{table_name}' download produced no YAML file"
+            )
+        with open(os.path.join(tmp, yaml_files[0]), 'r', encoding='utf-8') as f:
+            return f.read()
 
 
 def parse_metadata(meta_path: str) -> dict:
@@ -205,7 +248,7 @@ def parse_metadata(meta_path: str) -> dict:
 
     return {
         'recid': data.get('recid', ''),
-        'inspire_id': data.get('inspire_id') or '',
+        'inspire_id': data.get('inspire_id') or record.get('inspire_id') or '',
         'hepdata_doi': data.get('hepdata_doi', ''),
         'record': {
             'title': record.get('title', ''),
@@ -218,6 +261,39 @@ def parse_metadata(meta_path: str) -> dict:
         'observable_tables': observable_tables,
         'correlation_tables': correlation_tables,
     }
+
+
+_RANGE_RE = re.compile(
+    r'^\s*([+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?)'
+    r'\s*-\s*'
+    r'([+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?)\s*$'
+)
+
+
+def _independent_point(cell) -> tuple[str | None, str | None]:
+    """Normalize a HEPData independent-variable cell to ``(low, high)``.
+
+    HEPData uses ``{low, high}`` for binned variables and ``{value: ...}``
+    for single points; legacy exports write ranges as ``"0.1-0.98"``.
+    """
+    if not isinstance(cell, dict):
+        return None, None
+    low = cell.get('low')
+    high = cell.get('high')
+    if low is None and high is None and 'value' in cell:
+        raw = cell['value']
+        if isinstance(raw, str):
+            match = _RANGE_RE.match(raw)
+            if match:
+                low, high = match.group(1), match.group(2)
+            else:
+                low = high = raw.strip()
+        else:
+            low = high = raw
+    return (
+        str(low).strip() if low is not None else None,
+        str(high).strip() if high is not None else None,
+    )
 
 
 def parse_yaml_observables(yaml_text: str) -> dict:
@@ -272,20 +348,57 @@ def parse_yaml_observables(yaml_text: str) -> dict:
         return [], {}
 
     observables = []
-    global_qualifiers = data.get('independent_variables', [])
+    independent_vars = data.get('independent_variables', [])
 
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '')
         table_qualifiers = var.get('qualifiers', [])
 
         values = []
-        for val in var.get('values', []):
+        for idx, val in enumerate(var.get('values', [])):
             raw_value = val.get('value')
+            independent = []
+            q2min = q2max = None
+            q2_found = False
+            for iv in independent_vars:
+                iv_values = iv.get('values', [])
+                if idx >= len(iv_values):
+                    continue
+                iv_header = iv.get('header', {}) or {}
+                name = iv_header.get('name', '')
+                units = iv_header.get('units', '')
+                low, high = _independent_point(iv_values[idx])
+                independent.append({
+                    'name': name,
+                    'units': units,
+                    'low': low,
+                    'high': high,
+                })
+                header_l = (
+                    f'{name} {units}'.lower()
+                    .replace('$', '').replace('{', '').replace('}', '')
+                    .replace('²', '^2').replace(' ', '')
+                )
+                if not q2_found and (
+                    'q^2' in header_l
+                    or 'q2' in header_l
+                    or 'q**2' in header_l
+                    or 'gev^2' in header_l
+                ):
+                    q2_found = True
+                    q2min, q2max = low, high
+
             point = {
                 'value': str(raw_value) if raw_value is not None else '',
                 'errors': [],
                 'qualifiers': val.get('qualifiers', []),
+                'independent': independent,
             }
+            if q2_found:
+                if q2min is not None:
+                    point['q2min'] = q2min
+                if q2max is not None:
+                    point['q2max'] = q2max
 
             for err in val.get('errors', []):
                 err_info = {'label': err.get('label', '')}
@@ -312,7 +425,7 @@ def parse_yaml_observables(yaml_text: str) -> dict:
             'values': values,
         })
 
-    return observables, {'global': global_qualifiers}
+    return observables, {'global': independent_vars}
 
 
 def parse_yaml_correlation(yaml_text: str) -> dict:
@@ -337,21 +450,31 @@ def parse_yaml_correlation(yaml_text: str) -> dict:
             matrix_type = 'covariance'
             break
 
-    # Extract matrix values (row-major order)
+    # Extract matrix values (row-major order). A '-' cell means the entry
+    # was not reported; substituting 0.0 keeps the matrix square instead
+    # of silently shifting every following element.
     values = []
     qualifiers = {}
+    missing = 0
     for var in data.get('dependent_variables', []):
         for val in var.get('values', []):
             v = val.get('value', '')
             if v == '-':
+                missing += 1
+                values.append(0.0)
                 continue
             try:
                 values.append(float(v))
             except (ValueError, TypeError):
-                print(f"Warning: Skipping non-numeric matrix value: {v!r}")
-                continue
+                print(f"Warning: non-numeric matrix value {v!r} treated as 0.0")
+                values.append(0.0)
         for q in var.get('qualifiers', []):
             qualifiers[q.get('name', '')] = q.get('value', '')
+    if missing:
+        print(
+            f"Warning: {missing} missing matrix entr(y/ies) ('-') "
+            f"treated as 0.0"
+        )
 
     # Reconstruct into 2D matrix
     n = int(len(values) ** 0.5)
@@ -367,6 +490,38 @@ def parse_yaml_correlation(yaml_text: str) -> dict:
     return matrix_type, matrix, qualifiers
 
 
+def detect_table_type(yaml_text: str) -> str:
+    """Classify a HEPData table as ``correlation``, ``covariance``, or
+    ``observable``.
+
+    Table names ("Table 9") carry no type information, so the YAML
+    structure must be inspected: a matrix table has "correlation"/
+    "covariance" headers or repeated ``CORR``/``COV`` independent variables.
+    """
+    if not HAS_YAML:
+        return 'unknown'
+    data = yaml.safe_load(yaml_text) or {}
+
+    for var in data.get('dependent_variables', []):
+        header = str(var.get('header', {}).get('name', '')).lower()
+        if 'covariance' in header:
+            return 'covariance'
+        if 'correlation' in header:
+            return 'correlation'
+
+    names = [
+        str(var.get('header', {}).get('name', '')).lower()
+        for var in data.get('independent_variables', [])
+    ]
+    if len(names) >= 2:
+        if all('cov' in name for name in names):
+            return 'covariance'
+        if all('corr' in name for name in names):
+            return 'correlation'
+
+    return 'observable'
+
+
 def main() -> int:
     """CLI entry point.
 
@@ -375,9 +530,9 @@ def main() -> int:
 
     Examples
     --------
-    >>> python3 scripts/hepdata-ext.py 1409497
-    >>> python3 scripts/hepdata-ext.py 1409497 --output_dir /tmp/hd
-    >>> python3 scripts/hepdata-ext.py 1409497 --table "Table 1"
+    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497
+    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497 --output_dir /tmp/hd
+    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497 --table "Table 1"
     """
     # Fail fast with a clear install message if the CLI is missing.
     if not HEPDATA_CLI:
@@ -482,8 +637,11 @@ def main() -> int:
         if not args.no_write:
             print(f"YAML saved to: {yaml_path}")
 
-        # Attempt to parse
-        if 'correlation' in args.table.lower() or 'covariance' in args.table.lower():
+        # Attempt to parse. Table names ("Table 9") carry no type
+        # information, so classify from the YAML structure.
+        table_type = detect_table_type(yaml_data)
+        print(f"Detected table type: {table_type}")
+        if table_type in ('correlation', 'covariance'):
             mtype, matrix, quals = parse_yaml_correlation(yaml_data)
             print(f"Matrix type: {mtype}")
             print(
@@ -497,10 +655,16 @@ def main() -> int:
             for obs in observables[:3]:
                 n_points = len(obs.get('values', []))
                 first = obs['values'][0] if n_points else {}
+                q2 = ''
+                if first.get('q2min') is not None or first.get('q2max') is not None:
+                    q2 = (
+                        f", q2=[{first.get('q2min')}, "
+                        f"{first.get('q2max')}]"
+                    )
                 print(
                     f"  {obs['header']}: {n_points} data point(s); "
                     f"first value={first.get('value', 'N/A')!r} "
-                    f"(errors: {len(first.get('errors', []))})"
+                    f"(errors: {len(first.get('errors', []))}){q2}"
                 )
 
     # Save JSON summary
@@ -517,7 +681,7 @@ def main() -> int:
 
 if __name__ == '__main__':
     try:
-        main()
+        sys.exit(main())
     except RuntimeError as e:
         # Surface actionable install / config errors without a traceback.
         print(f"\nError: {e}", file=sys.stderr)

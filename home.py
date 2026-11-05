@@ -5,7 +5,11 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('defs.py', 'r', encoding='utf-8') as f:
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
@@ -45,11 +49,10 @@ the following groups:
 
 | Category | Groups |
 |----------|--------|
+| Experimental | {', '.join(expe_labels)} |
+| Theoretical | {', '.join(THEOGROUP)} |
+| Observable | {', '.join(OBSGROUP)} |
 ''')
-
-st.markdown(f"| Experimental | {', '.join(expe_labels)} |")
-st.markdown(f"| Theoretical | {', '.join(THEOGROUP)} |")
-st.markdown(f"| Observable | {', '.join(OBSGROUP)} |")
 
 st.markdown('''
 ## Features
@@ -89,7 +92,7 @@ with col2:
     {", ".join(expe_labels)}
 
     Each collaboration page features an interactive dashboard with
-    timeline views, observable filtering, and data export.
+    year, month, and transition-mode filters.
     ''')
 
 with col3:
@@ -178,19 +181,18 @@ def get_database_statistics(experimental_groups, theoretical_groups,
                 index = get_json(idx_path)
             except (FileNotFoundError, json.JSONDecodeError):
                 continue
-            total_files += sum(len(ids) for ids in index.values())
-            if any(ids for ids in index.values()):
+            if not isinstance(index, dict):
+                continue
+            entry_ids = [ids for ids in index.values() if isinstance(ids, list)]
+            total_files += sum(len(ids) for ids in entry_ids)
+            if any(entry_ids):
                 years.add(year)
 
     for entry in experimental_groups:
         lab, group = entry[0], entry[1]
-        if len(entry) >= 3 and entry[2]:
-            group_dir = os.path.join(experimental_base, entry[2])
-        elif lab:
-            group_dir = os.path.join(experimental_base, f"{lab}-{group}")
-        else:
-            group_dir = os.path.join(experimental_base, group)
-        count_group(group, group_dir)
+        override = entry[2] if len(entry) >= 3 else None
+        folder = resolve_folder(lab, group, override)
+        count_group(group, os.path.join(experimental_base, folder))
 
     for group in theoretical_groups:
         count_group(group, os.path.join(theoretical_base, group))
@@ -204,6 +206,6 @@ total_files, unique_years = get_database_statistics(
     EXPERIMENTAL_BASE,
     THEORETICAL_BASE,
 )
-st.metric("Total JSON Entries", total_files)
+st.metric("Total Indexed Entries", total_files)
 if unique_years:
     st.caption(f"Spanning years: {', '.join(unique_years)}")

@@ -7,13 +7,15 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('defs.py', 'r', encoding='utf-8') as f:
-    exec(f.read())
-
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, PROJECT_ROOT)
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
+    exec(f.read())
+
 from flav_dashboard import run_dashboard
 
 # ---------------------------------------------------------

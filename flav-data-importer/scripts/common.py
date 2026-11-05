@@ -123,7 +123,7 @@ _MULTI_CHAR_REPLACEMENTS = [
 def unicode_to_latex(text: str) -> str:
     """Replace all supported Unicode characters in *text* with LaTeX equivalents.
 
-    Applies the mapping defined in SKILL.md "Import Conventions" rule 4:
+    Applies the mapping defined in SKILL.md "Core Conventions" rule 4:
     Greek letters, math symbols, smart quotes, dashes, and common
     typographic characters are converted. Unrecognised characters pass
     through unchanged.
@@ -154,7 +154,7 @@ def unicode_to_latex(text: str) -> str:
 # ---------------------------------------------------------------------------
 # BibTeX author-name formatting
 # ---------------------------------------------------------------------------
-# Rule 3 (SKILL.md "Import Conventions"):
+# Rule 3 (SKILL.md "Core Conventions"):
 #   Author field must use InspireHEP BibTeX format:
 #       "Surname, Initials."
 #   Example: "Aaij, Roel" → "Aaij, R."
@@ -222,21 +222,45 @@ def to_bibtex(full_name: str) -> str:
     return f'{surname}, {initials}'
 
 
+def format_authors(full_names: list[str]) -> str:
+    """Format an author list per SKILL.md rule 3.
+
+    Tiers: 1 author → ``"Surname, I."``; 2–3 → comma-separated BibTeX
+    names with ``and``; 4+ → ``"Surname, I. and others"``. An empty list
+    returns ``''``; the caller substitutes a collaboration fallback.
+    """
+    names = [name for name in (full_names or []) if name]
+    if not names:
+        return ''
+    bibtex = [to_bibtex(name) for name in names]
+    if len(bibtex) == 1:
+        return bibtex[0]
+    if len(bibtex) == 2:
+        return f'{bibtex[0]} and {bibtex[1]}'
+    if len(bibtex) == 3:
+        return f'{bibtex[0]}, {bibtex[1]}, and {bibtex[2]}'
+    return f'{bibtex[0]} and others'
+
+
 # Mapping from compact observable abbreviation to its LaTeX symbol.
 # Covers the most common observables used in B → K(*)ℓℓ and B → DK analyses.
 # For full canonical list see references/obs-abbr.md §3.
 #
-# IMPORTANT: This dict does NOT cover compact transition-symbol expansion
+# IMPORTANT: This dict does NOT cover transition-symbol expansion
 # (e.g. "B0.2.Kst0.mu+.mu-" → "B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}"). That
-# expansion is described in references/obs-abbr.md §1.2 and must be
-# applied separately, either by hand or via a more specialised parser.
+# expansion follows the rules in references/obs-abbr.md §1 and §4 and must
+# be applied separately, either by hand or via a more specialised parser.
 # latex_for_obs() below applies this dict for the OBSERVABLE ABBREVIATION
-# only; transition rendering falls through to the compact form verbatim.
+# only; transition rendering falls through to the transition form verbatim.
 OBSERVABLE_LATEX = {
     # Branching fractions and ratios
-    'Br': 'B',
-    'RBr': 'R',  # ratio of branching fractions (with [condition] suffix)
+    'Br': '\\mathcal{B}',
+    'RBr': '\\mathcal{R}',  # ratio of branching fractions
+    'dBr/dq2': 'd\\mathcal{B}/dq^2',
     'ACP': 'A_{CP}',
+    'Sigma': '\\sigma',
+    'Gamma': '\\Gamma',
+    'DeltaMass': '\\Delta M',
 
     # Angular coefficients (LHCb B → K* μμ angular analysis)
     'FL': 'F_L',
@@ -296,12 +320,12 @@ def latex_for_obs(obs_name: str) -> str:
         latex_for_obs("FL(B0.2.Kst0.mu+.mu-)")     # → "$F_L(B0.2.Kst0.mu+.mu-)$"
 
     **Limitations.** This helper applies the OBSERVABLE ABBREVIATION table
-    (e.g. ``FL`` → ``F_L``) but does NOT expand the compact transition
-    notation (e.g. ``B0.2.Kst0`` is NOT auto-expanded to
-    ``B^{0} \\to K^{*0}``). The compact form is left in place so the
+    (e.g. ``FL`` → ``F_L``) but does NOT expand the transition notation
+    (e.g. ``B0.2.Kst0`` is NOT auto-expanded to
+    ``B^{0} \\to K^{*0}``). The transition form is left in place so the
     downstream fitter can re-parse it. If you need fully expanded LaTeX,
-    see ``references/obs-abbr.md`` §1.2 for the rules and write the field
-    by hand, or extend this helper.
+    see ``references/obs-abbr.md`` §4 for the LaTeX mapping and write the
+    field by hand, or extend this helper.
 
     For an unknown abbreviation, falls back to wrapping the bare ``obs_name``
     in ``$...$``.
@@ -327,7 +351,7 @@ def latex_for_obs(obs_name: str) -> str:
 
     # Transition form: "ABBR(transition)" or "ABBR(transition)[condition]"
     # ABBR allows digits and lowercase (e.g. S3, P5p, dMs)
-    m = re.match(r'^([A-Za-z][A-Za-z0-9]*)\(([^)]*)\)(\[[^\]]*\])?$', obs_name)
+    m = re.match(r'^([A-Za-z][A-Za-z0-9/]*)\(([^)]*)\)(\[[^\]]*\])?$', obs_name)
     if m:
         abbr = m.group(1)
         sym = OBSERVABLE_LATEX.get(abbr, abbr)

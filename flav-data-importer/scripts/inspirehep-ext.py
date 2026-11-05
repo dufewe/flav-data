@@ -21,11 +21,12 @@ import re
 
 # Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
 # See common.py for the canonical implementations and SKILL.md
-# "Import Conventions" rules 3 + 4 for the policies.
+# "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
     to_bibtex, to_bibtex as _to_bibtex,
+    format_authors,
 )  # noqa: E402,F401
 
 
@@ -83,34 +84,32 @@ def extract_metadata(hit: dict) -> dict:
     texkey = texkeys[0] if texkeys else ''
 
     # Title (prefer arXiv source, preserves full LaTeX).
-    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Import Conventions".
+    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Core Conventions".
     title = ''
     for t in meta.get('titles', []):
         if t.get('source') == 'arXiv':
             title = _unicode_to_latex(t['title'])
             break
     if not title:
-        title = _unicode_to_latex(meta.get('titles', [{}])[0].get('title', ''))
+        titles = meta.get('titles') or [{}]
+        title = _unicode_to_latex(titles[0].get('title', ''))
 
     # Abstract (prefer arXiv source, preserves LaTeX format).
-    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Import Conventions".
+    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Core Conventions".
     abstract = ''
     for a in meta.get('abstracts', []):
         if a.get('source') == 'arXiv':
             abstract = _unicode_to_latex(a['value'])
             break
     if not abstract:
-        abstract = _unicode_to_latex(meta.get('abstracts', [{}])[0].get('value', ''))
+        abstracts = meta.get('abstracts') or [{}]
+        abstract = _unicode_to_latex(abstracts[0].get('value', ''))
 
-    # Author list. Convert first author to InspireHEP BibTeX form
-    # (initials only) per rule 3 of SKILL.md "Import Conventions".
+    # Author list. Apply the 1 / 2–3 / 4+ tiers from SKILL.md rule 3.
     authors = meta.get('authors', [])
     author_list = [a.get('full_name', '') for a in authors]
-    if len(author_list) > 1:
-        author_str = f"{_to_bibtex(author_list[0])} and others"
-    elif author_list:
-        author_str = _to_bibtex(author_list[0])
-    else:
+    author_str = format_authors(author_list)
+    if not author_str:
         # If no person name found, use collaboration name
         collaborations = meta.get('collaborations', [])
         if collaborations:
@@ -121,9 +120,11 @@ def extract_metadata(hit: dict) -> dict:
     # First author full info (includes email, etc.)
     first_author = meta.get('first_author', {})
 
-    # Collaboration
+    # Collaboration: join multi-collaboration papers with ", ".
     collaborations = meta.get('collaborations', [])
-    collaboration = collaborations[0]['value'] if collaborations else ''
+    collaboration = ', '.join(
+        c.get('value', '') for c in collaborations if c.get('value')
+    )
 
     # Date (use preprint_date = arXiv v1 submission date)
     preprint_date = meta.get('preprint_date', '')
@@ -180,12 +181,19 @@ def extract_metadata(hit: dict) -> dict:
         # Markdown links (for JSON files)
         # NOTE: arxiv_link includes primary category when available.
         # The version number (vN) is only available from arXiv API (arxiv-ext.py).
-        'inspire_hep_link': f'[{texkey}](https://inspirehep.net/literature/{recid})',
+        'inspire_hep_link': (
+            f'[{texkey}](https://inspirehep.net/literature/{recid})'
+            if texkey and recid else None
+        ),
         'arxiv_link': (
             f'[{primary_cat}/{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-            if primary_cat else f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+            if arxiv_id and primary_cat
+            else (
+                f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+                if arxiv_id else None
+            )
         ),
-        'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}',
+        'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}' if arxiv_id else None,
     }
 
 
@@ -194,10 +202,10 @@ def main() -> None:
 
     Examples
     --------
-    >>> python3 scripts/inspirehep-ext.py 1512.04442
-    >>> python3 scripts/inspirehep-ext.py --arxiv-id 1512.04442
-    >>> python3 scripts/inspirehep-ext.py --recid 1409497
-    >>> python3 scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
+    >>> python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442
+    >>> python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442
+    >>> python3 flav-data-importer/scripts/inspirehep-ext.py --recid 1409497
+    >>> python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
     """
     parser = argparse.ArgumentParser(
         description='Extract InspireHEP paper information'

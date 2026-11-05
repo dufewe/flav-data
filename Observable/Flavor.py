@@ -1,7 +1,11 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('./defs.py', 'r', encoding='utf-8') as f:
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
@@ -23,8 +27,8 @@ st.markdown('''
 
 **示例：**
 
-| 过程 | LaTeX | 符号 | 说明 |
-|------|-------|------|------|
+| 过程 | 类型 | 符号 | 说明 |
+|------|------|------|------|
 | $B^0 \\to e^+ e^-$ | Leptonic decay | `B0.2.e+.e-` | 标准：+ 后 - |
 | $\\bar{B}^0 \\to e^+ e^-$ | Leptonic decay | `B0Bar.2.e+.e-` | 反粒子用 Bar |
 | $B^+ \\to K^+ \\mu^+ \\mu^-$ | Semileptonic | `B+.2.K+.mu+.mu-` | 末态排序 |

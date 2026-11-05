@@ -8,30 +8,71 @@ Every decay or scattering process is encoded as a transition symbol using the fo
 
 ### Naming Rules
 
-1. **Particle names**: Use English names or standard abbreviations (see particle table below).
-2. **Charge indicators**: Every particle must carry its charge: `+`, `-`, or `0`. This applies to all particles without exception.
-3. **Ordering**: Within each state (initial or final), particles are ordered by charge: `+` first, then `-`, then `0`.
-4. **Antiparticles**: Append `Bar` to the particle name. **For neutral mesons**: `Bar` replaces `0` if present, then appends: `B0Bar`, `Kst0Bar`. **For baryons** (heavy): `Bar` goes at the very end after any charge indicator: `Lambdac+Bar`, `Lambdab0Bar`, `Sigma-Bar`, `pBar`. **Exception — charged particles** (mesons, leptons, bosons): the charge indicator alone denotes the antiparticle (e.g., `B+`/`B-`, `W+`/`W-`, `mu+`/`mu-`); do NOT add `Bar` to these.
-5. **Neutrinos**: No flavor indicator — always use `nu` or `nuBar` regardless of the specific neutrino type ($\nu_e$, $\nu_\mu$, $\nu_\tau$). **Exception**: when the experimental signature is flavor-specific (e.g., tagging a muon-neutrino via inverse muon decay, or reconstructing a $\tau^\pm$ from a $\nu_\tau$), the **flavor symbol** (`nue`, `numu`, `nutau`, plus `Bar` for antiparticle) is allowed in the transition. Most legacy data uses this convention; new imports should prefer the `nu`/`nuBar` form with flavor encoded in the `[condition]`.
-6. **Multi-step processes**: Use additional `2` separators for cascade processes: `p.p.2.W+.2.mu+.nu` represents $pp \to W^+ \to \mu^+ \nu$.
-7. **Intermediate resonances**: When an intermediate state decays to a dilepton pair, append `(2.l+.l-)` to the resonance name: `B0.2.Kst0.J/psi(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$.
+1. **State separator `2`**: `A.B.2.C.D` represents $A+B \to C+D$. The `2`
+   always separates the initial state from the final state. Cascades repeat
+   the separator: `p.p.2.W+.2.mu+.nu` = $pp \to W^+ \to \mu^+\nu$.
+2. **Particle-type order**: Within each state (initial or final), write
+   particles left to right by type: **baryon → meson → charged lepton →
+   neutral lepton**. Example: $\Lambda_b^0 \to p\,J/\psi\,\pi^-$ is
+   `Lambdab0.2.p.J/psi.pi-` (baryon, then mesons).
+3. **Mass order within a type**: Among particles of the same type, write
+   **heaviest → lightest**. Example: the same $\Lambda_b^0$ decay is
+   `Lambdab0.2.p.J/psi.pi-` ($J/\psi$ = 3.10 GeV before $\pi^-$ = 0.14 GeV);
+   $B^0 \to K^{*0}\tau^- e^+$ is `B0.2.Kst0.tau-.e+` ($\tau$ = 1.78 GeV
+   before $e$ = 0.0005 GeV). Mass ordering is applied **within each type**:
+   a lighter baryon still precedes a heavier meson.
+4. **Charge order for equal masses**: When same-type particles have equal
+   mass, write **`+` → `-` → `0`**. Example: $B^0 \to e^+ e^-$ is
+   `B0.2.e+.e-`; $\tau^+ \tau^-$ is `tau+.tau-`. Mass ordering takes
+   precedence, so charge only breaks equal-mass ties.
+5. **Charge indicators**: Every particle carries its charge: `+`, `-`, or
+   `0`, without exception.
+6. **Antiparticles**: Neutral antiparticles append `Bar`: $B^0$ →
+   `B0Bar`, $K^{*0}$ → `Kst0Bar`. For baryons, `Bar` goes at the very end
+   after any charge indicator (`Lambdac+Bar`, `Lambdab0Bar`, `pBar`);
+   for charged mesons, leptons, and bosons the charge sign already denotes
+   the antiparticle (`B+`/`B-`, `W+`/`W-`, `mu+`/`mu-`) — do **not** add
+   `Bar` to these.
+7. **Particle-name capitalisation**: Hadron symbols start with a capital
+   letter (`B0`, `K+`, `Dst0`, `Kst0`, `Lambdab0`, `Sigma-`). Leptons and
+   the light mesons keep their conventional lowercase forms (`e+`, `mu-`,
+   `pi-`, `rho`, `phi`, `eta`, `omega`, `nu`, `gamma`).
+8. **Neutrinos**: No flavor indicator — always use `nu` or `nuBar`
+   regardless of the specific neutrino type. **Exception**: when the
+   experimental signature is flavor-specific (e.g. tagging a muon-neutrino
+   via inverse muon decay, or reconstructing a $\tau^\pm$ from a
+   $\nu_\tau$), the **flavor symbol** (`nue`, `numu`, `nutau`, plus `Bar`
+   for antiparticle) is allowed in the transition. Most legacy data uses
+   this convention; new imports should prefer `nu`/`nuBar` with the flavor
+   encoded in `[condition]`.
+9. **Intermediate resonances**: When an intermediate state decays to a
+   dilepton pair, append `(2.l+.l-)` to the resonance name:
+   `B0.2.J/psi.Kst0(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$
+   (mesons heavy to light: $J/\psi$ before $K^{*0}$).
+
+Rules 2–4 are **enforced by `scripts/json-valid.py`** for dotted
+transitions (`.2.`): non-canonical order is reported as a validation
+failure. States containing particles outside the four listed types
+(W/Z/$\gamma$, quarks, generic placeholders such as `l`/`q` without a
+charge) are not order-checked; a state whose particle masses are unknown
+is also skipped; compact legacy forms without `.2.` are accepted unchanged.
 
 ### Examples
 
 | Process | LaTeX | Symbol | Notes |
 |---------|-------|--------|-------|
-| $B^0 \to e^+ e^-$ | Leptonic decay | `B0.2.e+.e-` | Standard: + then - |
-| $\bar{B}^0 \to e^+ e^-$ | Leptonic decay | `B0Bar.2.e+.e-` | Antiparticle uses Bar |
-| $B^+ \to K^+ \mu^+ \mu^-$ | Semileptonic | `B+.2.K+.mu+.mu-` | Final state: K+, mu+, mu- (same-charge particles ordered by appearance) |
-| $W^- \to \mu^- \bar{\nu}_\mu$ | Leptonic decay | `W-.2.mu-.nuBar` | Charged W uses own charge |
+| $B^0 \to e^+ e^-$ | Leptonic decay | `B0.2.e+.e-` | Charged leptons: + then - |
+| $\bar{B}^0 \to e^+ e^-$ | Leptonic decay | `B0Bar.2.e+.e-` | Neutral antiparticle uses Bar |
+| $B^+ \to K^+ \mu^+ \mu^-$ | Semileptonic | `B+.2.K+.mu+.mu-` | Meson first, then leptons (+ then -) |
+| $W^- \to \mu^- \bar{\nu}_\mu$ | Leptonic decay | `W-.2.mu-.nuBar` | Charged lepton before neutral lepton |
 | $B_s^0 \to \phi \mu^+ \mu^-$ | Semileptonic | `Bs0.2.phi.mu+.mu-` | Bs meson notation |
-| $\Lambda_b^0 \to J/\psi\, p\, \pi^-$ | Non-leptonic | `Lambdab0.2.J/psi.p.pi-` | Baryon decay, final: + 0 - |
+| $\Lambda_b^0 \to J/\psi\, p\, \pi^-$ | Non-leptonic | `Lambdab0.2.p.J/psi.pi-` | Baryon first; mesons heavy to light (`J/psi` before `pi-`) |
 | $pp \to Z \to \mu^+ \mu^-$ | Scattering | `p.p.2.Z.2.mu+.mu-` | Two-step process |
 | $e^+ e^- \to \mu^+ \mu^-$ | Scattering | `e+.e-.2.mu+.mu-` | Collider process |
 
 ### 1.5 Compact Form (Legacy)
 
-A **compact transition symbol** is an older, shorter notation that concatenates particles without the `.2.` separator. It appears in many legacy data files and is **accepted by the validator for backward compatibility**. **New imports should use the standard form** (§1.1–§1.2). The two forms differ as follows:
+A **compact transition symbol** is an older, shorter notation that concatenates particles without the `.2.` separator. It appears in many legacy data files and is **accepted by the validator for backward compatibility**. **New imports should use the standard form** (§1). The two forms differ as follows:
 
 | Standard form | Compact form | Decay |
 |---------------|--------------|-------|
@@ -155,7 +196,7 @@ For observables measuring a single process, no condition is needed:
 | Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma(Kst0.2.K+.pi-)` | Partial width |
 | Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2(B0.2.Xs.gamma)` | |
 | Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma(pp \to e^+ e^-)$ | `Sigma(p.p.2.e+.e-)` | |
-| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC(B+.2.J/psi.K+)` | Single-particle observable |
+| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC(B+.2.J/psi.K+)` | Same-type mesons: `J/psi` ($3097$ MeV) before `K+` ($493$ MeV), heaviest to lightest |
 | Mass difference $\Delta M_s$ | $\Delta M_s$ | `DeltaMass(Bs0.2.Bs0Bar)` | |
 | Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f(Z \to \mu^+ \mu^-)$ | `f(Z.2.mu+.mu-)` | Branching fraction of a resonance |
 
@@ -177,7 +218,7 @@ For observables comparing two or more transitions (e.g., lepton flavor universal
 | $r = \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $r$ | `r(B-.2.D0.K-)` | Amplitude ratio (GLW/ADS) |
 | $\delta = \arg \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $\delta$ | `delta(B-.2.D0.K-)` | Strong phase difference |
 
-**CKM parameters**: $r$ and $\delta$ are defined via $B^-$ decay amplitude ratios ($b \to u$ suppressed relative to $b \to c$ favored). The B meson and final-state meson in the transition must carry **negative charge**: `B-.2.D0.K-`, `B-.2.D0.pi-`.
+**CKM parameters**: $r$ and $\delta$ are defined via $B^-$ decay amplitude ratios ($b \to u$ suppressed relative to $b \to c$ favored). The B meson and final-state meson in the transition must carry **negative charge**: `B-.2.D0.K-`, `B-.2.D0.pi-` (canonical order: mesons heaviest to lightest, so `D0` before `K-`/`pi-`).
 
 ### 2.3 Observable Differences and Ratios (Unified Convention)
 
@@ -198,6 +239,8 @@ Examples:
 ## 3. Observable Abbreviations
 
 Each observable is listed with its flav-data abbreviation, LaTeX symbol, typical paper notation, and description.
+
+When building the `data` dictionary (json-meta.md §"Data Entries"), file each observable under the category its abbreviation belongs to: `angular` (angular coefficients, $F_L$, $S_i$, $P_i'$, S-wave coefficients, LFU angular differences), `differential` (`dBr/dq2`, `dGdw`, `dSigma/dpT`, ...), `branching` (`Br`), `asymmetry` (`ACP`, `AFB_CP`, `AC`, $S_{\phi\gamma}$, ...), `ratio` (`R...`, `r`, `fs/fd`, `ge/gmu`), `lifetime` (`Tau`), `mass-mixing` (`Mass`, `Gamma`, `DeltaMs`, `DeltaGamma`, ...), `cross-section` (`Sigma`, `sigmaWtaunu`, ...), or `other`. Angular observables and differential distributions must never share a category dictionary (SKILL.md rule 6).
 
 ### Branching Fractions and Decay Widths
 
@@ -401,7 +444,7 @@ The LaTeX symbol for each abbreviation is listed in §3 tables (column "LaTeX").
 # Build from the abbreviation and transition LaTeX
 # latex = f"${OBSERVABLE_LATEX[abbr]}({transition_latex})$"
 # Example: "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$"
-```text
+```
 
 **JSON escaping**: A single backslash in LaTeX (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
 

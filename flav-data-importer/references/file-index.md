@@ -6,7 +6,7 @@ This document specifies the directory layout, file naming conventions, and annua
 
 Experimental folders use the `Lab-Collaboration` format (实验室-实验组). Data file and index filenames inside keep only the collaboration name.
 
-```text
+```
 flav-data/
 ├── Experimental/                          # Experimental measurement data
 │   ├── CERN-LHCb/                         # Lab-Collaboration folder
@@ -29,7 +29,7 @@ flav-data/
 │   └── HFLAV/, PDG/                                # No-lab aggregation
 └── Theoretical/
     └── ...                                          # Theory group folders (HPQCD, UKQCD, etc.)
-```text
+```
 
 ## Naming Rules
 
@@ -104,7 +104,7 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Expe
 {
     "12": ["LHCb:2015svh"]
 }
-```text
+```
 
 - **Keys**: Zero-padded month strings ("01" through "12").
 - **Values**: Arrays of file_ids (without the `.json` extension).
@@ -131,7 +131,7 @@ for year in sorted(os.listdir(base)):
                 if target in files:
                     print(f"Found: {year}/{month}/{target}.json")
                     break
-```text
+```
 
 ### Verify Index Integrity
 
@@ -148,13 +148,17 @@ indexed = set()
 for month_files in index.values():
     indexed.update(month_files)
 
-# Disk file_ids
+# Disk file_ids — both month subdirectories (YYYY/MM/)
+# and flat files directly under the year directory (YYYY/)
 on_disk = set()
-for month_dir in sorted(os.listdir(base)):
-    if month_dir.isdigit() and len(month_dir) == 2:
-        for fname in os.listdir(f'{base}/{month_dir}'):
+for entry in sorted(os.listdir(base)):
+    path = f'{base}/{entry}'
+    if os.path.isdir(path) and entry.isdigit() and len(entry) == 2:
+        for fname in os.listdir(path):
             if fname.endswith('.json') and '@' not in fname:
                 on_disk.add(fname[:-5])  # Strip .json
+    elif entry.endswith('.json') and '@' not in entry:
+        on_disk.add(entry[:-5])
 
 # Report discrepancies
 missing_in_index = on_disk - indexed
@@ -166,7 +170,7 @@ if missing_on_disk:
     print("Files in index but missing from disk:", sorted(missing_on_disk))
 if not missing_in_index and not missing_on_disk:
     print("Index is consistent with disk.")
-```text
+```
 
 ### Update an Index
 
@@ -201,7 +205,7 @@ INDEX="${BASE}/${COLLAB}@${YEAR}.json"
 PAPER="${BASE}/${MONTH}/${FILE_ID}.json"
 
 # 1. Confirm the paper JSON exists and parses
-python3 scripts/json-valid.py "${PAPER}"
+python3 flav-data-importer/scripts/json-valid.py "${PAPER}"
 
 # 2. Create index file (or load existing) and add file_id to month array.
 #    Uses a small inline Python snippet — no separate script required.
@@ -223,9 +227,21 @@ month_list = idx.setdefault(month, [])
 if file_id not in month_list:
     month_list.append(file_id)
 
-# Re-sort by arXiv v1 date (read 'time' field from each paper JSON)
+# Re-sort by arXiv v1 date (read 'time' field from each paper JSON).
+# Papers may live in a YYYY/MM/ subdirectory or flat under YYYY/.
+month_dir = os.path.dirname(paper_path)
+
+def resolve(fid):
+    for candidate in (
+        os.path.join(month_dir, fid + '.json'),
+        os.path.join(os.path.dirname(month_dir), fid + '.json'),
+    ):
+        if os.path.exists(candidate):
+            return candidate
+    raise FileNotFoundError(f'{fid}.json not found under {month_dir} or its parent')
+
 def v1_date(fid):
-    with open(os.path.join(os.path.dirname(paper_path), fid + '.json')) as f:
+    with open(resolve(fid)) as f:
         return json.load(f)['time']
 idx[month] = sorted(month_list, key=v1_date)
 
@@ -268,6 +284,6 @@ When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS 
 1. **Always update the index** after adding or deleting a JSON file.
 2. **Month assignment** is based on the arXiv v1 submission date.
 3. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
-4. **Validate** with `python3 scripts/json-valid.py` after writing (except HFLAV/PDG — see json-meta.md).
+4. **Validate** with `python3 flav-data-importer/scripts/json-valid.py` after writing (it also handles HFLAV/PDG snapshots — see json-meta.md).
 5. **Backup before modifying** — especially when updating indices or replacing existing files.
 6. **Index file ordering**: Within each month array, file_ids are sorted by arXiv v1 submission date. Since the index file itself doesn't store dates, re-sort whenever adding a new entry — look up each file's `time` field from its JSON content, then sort.

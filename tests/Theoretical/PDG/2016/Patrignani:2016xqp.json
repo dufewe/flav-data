@@ -1,0 +1,47 @@
+{
+    "inspire-hep": "1489868",
+    "author": "Patrignani, C. and others",
+    "collaboration": "Particle Data Group",
+    "title": "Review of Particle Physics",
+    "arxiv": "no arxiv (published in Chin.Phys.C)",
+    "year": "2016",
+    "time": "2016-10-01",
+    "abstract": "The Review of Particle Physics summarizes much of particle physics and cosmology. Using data from previous editions, plus 3,062 new measurements from 721 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons.",
+    "pdf": "https://pdg.lbl.gov/2016/reviews/rpp2016-rev-standard-model.pdf",
+    "transition-mode": "sm-parameters",
+    "data": [
+        {
+            "obs@1": {
+                "name": "mZ(e+.e-.2.Z.2.all)",
+                "latex": "$m_Z$",
+                "value": "91.1876",
+                "tot_err_up": "0.0021",
+                "tot_err_down": "0.0021",
+                "unit": "GeV"
+            },
+            "obs@2": {
+                "name": "mW(p.pbar.2.W.2.l.nu)",
+                "latex": "$m_W$",
+                "value": "80.385",
+                "tot_err_up": "0.015",
+                "tot_err_down": "0.015",
+                "unit": "GeV"
+            },
+            "obs@3": {
+                "name": "sin2theta_eff_lept(Z.2.l+.l-)",
+                "latex": "$\\sin^2\\theta_{eff}^{lept}$",
+                "value": "0.23153",
+                "tot_err_up": "0.00016",
+                "tot_err_down": "0.00016"
+            },
+            "obs@4": {
+                "name": "GammaZ(e+.e-.2.Z.2.all)",
+                "latex": "$\\Gamma_Z$",
+                "value": "2.4952",
+                "tot_err_up": "0.0023",
+                "tot_err_down": "0.0023",
+                "unit": "GeV"
+            }
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "inspire-hep": "1768403",
+    "author": "Janot, Patrick and Jadach, Stanisław",
+    "collaboration": "",
+    "title": "Improved Bhabha cross section at LEP and the number of light neutrino species",
+    "arxiv": "[1912.02067v2](https://arxiv.org/pdf/1912.02067.pdf)",
+    "year": "2019",
+    "time": "2019-12-04",
+    "abstract": "In e+e- collisions, the integrated luminosity is generally measured from the rate of low-angle Bhabha interactions. We present an updated and more accurate prediction of the Bhabha cross section, which reduces it by about 0.048% and its uncertainty to +-0.037%. The number of light neutrino species becomes N_nu = 2.9963 +- 0.0074.",
+    "pdf": "https://arxiv.org/pdf/1912.02067.pdf",
+    "transition-mode": "z-pole-combination",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Nnu(Z.2.nu.nubar)",
+                "latex": "$N_{\\nu}$",
+                "value": "2.9963",
+                "tot_err_up": "0.0074",
+                "tot_err_down": "0.0074"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "sigma_had0(e+.e-.2.Z.2.had)",
+                "latex": "$\\sigma_{had}^{0}$",
+                "value": "41.4802",
+                "tot_err_up": "0.0325",
+                "tot_err_down": "0.0325",
+                "unit": "nb"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "GammaZ(e+.e-.2.Z.2.f.fbar)",
+                "latex": "$\\Gamma_{Z}$",
+                "value": "2.4955",
+                "tot_err_up": "0.0023",
+                "tot_err_down": "0.0023",
+                "unit": "GeV"
+            }
+        }
+    ]
+}

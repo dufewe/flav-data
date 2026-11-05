@@ -21,11 +21,12 @@ import re
 
 # Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
 # See common.py for the canonical implementations and SKILL.md
-# "Import Conventions" rules 3 + 4 for the policies.
+# "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
     to_bibtex, to_bibtex as _to_bibtex,
+    format_authors,
 )  # noqa: E402,F401
 
 
@@ -56,7 +57,7 @@ def get_arxiv_info(arxiv_id: str) -> dict:
         )
 
     # Basic info (safe checks: elements may be missing)
-    # Apply Unicode -> LaTeX to title/abstract (rule 4 of SKILL.md "Import Conventions")
+    # Apply Unicode -> LaTeX to title/abstract (rule 4 of SKILL.md "Core Conventions")
     published_elem = entry.find('atom:published', ns)
     published = published_elem.text if published_elem is not None else ''
     updated_elem = entry.find('atom:updated', ns)
@@ -91,15 +92,11 @@ def get_arxiv_info(arxiv_id: str) -> dict:
             pdf_link = link.get('href')
             break
 
-    # Extract versioned arxiv_id from id_url
-    # id_url format: "http://arxiv.org/abs/1512.04442v1"
-    version_match = re.search(r'abs/(\d+\.\d+)(v\d+)?', id_url)
-    if version_match:
-        base_id = version_match.group(1)
-        version = version_match.group(2) or ''
-        arxiv_id_with_version = f"{base_id}{version}"
-    else:
-        arxiv_id_with_version = arxiv_id
+    # Extract versioned arxiv_id from id_url. Handles new-style
+    # ("1512.04442v1") and old-style ("hep-ex/9901001v1") identifiers.
+    # id_url format: "http://arxiv.org/abs/<id>[vN]"
+    tail_match = re.search(r'/abs/(.+)$', id_url)
+    arxiv_id_with_version = tail_match.group(1) if tail_match else arxiv_id
 
     # Primary category
     primary_category_elem = entry.find('arxiv:primary_category', ns)
@@ -136,26 +133,23 @@ def get_arxiv_info(arxiv_id: str) -> dict:
         'title': title,
         'abstract': summary,
         'authors': authors,
-        # Per rule 3, the ``author`` JSON field uses the InspireHEP
-        # BibTeX format (initials only). This function does a quick
-        # name-only conversion (full first name -> initial) and only
-        # uses the first author plus "and others" for collaboration
-        # papers. For the canonical "Surname, F. and others" string
-        # (with proper affiliation / multi-author handling) run
-        # ``inspirehep-ext.py`` instead and use its ``author_str`` /
-        # ``bibtex_author`` output. See references/arxiv-api.md and
-        # references/inspirehep-api.md for the full data flow.
-        'author_str': (
-            f"{_to_bibtex(authors[0])} and others"
-            if len(authors) > 1
-            else (_to_bibtex(authors[0]) if authors else '')
-        ),
+        # Rule 3 author tiers (1 / 2–3 / 4+), BibTeX initials only.
+        'author_str': format_authors(authors),
         'pdf_url': pdf_link,
         'abs_url': f'https://arxiv.org/abs/{arxiv_id}',
-        # Markdown link for JSON arxiv field
+        # Markdown link for JSON arxiv field. Old-style IDs already
+        # contain their category prefix, so do not prepend it twice.
         'arxiv_link': (
-            f'[{primary_category}/{arxiv_id_with_version}]'
+            f'[{arxiv_id_with_version}]'
             f'(https://arxiv.org/pdf/{arxiv_id})'
+            if '/' in arxiv_id_with_version
+            else (
+                f'[{primary_category}/{arxiv_id_with_version}]'
+                f'(https://arxiv.org/pdf/{arxiv_id})'
+                if primary_category
+                else f'[{arxiv_id_with_version}]'
+                     f'(https://arxiv.org/pdf/{arxiv_id})'
+            )
         ),
         'categories': categories,
         'comment': comment,
@@ -196,7 +190,8 @@ def download_pdf(arxiv_id: str, output_dir: str) -> str:
     """
     os.makedirs(output_dir, exist_ok=True)
     pdf_url = f'https://arxiv.org/pdf/{arxiv_id}'
-    pdf_path = os.path.join(output_dir, f'{arxiv_id}.pdf')
+    safe_id = arxiv_id.replace('/', '_')
+    pdf_path = os.path.join(output_dir, f'{safe_id}.pdf')
 
     req = urllib.request.Request(pdf_url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
@@ -220,8 +215,8 @@ def main() -> None:
 
     Examples
     --------
-    >>> python3 scripts/arxiv-ext.py 1512.04442
-    >>> python3 scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
+    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442
+    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
     """
     parser = argparse.ArgumentParser(
         description='Extract arXiv paper information and download PDF'

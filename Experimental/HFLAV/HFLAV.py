@@ -11,7 +11,11 @@
 # ---------------------------------------------------------
 # Load packages and definitions
 # ---------------------------------------------------------
-with open('defs.py', 'r', encoding='utf-8') as f:
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+with open(os.path.join(PROJECT_ROOT, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 # ---------------------------------------------------------
@@ -37,20 +41,34 @@ if not os.path.isdir(base_dir):
     st.warning(f"No HFLAV data found in {base_dir}/")
     st.stop()
 
-candidates = sorted(
-    (f for f in os.listdir(base_dir) if f.endswith(".json")),
-    reverse=True,
-)
-if not candidates:
+snapshot_paths = {}
+for entry in os.listdir(base_dir):
+    path = os.path.join(base_dir, entry)
+    if entry.isdigit() and len(entry) == 4:
+        year = entry
+        candidate = os.path.join(path, f"HFLAV@{year}.json")
+    elif entry.startswith("HFLAV@") and entry.endswith(".json"):
+        year = entry[len("HFLAV@"):-len(".json")]
+        candidate = path
+    else:
+        continue
+    if year.isdigit() and len(year) == 4 and os.path.isfile(candidate):
+        snapshot_paths[year] = candidate
+
+candidate_years = sorted(snapshot_paths, reverse=True)
+if not candidate_years:
     st.warning(f"No HFLAV data found in {base_dir}/")
     st.stop()
 
-idx_path = os.path.join(base_dir, candidates[0])
+latest_year = candidate_years[0]
+idx_path = snapshot_paths[latest_year]
 try:
     hfla = get_json(idx_path)
 except (FileNotFoundError, json.JSONDecodeError) as e:
     st.error(f"Failed to load {idx_path}: {e}")
     st.stop()
+
+st.caption(f"Snapshot year: {latest_year}")
 
 # Sidebar: which HFLAV subgroup to view
 subgroup_keys = [k for k in hfla.keys() if k.startswith("HFLAV@")]
@@ -61,7 +79,7 @@ if not subgroup_keys:
 with st.sidebar:
     st.markdown("# Filters")
     st.markdown("##### HFLAV Subgroup")
-    subgroup = st.radio(
+    subgroup = st.selectbox(
         "HFLAV Subgroup",
         subgroup_keys,
         label_visibility="collapsed",
@@ -84,3 +102,13 @@ with col2:
         st.table(observables)
     else:
         st.info("No observables in this subgroup.")
+
+correlation = subgroup_data.get("correlation")
+if correlation:
+    corr_expander = st.expander(
+        "View Correlation", on_change='rerun',
+        key=f"hflav_correlation_{subgroup}"
+    )
+    if corr_expander.open:
+        with corr_expander:
+            st.table(correlation)

@@ -1,0 +1,34 @@
+{
+    "inspire-hep": "1853232",
+    "author": "Altmannshofer, Wolfgang and Stangl, Peter",
+    "collaboration": "",
+    "title": "New physics in rare B decays after Moriond 2021",
+    "arxiv": "[2103.13370v3](https://arxiv.org/pdf/2103.13370.pdf)",
+    "year": "2021",
+    "time": "2021-03-24",
+    "abstract": "The anomalies in rare B decays endure. We present results of an updated global analysis that takes into account the latest experimental input – in particular the recent results on RK and BR(Bs -> mu mu) – and that qualitatively improves the treatment of theory uncertainties. Fit results are presented for the Wilson coefficients of four-fermion contact interactions. We find that muon specific Wilson coefficients C9 = -0.73 or C9 = -C10 = -0.39 continue to give an excellent description of the data.",
+    "pdf": "https://arxiv.org/pdf/2103.13370.pdf",
+    "transition-mode": "bsmumu",
+    "data": [
+        {
+            "obs@1": {
+                "name": "C9_new(bs.2.mu+.mu-)",
+                "latex": "$C_9^{\\text{NP}}$",
+                "value": "-0.73",
+                "type@1_err": "approx",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0"
+            }
+        },
+        {
+            "obs@1": {
+                "name": "C9_m_C10_new(bs.2.mu+.mu-)",
+                "latex": "$C_9^{NP} = -C_{10}^{NP}$",
+                "value": "-0.39",
+                "type@1_err": "approx",
+                "type@1_err_up": "0.0",
+                "type@1_err_down": "0.0"
+            }
+        }
+    ]
+}

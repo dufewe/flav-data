@@ -1,0 +1,35 @@
+{
+    "inspire-hep": "1821327",
+    "author": "J. C. Hardy, I. S. Towner",
+    "collaboration": "",
+    "title": "Superallowed $0^+ \\to 0^+$ nuclear $\\beta$ decays: 2020 critical survey, with implications for V$_{ud}$ and CKM unitarity",
+    "arxiv": "no arxiv (published in PRC)",
+    "time": "2020-10-01",
+    "abstract": "A new critical survey of all half-life, decay-energy, and branching-ratio measurements related to 23 superallowed $0^+\\to 0^+$ $\\beta$ decays is presented. Included are 222 individual measurements of comparable precision obtained from 174 published references. We obtain world-average ft values for each of the 21 transitions that have a complete set of data, then apply radiative and isospin-symmetry-breaking corrections to extract \"corrected\" Ft values. Fifteen of these Ft values now have a precision of 0.3% or better. Their average, when combined with the muon lifetime, yields $V_{ud} = 0.97373 \\pm 0.00031$. This is lower than our 2015 result by one standard deviation and its uncertainty is increased by 50%, a consequence of new calculations for the radiative corrections.",
+    "pdf": "https://www.osti.gov/servlets/purl/1780888",
+    "transition-mode": "beta-decay-superallowed",
+    "data": [
+        {
+            "obs@1": {
+                "name": "Ft(0+.2.0+.e+.nu)",
+                "latex": "$\\mathcal{F}t$",
+                "value": "3072.24",
+                "type@1_err": "0.57",
+                "type@1_err_up": "0.57",
+                "type@1_err_down": "0.57",
+                "unit": "s",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "Vud(0+.2.0+.e+.nu)",
+                "latex": "$|V_{ud}|$",
+                "value": "0.97373",
+                "type@1_err": "0.00031",
+                "type@1_err_up": "0.00031",
+                "type@1_err_down": "0.00031",
+                "unit": "",
+                "ref": ""
+            }
+        }
+    ]
+}

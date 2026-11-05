@@ -37,7 +37,7 @@ Rate-limited (~2 req/s). Required header: `Accept: application/json`.
 
 URL uses recid (`https://inspirehep.net/literature/1409497`); display text uses TexKey (`[LHCb:2015svh](https://inspirehep.net/literature/1409497)`).
 
-## Python API (`scripts/inspirehep-ext.py`)
+## Python API (`flav-data-importer/scripts/inspirehep-ext.py`)
 
 | Function | Purpose |
 |---|---|
@@ -45,7 +45,7 @@ URL uses recid (`https://inspirehep.net/literature/1409497`); display text uses 
 | `get_inspire_by_recid(recid)` → `dict` | Query by recid directly, return raw record |
 | `extract_metadata(meta)` → `dict` | Normalize a raw metadata object into the structured 22-field dict |
 
-All functions apply `unicode_to_latex` + `to_bibtex` transforms. `extract_metadata`
+`extract_metadata` applies `unicode_to_latex`, `to_bibtex`/`format_authors`, and
 returns a dict with these 22 keys:
 `texkey`, `recid`, `title`, `abstract`, `authors`, `author_str`, `collaboration`,
 `time`, `arxiv_id`, `arxiv_categories`, `journal`, `journal_year`, `journal_volume`,
@@ -54,16 +54,19 @@ returns a dict with these 22 keys:
 
 CLI usage:
 ```bash
-python3 scripts/inspirehep-ext.py 1512.04442
-python3 scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
-python3 scripts/inspirehep-ext.py --recid 1409497
+python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442
+python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
+python3 flav-data-importer/scripts/inspirehep-ext.py --recid 1409497
 ```
 
 ## Notes
 
 1. Always prefer arXiv-sourced titles/abstracts — they preserve LaTeX formatting. Journal-sourced versions often strip LaTeX.
-2. If no person authors, fall back to `"{group} collaboration"`.
-3. Use the collaboration-level TexKey for filenames and indices, not the author-level one.
-4. TexKeys can change when papers are updated — always verify before writing indices.
-5. On timeout/empty response, retry after 2s delay, or use the bibtex fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
-6. `arxiv_eprints.value` does NOT include version number — use arXiv API for that.
+2. `author_str` uses the 1 / 2–3 / 4+ tiers (SKILL.md rule 3). If no person authors, fall back to `"{group} collaboration"`.
+3. Multi-collaboration records are joined with `", "` (e.g. `"ATLAS, CMS"`).
+4. Use the collaboration-level TexKey for filenames and indices, not the author-level one.
+5. TexKeys can change when papers are updated — always verify before writing indices.
+6. `inspire_hep_link`, `arxiv_link`, and `pdf_url` are `None` when the required
+   identifiers are absent — never build `[]()` / `(...)` stubs.
+7. On timeout/empty response, retry after 2s delay, or use the bibtex fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
+8. `arxiv_eprints.value` does NOT include version number — use arXiv API for that.

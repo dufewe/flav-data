@@ -1,0 +1,139 @@
+{
+    "inspire-hep": "1505428",
+    "author": "Y. Amhis et al.",
+    "collaboration": "HFLAV",
+    "title": "Averages of $b$-hadron, $c$-hadron, and $\\tau$-lepton properties as of summer 2016",
+    "arxiv": "1612.07233v2 [hep-ex]",
+    "time": "2017-07-01",
+    "abstract": "This article reports world averages of measurements of $b$-hadron, $c$-hadron, and $\\tau$-lepton properties obtained by the Heavy Flavor Averaging Group using results available through summer 2016. For the averaging, common input parameters used in the various analyses are adjusted (rescaled) to common values, and known correlations are taken into account. The averages include branching fractions, lifetimes, neutral meson mixing parameters, $CP$ violation parameters, parameters of semileptonic decays, and Cabbibo-Kobayashi-Maskawa matrix elements.",
+    "pdf": "https://arxiv.org/pdf/1612.07233.pdf",
+    "transition-mode": "b-mixing-lifetimes",
+    "data": [
+        {
+            "condition": "b-hadron lifetimes",
+            "obs@1": {
+                "name": "tau(B0.d.2.B0.d)",
+                "latex": "$\\tau(B^0)$",
+                "value": "1.520",
+                "type@1_err": "0.004",
+                "type@1_err_up": "0.004",
+                "type@1_err_down": "0.004",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "tau(B+.u.2.B+.u)",
+                "latex": "$\\tau(B^+)$",
+                "value": "1.638",
+                "type@1_err": "0.004",
+                "type@1_err_up": "0.004",
+                "type@1_err_down": "0.004",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "tau(B0s.s.2.B0s.s)",
+                "latex": "$\\tau(B^0_s) = 1/\\Gamma_s$",
+                "value": "1.505",
+                "type@1_err": "0.005",
+                "type@1_err_up": "0.005",
+                "type@1_err_down": "0.005",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@4": {
+                "name": "tau(B0sL.s.2.B0sL.s)",
+                "latex": "$\\tau(B^0_{sL}) = 1/(\\Gamma_s + \\Delta\\Gamma_s/2)$",
+                "value": "1.413",
+                "type@1_err": "0.006",
+                "type@1_err_up": "0.006",
+                "type@1_err_down": "0.006",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@5": {
+                "name": "tau(B0sH.s.2.B0sH.s)",
+                "latex": "$\\tau(B^0_{sH}) = 1/(\\Gamma_s - \\Delta\\Gamma_s/2)$",
+                "value": "1.609",
+                "type@1_err": "0.010",
+                "type@1_err_up": "0.010",
+                "type@1_err_down": "0.010",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@6": {
+                "name": "tau(Lambdab.uds.2.Lambdab.uds)",
+                "latex": "$\\tau(\\Lambda^0_b)$",
+                "value": "1.470",
+                "type@1_err": "0.010",
+                "type@1_err_up": "0.010",
+                "type@1_err_down": "0.010",
+                "unit": "ps",
+                "ref": ""
+            },
+            "obs@7": {
+                "name": "tau(Bc.cb.2.Bc.cb)",
+                "latex": "$\\tau(B^+_c)$",
+                "value": "0.507",
+                "type@1_err": "0.009",
+                "type@1_err_up": "0.009",
+                "type@1_err_down": "0.009",
+                "unit": "ps",
+                "ref": ""
+            }
+        },
+        {
+            "condition": "neutral B-meson mixing",
+            "obs@1": {
+                "name": "DeltaMd(B0.d.2.B0.d)",
+                "latex": "$\\Delta m_d$",
+                "value": "0.5065",
+                "type@1_err": "0.0019",
+                "type@1_err_up": "0.0019",
+                "type@1_err_down": "0.0019",
+                "unit": "ps^{-1}",
+                "ref": ""
+            },
+            "obs@2": {
+                "name": "DeltaMdGd(B0.d.2.B0.d)",
+                "latex": "$\\Delta\\Gamma_d/\\Gamma_d$",
+                "value": "-0.002",
+                "type@1_err": "0.010",
+                "type@1_err_up": "0.010",
+                "type@1_err_down": "0.010",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@3": {
+                "name": "DeltaMs(B0s.s.2.B0s.s)",
+                "latex": "$\\Delta m_s$",
+                "value": "17.757",
+                "type@1_err": "0.021",
+                "type@1_err_up": "0.021",
+                "type@1_err_down": "0.021",
+                "unit": "ps^{-1}",
+                "ref": ""
+            },
+            "obs@4": {
+                "name": "DeltaMsGs(B0s.s.2.B0s.s)",
+                "latex": "$\\Delta\\Gamma_s/\\Gamma_s$",
+                "value": "0.131",
+                "type@1_err": "0.006",
+                "type@1_err_up": "0.006",
+                "type@1_err_down": "0.006",
+                "unit": "",
+                "ref": ""
+            },
+            "obs@5": {
+                "name": "phi_s(B0s.s.2.B0s.s)",
+                "latex": "$\\phi_s = -2\\beta_s$",
+                "value": "-0.044",
+                "type@1_err": "0.026",
+                "type@1_err_up": "0.026",
+                "type@1_err_down": "0.026",
+                "unit": "rad",
+                "ref": ""
+            }
+        }
+    ]
+}

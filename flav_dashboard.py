@@ -15,27 +15,18 @@ import os
 
 import streamlit as st
 
-with open('defs.py', 'r', encoding='utf-8') as f:
+try:
+    _HERE = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    _HERE = os.path.dirname(os.path.abspath('flav_dashboard.py'))
+
+with open(os.path.join(_HERE, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
 
 # ---------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------
-def _resolve_folder(lab, group, folder_override=None):
-    """Build the on-disk folder name for a group.
-
-    For experimental groups the convention is ``<Lab>-<Collaboration>``
-    (e.g. ``CERN-LHCb``). For theoretical groups ``lab`` is empty
-    and the bare group name is used (e.g. ``HPQCD``). The optional
-    ``folder_override`` lets a group live under a non-standard
-    parent directory (currently unused by any registered group).
-    """
-    if folder_override:
-        return folder_override
-    return f"{lab}-{group}" if lab else group
-
-
 @st.cache_data(ttl=3600)
 def get_cached_data(lab, group, years, months, _get_json_func, base_path, folder_override=None):
     """Walk the selected years/months and load every JSON entry into memory.
@@ -52,13 +43,15 @@ def get_cached_data(lab, group, years, months, _get_json_func, base_path, folder
         keys ``_year`` and ``_month`` injected for downstream sorting.
     """
     data_pool = []
-    folder = _resolve_folder(lab, group, folder_override)
+    folder = resolve_folder(lab, group, folder_override)
 
     for year in years:
         index_path = fr'{base_path}/{folder}/{year}/{group}@{year}.json'
         try:
             json_index = _get_json_func(index_path)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
+            continue
+        if not isinstance(json_index, dict):
             continue
 
         for m_key, item_ids in json_index.items():
@@ -67,6 +60,8 @@ def get_cached_data(lab, group, years, months, _get_json_func, base_path, folder
             except (TypeError, ValueError):
                 continue
             if month not in months or not 1 <= month <= 12:
+                continue
+            if not isinstance(item_ids, list):
                 continue
             for fid in item_ids:
                 detail_path = fr'{base_path}/{folder}/{year}/{m_key}/{fid}.json'
@@ -92,7 +87,7 @@ def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, fold
     ``_get_json_func`` is unhashable to Streamlit (function object);
     the leading underscore disables hashing for this parameter.
     """
-    folder = _resolve_folder(lab, group, folder_override)
+    folder = resolve_folder(lab, group, folder_override)
     years = []
     for year in range(year_min, year_max + 1):
         idx = os.path.join(base_path, folder, str(year), f'{group}@{year}.json')
@@ -104,6 +99,27 @@ def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, fold
 # ---------------------------------------------------------
 # Dashboard UI
 # ---------------------------------------------------------
+def iter_data_groups(data):
+    """Yield ``(transition, category, group)`` for both ``data`` schemas.
+
+    New files use ``{transition: {category: [group, ...]}}``; legacy
+    files still use a flat list, for which the first two values are
+    ``None``.
+    """
+    if isinstance(data, dict):
+        for transition, categories in data.items():
+            if not isinstance(categories, dict):
+                continue
+            for category, groups in categories.items():
+                if not isinstance(groups, list):
+                    continue
+                for group in groups:
+                    yield transition, category, group
+    elif isinstance(data, list):
+        for group in data:
+            yield None, None, group
+
+
 def run_dashboard(lab, group, year_min, year_max, get_json_func,
                   month_label=None, base_path='Experimental',
                   folder_override=None):
@@ -144,7 +160,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                                  get_json_func, base_path, folder_override)
 
     if not exp_year_list:
-        folder = _resolve_folder(lab, group, folder_override)
+        folder = resolve_folder(lab, group, folder_override)
         st.warning(fr"No {group} data found in {base_path}/{folder}/")
         return
 
@@ -213,10 +229,12 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
             if st.session_state.get(f"tx_{t}", True)
         ]
 
-        # Apply the transition-mode filter
+        # Apply the transition-mode filter. Entries without a
+        # transition-mode are shown rather than silently dropped.
         filtered_data = [
             mode for mode in raw_data
             if mode.get('transition-mode') in selected_transitions
+            or 'transition-mode' not in mode
         ]
 
         # Statistics (in-memory, no I/O)
@@ -225,7 +243,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
         tot_obs = sum(
             sum(1 for k in entry if k.startswith("obs@"))
             for mode in filtered_data
-            for entry in mode.get('data', [])
+            for _, _, entry in iter_data_groups(mode.get('data', []))
             if isinstance(entry, dict)
         )
 
@@ -245,7 +263,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
 
     # Render in groups keyed by (year, month)
     current_header = ""
-    for json_detail in filtered_data:
+    for paper_index, json_detail in enumerate(filtered_data):
         year = json_detail.get('_year')
         month_key = json_detail.get('_month')
         month_name = month_label.get(str(month_key), month_key)
@@ -276,13 +294,22 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
             # Expandable data view
             expander = st.expander(
                 'View Data', on_change='rerun',
-                key=f"view_data_{group}_{json_detail.get('inspire-hep', json_detail.get('arxiv', json_detail.get('title', 'untitled')))}"
+                key=(
+                    f"view_data_{group}_{paper_index}_"
+                    f"{json_detail.get('inspire-hep', json_detail.get('arxiv', json_detail.get('title', 'untitled')))}"
+                )
             )
             if expander.open:
                 with expander:
                     data = json_detail.get('data', [])
-                    for data_value in data:
+                    for transition, category, data_value in iter_data_groups(data):
+                        if not isinstance(data_value, dict):
+                            continue
                         with st.container(border=True):
+                            if transition:
+                                st.markdown(
+                                    fr'- **{transition}** ({category})'
+                                )
                             data_obs = [value for key, value in data_value.items()
                                         if key.startswith("obs@")]
                             if data_obs:
