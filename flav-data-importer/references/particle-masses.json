@@ -1,7 +1,7 @@
 {
     "source": "PDG 2024, Review of Particle Physics (Phys. Rev. D 110, 030001), https://pdg.lbl.gov",
     "units": "GeV",
-    "notes": "Masses used only for the heaviest-to-lightest transition ordering in json-valid.py. Values match tests/Experimental/PDG/2024/PDG@2024.json where available. Generic charge-less legacy tokens use the corresponding neutral or charged state mass; the difference does not affect ordering. Tokens that are placeholders, multi-particle sums, detector labels, or nuclear targets are listed under non_orderable and are skipped by the ordering/known-particle checks.",
+    "notes": "Masses used only for the heaviest-to-lightest transition ordering in json-valid.py. Values match expe-data/PDG/2024/PDG@2024.json where available. Generic charge-less legacy tokens use the corresponding neutral or charged state mass; the difference does not affect ordering. Tokens that are placeholders, multi-particle sums, detector labels, or nuclear targets are listed under non_orderable and are skipped by the ordering/known-particle checks.",
     "masses": {
         "p": 0.93827208816,
         "n": 0.9395654205,

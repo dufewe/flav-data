@@ -1,0 +1,210 @@
+{
+    "inspire-hep": "1696607",
+    "author": "Sirunyan, A.M. and others",
+    "collaboration": "CMS",
+    "title": "Combined measurements of Higgs boson couplings in proton-proton collisions at sqrt(s)=13 TeV",
+    "arxiv": "[hep-ex/1809.10733v2](https://arxiv.org/pdf/1809.10733.pdf)",
+    "time": "2018-09-27",
+    "abstract": "Combined measurements of the production and decay rates of the Higgs boson, as well as its couplings to vector bosons and fermions, using 35.9 fb-1 at 13 TeV. Based on analyses of H->gamma gamma, ZZ, WW, tau tau, bb, and mu mu. The global signal strength and per-mode signal strengths are measured.",
+    "transition-mode": "higgs-decay",
+    "data": [
+        {
+            "g.g.2.H.2.f.fbar": {
+                "obs@1": {
+                    "name": "mu_ggF",
+                    "value": "1.22",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.12",
+                    "type@1_lower": "0.10",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.08",
+                    "type@2_lower": "0.08"
+                }
+            }
+        },
+        {
+            "q.q.2.H.2.f.fbar": {
+                "obs@1": {
+                    "name": "mu_VBF",
+                    "value": "0.73",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.17",
+                    "type@1_lower": "0.15",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.24",
+                    "type@2_lower": "0.23"
+                }
+            }
+        },
+        {
+            "q.qbar.2.W.2.H.2.f.fbar": {
+                "obs@1": {
+                    "name": "mu_WH",
+                    "value": "2.18",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.34",
+                    "type@1_lower": "0.32",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.46",
+                    "type@2_lower": "0.45"
+                }
+            }
+        },
+        {
+            "q.qbar.2.Z.2.H.2.f.fbar": {
+                "obs@1": {
+                    "name": "mu_ZH",
+                    "value": "0.87",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.20",
+                    "type@1_lower": "0.18",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.39",
+                    "type@2_lower": "0.38"
+                }
+            }
+        },
+        {
+            "t.tbar.2.t.tbar.H.2.f.fbar": {
+                "obs@1": {
+                    "name": "mu_ttH",
+                    "value": "1.18",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.26",
+                    "type@1_lower": "0.21",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.16",
+                    "type@2_lower": "0.16"
+                }
+            }
+        },
+        {
+            "H.2.b.bbar": {
+                "obs@1": {
+                    "name": "mu_bb",
+                    "value": "1.12",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.22",
+                    "type@1_lower": "0.22",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.19",
+                    "type@2_lower": "0.18"
+                }
+            }
+        },
+        {
+            "H.2.b.bbar": {
+                "obs@1": {
+                    "name": "kappa_b",
+                    "value": "1.03",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.18",
+                    "type@1_lower": "0.17",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.18",
+                    "type@2_lower": "0.18"
+                }
+            }
+        },
+        {
+            "H.2.tau.tau": {
+                "obs@1": {
+                    "name": "mu_tautau",
+                    "value": "1.02",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.21",
+                    "type@1_lower": "0.19",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.15",
+                    "type@2_lower": "0.15"
+                }
+            }
+        },
+        {
+            "H.2.tau.tau": {
+                "obs@1": {
+                    "name": "kappa_tau",
+                    "value": "1.01",
+                    "error_upper": "0.12",
+                    "error_lower": "0.12"
+                }
+            }
+        },
+        {
+            "H.2.W.W": {
+                "obs@1": {
+                    "name": "mu_WW",
+                    "value": "1.28",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.14",
+                    "type@1_lower": "0.13",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.09",
+                    "type@2_lower": "0.09"
+                }
+            }
+        },
+        {
+            "H.2.W.W": {
+                "obs@1": {
+                    "name": "kappa_W",
+                    "value": "1.01",
+                    "error_upper": "0.06",
+                    "error_lower": "0.07"
+                }
+            }
+        },
+        {
+            "H.2.Z.Z": {
+                "obs@1": {
+                    "name": "mu_ZZ",
+                    "value": "1.06",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.11",
+                    "type@1_lower": "0.08",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.16",
+                    "type@2_lower": "0.15"
+                }
+            }
+        },
+        {
+            "H.2.Z.Z": {
+                "obs@1": {
+                    "name": "kappa_Z",
+                    "value": "1.09",
+                    "error_upper": "0.07",
+                    "error_lower": "0.07"
+                }
+            }
+        },
+        {
+            "H.2.gamma.gamma": {
+                "obs@1": {
+                    "name": "mu_gammagamma",
+                    "value": "1.20",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.12",
+                    "type@1_lower": "0.09",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.13",
+                    "type@2_lower": "0.11"
+                }
+            }
+        },
+        {
+            "H.gg.2.t.tbar": {
+                "obs@1": {
+                    "name": "kappa_t",
+                    "value": "1.05",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.09",
+                    "type@1_lower": "0.08",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.12",
+                    "type@2_lower": "0.12"
+                }
+            }
+        }
+    ]
+}

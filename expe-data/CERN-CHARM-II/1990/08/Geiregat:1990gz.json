@@ -1,0 +1,22 @@
+{
+    "inspire-hep": "296405",
+    "author": "Geiregat, D. and others",
+    "collaboration": "CHARM-II",
+    "title": "A measurement of the weak mixing angle from nu_mu e elastic scattering",
+    "arxiv": "no arxiv (published in Phys.Lett.B)",
+    "time": "1990-08-01",
+    "abstract": "A measurement of the weak mixing angle from nu_mu e elastic scattering in the CHARM-II experiment. The result is sin^2theta_W = 0.2309 +/- 0.0066.",
+    "transition-mode": "scattering",
+    "data": [
+        {
+            "e.nu.2.e.nu": {
+                "obs@1": {
+                    "name": "sin2theta_W",
+                    "value": "0.2309",
+                    "error_upper": "0.0066",
+                    "error_lower": "0.0066"
+                }
+            }
+        }
+    ]
+}

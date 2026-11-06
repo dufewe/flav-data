@@ -8,7 +8,7 @@ tags: [flavor-physics, data-collecting, json-importer]
 
 # flav-data Importer
 
-Extract structured flavor-physics data from arXiv, InspireHEP, and HEPData into the `flav-data` standard JSON format. One JSON file per paper with single or multiple collaborations under `Experimental/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`, with annual index files alongside. Covers the full lifecycle: discovery → extraction → validation → index maintenance.
+Extract structured flavor-physics data from arXiv, InspireHEP, and HEPData into the `flav-data` standard JSON format. One JSON file per paper with single or multiple collaborations under `expe-data/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`, with annual index files alongside. Covers the full lifecycle: discovery → extraction → validation → index maintenance.
 
 This is **not** a fit tool. It produces JSON inputs consumed by downstream fitting tools.
 
@@ -72,11 +72,6 @@ unicode_to_latex("B⁰ → K*⁰ μ⁺μ⁻")   # → "B^{0} \\to K*^{0} \\mu^{+
 to_bibtex("Aaij, Roel")               # → "Aaij, R."
 ```
 
-Channel LaTeX is written once per channel as the first element of the
-channel pair (e.g. `"$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$"`). Take the
-transition formula from the source; do not include the observable symbol.
-Observables carry only `name`, so no per-observable LaTeX helper is used.
-
 ## Tool Inventory
 
 ### External APIs / CLIs
@@ -117,7 +112,7 @@ This prevents duplicates and tracks the version history of each measurement.
 
 1. Check if the file already exists:
    ```bash
-   ls "Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json"
+   ls "expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json"
    ```
 2. If found, **compare versions**:
    - `arxiv` field has same arXiv ID → no action
@@ -125,7 +120,7 @@ This prevents duplicates and tracks the version history of each measurement.
    - `arxiv` field has different ID → different paper, create new entry
 3. If not found, proceed to Step 2.
 
-**Index files** (`Experimental/<Lab>-<Collaboration>/<year>/<Collaboration>@<year>.json`)
+**Index files** (`expe-data/<Lab>-<Collaboration>/<year>/<Collaboration>@<year>.json`)
 list every paper in that directory. Rebuild the index after any add/remove.
 See `references/file-index.md`.
 
@@ -211,21 +206,17 @@ common = load_script("common")
        "transition-mode": "semileptonic-decay",          # hyphenated whitelist
        "data": [
            {
-               # each group maps one or more transition channels to a
-               # [latex, obs@N object] pair, then optionally one group-level
-               # matrix
-               "B0.2.Kst0.mu+.mu-": [
-                   "$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$",  # channel LaTeX (no observable symbol)
-                   {
-                       # for each obs@N:
-                       #   "name":  "FL"                    # symbol only; channel is the group key
-                       #   "value": "0.69"
-                       #   "type@1_error": "stat"
-                       #   "type@1_upper": "0.035"
-                       #   "type@1_lower": "0.036"
-                       # optionally: "q2min": "0.1", "q2max": "1.1", etc.
-                   }
-               ],
+               # each group maps one or more transition channels to an
+               # obs@N object, then optionally one group-level matrix
+               "B0.2.Kst0.mu+.mu-": {
+                   # for each obs@N:
+                   #   "name":  "FL"                    # symbol only; channel is the group key
+                   #   "value": "0.69"
+                   #   "type@1_error": "stat"
+                   #   "type@1_upper": "0.035"
+                   #   "type@1_lower": "0.036"
+                   # optionally: "q2min": "0.1", "q2max": "1.1", etc.
+               },
                # optional; rows align with channel order, then obs@N order:
                # "correlation": [[1.0, 0.5], [0.5, 1.0]]
            }
@@ -273,7 +264,7 @@ schema (see `references/json-meta.md` §"Non-Standard Schemas").
 For standard files the `data` array of groups is validated strictly
 (unknown observable fields, error triplets/labels, one measurement
 format, transition match, and particle masses). Every group maps one or
-more transition channels to per-channel `[latex, obs@N object]` pairs;
+more transition channels to per-channel `obs@N` objects;
 its optional matrix dimension must equal the group's total observable
 count.
 
@@ -283,13 +274,13 @@ Run these commands from the project root:
 
 ```bash
 # 1. Validate every changed file
-python3 flav-data-importer/scripts/json-valid.py Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
+python3 flav-data-importer/scripts/json-valid.py expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json
 
 # 2. Rebuild the year index if you added or removed papers
 # (manual edit; see flav-data-importer/references/file-index.md)
 
 # 3. Find the paper file at its month-directory depth
-find Experimental/CERN-LHCb/2015 -mindepth 2 -maxdepth 2 -name 'LHCb:2015svh.json' -print
+find expe-data/CERN-LHCb/2015 -mindepth 2 -maxdepth 2 -name 'LHCb:2015svh.json' -print
 ```
 
 ## Core Conventions
@@ -370,14 +361,15 @@ reference doc points back to these.
 
 7. **`data` is an array of groups** — each group maps one or more
    transition symbols (`A.B.2.C.D`, or `no-transition` for observables
-   without a transition) to a per-channel `[latex, obs@N object]` pair,
-   then an optional group-level matrix. The channel LaTeX is the
-   transition formula (no observable symbol), written once per channel;
-   observables carry no `latex`. Channels that share a matrix belong to
+   without a transition) to an `obs@N` object, then optionally a
+   group-level `method` string shared by every observable in the group,
+   then an optional group-level matrix. Group keys are ordered channels
+   → `method` → matrices. JSON data stores no LaTeX for channels or
+   observables. Channels that share a matrix belong to
    the same group; separate measurement contexts are separate array
    elements. The channel key alone carries the transition, so observable
    `name` values must **not** repeat it: `FL`, not
-   `FL(B0.2.Kst0.mu+.mu-)`. Conditions and method tags stay in the name
+   `FL(B0.2.Kst0.mu+.mu-)`. Conditions and parameter tags stay in the name
    (`Q6[mu-e]`, `Vcb(CLN)`); the validator rejects an embedded
    transition. Matrix rows follow the channel keys in written order,
    then each channel's `obs@N` order.
@@ -396,8 +388,9 @@ reference doc points back to these.
    number applies to several form factors (e.g. both `a0_Gv` and
    `a0_Gp`), write one observable per form factor and repeat its
    value/errors; never join symbols into a name like `a0_Gv_Gp`. Fit
-   choices (nominal, higher-order, ...) belong in the `method` field
-   (`"nominal"`, `"higher-order"`), never in the name.
+   choices (nominal, higher-order, ...) belong in the group-level
+   `method` field (`"nominal"`, `"higher-order"`), never in the name or
+   inside `obs@N`.
 
 ## Decision Points
 
@@ -408,7 +401,7 @@ accepts any non-null Markdown link as the `inspire-hep` value.
 
 **Q: What if there's no HEPData entry for this paper?**
 A: Fall back to extracting from the source PDF via `pymupdf` (preferred)
-or table screenshots via `vision_analyze`. An empty `data: {}` fails
+or table screenshots via `vision_analyze`. An empty `data: []` fails
 validation, so a paper with no extractable data must not be committed
 until its data is filled in.
 
@@ -447,28 +440,28 @@ Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
 ### Error: "name must not embed the transition channel"
 
 The channel lives in the `data` key. Keep only the observable symbol in
-`name`: `FL`, `Br`, `a0_F0`, `dBr/dq2`. Keep a `[condition]` or a method
-tag when the source reports one (`Q6[mu-e]`, `Vcb(CLN)`), but never
-`FL(B0.2.Kst0.mu+.mu-)`. **Basic observables** (particle masses,
+`name`: `FL`, `Br`, `a0_F0`, `dBr/dq2`. Keep a `[condition]` or a
+parameter tag when the source reports one (`Q6[mu-e]`, `Vcb(CLN)`), but
+never `FL(B0.2.Kst0.mu+.mu-)`. **Basic observables** (particle masses,
 lifetimes, CKM parameters, EW parameters) use their documented forms:
 `Mass(Z)`, `Tau(e-)`, `gammaCKM`, `MZ` (see `references/obs-abbr.md`
 §2.1).
 
-### Error: "data must be an array of data groups" / "must be a 2-element array"
+### Error: "data must be an array of data groups"
 
 `data` must be an array of **data group** objects, each mapping one or
-more transition channels to a `[latex, obs@N object]` pair
-(`{"B0.2.Kst0.mu+.mu-": ["$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$", {"obs@1": {...}, "obs@2": {...}}], "correlation": [...]}`);
+more transition channels to an `obs@N` object
+(`{"B0.2.Kst0.mu+.mu-": {"obs@1": {...}, "obs@2": {...}}, "correlation": [...]}`);
 each `obs@N` value must itself be an object. See
 `assets/workflow-lhcb-2015svh.md` Step 4 for the canonical shape.
 
 ### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet"
 
 Per-paper files accept only the documented `obs@N` fields:
-`name`, `value`, `unit`, `ref`, `method`, `dataset`, `note`,
+`name`, `value`, `unit`, `ref`, `dataset`, `note`,
 the kinematic boundaries, `error_upper`/`error_lower`, and the
-`type@N_*` keys. LaTeX belongs to the enclosing channel pair, not to
-the observable.
+`type@N_*` keys. Measurement method and fit choice are **group-level**
+(`"method": "..."` beside the channel keys), never inside `obs@N`.
 Component errors must be a complete `type@N_error`, `type@N_upper`,
 `type@N_lower` triplet, and the label must be one of `stat`, `syst`,
 `lumi`, `norm`, `theo`, `expe`. Use `error_upper`/`error_lower` for a
@@ -504,15 +497,14 @@ Before committing any new or updated JSON file:
 - [ ] `inspire-hep` is `[<TexKey>](https://inspirehep.net/literature/<recid>)` with verified TexKey
 - [ ] `author` follows the 1 / 2–3 / 4+ tier rule (initials only)
 - [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
-- [ ] `data` is a non-empty array of groups; each group maps channel keys to a `[latex, obs@N object]` pair, no observable repeats the channel in its `name`, and any group matrix dimension matches the group's observable count
-- [ ] Each channel pair carries a non-empty transition LaTeX (empty only for `no-transition`); obs entries carry no `latex`
+- [ ] `data` is a non-empty array of groups; each group maps channel keys to an `obs@N` object, then an optional group-level `method` string, then any group matrices; no observable repeats the channel in its `name`, and any group matrix dimension matches the group's observable count
 - [ ] Each `obs@N` has `name`, plus exactly one error scheme
       (`value` + complete `type@N_error`/`_upper`/`_lower` triplets or
       `error_upper`/`error_lower`), optionally with `ref` and/or upper limits;
       upper-limit-only entries carry no `value` or errors
-- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; only `method`, `dataset`, `note` and documented kinematic fields are allowed alongside them
+- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; only `dataset`, `note` and documented kinematic fields are allowed alongside them; `method` is group-level, not per-observable
 - [ ] Groups that differ in method, dataset, or kinematic region are separate elements of the `data` array, not merged
-- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_Fp`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_Gp`), never joined; fit choices are in `method`
+- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_Fp`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_Gp`), never joined; fit choices are in the group-level `method`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
 - [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
 - [ ] Annual index file includes the new paper if added (or excludes if deleted)
@@ -536,7 +528,7 @@ Before committing any new or updated JSON file:
 ## FAQ
 
 **Q: What is the canonical JSON file path?**
-A: `Experimental/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`.
+A: `expe-data/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`.
 For a multi-collaboration paper, use the primary collaboration's directory
 and list all collaborations in the `Collaboration` field
 (`"LHCb, CMS"`). If HEPData is the only source and no TexKey exists, use

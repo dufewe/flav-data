@@ -127,24 +127,21 @@ st.code('''{
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": [
-                "$B^{0}\\\\to K^{*0}\\\\mu^{+}\\\\mu^{-}$",
-                {
-                    "obs@1": {
-                        "name": "FL",
-                        "value": "0.69",
-                        "type@1_error": "stat",
-                        "type@1_upper": "0.035",
-                        "type@1_lower": "0.036",
-                        "type@2_error": "syst",
-                        "type@2_upper": "0.017",
-                        "type@2_lower": "0.017",
-                        "q2min": "0.1",
-                        "q2max": "1.1"
-                    },
-                    "obs@2": { "...": "..." }
-                }
-            ],
+            "B0.2.Kst0.mu+.mu-": {
+                "obs@1": {
+                    "name": "FL",
+                    "value": "0.69",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.035",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.017",
+                    "type@2_lower": "0.017",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "obs@2": { "...": "..." }
+            },
             "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
         }
     ]
@@ -158,9 +155,9 @@ st.markdown('''
 | All numeric values are strings | `"0.69"` not `0.69` |
 | Component errors preferred | Separate `type@1_error` (stat), `type@2_error` (syst) |
 | Correlation matrices at group level | `correlation`/`type@1_correlation` alongside channel keys |
-| Channel LaTeX | one transition formula per channel, written as `[latex, observables]` |
-| LaTeX escaping | `\\\\to` in JSON → `\\to` after parsing |
-| Transition symbol | group channel key `A.B.2.C.D` replaces $A + B \\to C + D$ |
+| Transition key | group channel key `A.B.2.C.D` replaces $A + B \\to C + D$ |
+| No channel LaTeX | transition is encoded by the channel key; `data` stores no LaTeX |
+| LaTeX escaping | `\\\\to` in `title`/`abstract` JSON → `\\to` after parsing |
 | Observable naming | bare `OBS` symbol; `[condition]` only for multi-transition ratios |
 ''')
 

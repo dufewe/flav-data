@@ -1,0 +1,50 @@
+{
+    "inspire-hep": "[CMS:2019bbr](https://inspirehep.net/literature/1761656)",
+    "author": "Sirunyan, A.M. and others",
+    "collaboration": "CMS",
+    "title": "Measurement of properties of $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decays and search for $B^0 \\\\to \\\\mu^+ \\\\mu^-$ with the CMS experiment",
+    "arxiv": "[hep-ex/1910.12127v2](https://arxiv.org/pdf/1910.12127)",
+    "time": "2019.10.28",
+    "abstract": "Results are reported for the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction and effective lifetime and from a search for the decay $B^0 \\\\to \\\\mu^+ \\\\mu^-$. The analysis uses data samples of proton-proton collisions accumulated by the CMS experiment in 2011, 2012, and 2016. The branching fraction of the $B_s^0 \\\\to \\\\mu^+ \\\\mu^-$ decay is measured to be $[2.9^{+0.7}_{-0.6} (\\\\text{exp}) \\\\pm 0.2 (\\\\text{frag})] \\\\times 10^{-9}$. The effective lifetime is measured to be $1.70^{+0.61}_{-0.44} \\\\pm 0.05$ ps. An upper limit of $3.6 \\\\times 10^{-10}$ is set on the $B^0 \\\\to \\\\mu^+ \\\\mu^-$ branching fraction at 95% confidence level.",
+    "transition-mode": "leptonic-decay",
+    "data": [
+        {
+            "Bs0.2.mup.mu-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.9e-09",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.7e-09",
+                    "type@1_lower": "0.6e-09",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.2e-09",
+                    "type@2_lower": "0.2e-09"
+                }
+            }
+        },
+        {
+            "Bs0.2.mup.mu-": {
+                "obs@1": {
+                    "name": "Tau",
+                    "value": "1.70",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.61",
+                    "type@1_lower": "0.44",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.05",
+                    "type@2_lower": "0.05",
+                    "unit": "ps"
+                }
+            }
+        },
+        {
+            "B0.2.mup.mu-": {
+                "obs@1": {
+                    "name": "Br",
+                    "type@1_upper_limit": "3.6e-10",
+                    "type@1_level": "95%@CL"
+                }
+            }
+        }
+    ]
+}

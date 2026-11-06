@@ -8,15 +8,14 @@ Experimental folders use the `Lab-Collaboration` format (实验室-实验组). D
 
 ```
 flav-data/
-├── Experimental/                          # Experimental measurement data
-│   ├── CERN-LHCb/                         # Lab-Collaboration folder
-│   │   ├── LHCb.py                        # Streamlit dashboard page
+├── expe-data/                                     # Experimental measurement data
+│   ├── CERN-LHCb/                                 # Lab-Collaboration folder
 │   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json             # Annual index
+│   │   │   ├── LHCb@2015.json                     # Annual index
 │   │   │   └── 12/
-│   │   │       └── LHCb:2015svh.json     # Data file (Collaboration:TexKey)
+│   │   │       └── LHCb:2015svh.json              # Data file (Collaboration:TexKey)
 │   ├── CERN-ATLAS/, CERN-CMS/, CERN-DELPHI/, CERN-OPAL/,
-│   ├── CERN-LEP/                          # Combined LEP (ALEPH+DELPHI+L3+OPAL)
+│   ├── CERN-LEP/                                  # Combined LEP (ALEPH+DELPHI+L3+OPAL)
 │   ├── CERN-NA62/, CERN-CHARM-II/
 │   ├── KEK-Belle/, KEK-KOTO/
 │   ├── SLAC-BaBar/, SLAC-SLD/
@@ -26,16 +25,16 @@ flav-data/
 │   ├── BNL-E949/, Cornell-CLEO/, TRIUMF-PiENu/
 │   ├── PSI-SINDRUM-II/, PSI-nTRV/
 │   ├── LANL-UCNA/, NIST-aCORN/
-│   └── HFLAV/, PDG/                                # No-lab aggregation
-└── Theoretical/
-    ├── HPQCD/                                       # Large collaborations keep a group folder
+│   └── HFLAV/, PDG/                               # No-lab aggregation
+└── theo-data/
+    ├── HPQCD/                                     # Large collaborations keep a group folder
     │   └── <year>/...
-    ├── LQCD/                                        # Method folder for smaller groups
+    ├── LQCD/                                      # Method folder for smaller groups
     │   └── 2015/
-    │       ├── LQCD@2015.json                       # Method-level annual index
+    │       ├── LQCD@2015.json                     # Method-level annual index
     │       └── 03/
-    │           └── Detmold:2015aaa.json             # Data file (TexKey)
-    └── QCD/                                         # Perturbative QCD calculations
+    │           └── Detmold:2015aaa.json           # Data file (TexKey)
+    └── QCD/                                       # Perturbative QCD calculations
 ```
 
 ## Naming Rules
@@ -83,11 +82,11 @@ Theoretical folders depend on the size of the group:
 
 - **Large collaborations** (HPQCD, JLQCD, RBC/UKQCD, ...) keep their own
   top-level folder and follow the normal layout:
-  `Theoretical/<Group>/<year>/<month>/<TexKey>.json` with the annual index
-  `Theoretical/<Group>/<year>/<Group>@<year>.json`.
+  `theo-data/<Group>/<year>/<month>/<TexKey>.json` with the annual index
+  `theo-data/<Group>/<year>/<Group>@<year>.json`.
 - **Smaller calculation groups** are collected by the method they use:
-  `Theoretical/<Method>/<year>/<month>/<TexKey>.json`, with a method-level
-  annual index `Theoretical/<Method>/<year>/<Method>@<year>.json`. The
+  `theo-data/<Method>/<year>/<month>/<TexKey>.json`, with a method-level
+  annual index `theo-data/<Method>/<year>/<Method>@<year>.json`. The
   method folders are `LQCD` (lattice QCD) and `QCD` (perturbative QCD);
   add a new method folder only for a new calculation method. Papers from
   small groups omit the `collaboration` key (SKILL.md rule 8), and TexKeys
@@ -98,7 +97,7 @@ parameter determinations, bounds and theory-group averages derived from
 existing data are not ingested (see SKILL.md §Scope).
 
 Only groups registered in `defs.THEOGROUP` are linked from the Streamlit
-sidebar; method folders are data organization only and have no page of
+navigation; method folders are data organization only and have no page of
 their own.
 
 **Special cases**:
@@ -113,7 +112,7 @@ their own.
 
 Format: `{Collaboration}:{TexKey}.json`
 
-The filename uses only the collaboration name (not the full `Lab-Collaboration` folder name). For example, under `Experimental/CERN-LHCb/`, the data file is `LHCb:2015svh.json`. TexKey comes from InspireHEP.
+The filename uses only the collaboration name (not the full `Lab-Collaboration` folder name). For example, under `expe-data/CERN-LHCb/`, the data file is `LHCb:2015svh.json`. TexKey comes from InspireHEP.
 
 | Example | Description |
 |---------|-------------|
@@ -125,7 +124,7 @@ The filename uses only the collaboration name (not the full `Lab-Collaboration` 
 
 Format: `{Collaboration}@{year}.json` — uses the collaboration name only (e.g., `LHCb@2015.json`).
 
-Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Experimental/CERN-LHCb/2015/LHCb@2015.json`).
+Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `expe-data/CERN-LHCb/2015/LHCb@2015.json`).
 
 ```json
 {
@@ -146,7 +145,7 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `Expe
 ```python
 import json, os
 
-base = 'Experimental/CERN-LHCb'
+base = 'expe-data/CERN-LHCb'
 target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
@@ -167,7 +166,7 @@ Compare indexed entries against actual files on disk to detect discrepancies:
 ```python
 import json, os
 
-base = 'Experimental/CERN-LHCb/2015'
+base = 'expe-data/CERN-LHCb/2015'
 index = json.load(open(f'{base}/LHCb@2015.json'))
 
 # Index file_ids
@@ -216,7 +215,7 @@ When removing a file:
 
 #### Concrete Recipe (add new paper)
 
-The index file (`Experimental/CERN-LHCb/2015/LHCb@2015.json`) does NOT
+The index file (`expe-data/CERN-LHCb/2015/LHCb@2015.json`) does NOT
 store submission dates — only file_ids — so re-sorting requires reading
 each referenced JSON's `time` field. The most reliable workflow:
 
@@ -227,7 +226,7 @@ COLLAB="LHCb"
 YEAR="2015"
 MONTH="12"  # zero-padded, from paper's arXiv v1 submission date
 FILE_ID="LHCb:2015svh"  # TexKey, equals filename without ".json"
-BASE="Experimental/CERN-LHCb/${YEAR}"
+BASE="expe-data/CERN-LHCb/${YEAR}"
 INDEX="${BASE}/${COLLAB}@${YEAR}.json"
 PAPER="${BASE}/${MONTH}/${FILE_ID}.json"
 

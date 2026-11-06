@@ -12,7 +12,7 @@ Check whether this paper's data is already in the database:
 ```python
 import json, os
 
-base = 'Experimental/CERN-LHCb'
+base = 'expe-data/CERN-LHCb'
 target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
@@ -107,36 +107,33 @@ Parse the YAML tables and construct the JSON entry:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": [
-                "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
-                {
-                    "obs@1": {
-                        "name": "FL",
-                        "value": "0.69",
-                        "type@1_error": "stat",
-                        "type@1_upper": "0.035",
-                        "type@1_lower": "0.036",
-                        "type@2_error": "syst",
-                        "type@2_upper": "0.017",
-                        "type@2_lower": "0.017",
-                        "q2min": "0.1",
-                        "q2max": "1.1"
-                    },
-                    "obs@2": {
-                        "name": "S3",
-                        "value": "0.012",
-                        "type@1_error": "stat",
-                        "type@1_upper": "0.038",
-                        "type@1_lower": "0.038",
-                        "type@2_error": "syst",
-                        "type@2_upper": "0.004",
-                        "type@2_lower": "0.004",
-                        "q2min": "0.1",
-                        "q2max": "1.1"
-                    },
-                    "...": "..."
-                }
-            ],
+            "B0.2.Kst0.mu+.mu-": {
+                "obs@1": {
+                    "name": "FL",
+                    "value": "0.69",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.035",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.017",
+                    "type@2_lower": "0.017",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "obs@2": {
+                    "name": "S3",
+                    "value": "0.012",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.038",
+                    "type@1_lower": "0.038",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.004",
+                    "type@2_lower": "0.004",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "...": "..."
+            },
             "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
         }
     ]
@@ -154,13 +151,13 @@ matrix rows ordered by channel key and then `obs@N`.
 
 ```bash
 # Create directory structure
-mkdir -p Experimental/CERN-LHCb/2015/12
+mkdir -p expe-data/CERN-LHCb/2015/12
 
 # Write JSON file
-# → Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
+# → expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json
 ```
 
-**Update the annual index** at `Experimental/CERN-LHCb/2015/LHCb@2015.json`:
+**Update the annual index** at `expe-data/CERN-LHCb/2015/LHCb@2015.json`:
 
 ```json
 {
@@ -174,12 +171,12 @@ If the index already had entries for other months, preserve them and add month "
 
 ```bash
 python3 flav-data-importer/scripts/json-valid.py \
-  Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
+  expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json
 ```
 
 Expected output:
 ```console
-Validating: Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json
+Validating: expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json
   [OK] JSON format correct
   [OK] Top-level fields complete
   [OK] All checks passed
@@ -203,4 +200,4 @@ Remove all temporary PDFs, YAML files, and intermediate JSONs.
 5. **LaTeX escaping** — `\\to` in JSON becomes `\to` after parsing.
 6. **arxiv field** — must include primary category and version: `[hep-ex/1512.04442v1](...)`.
 7. **transition-mode** — use the hyphenated property names (e.g. `"semileptonic-decay"`), never "rare decay".
-8. **Folder naming** — `Experimental/CERN-LHCb/` (Lab-Collaboration), data file uses collaboration name only.
+8. **Folder naming** — `expe-data/CERN-LHCb/` (Lab-Collaboration), data file uses collaboration name only.

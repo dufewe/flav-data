@@ -44,7 +44,7 @@ OBS_EXACT_FIELDS = {
     'name', 'value', 'unit', 'ref',
     'error_upper', 'error_lower',
     # Optional provenance metadata carried over from imported papers.
-    'method', 'dataset', 'note',
+    'dataset', 'note',
 }
 _OBS_KEY_RE = re.compile(
     r'type@\d+_(?:error|upper|lower|upper_limit|level)$'
@@ -451,8 +451,8 @@ def validate_observable_name(name: str) -> list[str]:
     """Check that the observable name does not embed a transition channel.
 
     The channel is carried by the ``data`` key. Names are the observable
-    symbol, optionally followed by a condition or a method/parameter tag:
-    ``OBS``, ``OBS[condition]``, ``OBS(method)``, ``f+.Vcs``.
+    symbol, optionally followed by a condition or a parameter tag:
+    ``OBS``, ``OBS[condition]``, ``OBS(parameter)``, ``f+.Vcs``.
     """
     issues = []
     for _, _, body in _parenthetical_blocks(name):
@@ -586,49 +586,27 @@ def validate_arxiv_format(arxiv) -> list[str]:
     return issues
 
 
-def _validate_channel_entry(
-    channel, label: str, channel_key: str
-) -> tuple[list[str], int]:
-    """Validate one channel entry: ``[latex, obs@N object]``.
+def _validate_channel_entry(channel, label: str) -> tuple[list[str], int]:
+    """Validate one channel entry: an object of ``obs@N`` entries.
 
-    The first element is the channel's LaTeX expression, empty only for
-    ``no-transition``. The second element holds only ``obs@N`` entries;
-    kinematic bounds belong inside the observable. Returns the issues and
-    the observable count, which feeds the group matrix dimension check.
+    The channel key carries the transition; the value holds only
+    ``obs@N`` entries. Kinematic bounds belong inside the observable and
+    matrices at the group level. Returns the issues and the observable
+    count, which feeds the group matrix dimension check.
     """
     issues = []
-    if not isinstance(channel, list) or len(channel) != 2:
+    if not isinstance(channel, dict):
         return [
-            f"  {label}: must be a 2-element array "
-            f"[latex, obs@N object]"
+            f"  {label}: must be an object of obs@N entries"
         ], 0
 
-    channel_latex, obs_bundle = channel
-    if not isinstance(channel_latex, str):
-        issues.append(f"  {label}[0]: channel LaTeX must be a string")
-    elif channel_key == 'no-transition':
-        if channel_latex.strip():
-            issues.append(
-                f"  {label}[0]: channel LaTeX must be empty for "
-                f"'no-transition'"
-            )
-    elif not channel_latex.strip():
-        issues.append(f"  {label}[0]: channel LaTeX must not be empty")
-    else:
-        issues.extend(validate_latex(channel_latex, 'latex', f"{label}[0]"))
-
-    if not isinstance(obs_bundle, dict):
-        issues.append(f"  {label}[1]: must be an object of obs@N entries")
-        return issues, 0
-
     obs_keys = []
-    for key in obs_bundle:
+    for key in channel:
         if not re.fullmatch(r'obs@\d+', key):
             issues.append(
-                f"  {label}[1]: disallowed field '{key}'; the channel's "
-                f"second element holds only obs@N entries — put kinematic "
-                f"bounds inside the observable and matrices at the group "
-                f"level"
+                f"  {label}: disallowed field '{key}'; a channel value "
+                f"holds only obs@N entries — put kinematic bounds inside "
+                f"the observable and matrices at the group level"
             )
             continue
         try:
@@ -659,7 +637,7 @@ def _validate_channel_entry(
 
     for obs_key in obs_keys:
         issues.extend(_validate_observable(
-            obs_bundle[obs_key], f"{label}[1].{obs_key}",
+            channel[obs_key], f"{label}.{obs_key}",
         ))
     return issues, len(obs_keys)
 
@@ -834,7 +812,7 @@ def _validate_observable(obs, label: str) -> list[str]:
         if key in DATA_ENTRY_KINEMATIC_FIELDS:
             issues.extend(_kinematic_issues(obs[key], f"{label}.{key}"))
 
-    for key in ('method', 'dataset', 'note'):
+    for key in ('dataset', 'note'):
         if key in obs and (
             not isinstance(obs[key], str) or not obs[key].strip()
         ):
@@ -847,10 +825,12 @@ def _validate_observable(obs, label: str) -> list[str]:
 
 
 def _validate_data_group(group, label: str) -> list[str]:
-    """Validate one data group: channel bundles plus group-level matrices.
+    """Validate one data group: channel bundles, optional method, matrices.
 
-    A group is an object whose non-matrix keys are transition channels
-    (each mapping to a ``[latex, obs@N object]`` pair) and whose optional
+    A group is an object whose non-matrix, non-``method`` keys are
+    transition channels (each mapping to an object of ``obs@N`` entries).
+    The optional group-level ``method`` string applies to every observable
+    in the group and must precede any matrix key. The optional
     ``correlation``/``covariance`` matrix aligns with the observables of
     all channels, flattened in channel order then ``obs@N`` order.
     """
@@ -861,12 +841,28 @@ def _validate_data_group(group, label: str) -> list[str]:
     matrix_keys = []
     channel_count = 0
     obs_total = 0
+    saw_method = False
     saw_matrix = False
     for key in group:
+        if key == 'method':
+            if not isinstance(group[key], str) or not group[key].strip():
+                issues.append(f"  {label}.method: must be a non-empty string")
+            if saw_matrix:
+                issues.append(
+                    f"  {label}: 'method' appears after a matrix key; "
+                    f"keep it before the matrices"
+                )
+            saw_method = True
+            continue
         if is_group_matrix_key(key):
             matrix_keys.append(key)
             saw_matrix = True
             continue
+        if saw_method:
+            issues.append(
+                f"  {label}: channel '{key}' appears after 'method'; "
+                f"keep all channel keys first"
+            )
         if saw_matrix:
             issues.append(
                 f"  {label}: channel '{key}' appears after a matrix key; "
@@ -876,7 +872,7 @@ def _validate_data_group(group, label: str) -> list[str]:
         channel_count += 1
         issues.extend(validate_transition_key(key))
         channel_issues, obs_count = _validate_channel_entry(
-            group[key], f"{label}['{key}']", key,
+            group[key], f"{label}['{key}']",
         )
         issues.extend(channel_issues)
         obs_total += obs_count

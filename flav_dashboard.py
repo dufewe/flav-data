@@ -1,10 +1,8 @@
 # ---------------------------------------------------------
 # Core dashboard renderer for the flav-data Streamlit app.
 #
-# Each Experimental/<Lab>-<Collaboration>/<Collaboration>.py
-# and Theoretical/<group>/<group>.py file is a thin wrapper that
-# loads defs.py (via exec) and then calls run_dashboard(...) with
-# the appropriate lab/group/base_path combination.
+# ``main.py`` dispatches every navigable page to one of the
+# renderers below; there are no per-group page modules.
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------
@@ -103,8 +101,8 @@ def iter_data_groups(data):
     """Yield the data groups of a paper.
 
     ``data`` is an array of groups; each group maps one or more
-    transition channels to ``[latex, obs@N object]`` pairs and may
-    carry a group-level correlation/covariance matrix.
+    transition channels to ``obs@N`` objects and may carry a group-level
+    correlation/covariance matrix.
     """
     if not isinstance(data, list):
         return
@@ -117,15 +115,6 @@ def is_matrix_key(key):
     return key.endswith(('correlation', 'covariance'))
 
 
-def channel_obs(channel):
-    """Return the ``obs@N`` mapping of a ``[latex, obs@N object]`` entry."""
-    if isinstance(channel, list) and len(channel) == 2:
-        bundle = channel[1]
-        if isinstance(bundle, dict):
-            return bundle
-    return {}
-
-
 def matrix_label(key, group):
     """Return a display label for a group-level matrix key."""
     kind = 'COVARIANCE' if key.endswith('covariance') else 'CORRELATION'
@@ -133,14 +122,16 @@ def matrix_label(key, group):
         return f'TOTAL-{kind}'
     prefix = key.split('_', 1)[0]
     for channel in group.values():
-        for obs in channel_obs(channel).values():
+        if not isinstance(channel, dict):
+            continue
+        for obs in channel.values():
             if isinstance(obs, dict) and f'{prefix}_error' in obs:
                 return f'{str(obs[f"{prefix}_error"]).upper()}-{kind}'
     return key
 
 
 def run_dashboard(lab, group, year_min, year_max, get_json_func,
-                  month_label=None, base_path='Experimental',
+                  month_label=None, base_path='expe-data',
                   folder_override=None):
     """Render the full experimental/theoretical dashboard for one group.
 
@@ -164,7 +155,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
         back to the raw key if a month isn't in the mapping.
     base_path : str
         Top-level directory containing the group's data, typically
-        ``"Experimental"`` or ``"Theoretical"``.
+        ``"expe-data"`` or ``"theo-data"``.
     folder_override : str, optional
         If given, use this exact folder name under ``base_path``
         instead of building ``<lab>-<group>``. Currently unused
@@ -260,11 +251,11 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
         st.markdown("# Statistics")
         tot_exp = len(filtered_data)
         tot_obs = sum(
-            sum(1 for k in channel_obs(channel) if k.startswith("obs@"))
+            sum(1 for k in channel if k.startswith("obs@"))
             for mode in filtered_data
             for group in iter_data_groups(mode.get('data', []))
             for key, channel in group.items()
-            if not is_matrix_key(key)
+            if not is_matrix_key(key) and isinstance(channel, dict)
         )
 
         st.markdown("##### Total Experiments")
@@ -324,17 +315,12 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                     data = json_detail.get('data', [])
                     for data_group in iter_data_groups(data):
                         with st.container(border=True):
-                            for channel, channel_data in data_group.items():
+                            for channel, obs_bundle in data_group.items():
                                 if is_matrix_key(channel):
                                     continue
-                                obs_bundle = channel_obs(channel_data)
-                                if not obs_bundle:
+                                if not isinstance(obs_bundle, dict) or not obs_bundle:
                                     continue
-                                label = fr'- **{channel}**'
-                                channel_latex = channel_data[0]
-                                if channel_latex:
-                                    label += fr' — {channel_latex}'
-                                st.markdown(label)
+                                st.markdown(fr'- **{channel}**')
                                 data_obs = [
                                     value for key, value in obs_bundle.items()
                                     if key.startswith("obs@")
@@ -350,3 +336,129 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                                     fr'- **{matrix_label(key, data_group)}**'
                                 )
                                 st.table(matrix)
+
+
+# ---------------------------------------------------------
+# Snapshot dashboards (HFLAV / PDG non-standard schemas)
+# ---------------------------------------------------------
+def _latest_snapshot(base_dir, group):
+    """Return ``(year, path)`` for the newest ``group@year.json``."""
+    if not os.path.isdir(base_dir):
+        return None
+    candidates = []
+    for entry in os.listdir(base_dir):
+        path = os.path.join(base_dir, entry)
+        if entry.isdigit() and len(entry) == 4:
+            year = entry
+            candidate = os.path.join(path, f'{group}@{year}.json')
+        elif entry.startswith(f'{group}@') and entry.endswith('.json'):
+            year = entry[len(group) + 1:-len('.json')]
+            candidate = path
+        else:
+            continue
+        if year.isdigit() and len(year) == 4 and os.path.isfile(candidate):
+            candidates.append((year, candidate))
+    return max(candidates) if candidates else None
+
+
+def run_snapshot_dashboard(group, get_json_func, base_path='expe-data'):
+    """Render the latest HFLAV or PDG snapshot."""
+    base_dir = os.path.join(base_path, group)
+    found = _latest_snapshot(base_dir, group)
+    if not found:
+        st.warning(f"No {group} data found in {base_dir}/")
+        return
+
+    year, path = found
+    try:
+        doc = get_json_func(path)
+    except (FileNotFoundError, json.JSONDecodeError) as exc:
+        st.error(f"Failed to load {path}: {exc}")
+        return
+
+    if group == 'HFLAV':
+        st.title("HFLAV — Heavy Flavor Averaging Group")
+        st.markdown(
+            "**World-average heavy-flavor measurements from the HFLAV "
+            "review (`inspire-hep = HeavyFlavorAveragingGroupHFLAV:2024ctg`).**"
+        )
+        st.caption(f"Snapshot year: {year}")
+        subgroups = [key for key in doc if key.startswith('HFLAV@')]
+        if not subgroups:
+            st.warning("No HFLAV subgroups found in this snapshot.")
+            return
+        with st.sidebar:
+            st.markdown("# Filters")
+            st.markdown("##### HFLAV Subgroup")
+            subgroup = st.selectbox(
+                "HFLAV Subgroup", subgroups, label_visibility="collapsed",
+            )
+        subgroup_data = doc.get(subgroup, {})
+        st.subheader(subgroup)
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            for key, value in subgroup_data.items():
+                if key != 'observables':
+                    st.markdown(f"- **{key.upper()}**: {value}")
+        with col2:
+            observables = subgroup_data.get('observables', [])
+            if observables:
+                st.markdown(f"**{len(observables)} observables**")
+                st.table(observables)
+            else:
+                st.info("No observables in this subgroup.")
+        correlation = subgroup_data.get('correlation')
+        if correlation:
+            expander = st.expander(
+                "View Correlation", on_change='rerun',
+                key=f"hflav_correlation_{subgroup}",
+            )
+            if expander.open:
+                with expander:
+                    st.table(correlation)
+        return
+
+    st.title("PDG — Particle Data Group")
+    st.markdown(
+        "**World-average particle properties from the PDG review "
+        "(`inspire-hep = ParticleDataGroup:2024cfk`).**"
+    )
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        st.markdown(f"- **YEAR**: {year}")
+        st.markdown(f"- **INSPIRE-HEP**: {doc.get('inspire-hep', 'N/A')}")
+        st.markdown(f"- **AUTHOR**: {doc.get('author', 'N/A')}")
+    with col2:
+        st.markdown(f"- **TITLE**: {doc.get('title', 'N/A')}")
+        abstract = doc.get('abstract', 'N/A')
+        if isinstance(abstract, str) and len(abstract) > 800:
+            abstract = abstract[:800] + "..."
+        st.markdown(f"- **ABSTRACT**: {abstract}")
+    st.divider()
+
+    data = doc.get('data', {})
+    if not data:
+        st.warning("No subgroup data found in this PDG snapshot.")
+        return
+    with st.sidebar:
+        st.markdown("# Filters")
+        st.markdown("##### PDG Subgroup")
+        subgroup = st.selectbox(
+            "PDG Subgroup", list(data), label_visibility="collapsed",
+        )
+    st.subheader(subgroup)
+    subgroup_data = data[subgroup]
+    rows = [
+        {"key": key, **value}
+        for key, value in subgroup_data.items()
+        if key.startswith('obs@')
+    ]
+    if rows:
+        st.table(rows)
+    else:
+        st.info("No obs@N entries in this subgroup.")
+
+    correlation = subgroup_data.get('correlation')
+    if correlation is not None:
+        st.markdown("**Correlation matrix**")
+        st.table(correlation)

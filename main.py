@@ -1,14 +1,12 @@
 # ---------------------------------------------------------
 # Streamlit app entry point. Builds the top-level navigation
-# tree from the EXPEGROUP / THEOGROUP registries in defs.py
-# and dispatches the active page via st.navigation.
+# tree from the EXPEGROUP / THEOGROUP registries in defs.py and
+# dispatches every group to the shared dashboard renderers.
 # ---------------------------------------------------------
 
-# ---------------------------------------------------------
-# Load packages and definitions
-# ---------------------------------------------------------
 import os
 import sys
+from functools import partial
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
@@ -17,60 +15,56 @@ sys.path.insert(0, HERE)
 with open(os.path.join(HERE, 'defs.py'), 'r', encoding='utf-8') as f:
     exec(f.read())
 
-# ---------------------------------------------------------
-# Configure page layout
-# ---------------------------------------------------------
-st.set_page_config(
-    layout="wide"
-)
+import streamlit as st
+
+from flav_dashboard import run_dashboard, run_snapshot_dashboard
+
+st.set_page_config(layout="wide")
 
 
-def _page_path(lab, exp, folder_override=None):
-    """Build the relative path of a Streamlit page file.
-
-    Most groups follow the ``<Lab>-<Collaboration>`` folder
-    convention (e.g. ``Experimental/CERN-LHCb/LHCb.py``,
-    ``Experimental/KEK-Belle/Belle.py``). Groups with no
-    parent lab (``HFLAV``, ``PDG``) use
-    the bare group name as the folder. ``folder_override``
-    is currently unused by any registered group but is
-    retained as an escape hatch for future non-standard
-    parent directories.
-    """
-    if folder_override:
-        folder = folder_override
-    else:
-        folder = resolve_folder(lab, exp)
-    return f"Experimental/{folder}/{exp}.py"
+def _dashboard_page(lab, group, base_path):
+    return partial(
+        run_dashboard, lab=lab, group=group,
+        year_min=year_min, year_max=year_max,
+        get_json_func=get_json, month_label=month_label,
+        base_path=base_path,
+    )
 
 
-# Build the navigation tree. Each Experimental page lives at
-# Experimental/<Lab>-<Collaboration>/<Collaboration>.py and each
-# Theoretical page lives at Theoretical/<group>/<group>.py.
-#
-# We derive the page path directly from the registries in defs.py
-# so adding a new group only requires updating defs.py + creating
-# the matching .py file (no edits to main.py needed).
+def _snapshot_page(group):
+    return partial(
+        run_snapshot_dashboard, group=group,
+        get_json_func=get_json, base_path=EXPERIMENTAL_BASE,
+    )
+
+
+def _experimental_page(entry):
+    lab, group = entry[0], entry[1]
+    if group in ('HFLAV', 'PDG'):
+        return _snapshot_page(group)
+    return _dashboard_page(lab, group, EXPERIMENTAL_BASE)
+
+
+def _title(entry):
+    lab, group = entry[0], entry[1]
+    return f"{lab}-{group}" if lab else group
+
+
 main_pages = {
-    "Home": [
-        st.Page("home.py", title="Home")
-    ],
+    "Home": [st.Page("home.py", title="Home")],
     "Observable": [
         st.Page(f"Observable/{obs}.py", title=obs) for obs in OBSGROUP
     ],
     "Experimental": [
-        st.Page(_page_path(*entry),
-                title=(
-                    f"{entry[0]}-{entry[1]}"
-                    if entry[0] else entry[1]
-                ))
+        st.Page(_experimental_page(entry), title=_title(entry),
+                url_path=_title(entry))
         for entry in EXPEGROUP
     ],
     "Theoretical": [
-        st.Page(f"Theoretical/{theo}/{theo}.py", title=theo)
+        st.Page(_dashboard_page("", theo, THEORETICAL_BASE), title=theo,
+                url_path=theo)
         for theo in THEOGROUP
-    ]
+    ],
 }
 
-main_navi = st.navigation(main_pages, position="top")
-main_navi.run()
+st.navigation(main_pages, position="top").run()

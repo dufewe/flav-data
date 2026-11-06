@@ -1,6 +1,6 @@
 # Transition Symbols and Observable Naming
 
-This document defines the naming conventions for all transitions and observables in the flav-data database. It is the authoritative reference for constructing the observable `name` and the channel LaTeX in JSON entries.
+This document defines the naming conventions for all transitions and observables in the flav-data database. It is the authoritative reference for constructing the observable `name` and the channel keys in JSON entries.
 
 ## 1. Transition Symbols: `A.B.2.C.D`
 
@@ -234,6 +234,9 @@ Unless otherwise specified, differences and ratios between observables follow th
 |------|--------|-------|---------|
 | Difference | `DeltaOBS[condition]` | $\Delta_{OBS}^{condition}$ | `DeltaBr[mu-e]` |
 | Ratio | `ROBS[condition]` | $R_{OBS}^{condition}$ | `RFL[mu/e]` |
+| LFU ratio | `R` | $R(X)$ | `R` |
+
+The canonical LFU ratio $R(X)=\mathcal{B}(B\to X\tau\nu)/\mathcal{B}(B\to X\ell\nu)$ is the **bare symbol `R`** whenever the channel key already fixes the final state $X$ (e.g. `R` under `B0Bar.2.D+.tau-.nuBar` is \(R(D)\)); in that case do not repeat $X$ in the name (no `RD`, `RDst`). Ratios that compare other observables still use `ROBS[condition]`.
 
 Examples:
 | LaTeX | Symbol | Description |
@@ -241,6 +244,7 @@ Examples:
 | $\Delta_{A_{CP}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaACP[mu-e]` | CP asymmetry difference |
 | $R_{F_L}^{\mu/e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `RFL[mu/e]` | Longitudinal polarization ratio |
 | $\Delta_{\mathcal{B}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaBr[mu-e]` | Branching fraction difference |
+| $R(D)$ | `R` | LFU ratio (channel carries $D$) |
 
 ### 2.4 Form-Factor Expansion Coefficients: `aN_FF`
 
@@ -256,7 +260,8 @@ repeat the value/errors (`a0_Gv` and `a0_Gp`), never joined into a
 single name such as `a0_Gv_Gp`.
 
 Fit choices (nominal, higher-order, ...) are **not** part of the name —
-record them in the `method` field (`"nominal"`, `"higher-order"`).
+record them in the group-level `method` field (`"nominal"`,
+`"higher-order"`).
 
 **Form-factor symbols** (use the notation of the paper's own
 decomposition; these are the standard symbols):
@@ -460,7 +465,7 @@ Differences of angular coefficients between muon and electron modes, used to tes
 
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
-| `R` | $R$ | $R_X$ | Ratio prefix — always followed by the observable being compared (e.g., `RBr`, `RFL`, `RAFB`). See §2 for naming. |
+| `R` | $R$ | $R_X$ | Canonical LFU ratio, written bare when the channel key carries the final state (e.g. `R` under `B0Bar.2.D+.tau-.nuBar` is \(R(D)\)); do not repeat the final state in the name. Ratios of other observables use `ROBS[condition]` (e.g. `RFL[mu/e]`). See §2.3. |
 | `r` | $r$ | $r_{J/\psi}$ | Charmonium normalization ratio (e.g., $R_K = r_{J/\psi} \cdot R_{K,J/\psi}$). For the CKM amplitude ratio in $B \to DK$ decays, see **CKM Parameters** below. |
 
 ### Asymmetries and Fractions
@@ -500,16 +505,14 @@ Differences of angular coefficients between muon and electron modes, used to tes
 | `r` | $r$ | $r_B$, $r_D$ | Amplitude ratio (decay channel specified in transition) |
 | `delta` | $\delta$ | $\delta_B$, $\delta_D$ | Strong phase difference |
 
-## 4. LaTeX Mapping
+## 4. LaTeX Notation
 
 The LaTeX symbol for each abbreviation is listed in §3 tables (column
-"LaTeX"). Observables carry only `name`; the only LaTeX in `data` is the
-channel formula stored in the channel's `[latex, obs@N object]` pair, for
-example `"$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$"` (no observable symbol).
+"LaTeX") as a notation reference for papers and plots. JSON data stores
+no LaTeX for transitions or observables: the channel key carries the
+transition and each observable carries only its bare `name`.
 
-**JSON escaping**: A single backslash in LaTeX (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
-
-For the full abbreviation-to-LaTeX mapping as a Python dict, see the table in §3 — each row provides both the abbreviation and its LaTeX symbol.
+**JSON escaping**: In top-level `title`/`abstract` LaTeX, a single backslash (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
 
 ## 5. Common q² Intervals (GeV²)
 
@@ -547,8 +550,7 @@ observable choice may differ across analyses — this is illustrative, not a tem
 When a paper introduces an observable not listed in this document:
 
 1. **Confirm the physical meaning** and identify the standard notation used in the literature.
-2. **Choose or create an abbreviation** following the conventions in Section 3. Add it to the appropriate category.
-3. **Add the LaTeX mapping** to Section 4.
-4. **Add new particles** to the particle table in Section 1 if the observable involves a particle not yet listed.
-5. **Verify the naming**: `name` is the bare symbol plus an optional `[condition]`; the transition is the `data` key.
-6. **Remember**: use symbolic notation only, not full expression definitions.
+2. **Choose or create an abbreviation** following the conventions in Section 3. Add it to the appropriate category, including its LaTeX symbol in the table's "LaTeX" column.
+3. **Add new particles** to the particle table in Section 1 if the observable involves a particle not yet listed.
+4. **Verify the naming**: `name` is the bare symbol plus an optional `[condition]`; the transition is the `data` key.
+5. **Remember**: use symbolic notation only, not full expression definitions.

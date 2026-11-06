@@ -1,0 +1,182 @@
+{
+    "inspire-hep": "[Belle:2005fli](https://inspirehep.net/literature/679052)",
+    "author": "Iwasaki, M. and others",
+    "collaboration": "Belle",
+    "title": "Improved Measurement of the Electroweak Penguin Process $B \\to X_s \\ell^+ \\ell^-$",
+    "arxiv": "[hep-ex/0503044v1](https://arxiv.org/pdf/hep-ex/0503044)",
+    "time": "2005.03.17",
+    "abstract": "We present an improved measurement of the branching fraction for the electroweak penguin process $B \\to X_s \\ell^+ \\ell^-$, where $\\ell$ is an electron or a muon and $X_s$ is a hadronic state with strangeness $S = -1$. Averaging over both lepton flavors, the inclusive branching fraction is measured to be $\\mathcal{B}(B \\to X_s \\ell^+ \\ell^-) = (4.11 \\pm 0.83 {+0.85 \\atop -0.81}) \\times 10^{-6}$ for $M_{\\ell^+ \\ell^-} > 0.2$ GeV/$c^2$.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bbar.2.XsBar.ep.em": {
+                "obs@1": {
+                    "name": "Br[Mll>0.2]",
+                    "value": "4.04",
+                    "type@1_error": "stat",
+                    "type@1_upper": "1.30",
+                    "type@1_lower": "1.30",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.87",
+                    "type@2_lower": "0.83",
+                    "unit": "1e-6",
+                    "q2min": "0.2",
+                    "q2max": "25.0"
+                }
+            }
+        },
+        {
+            "Bbar.2.XsBar.mup.mum": {
+                "obs@1": {
+                    "name": "Br[Mll>0.2]",
+                    "value": "4.13",
+                    "type@1_error": "stat",
+                    "type@1_upper": "1.05",
+                    "type@1_lower": "1.05",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.85",
+                    "type@2_lower": "0.81",
+                    "unit": "1e-6",
+                    "q2min": "0.2",
+                    "q2max": "25.0"
+                }
+            }
+        },
+        {
+            "Bbar.2.XsBar.l+.l-": {
+                "obs@1": {
+                    "name": "Br[Mll>0.2]",
+                    "value": "4.11",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.83",
+                    "type@1_lower": "0.83",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.85",
+                    "type@2_lower": "0.81",
+                    "unit": "1e-6",
+                    "q2min": "0.2",
+                    "q2max": "25.0"
+                },
+                "obs@2": {
+                    "name": "Br[0.04<Mll<1.0]",
+                    "value": "11.34",
+                    "type@1_error": "stat",
+                    "type@1_upper": "4.83",
+                    "type@1_lower": "4.83",
+                    "type@2_error": "syst",
+                    "type@2_upper": "4.60",
+                    "type@2_lower": "2.71",
+                    "unit": "1e-7",
+                    "q2min": "0.04",
+                    "q2max": "1.0"
+                },
+                "obs@3": {
+                    "name": "Br[1.0<Mll<6.0]",
+                    "value": "14.93",
+                    "type@1_error": "stat",
+                    "type@1_upper": "5.04",
+                    "type@1_lower": "5.04",
+                    "type@2_error": "syst",
+                    "type@2_upper": "4.11",
+                    "type@2_lower": "3.21",
+                    "unit": "1e-7",
+                    "q2min": "1.0",
+                    "q2max": "6.0"
+                },
+                "obs@4": {
+                    "name": "Br[6.0<Mll<14.4]",
+                    "value": "7.32",
+                    "type@1_error": "stat",
+                    "type@1_upper": "6.14",
+                    "type@1_lower": "6.14",
+                    "type@2_error": "syst",
+                    "type@2_upper": "1.84",
+                    "type@2_lower": "1.91",
+                    "unit": "1e-7",
+                    "q2min": "6.0",
+                    "q2max": "14.4"
+                },
+                "obs@5": {
+                    "name": "Br[14.4<Mll<25.0]",
+                    "value": "4.18",
+                    "type@1_error": "stat",
+                    "type@1_upper": "1.17",
+                    "type@1_lower": "1.17",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.61",
+                    "type@2_lower": "0.68",
+                    "unit": "1e-7",
+                    "q2min": "14.4",
+                    "q2max": "25.0"
+                }
+            }
+        },
+        {
+            "Bbar.2.XsBar.l+.l-": {
+                "obs@1": {
+                    "name": "dBr/dMxs",
+                    "value": "3.75e-7",
+                    "type@1_upper": "0.96e-7",
+                    "type@1_lower": "0.96e-7",
+                    "type@2_upper": "0.34e-7",
+                    "type@2_lower": "0.34e-7",
+                    "type@3_error": "syst",
+                    "type@3_upper": "0.34e-7",
+                    "type@3_lower": "0.34e-7",
+                    "mxs_min": "0.4",
+                    "mxs_max": "0.6",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@2": {
+                    "name": "dBr/dMxs",
+                    "value": "0.36e-7",
+                    "type@1_upper": "0.88e-7",
+                    "type@1_lower": "0.88e-7",
+                    "type@2_upper": "0.08e-7",
+                    "type@2_lower": "0.08e-7",
+                    "mxs_min": "0.6",
+                    "mxs_max": "0.8",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@3": {
+                    "name": "dBr/dMxs",
+                    "value": "6.65e-7",
+                    "type@1_upper": "2.25e-7",
+                    "type@1_lower": "2.25e-7",
+                    "type@2_upper": "0.67e-7",
+                    "type@2_lower": "0.67e-7",
+                    "mxs_min": "0.8",
+                    "mxs_max": "1.0",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@4": {
+                    "name": "dBr/dMxs",
+                    "value": "10.50e-7",
+                    "type@1_upper": "6.90e-7",
+                    "type@1_lower": "6.90e-7",
+                    "type@2_upper": "2.00e-7",
+                    "type@2_lower": "2.00e-7",
+                    "mxs_min": "1.0",
+                    "mxs_max": "1.4",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@5": {
+                    "name": "dBr/dMxs",
+                    "value": "46.59e-7",
+                    "type@1_upper": "23.37e-7",
+                    "type@1_lower": "23.37e-7",
+                    "type@2_upper": "22.51e-7",
+                    "type@2_lower": "10.94e-7",
+                    "mxs_min": "1.4",
+                    "mxs_max": "2.0",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                }
+            }
+        }
+    ]
+}

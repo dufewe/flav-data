@@ -1,0 +1,46 @@
+{
+    "inspire-hep": "LHCb:2017rmj",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $B^0_s\\to\\mu^+\\mu^-$ branching fraction and effective lifetime and search for $B^0\\to\\mu^+\\mu^-$ decays",
+    "arxiv": "[hep-ex/1703.05747](https://arxiv.org/pdf/1703.05747)",
+    "time": "2017.01.01",
+    "abstract": "a search for the rare decays $B^0_s \\to \\mu^+ \\mu^-$ and $B^0 \\to \\mu^+ \\mu^-$ performed at the LHCb experiment, using data collected in $pp$ collisions corresponding to a total integrated luminosity of 4.4 fb$^{-1}$",
+    "transition-mode": "leptonic-decay",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3e-09",
+                    "type@1_upper": "6e-10",
+                    "type@1_lower": "6e-10",
+                    "type@2_upper": "3e-10",
+                    "type@2_lower": "2e-10",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "type@1_upper_limit": "3.4e-10",
+                    "type@1_level": "95%@CL"
+                }
+            }
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Tau",
+                    "value": "2.04",
+                    "unit": "ps",
+                    "type@1_upper": "0.44",
+                    "type@1_lower": "0.44",
+                    "type@2_upper": "0.05",
+                    "type@2_lower": "0.05",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                }
+            }
+        }
+    ]
+}

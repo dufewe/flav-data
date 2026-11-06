@@ -27,7 +27,7 @@ arxiv_ext = load_script('arxiv_ext', 'arxiv-ext.py')
 
 class JsonValidatorTests(unittest.TestCase):
     def test_existing_example_has_required_top_level_order(self):
-        source = PROJECT_ROOT / 'tests/Experimental/CERN-LHCb/2015/12/LHCb:2015svh.json'
+        source = PROJECT_ROOT / 'expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json'
         with source.open(encoding='utf-8') as f:
             data = json.load(f)
         keys = list(data)
@@ -43,7 +43,7 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(any('Top-level JSON must be an object' in issue for issue in issues))
 
     def test_observable_name_rejects_embedded_transition(self):
-        for name in ('FL', 'RBr[mu/e]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
+        for name in ('FL', 'R', 'RBr[mu/e]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
             self.assertEqual(json_valid.validate_observable_name(name), [], name)
 
         for name in ('FL(B0.2.Kst0.mu+.mu-)', 'FL(B02Kstmumu)'):
@@ -72,8 +72,8 @@ class JsonValidatorTests(unittest.TestCase):
         }
 
     @classmethod
-    def _channel(cls, latex, *obs):
-        return [latex, {f'obs@{i}': o for i, o in enumerate(obs, 1)}]
+    def _channel(cls, *obs):
+        return {f'obs@{i}': o for i, o in enumerate(obs, 1)}
 
     def _validate_data(self, data_block):
         doc = {
@@ -94,12 +94,9 @@ class JsonValidatorTests(unittest.TestCase):
     def test_data_groups_allow_cross_channel_matrices(self):
         data = [{
             'B0.2.Kst0.mu+.mu-': self._channel(
-                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
                 self._obs('FL'), self._obs('S3'),
             ),
-            'B+.2.K+.mu+.mu-': self._channel(
-                r'$B^{+}\to K^{+}\mu^{+}\mu^{-}$', self._obs('FL'),
-            ),
+            'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
             'correlation': [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]],
         }]
         self.assertEqual(self._validate_data(data), [])
@@ -107,12 +104,9 @@ class JsonValidatorTests(unittest.TestCase):
     def test_data_group_matrix_dimension_must_cover_all_channels(self):
         data = [{
             'B0.2.Kst0.mu+.mu-': self._channel(
-                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
                 self._obs('FL'), self._obs('S3'),
             ),
-            'B+.2.K+.mu+.mu-': self._channel(
-                r'$B^{+}\to K^{+}\mu^{+}\mu^{-}$', self._obs('FL'),
-            ),
+            'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
             'correlation': [[1.0, 0.5], [0.5, 1.0]],
         }]
         issues = self._validate_data(data)
@@ -121,12 +115,50 @@ class JsonValidatorTests(unittest.TestCase):
     def test_data_group_channel_must_precede_matrix(self):
         data = [{
             'correlation': [[1.0]],
-            'B0.2.Kst0.mu+.mu-': self._channel(
-                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', self._obs('FL'),
-            ),
+            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
         }]
         issues = self._validate_data(data)
         self.assertTrue(any('appears after a matrix key' in issue for issue in issues))
+
+    def test_group_method_sits_between_channels_and_matrix(self):
+        data = [{
+            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+            'method': 'maximum likelihood',
+            'correlation': [[1.0]],
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_observable_method_is_rejected(self):
+        obs = self._obs('FL')
+        obs['method'] = 'maximum likelihood'
+        issues = self._validate_data([{
+            'B0.2.Kst0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any("unknown observable field 'method'" in issue for issue in issues))
+
+    def test_group_method_order_is_enforced(self):
+        after_matrix = [{
+            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+            'correlation': [[1.0]],
+            'method': 'maximum likelihood',
+        }]
+        issues = self._validate_data(after_matrix)
+        self.assertTrue(any("'method' appears after a matrix key" in issue for issue in issues))
+
+        after_method = [{
+            'method': 'maximum likelihood',
+            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+        }]
+        issues = self._validate_data(after_method)
+        self.assertTrue(any("appears after 'method'" in issue for issue in issues))
+
+    def test_group_method_must_be_non_empty_string(self):
+        data = [{
+            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+            'method': '',
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any('method: must be a non-empty string' in issue for issue in issues))
 
     def test_legacy_channel_to_group_dict_is_rejected(self):
         issues = self._validate_data({
@@ -134,50 +166,37 @@ class JsonValidatorTests(unittest.TestCase):
         })
         self.assertTrue(any('data must be an array of data groups' in issue for issue in issues))
 
-    def test_channel_must_be_latex_observable_pair(self):
+    def test_channel_must_be_observable_object(self):
         for channel in (
-            {'obs@1': self._obs('FL')},
-            [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$'],
-            [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': self._obs('FL')}, 'extra'],
+            [{'obs@1': self._obs('FL')}],
+            [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': self._obs('FL')}],
         ):
             issues = self._validate_data([{'B0.2.Kst0.mu+.mu-': channel}])
             self.assertTrue(
-                any('must be a 2-element array' in issue for issue in issues),
+                any('must be an object of obs@N entries' in issue for issue in issues),
                 channel,
             )
 
-    def test_channel_latex_must_be_a_string(self):
+    def test_channel_latex_key_is_rejected(self):
         issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': [123, {'obs@1': self._obs('FL')}],
+            'B0.2.Kst0.mu+.mu-': {
+                'latex': r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
+                'obs@1': self._obs('FL'),
+            },
         }])
-        self.assertTrue(any('channel LaTeX must be a string' in issue for issue in issues))
+        self.assertTrue(any("disallowed field 'latex'" in issue for issue in issues))
 
-    def test_empty_channel_latex_is_rejected(self):
-        issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': ['', {'obs@1': self._obs('FL')}],
-        }])
-        self.assertTrue(any('channel LaTeX must not be empty' in issue for issue in issues))
-
-    def test_no_transition_requires_empty_channel_latex(self):
-        ok = self._validate_data([{
-            'no-transition': ['', {'obs@1': self._obs('MZ')}],
-        }])
-        self.assertEqual(ok, [])
-
-        issues = self._validate_data([{
-            'no-transition': [r'$Z\to\ell\ell$', {'obs@1': self._obs('MZ')}],
-        }])
-        self.assertTrue(
-            any("must be empty for 'no-transition'" in issue for issue in issues)
-        )
+    def test_no_transition_channel_is_observable_object(self):
+        data = [{
+            'no-transition': self._channel(self._obs('MZ')),
+        }]
+        self.assertEqual(self._validate_data(data), [])
 
     def test_observable_latex_is_rejected(self):
         obs = self._obs('FL')
         obs['latex'] = r'$F_L$'
         issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': [
-                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': obs},
-            ],
+            'B0.2.Kst0.mu+.mu-': {'obs@1': obs},
         }])
         self.assertTrue(any("unknown observable field 'latex'" in issue for issue in issues))
 
@@ -192,9 +211,7 @@ class JsonValidatorTests(unittest.TestCase):
             'pdf': 'https://arxiv.org/pdf/2401.00001',
             'transition-mode': 'semileptonic-decay',
             'data': [{
-                'B0.2.Kst0.mu+.mu-': self._channel(
-                    r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', self._obs('FL'),
-                ),
+                'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
             }],
         }
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
@@ -238,7 +255,7 @@ class DashboardDataTests(unittest.TestCase):
 
         self.assertEqual(years, [2020])
 
-    def test_channel_pair_helpers_read_observable_bundle(self):
+    def test_matrix_label_reads_group_observables(self):
         dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
         source = dashboard_path.read_text(encoding='utf-8')
         namespace = {'__name__': 'dashboard_test'}
@@ -246,33 +263,53 @@ class DashboardDataTests(unittest.TestCase):
 
         obs = {'name': 'BR', 'type@1_error': 'stat',
                'type@1_upper': '0.1', 'type@1_lower': '0.1'}
-        pair = [r'$B^{0}\to\mu^{+}\mu^{-}$', {'obs@1': obs}]
-        self.assertEqual(namespace['channel_obs'](pair), {'obs@1': obs})
-        self.assertEqual(namespace['channel_obs']({'obs@1': obs}), {})
-
-        group = {'B0.2.mu+.mu-': pair, 'type@1_correlation': [[1.0]]}
+        group = {'B0.2.mu+.mu-': {'obs@1': obs}, 'type@1_correlation': [[1.0]]}
         self.assertEqual(
             namespace['matrix_label']('type@1_correlation', group),
             'STAT-CORRELATION',
         )
 
 
-class StreamlitMissingDirectoryTests(unittest.TestCase):
-    def test_hflav_page_loads_latest_year_indexed_snapshot(self):
-        source = (PROJECT_ROOT / 'Experimental/HFLAV/HFLAV.py').read_text(encoding='utf-8')
-        self.assertIn('f"HFLAV@{year}.json"', source)
-        self.assertIn('latest_year = candidate_years[0]', source)
+def load_dashboard():
+    dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+    namespace = {'__name__': 'dashboard_test'}
+    exec(compile('from __future__ import annotations\n' + dashboard_path.read_text(encoding='utf-8'),
+                 str(dashboard_path), 'exec'), namespace)
+    return namespace
 
-    def test_snapshot_pages_guard_missing_directories(self):
-        for relative_path in (
-            'Experimental/HFLAV/HFLAV.py',
-            'Experimental/PDG/PDG.py',
-        ):
-            source = (PROJECT_ROOT / relative_path).read_text(encoding='utf-8')
-            guard = 'if not os.path.isdir(base_dir):'
-            listing = 'os.listdir(base_dir)'
-            self.assertIn(guard, source, relative_path)
-            self.assertLess(source.index(guard), source.index(listing), relative_path)
+
+class StreamlitSnapshotTests(unittest.TestCase):
+    def test_latest_snapshot_picks_newest_year(self):
+        namespace = load_dashboard()
+        with tempfile.TemporaryDirectory() as directory:
+            for year in ('2023', '2024'):
+                folder = Path(directory) / 'HFLAV' / year
+                folder.mkdir(parents=True)
+                (folder / f'HFLAV@{year}.json').write_text('{}', encoding='utf-8')
+
+            found = namespace['_latest_snapshot'](
+                str(Path(directory) / 'HFLAV'), 'HFLAV'
+            )
+
+        self.assertEqual(found[0], '2024')
+        self.assertTrue(found[1].endswith('HFLAV@2024.json'))
+
+    def test_latest_snapshot_missing_directory_returns_none(self):
+        namespace = load_dashboard()
+        with tempfile.TemporaryDirectory() as directory:
+            missing = str(Path(directory) / 'Missing')
+            self.assertIsNone(namespace['_latest_snapshot'](missing, 'HFLAV'))
+
+    def test_latest_snapshot_accepts_flat_snapshot_file(self):
+        namespace = load_dashboard()
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory) / 'PDG'
+            folder.mkdir()
+            (folder / 'PDG@2022.json').write_text('{}', encoding='utf-8')
+
+            found = namespace['_latest_snapshot'](str(folder), 'PDG')
+
+        self.assertEqual(found[0], '2022')
 
 
 class ExternalMetadataTests(unittest.TestCase):

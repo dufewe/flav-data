@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "[LHCb:2025hhv](https://inspirehep.net/literature/2952168)",
+    "author": "Aaij, R. and others",
+    "collaboration": "LHCb",
+    "title": "Measurement of the $B^0\\rightarrow \\rho(770)^{0}\\gamma$ branching fraction",
+    "arxiv": "[hep-ex/2507.14401v3](https://arxiv.org/pdf/2507.14401)",
+    "time": "2025.07.18",
+    "abstract": "The ratio between the branching fractions of the $B^0\\rightarrow \\rho(770)^{0}\\gamma$ and $B^{0}\\rightarrow K^{*}(892)^{0}\\gamma$ decays is measured with proton-proton collision data collected by the LHCb experiment at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to an integrated luminosity of 9 fb$^{-1}$. The measured value is $\\mathcal{B}(B^0\\rightarrow \\rho(770)^{0}\\gamma)/\\mathcal{B}(B^0\\rightarrow K^{*}(892)^{0}\\gamma) = 0.0189 \\pm 0.0007 \\pm 0.0005$, where the first uncertainty is statistical and the second systematic. The branching fraction for $B^0\\rightarrow \\rho(770)^{0}\\gamma$ decays is hence obtained as $\\mathcal{B}(B^0\\rightarrow \\rho(770)^{0}\\gamma) = (7.9 \\pm 0.3 \\pm 0.2 \\pm 0.2) \\times 10^{-7}$, where the last uncertainty is due to the branching fraction of the normalisation mode. This result assumes that both the $\\rho(770)^0$ and $K^{*}(892)^0$ decays saturate the dihadron mass spectra considered in the analysis. It is consistent with the current world-average value and by far the most precise measurement to date.",
+    "transition-mode": "radiative-decay",
+    "data": [
+        {
+            "B0.2.rho0.gamma": {
+                "obs@1": {
+                    "name": "Br/Br",
+                    "value": "0.0189",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0007",
+                    "type@1_lower": "0.0007",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0005",
+                    "type@2_lower": "0.0005"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "value": "7.9e-7",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.3e-7",
+                    "type@1_lower": "0.3e-7",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.2e-7",
+                    "type@2_lower": "0.2e-7",
+                    "type@3_error": "norm",
+                    "type@3_upper": "0.2e-7",
+                    "type@3_lower": "0.2e-7"
+                }
+            }
+        }
+    ]
+}

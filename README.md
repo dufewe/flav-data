@@ -37,8 +37,8 @@ navigation; other theoretical groups' data is not yet wired into the app.
 The database stores only experimental measurements and theoretical
 calculations — fits, parameter determinations, bounds and theory-group
 averages derived from existing data are not ingested. Small calculation
-groups are filed under a method folder (`Theoretical/LQCD/`,
-`Theoretical/QCD/`) instead of their own group folder.
+groups are filed under a method folder (`theo-data/LQCD/`,
+`theo-data/QCD/`) instead of their own group folder.
 
 ## Data Format
 
@@ -56,24 +56,21 @@ Each paper corresponds to one JSON file with the following structure:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": [
-                "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
-                {
-                    "obs@1": {
-                        "name": "FL",
-                        "value": "0.69",
-                        "type@1_error": "stat",
-                        "type@1_upper": "0.035",
-                        "type@1_lower": "0.036",
-                        "type@2_error": "syst",
-                        "type@2_upper": "0.017",
-                        "type@2_lower": "0.017",
-                        "q2min": "0.1",
-                        "q2max": "1.1"
-                    },
-                    "obs@2": { ... }
-                }
-            ],
+            "B0.2.Kst0.mu+.mu-": {
+                "obs@1": {
+                    "name": "FL",
+                    "value": "0.69",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.035",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.017",
+                    "type@2_lower": "0.017",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "obs@2": { ... }
+            },
             "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
         }
     ]
@@ -81,11 +78,10 @@ Each paper corresponds to one JSON file with the following structure:
 ```
 
 `data` is an array of groups. Each group maps one or more transition
-channels to a `[latex, obs@N object]` pair and may carry a group-level
-matrix whose rows follow the channel keys, then their `obs@N` order.
-The channel LaTeX is written once per channel; observables carry no
-`latex`. Add another group for different kinematic bins, fit methods, or
-datasets.
+channels to an `obs@N` object and may carry a group-level matrix whose
+rows follow the channel keys, then their `obs@N` order. The channel key
+alone encodes the transition; `data` stores no LaTeX. Add another group
+for different kinematic bins, fit methods, or datasets.
 
 ### Key Design Principles
 
@@ -94,7 +90,7 @@ datasets.
 | Numeric values | All strings: `"0.69"` not `0.69` |
 | Errors | Component-level (`stat`, `syst`) preferred |
 | Matrices | Float arrays alongside channel keys in each group, diagonal = 1.0 for correlation |
-| LaTeX | One channel-level formula per channel; double-backslash escaping: `\\to` in JSON → `\to` in Python |
+| LaTeX | Only in `title`/`abstract`; double-backslash escaping: `\\to` in JSON → `\to` in Python |
 | Indentation | 4 spaces |
 | Empty fields | Omit key entirely (except `arxiv` which uses `null`) |
 
@@ -147,30 +143,26 @@ symbol plus optional condition/method tags.
 
 ```
 flav-data/
-├── Experimental/
+├── expe-data/
 │   ├── CERN-LHCb/
-│   │   ├── LHCb.py                 # Streamlit dashboard page
-│   │   └── ...                     # Year-indexed data directories
+│   │   ├── LHCb@2015.json          # Annual index
+│   │   └── 2015/12/LHCb:2015svh.json
 │   ├── HFLAV/
-│   │   ├── HFLAV.py               # Snapshot dashboard page
-│   │   └── HFLAV@2024.json        # Flat snapshot (year subdirs also supported)
+│   │   └── HFLAV@2024.json         # Flat snapshot (year subdirs also supported)
 │   ├── PDG/
-│   │   ├── PDG.py                 # Snapshot dashboard page
 │   │   └── 2024/PDG@2024.json
 │   └── ...                         # Other experimental groups
-├── Theoretical/
+├── theo-data/
 │   ├── HPQCD/                       # Large collaborations: own folder
 │   └── LQCD/, QCD/                  # Smaller calculation groups, grouped by method
 ├── Observable/
 │   ├── Flavor.py                    # Observable naming guide
 │   └── EWPO.py                      # EWPO naming guide
 ├── tests/
-│   ├── test_importer_regressions.py
-│   ├── Experimental/                # Fixture data
-│   └── Theoretical/                 # Fixture data
-├── main.py                          # Streamlit app entry
+│   └── test_importer_regressions.py
+├── main.py                          # Streamlit app entry (builds all pages)
 ├── home.py                          # Homepage
-├── flav_dashboard.py                # Dashboard component
+├── flav_dashboard.py                # Dashboard renderers (standard + snapshot)
 └── defs.py                          # Shared definitions
 ```
 
@@ -204,18 +196,18 @@ The full Lab-Collaboration folder convention is:
 | `PSI-nTRV` | PSI | nTRV | Neutron trimer |
 | `LANL-UCNA` | LANL | UCNA | |
 | `NIST-aCORN` | NIST | aCORN | |
-| `HFLAV` | — | HFLAV | Aggregation, non-standard schema (uses `run_dashboard`-bypassing custom page) |
+| `HFLAV` | — | HFLAV | Aggregation, non-standard schema (rendered by `run_snapshot_dashboard`) |
 | `PDG` | — | PDG | Aggregation, non-standard schema |
 
 ### Special cases
 
 - **HFLAV** and **PDG** store data in a non-standard flav-data schema
   (one snapshot JSON per year whose keys are subgroup names containing
-  nested observables). They have dedicated Streamlit pages at
-  `Experimental/HFLAV/HFLAV.py` and `Experimental/PDG/PDG.py` that bypass
+  nested observables). `main.py` routes them to
+  `run_snapshot_dashboard` in `flav_dashboard.py`, which bypasses
   `run_dashboard`.
 
-The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) create `Experimental/<folder>/<group>.py` calling `run_dashboard(lab=..., group=...)` (or pass `folder_override=` if needed), (3) drop data into `Experimental/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index.
+The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) drop data into `expe-data/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index. `main.py` generates the page automatically.
 
 ### Index File Format
 
@@ -245,7 +237,7 @@ streamlit run main.py
 | **Home** | Database overview, format specification, statistics |
 | **Observable** → Flavor | Transition symbols, particle table, observable abbreviations |
 | **Observable** → EWPO | Electroweak precision observable definitions |
-| **Experimental** → [Group] | Interactive dashboard with year, month, and transition-mode filters |
+| **Experimental** → [Lab-Group] | Interactive dashboard with year, month, and transition-mode filters |
 | **Theoretical** → [Group] | Theory group results browser |
 
 ## Contributing

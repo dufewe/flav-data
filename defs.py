@@ -1,11 +1,9 @@
 # ---------------------------------------------------------
 # Shared definitions for the flav-data Streamlit app.
-# Loaded via `exec` from each page (at the absolute path resolved
-# from the page's own location) so the same name bindings
-# (get_json, EXPEGROUP, ...) are available in every page's module
-# scope. As a side effect this also injects `streamlit` (as `st`),
-# `json`, and `os` into each page's globals, so HFLAV/PDG/home can
-# call `st.*` / `json.*` / `os.*` without re-importing.
+# Loaded via `exec` from main.py (and the Observable pages) so the
+# same name bindings (get_json, EXPEGROUP, ...) are available in the
+# caller's module scope. As a side effect this also injects
+# `streamlit` (as `st`), `json`, and `os` into the caller's globals.
 # ---------------------------------------------------------
 
 import streamlit as st
@@ -61,17 +59,15 @@ month_label = {
 
 # Collaboration registry ---------------------------------------------
 #
-# Each entry produces an ``Experimental/<Lab>-<Collaboration>/``
-# folder (or ``Experimental/<Collaboration>/`` when ``lab`` is
-# empty for aggregation groups, or ``Theoretical/<Collaboration>``
-# for theoretical groups). A 2-tuple ``(lab, collaboration)``
-# uses that default; a 3-tuple with a third ``folder_override``
-# element lets a group live under a non-standard path (currently
-# unused; kept as an escape hatch).
+# Each entry produces an ``expe-data/<Lab>-<Collaboration>/`` folder
+# (or ``expe-data/<Collaboration>/`` when ``lab`` is empty for
+# aggregation groups, or ``theo-data/<Collaboration>`` for theoretical
+# groups). A 2-tuple ``(lab, collaboration)`` uses that default; a
+# 3-tuple with a third ``folder_override`` element lets a group live
+# under a non-standard path (currently unused; kept as an escape hatch).
 #
-# Each entry must have a matching
-# ``Experimental/<Lab>-<Collaboration>/<Collaboration>.py``
-# (or equivalent) Streamlit page that calls ``run_dashboard``.
+# Navigation entries are generated in ``main.py`` from the same
+# registries, so adding a group only requires updating this list.
 EXPEGROUP = [
     # CERN
     ("CERN", "LHCb"),
@@ -119,8 +115,8 @@ OBSGROUP = ["Flavor", "EWPO"]
 
 # Paths ---------------------------------------------------------------
 # Absolute so pages work regardless of the launch directory.
-EXPERIMENTAL_BASE = os.path.join(PROJECT_ROOT, "Experimental")
-THEORETICAL_BASE  = os.path.join(PROJECT_ROOT, "Theoretical")
+EXPERIMENTAL_BASE = os.path.join(PROJECT_ROOT, "expe-data")
+THEORETICAL_BASE  = os.path.join(PROJECT_ROOT, "theo-data")
 
 
 def resolve_folder(lab, group, folder_override=None):
