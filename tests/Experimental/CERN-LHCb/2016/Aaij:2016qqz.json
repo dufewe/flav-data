@@ -6,67 +6,72 @@
     "arxiv": "[hep-ex/1608.01484v2](https://arxiv.org/pdf/1608.01484.pdf)",
     "time": "2016-08-04",
     "abstract": "A measurement of the cross-section for W->e nu production in pp collisions using 2 fb-1 at sqrt(s)=8 TeV. The inclusive W production cross-sections are measured to be sigma(W+)=1124.4 pb and sigma(W-)=809.0 pb. The ratio B(W->e nu)/B(W->mu nu)=1.020 +/- 0.002 +/- 0.019.",
-    "pdf": "https://arxiv.org/pdf/1608.01484.pdf",
     "transition-mode": "scattering",
-    "data": {
-        "p.p.2.W+.2.e+.nu": [
-            {
-                "obs@1": {
-                    "name": "sigma_Wpenu",
-                    "latex": "$\\sigma(W^{+} \\to e^{+}\\nu)$",
-                    "value": "1124.4",
-                    "type@1_error": "syst",
-                    "type@1_upper": "21.5",
-                    "type@1_lower": "21.5",
-                    "type@2_error": "syst",
-                    "type@2_upper": "11.2",
-                    "type@2_lower": "11.2",
-                    "type@3_error": "lumi",
-                    "type@3_upper": "13.0",
-                    "type@3_lower": "13.0",
-                    "unit": "pb",
-                    "type@4_error": "stat",
-                    "type@4_upper": "2.1",
-                    "type@4_lower": "2.1"
+    "data": [
+        {
+            "p.p.2.W+.2.e+.nu": [
+                "$pp\\to W^{+}\\to e^{+}\\nu$",
+                {
+                    "obs@1": {
+                        "name": "sigma_Wpenu",
+                        "value": "1124.4",
+                        "type@1_error": "syst",
+                        "type@1_upper": "21.5",
+                        "type@1_lower": "21.5",
+                        "type@2_error": "syst",
+                        "type@2_upper": "11.2",
+                        "type@2_lower": "11.2",
+                        "type@3_error": "lumi",
+                        "type@3_upper": "13.0",
+                        "type@3_lower": "13.0",
+                        "unit": "pb",
+                        "type@4_error": "stat",
+                        "type@4_upper": "2.1",
+                        "type@4_lower": "2.1"
+                    }
                 }
-            }
-        ],
-        "p.p.2.W-.2.e-.nubar": [
-            {
-                "obs@1": {
-                    "name": "sigma_Wmenu",
-                    "latex": "$\\sigma(W^{-} \\to e^{-}\\bar{\\nu})$",
-                    "value": "809.0",
-                    "type@1_error": "syst",
-                    "type@1_upper": "18.1",
-                    "type@1_lower": "18.1",
-                    "type@2_error": "syst",
-                    "type@2_upper": "7.0",
-                    "type@2_lower": "7.0",
-                    "type@3_error": "lumi",
-                    "type@3_upper": "9.4",
-                    "type@3_lower": "9.4",
-                    "unit": "pb",
-                    "type@4_error": "stat",
-                    "type@4_upper": "1.9",
-                    "type@4_lower": "1.9"
+            ]
+        },
+        {
+            "p.p.2.W-.2.e-.nubar": [
+                "$pp\\to W^{-}\\to e^{-}\\bar{\\nu}$",
+                {
+                    "obs@1": {
+                        "name": "sigma_Wmenu",
+                        "value": "809.0",
+                        "type@1_error": "syst",
+                        "type@1_upper": "18.1",
+                        "type@1_lower": "18.1",
+                        "type@2_error": "syst",
+                        "type@2_upper": "7.0",
+                        "type@2_lower": "7.0",
+                        "type@3_error": "lumi",
+                        "type@3_upper": "9.4",
+                        "type@3_lower": "9.4",
+                        "unit": "pb",
+                        "type@4_error": "stat",
+                        "type@4_upper": "1.9",
+                        "type@4_lower": "1.9"
+                    }
                 }
-            }
-        ],
-        "W.2.e.nu": [
-            {
-                "obs@1": {
-                    "name": "RWenu2Wmumu",
-                    "latex": "$\\mathcal{B}(W \\to e\\nu)/\\mathcal{B}(W \\to \\mu\\nu)$",
-                    "value": "1.020",
-                    "type@1_error": "syst",
-                    "type@1_upper": "0.019",
-                    "type@1_lower": "0.019",
-                    "type@2_error": "stat",
-                    "type@2_upper": "0.002",
-                    "type@2_lower": "0.002"
+            ]
+        },
+        {
+            "W.2.e.nu": [
+                "$W\\to e\\nu$",
+                {
+                    "obs@1": {
+                        "name": "RWenu2Wmumu",
+                        "value": "1.020",
+                        "type@1_error": "syst",
+                        "type@1_upper": "0.019",
+                        "type@1_lower": "0.019",
+                        "type@2_error": "stat",
+                        "type@2_upper": "0.002",
+                        "type@2_lower": "0.002"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

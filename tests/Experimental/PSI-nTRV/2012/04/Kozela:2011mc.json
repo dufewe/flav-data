@@ -6,28 +6,33 @@
     "arxiv": "[nucl-ex/1111.4695v1](https://arxiv.org/pdf/1111.4695v1)",
     "time": "2012-04",
     "abstract": "The final analysis of the experiment determining both components of the transverse polarization of electrons (sigma_T1, sigma_T2) emitted in the beta-decay of polarized, free neutrons is presented. The T-odd, P-odd correlation coefficient quantifying sigma_T2, perpendicular to the neutron polarization and electron momentum, was found to be R = 0.004(12)(5).",
-    "pdf": "https://arxiv.org/pdf/1111.4695.pdf",
     "transition-mode": "neutron-beta-decay",
-    "data": {
-        "n.2.p.e-.nuebar": [
-            {
-                "obs@1": {
-                    "name": "N",
-                    "latex": "$N$",
-                    "value": "0.067",
-                    "error_upper": "0.012",
-                    "error_lower": "0.012"
+    "data": [
+        {
+            "n.2.p.e-.nuebar": [
+                "$n\\to p\\,e^{-}\\bar{\\nu}_{e}$",
+                {
+                    "obs@1": {
+                        "name": "N",
+                        "value": "0.067",
+                        "error_upper": "0.012",
+                        "error_lower": "0.012"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$R$",
-                    "value": "0.004",
-                    "error_upper": "0.013",
-                    "error_lower": "0.013"
+            ]
+        },
+        {
+            "n.2.p.e-.nuebar": [
+                "$n\\to p\\,e^{-}\\bar{\\nu}_{e}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "0.004",
+                        "error_upper": "0.013",
+                        "error_lower": "0.013"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

@@ -1,6 +1,6 @@
 # Transition Symbols and Observable Naming
 
-This document defines the naming conventions for all transitions and observables in the flav-data database. It is the authoritative reference for constructing `name` and `latex` fields in JSON entries.
+This document defines the naming conventions for all transitions and observables in the flav-data database. It is the authoritative reference for constructing the observable `name` and the channel LaTeX in JSON entries.
 
 ## 1. Transition Symbols: `A.B.2.C.D`
 
@@ -283,6 +283,16 @@ decomposition; these are the standard symbols):
 | `hv` | helicity $h_\perp$ |
 | `htp` | helicity $\tilde{h}_+$ |
 | `htv` | helicity $\tilde{h}_\perp$ |
+| `g` | BGL $g$ ($\bar B \to D^*$) |
+| `f` | BGL $f$ ($\bar B \to D^*$) |
+| `F1` | BGL $F_1$ ($\bar B \to D^*$) |
+| `F2` | BGL $F_2$ ($\bar B \to D^*$) |
+
+For a BGL $z$-series fit of the $\bar B_{(s)} \to D_{(s)}^{(*)}
+\ell\bar\nu_\ell$ form factors, the basis is $f_+, f_0$ for the
+pseudoscalar channel and $g, f, F_1, F_2$ for the vector channel, so the
+coefficients are named `aN_fp`, `aN_f0`, `aN_g`, `aN_f`, `aN_F1`,
+`aN_F2` (e.g. `a0_fp`, `a2_F1`).
 
 Baryon semileptonic decays ($\Lambda_b \to \Lambda_c \ell^- \bar{\nu}$,
 $\Lambda_b \to p \ell^- \bar{\nu}$) use the helicity set, with the
@@ -492,13 +502,10 @@ Differences of angular coefficients between muon and electron modes, used to tes
 
 ## 4. LaTeX Mapping
 
-The LaTeX symbol for each abbreviation is listed in §3 tables (column "LaTeX"). For programmatic use, construct the `latex` field as:
-
-```python
-# Build from the abbreviation and transition LaTeX
-# latex = f"${OBSERVABLE_LATEX[abbr]}({transition_latex})$"
-# Example: "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$"
-```
+The LaTeX symbol for each abbreviation is listed in §3 tables (column
+"LaTeX"). Observables carry only `name`; the only LaTeX in `data` is the
+channel formula stored in the channel's `[latex, obs@N object]` pair, for
+example `"$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$"` (no observable symbol).
 
 **JSON escaping**: A single backslash in LaTeX (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
 
@@ -531,7 +538,7 @@ for $B^0 \to K^{*0}\mu^+\mu^-$ (same process as LHCb:2015svh):
 | data[4] | Alternative P parameterization | ~210 | Different observable set |
 | data[5] | CP-averaged (fine bins) | ~362 | 16 q² bins × ~22-27 obs/bin |
 
-Each entry has its own `total_correlation` matrix. Fine binning (data[5]) splits
+Each group carries its own `correlation` matrix. Fine binning (data[5]) splits
 standard bins into sub-intervals for higher resolution. The exact split and
 observable choice may differ across analyses — this is illustrative, not a template.
 

@@ -104,51 +104,51 @@ Parse the YAML tables and construct the JSON entry:
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
-    "pdf": "https://arxiv.org/pdf/1512.04442",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.Kst0.mu+.mu-": [
-            {
-                "obs@1": {
-                    "name": "FL",
-                    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
-                    "value": "0.69",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.035",
-                    "type@1_lower": "0.036",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.017",
-                    "type@2_lower": "0.017",
-                    "q2min": "0.1",
-                    "q2max": "1.1"
-                },
-                "obs@2": {
-                    "name": "S3",
-                    "latex": "$S_3(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
-                    "value": "0.012",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.038",
-                    "type@1_lower": "0.038",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.004",
-                    "type@2_lower": "0.004",
-                    "q2min": "0.1",
-                    "q2max": "1.1"
-                },
-                "...": "...",
-                "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
-            }
-        ]
-    }
+    "data": [
+        {
+            "B0.2.Kst0.mu+.mu-": [
+                "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
+                {
+                    "obs@1": {
+                        "name": "FL",
+                        "value": "0.69",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.035",
+                        "type@1_lower": "0.036",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.017",
+                        "type@2_lower": "0.017",
+                        "q2min": "0.1",
+                        "q2max": "1.1"
+                    },
+                    "obs@2": {
+                        "name": "S3",
+                        "value": "0.012",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.038",
+                        "type@1_lower": "0.038",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.004",
+                        "type@2_lower": "0.004",
+                        "q2min": "0.1",
+                        "q2max": "1.1"
+                    },
+                    "...": "..."
+                }
+            ],
+            "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
+        }
+    ]
 }
 ```
 
-Each q² bin from the paper becomes a separate element in that channel's
-`data` group array — its own group. The correlation matrix from
-Table 9 goes into the first group (low q² bin), Table 10 into the
-second, and so on. Observables coupled by one source matrix (including
-angular and differential ones) stay together in that group
-(SKILL.md rule 6).
+Each q² bin from the paper becomes a separate element of the `data`
+group array. The correlation matrix from Table 9 goes into the first
+group (low q² bin), Table 10 into the second, and so on. Observables
+coupled by one source matrix (including angular, differential, and
+cross-channel ones) stay together in that group (SKILL.md rule 6), with
+matrix rows ordered by channel key and then `obs@N`.
 
 ## Step 5: Write File and Update Index
 

@@ -6,30 +6,33 @@
     "arxiv": "1506.05845v2 [hep-ex]",
     "time": "2015-08-24",
     "abstract": "A new measurement of the branching ratio $R_{e/\\mu} = \\Gamma(\\pi^+ \\to e^+ \\nu + \\pi^+ \\to e^+ \\nu \\gamma)/\\Gamma(\\pi^+ \\to \\mu^+ \\nu + \\pi^+ \\to \\mu^+ \\nu \\gamma)$ resulted in $R^{\\rm exp}_{e/\\mu} = (1.2344 \\pm 0.0023_{\\rm stat} \\pm 0.0019_{\\rm syst}) \\times 10^{-4}$. This is in agreement with the standard model prediction and improves the test of electron-muon universality to the level of 0.1\\%.",
-    "pdf": "https://arxiv.org/pdf/1506.05845.pdf",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "pi+.2.e+.nue/pi+.2.mu+.numu": [
-            {
-                "obs@1": {
-                    "name": "Re/mu",
-                    "latex": "$R_{e/\\mu} = \\frac{\\Gamma(\\pi^+ \\to e^+ \\nu(\\gamma))}{\\Gamma(\\pi^+ \\to \\mu^+ \\nu(\\gamma))}$",
-                    "value": "1.2344e-4",
-                    "error_upper": "0.0030e-4",
-                    "error_lower": "0.0030e-4"
+    "data": [
+        {
+            "pi+.2.e+.nue/pi+.2.mu+.numu": [
+                "$\\pi^{+}\\to e^{+}\\nu_{e} / \\pi^{+}\\to\\mu^{+}\\nu_{\\mu}$",
+                {
+                    "obs@1": {
+                        "name": "Re/mu",
+                        "value": "1.2344e-4",
+                        "error_upper": "0.0030e-4",
+                        "error_lower": "0.0030e-4"
+                    }
                 }
-            }
-        ],
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "ge/gmu",
-                    "latex": "$g_e / g_\\mu$",
-                    "value": "0.9996",
-                    "error_upper": "0.0012",
-                    "error_lower": "0.0012"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "ge/gmu",
+                        "value": "0.9996",
+                        "error_upper": "0.0012",
+                        "error_lower": "0.0012"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

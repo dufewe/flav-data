@@ -61,6 +61,148 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(json_valid.validate_transition_mode('Higgs decay'))
         self.assertTrue(json_valid.validate_transition_mode('electroweak precision'))
 
+    @staticmethod
+    def _obs(name):
+        return {
+            'name': name,
+            'value': '1.0',
+            'type@1_error': 'stat',
+            'type@1_upper': '0.1',
+            'type@1_lower': '0.1',
+        }
+
+    @classmethod
+    def _channel(cls, latex, *obs):
+        return [latex, {f'obs@{i}': o for i, o in enumerate(obs, 1)}]
+
+    def _validate_data(self, data_block):
+        doc = {
+            'inspire-hep': '[Test:2024](https://inspirehep.net/literature/1)',
+            'author': 'Doe, J.',
+            'title': 'Test',
+            'arxiv': '[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)',
+            'time': '2024.01.01',
+            'abstract': 'Test abstract.',
+            'transition-mode': 'semileptonic-decay',
+            'data': data_block,
+        }
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
+            json.dump(doc, f)
+            f.flush()
+            return json_valid.validate_json(f.name)
+
+    def test_data_groups_allow_cross_channel_matrices(self):
+        data = [{
+            'B0.2.Kst0.mu+.mu-': self._channel(
+                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
+                self._obs('FL'), self._obs('S3'),
+            ),
+            'B+.2.K+.mu+.mu-': self._channel(
+                r'$B^{+}\to K^{+}\mu^{+}\mu^{-}$', self._obs('FL'),
+            ),
+            'correlation': [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]],
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_data_group_matrix_dimension_must_cover_all_channels(self):
+        data = [{
+            'B0.2.Kst0.mu+.mu-': self._channel(
+                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
+                self._obs('FL'), self._obs('S3'),
+            ),
+            'B+.2.K+.mu+.mu-': self._channel(
+                r'$B^{+}\to K^{+}\mu^{+}\mu^{-}$', self._obs('FL'),
+            ),
+            'correlation': [[1.0, 0.5], [0.5, 1.0]],
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any('does not match the 3 observables' in issue for issue in issues))
+
+    def test_data_group_channel_must_precede_matrix(self):
+        data = [{
+            'correlation': [[1.0]],
+            'B0.2.Kst0.mu+.mu-': self._channel(
+                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', self._obs('FL'),
+            ),
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any('appears after a matrix key' in issue for issue in issues))
+
+    def test_legacy_channel_to_group_dict_is_rejected(self):
+        issues = self._validate_data({
+            'B0.2.Kst0.mu+.mu-': [{'obs@1': self._obs('FL')}],
+        })
+        self.assertTrue(any('data must be an array of data groups' in issue for issue in issues))
+
+    def test_channel_must_be_latex_observable_pair(self):
+        for channel in (
+            {'obs@1': self._obs('FL')},
+            [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$'],
+            [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': self._obs('FL')}, 'extra'],
+        ):
+            issues = self._validate_data([{'B0.2.Kst0.mu+.mu-': channel}])
+            self.assertTrue(
+                any('must be a 2-element array' in issue for issue in issues),
+                channel,
+            )
+
+    def test_channel_latex_must_be_a_string(self):
+        issues = self._validate_data([{
+            'B0.2.Kst0.mu+.mu-': [123, {'obs@1': self._obs('FL')}],
+        }])
+        self.assertTrue(any('channel LaTeX must be a string' in issue for issue in issues))
+
+    def test_empty_channel_latex_is_rejected(self):
+        issues = self._validate_data([{
+            'B0.2.Kst0.mu+.mu-': ['', {'obs@1': self._obs('FL')}],
+        }])
+        self.assertTrue(any('channel LaTeX must not be empty' in issue for issue in issues))
+
+    def test_no_transition_requires_empty_channel_latex(self):
+        ok = self._validate_data([{
+            'no-transition': ['', {'obs@1': self._obs('MZ')}],
+        }])
+        self.assertEqual(ok, [])
+
+        issues = self._validate_data([{
+            'no-transition': [r'$Z\to\ell\ell$', {'obs@1': self._obs('MZ')}],
+        }])
+        self.assertTrue(
+            any("must be empty for 'no-transition'" in issue for issue in issues)
+        )
+
+    def test_observable_latex_is_rejected(self):
+        obs = self._obs('FL')
+        obs['latex'] = r'$F_L$'
+        issues = self._validate_data([{
+            'B0.2.Kst0.mu+.mu-': [
+                r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': obs},
+            ],
+        }])
+        self.assertTrue(any("unknown observable field 'latex'" in issue for issue in issues))
+
+    def test_top_level_pdf_is_rejected(self):
+        doc = {
+            'inspire-hep': '[Test:2024](https://inspirehep.net/literature/1)',
+            'author': 'Doe, J.',
+            'title': 'Test',
+            'arxiv': '[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)',
+            'time': '2024.01.01',
+            'abstract': 'Test abstract.',
+            'pdf': 'https://arxiv.org/pdf/2401.00001',
+            'transition-mode': 'semileptonic-decay',
+            'data': [{
+                'B0.2.Kst0.mu+.mu-': self._channel(
+                    r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', self._obs('FL'),
+                ),
+            }],
+        }
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
+            json.dump(doc, f)
+            f.flush()
+            issues = json_valid.validate_json(f.name)
+        self.assertTrue(any("Forbidden field present: 'pdf'" in issue for issue in issues))
+
 
 class DashboardDataTests(unittest.TestCase):
     def test_skips_invalid_month_keys_and_corrupt_details(self):
@@ -95,6 +237,24 @@ class DashboardDataTests(unittest.TestCase):
             )
 
         self.assertEqual(years, [2020])
+
+    def test_channel_pair_helpers_read_observable_bundle(self):
+        dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+        source = dashboard_path.read_text(encoding='utf-8')
+        namespace = {'__name__': 'dashboard_test'}
+        exec(compile('from __future__ import annotations\n' + source, str(dashboard_path), 'exec'), namespace)
+
+        obs = {'name': 'BR', 'type@1_error': 'stat',
+               'type@1_upper': '0.1', 'type@1_lower': '0.1'}
+        pair = [r'$B^{0}\to\mu^{+}\mu^{-}$', {'obs@1': obs}]
+        self.assertEqual(namespace['channel_obs'](pair), {'obs@1': obs})
+        self.assertEqual(namespace['channel_obs']({'obs@1': obs}), {})
+
+        group = {'B0.2.mu+.mu-': pair, 'type@1_correlation': [[1.0]]}
+        self.assertEqual(
+            namespace['matrix_label']('type@1_correlation', group),
+            'STAT-CORRELATION',
+        )
 
 
 class StreamlitMissingDirectoryTests(unittest.TestCase):
@@ -169,7 +329,7 @@ class ImporterDocumentationTests(unittest.TestCase):
         self.assertNotIn("meta['inspire_recid']", skill)
         self.assertIn('matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation', skill)
         self.assertIn('transition-mode": "semileptonic-decay"', skill)
-        self.assertLess(skill.index('"transition-mode": "semileptonic-decay"'), skill.index('"data": {', skill.index('"transition-mode": "semileptonic-decay"')))
+        self.assertLess(skill.index('"transition-mode": "semileptonic-decay"'), skill.index('"data": [', skill.index('"transition-mode": "semileptonic-decay"')))
 
 
 class HepDataImporterTests(unittest.TestCase):

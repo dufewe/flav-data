@@ -6,23 +6,24 @@
     "arxiv": "[hep-ex/1506.08614](https://arxiv.org/pdf/1506.08614)",
     "time": "2015.01.01",
     "abstract": "an analysis of the branching fraction ratio $R(D^\\ast) \\equiv \\mathcal{B}(B^0 \\to D^{\\ast +} \\tau^- \\bar{\\nu}_\\tau)/\\mathcal{B}(B^0 \\to D^{\\ast +} \\mu^- \\bar{\\nu}_\\mu), using a sample of proton-proton collision data corresponding to 3.0 fb$^{-1}$ of integrated luminosity recorded during 2011 and 2012",
-    "pdf": "https://arxiv.org/pdf/1506.08614",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "RDst+[tau/mu]",
-                    "latex": "R_{D^{\\ast+}}^{\\tau/\\mu}",
-                    "value": "0.336",
-                    "type@1_upper": "0.027",
-                    "type@1_lower": "0.027",
-                    "type@2_upper": "0.03",
-                    "type@2_lower": "0.03",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
+    "data": [
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "RDst+[tau/mu]",
+                        "value": "0.336",
+                        "type@1_upper": "0.027",
+                        "type@1_lower": "0.027",
+                        "type@2_upper": "0.03",
+                        "type@2_lower": "0.03",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

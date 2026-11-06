@@ -6,24 +6,24 @@
     "arxiv": "[hep-ex/1509.06521v1](https://arxiv.org/pdf/1509.06521)",
     "time": "2015.09.22",
     "abstract": "We search for the process $B^0 \\to \\pi^- \\tau^+ \\nu_\\tau$ using the full Belle data set of $711\\,\\mathrm{fb}^{-1}$, corresponding to $772 \\times 10^6 B\\bar{B}$ pairs. We observe an excess of $2.8\\sigma$ ($2.4\\sigma$ including systematic uncertainties) above the background-only hypothesis. An upper limit of $\\mathcal{B}(B^0 \\to \\pi^- \\tau^+ \\nu_\\tau) < 2.5 \\times 10^{-4}$ is obtained at the 90% confidence level.",
-    "pdf": "https://arxiv.org/pdf/1509.06521",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.pim.taup.nutau": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{-}\\tau^{+}\\nu_{\\tau})$",
-                    "type@1_upper_limit": "2.5e-4",
-                    "type@1_level": "90%@CL"
-                },
-                "obs@2": {
-                    "name": "Br[95%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{-}\\tau^{+}\\nu_{\\tau})$",
-                    "type@1_upper_limit": "2.8e-4",
-                    "type@1_level": "95%@CL"
+    "data": [
+        {
+            "B0.2.pim.taup.nutau": [
+                "$B^{0}\\to \\pi^{-}\\tau^{+}\\nu_{\\tau}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "2.5e-4",
+                        "type@1_level": "90%@CL"
+                    },
+                    "obs@2": {
+                        "name": "Br[95%@CL]",
+                        "type@1_upper_limit": "2.8e-4",
+                        "type@1_level": "95%@CL"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

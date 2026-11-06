@@ -6,64 +6,71 @@
     "arxiv": "[hep-ex/1307.7627v2](https://arxiv.org/pdf/1307.7627.pdf)",
     "time": "2013-07-29",
     "abstract": "Combination of direct measurements of the W boson mass in ppbar collisions at sqrt(s)=1.96 TeV from CDF and D0 experiments. The Tevatron average is MW = 80387 +/- 19 MeV. Combined with LEP: MW = 80385 +/- 15 MeV.",
-    "pdf": "https://arxiv.org/pdf/1307.7627.pdf",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "p.pbar.2.W.2.l.nu": [
-            {
-                "obs@1": {
-                    "name": "mW",
-                    "latex": "$m_{W}^{\\text{Tevatron}}$",
-                    "value": "80387",
-                    "error_upper": "19",
-                    "error_lower": "19",
-                    "unit": "MeV"
+    "data": [
+        {
+            "p.pbar.2.W.2.l.nu": [
+                "$p\\bar{p}\\to W\\to\\ell\\nu$",
+                {
+                    "obs@1": {
+                        "name": "mW",
+                        "value": "80387",
+                        "error_upper": "19",
+                        "error_lower": "19",
+                        "unit": "MeV"
+                    }
                 }
-            }
-        ],
-        "p.pbar.2.W.2.l.nu.world": [
-            {
-                "obs@1": {
-                    "name": "mW",
-                    "latex": "$m_{W}^{\\text{world}}$",
-                    "value": "80385",
-                    "error_upper": "15",
-                    "error_lower": "15",
-                    "unit": "MeV"
+            ]
+        },
+        {
+            "p.pbar.2.W.2.l.nu.world": [
+                "$p\\bar{p}\\to W\\to\\ell\\nu$",
+                {
+                    "obs@1": {
+                        "name": "mW",
+                        "value": "80385",
+                        "error_upper": "15",
+                        "error_lower": "15",
+                        "unit": "MeV"
+                    }
                 }
-            }
-        ],
-        "p.pbar.2.W.2.l.nu.CDF": [
-            {
-                "obs@1": {
-                    "name": "mW",
-                    "latex": "$m_{W}^{\\text{CDF}}$",
-                    "value": "80387",
-                    "type@1_error": "syst",
-                    "type@1_upper": "15",
-                    "type@1_lower": "15",
-                    "unit": "MeV",
-                    "type@2_error": "stat",
-                    "type@2_upper": "12",
-                    "type@2_lower": "12"
+            ]
+        },
+        {
+            "p.pbar.2.W.2.l.nu.CDF": [
+                "$p\\bar{p}\\to W\\to\\ell\\nu$",
+                {
+                    "obs@1": {
+                        "name": "mW",
+                        "value": "80387",
+                        "type@1_error": "syst",
+                        "type@1_upper": "15",
+                        "type@1_lower": "15",
+                        "unit": "MeV",
+                        "type@2_error": "stat",
+                        "type@2_upper": "12",
+                        "type@2_lower": "12"
+                    }
                 }
-            }
-        ],
-        "p.pbar.2.W.2.l.nu.D0": [
-            {
-                "obs@1": {
-                    "name": "mW",
-                    "latex": "$m_{W}^{\\text{D0}}$",
-                    "value": "80367",
-                    "type@1_error": "syst",
-                    "type@1_upper": "22",
-                    "type@1_lower": "22",
-                    "unit": "MeV",
-                    "type@2_error": "stat",
-                    "type@2_upper": "13",
-                    "type@2_lower": "13"
+            ]
+        },
+        {
+            "p.pbar.2.W.2.l.nu.D0": [
+                "$p\\bar{p}\\to W\\to\\ell\\nu$",
+                {
+                    "obs@1": {
+                        "name": "mW",
+                        "value": "80367",
+                        "type@1_error": "syst",
+                        "type@1_upper": "22",
+                        "type@1_lower": "22",
+                        "unit": "MeV",
+                        "type@2_error": "stat",
+                        "type@2_upper": "13",
+                        "type@2_lower": "13"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

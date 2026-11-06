@@ -6,46 +6,45 @@
     "arxiv": "[hep-ex/2505.03483v4](https://arxiv.org/pdf/2505.03483)",
     "time": "2025.05.06",
     "abstract": "A test of lepton universality between muons and electrons is performed using $B^+\\to K^+\\ell^+\\ell^-$ decays (where $\\ell$ = $e$, $\\mu$), in the dilepton invariant-mass-squared region above 14.3 GeV$^2/c^4$. The data used for the measurement consists of beauty meson decays produced in proton-proton collisions, corresponding to an integrated luminosity of 9 $\\text{fb}^{-1}$, collected by the LHCb experiment between 2011 and 2018. The ratio of branching fractions for $B^+\\to K^+\\mu^+\\mu^-$ and $B^+\\to K^+e^+e^-$ decays is measured to be $R_K = 1.08^{+0.11}_{-0.09}\\;(\\text{stat})\\;^{+0.04}_{-0.04}\\;(\\text{syst})$, which is consistent with the Standard Model prediction of unity. This constitutes the most precise test of lepton flavour universality using $B^+\\to K^+\\ell^+\\ell^-$ decays with dilepton invariant-mass-squared above the $\\psi(2S)$ mass, whilst being the first of its kind at a hadron collider.",
-    "pdf": "https://arxiv.org/pdf/2505.03483",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B+.2.K+.l+.l-": [
-            {
-                "obs@1": {
-                    "name": "r[J/psi]",
-                    "latex": "$r_{B^+ \\to K^+ \\ell^+ \\ell^-}^{J/\\psi}$",
-                    "value": "0.997",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.003",
-                    "type@1_lower": "0.003",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.055",
-                    "type@2_lower": "0.055"
-                },
-                "obs@2": {
-                    "name": "R[psi(2S)]",
-                    "latex": "$R_{B^+ \\to K^+ \\ell^+ \\ell^-}^{\\psi(2S)}$",
-                    "value": "1.002",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.009",
-                    "type@1_lower": "0.009",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.004",
-                    "type@2_lower": "0.004"
-                },
-                "obs@3": {
-                    "name": "R[mu/e]",
-                    "latex": "$R_{B^+ \\to K^+ \\ell^+ \\ell^-}^{\\mu/e}$",
-                    "value": "1.08",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.11",
-                    "type@1_lower": "0.09",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.04",
-                    "type@2_lower": "0.04",
-                    "q2min": "14.3"
+    "data": [
+        {
+            "B+.2.K+.l+.l-": [
+                "$B^+ \\to K^+ \\ell^+ \\ell^-$",
+                {
+                    "obs@1": {
+                        "name": "r[J/psi]",
+                        "value": "0.997",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.003",
+                        "type@1_lower": "0.003",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.055",
+                        "type@2_lower": "0.055"
+                    },
+                    "obs@2": {
+                        "name": "R[psi(2S)]",
+                        "value": "1.002",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.009",
+                        "type@1_lower": "0.009",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.004",
+                        "type@2_lower": "0.004"
+                    },
+                    "obs@3": {
+                        "name": "R[mu/e]",
+                        "value": "1.08",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.11",
+                        "type@1_lower": "0.09",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.04",
+                        "type@2_lower": "0.04",
+                        "q2min": "14.3"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

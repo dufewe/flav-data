@@ -6,36 +6,41 @@
     "arxiv": "[hep-ex/1406.0755v3](https://arxiv.org/pdf/1406.0755)",
     "time": "2014.06.03",
     "abstract": "the first observation of the Cabibbo-suppressed decay $\\Lambda^0_b \\to J/\\psi p \\pi^-$, using a data sample of proton-proton collisions at 7 and 8 TeV, corresponding to an integrated luminosity of 3 fb$^{-1}$",
-    "pdf": "https://arxiv.org/pdf/1406.0755",
     "transition-mode": "non-leptonic-decay",
-    "data": {
-        "Lambdab0.2.p.J/psi": [
-            {
-                "obs@1": {
-                    "name": "R[pi/K]",
-                    "latex": "R_{\\Lambda_b^0 \\to J/\\psi p}^{[\\pi^-/K^-]}",
-                    "value": "0.0824",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0025",
-                    "type@1_lower": "0.0025",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.0042",
-                    "type@2_lower": "0.0042"
+    "data": [
+        {
+            "Lambdab0.2.p.J/psi": [
+                "$\\Lambda_b^0 \\to J/\\psi p$",
+                {
+                    "obs@1": {
+                        "name": "R[pi/K]",
+                        "value": "0.0824",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.0025",
+                        "type@1_lower": "0.0025",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.0042",
+                        "type@2_lower": "0.0042"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "DeltaACP[pi-K]",
-                    "latex": "\\Delta A_{CP}^{[\\pi^- - K^-]} (\\Lambda_b^0 \\to J/\\psi p)",
-                    "value": "5.7e-2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.4e-2",
-                    "type@1_lower": "2.4e-2",
-                    "type@2_error": "syst",
-                    "type@2_upper": "1.2e-2",
-                    "type@2_lower": "1.2e-2"
+            ]
+        },
+        {
+            "Lambdab0.2.p.J/psi": [
+                "$\\Lambda_b^0 \\to J/\\psi p$",
+                {
+                    "obs@1": {
+                        "name": "DeltaACP[pi-K]",
+                        "value": "5.7e-2",
+                        "type@1_error": "stat",
+                        "type@1_upper": "2.4e-2",
+                        "type@1_lower": "2.4e-2",
+                        "type@2_error": "syst",
+                        "type@2_upper": "1.2e-2",
+                        "type@2_lower": "1.2e-2"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

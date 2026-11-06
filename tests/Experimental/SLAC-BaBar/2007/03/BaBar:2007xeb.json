@@ -6,108 +6,127 @@
     "arxiv": "[hep-ex/0703018v1](https://arxiv.org/pdf/hep-ex/0703018)",
     "time": "2007.03.07",
     "abstract": "We have performed a search for the flavor-changing neutral-current decays $B \\to \\pi \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$, using a sample of 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance. We observe no evidence of a signal and measure the upper limit on the isospin-averaged branching fraction to be $\\mathcal{B}(B \\to \\pi \\ell^{+} \\ell^{-}) < 9.1 \\times 10^{-8}$ at 90% confidence level. We also search for the lepton-flavor-violating decays $B \\to \\pi e^{\\pm} \\mu^{\\mp}$ and measure an upper limit on the isospin-averaged branching fraction of $\\mathcal{B}(B \\to \\pi e^{\\pm} \\mu^{\\mp}) < 9.2 \\times 10^{-8}$ at 90% confidence level.",
-    "pdf": "https://arxiv.org/pdf/hep-ex/0703018",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "Bp.2.pip.ep.em": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}e^{+}e^{-})$",
-                    "type@1_upper_limit": "1.8e-7",
-                    "type@1_level": "90%@CL"
+    "data": [
+        {
+            "Bp.2.pip.ep.em": [
+                "$B^{+}\\to \\pi^{+}e^{+}e^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.8e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B0.2.pi0.ep.em": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}e^{+}e^{-})$",
-                    "type@1_upper_limit": "1.4e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B0.2.pi0.ep.em": [
+                "$B^{0}\\to \\pi^{0}e^{+}e^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.4e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "Bp.2.pip.mup.mum": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\mu^{+}\\mu^{-})$",
-                    "type@1_upper_limit": "2.8e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "Bp.2.pip.mup.mum": [
+                "$B^{+}\\to \\pi^{+}\\mu^{+}\\mu^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "2.8e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B0.2.pi0.mup.mum": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}\\mu^{+}\\mu^{-})$",
-                    "type@1_upper_limit": "5.1e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B0.2.pi0.mup.mum": [
+                "$B^{0}\\to \\pi^{0}\\mu^{+}\\mu^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "5.1e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "Bp.2.pip.mup.em": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}e^{\\pm}\\mu^{\\mp})$",
-                    "type@1_upper_limit": "1.7e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "Bp.2.pip.mup.em": [
+                "$B^{+}\\to \\pi^{+}e^{\\pm}\\mu^{\\mp}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.7e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B0.2.pi0.mup.em": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}e^{\\pm}\\mu^{\\mp})$",
-                    "type@1_upper_limit": "1.4e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B0.2.pi0.mup.em": [
+                "$B^{0}\\to \\pi^{0}e^{\\pm}\\mu^{\\mp}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.4e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "Bp.2.pip.l+.l-": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{+}\\to \\pi^{+}\\ell^{+}\\ell^{-})$",
-                    "type@1_upper_limit": "1.2e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "Bp.2.pip.l+.l-": [
+                "$B^{+}\\to \\pi^{+}\\ell^{+}\\ell^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.2e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B0.2.pi0.l+.l-": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B^{0}\\to \\pi^{0}\\ell^{+}\\ell^{-})$",
-                    "type@1_upper_limit": "1.2e-7",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B0.2.pi0.l+.l-": [
+                "$B^{0}\\to \\pi^{0}\\ell^{+}\\ell^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "1.2e-7",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B.2.pi.l+.l-": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B\\to \\pi\\ell^{+}\\ell^{-})$",
-                    "type@1_upper_limit": "9.1e-8",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B.2.pi.l+.l-": [
+                "$B\\to \\pi\\ell^{+}\\ell^{-}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "9.1e-8",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "B.2.pi.mup.em": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B\\to \\pi e^{\\pm}\\mu^{\\mp})$",
-                    "type@1_upper_limit": "9.2e-8",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "B.2.pi.mup.em": [
+                "$B\\to \\pi e^{\\pm}\\mu^{\\mp}$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "9.2e-8",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

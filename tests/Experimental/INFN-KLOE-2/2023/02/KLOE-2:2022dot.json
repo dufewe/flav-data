@@ -6,48 +6,59 @@
     "arxiv": "2208.04872v4 [hep-ex]",
     "time": "2023-02-01",
     "abstract": "The ratio $\\mathcal{R} = \\Gamma(K_{S}\\to \\pi e \\nu)/\\Gamma(K_{S}\\to \\pi^+ \\pi^-)$ has been measured with a sample of 300 million $K_{S}$ mesons produced in $\\phi \\to K_{L} K_{S}$ decays recorded by the KLOE experiment at the DA$\\Phi$NE $e^+ e^-$ collider. With $49647 \\pm 316$ signal events we measure $\\mathcal{R} = (1.0421 \\pm 0.0066_{\\rm stat} \\pm 0.0075_{\\rm syst}) \\times 10^{-3}$. The combination with our previous measurement gives $\\mathcal{R} = (1.0338 \\pm 0.0054_{\\rm stat} \\pm 0.0064_{\\rm syst}) \\times 10^{-3}$. From this value we derive the branching fraction $\\mathcal{B}(K_{S} \\to \\pi e \\nu) = (7.153 \\pm 0.037_{\\rm stat} \\pm 0.044_{\\rm syst}) \\times 10^{-4}$ and $f_+(0)|V_{us}| = 0.2170 \\pm 0.0009$.",
-    "pdf": "https://arxiv.org/pdf/2208.04872.pdf",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "K0S.2.pi-.e+.nue/K0S.2.pi+.pi-": [
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$\\mathcal{R} = \\Gamma(K_S \\to \\pi e \\nu)/\\Gamma(K_S \\to \\pi^+ \\pi^-)$",
-                    "value": "1.0421e-3",
-                    "error_upper": "0.0100e-3",
-                    "error_lower": "0.0100e-3"
+    "data": [
+        {
+            "K0S.2.pi-.e+.nue/K0S.2.pi+.pi-": [
+                "$K_{S}^{0}\\to\\pi^{-}e^{+}\\nu_{e} / K_{S}^{0}\\to\\pi^{+}\\pi^{-}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "1.0421e-3",
+                        "error_upper": "0.0100e-3",
+                        "error_lower": "0.0100e-3"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$\\mathcal{R} = \\Gamma(K_S \\to \\pi e \\nu)/\\Gamma(K_S \\to \\pi^+ \\pi^-)$",
-                    "value": "1.0338e-3",
-                    "error_upper": "0.0084e-3",
-                    "error_lower": "0.0084e-3"
+            ]
+        },
+        {
+            "K0S.2.pi-.e+.nue/K0S.2.pi+.pi-": [
+                "$K_{S}^{0}\\to\\pi^{-}e^{+}\\nu_{e} / K_{S}^{0}\\to\\pi^{+}\\pi^{-}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "1.0338e-3",
+                        "error_upper": "0.0084e-3",
+                        "error_lower": "0.0084e-3"
+                    }
                 }
-            }
-        ],
-        "K0S.2.pi-.e+.nue": [
-            {
-                "obs@1": {
-                    "name": "BR",
-                    "latex": "$\\mathcal{B}(K_S \\to \\pi e \\nu)$",
-                    "value": "7.153e-4",
-                    "error_upper": "0.058e-4",
-                    "error_lower": "0.058e-4"
+            ]
+        },
+        {
+            "K0S.2.pi-.e+.nue": [
+                "$K_{S}^{0}\\to\\pi^{-}e^{+}\\nu_{e}$",
+                {
+                    "obs@1": {
+                        "name": "BR",
+                        "value": "7.153e-4",
+                        "error_upper": "0.058e-4",
+                        "error_lower": "0.058e-4"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "Vus.f+",
-                    "latex": "$f_+(0)|V_{us}|_{K_S \\to \\pi e \\nu}$",
-                    "value": "0.2170",
-                    "error_upper": "0.0009",
-                    "error_lower": "0.0009"
+            ]
+        },
+        {
+            "K0S.2.pi-.e+.nue": [
+                "$K_{S}^{0}\\to\\pi^{-}e^{+}\\nu_{e}$",
+                {
+                    "obs@1": {
+                        "name": "Vus.f+",
+                        "value": "0.2170",
+                        "error_upper": "0.0009",
+                        "error_lower": "0.0009"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

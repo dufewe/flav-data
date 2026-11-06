@@ -6,38 +6,41 @@
     "arxiv": "[hep-ex/1904.08794v2](https://arxiv.org/pdf/1904.08794)",
     "time": "2019.04.18",
     "abstract": "We report a measurement of the ratios of branching fractions $\\mathcal{R}(D) = {\\cal B}(\\bar{B} \\to D \\tau^{-} \\bar{\\nu}_{\\tau})/{\\cal B}(\\bar{B} \\to D \\ell^{-} \\bar{\\nu}_{\\ell})$ and $\\mathcal{R}(D^{\\ast}) = {\\cal B}(\\bar{B} \\to D^{\\ast} \\tau^{-} \\bar{\\nu}_{\\tau})/{\\cal B}(\\bar{B} \\to D^{\\ast} \\ell^{-} \\bar{\\nu}_{\\ell})$, where $\\ell$ denotes either an electron or a muon. The $B$ mesons are reconstructed in a semileptonic decay mode. Using the full Belle data sample of $772 \\times 10^{6}$ $B\\bar{B}$ pairs, we obtain $\\mathcal{R}(D) = 0.307 \\pm 0.037 \\pm 0.016$ and $\\mathcal{R}(D^{*}) = 0.283 \\pm 0.018 \\pm 0.014$, where the first uncertainty is statistical and the second systematic.",
-    "pdf": "https://arxiv.org/pdf/1904.08794",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "Bbar.2.D.tau.nu": [
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$R(D) = \\frac{\\mathcal{B}(\\bar{B}\\to D\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D\\ell^{-}\\bar{\\nu}_{\\ell})}$",
-                    "value": "0.307",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.037",
-                    "type@1_lower": "0.037",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.016",
-                    "type@2_lower": "0.016"
+    "data": [
+        {
+            "Bbar.2.D.tau.nu": [
+                "$\\bar{B}\\to D\\tau\\bar{\\nu}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "0.307",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.037",
+                        "type@1_lower": "0.037",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.016",
+                        "type@2_lower": "0.016"
+                    }
                 }
-            }
-        ],
-        "Bbar.2.Dst.tau.nu": [
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$R(D^{*}) = \\frac{\\mathcal{B}(\\bar{B}\\to D^{*}\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu}_{\\ell})}$",
-                    "value": "0.283",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.018",
-                    "type@1_lower": "0.018",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.014",
-                    "type@2_lower": "0.014"
+            ]
+        },
+        {
+            "Bbar.2.Dst.tau.nu": [
+                "$\\bar{B}\\to D^{*}\\tau\\bar{\\nu}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "0.283",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.018",
+                        "type@1_lower": "0.018",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.014",
+                        "type@2_lower": "0.014"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

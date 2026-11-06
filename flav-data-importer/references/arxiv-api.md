@@ -26,7 +26,7 @@ curl -sL "https://export.arxiv.org/api/query?search_query=au:Roel_Aaij&max_resul
 | `<atom:title>` | `title` (LaTeX preserved) |
 | `<atom:summary>` | `abstract` (LaTeX preserved) |
 | `<atom:author>` → `<atom:name>` | `authors` list; `author_str` uses the 1 / 2–3 / 4+ tiering |
-| `<atom:link title="pdf">` → `href` | `pdf` URL |
+| `<atom:link title="pdf">` → `href` | PDF link target inside the `arxiv` Markdown link |
 | `<atom:id>` | Version number (e.g. `.../abs/1512.04442v1`) |
 | `<arxiv:primary_category term="...">` | `arxiv` field prefix |
 

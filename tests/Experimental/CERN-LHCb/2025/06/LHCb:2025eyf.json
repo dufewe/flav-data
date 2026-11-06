@@ -6,38 +6,41 @@
     "arxiv": "[hep-ex/2506.15347v2](https://arxiv.org/pdf/2506.15347)",
     "time": "2025.06.18",
     "abstract": "A first search for the lepton-flavour-violating decays $B^0\\to K^{*0}\\tau^\\pm e^\\mp$ is presented. The analysis is performed using a sample of proton-proton collision data, collected with the LHCb detector at a centre-of-mass energy of 13 TeV between 2016 and 2018, corresponding to an integrated luminosity of 5.4 fb$^{-1}$. No significant signal is observed, and upper limits on the branching fractions are determined to be $\\cal{B}$$(B^0 \\to K^{*0}\\tau^-e^+)< 5.9$ $(7.1)\\times 10^{-6}$ and $\\cal{B}$$(B^0 \\to K^{*0}\\tau^+e^-)< 4.9$ $(5.9)\\times 10^{-6}$ at the 90% (95%) confidence level. These results correspond to the current most stringent upper limits for $b \\to s\\tau\\ell$ transitions.",
-    "pdf": "https://arxiv.org/pdf/2506.15347",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.Kst0.tau-.e+": [
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(B^0 \\to K^{\\ast0} \\tau^- e^+)$",
-                    "value": "1.7e-6",
-                    "error_upper": "2.5e-6",
-                    "error_lower": "2.5e-6",
-                    "type@1_upper_limit": "5.9e-6",
-                    "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "7.1e-6",
-                    "type@2_level": "95%@CLs"
+    "data": [
+        {
+            "B0.2.Kst0.tau-.e+": [
+                "$B^0 \\to K^{\\ast0} \\tau^- e^+$",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "1.7e-6",
+                        "error_upper": "2.5e-6",
+                        "error_lower": "2.5e-6",
+                        "type@1_upper_limit": "5.9e-6",
+                        "type@1_level": "90%@CLs",
+                        "type@2_upper_limit": "7.1e-6",
+                        "type@2_level": "95%@CLs"
+                    }
                 }
-            }
-        ],
-        "B0.2.Kst0.tau+.e-": [
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(B^0 \\to K^{\\ast0} \\tau^+ e^-)$",
-                    "value": "1.8e-6",
-                    "error_upper": "1.9e-6",
-                    "error_lower": "1.9e-6",
-                    "type@1_upper_limit": "4.9e-6",
-                    "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "5.9e-6",
-                    "type@2_level": "95%@CLs"
+            ]
+        },
+        {
+            "B0.2.Kst0.tau+.e-": [
+                "$B^0 \\to K^{\\ast0} \\tau^+ e^-$",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "1.8e-6",
+                        "error_upper": "1.9e-6",
+                        "error_lower": "1.9e-6",
+                        "type@1_upper_limit": "4.9e-6",
+                        "type@1_level": "90%@CLs",
+                        "type@2_upper_limit": "5.9e-6",
+                        "type@2_level": "95%@CLs"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

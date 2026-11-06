@@ -6,50 +6,52 @@
     "arxiv": "[hep-ex/2509.16103v2](https://arxiv.org/pdf/2509.16103)",
     "time": "2025.09.19",
     "abstract": "A study of the difference in the CP asymmetries between $\\Lambda^0_b \\rightarrow J/\\psi p \\pi^-$ and $\\Lambda^0_b \\rightarrow J/\\psi p K^-$ decays, $\\Delta {\\cal A}_{CP}$, is performed using proton-proton collision data collected by the LHCb experiment in the years 2015--2018, corresponding to an integrated luminosity of $6 \\,{\\rm fb}^{-1}$. This quantity is measured to be $\\Delta {\\cal A}_{CP} = (4.03 \\pm 1.18 \\pm 0.23)\\%$, where the first uncertainty is statistical and the second is systematic. When combined with the previous LHCb result, a value of $\\Delta {\\cal A}_{CP} = (4.31 \\pm 1.06 \\pm 0.28)\\%$ is obtained, corresponding to a significance of $3.9\\sigma$ against the CP symmetry hypothesis. Studies of triple-product asymmetries, which provide an additional probe of CP violation, show no significant deviation from CP symmetry.",
-    "pdf": "https://arxiv.org/pdf/2509.16103",
     "transition-mode": "non-leptonic-decay",
-    "data": {
-        "Lambdab0.2.p.J/psi": [
-            {
-                "obs@1": {
-                    "name": "DeltaACP[pi-K]",
-                    "latex": "$\\Delta A_{CP}^{\\pi-K}(\\Lambda_b^0 \\to J/\\psi p)$",
-                    "value": "4.03e-2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.18e-2",
-                    "type@1_lower": "1.18e-2",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.23e-2",
-                    "type@2_lower": "0.23e-2"
-                },
-                "obs@2": {
-                    "name": "DeltaACP[pi-K][combined]",
-                    "latex": "$\\Delta A_{CP}^{\\pi-K}(\\Lambda_b^0 \\to J/\\psi p)$",
-                    "value": "4.31e-2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.06e-2",
-                    "type@1_lower": "1.06e-2",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.28e-2",
-                    "type@2_lower": "0.28e-2",
-                    "ref": "[LHCb:2016xlg](https://inspirehep.net/literature/1486137)"
+    "data": [
+        {
+            "Lambdab0.2.p.J/psi": [
+                "$\\Lambda_b^0 \\to J/\\psi p$",
+                {
+                    "obs@1": {
+                        "name": "DeltaACP[pi-K]",
+                        "value": "4.03e-2",
+                        "type@1_error": "stat",
+                        "type@1_upper": "1.18e-2",
+                        "type@1_lower": "1.18e-2",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.23e-2",
+                        "type@2_lower": "0.23e-2"
+                    },
+                    "obs@2": {
+                        "name": "DeltaACP[pi-K][combined]",
+                        "value": "4.31e-2",
+                        "type@1_error": "stat",
+                        "type@1_upper": "1.06e-2",
+                        "type@1_lower": "1.06e-2",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.28e-2",
+                        "type@2_lower": "0.28e-2",
+                        "ref": "[LHCb:2016xlg](https://inspirehep.net/literature/1486137)"
+                    }
                 }
-            }
-        ],
-        "Lambdab0.2.p.J/psi.pi-": [
-            {
-                "obs@1": {
-                    "name": "ATodd",
-                    "latex": "$A_{T-odd}(\\Lambda_b^0 \\to J/\\psi p \\pi^-)$",
-                    "value": "-1.37e-2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.15e-2",
-                    "type@1_lower": "1.15e-2",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.21e-2",
-                    "type@2_lower": "0.21e-2"
+            ]
+        },
+        {
+            "Lambdab0.2.p.J/psi.pi-": [
+                "$\\Lambda_b^0 \\to J/\\psi p \\pi^-$",
+                {
+                    "obs@1": {
+                        "name": "ATodd",
+                        "value": "-1.37e-2",
+                        "type@1_error": "stat",
+                        "type@1_upper": "1.15e-2",
+                        "type@1_lower": "1.15e-2",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.21e-2",
+                        "type@2_lower": "0.21e-2"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

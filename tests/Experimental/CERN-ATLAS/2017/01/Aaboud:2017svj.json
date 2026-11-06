@@ -6,39 +6,42 @@
     "arxiv": "[hep-ex/1701.07240v2](https://arxiv.org/pdf/1701.07240.pdf)",
     "time": "2017-01-25",
     "abstract": "A measurement of the W boson mass based on 4.6 fb-1 of pp collisions at sqrt(s)=7 TeV. The W-boson mass is obtained from template fits to the charged lepton transverse momentum and the W boson transverse mass in the electron and muon decay channels: mW = 80370 +/- 7 (stat.) +/- 11 (exp. syst.) +/- 14 (mod. syst.) MeV. The W+ and W- mass difference yields mW+ - mW- = -29 +/- 28 MeV.",
-    "pdf": "https://arxiv.org/pdf/1701.07240.pdf",
     "transition-mode": "scattering",
-    "data": {
-        "p.p.2.W.2.l.nu": [
-            {
-                "obs@1": {
-                    "name": "mW",
-                    "latex": "$m_{W}$",
-                    "value": "80370",
-                    "type@1_error": "expe",
-                    "type@1_upper": "11",
-                    "type@1_lower": "11",
-                    "type@2_error": "theo",
-                    "type@2_upper": "14",
-                    "type@2_lower": "14",
-                    "unit": "MeV",
-                    "type@3_error": "stat",
-                    "type@3_upper": "7",
-                    "type@3_lower": "7"
+    "data": [
+        {
+            "p.p.2.W.2.l.nu": [
+                "$pp\\to W\\to\\ell\\nu$",
+                {
+                    "obs@1": {
+                        "name": "mW",
+                        "value": "80370",
+                        "type@1_error": "expe",
+                        "type@1_upper": "11",
+                        "type@1_lower": "11",
+                        "type@2_error": "theo",
+                        "type@2_upper": "14",
+                        "type@2_lower": "14",
+                        "unit": "MeV",
+                        "type@3_error": "stat",
+                        "type@3_upper": "7",
+                        "type@3_lower": "7"
+                    }
                 }
-            }
-        ],
-        "p.p.2.W+.2.l+.nu": [
-            {
-                "obs@1": {
-                    "name": "dmW",
-                    "latex": "$m_{W^{+}} - m_{W^{-}}$",
-                    "value": "-29",
-                    "error_upper": "28",
-                    "error_lower": "28",
-                    "unit": "MeV"
+            ]
+        },
+        {
+            "p.p.2.W+.2.l+.nu": [
+                "$pp\\to W^{+}\\to\\ell^{+}\\nu$",
+                {
+                    "obs@1": {
+                        "name": "dmW",
+                        "value": "-29",
+                        "error_upper": "28",
+                        "error_lower": "28",
+                        "unit": "MeV"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

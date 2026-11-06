@@ -17,7 +17,7 @@ This document defines which data sources to use, in what order, and what data is
 
 **Handling unsupported requests**: If a user asks to import unsupported data, respond with "This data is not supported for import." Then, if applicable, search arXiv and InspireHEP for the corresponding formal paper and offer to import from that instead.
 
-**Multi-paper merging**: When multiple arXiv papers describe the same measurement (e.g., a conference note superseded by a full paper, or a short letter followed by a detailed analysis), merge all data into a single JSON file. The schema stores a single `inspire-hep`/`arxiv`/`pdf` citation set, so use the **primary** (normally the peer-reviewed) paper for those fields and mention superseded identifiers in the abstract only when that context matters — do not add extra citation fields.
+**Multi-paper merging**: When multiple arXiv papers describe the same measurement (e.g., a conference note superseded by a full paper, or a short letter followed by a detailed analysis), merge all data into a single JSON file. The schema stores a single `inspire-hep`/`arxiv` citation set, so use the **primary** (normally the peer-reviewed) paper for those fields and mention superseded identifiers in the abstract only when that context matters — do not add extra citation fields.
 
 ## Data Source Priority
 
@@ -163,7 +163,7 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 
 See SKILL.md "Core Conventions" — the 9 hard rules there (matrix layout,
 single-line abstract, InspireHEP author format, LaTeX-only Unicode,
-canonical transition order, one group per property set, the
-transition-keyed `data` object of group arrays, conditional
+canonical transition order, one group per property set, the `data`
+array of channel-keyed groups, conditional
 `collaboration`, and `aN_FF` form-factor naming)
 apply to all JSON output.

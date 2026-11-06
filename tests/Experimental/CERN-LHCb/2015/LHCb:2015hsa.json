@@ -6,219 +6,221 @@
     "arxiv": "[hep-ex/1509.00414](https://arxiv.org/pdf/1509.00414)",
     "time": "2015.01.01",
     "abstract": "an analysis of the differential branching fraction with respect to the dimuon invariant mass squared and the CP asymmetry of the $B^\\pm \\to \\pi^\\pm \\mu^+ \\mu^-$ decay, using proton-proton collision data corresponding to an integrated luminosity of 3.0 fb$^{-1}$ at centre-of- mass energies of 7 and 8 TeV",
-    "pdf": "https://arxiv.org/pdf/1509.00414",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "1.89e-09",
-                    "q2min": "0.1",
-                    "q2max": "2.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "4.7e-10",
-                    "type@1_lower": "4.1e-10",
-                    "type@2_upper": "6e-11",
-                    "type@2_lower": "6e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@2": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "6.2e-10",
-                    "q2min": "2.0",
-                    "q2max": "4.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "3.9e-10",
-                    "type@1_lower": "3.3e-10",
-                    "type@2_upper": "2e-11",
-                    "type@2_lower": "2e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@3": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "8.5e-10",
-                    "q2min": "4.0",
-                    "q2max": "6.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "3.2e-10",
-                    "type@1_lower": "2.7e-10",
-                    "type@2_upper": "2e-11",
-                    "type@2_lower": "2e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@4": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "6.6e-10",
-                    "q2min": "6.0",
-                    "q2max": "8.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "3e-10",
-                    "type@1_lower": "2.5e-10",
-                    "type@2_upper": "2e-11",
-                    "type@2_lower": "2e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@5": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "8.8e-10",
-                    "q2min": "11.0",
-                    "q2max": "12.5",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "3.4e-10",
-                    "type@1_lower": "2.9e-10",
-                    "type@2_upper": "3e-11",
-                    "type@2_lower": "3e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@6": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "6.3e-10",
-                    "q2min": "15.0",
-                    "q2max": "17.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "2.4e-10",
-                    "type@1_lower": "1.9e-10",
-                    "type@2_upper": "2e-11",
-                    "type@2_lower": "2e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@7": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "4.1e-10",
-                    "q2min": "17.0",
-                    "q2max": "19.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "2.1e-10",
-                    "type@1_lower": "1.7e-10",
-                    "type@2_upper": "1e-11",
-                    "type@2_lower": "1e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@8": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "3.8e-10",
-                    "q2min": "19.0",
-                    "q2max": "22.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "1.8e-10",
-                    "type@1_lower": "1.5e-10",
-                    "type@2_upper": "1e-11",
-                    "type@2_lower": "1e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@9": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "1.4e-10",
-                    "q2min": "22.0",
-                    "q2max": "25.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "1.3e-10",
-                    "type@1_lower": "9e-11",
-                    "type@2_upper": "1e-11",
-                    "type@2_lower": "1e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@10": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "9.1e-10",
-                    "q2min": "1.0",
-                    "q2max": "6.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "2.1e-10",
-                    "type@1_lower": "2e-10",
-                    "type@2_upper": "3e-11",
-                    "type@2_lower": "3e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
-                },
-                "obs@11": {
-                    "name": "dBr/dq2",
-                    "latex": "$d\\mathcal{B}/dq^2(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "4.7e-10",
-                    "q2min": "15.0",
-                    "q2max": "22.0",
-                    "unit": "GeV-2",
-                    "method": "maximum likelihood",
-                    "type@1_upper": "1.2e-10",
-                    "type@1_lower": "1e-10",
-                    "type@2_upper": "1e-11",
-                    "type@2_lower": "1e-11",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
+    "data": [
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "dBr/dq2",
+                        "value": "1.89e-09",
+                        "q2min": "0.1",
+                        "q2max": "2.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "4.7e-10",
+                        "type@1_lower": "4.1e-10",
+                        "type@2_upper": "6e-11",
+                        "type@2_lower": "6e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@2": {
+                        "name": "dBr/dq2",
+                        "value": "6.2e-10",
+                        "q2min": "2.0",
+                        "q2max": "4.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "3.9e-10",
+                        "type@1_lower": "3.3e-10",
+                        "type@2_upper": "2e-11",
+                        "type@2_lower": "2e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@3": {
+                        "name": "dBr/dq2",
+                        "value": "8.5e-10",
+                        "q2min": "4.0",
+                        "q2max": "6.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "3.2e-10",
+                        "type@1_lower": "2.7e-10",
+                        "type@2_upper": "2e-11",
+                        "type@2_lower": "2e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@4": {
+                        "name": "dBr/dq2",
+                        "value": "6.6e-10",
+                        "q2min": "6.0",
+                        "q2max": "8.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "3e-10",
+                        "type@1_lower": "2.5e-10",
+                        "type@2_upper": "2e-11",
+                        "type@2_lower": "2e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@5": {
+                        "name": "dBr/dq2",
+                        "value": "8.8e-10",
+                        "q2min": "11.0",
+                        "q2max": "12.5",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "3.4e-10",
+                        "type@1_lower": "2.9e-10",
+                        "type@2_upper": "3e-11",
+                        "type@2_lower": "3e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@6": {
+                        "name": "dBr/dq2",
+                        "value": "6.3e-10",
+                        "q2min": "15.0",
+                        "q2max": "17.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "2.4e-10",
+                        "type@1_lower": "1.9e-10",
+                        "type@2_upper": "2e-11",
+                        "type@2_lower": "2e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@7": {
+                        "name": "dBr/dq2",
+                        "value": "4.1e-10",
+                        "q2min": "17.0",
+                        "q2max": "19.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "2.1e-10",
+                        "type@1_lower": "1.7e-10",
+                        "type@2_upper": "1e-11",
+                        "type@2_lower": "1e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@8": {
+                        "name": "dBr/dq2",
+                        "value": "3.8e-10",
+                        "q2min": "19.0",
+                        "q2max": "22.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "1.8e-10",
+                        "type@1_lower": "1.5e-10",
+                        "type@2_upper": "1e-11",
+                        "type@2_lower": "1e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@9": {
+                        "name": "dBr/dq2",
+                        "value": "1.4e-10",
+                        "q2min": "22.0",
+                        "q2max": "25.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "1.3e-10",
+                        "type@1_lower": "9e-11",
+                        "type@2_upper": "1e-11",
+                        "type@2_lower": "1e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@10": {
+                        "name": "dBr/dq2",
+                        "value": "9.1e-10",
+                        "q2min": "1.0",
+                        "q2max": "6.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "2.1e-10",
+                        "type@1_lower": "2e-10",
+                        "type@2_upper": "3e-11",
+                        "type@2_lower": "3e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    },
+                    "obs@11": {
+                        "name": "dBr/dq2",
+                        "value": "4.7e-10",
+                        "q2min": "15.0",
+                        "q2max": "22.0",
+                        "unit": "GeV-2",
+                        "method": "maximum likelihood",
+                        "type@1_upper": "1.2e-10",
+                        "type@1_lower": "1e-10",
+                        "type@2_upper": "1e-11",
+                        "type@2_lower": "1e-11",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(B^+ \\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "1.83e-08",
-                    "type@1_upper": "2.4e-09",
-                    "type@1_lower": "2.4e-09",
-                    "type@2_upper": "5e-10",
-                    "type@2_lower": "5e-10",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "1.83e-08",
+                        "type@1_upper": "2.4e-09",
+                        "type@1_lower": "2.4e-09",
+                        "type@2_upper": "5e-10",
+                        "type@2_lower": "5e-10",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "|Vtd|",
-                    "latex": "$|V_{td}|$",
-                    "value": "0.0072",
-                    "error_upper": "0.0009",
-                    "error_lower": "0.0008"
-                },
-                "obs@2": {
-                    "name": "|Vts|",
-                    "latex": "$|V_{ts}|$",
-                    "value": "0.032",
-                    "error_upper": "0.004",
-                    "error_lower": "0.004"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "|Vtd|",
+                        "value": "0.0072",
+                        "error_upper": "0.0009",
+                        "error_lower": "0.0008"
+                    },
+                    "obs@2": {
+                        "name": "|Vts|",
+                        "value": "0.032",
+                        "error_upper": "0.004",
+                        "error_lower": "0.004"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "ACP",
-                    "latex": "$A_{CP}(B^+\\to \\pi^+ \\mu^+ \\mu^-)$",
-                    "value": "-0.11",
-                    "type@1_upper": "0.12",
-                    "type@1_lower": "0.12",
-                    "type@2_upper": "0.01",
-                    "type@2_lower": "0.01",
-                    "type@1_error": "stat",
-                    "type@2_error": "syst"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "ACP",
+                        "value": "-0.11",
+                        "type@1_upper": "0.12",
+                        "type@1_lower": "0.12",
+                        "type@2_upper": "0.01",
+                        "type@2_lower": "0.01",
+                        "type@1_error": "stat",
+                        "type@2_error": "syst"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

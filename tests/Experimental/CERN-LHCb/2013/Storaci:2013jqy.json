@@ -6,19 +6,20 @@
     "arxiv": null,
     "time": "2013.01.01",
     "abstract": "the fragmentation-function ratio of $f_s$ and $f_d$ from $B_s^0$ and $B^0$ meson production cross-sections",
-    "pdf": "https://inspirehep.net/files/a9bba5ff9b8dd78ab9584102352561e0",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "fs/fd",
-                    "latex": "$f_s/f_d$",
-                    "value": "0.259",
-                    "error_upper": "0.015",
-                    "error_lower": "0.015"
+    "data": [
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "fs/fd",
+                        "value": "0.259",
+                        "error_upper": "0.015",
+                        "error_lower": "0.015"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

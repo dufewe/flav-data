@@ -315,11 +315,11 @@ OBSERVABLE_LATEX = {
 
 
 def latex_for_obs(obs_name: str) -> str:
-    """Build the LaTeX string for an observable name.
+    """Build the LaTeX symbol for an observable name.
 
-    The flav-data JSON schema requires every ``obs@N`` entry to carry a
-    ``latex`` field. The observable ``name`` is the bare symbol (the
-    transition lives in the ``data`` key), so this helper renders the
+    Kept as a standalone formatting helper: the flav-data schema stores
+    LaTeX only at the channel level (``[latex, obs@N object]``), so this
+    is not used when assembling JSON. It renders the bare observable
     symbol and any ``[condition]`` it carries. For example::
 
         latex_for_obs("gammaCKM")                  # → "$\\gamma$"

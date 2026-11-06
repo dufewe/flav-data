@@ -6,59 +6,66 @@
     "arxiv": "[hep-ex/1507.04548v1](https://arxiv.org/pdf/1507.04548.pdf)",
     "time": "2015-07-16",
     "abstract": "Combined analyses of the Higgs boson production and decay rates and coupling strengths to vector bosons and fermions using 4.7 fb-1 at 7 TeV and 20.3 fb-1 at 8 TeV. The global signal strength is mu = 1.18 +0.15-0.14. Production mode signal strengths: mu_ggF=1.23, mu_VBF=1.23.",
-    "pdf": "https://arxiv.org/pdf/1507.04548.pdf",
     "transition-mode": "higgs-decay",
-    "data": {
-        "g.g.2.H.2.f.fbar": [
-            {
-                "obs@1": {
-                    "name": "mu_H",
-                    "latex": "$\\mu$",
-                    "value": "1.18",
-                    "type@1_error": "syst",
-                    "type@1_upper": "0.07",
-                    "type@1_lower": "0.07",
-                    "type@2_error": "theo",
-                    "type@2_upper": "0.08",
-                    "type@2_lower": "0.07",
-                    "type@3_error": "stat",
-                    "type@3_upper": "0.10",
-                    "type@3_lower": "0.10"
+    "data": [
+        {
+            "g.g.2.H.2.f.fbar": [
+                "$gg\\to H\\to f\\bar{f}$",
+                {
+                    "obs@1": {
+                        "name": "mu_H",
+                        "value": "1.18",
+                        "type@1_error": "syst",
+                        "type@1_upper": "0.07",
+                        "type@1_lower": "0.07",
+                        "type@2_error": "theo",
+                        "type@2_upper": "0.08",
+                        "type@2_lower": "0.07",
+                        "type@3_error": "stat",
+                        "type@3_upper": "0.10",
+                        "type@3_lower": "0.10"
+                    }
                 }
-            }
-        ],
-        "g.g.2.H.2.all": [
-            {
-                "obs@1": {
-                    "name": "mu_ggF",
-                    "latex": "$\\mu_{ggF}$",
-                    "value": "1.23",
-                    "error_upper": "0.23",
-                    "error_lower": "0.20"
+            ]
+        },
+        {
+            "g.g.2.H.2.all": [
+                "$gg\\to H$",
+                {
+                    "obs@1": {
+                        "name": "mu_ggF",
+                        "value": "1.23",
+                        "error_upper": "0.23",
+                        "error_lower": "0.20"
+                    }
                 }
-            }
-        ],
-        "q.q.2.H.2.all": [
-            {
-                "obs@1": {
-                    "name": "mu_VBF",
-                    "latex": "$\\mu_{VBF}$",
-                    "value": "1.23",
-                    "error_upper": "0.32",
-                    "error_lower": "0.32"
+            ]
+        },
+        {
+            "q.q.2.H.2.all": [
+                "$qq\\to H$",
+                {
+                    "obs@1": {
+                        "name": "mu_VBF",
+                        "value": "1.23",
+                        "error_upper": "0.32",
+                        "error_lower": "0.32"
+                    }
                 }
-            }
-        ],
-        "q.qbar.2.V.2.H.2.all": [
-            {
-                "obs@1": {
-                    "name": "mu_VH",
-                    "latex": "$\\mu_{VH}$",
-                    "value": "1.02",
-                    "error_upper": "0.31",
-                    "error_lower": "0.27"
+            ]
+        },
+        {
+            "q.qbar.2.V.2.H.2.all": [
+                "$q\\bar{q}\\to V\\to H$",
+                {
+                    "obs@1": {
+                        "name": "mu_VH",
+                        "value": "1.02",
+                        "error_upper": "0.31",
+                        "error_lower": "0.27"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

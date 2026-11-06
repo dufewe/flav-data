@@ -124,29 +124,30 @@ st.code('''{
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\\\to K^{*0}(\\\\to K^{+}\\\\pi^{-})\\\\mu^{+}\\\\mu^{-}$ decay...",
-    "pdf": "https://arxiv.org/pdf/1512.04442",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.Kst0.mu+.mu-": [
-            {
-                "obs@1": {
-                    "name": "FL",
-                    "latex": "$F_L(B^{0}\\\\to K^{*0}\\\\mu^{+}\\\\mu^{-})$",
-                    "value": "0.69",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.035",
-                    "type@1_lower": "0.036",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.017",
-                    "type@2_lower": "0.017",
-                    "q2min": "0.1",
-                    "q2max": "1.1"
-                },
-                "obs@2": { "...": "..." },
-                "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
-            }
-        ]
-    }
+    "data": [
+        {
+            "B0.2.Kst0.mu+.mu-": [
+                "$B^{0}\\\\to K^{*0}\\\\mu^{+}\\\\mu^{-}$",
+                {
+                    "obs@1": {
+                        "name": "FL",
+                        "value": "0.69",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.035",
+                        "type@1_lower": "0.036",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.017",
+                        "type@2_lower": "0.017",
+                        "q2min": "0.1",
+                        "q2max": "1.1"
+                    },
+                    "obs@2": { "...": "..." }
+                }
+            ],
+            "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
+        }
+    ]
 }''', language="json")
 
 st.markdown('''
@@ -156,9 +157,10 @@ st.markdown('''
 |-----------|----------------|
 | All numeric values are strings | `"0.69"` not `0.69` |
 | Component errors preferred | Separate `type@1_error` (stat), `type@2_error` (syst) |
-| Correlation matrices at entry level | `type@1_correlation` alongside `obs@N` keys |
+| Correlation matrices at group level | `correlation`/`type@1_correlation` alongside channel keys |
+| Channel LaTeX | one transition formula per channel, written as `[latex, observables]` |
 | LaTeX escaping | `\\\\to` in JSON → `\\to` after parsing |
-| Transition symbol | `data` key `A.B.2.C.D` replaces $A + B \\to C + D$ |
+| Transition symbol | group channel key `A.B.2.C.D` replaces $A + B \\to C + D$ |
 | Observable naming | bare `OBS` symbol; `[condition]` only for multi-transition ratios |
 ''')
 

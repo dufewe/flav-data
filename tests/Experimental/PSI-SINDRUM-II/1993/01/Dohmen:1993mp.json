@@ -6,28 +6,31 @@
     "arxiv": "no arxiv (published in Phys.Lett.B)",
     "time": "1993-01-01",
     "abstract": "A search for mu->e conversion in muonic atoms using the SINDRUM II spectrometer at PSI. A first measurement on Ti gives upper limits on the branching ratios for ground-state transitions of R(mu- Ti -> e- Ti g.s.) / R(mu- Ti capture) < 4.3e-12 and R(mu- Ti -> e+ Ca g.s.) / R(mu- Ti capture) < 4.3e-12 (90% CL).",
-    "pdf": "https://doi.org/10.1016/0370-2693(93)91383-X",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "mu-.Ti.2.e-.Ti": [
-            {
-                "obs@1": {
-                    "name": "R_mue_conv",
-                    "latex": "$\\frac{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to e^{-}\\mathrm{Ti})}{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to \\nu_{\\mu}\\mathrm{Sc})}$",
-                    "type@1_upper_limit": "4.3e-12",
-                    "type@1_level": "90%@CL"
+    "data": [
+        {
+            "mu-.Ti.2.e-.Ti": [
+                "$\\mu^{-}\\mathrm{Ti}\\to e^{-}\\mathrm{Ti}$",
+                {
+                    "obs@1": {
+                        "name": "R_mue_conv",
+                        "type@1_upper_limit": "4.3e-12",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "mu-.Ti.2.e+.Ca": [
-            {
-                "obs@1": {
-                    "name": "R_muconv",
-                    "latex": "$\\frac{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to e^{+}\\mathrm{Ca})}{\\Gamma(\\mu^{-}\\mathrm{Ti} \\to \\nu_{\\mu}\\mathrm{Sc})}$",
-                    "type@1_upper_limit": "4.3e-12",
-                    "type@1_level": "90%@CL"
+            ]
+        },
+        {
+            "mu-.Ti.2.e+.Ca": [
+                "$\\mu^{-}\\mathrm{Ti}\\to e^{+}\\mathrm{Ca}$",
+                {
+                    "obs@1": {
+                        "name": "R_muconv",
+                        "type@1_upper_limit": "4.3e-12",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

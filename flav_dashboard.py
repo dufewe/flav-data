@@ -100,18 +100,43 @@ def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, fold
 # Dashboard UI
 # ---------------------------------------------------------
 def iter_data_groups(data):
-    """Yield ``(transition, group)`` from the ``data`` object.
+    """Yield the data groups of a paper.
 
-    Each key is a transition channel whose value is a non-empty list of
-    data groups; a channel may carry several groups.
+    ``data`` is an array of groups; each group maps one or more
+    transition channels to ``[latex, obs@N object]`` pairs and may
+    carry a group-level correlation/covariance matrix.
     """
-    if not isinstance(data, dict):
+    if not isinstance(data, list):
         return
-    for transition, groups in data.items():
-        if not isinstance(groups, list):
-            continue
-        for group in groups:
-            yield transition, group
+    for group in data:
+        if isinstance(group, dict):
+            yield group
+
+
+def is_matrix_key(key):
+    return key.endswith(('correlation', 'covariance'))
+
+
+def channel_obs(channel):
+    """Return the ``obs@N`` mapping of a ``[latex, obs@N object]`` entry."""
+    if isinstance(channel, list) and len(channel) == 2:
+        bundle = channel[1]
+        if isinstance(bundle, dict):
+            return bundle
+    return {}
+
+
+def matrix_label(key, group):
+    """Return a display label for a group-level matrix key."""
+    kind = 'COVARIANCE' if key.endswith('covariance') else 'CORRELATION'
+    if not key.startswith('type@'):
+        return f'TOTAL-{kind}'
+    prefix = key.split('_', 1)[0]
+    for channel in group.values():
+        for obs in channel_obs(channel).values():
+            if isinstance(obs, dict) and f'{prefix}_error' in obs:
+                return f'{str(obs[f"{prefix}_error"]).upper()}-{kind}'
+    return key
 
 
 def run_dashboard(lab, group, year_min, year_max, get_json_func,
@@ -235,10 +260,11 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
         st.markdown("# Statistics")
         tot_exp = len(filtered_data)
         tot_obs = sum(
-            sum(1 for k in entry if k.startswith("obs@"))
+            sum(1 for k in channel_obs(channel) if k.startswith("obs@"))
             for mode in filtered_data
-            for _, entry in iter_data_groups(mode.get('data', {}))
-            if isinstance(entry, dict)
+            for group in iter_data_groups(mode.get('data', []))
+            for key, channel in group.items()
+            if not is_matrix_key(key)
         )
 
         st.markdown("##### Total Experiments")
@@ -295,32 +321,32 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
             )
             if expander.open:
                 with expander:
-                    data = json_detail.get('data', {})
-                    for transition, data_value in iter_data_groups(data):
-                        if not isinstance(data_value, dict):
-                            continue
+                    data = json_detail.get('data', [])
+                    for data_group in iter_data_groups(data):
                         with st.container(border=True):
-                            if transition:
-                                st.markdown(fr'- **{transition}**')
-                            data_obs = [value for key, value in data_value.items()
-                                        if key.startswith("obs@")]
-                            if data_obs:
-                                st.markdown('- **OBSERVABLE**')
-                                st.table(data_obs)
+                            for channel, channel_data in data_group.items():
+                                if is_matrix_key(channel):
+                                    continue
+                                obs_bundle = channel_obs(channel_data)
+                                if not obs_bundle:
+                                    continue
+                                label = fr'- **{channel}**'
+                                channel_latex = channel_data[0]
+                                if channel_latex:
+                                    label += fr' — {channel_latex}'
+                                st.markdown(label)
+                                data_obs = [
+                                    value for key, value in obs_bundle.items()
+                                    if key.startswith("obs@")
+                                ]
+                                if data_obs:
+                                    st.markdown('- **OBSERVABLE**')
+                                    st.table(data_obs)
 
-                            data_cor = [key for key in data_value
-                                        if "correlation" in key.lower()]
-                            for key in data_cor:
-                                obs1 = data_value.get("obs@1", {})
-                                if key.startswith("total_"):
-                                    error_type = "total"
-                                else:
-                                    err_key = key.replace("correlation", "error")
-                                    error_type = (
-                                        obs1.get(err_key, "Unknown")
-                                        if isinstance(obs1, dict) else "Unknown"
-                                    )
+                            for key, matrix in data_group.items():
+                                if not is_matrix_key(key) or matrix is None:
+                                    continue
                                 st.markdown(
-                                    fr'- **{str(error_type).upper()}-CORRELATION**'
+                                    fr'- **{matrix_label(key, data_group)}**'
                                 )
-                                st.table(data_value[key])
+                                st.table(matrix)

@@ -6,36 +6,41 @@
     "arxiv": "[hep-ex/1612.00529v2](https://arxiv.org/pdf/1612.00529)",
     "time": "2016.12.02",
     "abstract": "We report the first measurement of the $\\tau$ lepton polarization $P_{\\tau}(D^{*})$ in the decay $\\bar{B} \\to D^{*} \\tau^{-} \\bar{\\nu}_{\\tau}$ as well as a new measurement of $R(D^{*})$ using the full Belle data sample of $772 \\times 10^{6}$ $B\\bar{B}$ pairs. We obtain $R(D^{*}) = 0.270 \\pm 0.035 \\pm 0.028$ and $P_{\\tau}(D^{*}) = -0.38 \\pm 0.51 \\pm 0.21$, where the first uncertainty is statistical and the second is systematic.",
-    "pdf": "https://arxiv.org/pdf/1612.00529",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "Bbar.2.Dst.tau.nu": [
-            {
-                "obs@1": {
-                    "name": "R",
-                    "latex": "$R(D^{*}) = \\frac{\\mathcal{B}(\\bar{B}\\to D^{*}\\tau^{-}\\bar{\\nu}_{\\tau})}{\\mathcal{B}(\\bar{B}\\to D^{*}\\ell^{-}\\bar{\\nu}_{\\ell})}$",
-                    "value": "0.270",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.035",
-                    "type@1_lower": "0.035",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.028",
-                    "type@2_lower": "0.028"
+    "data": [
+        {
+            "Bbar.2.Dst.tau.nu": [
+                "$\\bar{B}\\to D^{*}\\tau\\bar{\\nu}$",
+                {
+                    "obs@1": {
+                        "name": "R",
+                        "value": "0.270",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.035",
+                        "type@1_lower": "0.035",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.028",
+                        "type@2_lower": "0.028"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "Pt",
-                    "latex": "$P_{\\tau}(D^{*})$",
-                    "value": "-0.38",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.51",
-                    "type@1_lower": "0.51",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.21",
-                    "type@2_lower": "0.21"
+            ]
+        },
+        {
+            "Bbar.2.Dst.tau.nu": [
+                "$\\bar{B}\\to D^{*}\\tau\\bar{\\nu}$",
+                {
+                    "obs@1": {
+                        "name": "Pt",
+                        "value": "-0.38",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.51",
+                        "type@1_lower": "0.51",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.21",
+                        "type@2_lower": "0.21"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

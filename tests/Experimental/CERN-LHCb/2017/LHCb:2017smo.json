@@ -6,42 +6,47 @@
     "arxiv": "[hep-ex/1708.08856](https://arxiv.org/pdf/1708.08856)",
     "time": "2017.01.01",
     "abstract": "the ratio of branching fractions $R_{D^{\\ast-}} \\equiv \\mathcal{B}(B^0 \\to D^{\\ast-} \\tau^+ \\nu_\\tau)/\\mathcal{B}(B^0 \\to D^{\\ast-}\\mu^+ \\nu_\\mu)$ measured using a data sample of proton-proton collisions collected with the LHCb detector at center-of-mass energies of 7 and 8 TeV, corresponding to an integrated luminosity of 3 fb$^{-1}$",
-    "pdf": "https://arxiv.org/pdf/1708.08856",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(B^0\\to D^{\\ast-}\\tau^+ \\nu_\\tau)$",
-                    "value": "0.0142",
-                    "type@1_upper": "0.00054",
-                    "type@1_lower": "0.00054",
-                    "type@2_upper": "0.00129",
-                    "type@2_lower": "0.00129",
-                    "type@1_error": "norm",
-                    "type@2_error": "syst",
-                    "type@3_error": "stat",
-                    "type@3_upper": "0.00094",
-                    "type@3_lower": "0.00094"
+    "data": [
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "0.0142",
+                        "type@1_upper": "0.00054",
+                        "type@1_lower": "0.00054",
+                        "type@2_upper": "0.00129",
+                        "type@2_lower": "0.00129",
+                        "type@1_error": "norm",
+                        "type@2_error": "syst",
+                        "type@3_error": "stat",
+                        "type@3_upper": "0.00094",
+                        "type@3_lower": "0.00094"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "RDst-[tau/mu]",
-                    "latex": "$R_{D^{\\ast-}}^{\\tau\\mu}$",
-                    "value": "0.291",
-                    "type@1_upper": "0.013",
-                    "type@1_lower": "0.013",
-                    "type@2_upper": "0.026",
-                    "type@2_lower": "0.026",
-                    "type@1_error": "norm",
-                    "type@2_error": "syst",
-                    "type@3_error": "stat",
-                    "type@3_upper": "0.019",
-                    "type@3_lower": "0.019"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "RDst-[tau/mu]",
+                        "value": "0.291",
+                        "type@1_upper": "0.013",
+                        "type@1_lower": "0.013",
+                        "type@2_upper": "0.026",
+                        "type@2_lower": "0.026",
+                        "type@1_error": "norm",
+                        "type@2_error": "syst",
+                        "type@3_error": "stat",
+                        "type@3_upper": "0.019",
+                        "type@3_lower": "0.019"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

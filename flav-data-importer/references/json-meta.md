@@ -15,20 +15,22 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\to K^{*0}(\\to K^{+}\\pi^{-})\\mu^{+}\\mu^{-}$ decay...",
-    "pdf": "https://arxiv.org/pdf/1512.04442",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.Kst0.mu+.mu-": [
-            {
-                "obs@1": { ... },
-                "obs@2": { ... },
-                "type@1_correlation": [
-                    [1.0, 0.5],
-                    [0.5, 1.0]
-                ]
-            }
-        ]
-    }
+    "data": [
+        {
+            "B0.2.Kst0.mu+.mu-": [
+                "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
+                {
+                    "obs@1": { ... },
+                    "obs@2": { ... }
+                }
+            ],
+            "correlation": [
+                [1.0, 0.5],
+                [0.5, 1.0]
+            ]
+        }
+    ]
 }
 ```
 
@@ -43,9 +45,8 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
 | `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
 | `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
-| `pdf` | string | Yes | URL to the paper PDF. Prefer the arXiv PDF URL. If no arXiv page exists, fall back to the InspireHEP file URL or the journal article homepage. | `https://arxiv.org/pdf/1512.04442` |
 | `transition-mode` | string | Yes | Must immediately precede `data`; `data` is the final top-level key. Describes the physical process type using a property-based category. Do NOT use non-property descriptors like "rare decay". | `semileptonic-decay` |
-| `data` | object | Yes | Object keyed by canonical transition channel (`A.B.2.C.D`, or `"no-transition"` for basic observables). Each value is a **non-empty array of data groups**; put several groups of one channel (different fit methods, kinematic bins, or matrices) in that channel's array. Allowed field names within a group are exact: `obs@N`, `type@N_correlation`, `type@N_covariance`, `total_correlation`, `total_covariance`, and the kinematic boundaries. | See Data Entries section |
+| `data` | array | Yes | **Non-empty array of data groups**. Each group is an object mapping one or more canonical transition channels (`A.B.2.C.D`, or `"no-transition"`) to a `[latex, obs@N object]` pair, plus optional group-level `correlation`/`covariance` matrices. Grouping channels together lets one matrix correlate observables across channels. | See Data Entries section |
 
 ## Metadata Field Sources
 
@@ -58,7 +59,6 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `abstract` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
 | `arxiv` | arXiv webpage | `[primary_category/arxiv_idvN](https://arxiv.org/pdf/<id>)` |
 | `time` | arXiv webpage | v1 submission date, `YYYY.MM.DD` |
-| `pdf` | arXiv webpage (preferred) | Fallback to InspireHEP or journal link |
 | `transition-mode` | Paper information | Property-based decay/scattering name |
 | `data` | Extracted from data source | HEPData, CDS, PDF, etc. |
 
@@ -76,54 +76,75 @@ determinations, mass or coupling bounds, and averages produced by theory
 groups from existing experimental/theoretical data. Those are analysis
 outputs, not primary data.
 
-## Data Entries (`data{}`)
+## Data Entries (`data[]`)
 
-`data` is an **object** keyed by transition channel; each value is a
-**non-empty array of data groups**:
+`data` is a **non-empty array of data groups**. A group is an object whose
+keys are transition channels (each mapping to a `[latex, obs@N object]`
+pair) plus an optional group-level matrix:
 
 ```json
-"data": {
-    "B0.2.Kst0.mu+.mu-": [
-        {
-            "obs@1": { ... },
-            "obs@2": { ... },
-            "type@1_correlation": [
-                [1.0, 0.4],
-                [0.4, 1.0]
-            ]
-        },
-        {
-            "obs@1": { ... },
-            "q2min": "1.1",
-            "q2max": "6.0"
-        }
-    ],
-    "no-transition": [
-        {
-            "obs@1": { ... }
-        }
-    ]
-}
+"data": [
+    {
+        "B0.2.Kst0.mu+.mu-": [
+            "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
+            {
+                "obs@1": { ... },
+                "obs@2": { ... }
+            }
+        ],
+        "correlation": [
+            [1.0, 0.4],
+            [0.4, 1.0]
+        ]
+    },
+    {
+        "B+.2.K+.mu+.mu-": [
+            "$B^{+}\\to K^{+}\\mu^{+}\\mu^{-}$",
+            { "obs@1": { ... } }
+        ],
+        "B+.2.Kst+.mu+.mu-": [
+            "$B^{+}\\to K^{*+}\\mu^{+}\\mu^{-}$",
+            { "obs@1": { ... }, "obs@2": { ... } }
+        ],
+        "correlation": [ ... ]
+    },
+    {
+        "no-transition": [
+            "",
+            { "obs@1": { ... } }
+        ]
+    }
+]
 ```
 
 1. **Transition channel** — a canonical transition (`A.B.2.C.D`, per
    `obs-abbr.md` §1) or `"no-transition"` for basic observables (`MZ`,
-   `Tau(B0)`, CKM elements, ...).
-2. **Data group** — an element of that channel's array: a set of
-   observables linked by a common correlation/covariance matrix (see
-   Data Grouping below). Different q² bins of the same observable go into
-   separate groups with identical `name` but different
-   `q2min`/`q2max` values.
-
-A channel's array holds one or more groups whose properties differ — a
-nominal and a higher-order fit, separate kinematic bins, or independent
-matrices. Each group has its own `obs@1 … obs@N` numbering and its own
-matrices. There is no category layer: observables are distinguished
-solely by their `name`.
-
-The data key alone carries the transition channel: observable `name`
-values must not repeat it. The validator rejects a transition embedded
-in `name` (e.g. `FL(B0.2.Kst0.mu+.mu-)`); write `FL` instead.
+   `Tau(B0)`, CKM elements, ...). The channel key alone carries the
+   transition: observable `name` values must not repeat it. The validator
+   rejects a transition embedded in `name` (e.g.
+   `FL(B0.2.Kst0.mu+.mu-)`); write `FL` instead. Each channel maps to a
+   two-element array `[latex, obs@N object]`: `latex` is the channel's
+   LaTeX expression (the decay/scattering formula), written once per
+   channel; write the transition formula (`$B^{0}\to K^{*0}\mu^{+}\mu^{-}$`),
+   not the observable symbol. It must be non-empty except for
+   `no-transition`, where it is `""`. Observable entries carry no `latex`.
+2. **Data group** — one element of the array: a measurement context whose
+   observables share one correlation/covariance matrix. A group may hold
+   **several channels** when the source matrix correlates observables
+   across them; channels placed in different groups are uncorrelated.
+3. **Matrix alignment** — an N×N group matrix covers N observables in
+   total across the group's channels: rows follow the channel keys in
+   written order, then each channel's `obs@1 … obs@N` order. Keep all
+   channel keys before the matrix key; the validator rejects a channel
+   that appears after a matrix.
+4. **Per-channel numbering** — each channel restarts at `obs@1` and runs
+   contiguously (1..N) within that channel.
+5. **Separate contexts** — different fit methods, datasets, or kinematic
+   bins go into separate groups, even for the same channel. Kinematic
+   boundaries (`q2min`/`q2max`, ...) live inside each `obs@N`, never at
+   group or channel level.
+6. **No category layer** — observables are distinguished solely by
+   `name`.
 
 ### Form-Factor Expansion Coefficients
 
@@ -146,7 +167,6 @@ Use this format when the paper reports a central value with component errors (st
 ```json
 "obs@1": {
     "name": "FL",
-    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
     "value": "0.69",
     "type@1_error": "stat",
     "type@1_upper": "0.035",
@@ -162,7 +182,6 @@ Use this format when the paper reports a central value with component errors (st
 | Field | Required | Type | Description |
 |-------|----------|------|-------------|
 | `name` | Yes | string | Observable symbol, optionally followed by a `[condition]` or a method/parameter tag: `OBS`, `OBS[condition]`, `OBS(method)`. Do **not** embed the transition channel — the `data` key already carries it. Symbolic notation only — no full expression definitions. |
-| `latex` | Yes | string | LaTeX representation of the observable. Double backslash for JSON escaping; after json.load(), Python reads single backslash. |
 | `value` | Yes | string | Central value. Must be a string, even for integers. |
 | `type@1_error` | Yes | string | Error type label for the first error component (usually `"stat"`). |
 | `type@1_upper` | Yes | string | Upper error bound for type 1. For symmetric errors, equals `type@1_lower`. |
@@ -217,9 +236,10 @@ limit is kept. A confidence level recorded as `CL@95%` is normalised to
 `95%@CL`.
 
 Unknown keys inside `obs@N` are rejected by the validator. The only
-allowed keys are `name`, `latex`, `value`, `unit`, `ref`, `method`,
+allowed keys are `name`, `value`, `unit`, `ref`, `method`,
 `dataset`, `note`, the kinematic boundaries, `error_upper`/`error_lower`,
-and the `type@N_*` patterns documented here.
+and the `type@N_*` patterns documented here. The channel's LaTeX lives in
+the enclosing `[latex, ...]` pair, not in the observable.
 
 ### Upper Limit Format
 
@@ -228,7 +248,6 @@ Use this format when the paper reports a confidence-level upper limit rather tha
 ```json
 "obs@1": {
     "name": "Br",
-    "latex": "$\\mathcal{B}(B^{0}\\to K^{*0} \\tau^{-} e^{+})$",
     "type@1_upper_limit": "5.9e-6",
     "type@1_level": "90%@CLs"
 }
@@ -250,7 +269,6 @@ Use this format when the paper reports a single combined (total) error without s
 ```json
 {
     "name": "FL",
-    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
     "value": "0.69",
     "error_upper": "0.039",
     "error_lower": "0.039",
@@ -276,7 +294,6 @@ Use this format for values taken from external sources (PDG world averages, HFLA
 ```json
 {
     "name": "RBr[mu/e]",
-    "latex": "$\\mathcal{R}^{\\mu/e}_{\\Lambda_c^+\\to p\\ell\\nu}$",
     "value": "0.175",
     "error_upper": "0.012",
     "error_lower": "0.012",
@@ -288,60 +305,59 @@ The `ref` field must be a Markdown link with a verified InspireHEP TexKey. Look 
 
 ## Correlation and Covariance Matrices
 
-### Correlation Matrix (`type@N_correlation`)
-
-Placed at the data entry level (alongside `obs@N` keys, not inside any obs):
+Matrices are **group-level keys** placed alongside the channel keys, never
+inside an `obs@N` object:
 
 ```json
-"type@1_correlation": [
-    [1.0, 0.5, 0.1],
-    [0.5, 1.0, 0.2],
-    [0.1, 0.2, 1.0]
-]
+{
+    "B0.2.Kst0.mu+.mu-": [
+        "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
+        { "obs@1": { ... }, "obs@2": { ... } }
+    ],
+    "B+.2.K+.mu+.mu-": [
+        "$B^{+}\\to K^{+}\\mu^{+}\\mu^{-}$",
+        { "obs@1": { ... } }
+    ],
+    "correlation": [
+        [1.0, 0.5, 0.1],
+        [0.5, 1.0, 0.2],
+        [0.1, 0.2, 1.0]
+    ]
+}
 ```
 
 **Rules:**
-- **Diagonal elements must be 1.0** (correlation of an observable with itself).
-- **Matrix must be symmetric**: `M[i][j] == M[j][i]`.
-- **Dimension**: matrix size (N×N) must equal the number of `obs@N` entries in the same data entry.
-- **Order**: matrix indices correspond to obs@N numbering order (obs@1 → index 0, obs@2 → index 1, etc.).
-- **Naming**: use `type@1_correlation` to match `type@1_error` (stat), `type@2_correlation` to match `type@2_error` (syst), etc.
-- **Format**: matrix elements are floats (not strings).
-- **Layout**: each matrix row is on a single line; do **not** put each element on its own line. This applies to all `*_correlation` and `*_covariance` fields. (See SKILL.md "Core Conventions" rule 1.)
-- If no correlation matrix is available, **omit the field entirely** (do not set to `null`).
-
-### Total Error Correlation/Covariance (`total_correlation`, `total_covariance`)
-
-When using total error format (`error_upper`/`error_lower`), use the
-`total_` prefix for matrices: `total_correlation` or `total_covariance`.
-Same rules as `type@N_correlation`/`type@N_covariance`. Do NOT mix
-`total_correlation` with component errors (`type@N_error`).
-
-### Covariance Matrix (`type@N_covariance`)
-
-```json
-"type@1_covariance": [
-    [0.01, 0.005],
-    [0.005, 0.01]
-]
-```
-
-**Rules:**
-- **Matrix must be symmetric**.
-- **Diagonal elements** are the variances (error squared) for each observable. These must be manually verified against the reported errors.
-- **Dimension and order** follow the same rules as correlation matrices.
-- Matrix elements are floats.
-- Omit the field if not available.
+- **Key** — `correlation` (unit diagonal) or `covariance` (diagonal holds
+  the variance). A `type@N_` prefix (`type@1_correlation`) labels a matrix
+  describing only that component error and matches `type@N_error`; the
+  unprefixed key describes the total uncertainty. A group carries at most
+  one unprefixed matrix and one matrix per component prefix; all share the
+  same dimension and ordering.
+- **Diagonal** — correlation matrices must have 1.0 on the diagonal;
+  covariance diagonals are the squared errors and must be verified against
+  the reported uncertainties. Both must be symmetric: `M[i][j] == M[j][i]`.
+- **Dimension** — N×N must equal the total number of observables in all
+  channels of the group.
+- **Order** — channel keys in written order, then `obs@N` order within each
+  channel.
+- **Format** — matrix elements are floats (not strings), one row per line.
+  Do not put each element on its own line (SKILL.md rule 1).
+- If no matrix is available, **omit the key entirely** (do not set `null`).
 
 ### Data Grouping
 
-Each element of a channel's array is a **data group** — a set of
-observables that share a common measurement context:
+Each element of the `data` array is a **data group** — one measurement
+context:
 
-- **Group boundary**: defined by a correlation or covariance matrix. All observables linked by the same matrix belong to one group.
-- **Matrix dimension**: the N×N matrix covers exactly N observables (`obs@1` through `obs@N`).
-- **No matrix**: observables without a correlation/covariance matrix can be placed together in the same group, or split across groups as appropriate.
-- **Several groups per channel**: add another element to that channel's array. Do not merge groups whose properties differ (fit method, dataset, kinematic region).
+- **Group boundary**: defined by a correlation or covariance matrix. All
+  observables linked by the same matrix belong to one group, whether they
+  sit in one channel or several.
+- **Matrix dimension**: the N×N matrix covers exactly N observables across
+  the group's channels.
+- **No matrix**: observables without a matrix can share a group or be split
+  across groups as appropriate.
+- **Several groups**: add another element to the `data` array. Do not merge
+  groups whose properties differ (fit method, dataset, kinematic region).
 
 ### Combined Kinematic Bins
 
@@ -405,7 +421,7 @@ as subgroup keys).
     "year": "2024",
     "data": {
         "PDG@W": {
-            "obs@1": { "name": "MW", "latex": "$M_W$", "value": 80.3692, "error": 0.0133, "unit": "GeV" },
+            "obs@1": { "name": "MW", "value": 80.3692, "error": 0.0133, "unit": "GeV" },
             "obs@27": { "name": "Br(W2lnu)", "value": 0.1086, "error": 0.0009 },
             "correlation": null
         },
@@ -447,9 +463,8 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
   `error` (scalar) or `error_upper`/`error_lower`. Do not use
   `type@N_error` triplets.
 - Unknown observable keys are rejected: the only allowed fields are
-  `name`, `latex`, `value`, `error`, `error_upper`, `error_lower`,
+  `name`, `value`, `error`, `error_upper`, `error_lower`,
   `unit`, `limit`.
-- `latex` is optional but, when present, must be Unicode-free.
 - `unit` is a free-form string (`"GeV"`, `"ps"`, `"fb"`).
 - Optional subgroup `correlation` is a square N×N matrix whose
   dimension must equal the observable count; `null` is allowed.
@@ -461,17 +476,17 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, `q2min`/`q2max`, `pTmin`/`pTmax`, all error fields, and `unit`.
 2. **LaTeX uses double backslash** — `\\to` in the JSON file. After `json.load()`, this becomes `\to` in Python.
 3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
-4. **Field order** — Top-level fields follow the Top-Level Fields table order; within `obs@N`, follow the Standard Measurement table.
+4. **Field order** — Top-level fields follow the Top-Level Fields table order; each channel entry is `[latex, obs@N object]`; within `obs@N`, follow the Standard Measurement table.
 5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
-6. **No `year` field** — Standard schema does not support a top-level `year` field (HFLAV/PDG non-standard snapshots are the only exception; see §Non-Standard Schemas).
-7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent).
+6. **No `year`/`pdf` fields** — The standard schema has neither a top-level `year` nor `pdf` field (HFLAV/PDG snapshots use `year`; see §Non-Standard Schemas). Citations come from the `arxiv` and `inspire-hep` fields.
+7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv` which uses `null` when absent, and the channel LaTeX, which is `""` for `no-transition`).
 8. **Top-level key order** — `transition-mode` must immediately precede `data`, and `data` must be the final key in the JSON object.
 9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
 10. **Author format** — initials only, with 1 / 2–3 / 4+ tiers: `"Polchinski, J."`, `"Aaij, R., Smith, J., and Oyanguren, A."`, or `"Aaij, R. and others"`. (SKILL.md rule 3.)
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)
 12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, dashes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). Latin ligatures from PDF text extraction (`ﬀ`, `ﬁ`, `ﬂ`, `ﬃ`, `ﬄ`) are replaced by their plain letter sequences. (SKILL.md rule 4.)
 13. **Transition order** — Dotted `.2.` transitions follow the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses; neutral antiparticles append `Bar`. The validator fails non-canonical order.
-14. **`data` is an object keyed by transition** — each key (`A.B.2.C.D` or `no-transition`) maps to a non-empty array of data groups; several groups of one channel are separate array elements (SKILL.md rule 7).
+14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to a `[latex, obs@N object]` pair and optionally carries a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). Observables carry no `latex` of their own.
 15. **One group per property set** — observables whose fit method, dataset, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).
 16. **Exactly one error scheme** — component-error triplets (`type@N_error`/`_upper`/`_lower`) or total error (`error_upper`/`error_lower`), optionally with `ref` and/or upper limits; error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`. Unknown observable fields are rejected.
 17. **`collaboration` is conditional** — required for named collaborations (experiments, HFLAV/PDG, large theory groups such as HPQCD); omit the key for individual-author and small-group papers (SKILL.md rule 8).

@@ -6,28 +6,31 @@
     "arxiv": "[hep-ex/1806.05996v2](https://arxiv.org/pdf/1806.05996.pdf)",
     "time": "2018-06-15",
     "abstract": "Search for H->Z gamma and H->gamma* gamma -> mu mu gamma using 35.9 fb-1 at 13 TeV. The observed (expected) combined 95% CL upper limit for mH=125 GeV is 3.9 (2.0) times the SM cross section. The H->Z gamma limit varies between 6.1 and 11.4.",
-    "pdf": "https://arxiv.org/pdf/1806.05996.pdf",
     "transition-mode": "higgs-decay",
-    "data": {
-        "H.2.Z.gamma": [
-            {
-                "obs@1": {
-                    "name": "mu_HZg[13TeV]",
-                    "latex": "$\\mu_{H\\to Z\\gamma}$",
-                    "type@1_upper_limit": "6.6",
-                    "type@1_level": "95%@CL"
+    "data": [
+        {
+            "H.2.Z.gamma": [
+                "$H\\to Z\\gamma$",
+                {
+                    "obs@1": {
+                        "name": "mu_HZg[13TeV]",
+                        "type@1_upper_limit": "6.6",
+                        "type@1_level": "95%@CL"
+                    }
                 }
-            }
-        ],
-        "H.2.Z.gamma+gamma.mu.mu": [
-            {
-                "obs@1": {
-                    "name": "mu_HZg_HgammaMuMu[13TeV]",
-                    "latex": "$\\mu_{H\\to Z\\gamma, \\gamma^*\\gamma\\to\\mu\\mu\\gamma}$",
-                    "type@1_upper_limit": "3.9",
-                    "type@1_level": "95%@CL"
+            ]
+        },
+        {
+            "H.2.Z.gamma+gamma.mu.mu": [
+                "$H\\to Z\\gamma,\\ \\gamma^{*}\\gamma\\to\\mu\\mu\\gamma$",
+                {
+                    "obs@1": {
+                        "name": "mu_HZg_HgammaMuMu[13TeV]",
+                        "type@1_upper_limit": "3.9",
+                        "type@1_level": "95%@CL"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

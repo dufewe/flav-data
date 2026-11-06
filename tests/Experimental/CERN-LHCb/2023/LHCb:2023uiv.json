@@ -6,42 +6,47 @@
     "arxiv": "[hep-ex/2305.01463](https://arxiv.org/pdf/2305.01463)",
     "time": "2023.01.01",
     "abstract": "an analysis of the branching fraction $\\mathcal{B}(B^0 \\to D^{\\ast-} \\tau^+ \\nu_\\tau) relative to that of the normalization mode $B^0 \\to D^{\\ast-} \\pi^+ \\pi^- \\pi^+$ using hadronic $\\tau^+ \\to \\pi^+ \\pi^- \\pi^+ (\\pi^0) \\bar{\\nu}_\\tau$ decays and the lepton universality $R(D^{\\ast-})$, in proton-proton collision data at a center-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 2 fb$^{-1}$",
-    "pdf": "https://arxiv.org/pdf/2305.01463",
     "transition-mode": "leptonic-decay",
-    "data": {
-        "no-transition": [
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(\\bar{B}^0 \\to D^{\\ast+} \\tau^- \\bar{\\nu}_\\tau)$",
-                    "value": "0.0129",
-                    "type@1_upper": "0.0005",
-                    "type@1_lower": "0.0005",
-                    "type@2_upper": "0.0008",
-                    "type@2_lower": "0.0008",
-                    "type@1_error": "expe",
-                    "type@2_error": "syst",
-                    "type@3_error": "stat",
-                    "type@3_upper": "0.0008",
-                    "type@3_lower": "0.0008"
+    "data": [
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "0.0129",
+                        "type@1_upper": "0.0005",
+                        "type@1_lower": "0.0005",
+                        "type@2_upper": "0.0008",
+                        "type@2_lower": "0.0008",
+                        "type@1_error": "expe",
+                        "type@2_error": "syst",
+                        "type@3_error": "stat",
+                        "type@3_upper": "0.0008",
+                        "type@3_lower": "0.0008"
+                    }
                 }
-            },
-            {
-                "obs@1": {
-                    "name": "RDst+[tau/mu]",
-                    "latex": "$R_{D^{\\ast+}}^{\\tau/\\mu}$",
-                    "value": "0.26",
-                    "type@1_upper": "0.012",
-                    "type@1_lower": "0.012",
-                    "type@2_upper": "0.016",
-                    "type@2_lower": "0.016",
-                    "type@1_error": "expe",
-                    "type@2_error": "syst",
-                    "type@3_error": "stat",
-                    "type@3_upper": "0.015",
-                    "type@3_lower": "0.015"
+            ]
+        },
+        {
+            "no-transition": [
+                "",
+                {
+                    "obs@1": {
+                        "name": "RDst+[tau/mu]",
+                        "value": "0.26",
+                        "type@1_upper": "0.012",
+                        "type@1_lower": "0.012",
+                        "type@2_upper": "0.016",
+                        "type@2_lower": "0.016",
+                        "type@1_error": "expe",
+                        "type@2_error": "syst",
+                        "type@3_error": "stat",
+                        "type@3_upper": "0.015",
+                        "type@3_lower": "0.015"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

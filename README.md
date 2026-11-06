@@ -53,36 +53,39 @@ Each paper corresponds to one JSON file with the following structure:
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
     "time": "2015.12.14",
     "abstract": "...",
-    "pdf": "https://arxiv.org/pdf/1512.04442",
     "transition-mode": "semileptonic-decay",
-    "data": {
-        "B0.2.Kst0.mu+.mu-": [
-            {
-                "obs@1": {
-                    "name": "FL",
-                    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
-                    "value": "0.69",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.035",
-                    "type@1_lower": "0.036",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.017",
-                    "type@2_lower": "0.017",
-                    "q2min": "0.1",
-                    "q2max": "1.1"
-                },
-                "obs@2": { ... },
-                "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
-            }
-        ]
-    }
+    "data": [
+        {
+            "B0.2.Kst0.mu+.mu-": [
+                "$B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$",
+                {
+                    "obs@1": {
+                        "name": "FL",
+                        "value": "0.69",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.035",
+                        "type@1_lower": "0.036",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.017",
+                        "type@2_lower": "0.017",
+                        "q2min": "0.1",
+                        "q2max": "1.1"
+                    },
+                    "obs@2": { ... }
+                }
+            ],
+            "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
+        }
+    ]
 }
 ```
 
-`data` is an object keyed by transition channel; each value is an array of
-groups of observables coupled by a shared matrix. Add another element to
-the channel's array for additional groups (other kinematic bins, fit
-methods, datasets).
+`data` is an array of groups. Each group maps one or more transition
+channels to a `[latex, obs@N object]` pair and may carry a group-level
+matrix whose rows follow the channel keys, then their `obs@N` order.
+The channel LaTeX is written once per channel; observables carry no
+`latex`. Add another group for different kinematic bins, fit methods, or
+datasets.
 
 ### Key Design Principles
 
@@ -90,8 +93,8 @@ methods, datasets).
 |-----------|------|
 | Numeric values | All strings: `"0.69"` not `0.69` |
 | Errors | Component-level (`stat`, `syst`) preferred |
-| Matrices | Float arrays at data entry level, diagonal = 1.0 for correlation |
-| LaTeX | Double-backslash escaping: `\\to` in JSON → `\to` in Python |
+| Matrices | Float arrays alongside channel keys in each group, diagonal = 1.0 for correlation |
+| LaTeX | One channel-level formula per channel; double-backslash escaping: `\\to` in JSON → `\to` in Python |
 | Indentation | 4 spaces |
 | Empty fields | Omit key entirely (except `arxiv` which uses `null`) |
 

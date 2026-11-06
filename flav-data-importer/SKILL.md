@@ -64,24 +64,18 @@ def load_script(name):
 common = load_script("common")
 unicode_to_latex = common.unicode_to_latex
 to_bibtex = common.to_bibtex
-latex_for_obs = common.latex_for_obs
 
 # Unicode → LaTeX (86 single chars + 8 multi-char sequences)
 unicode_to_latex("B⁰ → K*⁰ μ⁺μ⁻")   # → "B^{0} \\to K*^{0} \\mu^{+}\\mu^{-}"
 
 # Author name → BibTeX initials
 to_bibtex("Aaij, Roel")               # → "Aaij, R."
-
-# Observable name → LaTeX field for obs@N.latex
-# (expands the OBSERVABLE abbreviation; the name itself carries no channel)
-latex_for_obs("FL")                     # → "$F_L$"
-latex_for_obs("gammaCKM")               # → "$\\gamma$"
-latex_for_obs("Mass(B0)")               # → "$M_{B0}$"
 ```
 
-Note: the `latex` field is the fully-expanded expression including the
-transition (e.g. `$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$`). See
-`references/obs-abbr.md` §4 and write it by hand from the data key.
+Channel LaTeX is written once per channel as the first element of the
+channel pair (e.g. `"$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$"`). Take the
+transition formula from the source; do not include the observable symbol.
+Observables carry only `name`, so no per-observable LaTeX helper is used.
 
 ## Tool Inventory
 
@@ -190,15 +184,14 @@ common = load_script("common")
    Table names (`"Table 9"`) carry no type information — always use
    `detect_table_type()` rather than the name. Each observable data point
    carries its own `q2min`/`q2max` (pairing is positional with
-   `independent_variables`), so one q² bin becomes one group in that
-   transition's group array under `data`.
+   `independent_variables`), so one q² bin becomes one group in the
+   `data` array, holding that channel's observables.
    If HEPData is unavailable or incomplete, fall back to the PDF + pymupdf.
    See `references/hepdata-cli.md` and `references/data-source.md`.
 
 4. **Write the JSON file** at the canonical path. The full assembly:
 
    ```python
-   latex_for_obs = common.latex_for_obs
    unicode_to_latex = common.unicode_to_latex
 
    meta = inspirehep_ext.extract_metadata(hit)
@@ -214,42 +207,43 @@ common = load_script("common")
        # ----- from arxiv-ext (get_arxiv_info) -----
        "arxiv":           arxiv["arxiv_link"],          # Markdown link [primary_category/arxiv_idvN](url)
        "time":            arxiv["time"],                 # "YYYY.MM.DD" (v1 submission date)
-       "pdf":             arxiv["pdf_url"],              # prefer arXiv over InspireHEP
        # ----- human-picked (per references/json-meta.md §"transition-mode Values") -----
        "transition-mode": "semileptonic-decay",          # hyphenated whitelist
-       "data": {
-           # one key per transition channel; each value is an array of
-           # data groups for that channel
-           "B0.2.Kst0.mu+.mu-": [
-               {
-                   # each group: {"obs@1": {...}, ..., "type@1_correlation": [...]}
-                   # for each obs@N:
-                   #   "name":  "FL"                            # symbol only; channel is the data key
-                   #   "latex": "$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$"  # fully-expanded LaTeX
-                   #   "value": "0.69"
-                   #   "type@1_error": "stat"
-                   #   "type@1_upper": "0.035"
-                   #   "type@1_lower": "0.036"
-                   # optionally: "q2min": "0.1", "q2max": "1.1", etc.
-               }
-           ]
-       },
+       "data": [
+           {
+               # each group maps one or more transition channels to a
+               # [latex, obs@N object] pair, then optionally one group-level
+               # matrix
+               "B0.2.Kst0.mu+.mu-": [
+                   "$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$",  # channel LaTeX (no observable symbol)
+                   {
+                       # for each obs@N:
+                       #   "name":  "FL"                    # symbol only; channel is the group key
+                       #   "value": "0.69"
+                       #   "type@1_error": "stat"
+                       #   "type@1_upper": "0.035"
+                       #   "type@1_lower": "0.036"
+                       # optionally: "q2min": "0.1", "q2max": "1.1", etc.
+                   }
+               ],
+               # optional; rows align with channel order, then obs@N order:
+               # "correlation": [[1.0, 0.5], [0.5, 1.0]]
+           }
+       ],
    }
    ```
 
-   `data` is an object keyed by transition channel (`A.B.2.C.D`, or
-   `no-transition` for basic observables such as `MZ` or `Tau(B0)`).
-   Each value is a non-empty array of data groups; add another element
-   when the channel carries several groups with different properties
-   (fit method, kinematic bin, matrix).
+   `data` is an array of data groups. Each group keys one or more
+   transition channels (`A.B.2.C.D`, or `no-transition` for basic
+   observables such as `MZ` or `Tau(B0)`) to their observables, and may
+   carry a group-level `correlation`/`covariance` matrix. Channels that
+   share a matrix belong to the same group; add another element when the
+   fit method, kinematic bin, or matrix differs.
    See rules 6 and 7 below and `references/json-meta.md` §"Data Entries".
 
    Field-source priorities when there are two candidates:
    - **Title / Abstract**: InspireHEP preferred (LaTeX-preserved);
      fall back to arXiv only if InspireHEP lacks the paper.
-   - **PDF URL**: arXiv preferred (canonical, version-pinned);
-     fall back to InspireHEP's `pdf_url` only for journal-only papers
-     (`arxiv == null`).
    - **Author**: Always from InspireHEP; apply `to_bibtex()` to each
      full name, then arrange by author count per SKILL.md rule 3.
 
@@ -276,10 +270,12 @@ subgroups; HFLAV has top-level `HFLAV@...` subgroup keys containing an
 `observables` list. Snapshots are validated against their own relaxed
 schema (see `references/json-meta.md` §"Non-Standard Schemas").
 
-For standard files the transition-keyed `data` object is validated
-strictly (unknown observable fields, error triplets/labels, one
-measurement format, transition match, and particle masses). Each key is
-a transition channel and each value is a non-empty array of groups.
+For standard files the `data` array of groups is validated strictly
+(unknown observable fields, error triplets/labels, one measurement
+format, transition match, and particle masses). Every group maps one or
+more transition channels to per-channel `[latex, obs@N object]` pairs;
+its optional matrix dimension must equal the group's total observable
+count.
 
 ### Step 3: Cleanup
 
@@ -303,14 +299,14 @@ reference doc points back to these.
 
 1. **Matrix format (row-per-line)** — each matrix row on one line:
    ```json
-   "total_correlation": [
+   "correlation": [
        [1.0, 0.5, 0.3],
        [0.5, 1.0, 0.2],
        [0.3, 0.2, 1.0]
    ]
    ```
-   Applies to all `*_correlation` and `*_covariance` fields. Do **not**
-   put each element on its own line.
+   Applies to all group-level `*_correlation` and `*_covariance` keys.
+   Do **not** put each element on its own line.
 
 2. **Abstract = single line** — Collapse multi-line `align*` / `gather*` /
    etc. blocks to a single-line LaTeX string. Internal line breaks (`\\`)
@@ -367,20 +363,24 @@ reference doc points back to these.
 6. **One group per property set** — a data group is a set of observables
    linked by one correlation/covariance matrix and one measurement
    context. Do not merge into one group measurements whose fit method,
-   dataset, or kinematic region differ; add another element to the same
-   channel's group array instead. In particular, angular observables
-   (`FL`, `S3`, `P5p`, ...) and differential widths (`dBr/dq2`, `dGdw`,
-   ...) never share a group unless the source matrix genuinely couples
-   them.
+   dataset, or kinematic region differ; add another element to the
+   `data` array instead. In particular, angular observables (`FL`, `S3`,
+   `P5p`, ...) and differential widths (`dBr/dq2`, `dGdw`, ...) never
+   share a group unless the source matrix genuinely couples them.
 
-7. **`data` is an object of channel → group arrays** — each key is the
-   transition symbol (`A.B.2.C.D`, or `no-transition` for observables
-   without a transition); its value is a non-empty array of data groups.
-   Several groups of one channel are separate elements of that array.
-   The key carries the channel, so observable `name` values must **not**
-   repeat it: `FL`, not `FL(B0.2.Kst0.mu+.mu-)`. Conditions and method
-   tags stay in the name (`Q6[mu-e]`, `Vcb(CLN)`); the validator rejects
-   an embedded transition.
+7. **`data` is an array of groups** — each group maps one or more
+   transition symbols (`A.B.2.C.D`, or `no-transition` for observables
+   without a transition) to a per-channel `[latex, obs@N object]` pair,
+   then an optional group-level matrix. The channel LaTeX is the
+   transition formula (no observable symbol), written once per channel;
+   observables carry no `latex`. Channels that share a matrix belong to
+   the same group; separate measurement contexts are separate array
+   elements. The channel key alone carries the transition, so observable
+   `name` values must **not** repeat it: `FL`, not
+   `FL(B0.2.Kst0.mu+.mu-)`. Conditions and method tags stay in the name
+   (`Q6[mu-e]`, `Vcb(CLN)`); the validator rejects an embedded
+   transition. Matrix rows follow the channel keys in written order,
+   then each channel's `obs@N` order.
 
 8. **`collaboration` only for named collaborations** — include the key for
    experimental collaborations, HFLAV/PDG, and large theory collaborations
@@ -454,20 +454,21 @@ lifetimes, CKM parameters, EW parameters) use their documented forms:
 `Mass(Z)`, `Tau(e-)`, `gammaCKM`, `MZ` (see `references/obs-abbr.md`
 §2.1).
 
-### Error: "data must be an object" / "obs@N: must be an object"
+### Error: "data must be an array of data groups" / "must be a 2-element array"
 
-`data` must be an object keyed by transition channel, each value a
-non-empty array of **data group** dicts
-(`{"obs@1": {...}, "obs@2": {...}, ...}`), and each `obs@N` value must
-itself be an object. See `assets/workflow-lhcb-2015svh.md` Step 4 for
-the canonical shape.
+`data` must be an array of **data group** objects, each mapping one or
+more transition channels to a `[latex, obs@N object]` pair
+(`{"B0.2.Kst0.mu+.mu-": ["$B^{0} \\to K^{*0} \\mu^{+}\\mu^{-}$", {"obs@1": {...}, "obs@2": {...}}], "correlation": [...]}`);
+each `obs@N` value must itself be an object. See
+`assets/workflow-lhcb-2015svh.md` Step 4 for the canonical shape.
 
 ### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet"
 
 Per-paper files accept only the documented `obs@N` fields:
-`name`, `latex`, `value`, `unit`, `ref`, `method`, `dataset`, `note`,
+`name`, `value`, `unit`, `ref`, `method`, `dataset`, `note`,
 the kinematic boundaries, `error_upper`/`error_lower`, and the
-`type@N_*` keys.
+`type@N_*` keys. LaTeX belongs to the enclosing channel pair, not to
+the observable.
 Component errors must be a complete `type@N_error`, `type@N_upper`,
 `type@N_lower` triplet, and the label must be one of `stat`, `syst`,
 `lumi`, `norm`, `theo`, `expe`. Use `error_upper`/`error_lower` for a
@@ -503,13 +504,14 @@ Before committing any new or updated JSON file:
 - [ ] `inspire-hep` is `[<TexKey>](https://inspirehep.net/literature/<recid>)` with verified TexKey
 - [ ] `author` follows the 1 / 2–3 / 4+ tier rule (initials only)
 - [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
-- [ ] `data` is an object keyed by transition channel; each value is a non-empty array of groups, and no observable repeats the channel in its `name`
-- [ ] Each `obs@N` has `name` and `latex`, plus exactly one error scheme
+- [ ] `data` is a non-empty array of groups; each group maps channel keys to a `[latex, obs@N object]` pair, no observable repeats the channel in its `name`, and any group matrix dimension matches the group's observable count
+- [ ] Each channel pair carries a non-empty transition LaTeX (empty only for `no-transition`); obs entries carry no `latex`
+- [ ] Each `obs@N` has `name`, plus exactly one error scheme
       (`value` + complete `type@N_error`/`_upper`/`_lower` triplets or
       `error_upper`/`error_lower`), optionally with `ref` and/or upper limits;
       upper-limit-only entries carry no `value` or errors
 - [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; only `method`, `dataset`, `note` and documented kinematic fields are allowed alongside them
-- [ ] Groups that differ in method, dataset, or kinematic region are separate elements of the channel's group array, not merged
+- [ ] Groups that differ in method, dataset, or kinematic region are separate elements of the `data` array, not merged
 - [ ] Form-factor expansion coefficients use `aN_FF` (`a0_Fp`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_Gp`), never joined; fit choices are in `method`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
 - [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)

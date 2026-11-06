@@ -6,37 +6,40 @@
     "arxiv": "[hep-ex/1411.7771v1](https://arxiv.org/pdf/1411.7771)",
     "time": "2014.11.28",
     "abstract": "We search for the decay $B_{s}^{0} \\to \\gamma \\gamma$ and measure the branching fraction for $B_{s}^{0} \\to \\phi \\gamma$ using 121.4 fb$^{-1}$ of data collected at the $\\Upsilon(5S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^{+} e^{-}$ collider. We find no statistically significant evidence for the $B_{s}^{0} \\to \\gamma \\gamma$ signal and set an upper limit on its branching fraction at $3.1 \\times 10^{-6}$. We measure the branching fraction for $B_{s}^{0} \\to \\phi \\gamma$ to be $(3.6 \\pm 0.5 \\pm 0.3 \\pm 0.6) \\times 10^{-5}$.",
-    "pdf": "https://arxiv.org/pdf/1411.7771",
     "transition-mode": "radiative-decay",
-    "data": {
-        "Bs0.2.gamma.gamma": [
-            {
-                "obs@1": {
-                    "name": "Br[90%@CL]",
-                    "latex": "$\\mathcal{B}(B_{s}^{0}\\to \\gamma \\gamma)$",
-                    "type@1_upper_limit": "3.1e-6",
-                    "type@1_level": "90%@CL"
+    "data": [
+        {
+            "Bs0.2.gamma.gamma": [
+                "$B_{s}^{0}\\to \\gamma \\gamma$",
+                {
+                    "obs@1": {
+                        "name": "Br[90%@CL]",
+                        "type@1_upper_limit": "3.1e-6",
+                        "type@1_level": "90%@CL"
+                    }
                 }
-            }
-        ],
-        "Bs0.2.phi.gamma": [
-            {
-                "obs@1": {
-                    "name": "Br",
-                    "latex": "$\\mathcal{B}(B_{s}^{0}\\to \\phi \\gamma)$",
-                    "value": "3.6",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.5",
-                    "type@1_lower": "0.5",
-                    "type@2_error": "syst",
-                    "type@2_upper": "0.3",
-                    "type@2_lower": "0.3",
-                    "type@3_error": "theo",
-                    "type@3_upper": "0.6",
-                    "type@3_lower": "0.6",
-                    "unit": "1e-5"
+            ]
+        },
+        {
+            "Bs0.2.phi.gamma": [
+                "$B_{s}^{0}\\to \\phi \\gamma$",
+                {
+                    "obs@1": {
+                        "name": "Br",
+                        "value": "3.6",
+                        "type@1_error": "stat",
+                        "type@1_upper": "0.5",
+                        "type@1_lower": "0.5",
+                        "type@2_error": "syst",
+                        "type@2_upper": "0.3",
+                        "type@2_lower": "0.3",
+                        "type@3_error": "theo",
+                        "type@3_upper": "0.6",
+                        "type@3_lower": "0.6",
+                        "unit": "1e-5"
+                    }
                 }
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }

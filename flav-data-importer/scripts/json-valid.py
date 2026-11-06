@@ -13,7 +13,7 @@ import argparse
 
 REQUIRED_TOP_FIELDS = [
     'inspire-hep', 'author', 'title',
-    'arxiv', 'time', 'abstract', 'pdf', 'transition-mode', 'data'
+    'arxiv', 'time', 'abstract', 'transition-mode', 'data'
 ]
 
 # ``collaboration`` is required only for named collaborations (experiments
@@ -21,13 +21,13 @@ REQUIRED_TOP_FIELDS = [
 CONDITIONAL_TOP_FIELDS = ['collaboration']
 
 # Fields that must NOT appear in the JSON
-FORBIDDEN_FIELDS = ['year']
+FORBIDDEN_FIELDS = ['year', 'pdf']
 
 # Snapshot (HFLAV/PDG) observable fields. Unknown keys are rejected so
 # the per-paper error formats (type@N_error, ref, ...) cannot leak into a
 # snapshot. See references/json-meta.md §"Non-Standard Schemas".
 SNAPSHOT_OBS_ALLOWED_FIELDS = {
-    'name', 'latex', 'value',
+    'name', 'value',
     'error', 'error_upper', 'error_lower',
     'unit', 'limit',
 }
@@ -41,7 +41,7 @@ STANDARD_ERROR_LABELS = {
 # Per-paper observable fields. ``type@N_*`` keys are matched by pattern;
 # everything else must match exactly.
 OBS_EXACT_FIELDS = {
-    'name', 'latex', 'value', 'unit', 'ref',
+    'name', 'value', 'unit', 'ref',
     'error_upper', 'error_lower',
     # Optional provenance metadata carried over from imported papers.
     'method', 'dataset', 'note',
@@ -89,23 +89,23 @@ HFLAV_SUBGROUP_ALLOWED_FIELDS = {
     'observables', 'correlation',
 }
 
-# Allowed field patterns within data entries
-# Exact data-block keys (no substring matching): obs@N, type@N matrices,
-# total matrices, and kinematic boundaries.
+# Kinematic boundary fields, valid inside an ``obs@N`` object.
 DATA_ENTRY_KINEMATIC_FIELDS = {
     'q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax',
     # Additional kinematic boundaries used by existing measurements.
     'w_min', 'w_max', 'cos_min', 'cos_max',
     'chi_min', 'chi_max', 'mxs_min', 'mxs_max',
 }
-_DATA_ENTRY_KEY_RE = re.compile(
-    r'(?:obs@\d+|type@\d+_(?:correlation|covariance)|'
-    r'total_(?:correlation|covariance))$'
+# Group-level matrices sit alongside the channel keys. ``correlation`` /
+# ``covariance`` describe the total uncertainty; the ``type@N_`` prefix
+# optionally marks a component-error matrix (e.g. statistical only).
+_GROUP_MATRIX_KEY_RE = re.compile(
+    r'(?:type@\d+_)?(?:correlation|covariance)$'
 )
 
 
-def is_data_entry_key(key: str) -> bool:
-    return key in DATA_ENTRY_KINEMATIC_FIELDS or bool(_DATA_ENTRY_KEY_RE.fullmatch(key))
+def is_group_matrix_key(key: str) -> bool:
+    return bool(_GROUP_MATRIX_KEY_RE.fullmatch(key))
 
 
 # --- Canonical transition ordering (obs-abbr.md §1) -------------------
@@ -586,26 +586,82 @@ def validate_arxiv_format(arxiv) -> list[str]:
     return issues
 
 
-def validate_data_entry_fields(entry: dict, label: str) -> list[str]:
-    """Check that the data block contains only allowed field patterns and that
-    kinematic boundary fields are well-formed."""
+def _validate_channel_entry(
+    channel, label: str, channel_key: str
+) -> tuple[list[str], int]:
+    """Validate one channel entry: ``[latex, obs@N object]``.
+
+    The first element is the channel's LaTeX expression, empty only for
+    ``no-transition``. The second element holds only ``obs@N`` entries;
+    kinematic bounds belong inside the observable. Returns the issues and
+    the observable count, which feeds the group matrix dimension check.
+    """
     issues = []
-    for key in entry:
-        if not is_data_entry_key(key):
+    if not isinstance(channel, list) or len(channel) != 2:
+        return [
+            f"  {label}: must be a 2-element array "
+            f"[latex, obs@N object]"
+        ], 0
+
+    channel_latex, obs_bundle = channel
+    if not isinstance(channel_latex, str):
+        issues.append(f"  {label}[0]: channel LaTeX must be a string")
+    elif channel_key == 'no-transition':
+        if channel_latex.strip():
             issues.append(
-                f"  {label}: disallowed field '{key}'; data entries may only "
-                f"contain obs@N, type@N_correlation, type@N_covariance, "
-                f"total_correlation, total_covariance, and kinematic "
-                f"boundaries ({sorted(DATA_ENTRY_KINEMATIC_FIELDS)})"
+                f"  {label}[0]: channel LaTeX must be empty for "
+                f"'no-transition'"
             )
-    # Validate kinematic boundary fields (q2min/q2max, pTmin/pTmax, etamin/etamax)
-    # must be float-string (or comma-separated float-strings, or '+inf' for
-    # unbounded sides). Per json-meta.md §Combined Kinematic Bins.
-    for key in entry:
-        if key not in DATA_ENTRY_KINEMATIC_FIELDS:
+    elif not channel_latex.strip():
+        issues.append(f"  {label}[0]: channel LaTeX must not be empty")
+    else:
+        issues.extend(validate_latex(channel_latex, 'latex', f"{label}[0]"))
+
+    if not isinstance(obs_bundle, dict):
+        issues.append(f"  {label}[1]: must be an object of obs@N entries")
+        return issues, 0
+
+    obs_keys = []
+    for key in obs_bundle:
+        if not re.fullmatch(r'obs@\d+', key):
+            issues.append(
+                f"  {label}[1]: disallowed field '{key}'; the channel's "
+                f"second element holds only obs@N entries — put kinematic "
+                f"bounds inside the observable and matrices at the group "
+                f"level"
+            )
             continue
-        issues.extend(_kinematic_issues(entry[key], f"{label}.{key}"))
-    return issues
+        try:
+            num = int(key.split('@', 1)[1])
+        except (ValueError, IndexError):
+            issues.append(
+                f"  {label}: invalid obs key '{key}'; "
+                f"expected obs@N format (N as integer)"
+            )
+            continue
+        obs_keys.append((num, key))
+    obs_keys.sort(key=lambda item: item[0])
+    obs_nums = [num for num, _ in obs_keys]
+    obs_keys = [key for _, key in obs_keys]
+
+    # Numbering is per channel: start at 1 and run 1..N with no gaps.
+    if obs_nums:
+        expected = list(range(1, len(obs_nums) + 1))
+        if obs_nums != expected:
+            missing = [num for num in expected if num not in obs_nums]
+            issues.append(
+                f"  {label}: obs@N numbering is not contiguous; found "
+                f"{obs_nums}, expected 1..{len(obs_nums)}; missing "
+                f"obs@{missing}"
+            )
+    else:
+        issues.append(f"  {label}: no obs@N entries")
+
+    for obs_key in obs_keys:
+        issues.extend(_validate_observable(
+            obs_bundle[obs_key], f"{label}[1].{obs_key}",
+        ))
+    return issues, len(obs_keys)
 
 
 def _is_float_string(text) -> bool:
@@ -737,9 +793,8 @@ def _validate_observable(obs, label: str) -> list[str]:
                 f"type@N_error/type@N_upper/type@N_lower/"
                 f"type@N_upper_limit/type@N_level"
             )
-    for field in ('name', 'latex'):
-        if field not in obs:
-            issues.append(f"  {label}: missing required field: {field}")
+    if 'name' not in obs:
+        issues.append(f"  {label}: missing required field: name")
     issues.extend(_validate_error_triplets(obs, label))
     issues.extend(_validate_upper_limit_pairs(obs, label))
     has_tot_up = 'error_upper' in obs
@@ -785,109 +840,88 @@ def _validate_observable(obs, label: str) -> list[str]:
         ):
             issues.append(f"  {label}.{key}: must be a non-empty string")
 
-    if 'latex' in obs and isinstance(obs['latex'], str):
-        issues.extend(validate_latex(obs['latex'], 'latex', label))
-
     if 'name' in obs and isinstance(obs['name'], str):
         issues.extend(validate_observable_name(obs['name']))
 
     return issues
 
 
-def _validate_data_entry(entry, label: str) -> list[str]:
-    """Validate one data group: allowed fields, obs@N numbering, matrices."""
+def _validate_data_group(group, label: str) -> list[str]:
+    """Validate one data group: channel bundles plus group-level matrices.
+
+    A group is an object whose non-matrix keys are transition channels
+    (each mapping to a ``[latex, obs@N object]`` pair) and whose optional
+    ``correlation``/``covariance`` matrix aligns with the observables of
+    all channels, flattened in channel order then ``obs@N`` order.
+    """
     issues = []
-    if not isinstance(entry, dict):
+    if not isinstance(group, dict):
         return [f"  {label}: must be an object"]
-    issues.extend(validate_data_entry_fields(entry, label))
 
-    obs_keys = []
-    for key in entry:
-        if not key.startswith('obs@'):
+    matrix_keys = []
+    channel_count = 0
+    obs_total = 0
+    saw_matrix = False
+    for key in group:
+        if is_group_matrix_key(key):
+            matrix_keys.append(key)
+            saw_matrix = True
             continue
-        try:
-            num = int(key.split('@', 1)[1])
-        except (ValueError, IndexError):
+        if saw_matrix:
             issues.append(
-                f"  {label}: invalid obs key '{key}'; "
-                f"expected obs@N format (N as integer)"
+                f"  {label}: channel '{key}' appears after a matrix key; "
+                f"keep all channel keys first so the matrix ordering is "
+                f"unambiguous"
             )
-            continue
-        obs_keys.append((num, key))
-    obs_keys.sort(key=lambda item: item[0])
-    obs_nums = [num for num, _ in obs_keys]
-    obs_keys = [key for _, key in obs_keys]
-
-    # Numbering must start at 1 and run 1..N with no gaps. A gap almost
-    # always means an obs was deleted without updating the matrices.
-    if obs_nums:
-        expected = list(range(1, len(obs_nums) + 1))
-        if obs_nums != expected:
-            missing = [num for num in expected if num not in obs_nums]
-            issues.append(
-                f"  {label}: obs@N numbering is not contiguous; found "
-                f"{obs_nums}, expected 1..{len(obs_nums)}; missing "
-                f"obs@{missing}"
-            )
-
-    if not obs_keys:
-        has_matrix = any(
-            'correlation' in key.lower() or 'covariance' in key.lower()
-            for key in entry
+        channel_count += 1
+        issues.extend(validate_transition_key(key))
+        channel_issues, obs_count = _validate_channel_entry(
+            group[key], f"{label}['{key}']", key,
         )
-        if not has_matrix:
-            issues.append(f"  {label}: no obs@N entries")
-        return issues
+        issues.extend(channel_issues)
+        obs_total += obs_count
 
-    for obs_key in obs_keys:
-        issues.extend(_validate_observable(
-            entry[obs_key], f"{label}.{obs_key}",
-        ))
+    if not channel_count:
+        issues.append(
+            f"  {label}: no transition channel; every data group needs at "
+            f"least one channel key (or 'no-transition')"
+        )
 
-    for corr_key in entry:
-        if 'correlation' not in corr_key.lower() and 'covariance' not in corr_key.lower():
-            continue
-        if entry[corr_key] is None:
+    for key in matrix_keys:
+        matrix = group[key]
+        if matrix is None:
             continue  # null means no matrix — acceptable
-        if not isinstance(entry[corr_key], list):
-            issues.append(f"  {corr_key}: expected 2D array")
+        if not isinstance(matrix, list):
+            issues.append(f"  {label}['{key}']: expected 2D array")
             continue
-        matrix = entry[corr_key]
-        is_covariance = 'covariance' in corr_key.lower()
-        issues.extend(validate_correlation(matrix, label, is_covariance))
-        if len(matrix) != len(obs_keys):
+        issues.extend(
+            validate_correlation(
+                matrix, f"{label}['{key}']",
+                is_covariance='covariance' in key,
+            )
+        )
+        if len(matrix) != obs_total:
             issues.append(
-                f"  {label}: matrix dimension "
-                f"({len(matrix)}x{len(matrix)}) does not match "
-                f"observable count ({len(obs_keys)})"
+                f"  {label}['{key}']: matrix dimension "
+                f"({len(matrix)}x{len(matrix)}) does not match the "
+                f"{obs_total} observables of the group's channels"
             )
     return issues
 
 
-def _validate_data_dict(groups_by_channel: dict) -> list[str]:
-    """Validate the ``{transition: [group, ...]}`` ``data`` schema.
+def _validate_data_list(groups: list) -> list[str]:
+    """Validate the ``[group, ...]`` ``data`` schema.
 
-    Each key is a transition channel; each value is a non-empty list of
-    data groups for that channel. Multiple groups allow one channel to
-    carry separate fit methods, kinematic bins, or matrices.
+    Each group may carry one or more transition channels; a channel may
+    appear in several groups to separate fit methods, kinematic bins, or
+    matrices.
     """
     issues = []
-    if not groups_by_channel:
-        issues.append("  data object is empty")
-    for key, groups in groups_by_channel.items():
-        if not isinstance(key, str):
-            issues.append("  data keys must be transition strings")
-            continue
-        issues.extend(validate_transition_key(key))
-        if not isinstance(groups, list) or not groups:
-            issues.append(
-                f"  data['{key}']: must be a non-empty array of data groups"
-            )
-            continue
-        for group_idx, group in enumerate(groups):
-            issues.extend(_validate_data_entry(
-                group, f"data['{key}'][{group_idx}]",
-            ))
+    if not groups:
+        issues.append("  data array is empty")
+        return issues
+    for group_idx, group in enumerate(groups):
+        issues.extend(_validate_data_group(group, f"data[{group_idx}]"))
     return issues
 
 
@@ -912,8 +946,8 @@ def _detect_snapshot(data: dict) -> str | None:
 
     PDG: top-level ``data`` is a dict of subgroups whose keys are ``obs@N``
     (sparse) plus an optional ``correlation``. Standard per-paper files
-    have ``transition-mode`` and a ``data`` object whose values are group
-    arrays, so the two shapes are unambiguous. HFLAV: no top-level ``data``;
+    have ``transition-mode`` and a ``data`` array of groups, so the two
+    shapes are unambiguous. HFLAV: no top-level ``data``;
     each top-level value is a subgroup containing an ``observables`` list.
     """
     if 'transition-mode' not in data and isinstance(data.get('data'), dict):
@@ -994,10 +1028,6 @@ def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
                 f"  {label}: missing 'error' or "
                 f"'error_upper'/'error_lower'"
             )
-
-    if 'latex' in obs and isinstance(obs['latex'], str):
-        issues.extend(validate_latex(obs['latex'], 'latex', label))
-
 
 def _validate_snapshot_correlation(
     sub: dict, label: str, n_obs: int, issues: list[str]
@@ -1190,17 +1220,18 @@ def validate_json(file_path: str) -> list[str]:
     if 'transition-mode' in data:
         all_issues.extend(validate_transition_mode(data['transition-mode']))
 
-    # 7. Check data: a transition-keyed object of group arrays.
+    # 7. Check data: an array of groups; each group maps transition
+    # channels to their observables and optionally carries one matrix.
     if 'data' not in data:
         all_issues.append("  Missing required field: data")
-    elif isinstance(data['data'], dict):
-        all_issues.extend(_validate_data_dict(data['data']))
+    elif isinstance(data['data'], list):
+        all_issues.extend(_validate_data_list(data['data']))
     else:
         all_issues.append(
-            "  data must be an object mapping each transition to a "
-            "non-empty array of data groups, e.g. "
-            "{'Lambdab0.2.p.l-.nuBar': [{'obs@1': {...}}, {'obs@1': {...}}]}; "
-            "put several groups of one channel in the same array"
+            "  data must be an array of data groups, e.g. "
+            "[{'B0.2.Kst0.mu+.mu-': ['$B^{0}\\\\to K^{*0}\\\\mu^{+}"
+            "\\\\mu^{-}$', {'obs@1': {...}}], 'correlation': [[1.0]]}]; "
+            "channels sharing one matrix belong in the same group"
         )
 
     # Report results
