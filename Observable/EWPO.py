@@ -155,11 +155,11 @@ st.markdown('''
 
 | transition-mode 值 | 适用范围 | 示例 |
 |-------------------|---------|------|
-| `electroweak precision` | Z 极点、W 质量、弱混合角 | LEP/SLC Z-pole |
-| `W production` | W 玻色子产生与衰变 | Tevatron/LHC W cross sections |
-| `Higgs decay` | Higgs 玻色子衰变 | $H \\to \\gamma\\gamma$, $H \\to ZZ^*$ |
-| `Higgs production` | Higgs 玻色子产生 | $pp \\to H$, VBF, ttH |
-| `low energy` | 低能精确测量 | $g-2$, 原子宇称破坏 |
-| `oblique corrections` | S, T, U 参数拟合 | New physics constraints |
+| `electroweak-precision` | Z 极点、W 质量、弱混合角 | LEP/SLC Z-pole |
+| `w-production` | W 玻色子产生与衰变 | Tevatron/LHC W cross sections |
+| `higgs-decay` | Higgs 玻色子衰变 | $H \\to \\gamma\\gamma$, $H \\to ZZ^*$ |
+| `higgs-production` | Higgs 玻色子产生 | $pp \\to H$, VBF, ttH |
+| `low-energy` | 低能精确测量 | $g-2$, 原子宇称破坏 |
+| `oblique-corrections` | S, T, U 参数拟合 | New physics constraints |
 | `scattering` | 电弱散射过程 | $e^+e^- \\to f\\bar{f}$ |
 ''')

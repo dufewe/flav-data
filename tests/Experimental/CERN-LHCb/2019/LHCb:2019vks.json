@@ -7,53 +7,49 @@
     "time": "2019.01.01",
     "abstract": "the CP-violating observables $S_{\\phi\\gamma}$ and $C_{\\phi\\gamma}$ and the mixing-induced observable $A_{\\phi\\gamma}^\\Delta$ from a time-dependent analysis of the $B^0_s \\to \\phi\\gamma$ decay rate",
     "pdf": "https://arxiv.org/pdf/1905.06284",
-    "transition-mode": "leptonic decay",
-    "data": [
-        {
-            "tot_correlation": [
-                [1.0, -0.04, -0.04],
-                [-0.04, 1.0, -0.04],
-                [-0.04, -0.04, 1.0]
-            ],
-            "obs@1": {
-                "name": "S_phigamma",
-                "latex": "$S_{\\phi\\gamma}$",
-                "value": "0.43",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "type@1_err_up": "0.3",
-                "type@1_err_down": "0.3",
-                "type@2_err_up": "0.11",
-                "type@2_err_down": "0.11",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
-            },
-            "obs@2": {
-                "name": "C_phigamma",
-                "latex": "$C_{\\phi\\gamma}$",
-                "value": "0.11",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "type@1_err_up": "0.29",
-                "type@1_err_down": "0.29",
-                "type@2_err_up": "0.11",
-                "type@2_err_down": "0.11",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
-            },
-            "obs@3": {
-                "name": "ADelta_phigamma",
-                "latex": "$A^\\Delta_{\\phi\\gamma}$",
-                "value": "-0.67",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "type@1_err_up": "0.37",
-                "type@1_err_down": "0.41",
-                "type@2_err_up": "0.17",
-                "type@2_err_down": "0.17",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
+    "transition-mode": "leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "S_phigamma",
+                    "latex": "$S_{\\phi\\gamma}$",
+                    "value": "0.43",
+                    "type@1_upper": "0.3",
+                    "type@1_lower": "0.3",
+                    "type@2_upper": "0.11",
+                    "type@2_lower": "0.11",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@2": {
+                    "name": "C_phigamma",
+                    "latex": "$C_{\\phi\\gamma}$",
+                    "value": "0.11",
+                    "type@1_upper": "0.29",
+                    "type@1_lower": "0.29",
+                    "type@2_upper": "0.11",
+                    "type@2_lower": "0.11",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@3": {
+                    "name": "ADelta_phigamma",
+                    "latex": "$A^\\Delta_{\\phi\\gamma}$",
+                    "value": "-0.67",
+                    "type@1_upper": "0.37",
+                    "type@1_lower": "0.41",
+                    "type@2_upper": "0.17",
+                    "type@2_lower": "0.17",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "total_correlation": [
+                    [1.0, -0.04, -0.04],
+                    [-0.04, 1.0, -0.04],
+                    [-0.04, -0.04, 1.0]
+                ]
             }
-        }
-    ]
+        ]
+    }
 }

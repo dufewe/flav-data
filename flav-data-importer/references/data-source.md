@@ -6,11 +6,11 @@ This document defines which data sources to use, in what order, and what data is
 
 ### Supported for Import
 - **Experimental measurements** from recognized collaborations: LHCb, CMS, ATLAS, Belle, BaBar, BESIII, CDF, D0, HFLAV, LEP, NA62, KOTO, etc.
-- **Theoretical calculations** from established groups: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD, etc.
+- **Theoretical calculations** (lattice QCD, perturbative QCD, first-principles or fixed-order results) from established groups: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD, etc.
 - **arXiv preprints** and **peer-reviewed journal papers**
 
 ### Not Supported for Import
-- **Phenomenological fits** — interpretations, not primary measurements.
+- **Phenomenological fits** — interpretations, not primary measurements. This includes Wilson-coefficient fits, CKM/parameter determinations, mass or coupling bounds, and averages produced by theory groups from existing data.
 - **Conference papers** — results without a formal preprint or publication.
 - **Report papers** — conference contributions or internal reports without peer review.
 - **Informal non-peer-reviewed results** — blog posts, personal web pages, unpublished notes.
@@ -161,7 +161,9 @@ curl -sL "https://ar5iv.labs.arxiv.org/html/<arxiv_id>" | grep -A 50 "Table"
 
 ## Output Formatting Rules
 
-See SKILL.md "Core Conventions" — the 7 hard rules there (matrix layout,
+See SKILL.md "Core Conventions" — the 9 hard rules there (matrix layout,
 single-line abstract, InspireHEP author format, LaTeX-only Unicode,
-canonical transition order, category-separated dictionaries, and the
-transition-keyed `data` dictionary) apply to all JSON output.
+canonical transition order, one group per property set, the
+transition-keyed `data` object of group arrays, conditional
+`collaboration`, and `aN_FF` form-factor naming)
+apply to all JSON output.

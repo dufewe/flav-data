@@ -100,24 +100,18 @@ def detect_years(lab, group, year_min, year_max, _get_json_func, base_path, fold
 # Dashboard UI
 # ---------------------------------------------------------
 def iter_data_groups(data):
-    """Yield ``(transition, category, group)`` for both ``data`` schemas.
+    """Yield ``(transition, group)`` from the ``data`` object.
 
-    New files use ``{transition: {category: [group, ...]}}``; legacy
-    files still use a flat list, for which the first two values are
-    ``None``.
+    Each key is a transition channel whose value is a non-empty list of
+    data groups; a channel may carry several groups.
     """
-    if isinstance(data, dict):
-        for transition, categories in data.items():
-            if not isinstance(categories, dict):
-                continue
-            for category, groups in categories.items():
-                if not isinstance(groups, list):
-                    continue
-                for group in groups:
-                    yield transition, category, group
-    elif isinstance(data, list):
-        for group in data:
-            yield None, None, group
+    if not isinstance(data, dict):
+        return
+    for transition, groups in data.items():
+        if not isinstance(groups, list):
+            continue
+        for group in groups:
+            yield transition, group
 
 
 def run_dashboard(lab, group, year_min, year_max, get_json_func,
@@ -243,7 +237,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
         tot_obs = sum(
             sum(1 for k in entry if k.startswith("obs@"))
             for mode in filtered_data
-            for _, _, entry in iter_data_groups(mode.get('data', []))
+            for _, entry in iter_data_groups(mode.get('data', {}))
             if isinstance(entry, dict)
         )
 
@@ -301,15 +295,13 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
             )
             if expander.open:
                 with expander:
-                    data = json_detail.get('data', [])
-                    for transition, category, data_value in iter_data_groups(data):
+                    data = json_detail.get('data', {})
+                    for transition, data_value in iter_data_groups(data):
                         if not isinstance(data_value, dict):
                             continue
                         with st.container(border=True):
                             if transition:
-                                st.markdown(
-                                    fr'- **{transition}** ({category})'
-                                )
+                                st.markdown(fr'- **{transition}**')
                             data_obs = [value for key, value in data_value.items()
                                         if key.startswith("obs@")]
                             if data_obs:
@@ -320,11 +312,14 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                                         if "correlation" in key.lower()]
                             for key in data_cor:
                                 obs1 = data_value.get("obs@1", {})
-                                err_key = key.replace("correlation", "err")
-                                error_type = (
-                                    obs1.get(err_key, "Unknown")
-                                    if isinstance(obs1, dict) else "Unknown"
-                                )
+                                if key.startswith("total_"):
+                                    error_type = "total"
+                                else:
+                                    err_key = key.replace("correlation", "error")
+                                    error_type = (
+                                        obs1.get(err_key, "Unknown")
+                                        if isinstance(obs1, dict) else "Unknown"
+                                    )
                                 st.markdown(
                                     fr'- **{str(error_type).upper()}-CORRELATION**'
                                 )

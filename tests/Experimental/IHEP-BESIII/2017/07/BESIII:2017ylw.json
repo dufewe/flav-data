@@ -7,167 +7,169 @@
     "time": "2017-07",
     "abstract": "Using 2.93 fb-1 of data taken at 3.773 GeV with the BESIII detector operated at the BEPCII collider, we study the semileptonic decays D+ -> K0bar e+ nu_e and D+ -> pi0 e+ nu_e. We measure the absolute decay branching fractions and the differential decay rates, and determine the form factors and CKM matrix elements.",
     "pdf": "https://arxiv.org/pdf/1703.09084.pdf",
-    "transition-mode": "semileptonic decay",
-    "data": [
-        {
-            "obs@1": {
-                "name": "BR(D+.2.K0bar.e+.nue)",
-                "latex": "$\\mathcal{B}(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "0.0860",
-                "type@1_err": "0.0015",
-                "type@1_err_up": "0.0015",
-                "type@1_err_down": "0.0015"
+    "transition-mode": "semileptonic-decay",
+    "data": {
+        "D+.2.K0bar.e+.nue": [
+            {
+                "obs@1": {
+                    "name": "BR",
+                    "latex": "$\\mathcal{B}(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "0.0860",
+                    "error_upper": "0.0015",
+                    "error_lower": "0.0015"
+                }
             },
-            "obs@2": {
-                "name": "BR(D+.2.pi0.e+.nue)",
-                "latex": "$\\mathcal{B}(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "0.00363",
-                "type@1_err": "0.00009",
-                "type@1_err_up": "0.00009",
-                "type@1_err_down": "0.00009"
+            {
+                "obs@1": {
+                    "name": "f+.Vcs",
+                    "latex": "$f_+^K(0)|V_{cs}|$",
+                    "value": "0.7053",
+                    "error_upper": "0.0117",
+                    "error_lower": "0.0117"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "f+K",
+                    "latex": "$f_+^K(0)$",
+                    "value": "0.725",
+                    "error_upper": "0.012",
+                    "error_lower": "0.012"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "Vcs",
+                    "latex": "$|V_{cs}|$",
+                    "value": "0.944",
+                    "error_upper": "0.028",
+                    "error_lower": "0.028"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "alpha",
+                    "latex": "$\\alpha(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "0.294",
+                    "error_upper": "0.033",
+                    "error_lower": "0.033"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "mpole",
+                    "latex": "$m_{pole}(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "1.935",
+                    "error_upper": "0.018",
+                    "error_lower": "0.018"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "r1",
+                    "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "-2.18",
+                    "error_upper": "0.15",
+                    "error_lower": "0.15"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "r1",
+                    "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "-1.76",
+                    "error_upper": "0.25",
+                    "error_lower": "0.25"
+                },
+                "obs@2": {
+                    "name": "r2",
+                    "latex": "$r_2(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
+                    "value": "-13.4",
+                    "error_upper": "6.4",
+                    "error_lower": "6.4"
+                }
             }
-        },
-        {
-            "obs@1": {
-                "name": "f+(D+.2.K0bar.e+.nue).Vcs",
-                "latex": "$f_+^K(0)|V_{cs}|$",
-                "value": "0.7053",
-                "type@1_err": "0.0117",
-                "type@1_err_up": "0.0117",
-                "type@1_err_down": "0.0117"
+        ],
+        "D+.2.pi0.e+.nue": [
+            {
+                "obs@1": {
+                    "name": "BR",
+                    "latex": "$\\mathcal{B}(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "0.00363",
+                    "error_upper": "0.00009",
+                    "error_lower": "0.00009"
+                }
             },
-            "obs@2": {
-                "name": "f+(D+.2.pi0.e+.nue).Vcd",
-                "latex": "$f_+^\\pi(0)|V_{cd}|$",
-                "value": "0.1400",
-                "type@1_err": "0.0029",
-                "type@1_err_up": "0.0029",
-                "type@1_err_down": "0.0029"
+            {
+                "obs@1": {
+                    "name": "f+.Vcd",
+                    "latex": "$f_+^\\pi(0)|V_{cd}|$",
+                    "value": "0.1400",
+                    "error_upper": "0.0029",
+                    "error_lower": "0.0029"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "f+pi",
+                    "latex": "$f_+^\\pi(0)$",
+                    "value": "0.622",
+                    "error_upper": "0.012",
+                    "error_lower": "0.012"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "Vcd",
+                    "latex": "$|V_{cd}|$",
+                    "value": "0.210",
+                    "error_upper": "0.009",
+                    "error_lower": "0.009"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "alpha",
+                    "latex": "$\\alpha(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "0.285",
+                    "error_upper": "0.058",
+                    "error_lower": "0.058"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "mpole",
+                    "latex": "$m_{pole}(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "1.898",
+                    "error_upper": "0.020",
+                    "error_lower": "0.020"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "r1",
+                    "latex": "$r_1(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "-2.01",
+                    "error_upper": "0.13",
+                    "error_lower": "0.13"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "r1",
+                    "latex": "$r_1(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "-2.23",
+                    "error_upper": "0.42",
+                    "error_lower": "0.42"
+                },
+                "obs@2": {
+                    "name": "r2",
+                    "latex": "$r_2(D^+ \\to \\pi^0 e^+ \\nu_e)$",
+                    "value": "1.4",
+                    "error_upper": "2.5",
+                    "error_lower": "2.5"
+                }
             }
-        },
-        {
-            "obs@1": {
-                "name": "f+K(D+.2.K0bar.e+.nue)",
-                "latex": "$f_+^K(0)$",
-                "value": "0.725",
-                "type@1_err": "0.012",
-                "type@1_err_up": "0.012",
-                "type@1_err_down": "0.012"
-            },
-            "obs@2": {
-                "name": "f+pi(D+.2.pi0.e+.nue)",
-                "latex": "$f_+^\\pi(0)$",
-                "value": "0.622",
-                "type@1_err": "0.012",
-                "type@1_err_up": "0.012",
-                "type@1_err_down": "0.012"
-            }
-        },
-        {
-            "obs@1": {
-                "name": "Vcs(D+.2.K0bar.e+.nue)",
-                "latex": "$|V_{cs}|$",
-                "value": "0.944",
-                "type@1_err": "0.028",
-                "type@1_err_up": "0.028",
-                "type@1_err_down": "0.028"
-            },
-            "obs@2": {
-                "name": "Vcd(D+.2.pi0.e+.nue)",
-                "latex": "$|V_{cd}|$",
-                "value": "0.210",
-                "type@1_err": "0.009",
-                "type@1_err_up": "0.009",
-                "type@1_err_down": "0.009"
-            }
-        },
-        {
-            "obs@1": {
-                "name": "mpole(D+.2.K0bar.e+.nue)",
-                "latex": "$m_{pole}(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "1.935",
-                "type@1_err": "0.018",
-                "type@1_err_up": "0.018",
-                "type@1_err_down": "0.018"
-            },
-            "obs@2": {
-                "name": "mpole(D+.2.pi0.e+.nue)",
-                "latex": "$m_{pole}(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "1.898",
-                "type@1_err": "0.020",
-                "type@1_err_up": "0.020",
-                "type@1_err_down": "0.020"
-            }
-        },
-        {
-            "obs@1": {
-                "name": "alpha(D+.2.K0bar.e+.nue)",
-                "latex": "$\\alpha(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "0.294",
-                "type@1_err": "0.033",
-                "type@1_err_up": "0.033",
-                "type@1_err_down": "0.033"
-            },
-            "obs@2": {
-                "name": "alpha(D+.2.pi0.e+.nue)",
-                "latex": "$\\alpha(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "0.285",
-                "type@1_err": "0.058",
-                "type@1_err_up": "0.058",
-                "type@1_err_down": "0.058"
-            }
-        },
-        {
-            "obs@1": {
-                "name": "r1(D+.2.K0bar.e+.nue)",
-                "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "-2.18",
-                "type@1_err": "0.15",
-                "type@1_err_up": "0.15",
-                "type@1_err_down": "0.15"
-            },
-            "obs@2": {
-                "name": "r1(D+.2.pi0.e+.nue)",
-                "latex": "$r_1(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "-2.01",
-                "type@1_err": "0.13",
-                "type@1_err_up": "0.13",
-                "type@1_err_down": "0.13"
-            }
-        },
-        {
-            "obs@1": {
-                "name": "r1(D+.2.K0bar.e+.nue)",
-                "latex": "$r_1(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "-1.76",
-                "type@1_err": "0.25",
-                "type@1_err_up": "0.25",
-                "type@1_err_down": "0.25"
-            },
-            "obs@2": {
-                "name": "r2(D+.2.K0bar.e+.nue)",
-                "latex": "$r_2(D^+ \\to \\bar K^0 e^+ \\nu_e)$",
-                "value": "-13.4",
-                "type@1_err": "6.4",
-                "type@1_err_up": "6.4",
-                "type@1_err_down": "6.4"
-            },
-            "obs@3": {
-                "name": "r1(D+.2.pi0.e+.nue)",
-                "latex": "$r_1(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "-2.23",
-                "type@1_err": "0.42",
-                "type@1_err_up": "0.42",
-                "type@1_err_down": "0.42"
-            },
-            "obs@4": {
-                "name": "r2(D+.2.pi0.e+.nue)",
-                "latex": "$r_2(D^+ \\to \\pi^0 e^+ \\nu_e)$",
-                "value": "1.4",
-                "type@1_err": "2.5",
-                "type@1_err_up": "2.5",
-                "type@1_err_down": "2.5"
-            }
-        }
-    ]
+        ]
+    }
 }

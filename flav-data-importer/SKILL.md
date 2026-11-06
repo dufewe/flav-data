@@ -73,16 +73,15 @@ unicode_to_latex("B⁰ → K*⁰ μ⁺μ⁻")   # → "B^{0} \\to K*^{0} \\mu^{+
 to_bibtex("Aaij, Roel")               # → "Aaij, R."
 
 # Observable name → LaTeX field for obs@N.latex
-# (expands the OBSERVABLE abbreviation; does not expand the transition notation)
-latex_for_obs("FL(B0.2.Kst0.mu+.mu-)")  # → "$F_L(B0.2.Kst0.mu+.mu-)$"
+# (expands the OBSERVABLE abbreviation; the name itself carries no channel)
+latex_for_obs("FL")                     # → "$F_L$"
 latex_for_obs("gammaCKM")               # → "$\\gamma$"
 latex_for_obs("Mass(B0)")               # → "$M_{B0}$"
 ```
 
-Note: `latex_for_obs` does **not** expand transition notation
-(`B0.2.Kst0.mu+.mu-` is left as-is). For the fully-expanded form (e.g.
-`$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$`), see `references/obs-abbr.md`
-§4 and write the `latex` field by hand.
+Note: the `latex` field is the fully-expanded expression including the
+transition (e.g. `$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$`). See
+`references/obs-abbr.md` §4 and write it by hand from the data key.
 
 ## Tool Inventory
 
@@ -111,8 +110,8 @@ Note: `latex_for_obs` does **not** expand transition notation
 | Supported | Not Supported |
 |-----------|--------------|
 | Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Conference/report papers (no formal preprint) |
-| HFLAV/PDG snapshots (special schema) | Fits and global averages derived downstream |
-| Theoretical groups (HPQCD, RBC/UKQCD, etc.) | Unpublished results, theses |
+| Published experimental combinations and HFLAV/PDG snapshots | Fit results, parameter determinations, bounds, and averages produced by theory groups from existing data |
+| Theoretical calculations (HPQCD, lattice QCD, perturbative QCD, etc.) | Unpublished results, theses |
 | Multi-collaboration papers | Internal notes (CDS restricted) |
 
 ## Workflow
@@ -191,7 +190,8 @@ common = load_script("common")
    Table names (`"Table 9"`) carry no type information — always use
    `detect_table_type()` rather than the name. Each observable data point
    carries its own `q2min`/`q2max` (pairing is positional with
-   `independent_variables`), so one q² bin becomes one group in the transition's category list.
+   `independent_variables`), so one q² bin becomes one group in that
+   transition's group array under `data`.
    If HEPData is unavailable or incomplete, fall back to the PDF + pymupdf.
    See `references/hepdata-cli.md` and `references/data-source.md`.
 
@@ -206,6 +206,8 @@ common = load_script("common")
        # ----- from inspirehep-ext (extract_metadata) -----
        "inspire-hep":     meta["inspire_hep_link"],     # Markdown link "[TexKey](url)"
        "author":          meta["author_str"],            # BibTeX form, see SKILL.md rule 3
+       # Named collaborations only; omit this key entirely for
+       # individual/small-group papers (SKILL.md rule 8).
        "collaboration":   meta["collaboration"],
        "title":           meta["title"],                 # already Unicode→LaTeX
        "abstract":        meta["abstract"],             # already Unicode→LaTeX
@@ -214,40 +216,33 @@ common = load_script("common")
        "time":            arxiv["time"],                 # "YYYY.MM.DD" (v1 submission date)
        "pdf":             arxiv["pdf_url"],              # prefer arXiv over InspireHEP
        # ----- human-picked (per references/json-meta.md §"transition-mode Values") -----
-       "transition-mode": "semileptonic decay",          # 7-value whitelist
+       "transition-mode": "semileptonic-decay",          # hyphenated whitelist
        "data": {
-           # transition channel -> observable category -> list of groups
-           "B0.2.Kst0.mu+.mu-": {
-               "angular": [
+           # one key per transition channel; each value is an array of
+           # data groups for that channel
+           "B0.2.Kst0.mu+.mu-": [
+               {
                    # each group: {"obs@1": {...}, ..., "type@1_correlation": [...]}
                    # for each obs@N:
-                   #   "name":  "FL(B0.2.Kst0.mu+.mu-)"        # canonical form (per obs-abbr.md §1)
+                   #   "name":  "FL"                            # symbol only; channel is the data key
                    #   "latex": "$F_L(B^{0} \\to K^{*0} \\mu^{+}\\mu^{-})$"  # fully-expanded LaTeX
                    #   "value": "0.69"
-                   #   "type@1_err":      "stat"
-                   #   "type@1_err_up":   "0.035"
-                   #   "type@1_err_down": "0.036"
+                   #   "type@1_error": "stat"
+                   #   "type@1_upper": "0.035"
+                   #   "type@1_lower": "0.036"
                    # optionally: "q2min": "0.1", "q2max": "1.1", etc.
-               ]
-           }
+               }
+           ]
        },
    }
    ```
 
-   `data` is a dictionary keyed by the transition channel (`A.B.2.C.D`,
-   or `no-transition` for basic observables such as `MZ` or `Tau(B0)`).
-   Each value is a dictionary of observable categories, and each category
-   holds a non-empty list of data groups. See rules 6 and 7 below and
-   `references/json-meta.md` §"Data Entries".
-
-   Legacy files still use the flat list form below; the validator accepts
-   it during migration, but new files must use the dictionary form:
-
-   ```json
-   "data": [
-       {"obs@1": {"...": "..."}, "type@1_correlation": [[1.0]]}
-   ]
-   ```
+   `data` is an object keyed by transition channel (`A.B.2.C.D`, or
+   `no-transition` for basic observables such as `MZ` or `Tau(B0)`).
+   Each value is a non-empty array of data groups; add another element
+   when the channel carries several groups with different properties
+   (fit method, kinematic bin, matrix).
+   See rules 6 and 7 below and `references/json-meta.md` §"Data Entries".
 
    Field-source priorities when there are two candidates:
    - **Title / Abstract**: InspireHEP preferred (LaTeX-preserved);
@@ -281,11 +276,10 @@ subgroups; HFLAV has top-level `HFLAV@...` subgroup keys containing an
 `observables` list. Snapshots are validated against their own relaxed
 schema (see `references/json-meta.md` §"Non-Standard Schemas").
 
-For standard files the dict-shaped `data` schema is validated strictly
-(unknown observable fields, error triplets/labels, one measurement
-format, category membership, transition match, and particle masses);
-the legacy list schema is still accepted but only receives the older
-permissive checks until the file is migrated.
+For standard files the transition-keyed `data` object is validated
+strictly (unknown observable fields, error triplets/labels, one
+measurement format, transition match, and particle masses). Each key is
+a transition channel and each value is a non-empty array of groups.
 
 ### Step 3: Cleanup
 
@@ -304,12 +298,12 @@ find Experimental/CERN-LHCb/2015 -mindepth 2 -maxdepth 2 -name 'LHCb:2015svh.jso
 
 ## Core Conventions
 
-These are the 7 hard rules for writing JSON files in this repo. Each
+These are the 9 hard rules for writing JSON files in this repo. Each
 reference doc points back to these.
 
 1. **Matrix format (row-per-line)** — each matrix row on one line:
    ```json
-   "tot_correlation": [
+   "total_correlation": [
        [1.0, 0.5, 0.3],
        [0.5, 1.0, 0.2],
        [0.3, 0.2, 1.0]
@@ -346,8 +340,8 @@ reference doc points back to these.
    if a character appears in a flav-data JSON that isn't in the mapping,
    convert it by hand.
 
-5. **Transition symbol order** — inside `OBS(transition)`, the transition
-   follows `obs-abbr.md` §1:
+5. **Transition symbol order** — inside a `data` transition key, the
+   transition follows `obs-abbr.md` §1:
    - `.2.` separates the initial state from the final state (repeat it for
      cascades, e.g. `p.p.2.W+.2.mu+.nu`).
    - Within each state, order by particle type:
@@ -366,29 +360,44 @@ reference doc points back to these.
    W/Z/γ particles are not order-checked; compact legacy forms without
    `.2.` remain accepted. Mass values come from
    `references/particle-masses.json` (PDG 2024). A particle with no mass
-   there is an error for a dict-schema transition key; add its PDG mass
+   there is an error for a transition key; add its PDG mass
    (or list it under `non_orderable` when it cannot be ordered) before
    using the transition.
 
-6. **Separate observable categories into separate dictionaries** — do not
-   mix unlike measurements in one list. Angular coefficients, differential
-   distributions, branching fractions, asymmetries, ratios, lifetimes,
-   mass/mixing parameters, cross sections, and miscellaneous quantities
-   each get their own category key. In particular, angular observables
+6. **One group per property set** — a data group is a set of observables
+   linked by one correlation/covariance matrix and one measurement
+   context. Do not merge into one group measurements whose fit method,
+   dataset, or kinematic region differ; add another element to the same
+   channel's group array instead. In particular, angular observables
    (`FL`, `S3`, `P5p`, ...) and differential widths (`dBr/dq2`, `dGdw`,
-   ...) must never share a dictionary. Allowed categories:
-   `angular`, `differential`, `branching`, `asymmetry`, `ratio`,
-   `lifetime`, `mass-mixing`, `cross-section`, `other`.
+   ...) never share a group unless the source matrix genuinely couples
+   them.
 
-7. **`data` is a dictionary keyed by transition channel** — the top-level
-   `data` value is an object whose keys are the transition symbols
-   (`A.B.2.C.D`, or `no-transition` for observables without a transition);
-   each key maps to an object of categories (rule 6), and each category
-   maps to a non-empty list of data groups. Every observable inside a
-   transition's categories must carry that same transition in its `name`.
-   The flat-list form (`"data": [...]`) is legacy: the validator still
-   accepts it for existing files, but new and migrated files must use the
-   dictionary form.
+7. **`data` is an object of channel → group arrays** — each key is the
+   transition symbol (`A.B.2.C.D`, or `no-transition` for observables
+   without a transition); its value is a non-empty array of data groups.
+   Several groups of one channel are separate elements of that array.
+   The key carries the channel, so observable `name` values must **not**
+   repeat it: `FL`, not `FL(B0.2.Kst0.mu+.mu-)`. Conditions and method
+   tags stay in the name (`Q6[mu-e]`, `Vcb(CLN)`); the validator rejects
+   an embedded transition.
+
+8. **`collaboration` only for named collaborations** — include the key for
+   experimental collaborations, HFLAV/PDG, and large theory collaborations
+   (HPQCD, JLQCD, RBC/UKQCD, ...). For papers by individual authors or
+   small theory groups, omit the key entirely rather than repeating the
+   author's surname there.
+
+9. **Form-factor expansion coefficients use `aN_FF`** — `N` is the
+   expansion order (0, 1, 2, ...) and `FF` is the form-factor symbol from
+   `references/obs-abbr.md` §2.4 (`Fp`, `F0`, `Fv`, `Gp`, `G0`, `Gv`,
+   `hp`, `hv`, `fp`, `f0`, `fT`, `V`, `A0`, `A1`, `A12`, `T1`, `T2`,
+   `T23`, ...). Examples: `a0_Fp`, `a1_F0`, `a2_Gv`. When one reported
+   number applies to several form factors (e.g. both `a0_Gv` and
+   `a0_Gp`), write one observable per form factor and repeat its
+   value/errors; never join symbols into a name like `a0_Gv_Gp`. Fit
+   choices (nominal, higher-order, ...) belong in the `method` field
+   (`"nominal"`, `"higher-order"`), never in the name.
 
 ## Decision Points
 
@@ -399,7 +408,7 @@ accepts any non-null Markdown link as the `inspire-hep` value.
 
 **Q: What if there's no HEPData entry for this paper?**
 A: Fall back to extracting from the source PDF via `pymupdf` (preferred)
-or table screenshots via `vision_analyze`. An empty `data: []` fails
+or table screenshots via `vision_analyze`. An empty `data: {}` fails
 validation, so a paper with no extractable data must not be committed
 until its data is filled in.
 
@@ -409,10 +418,11 @@ authoritative author list and DOI. Use InspireHEP for metadata, arXiv
 for PDF.
 
 **Q: How to handle mixed q² bins across different obs entries?**
-A: Each q² bin is its own group (an element of the category list) carrying `q2min`/`q2max` (or
+A: Each q² bin is its own group (an element of that channel's `data`
+array) carrying `q2min`/`q2max` (or
 per-`obs@N` boundaries when observables within one matrix use different
 bins). The `[condition]` syntax is for multi-decay-channel ratios only
-(e.g. `RBr(B+.2.K+.l+.l-)[mu/e]`).
+(e.g. `RBr[mu/e]` under the channel key).
 
 ## Troubleshooting
 
@@ -421,42 +431,49 @@ bins). The `[condition]` syntax is for multi-decay-channel ratios only
 Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
 `[FAIL]` lines above the summary. Common ones:
 
-- `obs@N: missing required field: type@1_err` — add a `type@N_err` field
+- `obs@N: missing required field: type@1_error` — add a `type@N_error` field
   with one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`.
-- `obs@N: missing required field: type@1_err_up`/`_down` — paired
+- `obs@N: missing required field: type@1_upper`/`_lower` — paired
   asymmetric error bars; both required if either present.
 - `transition-mode: invalid value` — must be one of:
-  `leptonic decay`, `semileptonic decay`, `non-leptonic decay`,
-  `radiative decay`, `neutron beta decay`, `Higgs decay`, `scattering`
+  `leptonic-decay`, `semileptonic-decay`, `non-leptonic-decay`,
+  `radiative-decay`, `neutron-beta-decay`, `higgs-decay`, `mixing`,
+  `scattering`, `electroweak-precision`, `w-production`,
+  `higgs-production`, `low-energy`, `oblique-corrections`
   (see `references/json-meta.md` §"transition-mode Values").
 - `matrix not symmetric [i][j] != [j][i]` — fix the matrix entries.
   Re-check the source PDF table for the correct `ij`/`ji` pair.
 
-### Error: "Validator says transition symbol missing"
+### Error: "name must not embed the transition channel"
 
-The `OBS(transition)` syntax is **only** for observables from a specific
-decay channel. **Basic observables** (particle masses, lifetimes, CKM
-parameters, EW parameters) do not take a transition — write them as
-`Mass(Z)`, `Tau(e-)`, `gammaCKM`, `MZ`, etc. (see `references/obs-abbr.md`
+The channel lives in the `data` key. Keep only the observable symbol in
+`name`: `FL`, `Br`, `a0_F0`, `dBr/dq2`. Keep a `[condition]` or a method
+tag when the source reports one (`Q6[mu-e]`, `Vcb(CLN)`), but never
+`FL(B0.2.Kst0.mu+.mu-)`. **Basic observables** (particle masses,
+lifetimes, CKM parameters, EW parameters) use their documented forms:
+`Mass(Z)`, `Tau(e-)`, `gammaCKM`, `MZ` (see `references/obs-abbr.md`
 §2.1).
 
-If you see this error for an observable that should NOT have a transition,
-rename it to its basic-observable form, not to `OBS(transition)`.
+### Error: "data must be an object" / "obs@N: must be an object"
 
-### Error: "data[...] must be an object" / "obs@N: must be an object"
-
-With the dict schema, `data[transition][category]` must be a **list** of
-dicts (`[{"obs@1": {...}, "obs@2": {...}, ...}]`), each dict a data group,
-and each `obs@N` value must itself be an object. See
-`assets/workflow-lhcb-2015svh.md` Step 4 for the canonical shape.
+`data` must be an object keyed by transition channel, each value a
+non-empty array of **data group** dicts
+(`{"obs@1": {...}, "obs@2": {...}, ...}`), and each `obs@N` value must
+itself be an object. See `assets/workflow-lhcb-2015svh.md` Step 4 for
+the canonical shape.
 
 ### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet"
 
-New (dict-schema) files accept only the documented `obs@N` fields.
-Component errors must be a complete `type@N_err`, `type@N_err_up`,
-`type@N_err_down` triplet, and the label must be one of `stat`, `syst`,
-`lumi`, `norm`, `theo`, `expe`. Use `tot_err_up`/`tot_err_down` for a
+Per-paper files accept only the documented `obs@N` fields:
+`name`, `latex`, `value`, `unit`, `ref`, `method`, `dataset`, `note`,
+the kinematic boundaries, `error_upper`/`error_lower`, and the
+`type@N_*` keys.
+Component errors must be a complete `type@N_error`, `type@N_upper`,
+`type@N_lower` triplet, and the label must be one of `stat`, `syst`,
+`lumi`, `norm`, `theo`, `expe`. Use `error_upper`/`error_lower` for a
 single combined error, and never mix component errors with total errors.
+`ref` may accompany either scheme, and upper limits may be combined with
+a fit result (`value` + errors) or stand alone (limit only).
 
 ### Error: "HEPData 401 / Cloudflare blocked"
 
@@ -486,12 +503,14 @@ Before committing any new or updated JSON file:
 - [ ] `inspire-hep` is `[<TexKey>](https://inspirehep.net/literature/<recid>)` with verified TexKey
 - [ ] `author` follows the 1 / 2–3 / 4+ tier rule (initials only)
 - [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
-- [ ] `data` is a dict keyed by transition channel (`A.B.2.C.D` or `no-transition`), then by observable category, then a list of groups (legacy list schema only for unmigrated files)
-- [ ] Each `obs@N` has `name` and `latex`, plus exactly one measurement format
-      (`value` + complete `type@N_err`/`_err_up`/`_err_down` triplets,
-      `tot_err_up`/`tot_err_down`, upper limit, or snapshot `error`)
-- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; no unknown observable fields
-- [ ] Angular and differential observables are filed under separate categories
+- [ ] `data` is an object keyed by transition channel; each value is a non-empty array of groups, and no observable repeats the channel in its `name`
+- [ ] Each `obs@N` has `name` and `latex`, plus exactly one error scheme
+      (`value` + complete `type@N_error`/`_upper`/`_lower` triplets or
+      `error_upper`/`error_lower`), optionally with `ref` and/or upper limits;
+      upper-limit-only entries carry no `value` or errors
+- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; only `method`, `dataset`, `note` and documented kinematic fields are allowed alongside them
+- [ ] Groups that differ in method, dataset, or kinematic region are separate elements of the channel's group array, not merged
+- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_Fp`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_Gp`), never joined; fit choices are in `method`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
 - [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
 - [ ] Annual index file includes the new paper if added (or excludes if deleted)
@@ -527,13 +546,13 @@ A: Yes. Set `arxiv` to `null`. Look up the paper by DOI or title on
 InspireHEP and use the InspireHEP-only metadata path.
 
 **Q: How do I name the observable for a branching ratio?**
-A: `Br(transition)[condition]` if multi-decay, otherwise just
-`Br(B+.2.K+.mu+.mu-)` for a single decay. For Lepton Flavor Universality
-ratios, use `RBr(B+.2.K+.l+.l-)[mu/e]` (R + obs + transition + condition).
+A: Use `Br`; the decay channel is the enclosing `data` key. For Lepton
+Flavor Universality ratios, use `RBr[mu/e]` (R + observable + condition)
+under the same channel key.
 
 **Q: What about a CP asymmetry measurement?**
-A: Use `ACP(transition)` for time-integrated, or `ACP_bplus(transition)`
-for the B+ specific case. See `references/obs-abbr.md` §2.3.
+A: Use `ACP` for time-integrated, or `ACP_bplus` for the B+ specific
+case; the channel is the `data` key. See `references/obs-abbr.md` §3.
 
 **Q: Why are there `obs@N` suffixes on field names?**
 A: To group the observables that share one correlation/covariance matrix

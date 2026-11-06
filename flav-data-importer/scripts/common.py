@@ -117,6 +117,12 @@ _MULTI_CHAR_REPLACEMENTS = [
     # Invisible / zero-width characters
     ('\u200b', ''),      # zero-width space
     ('\ufeff', ''),      # BOM
+    # Latin ligatures (common in PDF text extraction)
+    ('\ufb00', 'ff'),
+    ('\ufb01', 'fi'),
+    ('\ufb02', 'fl'),
+    ('\ufb03', 'ffi'),
+    ('\ufb04', 'ffl'),
 ]
 
 
@@ -312,18 +318,18 @@ def latex_for_obs(obs_name: str) -> str:
     """Build the LaTeX string for an observable name.
 
     The flav-data JSON schema requires every ``obs@N`` entry to carry a
-    ``latex`` field containing a dollar-sign-wrapped rendering of the same
-    expression as ``name``. For example::
+    ``latex`` field. The observable ``name`` is the bare symbol (the
+    transition lives in the ``data`` key), so this helper renders the
+    symbol and any ``[condition]`` it carries. For example::
 
         latex_for_obs("gammaCKM")                  # → "$\\gamma$"
         latex_for_obs("Mass(B0)")                  # → "$M_{B0}$"
-        latex_for_obs("FL(B0.2.Kst0.mu+.mu-)")     # → "$F_L(B0.2.Kst0.mu+.mu-)$"
+        latex_for_obs("FL")                        # → "$F_L$"
 
     **Limitations.** This helper applies the OBSERVABLE ABBREVIATION table
-    (e.g. ``FL`` → ``F_L``) but does NOT expand the transition notation
-    (e.g. ``B0.2.Kst0`` is NOT auto-expanded to
-    ``B^{0} \\to K^{*0}``). The transition form is left in place so the
-    downstream fitter can re-parse it. If you need fully expanded LaTeX,
+    (e.g. ``FL`` → ``F_L``) and renders a parenthesized particle as a
+    subscript (``Mass(B0)`` → ``M_{B0}``). Method tags such as
+    ``Vcb(CLN)`` are not special-cased. If you need fully expanded LaTeX,
     see ``references/obs-abbr.md`` §4 for the LaTeX mapping and write the
     field by hand, or extend this helper.
 
@@ -348,14 +354,5 @@ def latex_for_obs(obs_name: str) -> str:
             abbr, particle = bare.group(1), bare.group(2)
             sym = OBSERVABLE_LATEX.get(abbr, abbr)
             return f'${sym}_{{{particle}}}$'
-
-    # Transition form: "ABBR(transition)" or "ABBR(transition)[condition]"
-    # ABBR allows digits and lowercase (e.g. S3, P5p, dMs)
-    m = re.match(r'^([A-Za-z][A-Za-z0-9/]*)\(([^)]*)\)(\[[^\]]*\])?$', obs_name)
-    if m:
-        abbr = m.group(1)
-        sym = OBSERVABLE_LATEX.get(abbr, abbr)
-        condition = m.group(3) or ''
-        return f'${sym}({m.group(2)}){condition}$'
 
     return f'${obs_name}$'  # last-ditch fallback

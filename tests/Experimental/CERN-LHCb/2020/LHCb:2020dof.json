@@ -5,81 +5,75 @@
     "title": "Strong constraints on the $b \\to s\\gamma$ photon polarisation from $B^0 \\to K^{*0} e^+ e^-$ decays",
     "arxiv": "[hep-ex/2010.06011](https://arxiv.org/pdf/2010.06011)",
     "time": "2020.01.01",
-    "abstract": "an angular analysis of the $B^0 \\to K^{\\ast0} e^+ e^−$ decay, using a data sample corresponding to an integrated luminosity of 9 fb$^{−1}$ of $pp$ collisions",
+    "abstract": "an angular analysis of the $B^0 \\to K^{\\ast0} e^+ e^-$ decay, using a data sample corresponding to an integrated luminosity of 9 fb$^{-1}$ of $pp$ collisions",
     "pdf": "https://arxiv.org/pdf/2010.06011",
-    "transition-mode": "leptonic decay",
-    "data": [
-        {
-            "tot_correlation": [
-                [1.0, -0.02, -0.01, 0.02],
-                [-0.02, 1.0, 0.05, 0.02],
-                [-0.01, 0.05, 1.0, 0.1],
-                [0.02, 0.02, 0.1, 1.0]
-            ],
-            "obs@1": {
-                "name": "FL(B02Kstee)",
-                "latex": "$F_L(B^0\\to K^{*0}e^+e^-)$",
-                "value": "0.044",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "q2min": "0.0008",
-                "q2max": "0.257",
-                "method": "maximum likelihood",
-                "type@1_err_up": "0.026",
-                "type@1_err_down": "0.026",
-                "type@2_err_up": "0.014",
-                "type@2_err_down": "0.014",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
-            },
-            "obs@2": {
-                "name": "ATRe(B02Kstee)",
-                "latex": "$A_T^{\\rm Re}(B^0\\to K^{*0}e^+e^-)$",
-                "value": "-0.06",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "q2min": "0.0008",
-                "q2max": "0.257",
-                "method": "maximum likelihood",
-                "type@1_err_up": "0.08",
-                "type@1_err_down": "0.08",
-                "type@2_err_up": "0.02",
-                "type@2_err_down": "0.02",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
-            },
-            "obs@3": {
-                "name": "AT2(B02Kstee)",
-                "latex": "$A_T^{(2)}(B^0\\to K^{*0}e^+e^-)$",
-                "value": "0.11",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "q2min": "0.0008",
-                "q2max": "0.257",
-                "method": "maximum likelihood",
-                "type@1_err_up": "0.1",
-                "type@1_err_down": "0.1",
-                "type@2_err_up": "0.02",
-                "type@2_err_down": "0.02",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
-            },
-            "obs@4": {
-                "name": "ATIm(B02Kstee)",
-                "latex": "$A_T^{\\rm Im}(B^0\\to K^{*0}e^+e^-)$",
-                "value": "0.02",
-                "tot_err_up": "",
-                "tot_err_down": "",
-                "q2min": "0.0008",
-                "q2max": "0.257",
-                "method": "maximum likelihood",
-                "type@1_err_up": "0.1",
-                "type@1_err_down": "0.1",
-                "type@2_err_up": "0.01",
-                "type@2_err_down": "0.01",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
+    "transition-mode": "leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "FL",
+                    "latex": "$F_L(B^0\\to K^{*0}e^+e^-)$",
+                    "value": "0.044",
+                    "q2min": "0.0008",
+                    "q2max": "0.257",
+                    "method": "maximum likelihood",
+                    "type@1_upper": "0.026",
+                    "type@1_lower": "0.026",
+                    "type@2_upper": "0.014",
+                    "type@2_lower": "0.014",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@2": {
+                    "name": "ATRe",
+                    "latex": "$A_T^{\\rm Re}(B^0\\to K^{*0}e^+e^-)$",
+                    "value": "-0.06",
+                    "q2min": "0.0008",
+                    "q2max": "0.257",
+                    "method": "maximum likelihood",
+                    "type@1_upper": "0.08",
+                    "type@1_lower": "0.08",
+                    "type@2_upper": "0.02",
+                    "type@2_lower": "0.02",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@3": {
+                    "name": "AT2",
+                    "latex": "$A_T^{(2)}(B^0\\to K^{*0}e^+e^-)$",
+                    "value": "0.11",
+                    "q2min": "0.0008",
+                    "q2max": "0.257",
+                    "method": "maximum likelihood",
+                    "type@1_upper": "0.1",
+                    "type@1_lower": "0.1",
+                    "type@2_upper": "0.02",
+                    "type@2_lower": "0.02",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "obs@4": {
+                    "name": "ATIm",
+                    "latex": "$A_T^{\\rm Im}(B^0\\to K^{*0}e^+e^-)$",
+                    "value": "0.02",
+                    "q2min": "0.0008",
+                    "q2max": "0.257",
+                    "method": "maximum likelihood",
+                    "type@1_upper": "0.1",
+                    "type@1_lower": "0.1",
+                    "type@2_upper": "0.01",
+                    "type@2_lower": "0.01",
+                    "type@1_error": "stat",
+                    "type@2_error": "syst"
+                },
+                "total_correlation": [
+                    [1.0, -0.02, -0.01, 0.02],
+                    [-0.02, 1.0, 0.05, 0.02],
+                    [-0.01, 0.05, 1.0, 0.1],
+                    [0.02, 0.02, 0.1, 1.0]
+                ]
             }
-        }
-    ]
+        ]
+    }
 }

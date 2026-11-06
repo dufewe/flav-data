@@ -7,20 +7,22 @@
     "time": "2009.08.03",
     "abstract": "We present results for the moments of observed spectra in inclusive semileptonic B-meson decays to charm hadrons. The results are obtained from a sample of 232 x 10^6 Y(4S) -> B Bbar events collected with the BABAR detector at the PEP-II e+ e- collider. Using a global fit to the moments of the hadronic mass and lepton-energy spectra, we extract the heavy quark parameters |V_cb| = (42.05 +/- 0.45 +/- 0.70) x 10^-3 and BR(Bbar -> X_c l- nubar) = (10.64 +/- 0.17 +/- 0.06)%.",
     "pdf": "https://arxiv.org/pdf/0908.0415",
-    "transition-mode": "semi-leptonic decay",
-    "data": [
-        {
-            "obs@1": {
-                "name": "Br(Bbar.2.Xcl.nubar)",
-                "latex": "$\\\\mathcal{B}(\\\\bar{B}\\\\to X_{c}\\\\ell^{-}\\\\bar{\\\\nu}_{\\\\ell})$",
-                "value": "0.1064",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.0017",
-                "type@1_err_down": "0.0017",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.0006",
-                "type@2_err_down": "0.0006"
+    "transition-mode": "semileptonic-decay",
+    "data": {
+        "Bbar.2.Xcl.nubar": [
+            {
+                "obs@1": {
+                    "name": "Br",
+                    "latex": "$\\\\mathcal{B}(\\\\bar{B}\\\\to X_{c}\\\\ell^{-}\\\\bar{\\\\nu}_{\\\\ell})$",
+                    "value": "0.1064",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0017",
+                    "type@1_lower": "0.0017",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0006",
+                    "type@2_lower": "0.0006"
+                }
             }
-        }
-    ]
+        ]
+    }
 }

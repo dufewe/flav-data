@@ -12,43 +12,23 @@ import os
 import argparse
 
 REQUIRED_TOP_FIELDS = [
-    'inspire-hep', 'author', 'collaboration', 'title',
+    'inspire-hep', 'author', 'title',
     'arxiv', 'time', 'abstract', 'pdf', 'transition-mode', 'data'
 ]
+
+# ``collaboration`` is required only for named collaborations (experiments
+# and large theory groups). Individual/small-group papers omit it entirely.
+CONDITIONAL_TOP_FIELDS = ['collaboration']
 
 # Fields that must NOT appear in the JSON
 FORBIDDEN_FIELDS = ['year']
 
-# Standard measurement required fields
-REQUIRED_OBS_FIELDS_WITH_VALUE = [
-    'name', 'latex', 'value',
-    'type@1_err', 'type@1_err_up', 'type@1_err_down'
-]
-
-# Upper limit format required fields
-REQUIRED_OBS_FIELDS_WITH_UPPER = [
-    'name', 'latex',
-    'type@1_upper_limit', 'type@1_level'
-]
-
-# External reference format required fields
-REQUIRED_OBS_FIELDS_WITH_REF = [
-    'name', 'latex', 'value',
-    'tot_err_up', 'tot_err_down', 'ref'
-]
-
-# Total error format required fields (without ref)
-REQUIRED_OBS_FIELDS_WITH_TOT_ERR = [
-    'name', 'latex', 'value',
-    'tot_err_up', 'tot_err_down'
-]
-
 # Snapshot (HFLAV/PDG) observable fields. Unknown keys are rejected so
-# the per-paper error formats (type@N_err, ref, ...) cannot leak into a
+# the per-paper error formats (type@N_error, ref, ...) cannot leak into a
 # snapshot. See references/json-meta.md §"Non-Standard Schemas".
 SNAPSHOT_OBS_ALLOWED_FIELDS = {
     'name', 'latex', 'value',
-    'error', 'error_up', 'error_down', 'tot_err_up', 'tot_err_down',
+    'error', 'error_upper', 'error_lower',
     'unit', 'limit',
 }
 
@@ -59,19 +39,19 @@ STANDARD_ERROR_LABELS = {
 }
 
 # Per-paper observable fields. ``type@N_*`` keys are matched by pattern;
-# everything else must match exactly. Legacy-only spellings (``sta_err_up``,
-# ``type@N_err_name``, ``method``, ``dataset``, ...) are rejected in the
-# dict schema and tolerated only in legacy list-schema files.
+# everything else must match exactly.
 OBS_EXACT_FIELDS = {
     'name', 'latex', 'value', 'unit', 'ref',
-    'tot_err_up', 'tot_err_down',
+    'error_upper', 'error_lower',
+    # Optional provenance metadata carried over from imported papers.
+    'method', 'dataset', 'note',
 }
 _OBS_KEY_RE = re.compile(
-    r'type@\d+_(?:err|err_up|err_down|upper_limit|level)$'
+    r'type@\d+_(?:error|upper|lower|upper_limit|level)$'
 )
 _NUMERIC_OBS_KEY_RE = re.compile(
-    r'(?:value|type@\d+_(?:err_up|err_down|upper_limit)|'
-    r'tot_err_up|tot_err_down)$'
+    r'(?:value|type@\d+_(?:upper|lower|upper_limit)|'
+    r'error_upper|error_lower)$'
 )
 
 
@@ -84,26 +64,23 @@ def is_observable_field(key: str) -> bool:
 
 # transition-mode whitelist (json-meta.md §"transition-mode Values" table)
 VALID_TRANSITION_MODES = [
-    'leptonic decay',
-    'semileptonic decay',
-    'non-leptonic decay',
-    'radiative decay',
-    'neutron beta decay',
-    'Higgs decay',
+    'leptonic-decay',
+    'semileptonic-decay',
+    'non-leptonic-decay',
+    'radiative-decay',
+    'neutron-beta-decay',
+    'higgs-decay',
+    'mixing',
     'scattering',
+    'electroweak-precision',
+    'w-production',
+    'higgs-production',
+    'low-energy',
+    'oblique-corrections',
 ]
 
-# Basic observables that carry no transition (obs-abbr.md §2.1).
-BASIC_OBSERVABLE_NAMES = {
-    'MZ', 'MW', 'Mtop', 'MH', 'Mh',
-    'R_b', 'R_c',
-    '|Vtd|', '|Vts|', '|Vub|', '|Vcb|',
-    'S_phigamma', 'C_phigamma', 'ADelta_phigamma',
-    'gammaCKM', 'r', 'delta',
-}
-
 # Top-level fields allowed in the standard (per-paper) schema.
-TOP_LEVEL_ALLOWED_FIELDS = set(REQUIRED_TOP_FIELDS)
+TOP_LEVEL_ALLOWED_FIELDS = set(REQUIRED_TOP_FIELDS) | set(CONDITIONAL_TOP_FIELDS)
 
 # Snapshot schemas (json-meta.md §"Non-Standard Schemas").
 PDG_SUBGROUP_ALLOWED_FIELDS = {'correlation'}
@@ -117,84 +94,18 @@ HFLAV_SUBGROUP_ALLOWED_FIELDS = {
 # total matrices, and kinematic boundaries.
 DATA_ENTRY_KINEMATIC_FIELDS = {
     'q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax',
+    # Additional kinematic boundaries used by existing measurements.
+    'w_min', 'w_max', 'cos_min', 'cos_max',
+    'chi_min', 'chi_max', 'mxs_min', 'mxs_max',
 }
 _DATA_ENTRY_KEY_RE = re.compile(
     r'(?:obs@\d+|type@\d+_(?:correlation|covariance)|'
-    r'(?:tot_)?(?:correlation|covariance))$'
+    r'total_(?:correlation|covariance))$'
 )
 
 
 def is_data_entry_key(key: str) -> bool:
     return key in DATA_ENTRY_KINEMATIC_FIELDS or bool(_DATA_ENTRY_KEY_RE.fullmatch(key))
-
-
-# Observable categories for the dictionary-shaped ``data`` schema.
-# One category per dictionary; angular coefficients and differential
-# widths must not share a dict (SKILL.md rule 6).
-OBSERVABLE_CATEGORIES = (
-    'angular', 'differential', 'branching', 'asymmetry',
-    'ratio', 'lifetime', 'mass-mixing', 'cross-section', 'other',
-)
-
-_ANGULAR_ABBREVIATIONS = {
-    'FL', 'FS', 'FH', 'FT', 'Ft', 'AFB', 'AFBh', 'AFBl', 'AFBlh',
-    'A0', 'A1c', 'A2s', 'A3', 'A4', 'A5', 'A6', 'A6c', 'A6p', 'A6s',
-    'A7', 'A8', 'A9', 'S1ac', 'S1bcre', 'S1bcim', 'S1c', 'S2c', 'S2s',
-    'S3', 'S4', 'S5', 'S6c', 'S7', 'S8', 'S9',
-    'P1', 'P2', 'P3', 'P4p', 'P5p', 'P6c', 'P6cp', 'P6p', 'P8p',
-    'DeltaFL', 'DeltaP1', 'DeltaP2', 'DeltaP3', 'DeltaP4p',
-    'DeltaP5p', 'DeltaP6p', 'DeltaP8p', 'DeltaAFB',
-    'AT2', 'ATIm', 'ATRe', 'ATodd',
-    'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q8', 'QFL',
-}
-_ASYMMETRY_ABBREVIATIONS = {
-    'ACP', 'DeltaACP', 'AC', 'AFB_CP', 'AFS', 'C', 'S',
-    'S_phigamma', 'C_phigamma', 'ADelta_phigamma',
-}
-_BRANCHING_ABBREVIATIONS = {
-    'Br', 'BR', 'BrW2had', 'Bsmu_gamma', 'Bsmu_gamma_exp',
-    'rel_BF_pwave',
-}
-_RATIO_ABBREVIATIONS = {
-    'r', 'r1', 'r2', 'Re/mu', 'Rmue', 'Rtaumu', 'fs/fd', 'fS/f+',
-    'fT/f+', 'ge/gmu', 'gtauoverge',
-}
-_LIFETIME_ABBREVIATIONS = {'Tau', 'tau'}
-_MASS_MIXING_ABBREVIATIONS = {
-    'Mass', 'mass', 'MZ', 'MW', 'MH', 'Mh', 'M1', 'M2', 'M3', 'M4',
-    'mW', 'mZ', 'mpole', 'dmW', 'DeltaMd', 'DeltaMs', 'DeltaMdGd',
-    'DeltaMsGs', 'DeltaGamma', 'Gamma', 'GammaZ', 'GammaW',
-}
-_CROSS_SECTION_ABBREVIATIONS = {
-    'Sigma', 'SigmaAFB', 'sigmaWtaunu', 'sigma_Wmenu', 'sigma_Wpenu',
-    'sigma_had0', 'sigma',
-}
-
-
-def _observable_category(name: str) -> str:
-    """Return the category of one observable name (first safe fallback)."""
-    abbr = name.split('(', 1)[0].split('[', 1)[0].strip()
-    if abbr in _ANGULAR_ABBREVIATIONS:
-        return 'angular'
-    if abbr in _ASYMMETRY_ABBREVIATIONS:
-        return 'asymmetry'
-    if abbr in _BRANCHING_ABBREVIATIONS:
-        return 'branching'
-    if abbr in _RATIO_ABBREVIATIONS or abbr.startswith('R'):
-        return 'ratio'
-    if abbr in _LIFETIME_ABBREVIATIONS:
-        return 'lifetime'
-    if abbr in _MASS_MIXING_ABBREVIATIONS:
-        return 'mass-mixing'
-    if abbr in _CROSS_SECTION_ABBREVIATIONS:
-        return 'cross-section'
-    # Prefix families: S1.../P1.../A3.../SS.../AS... are angular.
-    if re.fullmatch(r'(?:S\d.*|P\d.*|A\d.*|SS\d.*|AS\d.*)', abbr):
-        return 'angular'
-    # Differential dX/dY or dX forms (dBr, dBr/dq2, dGdw, ...).
-    if (('/d' in abbr) or abbr.startswith('d')) and not abbr.startswith(('Delta', 'dm')):
-        return 'differential'
-    return 'other'
 
 
 # --- Canonical transition ordering (obs-abbr.md §1) -------------------
@@ -360,35 +271,43 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
     return None, None
 
 
-def _transition_body(name: str) -> str | None:
-    """Return the text inside the first balanced ``(...)`` pair, sans condition."""
-    start = name.find('(')
-    if start < 0:
-        return None
-    depth = 0
-    for index in range(start, len(name)):
-        char = name[index]
-        if char == '(':
-            depth += 1
-        elif char == ')':
-            depth -= 1
-            if depth == 0:
-                return name[start + 1:index].split('[', 1)[0]
-    return None
+def _parenthetical_blocks(name: str) -> list[tuple[int, int, str]]:
+    """Return outer-level ``(...)`` blocks as ``(start, end, body)``.
 
-
-def _transition_order_issues(name: str) -> list[str]:
-    """Flag non-canonical ordering inside dotted ``A.B.2.C.D`` transitions.
-
-    Applies the obs-abbr.md §1 rules: within each state, order by particle
-    type (baryon -> meson -> charged lepton -> neutral lepton), then by
-    mass (heaviest -> lightest), and by charge (+ -> - -> 0) for particles
-    of equal mass. Compact legacy forms without ``.2.`` are skipped.
+    Parentheses inside a ``[...]`` condition are ignored, and nested
+    parentheses are part of the enclosing block's body.
     """
-    body = _transition_body(name)
-    if not body or '.2.' not in body:
-        return []
-    return _order_issues_for_body(body, f"Observable '{name}'")
+    blocks = []
+    index = 0
+    bracket_depth = 0
+    while index < len(name):
+        char = name[index]
+        if char == '[':
+            bracket_depth += 1
+        elif char == ']':
+            bracket_depth = max(0, bracket_depth - 1)
+        elif char == '(' and bracket_depth == 0:
+            depth = 1
+            end = index + 1
+            while end < len(name) and depth:
+                if name[end] == '(':
+                    depth += 1
+                elif name[end] == ')':
+                    depth -= 1
+                end += 1
+            if depth == 0:
+                blocks.append((index, end, name[index + 1:end - 1]))
+                index = end
+                continue
+        index += 1
+    return blocks
+
+
+def _looks_like_transition(text: str) -> bool:
+    """Heuristic: does ``text`` contain a particle transition?"""
+    if '.2.' in text:
+        return True
+    return bool(re.search(r'[A-Za-z0-9][+\-]?2[A-Za-z0-9(]', text))
 
 
 def validate_transition_key(key: str) -> list[str]:
@@ -414,6 +333,14 @@ def _order_issues_for_body(
     check.
     """
     issues = []
+    parts = _split_top_level(body, '/')
+    if len(parts) > 1 and all('.2.' in part for part in parts):
+        for part in parts:
+            if '.2.' in part:
+                issues.extend(
+                    _order_issues_for_body(part, label, require_known)
+                )
+        return issues
     stages = _split_top_level(body, '.2.')
     for stage in stages:
         tokens = _split_top_level(stage, '.')
@@ -520,48 +447,20 @@ def _order_issues_for_body(
     return issues
 
 
-def validate_transition_symbol(name: str) -> list[str]:
-    """Check that the observable name has the expected OBS(transition)[condition] shape.
+def validate_observable_name(name: str) -> list[str]:
+    """Check that the observable name does not embed a transition channel.
 
-    Three shapes are accepted (see obs-abbr.md):
-
-    1. **Basic observable** (no transition): ``OBS(particle)`` — e.g.
-       ``Tau(e-)``, ``Mass(Z)``, ``MZ``, ``gammaCKM``, ``|Vtd|``.
-    2. **Composite observable** (with transition): ``OBS(transition)`` —
-       e.g. ``Br(B+2K+mumu)``, ``RBr(B+.2.K+.l+.l-)``. Dotted ``.2.``
-       transitions must follow the canonical particle order
-       (baryon -> meson -> charged lepton -> neutral lepton, then
-       heaviest -> lightest within each type, then ``+`` -> ``-`` -> ``0``
-       for equal masses); compact legacy forms are accepted.
-    3. **Multi-transition observable** (with condition only):
-       ``OBS[condition]`` — e.g. ``RK+[mu/e]``, ``RDst+[tau/mu]``,
-       ``fs/fd``. The condition is given without a transition symbol.
+    The channel is carried by the ``data`` key. Names are the observable
+    symbol, optionally followed by a condition or a method/parameter tag:
+    ``OBS``, ``OBS[condition]``, ``OBS(method)``, ``f+.Vcs``.
     """
     issues = []
-    # Extract OBS prefix (e.g. "Tau", "Mass", "Br", "FL")
-    obs_prefix = name.split('(', 1)[0] if '(' in name else ''
-    # Basic observables (no transition symbol needed): see obs-abbr.md §2.1
-    if obs_prefix in ('Tau', 'Mass', 'mass'):
-        return issues
-    # Basic observables without OBS(particle) pattern but documented in
-    # obs-abbr.md §2.1 (CKM elements, LEP pseudo-observables, etc.).
-    if name in BASIC_OBSERVABLE_NAMES:
-        return issues
-    # Ratios without a transition (legacy compact form): fs/fd, ge/gmu, etc.
-    if '/' in name and '(' not in name and '[' not in name:
-        return issues
-    # Composite observable (parens present) or multi-transition (brackets
-    # present) — both valid. Only complain if neither is present.
-    has_parens = bool(re.search(r'\([^)]+\)', name))
-    has_brackets = bool(re.search(r'\[[^\]]+\]', name))
-    if not (has_parens or has_brackets):
-        issues.append(
-            f"  Observable '{name}' has no transition symbol (expected "
-            f"OBS(transition)) and no condition (expected OBS[condition])"
-        )
-        return issues
-
-    issues.extend(_transition_order_issues(name))
+    for _, _, body in _parenthetical_blocks(name):
+        if _looks_like_transition(body):
+            issues.append(
+                f"  Observable '{name}': name must not embed the transition "
+                f"channel ('{body}'); the data key already carries it"
+            )
     return issues
 
 
@@ -696,8 +595,8 @@ def validate_data_entry_fields(entry: dict, label: str) -> list[str]:
             issues.append(
                 f"  {label}: disallowed field '{key}'; data entries may only "
                 f"contain obs@N, type@N_correlation, type@N_covariance, "
-                f"tot_correlation, tot_covariance, and kinematic boundaries "
-                f"({sorted(DATA_ENTRY_KINEMATIC_FIELDS)})"
+                f"total_correlation, total_covariance, and kinematic "
+                f"boundaries ({sorted(DATA_ENTRY_KINEMATIC_FIELDS)})"
             )
     # Validate kinematic boundary fields (q2min/q2max, pTmin/pTmax, etamin/etamax)
     # must be float-string (or comma-separated float-strings, or '+inf' for
@@ -739,16 +638,16 @@ def _kinematic_issues(value, label: str) -> list[str]:
 
 
 def _validate_error_triplets(obs: dict, label: str) -> list[str]:
-    """Every ``type@N_err`` label needs the full ``_err/_err_up/_err_down``
-    triplet and a whitelisted label."""
+    """Every ``type@N_error`` label needs the full
+    ``_error/_upper/_lower`` triplet and a whitelisted label."""
     issues = []
     tags = sorted({
         key.split('_', 1)[0]
         for key in obs
-        if re.fullmatch(r'type@\d+_err(?:_up|_down)?', key)
+        if re.fullmatch(r'type@\d+_(?:error|upper|lower)', key)
     })
     for tag in tags:
-        base, up, down = f'{tag}_err', f'{tag}_err_up', f'{tag}_err_down'
+        base, up, down = f'{tag}_error', f'{tag}_upper', f'{tag}_lower'
         missing = [key for key in (base, up, down) if key not in obs]
         if missing:
             issues.append(
@@ -791,36 +690,30 @@ def _validate_measurement_scheme(obs: dict, label: str) -> list[str]:
     """Enforce exactly one measurement format (SKILL.md checklist)."""
     issues = []
     has_value = 'value' in obs
-    has_component = any(re.fullmatch(r'type@\d+_err', key) for key in obs)
-    has_total = 'tot_err_up' in obs or 'tot_err_down' in obs
+    has_component = any(re.fullmatch(r'type@\d+_error', key) for key in obs)
+    has_total = 'error_upper' in obs or 'error_lower' in obs
     has_upper = any(key.endswith('_upper_limit') for key in obs)
-    has_ref = 'ref' in obs
 
     if has_component and has_total:
         issues.append(
-            f"  {label}: mixes component errors (type@N_err) with "
-            f"tot_err_up/tot_err_down; use exactly one error scheme"
-        )
-    if has_ref and not has_total:
-        issues.append(
-            f"  {label}: 'ref' is only valid together with "
-            f"tot_err_up/tot_err_down (external reference format)"
+            f"  {label}: mixes component errors (type@N_error) with "
+            f"error_upper/error_lower; use exactly one error scheme"
         )
     if has_upper and not has_value and (has_component or has_total):
         issues.append(
             f"  {label}: upper-limit-only entries must not carry value or "
-            f"errors; use the combined format (value + tot_err) when a fit "
+            f"errors; use the combined format (value + errors) when a fit "
             f"result is also reported"
         )
-    if has_value and has_upper and not has_total:
+    if has_value and has_upper and not (has_component or has_total):
         issues.append(
-            f"  {label}: value + upper limit requires "
-            f"tot_err_up/tot_err_down (combined fit + limit format)"
+            f"  {label}: value + upper limit requires component errors "
+            f"(type@N_error) or error_upper/error_lower"
         )
     if has_value and not (has_component or has_total or has_upper):
         issues.append(
-            f"  {label}: measurement has no error; add a type@N_err triplet "
-            f"or tot_err_up/tot_err_down"
+            f"  {label}: measurement has no error; add a type@N_error triplet "
+            f"or error_upper/error_lower"
         )
     if not has_value and not has_upper:
         issues.append(
@@ -829,83 +722,33 @@ def _validate_measurement_scheme(obs: dict, label: str) -> list[str]:
     return issues
 
 
-def _validate_observable(
-    obs, label: str, *, transition_key: str | None = None,
-    category: str | None = None, strict: bool = False,
-) -> list[str]:
-    """Validate one ``obs@N`` object.
-
-    ``strict`` is used for the dict-shaped schema (new files): unknown
-    fields are rejected, error triplets and labels are enforced, and
-    exactly one measurement format is required. Legacy list-schema files
-    keep the earlier permissive checks so they can be migrated later.
-    """
+def _validate_observable(obs, label: str) -> list[str]:
+    """Validate one ``obs@N`` object."""
     if not isinstance(obs, dict):
         return [f"  {label}: must be an object"]
 
     issues = []
 
-    if strict:
-        for key in obs:
-            if not is_observable_field(key):
-                issues.append(
-                    f"  {label}: unknown observable field '{key}'; allowed "
-                    f"fields are {sorted(OBS_EXACT_FIELDS)} plus "
-                    f"type@N_err/type@N_err_up/type@N_err_down/"
-                    f"type@N_upper_limit/type@N_level"
-                )
-        for field in ('name', 'latex'):
-            if field not in obs:
-                issues.append(f"  {label}: missing required field: {field}")
-        issues.extend(_validate_error_triplets(obs, label))
-        issues.extend(_validate_upper_limit_pairs(obs, label))
-        has_tot_up = 'tot_err_up' in obs
-        if has_tot_up != ('tot_err_down' in obs):
-            missing = 'tot_err_down' if has_tot_up else 'tot_err_up'
+    for key in obs:
+        if not is_observable_field(key):
             issues.append(
-                f"  {label}: total error is one-sided; missing '{missing}'"
+                f"  {label}: unknown observable field '{key}'; allowed "
+                f"fields are {sorted(OBS_EXACT_FIELDS)} plus "
+                f"type@N_error/type@N_upper/type@N_lower/"
+                f"type@N_upper_limit/type@N_level"
             )
-        issues.extend(_validate_measurement_scheme(obs, label))
-    else:
-        # Legacy permissive format checks (priority-based).
-        has_value = 'value' in obs
-        has_upper = any(key.endswith('_upper_limit') for key in obs)
-        has_ref = 'ref' in obs and 'tot_err_up' in obs
-        has_tot_err = 'tot_err_up' in obs and 'tot_err_down' in obs
-        if has_ref and has_value:
-            required = REQUIRED_OBS_FIELDS_WITH_REF
-        elif has_tot_err and has_upper and has_value:
-            required = (
-                REQUIRED_OBS_FIELDS_WITH_TOT_ERR
-                + [f for f in REQUIRED_OBS_FIELDS_WITH_UPPER if f not in REQUIRED_OBS_FIELDS_WITH_TOT_ERR]
-            )
-        elif has_tot_err and has_value:
-            required = REQUIRED_OBS_FIELDS_WITH_TOT_ERR
-        elif has_upper:
-            required = REQUIRED_OBS_FIELDS_WITH_UPPER
-        elif has_value:
-            required = REQUIRED_OBS_FIELDS_WITH_VALUE
-        else:
-            required = []
-            issues.append(
-                f"  {label}: missing 'value' or 'type@1_upper_limit' field"
-            )
-        for field in required:
-            if field not in obs:
-                issues.append(f"  {label}: missing required field: {field}")
-
-        # Legacy: pair any *_err_up / *_err_down (including sta_/sys_).
-        for key in obs:
-            if key.endswith('_err_up'):
-                sibling = key[:-7] + '_err_down'
-            elif key.endswith('_err_down'):
-                sibling = key[:-9] + '_err_up'
-            else:
-                continue
-            if sibling not in obs:
-                issues.append(
-                    f"  {label}: '{key}' present but missing '{sibling}'"
-                )
+    for field in ('name', 'latex'):
+        if field not in obs:
+            issues.append(f"  {label}: missing required field: {field}")
+    issues.extend(_validate_error_triplets(obs, label))
+    issues.extend(_validate_upper_limit_pairs(obs, label))
+    has_tot_up = 'error_upper' in obs
+    if has_tot_up != ('error_lower' in obs):
+        missing = 'error_lower' if has_tot_up else 'error_upper'
+        issues.append(
+            f"  {label}: total error is one-sided; missing '{missing}'"
+        )
+    issues.extend(_validate_measurement_scheme(obs, label))
 
     if 'name' in obs and (
         not isinstance(obs['name'], str) or not obs['name'].strip()
@@ -926,7 +769,7 @@ def _validate_observable(
             )
         elif not obs[key].strip():
             issues.append(f"  {label}.{key}: must not be empty")
-        elif strict and not _is_float_string(obs[key]):
+        elif not _is_float_string(obs[key]):
             issues.append(
                 f"  {label}.{key}: expected a float-as-string, "
                 f"got {obs[key]!r}"
@@ -936,41 +779,22 @@ def _validate_observable(
         if key in DATA_ENTRY_KINEMATIC_FIELDS:
             issues.extend(_kinematic_issues(obs[key], f"{label}.{key}"))
 
+    for key in ('method', 'dataset', 'note'):
+        if key in obs and (
+            not isinstance(obs[key], str) or not obs[key].strip()
+        ):
+            issues.append(f"  {label}.{key}: must be a non-empty string")
+
     if 'latex' in obs and isinstance(obs['latex'], str):
         issues.extend(validate_latex(obs['latex'], 'latex', label))
 
     if 'name' in obs and isinstance(obs['name'], str):
-        issues.extend(validate_transition_symbol(obs['name']))
-        if strict and transition_key is not None:
-            body = _transition_body(obs['name'])
-            dotted = body if body and '.2.' in body else None
-            if transition_key == 'no-transition':
-                if dotted is not None:
-                    issues.append(
-                        f"  {label}: observable '{obs['name']}' belongs to "
-                        f"transition '{dotted}', not 'no-transition'"
-                    )
-            elif dotted != transition_key:
-                issues.append(
-                    f"  {label}: observable '{obs['name']}' transition "
-                    f"'{dotted or 'none'}' does not match data key "
-                    f"'{transition_key}'"
-                )
-        if strict and category is not None and category != 'other':
-            inferred = _observable_category(obs['name'])
-            if inferred != 'other' and inferred != category:
-                issues.append(
-                    f"  {label}: observable '{obs['name']}' looks like "
-                    f"category '{inferred}' but is filed under '{category}'"
-                )
+        issues.extend(validate_observable_name(obs['name']))
 
     return issues
 
 
-def _validate_data_entry(
-    entry, label: str, *, transition_key: str | None = None,
-    category: str | None = None, strict: bool = False,
-) -> list[str]:
+def _validate_data_entry(entry, label: str) -> list[str]:
     """Validate one data group: allowed fields, obs@N numbering, matrices."""
     issues = []
     if not isinstance(entry, dict):
@@ -1018,8 +842,6 @@ def _validate_data_entry(
     for obs_key in obs_keys:
         issues.extend(_validate_observable(
             entry[obs_key], f"{label}.{obs_key}",
-            transition_key=transition_key, category=category,
-            strict=strict,
         ))
 
     for corr_key in entry:
@@ -1042,61 +864,35 @@ def _validate_data_entry(
     return issues
 
 
-def _validate_legacy_data_list(entries: list) -> list[str]:
-    issues = []
-    if not entries:
-        issues.append("  data array is empty")
-    for entry_idx, entry in enumerate(entries):
-        issues.extend(_validate_data_entry(entry, f"data[{entry_idx}]"))
-    return issues
+def _validate_data_dict(groups_by_channel: dict) -> list[str]:
+    """Validate the ``{transition: [group, ...]}`` ``data`` schema.
 
-
-def _validate_data_dict(data_map: dict) -> list[str]:
-    """Validate the dict-shaped schema: transition -> category -> entries."""
+    Each key is a transition channel; each value is a non-empty list of
+    data groups for that channel. Multiple groups allow one channel to
+    carry separate fit methods, kinematic bins, or matrices.
+    """
     issues = []
-    if not data_map:
-        issues.append("  data dict is empty")
-    for key, categories in data_map.items():
+    if not groups_by_channel:
+        issues.append("  data object is empty")
+    for key, groups in groups_by_channel.items():
         if not isinstance(key, str):
-            issues.append(f"  data key {key!r}: must be a string")
+            issues.append("  data keys must be transition strings")
             continue
         issues.extend(validate_transition_key(key))
-        if not isinstance(categories, dict):
+        if not isinstance(groups, list) or not groups:
             issues.append(
-                f"  data['{key}']: must be an object mapping observable "
-                f"categories to lists"
+                f"  data['{key}']: must be a non-empty array of data groups"
             )
             continue
-        if not categories:
-            issues.append(
-                f"  data['{key}']: must contain at least one observable "
-                f"category"
-            )
-            continue
-        for category, entries in categories.items():
-            if category not in OBSERVABLE_CATEGORIES:
-                issues.append(
-                    f"  data['{key}']: unknown category '{category}'; "
-                    f"allowed categories are {list(OBSERVABLE_CATEGORIES)}"
-                )
-                continue
-            if not isinstance(entries, list) or not entries:
-                issues.append(
-                    f"  data['{key}']['{category}']: must be a non-empty "
-                    f"list of data entries"
-                )
-                continue
-            for entry_idx, entry in enumerate(entries):
-                issues.extend(_validate_data_entry(
-                    entry,
-                    f"data['{key}']['{category}'][{entry_idx}]",
-                    transition_key=key, category=category, strict=True,
-                ))
+        for group_idx, group in enumerate(groups):
+            issues.extend(_validate_data_entry(
+                group, f"data['{key}'][{group_idx}]",
+            ))
     return issues
 
 
 def validate_transition_mode(value: str) -> list[str]:
-    """Check that transition-mode matches one of the 7 valid values."""
+    """Check that transition-mode matches one of the valid hyphenated values."""
     issues = []
     if not isinstance(value, str) or not value.strip():
         issues.append("  transition-mode must be a non-empty string")
@@ -1105,8 +901,8 @@ def validate_transition_mode(value: str) -> list[str]:
     if value.lower() not in normalized:
         issues.append(
             f"  transition-mode '{value}' is not in the allowed list: "
-            f"{VALID_TRANSITION_MODES}; use property-based names like "
-            f"'semileptonic decay', 'scattering', etc."
+            f"{VALID_TRANSITION_MODES}; use hyphenated property names like "
+            f"'semileptonic-decay', 'scattering', etc."
         )
     return issues
 
@@ -1115,10 +911,10 @@ def _detect_snapshot(data: dict) -> str | None:
     """Return ``'pdg'``, ``'hflav'``, or ``None`` for a non-snapshot file.
 
     PDG: top-level ``data`` is a dict of subgroups whose keys are ``obs@N``
-    (sparse) plus an optional ``correlation``. Standard dict-schema files
-    have transitions (``A.B.2.C.D``) as their ``data`` keys, so the two
-    shapes are unambiguous. HFLAV: no top-level ``data``; each top-level
-    value is a subgroup containing an ``observables`` list.
+    (sparse) plus an optional ``correlation``. Standard per-paper files
+    have ``transition-mode`` and a ``data`` object whose values are group
+    arrays, so the two shapes are unambiguous. HFLAV: no top-level ``data``;
+    each top-level value is a subgroup containing an ``observables`` list.
     """
     if 'transition-mode' not in data and isinstance(data.get('data'), dict):
         subgroups = data['data']
@@ -1163,22 +959,19 @@ def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
         issues.append(f"  {label}.name: must be a non-empty string")
 
     # Snapshot observables use exactly one error form, never the
-    # per-paper type@N_err triplets.
+    # per-paper type@N_error triplets.
     has_error = 'error' in obs
-    has_error_pair = 'error_up' in obs and 'error_down' in obs
-    has_tot_pair = 'tot_err_up' in obs and 'tot_err_down' in obs
-    if sum((has_error, has_error_pair, has_tot_pair)) > 1:
+    has_error_pair = 'error_upper' in obs and 'error_lower' in obs
+    if sum((has_error, has_error_pair)) > 1:
         issues.append(
             f"  {label}: use exactly one error form "
-            f"('error', 'error_up'/'error_down', or "
-            f"'tot_err_up'/'tot_err_down')"
+            f"('error' or 'error_upper'/'error_lower')"
         )
 
     # Snapshot numbers are JSON numbers, not float-strings (json-meta.md
     # §"Shared rules for both snapshots").
     for field in (
-        'value', 'error', 'error_up', 'error_down',
-        'tot_err_up', 'tot_err_down',
+        'value', 'error', 'error_upper', 'error_lower',
     ):
         if field in obs and (
             isinstance(obs[field], bool)
@@ -1191,19 +984,15 @@ def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
     if 'unit' in obs and not isinstance(obs['unit'], str):
         issues.append(f"  {label}.unit: must be a string")
 
-    if not (has_error or has_error_pair or has_tot_pair):
-        if 'error_up' in obs:
-            issues.append(f"  {label}: 'error_up' present but missing 'error_down'")
-        elif 'error_down' in obs:
-            issues.append(f"  {label}: 'error_down' present but missing 'error_up'")
-        elif 'tot_err_up' in obs:
-            issues.append(f"  {label}: 'tot_err_up' present but missing 'tot_err_down'")
-        elif 'tot_err_down' in obs:
-            issues.append(f"  {label}: 'tot_err_down' present but missing 'tot_err_up'")
+    if not (has_error or has_error_pair):
+        if 'error_upper' in obs:
+            issues.append(f"  {label}: 'error_upper' present but missing 'error_lower'")
+        elif 'error_lower' in obs:
+            issues.append(f"  {label}: 'error_lower' present but missing 'error_upper'")
         else:
             issues.append(
-                f"  {label}: missing 'error', 'error_up'/'error_down', "
-                f"or 'tot_err_up'/'tot_err_down'"
+                f"  {label}: missing 'error' or "
+                f"'error_upper'/'error_lower'"
             )
 
     if 'latex' in obs and isinstance(obs['latex'], str):
@@ -1358,6 +1147,14 @@ def validate_json(file_path: str) -> list[str]:
             all_issues.append(f"  Missing required field: {field}")
         elif field != 'arxiv' and isinstance(data[field], str) and not data[field].strip():
             all_issues.append(f"  Top-level field '{field}' must not be empty")
+    if 'collaboration' in data and (
+        not isinstance(data['collaboration'], str)
+        or not data['collaboration'].strip()
+    ):
+        all_issues.append(
+            "  Top-level field 'collaboration' must be a non-empty string "
+            "when present (omit it for individual/small-group papers)"
+        )
     if not all_issues:
         print("  [OK] Top-level fields complete")
 
@@ -1393,20 +1190,17 @@ def validate_json(file_path: str) -> list[str]:
     if 'transition-mode' in data:
         all_issues.extend(validate_transition_mode(data['transition-mode']))
 
-    # 7. Check data. New files use a dict keyed by transition channel
-    # (transition -> category -> entries); the legacy list schema stays
-    # accepted until the existing files are migrated.
+    # 7. Check data: a transition-keyed object of group arrays.
     if 'data' not in data:
         all_issues.append("  Missing required field: data")
     elif isinstance(data['data'], dict):
         all_issues.extend(_validate_data_dict(data['data']))
-    elif isinstance(data['data'], list):
-        all_issues.extend(_validate_legacy_data_list(data['data']))
     else:
         all_issues.append(
-            "  data must be an object keyed by transition channel "
-            "(A.B.2.C.D or 'no-transition'); legacy files may still use "
-            "an array of data groups"
+            "  data must be an object mapping each transition to a "
+            "non-empty array of data groups, e.g. "
+            "{'Lambdab0.2.p.l-.nuBar': [{'obs@1': {...}}, {'obs@1': {...}}]}; "
+            "put several groups of one channel in the same array"
         )
 
     # Report results

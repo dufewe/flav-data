@@ -5,72 +5,59 @@
     "title": "Search for the lepton-flavour violating decays $B_{(s)}^{0} \\to e^{\\pm}\\mu^{\\mp}$",
     "arxiv": "[hep-ex/1710.04111](https://arxiv.org/pdf/1710.04111)",
     "time": "2017.01.01",
-    "abstract": "a search for the lepton-ﬂavour violating decays $B^0_s \\to e^\\pm \\mu^\\mp$ and $B^0 \\to e^\\pm \\mu^\\mp$ based on a sample of proton-proton collision data corresponding to an integrated luminosity of 3 fb$^{−1}$ at centre-of-mass energies of 7 and 8 TeV",
+    "abstract": "a search for the lepton-flavour violating decays $B^0_s \\to e^\\pm \\mu^\\mp$ and $B^0 \\to e^\\pm \\mu^\\mp$ based on a sample of proton-proton collision data corresponding to an integrated luminosity of 3 fb$^{-1}$ at centre-of-mass energies of 7 and 8 TeV",
     "pdf": "https://arxiv.org/pdf/1710.04111",
-    "transition-mode": "leptonic decay",
-    "data": [
-        {
-            "tot_correlation": null,
-            "obs@1": {
-                "name": "Br(Bs02emu)",
-                "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "5.4e-09",
-                "tot_err_down": "",
-                "level": "90@CL",
-                "method": "heavy dominance"
+    "transition-mode": "leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "heavy dominance",
+                    "type@1_upper_limit": "5.4e-09",
+                    "type@1_level": "90@CL"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "heavy dominance",
+                    "type@1_upper_limit": "6.3e-09",
+                    "type@1_level": "95@CL"
+                }
             },
-            "obs@2": {
-                "name": "Br(Bs02emu)",
-                "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "6.3e-09",
-                "tot_err_down": "",
-                "level": "95@CL",
-                "method": "heavy dominance"
-            }
-        },
-        {
-            "tot_correlation": null,
-            "obs@1": {
-                "name": "Br(Bs02emu)",
-                "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "6e-09",
-                "tot_err_down": "",
-                "level": "90@CL",
-                "method": "light dominance"
+            {
+                "obs@1": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "light dominance",
+                    "type@1_upper_limit": "6e-09",
+                    "type@1_level": "90@CL"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "light dominance",
+                    "type@1_upper_limit": "7.2e-09",
+                    "type@1_level": "95@CL"
+                }
             },
-            "obs@2": {
-                "name": "Br(Bs02emu)",
-                "latex": "$\\mathcal{B}(B_s^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "7.2e-09",
-                "tot_err_down": "",
-                "level": "95@CL",
-                "method": "light dominance"
+            {
+                "obs@1": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "light dominance",
+                    "type@1_upper_limit": "1e-09",
+                    "type@1_level": "90@CL"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B^0 \\to e^\\pm \\mu^\\mp)$",
+                    "method": "light dominance",
+                    "type@1_upper_limit": "1.3e-09",
+                    "type@1_level": "95@CL"
+                }
             }
-        },
-        {
-            "tot_correlation": null,
-            "obs@1": {
-                "name": "Br(B02emu)",
-                "latex": "$\\mathcal{B}(B^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "1e-09",
-                "tot_err_down": "",
-                "level": "90@CL",
-                "method": "light dominance"
-            },
-            "obs@2": {
-                "name": "Br(B02emu)",
-                "latex": "$\\mathcal{B}(B^0 \\to e^\\pm \\mu^\\mp)$",
-                "value": "",
-                "tot_err_up": "1.3e-09",
-                "tot_err_down": "",
-                "level": "95@CL",
-                "method": "light dominance"
-            }
-        }
-    ]
+        ]
+    }
 }

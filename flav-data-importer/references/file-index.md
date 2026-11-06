@@ -28,7 +28,14 @@ flav-data/
 │   ├── LANL-UCNA/, NIST-aCORN/
 │   └── HFLAV/, PDG/                                # No-lab aggregation
 └── Theoretical/
-    └── ...                                          # Theory group folders (HPQCD, UKQCD, etc.)
+    ├── HPQCD/                                       # Large collaborations keep a group folder
+    │   └── <year>/...
+    ├── LQCD/                                        # Method folder for smaller groups
+    │   └── 2015/
+    │       ├── LQCD@2015.json                       # Method-level annual index
+    │       └── 03/
+    │           └── Detmold:2015aaa.json             # Data file (TexKey)
+    └── QCD/                                         # Perturbative QCD calculations
 ```
 
 ## Naming Rules
@@ -72,7 +79,27 @@ the folder retain only the collaboration name (not the lab prefix).
 | `HFLAV` | — | HFLAV | No parent lab; non-standard schema |
 | `PDG` | — | PDG | No parent lab; non-standard schema |
 
-Theoretical folders use the group name directly: `HPQCD`, `UKQCD`, `Akeroyd`, `Altmannshofer`, `Greljo`, etc. (only those registered in `defs.THEOGROUP` are linked from the Streamlit sidebar).
+Theoretical folders depend on the size of the group:
+
+- **Large collaborations** (HPQCD, JLQCD, RBC/UKQCD, ...) keep their own
+  top-level folder and follow the normal layout:
+  `Theoretical/<Group>/<year>/<month>/<TexKey>.json` with the annual index
+  `Theoretical/<Group>/<year>/<Group>@<year>.json`.
+- **Smaller calculation groups** are collected by the method they use:
+  `Theoretical/<Method>/<year>/<month>/<TexKey>.json`, with a method-level
+  annual index `Theoretical/<Method>/<year>/<Method>@<year>.json`. The
+  method folders are `LQCD` (lattice QCD) and `QCD` (perturbative QCD);
+  add a new method folder only for a new calculation method. Papers from
+  small groups omit the `collaboration` key (SKILL.md rule 8), and TexKeys
+  are unique, so several groups can share one method folder and index.
+
+Only experimental data and theoretical calculations are stored; fit results,
+parameter determinations, bounds and theory-group averages derived from
+existing data are not ingested (see SKILL.md §Scope).
+
+Only groups registered in `defs.THEOGROUP` are linked from the Streamlit
+sidebar; method folders are data organization only and have no page of
+their own.
 
 **Special cases**:
 

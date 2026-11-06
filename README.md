@@ -34,6 +34,11 @@ The database covers measurements from **1990** to the present, organized by coll
 
 Only **HPQCD** is currently registered in `THEOGROUP` and exposed in the
 navigation; other theoretical groups' data is not yet wired into the app.
+The database stores only experimental measurements and theoretical
+calculations — fits, parameter determinations, bounds and theory-group
+averages derived from existing data are not ingested. Small calculation
+groups are filed under a method folder (`Theoretical/LQCD/`,
+`Theoretical/QCD/`) instead of their own group folder.
 
 ## Data Format
 
@@ -49,28 +54,35 @@ Each paper corresponds to one JSON file with the following structure:
     "time": "2015.12.14",
     "abstract": "...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
-    "data": [
-        {
-            "obs@1": {
-                "name": "FL(B0.2.Kst0.mu+.mu-)",
-                "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
-                "value": "0.69",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.035",
-                "type@1_err_down": "0.036",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.017",
-                "type@2_err_down": "0.017",
-                "q2min": "0.1",
-                "q2max": "1.1"
-            },
-            "obs@2": { ... },
-            "type@1_correlation": [[1.0, 0.06, ...], ...]
-        }
-    ],
-    "transition-mode": "semileptonic decay"
+    "transition-mode": "semileptonic-decay",
+    "data": {
+        "B0.2.Kst0.mu+.mu-": [
+            {
+                "obs@1": {
+                    "name": "FL",
+                    "latex": "$F_L(B^{0}\\to K^{*0}\\mu^{+}\\mu^{-})$",
+                    "value": "0.69",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.035",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.017",
+                    "type@2_lower": "0.017",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "obs@2": { ... },
+                "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
+            }
+        ]
+    }
 }
 ```
+
+`data` is an object keyed by transition channel; each value is an array of
+groups of observables coupled by a shared matrix. Add another element to
+the channel's array for additional groups (other kinematic bins, fit
+methods, datasets).
 
 ### Key Design Principles
 
@@ -97,18 +109,21 @@ Represents $A + B \to C + D$ with `2` replacing the arrow.
 | Neutrinos: no flavor tag | `nu`, `nuBar` |
 | Multi-step: additional `2` separators | `p.p.2.Z.2.mu+.mu-` |
 
-### Observable Name: `OBS(transition)[condition]`
+### Observable Name: `OBS` / `OBS[condition]`
+
+The transition is the `data` key, so `name` carries only the observable
+symbol plus optional condition/method tags.
 
 | Component | Description |
 |-----------|-------------|
 | `OBS` | Symbolic abbreviation (`Br`, `FL`, `ACP`, `R`, ...) |
-| `transition` | The `A.B.2.C.D` transition symbol |
 | `condition` | Optional qualifier for multi-transition observables (`[mu/e]`) |
+| `method` | Optional non-transition tag (`Vcb(CLN)`) |
 
 **Special patterns:**
-- Differences: `DeltaOBS(transition)[condition]` → $\Delta_{OBS}^{condition}(transition)$
-- Ratios: `ROBS(transition)[condition]` → $R_{OBS}^{condition}(transition)$
-- CKM parameters: `r(B-.2.D0.K-)`, `delta(B-.2.D0.K-)`
+- Differences: `DeltaOBS[condition]` → $\Delta_{OBS}^{condition}$
+- Ratios: `ROBS[condition]` → $R_{OBS}^{condition}$
+- CKM parameters: `r`, `delta` (under the `B-.2.D0.K-` key)
 
 ### Observable Categories
 
@@ -141,8 +156,8 @@ flav-data/
 │   │   └── 2024/PDG@2024.json
 │   └── ...                         # Other experimental groups
 ├── Theoretical/
-│   └── HPQCD/
-│       └── ...
+│   ├── HPQCD/                       # Large collaborations: own folder
+│   └── LQCD/, QCD/                  # Smaller calculation groups, grouped by method
 ├── Observable/
 │   ├── Flavor.py                    # Observable naming guide
 │   └── EWPO.py                      # EWPO naming guide

@@ -7,47 +7,61 @@
     "time": "2026.04.07",
     "abstract": "A measurement of the CKM angle $\\gamma$ is performed by applying a novel, unbinned, model-independent approach to datasets of electron-positron collisions collected by the BESIII experiment and proton-proton collisions by the LHCb experiment, corresponding to integrated luminosities of 8 fb$^{-1}$ and 9 fb$^{-1}$, respectively. The $CP$-violating phase $\\gamma$ is determined from $B^{\\pm} \\to D(\\to K_{S}^{0} h^{\\prime+} h^{\\prime-}) h^{\\pm}$ decays in LHCb data, where $h^{(\\prime)}$ is either a pion or kaon, while the corresponding strong-phase parameters are measured using doubly tagged $D \\to K_{S/L}^{0} h^{\\prime+} h^{\\prime-}$ decays in the quantum-correlated $D \\bar{D}$ system present in BESIII data. A joint fit to both datasets, which allows for a simultaneous determination of the associated $CP$-violating observables and strong-phase parameters, yields $\\gamma = (71.3 \\pm 5.0)^\\circ$. The result is the most precise to date and consistent with previous measurements and world averages.",
     "pdf": "https://arxiv.org/pdf/2604.05712",
-    "transition-mode": "non-leptonic decay",
-    "data": [
-        {
-            "obs@1": {
-                "name": "gammaCKM",
-                "latex": "$\\gamma_{CKM}$",
-                "value": "71.3",
-                "tot_err_up": "5.0",
-                "tot_err_down": "5.0",
-                "unit": "deg"
-            },
-            "obs@2": {
-                "name": "r(B-.2.D0.K-)",
-                "latex": "$r(B^- \\to D^0 K^-)$",
-                "value": "0.0949",
-                "tot_err_up": "0.0086",
-                "tot_err_down": "0.0085"
-            },
-            "obs@3": {
-                "name": "delta(B-.2.D0.K-)",
-                "latex": "$\\delta(B^- \\to D^0 K^-)$",
-                "value": "121.6",
-                "tot_err_up": "5.6",
-                "tot_err_down": "5.9",
-                "unit": "deg"
-            },
-            "obs@4": {
-                "name": "r(B-.2.D0.pi-)",
-                "latex": "$r(B^- \\to D^0 \\pi^-)$",
-                "value": "0.0064",
-                "tot_err_up": "0.0021",
-                "tot_err_down": "0.0019"
-            },
-            "obs@5": {
-                "name": "delta(B-.2.D0.pi-)",
-                "latex": "$\\delta(B^- \\to D^0 \\pi^-)$",
-                "value": "311",
-                "tot_err_up": "17",
-                "tot_err_down": "20",
-                "unit": "deg"
+    "transition-mode": "non-leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "gammaCKM",
+                    "latex": "$\\gamma_{CKM}$",
+                    "value": "71.3",
+                    "error_upper": "5.0",
+                    "error_lower": "5.0",
+                    "unit": "deg"
+                }
             }
-        }
-    ]
+        ],
+        "B-.2.D0.K-": [
+            {
+                "obs@1": {
+                    "name": "r",
+                    "latex": "$r(B^- \\to D^0 K^-)$",
+                    "value": "0.0949",
+                    "error_upper": "0.0086",
+                    "error_lower": "0.0085"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "delta",
+                    "latex": "$\\delta(B^- \\to D^0 K^-)$",
+                    "value": "121.6",
+                    "error_upper": "5.6",
+                    "error_lower": "5.9",
+                    "unit": "deg"
+                }
+            }
+        ],
+        "B-.2.D0.pi-": [
+            {
+                "obs@1": {
+                    "name": "r",
+                    "latex": "$r(B^- \\to D^0 \\pi^-)$",
+                    "value": "0.0064",
+                    "error_upper": "0.0021",
+                    "error_lower": "0.0019"
+                }
+            },
+            {
+                "obs@1": {
+                    "name": "delta",
+                    "latex": "$\\delta(B^- \\to D^0 \\pi^-)$",
+                    "value": "311",
+                    "error_upper": "17",
+                    "error_lower": "20",
+                    "unit": "deg"
+                }
+            }
+        ]
+    }
 }

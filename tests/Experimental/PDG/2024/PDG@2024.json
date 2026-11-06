@@ -10,71 +10,71 @@
                 "name": "GF",
                 "latex": "$G_F$",
                 "value": 1.1663788e-05,
-                "tot_err_up": 6e-12,
-                "tot_err_down": 6e-12,
+                "error_upper": 6e-12,
+                "error_lower": 6e-12,
                 "unit": "GeV-2"
             },
             "obs@2": {
                 "name": "alphas(MZ)",
                 "latex": "$\\alpha_s(M_Z)$",
                 "value": 0.118,
-                "tot_err_up": 0.0009,
-                "tot_err_down": 0.0009
+                "error_upper": 0.0009,
+                "error_lower": 0.0009
             },
             "obs@3": {
                 "name": "Mpi+",
                 "latex": "$M_{\\pi^+}$",
                 "value": 0.13957039,
-                "tot_err_up": 1.8e-07,
-                "tot_err_down": 1.8e-07,
+                "error_upper": 1.8e-07,
+                "error_lower": 1.8e-07,
                 "unit": "GeV"
             },
             "obs@4": {
                 "name": "Mpi0",
                 "latex": "$M_{\\pi^0}$",
                 "value": 0.1349768,
-                "tot_err_up": 5e-07,
-                "tot_err_down": 5e-07,
+                "error_upper": 5e-07,
+                "error_lower": 5e-07,
                 "unit": "GeV"
             },
             "obs@5": {
                 "name": "Meta",
                 "latex": "$M_\\eta$",
                 "value": 0.547862,
-                "tot_err_up": 1.7e-05,
-                "tot_err_down": 1.7e-05,
+                "error_upper": 1.7e-05,
+                "error_lower": 1.7e-05,
                 "unit": "GeV"
             },
             "obs@6": {
                 "name": "Mrho0",
                 "latex": "$M_{\\rho^0}$",
                 "value": 0.77526,
-                "tot_err_up": 0.00023,
-                "tot_err_down": 0.00023,
+                "error_upper": 0.00023,
+                "error_lower": 0.00023,
                 "unit": "GeV"
             },
             "obs@7": {
                 "name": "Mrho+",
                 "latex": "$M_{\\rho^+}$",
                 "value": 0.77526,
-                "tot_err_up": 0.00023,
-                "tot_err_down": 0.00023,
+                "error_upper": 0.00023,
+                "error_lower": 0.00023,
                 "unit": "GeV"
             },
             "obs@8": {
                 "name": "Momega",
                 "latex": "$M_\\omega$",
                 "value": 0.78266,
-                "tot_err_up": 0.00013,
-                "tot_err_down": 0.00013,
+                "error_upper": 0.00013,
+                "error_lower": 0.00013,
                 "unit": "GeV"
             },
             "obs@9": {
                 "name": "Metaprime",
                 "latex": "$M_{\\eta^\\prime}$",
                 "value": 0.95778,
-                "tot_err_up": 6e-05,
-                "tot_err_down": 6e-05,
+                "error_upper": 6e-05,
+                "error_lower": 6e-05,
                 "unit": "GeV"
             },
             "obs@10": {
@@ -161,8 +161,8 @@
             "obs@24": {
                 "name": "A@global",
                 "value": 0.826,
-                "error_up": 0.016,
-                "error_down": 0.015
+                "error_upper": 0.016,
+                "error_lower": 0.015
             },
             "obs@25": {
                 "name": "rhobar@global",
@@ -172,8 +172,8 @@
             "obs@26": {
                 "name": "etabar@global",
                 "value": 0.3523,
-                "error_up": 0.0073,
-                "error_down": 0.0071
+                "error_upper": 0.0073,
+                "error_lower": 0.0071
             },
             "correlation": null
         },
@@ -315,8 +315,8 @@
             "obs@49": {
                 "name": "Gammah",
                 "value": 0.0037,
-                "error_up": 0.0019,
-                "error_down": 0.0014,
+                "error_upper": 0.0019,
+                "error_lower": 0.0014,
                 "unit": "GeV"
             },
             "obs@50": {
@@ -347,8 +347,8 @@
             "obs@55": {
                 "name": "Br(h2tautau)",
                 "value": 0.06,
-                "error_up": 0.008,
-                "error_down": 0.007
+                "error_upper": 0.008,
+                "error_lower": 0.007
             },
             "obs@56": {
                 "name": "Br(h2Zgamma)",
@@ -440,8 +440,8 @@
             "obs@68": {
                 "name": "Gammat",
                 "value": 1.42,
-                "error_up": 0.19,
-                "error_down": 0.15,
+                "error_upper": 0.19,
+                "error_lower": 0.15,
                 "unit": "GeV"
             },
             "obs@69": {
@@ -577,8 +577,8 @@
             "obs@93": {
                 "name": "Br(B+2Kst+ee)",
                 "value": 1.55e-06,
-                "error_up": 4e-07,
-                "error_down": 3.1e-07
+                "error_upper": 4e-07,
+                "error_lower": 3.1e-07
             },
             "obs@94": {
                 "name": "Br(B+2Kst+mumu)",
@@ -656,8 +656,8 @@
             "obs@108": {
                 "name": "Br(B02omegagamma)",
                 "value": 4.4e-07,
-                "error_up": 1.8e-07,
-                "error_down": 1.6e-07
+                "error_upper": 1.8e-07,
+                "error_lower": 1.6e-07
             },
             "obs@109": {
                 "name": "Br(B02K0ll)",
@@ -667,8 +667,8 @@
             "obs@110": {
                 "name": "Br(B02K0ee)",
                 "value": 2.5e-07,
-                "error_up": 1.1e-07,
-                "error_down": 9e-08
+                "error_upper": 1.1e-07,
+                "error_lower": 9e-08
             },
             "obs@111": {
                 "name": "Br(B02K0mumu)",
@@ -678,14 +678,14 @@
             "obs@112": {
                 "name": "Br(B02Kst0ll)",
                 "value": 9.9e-07,
-                "error_up": 1.2e-07,
-                "error_down": 1.1e-07
+                "error_upper": 1.2e-07,
+                "error_lower": 1.1e-07
             },
             "obs@113": {
                 "name": "Br(B02Kst0ee)",
                 "value": 1.03e-06,
-                "error_up": 1.9e-07,
-                "error_down": 1.7e-07
+                "error_upper": 1.9e-07,
+                "error_lower": 1.7e-07
             },
             "obs@114": {
                 "name": "Br(B02Kst0mumu)",
@@ -799,8 +799,8 @@
             "obs@132": {
                 "name": "Br(Lambdab2Lambdaclnu)",
                 "value": 0.062,
-                "error_up": 0.014,
-                "error_down": 0.013
+                "error_upper": 0.014,
+                "error_lower": 0.013
             },
             "obs@133": {
                 "name": "Br(Lambdab2Lambdactaunu)",

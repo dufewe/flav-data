@@ -5,28 +5,25 @@
     "title": "Search for the lepton flavour violating decay $B^+ \\rightarrow K^+ \\mu^- \\tau^+$ using $B_{s2}^{*0}$ decays",
     "arxiv": "[hep-ex/2003.04352](https://arxiv.org/pdf/2003.04352)",
     "time": "2020.01.01",
-    "abstract": "a search for the lepton ﬂavour violating decay $B^+ \\to K^+ \\mu^- \\tau^+$ using a sample of proton--proton collisions at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to a total integrated luminosity of 9 fb$^{−1}$",
+    "abstract": "a search for the lepton flavour violating decay $B^+ \\to K^+ \\mu^- \\tau^+$ using a sample of proton--proton collisions at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to a total integrated luminosity of 9 fb$^{-1}$",
     "pdf": "https://arxiv.org/pdf/2003.04352",
-    "transition-mode": "leptonic decay",
-    "data": [
-        {
-            "tot_correlation": null,
-            "obs@1": {
-                "name": "Br(B+2K+mutau)",
-                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
-                "value": "",
-                "tot_err_up": "3.9e-05",
-                "tot_err_down": "",
-                "level": "90%@CL"
-            },
-            "obs@2": {
-                "name": "Br(B+2K+mutau)",
-                "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
-                "value": "",
-                "tot_err_up": "4.5e-05",
-                "tot_err_down": "",
-                "level": "95%@CL"
+    "transition-mode": "leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
+                    "type@1_upper_limit": "3.9e-05",
+                    "type@1_level": "90%@CL"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "latex": "$\\mathcal{B}(B^+\\to K^+ \\mu^- \\tau^+)$",
+                    "type@1_upper_limit": "4.5e-05",
+                    "type@1_level": "95%@CL"
+                }
             }
-        }
-    ]
+        ]
+    }
 }

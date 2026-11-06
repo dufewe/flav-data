@@ -7,23 +7,18 @@
     "time": "2011.01.01",
     "abstract": "the ratio of strange $B$ meson to light neutral $B$ meson production $f_s/f_d$",
     "pdf": "https://arxiv.org/pdf/1111.2357",
-    "transition-mode": "leptonic decay",
-    "data": [
-        {
-            "tot_correlation": null,
-            "obs@1": {
-                "name": "fs/fd",
-                "latex": "$f_s/f_d$",
-                "value": "0.267",
-                "tot_err_up": "0.021",
-                "tot_err_down": "0.02",
-                "type@1_err_up": "",
-                "type@1_err_down": "",
-                "type@2_err_up": "",
-                "type@2_err_down": "",
-                "type@1_err": "stat",
-                "type@2_err": "syst"
+    "transition-mode": "leptonic-decay",
+    "data": {
+        "no-transition": [
+            {
+                "obs@1": {
+                    "name": "fs/fd",
+                    "latex": "$f_s/f_d$",
+                    "value": "0.267",
+                    "error_upper": "0.021",
+                    "error_lower": "0.02"
+                }
             }
-        }
-    ]
+        ]
+    }
 }

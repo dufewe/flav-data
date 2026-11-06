@@ -42,6 +42,25 @@ class JsonValidatorTests(unittest.TestCase):
 
         self.assertTrue(any('Top-level JSON must be an object' in issue for issue in issues))
 
+    def test_observable_name_rejects_embedded_transition(self):
+        for name in ('FL', 'RBr[mu/e]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
+        for name in ('FL(B0.2.Kst0.mu+.mu-)', 'FL(B02Kstmumu)'):
+            self.assertTrue(json_valid.validate_observable_name(name), name)
+
+    def test_transition_mode_is_hyphenated(self):
+        for mode in ('leptonic-decay', 'semileptonic-decay', 'non-leptonic-decay',
+                     'radiative-decay', 'neutron-beta-decay', 'higgs-decay',
+                     'mixing', 'scattering', 'electroweak-precision',
+                     'w-production', 'higgs-production', 'low-energy',
+                     'oblique-corrections'):
+            self.assertEqual(json_valid.validate_transition_mode(mode), [], mode)
+
+        self.assertTrue(json_valid.validate_transition_mode('semileptonic decay'))
+        self.assertTrue(json_valid.validate_transition_mode('Higgs decay'))
+        self.assertTrue(json_valid.validate_transition_mode('electroweak precision'))
+
 
 class DashboardDataTests(unittest.TestCase):
     def test_skips_invalid_month_keys_and_corrupt_details(self):
@@ -149,8 +168,8 @@ class ImporterDocumentationTests(unittest.TestCase):
         self.assertIn("meta['recid']", skill)
         self.assertNotIn("meta['inspire_recid']", skill)
         self.assertIn('matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation', skill)
-        self.assertIn('transition-mode": "semileptonic decay"', skill)
-        self.assertLess(skill.index('"transition-mode": "semileptonic decay"'), skill.index('"data": [', skill.index('"transition-mode": "semileptonic decay"')))
+        self.assertIn('transition-mode": "semileptonic-decay"', skill)
+        self.assertLess(skill.index('"transition-mode": "semileptonic-decay"'), skill.index('"data": {', skill.index('"transition-mode": "semileptonic-decay"')))
 
 
 class HepDataImporterTests(unittest.TestCase):

@@ -137,13 +137,17 @@ When the validator cannot resolve a transition symbol unambiguously, it falls ba
 | $\gamma$ | `gamma` | Photon |
 | $t$, $\bar{t}$ | `t`, `tBar` | Top quark |
 
-## 2. Observable Naming: `OBS(transition)[condition]`
+## 2. Observable Naming: `OBS` / `OBS[condition]`
 
-Every measured quantity is named using the pattern `OBS(transition)[condition]`:
+Every measured quantity is named by its observable symbol only. The
+transition is the enclosing `data` key (Section 1), so `name` must not
+repeat it:
 
 - **OBS**: a symbolic abbreviation representing the physical observable (see §3 for the full abbreviation table). Use only symbols — never write full expression definitions.
-- **transition**: the `A.B.2.C.D` transition symbol from Section 1. **Required for all composite observables** (anything beyond intrinsic particle properties). **Omitted for basic observables** such as mass, lifetime, charge — these use `OBS(particle)` format instead.
-- **condition**: an optional qualifier in square brackets, used ONLY for multi-transition observables such as ratios or differences between different lepton flavors. Do NOT use `[condition]` to distinguish measurements at different q² bins — use separate `data[]` entries with `q2min`/`q2max` instead.
+- **condition**: an optional qualifier in square brackets, used ONLY for multi-transition observables such as ratios or differences between different lepton flavors. Do NOT use `[condition]` to distinguish measurements at different q² bins — use separate groups with `q2min`/`q2max` instead.
+- **method/parameter tags**: optional parentheses for non-transition qualifiers, e.g. `Vcb(CLN)`, `R1(CLN)`, `f+.Vcs`. A transition inside parentheses is invalid.
+
+Examples: `FL`, `Br`, `dBr/dq2`, `Q6[mu-e]`, `RBr[mu/e]`, `Vcb(CLN)`.
 
 ### 2.1 Basic Observables (No Transition)
 
@@ -182,41 +186,43 @@ Every measured quantity is named using the pattern `OBS(transition)[condition]`:
 | `fs/fd` | $f_s / f_d$ fragmentation ratio |
 | `ge/gmu`, `ge/gtau` | Lepton flavor ratios at $Z$ |
 
-### 2.2 Composite Observables (With Transition)
+### 2.2 Decay and Scattering Observables
 
-**Composite observables** describe decay or scattering properties and MUST include the transition symbol. The transition uses the full `A.B.2.C.D` format (scattering) or `A.2.C.D` format (decay), as demonstrated in the examples below.
+Decay or scattering observables use the same bare symbol; the process is
+the `data` key. The key follows the full `A.B.2.C.D` format (scattering)
+or `A.2.C.D` format (decay).
 
 #### 2.2.1 Single-Transition Observables
 
 For observables measuring a single process, no condition is needed:
 
-| Observable | LaTeX | Symbol | Notes |
-|------------|-------|--------|-------|
-| Branching fraction $\mathcal{B}(B^0 \to e^+ e^-)$ | $\mathcal{B}$ | `Br(B0.2.e+.e-)` | Standard decay |
-| Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma(Kst0.2.K+.pi-)` | Partial width |
-| Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2(B0.2.Xs.gamma)` | |
-| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma(pp \to e^+ e^-)$ | `Sigma(p.p.2.e+.e-)` | |
-| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC(B+.2.J/psi.K+)` | Same-type mesons: `J/psi` ($3097$ MeV) before `K+` ($493$ MeV), heaviest to lightest |
-| Mass difference $\Delta M_s$ | $\Delta M_s$ | `DeltaMass(Bs0.2.Bs0Bar)` | |
-| Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f(Z \to \mu^+ \mu^-)$ | `f(Z.2.mu+.mu-)` | Branching fraction of a resonance |
+| Observable | LaTeX | Symbol | Data key |
+|------------|-------|--------|----------|
+| Branching fraction $\mathcal{B}(B^0 \to e^+ e^-)$ | $\mathcal{B}$ | `Br` | `B0.2.e+.e-` |
+| Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma` | `Kst0.2.K+.pi-` |
+| Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2` | `B0.2.Xs.gamma` |
+| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma(pp \to e^+ e^-)$ | `Sigma` | `p.p.2.e+.e-` |
+| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC` | `B+.2.J/psi.K+` |
+| Mass difference $\Delta M_s$ | $\Delta M_s$ | `DeltaMass` | `Bs0.2.Bs0Bar` |
+| Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f(Z \to \mu^+ \mu^-)$ | `f` | `Z.2.mu+.mu-` |
 
 #### 2.2.2 Multi-Transition Observables
 
 For observables comparing two or more transitions (e.g., lepton flavor universality tests):
 
-- **transition** uses the shared part of the multi-transition process.
+- The **data key** uses the shared part of the multi-transition process.
 - Shared particles are denoted generically: `l1`/`l2` (leptons), `q1`/`q2` (quarks), `nu1`/`nu2` (neutrinos), `h1`/`h2` (hadrons).
 - **condition** encodes the flavor mapping, e.g., `[mu/e]` means l1 = μ, l2 = e.
-  - **`/` (slash)** in condition → `R` ratio: `RBr(B0.2.Kst0.l+.l-)[mu/e]` = $\mathcal{B}(B^0\to K^{*0}\mu^+\mu^-)/\mathcal{B}(B^0\to K^{*0}e^+e^-)$.
-  - **`-` (dash)** in condition → `Delta` difference: `DeltaACP(B-.2.l-.nuBar)[mu-e]` = $A_{CP}(B^-\to\mu^- \bar{\nu}) - A_{CP}(B^-\to e^-\bar{\nu})$.
+  - **`/` (slash)** in condition → `R` ratio: `RBr[mu/e]` = $\mathcal{B}(B^0\to K^{*0}\mu^+\mu^-)/\mathcal{B}(B^0\to K^{*0}e^+e^-)$.
+  - **`-` (dash)** in condition → `Delta` difference: `DeltaACP[mu-e]` = $A_{CP}(B^-\to\mu^- \bar{\nu}) - A_{CP}(B^-\to e^-\bar{\nu})$.
 
-| Observable | LaTeX | Symbol | Notes |
-|------------|-------|--------|-------|
-| $R_{K^*} = \frac{\mathcal{B}(B^0 \to K^{*0}\mu^+\mu^-)}{\mathcal{B}(B^0 \to K^{*0}e^+e^-)}$ | $R_{K^*}$ | `RBr(B0.2.Kst0.l+.l-)[mu/e]` | Lepton flavor ratio of branching fractions |
-| $R_K = \frac{\mathcal{B}(B^+ \to K^+\mu^+\mu^-)}{\mathcal{B}(B^+ \to K^+e^+e^-)}$ | $R_K$ | `RBr(B+.2.K+.l+.l-)[mu/e]` | |
-| $\Delta A_{CP} = A_{CP}(\mu) - A_{CP}(e)$ | $\Delta A_{CP}$ | `DeltaACP(B-.2.l-.nuBar)[mu-e]` | CP asymmetry difference |
-| $r = \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $r$ | `r(B-.2.D0.K-)` | Amplitude ratio (GLW/ADS) |
-| $\delta = \arg \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $\delta$ | `delta(B-.2.D0.K-)` | Strong phase difference |
+| Observable | LaTeX | Symbol | Data key |
+|------------|-------|--------|----------|
+| $R_{K^*} = \frac{\mathcal{B}(B^0 \to K^{*0}\mu^+\mu^-)}{\mathcal{B}(B^0 \to K^{*0}e^+e^-)}$ | $R_{K^*}$ | `RBr[mu/e]` | `B0.2.Kst0.l+.l-` |
+| $R_K = \frac{\mathcal{B}(B^+ \to K^+\mu^+\mu^-)}{\mathcal{B}(B^+ \to K^+e^+e^-)}$ | $R_K$ | `RBr[mu/e]` | `B+.2.K+.l+.l-` |
+| $\Delta A_{CP} = A_{CP}(\mu) - A_{CP}(e)$ | $\Delta A_{CP}$ | `DeltaACP[mu-e]` | `B-.2.l-.nuBar` |
+| $r = \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $r$ | `r` | `B-.2.D0.K-` |
+| $\delta = \arg \frac{A(B^- \to \bar{D}^0 K^-)}{A(B^- \to D^0 K^-)}$ | $\delta$ | `delta` | `B-.2.D0.K-` |
 
 **CKM parameters**: $r$ and $\delta$ are defined via $B^-$ decay amplitude ratios ($b \to u$ suppressed relative to $b \to c$ favored). The B meson and final-state meson in the transition must carry **negative charge**: `B-.2.D0.K-`, `B-.2.D0.pi-` (canonical order: mesons heaviest to lightest, so `D0` before `K-`/`pi-`).
 
@@ -226,15 +232,63 @@ Unless otherwise specified, differences and ratios between observables follow th
 
 | Type | Symbol | LaTeX | Example |
 |------|--------|-------|---------|
-| Difference | `DeltaOBS(transition)[condition]` | $\Delta_{OBS}^{condition}(transition)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu-e]` |
-| Ratio | `ROBS(transition)[condition]` | $R_{OBS}^{condition}(transition)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` |
+| Difference | `DeltaOBS[condition]` | $\Delta_{OBS}^{condition}$ | `DeltaBr[mu-e]` |
+| Ratio | `ROBS[condition]` | $R_{OBS}^{condition}$ | `RFL[mu/e]` |
 
 Examples:
 | LaTeX | Symbol | Description |
 |-------|--------|-------------|
-| $\Delta_{A_{CP}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaACP(B0.2.Kst0.l+.l-)[mu-e]` | CP asymmetry difference |
-| $R_{F_L}^{\mu/e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` | Longitudinal polarization ratio |
-| $\Delta_{\mathcal{B}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu-e]` | Branching fraction difference |
+| $\Delta_{A_{CP}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaACP[mu-e]` | CP asymmetry difference |
+| $R_{F_L}^{\mu/e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `RFL[mu/e]` | Longitudinal polarization ratio |
+| $\Delta_{\mathcal{B}}^{\mu-e}(B^0 \to K^{*0} \ell^+\ell^-)$ | `DeltaBr[mu-e]` | Branching fraction difference |
+
+### 2.4 Form-Factor Expansion Coefficients: `aN_FF`
+
+Coefficients of a form-factor expansion (z-expansion, BCL, ...) are
+named `aN_FF`:
+
+- `N` — expansion order: 0, 1, 2, ...
+- `FF` — form-factor symbol from the table below.
+
+Examples: `a0_Fp`, `a1_F0`, `a2_Fv`, `a0_Gv`. When the source quotes one
+number for several form factors, write one observable per symbol and
+repeat the value/errors (`a0_Gv` and `a0_Gp`), never joined into a
+single name such as `a0_Gv_Gp`.
+
+Fit choices (nominal, higher-order, ...) are **not** part of the name —
+record them in the `method` field (`"nominal"`, `"higher-order"`).
+
+**Form-factor symbols** (use the notation of the paper's own
+decomposition; these are the standard symbols):
+
+| Symbol | Form factor |
+|--------|-------------|
+| `fp` | $f_+$ |
+| `f0` | $f_0$ |
+| `fT` | $f_T$ |
+| `V` | $V$ |
+| `A0` | $A_0$ |
+| `A1` | $A_1$ |
+| `A12` | $A_{12}$ |
+| `T1` | $T_1$ |
+| `T2` | $T_2$ |
+| `T23` | $T_{23}$ |
+| `Fp` | helicity $f_+$ |
+| `F0` | helicity $f_0$ |
+| `Fv` | helicity $f_\perp$ |
+| `Gp` | helicity $g_+$ |
+| `G0` | helicity $g_0$ |
+| `Gv` | helicity $g_\perp$ |
+| `hp` | helicity $h_+$ |
+| `hv` | helicity $h_\perp$ |
+| `htp` | helicity $\tilde{h}_+$ |
+| `htv` | helicity $\tilde{h}_\perp$ |
+
+Baryon semileptonic decays ($\Lambda_b \to \Lambda_c \ell^- \bar{\nu}$,
+$\Lambda_b \to p \ell^- \bar{\nu}$) use the helicity set, with the
+mapping $f_+ \to$ `Fp`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`,
+$g_+ \to$ `Gp`, $g_0 \to$ `G0`, $g_\perp \to$ `Gv`,
+$h_+ \to$ `hp`, $h_\perp \to$ `hv`.
 
 ## 3. Observable Abbreviations
 
@@ -477,7 +531,7 @@ for $B^0 \to K^{*0}\mu^+\mu^-$ (same process as LHCb:2015svh):
 | data[4] | Alternative P parameterization | ~210 | Different observable set |
 | data[5] | CP-averaged (fine bins) | ~362 | 16 q² bins × ~22-27 obs/bin |
 
-Each entry has its own `tot_correlation` matrix. Fine binning (data[5]) splits
+Each entry has its own `total_correlation` matrix. Fine binning (data[5]) splits
 standard bins into sub-intervals for higher resolution. The exact split and
 observable choice may differ across analyses — this is illustrative, not a template.
 
@@ -489,5 +543,5 @@ When a paper introduces an observable not listed in this document:
 2. **Choose or create an abbreviation** following the conventions in Section 3. Add it to the appropriate category.
 3. **Add the LaTeX mapping** to Section 4.
 4. **Add new particles** to the particle table in Section 1 if the observable involves a particle not yet listed.
-5. **Verify the naming** follows `OBS(transition)[condition]` format.
+5. **Verify the naming**: `name` is the bare symbol plus an optional `[condition]`; the transition is the `data` key.
 6. **Remember**: use symbolic notation only, not full expression definitions.

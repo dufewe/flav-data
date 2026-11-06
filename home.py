@@ -58,7 +58,7 @@ st.markdown('''
 ## Features
 
 - **Standardized JSON format** — every entry follows the same schema with metadata, data arrays, and transition-mode classification
-- **Machine-parseable naming** — transition symbols (`A.B.2.C.D`) and observable names (`OBS(transition)[condition]`) enable automated data retrieval
+- **Machine-parseable naming** — `data` keys carry transition symbols (`A.B.2.C.D`) and observable names are bare symbols with optional `[condition]` qualifiers
 - **Year-indexed organization** — annual index files (`LHCb@2025.json`) for fast lookup
 - **Month subdirectories** — files organized by arXiv v1 submission date
 - **Complete error breakdown** — component-level (stat/syst) errors with optional correlation matrices
@@ -125,26 +125,28 @@ st.code('''{
     "time": "2015.12.14",
     "abstract": "An angular analysis of the $B^{0}\\\\to K^{*0}(\\\\to K^{+}\\\\pi^{-})\\\\mu^{+}\\\\mu^{-}$ decay...",
     "pdf": "https://arxiv.org/pdf/1512.04442",
-    "data": [
-        {
-            "obs@1": {
-                "name": "FL(B0.2.Kst0.mu+.mu-)",
-                "latex": "$F_L(B^{0}\\\\to K^{*0}\\\\mu^{+}\\\\mu^{-})$",
-                "value": "0.69",
-                "type@1_err": "stat",
-                "type@1_err_up": "0.035",
-                "type@1_err_down": "0.036",
-                "type@2_err": "syst",
-                "type@2_err_up": "0.017",
-                "type@2_err_down": "0.017",
-                "q2min": "0.1",
-                "q2max": "1.1"
-            },
-            "obs@2": { "...": "..." },
-            "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
-        }
-    ],
-    "transition-mode": "semileptonic decay"
+    "transition-mode": "semileptonic-decay",
+    "data": {
+        "B0.2.Kst0.mu+.mu-": [
+            {
+                "obs@1": {
+                    "name": "FL",
+                    "latex": "$F_L(B^{0}\\\\to K^{*0}\\\\mu^{+}\\\\mu^{-})$",
+                    "value": "0.69",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.035",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.017",
+                    "type@2_lower": "0.017",
+                    "q2min": "0.1",
+                    "q2max": "1.1"
+                },
+                "obs@2": { "...": "..." },
+                "type@1_correlation": [[1.0, 0.06], [0.06, 1.0]]
+            }
+        ]
+    }
 }''', language="json")
 
 st.markdown('''
@@ -153,11 +155,11 @@ st.markdown('''
 | Principle | Implementation |
 |-----------|----------------|
 | All numeric values are strings | `"0.69"` not `0.69` |
-| Component errors preferred | Separate `type@1_err` (stat), `type@2_err` (syst) |
+| Component errors preferred | Separate `type@1_error` (stat), `type@2_error` (syst) |
 | Correlation matrices at entry level | `type@1_correlation` alongside `obs@N` keys |
 | LaTeX escaping | `\\\\to` in JSON → `\\to` after parsing |
-| Transition symbol | `A.B.2.C.D` replaces $A + B \\to C + D$ |
-| Observable naming | `OBS(transition)[condition]` |
+| Transition symbol | `data` key `A.B.2.C.D` replaces $A + B \\to C + D$ |
+| Observable naming | bare `OBS` symbol; `[condition]` only for multi-transition ratios |
 ''')
 
 # ---------------------------------------------------------

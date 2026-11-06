@@ -90,18 +90,18 @@ st.markdown('''
 # Observable Naming Convention
 # ---------------------------------------------------------
 st.markdown('''
-# 观测量命名规则：`OBS(transition)[condition]`
+# 观测量命名规则：`OBS` / `OBS[condition]`
 
-每个测量量使用模式 `OBS(transition)[condition]` 命名：
+每个测量量使用模式 `OBS` 或 `OBS[condition]` 命名：
 
 - **OBS**：观测量符号缩写（见下表）。**仅用符号，不写完整表达式定义**
-- **transition**：`A.B.2.C.D` 跃迁符号
 - **condition**：可选限定符（方括号），**仅**用于多跃迁可观测量（如不同轻子味道比值）。**不**用于区分不同 q² 区间的测量——使用独立 `data[]` 条目配合 `q2min`/`q2max`
+- **跃迁道由 `data` 键（`A.B.2.C.D`）表示**，`name` 中不重复书写跃迁道
 
 **特殊模式：**
-- 观测量差值：`DeltaOBS(transition)[condition]`，LaTeX：$\\Delta_{OBS}^{condition}(transition)$
-- 观测量比值：`ROBS(transition)[condition]`，LaTeX：$R_{OBS}^{condition}(transition)$
-- CKM 参数 $r$ 和 $\\delta$：B 介子和末态介子带负电荷（如 `B-.2.D0.K-`）
+- 观测量差值：`DeltaOBS[condition]`，LaTeX：$\\Delta_{OBS}^{condition}$
+- 观测量比值：`ROBS[condition]`，LaTeX：$R_{OBS}^{condition}$
+- CKM 参数 `r` 和 `delta`：对应 `data` 键 `B-.2.D0.K-`（B 介子和末态介子带负电荷）
 ''')
 
 # ---------------------------------------------------------
@@ -240,26 +240,26 @@ st.markdown('''
 
 对于比较两个或更多跃迁的观测量（如轻子味道普适性检验）：
 
-- **transition** 使用多跃迁过程的共享部分
+- **data 键**（`transition`）使用多跃迁过程的共享部分
 - 共享粒子用通用记号：`l1`/`l2`（轻子），`q1`/`q2`（夸克），`nu1`/`nu2`（中微子），`h1`/`h2`（强子）
-- **condition** 编码味道映射，如 `[mu/e]` 表示 l1 = μ，l2 = e
+- **name** 只保留观测量符号；**condition** 编码味道映射，如 `[mu/e]` 表示 l1 = μ，l2 = e
 
 **示例：**
 
-| 观测量 | LaTeX | 符号 | 说明 |
-|--------|-------|------|------|
-| $R_{K^*} = \\frac{\\mathcal{B}(B^0 \\to K^{*0}\\mu^+\\mu^-)}{\\mathcal{B}(B^0 \\to K^{*0}e^+e^-)}$ | $R$ | `R(B0.2.Kst0.l+.l-)[mu/e]` | 轻子味道比值 |
-| $R_K = \\frac{\\mathcal{B}(B^+ \\to K^+\\mu^+\\mu^-)}{\\mathcal{B}(B^+ \\to K^+e^+e^-)}$ | $R$ | `R(B+.2.K+.l+.l-)[mu/e]` | |
-| $A_{CP}(\\mu) - A_{CP}(e)$ | $\\Delta A_{CP}$ | `DeltaACP(B-.2.l-.nuBar)[mu-e]` | CP 不对称性差值 |
-| $r = \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $r$ | `r(B-.2.D0.K-)` | 振幅比值 (GLW/ADS) |
-| $\\delta = \\arg \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $\\delta$ | `delta(B-.2.D0.K-)` | 强相位差 |
+| 观测量 | LaTeX | 符号 | data 键 | 说明 |
+|--------|-------|------|---------|------|
+| $R_{K^*} = \\frac{\\mathcal{B}(B^0 \\to K^{*0}\\mu^+\\mu^-)}{\\mathcal{B}(B^0 \\to K^{*0}e^+e^-)}$ | $R$ | `RBr[mu/e]` | `B0.2.Kst0.l+.l-` | 轻子味道比值 |
+| $R_K = \\frac{\\mathcal{B}(B^+ \\to K^+\\mu^+\\mu^-)}{\\mathcal{B}(B^+ \\to K^+e^+e^-)}$ | $R$ | `RBr[mu/e]` | `B+.2.K+.l+.l-` | |
+| $A_{CP}(\\mu) - A_{CP}(e)$ | $\\Delta A_{CP}$ | `DeltaACP[mu-e]` | `B-.2.l-.nuBar` | CP 不对称性差值 |
+| $r = \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $r$ | `r` | `B-.2.D0.K-` | 振幅比值 (GLW/ADS) |
+| $\\delta = \\arg \\frac{A(B^- \\to \\bar{D}^0 K^-)}{A(B^- \\to D^0 K^-)}$ | $\\delta$ | `delta` | `B-.2.D0.K-` | 强相位差 |
 
 **差值与比值统一约定：**
 
 | 类型 | 符号 | LaTeX | 示例 |
 |------|------|-------|------|
-| 差值 | `DeltaOBS(transition)[condition]` | $\\Delta_{OBS}^{condition}(transition)$ | `DeltaBr(B0.2.Kst0.l+.l-)[mu/e]` |
-| 比值 | `ROBS(transition)[condition]` | $R_{OBS}^{condition}(transition)$ | `RFL(B0.2.Kst0.l+.l-)[mu/e]` |
+| 差值 | `DeltaOBS[condition]` | $\\Delta_{OBS}^{condition}$ | `DeltaBr[mu-e]` |
+| 比值 | `ROBS[condition]` | $R_{OBS}^{condition}$ | `RFL[mu/e]` |
 ''')
 
 # ---------------------------------------------------------

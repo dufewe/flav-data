@@ -7,78 +7,108 @@
     "time": "2016-06-07",
     "abstract": "Combined ATLAS and CMS measurements of the Higgs boson production and decay rates, as well as constraints on its couplings to vector bosons and fermions. The combined signal yield relative to the SM prediction is measured to be 1.09 +/- 0.11. The combination uses 5 fb-1 at 7 TeV and 20 fb-1 at 8 TeV per experiment.",
     "pdf": "https://arxiv.org/pdf/1606.02266.pdf",
-    "transition-mode": "Higgs decay",
-    "data": [
-        {
-            "obs@1": {
-                "name": "mu_H(g.g.2.H.2.f.fbar)",
-                "latex": "$\\mu$",
-                "value": "1.09",
-                "tot_err_up": "0.11",
-                "tot_err_down": "0.11"
+    "transition-mode": "higgs-decay",
+    "data": {
+        "g.g.2.H.2.f.fbar": [
+            {
+                "obs@1": {
+                    "name": "mu_H",
+                    "latex": "$\\mu$",
+                    "value": "1.09",
+                    "error_upper": "0.11",
+                    "error_lower": "0.11"
+                }
             }
-        },
-        {
-            "obs@1": {
-                "name": "kappa_gZ(H.gg.2.Z.Z)",
-                "latex": "$\\kappa_{gZ}$",
-                "value": "1.09",
-                "sta_err_up": "0.09",
-                "sta_err_down": "0.09",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.06",
-                "type@1_err_down": "0.06"
-            },
-            "obs@2": {
-                "name": "kappa_W(H.2.W.W)",
-                "latex": "$\\kappa_{W}$",
-                "value": "1.00",
-                "sta_err_up": "0.08",
-                "sta_err_down": "0.08",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.04",
-                "type@1_err_down": "0.04"
-            },
-            "obs@3": {
-                "name": "kappa_Z(H.2.Z.Z)",
-                "latex": "$\\kappa_{Z}$",
-                "value": "1.04",
-                "sta_err_up": "0.07",
-                "sta_err_down": "0.07",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.04",
-                "type@1_err_down": "0.04"
-            },
-            "obs@4": {
-                "name": "kappa_tau(H.2.tau.tau)",
-                "latex": "$\\kappa_{\\tau}$",
-                "value": "1.04",
-                "sta_err_up": "0.16",
-                "sta_err_down": "0.16",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.13",
-                "type@1_err_down": "0.13"
-            },
-            "obs@5": {
-                "name": "kappa_b(H.2.b.bbar)",
-                "latex": "$\\kappa_{b}$",
-                "value": "0.95",
-                "sta_err_up": "0.25",
-                "sta_err_down": "0.25",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.16",
-                "type@1_err_down": "0.16"
-            },
-            "obs@6": {
-                "name": "kappa_t(H.gg.2.t.tbar)",
-                "latex": "$\\kappa_{t}$",
-                "value": "1.05",
-                "sta_err_up": "0.13",
-                "sta_err_down": "0.13",
-                "type@1_err": "syst",
-                "type@1_err_up": "0.11",
-                "type@1_err_down": "0.11"
+        ],
+        "H.gg.2.Z.Z": [
+            {
+                "obs@1": {
+                    "name": "kappa_gZ",
+                    "latex": "$\\kappa_{gZ}$",
+                    "value": "1.09",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.06",
+                    "type@1_lower": "0.06",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.09",
+                    "type@2_lower": "0.09"
+                }
             }
-        }
-    ]
+        ],
+        "H.2.W.W": [
+            {
+                "obs@1": {
+                    "name": "kappa_W",
+                    "latex": "$\\kappa_{W}$",
+                    "value": "1.00",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.04",
+                    "type@1_lower": "0.04",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.08",
+                    "type@2_lower": "0.08"
+                }
+            }
+        ],
+        "H.2.Z.Z": [
+            {
+                "obs@1": {
+                    "name": "kappa_Z",
+                    "latex": "$\\kappa_{Z}$",
+                    "value": "1.04",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.04",
+                    "type@1_lower": "0.04",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.07",
+                    "type@2_lower": "0.07"
+                }
+            }
+        ],
+        "H.2.tau.tau": [
+            {
+                "obs@1": {
+                    "name": "kappa_tau",
+                    "latex": "$\\kappa_{\\tau}$",
+                    "value": "1.04",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.13",
+                    "type@1_lower": "0.13",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.16",
+                    "type@2_lower": "0.16"
+                }
+            }
+        ],
+        "H.2.b.bbar": [
+            {
+                "obs@1": {
+                    "name": "kappa_b",
+                    "latex": "$\\kappa_{b}$",
+                    "value": "0.95",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.16",
+                    "type@1_lower": "0.16",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.25",
+                    "type@2_lower": "0.25"
+                }
+            }
+        ],
+        "H.gg.2.t.tbar": [
+            {
+                "obs@1": {
+                    "name": "kappa_t",
+                    "latex": "$\\kappa_{t}$",
+                    "value": "1.05",
+                    "type@1_error": "syst",
+                    "type@1_upper": "0.11",
+                    "type@1_lower": "0.11",
+                    "type@2_error": "stat",
+                    "type@2_upper": "0.13",
+                    "type@2_lower": "0.13"
+                }
+            }
+        ]
+    }
 }
