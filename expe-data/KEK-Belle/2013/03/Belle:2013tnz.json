@@ -9,82 +9,82 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kp.nu.nuBar": {
+            "B+.2.K+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.5e-5",
+                    "type@1_upper": "5.5e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.K0s.nu.nuBar": {
+            "B0.2.KS0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "9.7e-5",
+                    "type@1_upper": "9.7e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.Kstp.nu.nuBar": {
+            "B+.2.K*+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "4.0e-5",
+                    "type@1_upper": "4.0e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.Kst0.nu.nuBar": {
+            "B0.2.K*0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.5e-5",
+                    "type@1_upper": "5.5e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.pip.nu.nuBar": {
+            "B+.2.pi+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "9.8e-5",
+                    "type@1_upper": "9.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.pi0.nu.nuBar": {
+            "B0.2.pi0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "6.9e-5",
+                    "type@1_upper": "6.9e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.rhop.nu.nuBar": {
+            "B+.2.rho+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "21.3e-5",
+                    "type@1_upper": "21.3e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.rho0.nu.nuBar": {
+            "B0.2.rho0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "20.8e-5",
+                    "type@1_upper": "20.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.phi.nu.nuBar": {
+            "B0.2.phi.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "12.7e-5",
+                    "type@1_upper": "12.7e-5",
                     "type@1_level": "90%@CL"
                 }
             }

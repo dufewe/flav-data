@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.omegal.l+.nu": {
+            "B+.2.omegal.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "27.6",
@@ -87,7 +87,7 @@
             ]
         },
         {
-            "Bp.2.etap.l+.nu": {
+            "B+.2.etap.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.24",

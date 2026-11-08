@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambda.2.p.mu-.nuBar": {
+            "Lambda.2.p.mu-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.462e-4",
@@ -26,12 +26,12 @@
             }
         },
         {
-            "Lambda.2.p.l-.nuBar": {
+            "Lambda.2.p.l-.vBar": {
                 "obs@1": {
                     "name": "R[mu/e]",
                     "value": "0.175",
-                    "error_upper": "0.012",
-                    "error_lower": "0.012"
+                    "total_upper": "0.012",
+                    "total_lower": "0.012"
                 }
             }
         }

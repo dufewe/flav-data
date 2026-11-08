@@ -9,26 +9,25 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "Bp.2.mup.numu": {
+            "B+.2.mu+.vmu": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "5.3",
+                    "value": "5.3e-7",
                     "type@1_error": "stat",
-                    "type@1_upper": "2.0",
-                    "type@1_lower": "2.0",
+                    "type@1_upper": "2.0e-7",
+                    "type@1_lower": "2.0e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.9",
-                    "type@2_lower": "0.9",
-                    "unit": "1e-7"
+                    "type@2_upper": "9e-8",
+                    "type@2_lower": "9e-8"
                 },
                 "obs@2": {
                     "name": "Br[90%@CL][freq]",
-                    "type@1_upper_limit": "8.6e-7",
+                    "type@1_upper": "8.6e-7",
                     "type@1_level": "90%@CL"
                 },
                 "obs@3": {
                     "name": "Br[90%@CL][bayes]",
-                    "type@1_upper_limit": "8.9e-7",
+                    "type@1_upper": "8.9e-7",
                     "type@1_level": "90%@CL"
                 }
             }

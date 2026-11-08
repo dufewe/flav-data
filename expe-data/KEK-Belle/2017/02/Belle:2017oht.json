@@ -9,127 +9,127 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kp.nu.nuBar": {
+            "B+.2.K+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.9e-5",
+                    "type@1_upper": "1.9e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.K0s.nu.nuBar": {
+            "B0.2.KS0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.3e-5",
+                    "type@1_upper": "1.3e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.Kstp.nu.nuBar": {
+            "B+.2.K*+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "6.1e-5",
+                    "type@1_upper": "6.1e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.Kst0.nu.nuBar": {
+            "B0.2.K*0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.8e-5",
+                    "type@1_upper": "1.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.pip.nu.nuBar": {
+            "B+.2.pi+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.4e-5",
+                    "type@1_upper": "1.4e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.pi0.nu.nuBar": {
+            "B0.2.pi0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "0.9e-5",
+                    "type@1_upper": "0.9e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.rhop.nu.nuBar": {
+            "B+.2.rho+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "3.0e-5",
+                    "type@1_upper": "3.0e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.rho0.nu.nuBar": {
+            "B0.2.rho0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "4.0e-5",
+                    "type@1_upper": "4.0e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.K.nu.nuBar": {
+            "B.2.K.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.6e-5",
+                    "type@1_upper": "1.6e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.K.nu.nuBar": {
+            "B.2.K.v.vBar": {
                 "obs@1": {
                     "name": "R[exp/sm][90%@CL]",
-                    "type@1_upper_limit": "3.9",
+                    "type@1_upper": "3.9",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.Kst.nu.nuBar": {
+            "B.2.K*.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "2.7e-5",
+                    "type@1_upper": "2.7e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.Kst.nu.nuBar": {
+            "B.2.K*.v.vBar": {
                 "obs@1": {
                     "name": "R[exp/sm][90%@CL]",
-                    "type@1_upper_limit": "2.7",
+                    "type@1_upper": "2.7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.pi.nu.nuBar": {
+            "B.2.pi.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "0.8e-5",
+                    "type@1_upper": "0.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.rho.nu.nuBar": {
+            "B.2.rho.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "2.8e-5",
+                    "type@1_upper": "2.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }

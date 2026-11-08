@@ -12,10 +12,10 @@
             "Bs0.2.J/psi.gamma": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "2.9e-6",
-                    "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "3.4e-6",
-                    "type@2_level": "95%@CLs",
+                    "type@3_upper": "2.9e-6",
+                    "type@3_level": "90%@CLs",
+                    "type@4_upper": "3.4e-6",
+                    "type@4_level": "95%@CLs",
                     "value": "1.34",
                     "type@1_error": "stat",
                     "type@1_upper": "0.78",
@@ -30,10 +30,10 @@
             "B0.2.J/psi.gamma": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "2.6e-6",
-                    "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "3.5e-6",
-                    "type@2_level": "95%@CLs",
+                    "type@3_upper": "2.6e-6",
+                    "type@3_level": "90%@CLs",
+                    "type@4_upper": "3.5e-6",
+                    "type@4_level": "95%@CLs",
                     "value": "0.61",
                     "type@1_error": "stat",
                     "type@1_upper": "0.50",

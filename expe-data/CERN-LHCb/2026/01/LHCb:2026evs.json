@@ -12,20 +12,20 @@
             "B-.2.D+.mu-.mu-": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "3.8e-8",
+                    "type@1_upper": "3.8e-8",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "4.6e-8",
+                    "type@2_upper": "4.6e-8",
                     "type@2_level": "95%@CLs"
                 }
             }
         },
         {
-            "B-.2.Dst+.mu-.mu-": {
+            "B-.2.D*+.mu-.mu-": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "4.5e-8",
+                    "type@1_upper": "4.5e-8",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "5.9e-8",
+                    "type@2_upper": "5.9e-8",
                     "type@2_level": "95%@CLs"
                 }
             }

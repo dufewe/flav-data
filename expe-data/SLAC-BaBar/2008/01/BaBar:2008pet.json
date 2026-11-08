@@ -9,37 +9,37 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "Bp.2.ep.nu": {
+            "B+.2.e+.v": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.2e-6",
+                    "type@1_upper": "5.2e-6",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.mup.nu": {
+            "B+.2.mu+.v": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.6e-6",
+                    "type@1_upper": "5.6e-6",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.taum.ep": {
+            "B0.2.tau-.e+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "2.8e-5",
+                    "type@1_upper": "2.8e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.taum.mup": {
+            "B0.2.tau-.mu+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "2.2e-5",
+                    "type@1_upper": "2.2e-5",
                     "type@1_level": "90%@CL"
                 }
             }

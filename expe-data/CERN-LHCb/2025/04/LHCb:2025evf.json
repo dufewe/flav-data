@@ -13,8 +13,8 @@
                 "obs@1": {
                     "name": "Br",
                     "value": "1.08e-8",
-                    "error_upper": "0.17e-8",
-                    "error_lower": "0.17e-8"
+                    "total_upper": "0.17e-8",
+                    "total_lower": "0.17e-8"
                 }
             }
         }

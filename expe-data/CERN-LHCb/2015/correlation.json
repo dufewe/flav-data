@@ -8,14 +8,14 @@
             "q2min": 1.1,
             "q2max": 2.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -105,14 +105,14 @@
             "q2min": 2.0,
             "q2max": 3.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -202,14 +202,14 @@
             "q2min": 3.0,
             "q2max": 4.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -299,14 +299,14 @@
             "q2min": 4.0,
             "q2max": 5.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -396,14 +396,14 @@
             "q2min": 5.0,
             "q2max": 6.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -493,14 +493,14 @@
             "q2min": 6.0,
             "q2max": 7.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -590,14 +590,14 @@
             "q2min": 7.0,
             "q2max": 8.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -687,14 +687,14 @@
             "q2min": 11.0,
             "q2max": 11.75,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -784,14 +784,14 @@
             "q2min": 11.75,
             "q2max": 12.5,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -881,14 +881,14 @@
             "q2min": 15.0,
             "q2max": 16.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -978,14 +978,14 @@
             "q2min": 16.0,
             "q2max": 17.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1075,14 +1075,14 @@
             "q2min": 17.0,
             "q2max": 18.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1172,14 +1172,14 @@
             "q2min": 18.0,
             "q2max": 19.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1269,14 +1269,14 @@
             "q2min": 15.0,
             "q2max": 19.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "S3(B02Kstmumu)",
-                "S4(B02Kstmumu)",
-                "S5(B02Kstmumu)",
-                "AFB(B02Kstmumu)",
-                "S7(B02Kstmumu)",
-                "S8(B02Kstmumu)",
-                "S9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "S3(B02K*mumu)",
+                "S4(B02K*mumu)",
+                "S5(B02K*mumu)",
+                "AFB(B02K*mumu)",
+                "S7(B02K*mumu)",
+                "S8(B02K*mumu)",
+                "S9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1366,14 +1366,14 @@
             "q2min": 0.1,
             "q2max": 0.98,
             "observables": [
-                "FL(B02Kstmumu)",
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1463,13 +1463,13 @@
             "q2min": 1.1,
             "q2max": 2.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1542,13 +1542,13 @@
             "q2min": 2.0,
             "q2max": 3.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1621,13 +1621,13 @@
             "q2min": 3.0,
             "q2max": 4.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1700,13 +1700,13 @@
             "q2min": 4.0,
             "q2max": 5.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1779,13 +1779,13 @@
             "q2min": 5.0,
             "q2max": 6.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1858,13 +1858,13 @@
             "q2min": 6.0,
             "q2max": 7.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -1937,13 +1937,13 @@
             "q2min": 7.0,
             "q2max": 8.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2016,13 +2016,13 @@
             "q2min": 11.0,
             "q2max": 11.75,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2095,13 +2095,13 @@
             "q2min": 11.75,
             "q2max": 12.5,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2174,13 +2174,13 @@
             "q2min": 15.0,
             "q2max": 16.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2253,13 +2253,13 @@
             "q2min": 16.0,
             "q2max": 17.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2332,13 +2332,13 @@
             "q2min": 17.0,
             "q2max": 18.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2411,13 +2411,13 @@
             "q2min": 18.0,
             "q2max": 19.0,
             "observables": [
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2490,14 +2490,14 @@
             "q2min": 15,
             "q2max": 19,
             "observables": [
-                "FL(B02Kstmumu)",
-                "A3(B02Kstmumu)",
-                "A4(B02Kstmumu)",
-                "A5(B02Kstmumu)",
-                "A6s(B02Kstmumu)",
-                "A7(B02Kstmumu)",
-                "A8(B02Kstmumu)",
-                "A9(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "A3(B02K*mumu)",
+                "A4(B02K*mumu)",
+                "A5(B02K*mumu)",
+                "A6s(B02K*mumu)",
+                "A7(B02K*mumu)",
+                "A8(B02K*mumu)",
+                "A9(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2587,14 +2587,14 @@
             "q2min": 0.1,
             "q2max": 0.98,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2684,14 +2684,14 @@
             "q2min": 1.1,
             "q2max": 2.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2781,14 +2781,14 @@
             "q2min": 2.0,
             "q2max": 3.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2878,14 +2878,14 @@
             "q2min": 3.0,
             "q2max": 4.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -2975,14 +2975,14 @@
             "q2min": 4.0,
             "q2max": 5.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3072,14 +3072,14 @@
             "q2min": 5.0,
             "q2max": 6.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3169,14 +3169,14 @@
             "q2min": 6.0,
             "q2max": 7.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3266,14 +3266,14 @@
             "q2min": 7.0,
             "q2max": 8.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3363,14 +3363,14 @@
             "q2min": 11.0,
             "q2max": 11.75,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3460,14 +3460,14 @@
             "q2min": 11.75,
             "q2max": 12.5,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3557,14 +3557,14 @@
             "q2min": 15.0,
             "q2max": 16.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3654,14 +3654,14 @@
             "q2min": 16.0,
             "q2max": 17.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3751,14 +3751,14 @@
             "q2min": 17.0,
             "q2max": 18.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3848,14 +3848,14 @@
             "q2min": 18.0,
             "q2max": 19.0,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [
@@ -3945,14 +3945,14 @@
             "q2min": 15,
             "q2max": 19,
             "observables": [
-                "FL(B02Kstmumu)",
-                "P1(B02Kstmumu)",
-                "P2(B02Kstmumu)",
-                "P3(B02Kstmumu)",
-                "P4p(B02Kstmumu)",
-                "P5p(B02Kstmumu)",
-                "P6p(B02Kstmumu)",
-                "P8p(B02Kstmumu)"
+                "FL(B02K*mumu)",
+                "P1(B02K*mumu)",
+                "P2(B02K*mumu)",
+                "P3(B02K*mumu)",
+                "P4p(B02K*mumu)",
+                "P5p(B02K*mumu)",
+                "P6p(B02K*mumu)",
+                "P8p(B02K*mumu)"
             ],
             "correlation": [
                 [

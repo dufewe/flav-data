@@ -28,7 +28,7 @@ FORBIDDEN_FIELDS = ['year', 'pdf']
 # snapshot. See references/json-meta.md §"Non-Standard Schemas".
 SNAPSHOT_OBS_ALLOWED_FIELDS = {
     'name', 'value',
-    'error', 'error_upper', 'error_lower',
+    'total_upper', 'total_lower',
     'unit', 'limit',
 }
 
@@ -42,16 +42,18 @@ STANDARD_ERROR_LABELS = {
 # everything else must match exactly.
 OBS_EXACT_FIELDS = {
     'name', 'value', 'unit', 'ref',
-    'error_upper', 'error_lower',
+    'total_upper', 'total_lower',
     # Optional provenance metadata carried over from imported papers.
     'dataset', 'note',
 }
 _OBS_KEY_RE = re.compile(
-    r'type@\d+_(?:error|upper|lower|upper_limit|level)$'
+    r'type@\d+_(?:error|upper|lower|level)$'
 )
 _NUMERIC_OBS_KEY_RE = re.compile(
-    r'(?:value|type@\d+_(?:upper|lower|upper_limit)|'
-    r'error_upper|error_lower)$'
+    r'(?:value|type@\d+_(?:upper|lower)|total_upper|total_lower)$'
+)
+_SCALE_UNIT_RE = re.compile(
+    r'(?:1e[+-]?\d+|10\^\{?[+-]?\d+\}?)$', re.IGNORECASE
 )
 
 
@@ -108,29 +110,59 @@ def is_group_matrix_key(key: str) -> bool:
     return bool(_GROUP_MATRIX_KEY_RE.fullmatch(key))
 
 
+# Form-factor expansion coefficients (``aN_FF``) come from a fit to a
+# named expansion form, recorded once per data group.
+_FORM_FACTOR_COEFFICIENT_RE = re.compile(r'a\d+_[A-Za-z0-9]+')
+FORM_FACTOR_SCHEMES = {'BGL', 'BCL', 'BSZ', 'DLM'}
+
+# Group-level ``dataset`` names the data sources behind a group, in this
+# canonical order, joined with ``+`` (e.g. ``LQCD+LCSR``).
+DATASET_SOURCES = ('LQCD', 'LCSR', 'EXPE')
+
+
+def _dataset_issue(value) -> str:
+    """Return an error message for an invalid ``dataset`` value."""
+    if not isinstance(value, str) or not value.strip():
+        return "must be a non-empty string"
+    parts = value.split('+')
+    if any(part not in DATASET_SOURCES for part in parts):
+        return (
+            f"unsupported source in {value!r}; use sources from: "
+            f"{', '.join(DATASET_SOURCES)}"
+        )
+    if len(set(parts)) != len(parts):
+        return f"duplicate source in {value!r}"
+    ranks = [DATASET_SOURCES.index(part) for part in parts]
+    if ranks != sorted(ranks):
+        return (
+            f"sources in {value!r} must follow the order "
+            f"{'+'.join(DATASET_SOURCES)}"
+        )
+    return ""
+
+
 # --- Canonical transition ordering (obs-abbr.md §1) -------------------
 # Particle tokens are classified into the four orderable types from the
 # spec. Hadrons keep their conventional capitalisation; leptons and light
-# mesons stay lowercase (e+, mu-, pi-, nu).
+# mesons stay lowercase (e+, mu-, pi-, v).
 _BARYON_STEMS = (
     'Lambdac', 'Lambdab', 'Lambda', 'Sigma', 'Xic', 'Xib',
     'Omegac', 'Omega', 'Xi',
 )
 _MESON_STEMS = (
-    'J/psi', 'psi', 'Kstar', 'Kst', 'Bc', 'Bs0', 'B0s', 'B0', 'B',
-    'Dst', 'D*', 'Ds', 'D0', 'D', 'KS0', 'K0S', 'K0L', 'K0s', 'K0bar',
+    'J/psi', 'psi', 'K*', 'Bc', 'Bs0', 'B0', 'B',
+    'D*', 'Ds', 'D0', 'D', 'KS0', 'KL0',
     'K0', 'K', 'pi', 'rho', 'phi', 'omega', 'eta', 'Xs', 'Xce', 'Xcl', 'f',
 )
-_MESON_CHARGED_STEMS = ('B', 'Bc', 'D', 'Dst', 'D*', 'Ds', 'K', 'Kst', 'Kstar', 'pi', 'rho')
+_MESON_CHARGED_STEMS = ('B', 'Bc', 'D', 'D*', 'Ds', 'K', 'K*', 'pi', 'rho')
 _LEP_STEMS = ('mu', 'tau', 'e', 'l')
 _NEUTRAL_MESONS = {
     'J/psi', 'psi', 'phi', 'omega', 'eta', 'etaprime', 'Xs', 'Xce', 'Xcl',
-    'f', 'D0', 'B0', 'B0s', 'Bs0', 'K0', 'Kst0', 'Dst0', 'D*0', 'Bbar',
-    'K0bar', 'K0S', 'K0L', 'KS0', 'K0s', 'B0Bar',
+    'f', 'D0', 'B0', 'Bs0', 'K0', 'K*0', 'D*0',
+    'KL0', 'KS0', 'B0Bar',
 }
 _NEUTRAL_LEPTONS = {
-    'nu', 'nuBar', 'nubar', 'nue', 'numu', 'nutau',
-    'nuebar', 'numubar', 'nutaubar',
+    'v', 'vBar', 've', 'veBar', 'vmu', 'vmuBar', 'vtau', 'vtauBar',
 }
 _TYPE_NAMES = {
     1: 'baryon', 2: 'meson', 3: 'charged lepton', 4: 'neutral lepton',
@@ -156,8 +188,9 @@ _PARTICLE_MASS, _NON_ORDERABLE = _load_mass_reference()
 
 
 def _strip_bar(token: str) -> str:
-    # Handles both ``K0Bar`` and the legacy ``LambdacBar-`` placement.
-    return re.sub(r'(?:Bar|bar)(?=[+\-]?$)', '', token)
+    # Only the canonical capital ``Bar`` at the very end is stripped;
+    # lowercase ``bar`` and the legacy mid-symbol placement are invalid.
+    return re.sub(r'Bar$', '', token)
 
 
 def _strip_resonance(token: str) -> str:
@@ -174,10 +207,6 @@ def _particle_mass(token: str) -> float | None:
     if stem.endswith('-') and stem[:-1] + '+' in _PARTICLE_MASS:
         return _PARTICLE_MASS[stem[:-1] + '+']
     if stem.endswith('+') and stem[:-1] + '-' in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem[:-1] + '-']
-    if stem.endswith('p') and stem[:-1] + '+' in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem[:-1] + '+']
-    if stem.endswith('m') and stem[:-1] + '-' in _PARTICLE_MASS:
         return _PARTICLE_MASS[stem[:-1] + '-']
     return None
 
@@ -206,17 +235,12 @@ def _split_top_level(text: str, separator: str) -> list[str]:
     return [part for part in parts if part]
 
 
-def _charge_rank(token: str, stem: str, charged_stems: tuple[str, ...]) -> int | None:
-    """Return ordering rank for charge: + -> 0, - -> 1, 0 -> 2."""
+def _charge_rank(token: str) -> int | None:
+    """Return ordering rank for an explicit charge: + -> 0, - -> 1."""
     if token.endswith('+'):
         return 0
     if token.endswith('-'):
         return 1
-    if stem in charged_stems:
-        if token.endswith('p'):
-            return 0
-        if token.endswith('m'):
-            return 1
     return None
 
 
@@ -237,33 +261,30 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
     if stem in ('p', 'n'):
         if token == 'p':
             return 1, 0
-        if token in ('pBar', 'pbar'):
+        if token == 'pBar':
             return 1, 1
-        if token in ('n', 'nBar', 'nbar'):
+        if token in ('n', 'nBar'):
             return 1, 2
         return 1, None
     if stem.startswith(_BARYON_STEMS):
-        charge = _charge_rank(token, stem, ())
+        charge = _charge_rank(token)
         if charge is None and ('0' in stem or stem in ('Lambda', 'Lambdab')):
             charge = 2
         return 1, charge
 
     core = re.sub(r'[+\-]$', '', stem)
-    if core.endswith(('p', 'm')) and core[:-1] in _LEP_STEMS:
-        core = core[:-1]
     if core in _LEP_STEMS:
-        if core == 'l' and not token.endswith(('+', '-', 'p', 'm')):
+        if core == 'l' and not token.endswith(('+', '-')):
             # Bare generic lepton: its charge is unknown, so skip the state.
             return None, None
-        return 3, _charge_rank(token, core, _LEP_STEMS)
+        return 3, _charge_rank(token)
 
     if stem.startswith(_MESON_STEMS):
-        charge = _charge_rank(token, stem, _MESON_CHARGED_STEMS)
+        charge = _charge_rank(token)
         if charge is None and (
             token in _NEUTRAL_MESONS
             or stem in _NEUTRAL_MESONS
             or '0' in stem
-            or stem.endswith('bar')
         ):
             charge = 2
         return 2, charge
@@ -350,9 +371,28 @@ def _order_issues_for_body(
         masses = [_particle_mass(token) for token in tokens]
 
         for token, (type_rank, _) in zip(tokens, classified):
+            if 'Bar' not in token and 'bar' in token:
+                issues.append(
+                    f"  {label}: particle '{token}' uses lowercase 'bar'; "
+                    f"write the antiparticle marker as capital 'Bar'"
+                )
+                continue
             if _particle_mass(token) is None and token not in _NEUTRAL_LEPTONS:
                 stem = _strip_bar(token)
                 if stem in _NON_ORDERABLE or token in _NON_ORDERABLE:
+                    continue
+                if token[-1:] in ('p', 'm') and _particle_mass(token[:-1]):
+                    sign = '+' if token[-1] == 'p' else '-'
+                    issues.append(
+                        f"  {label}: particle '{token}' writes its charge with "
+                        f"'{token[-1]}'; write '{token[:-1]}{sign}' instead"
+                    )
+                    continue
+                if token == 'K0L':
+                    issues.append(
+                        f"  {label}: particle 'K0L' is written 'KL0' "
+                        f"(subscript before superscript)"
+                    )
                     continue
                 if type_rank is not None:
                     issues.append(
@@ -652,6 +692,17 @@ def _is_float_string(text) -> bool:
     return True
 
 
+def _scale_unit_issue(unit, label: str) -> list[str]:
+    """Reject scientific-notation scale factors stored in ``unit``."""
+    if isinstance(unit, str) and _SCALE_UNIT_RE.fullmatch(unit.strip()):
+        return [
+            f"  {label}.unit: {unit!r} is a pure scale factor, not a unit; "
+            f"multiply it into value/total_upper/total_lower/bounds and "
+            f"omit unit"
+        ]
+    return []
+
+
 def _kinematic_issues(value, label: str) -> list[str]:
     """Kinematic bounds are float-strings, comma lists, or '+inf'."""
     if not isinstance(value, str):
@@ -671,52 +722,70 @@ def _kinematic_issues(value, label: str) -> list[str]:
     return issues
 
 
-def _validate_error_triplets(obs: dict, label: str) -> list[str]:
-    """Every ``type@N_error`` label needs the full
-    ``_error/_upper/_lower`` triplet and a whitelisted label."""
+def _validate_component_errors_and_bounds(obs: dict, label: str) -> list[str]:
+    """Validate typed component errors and bound (limit) slots.
+
+    A ``type@N`` slot is either a component error (``_error`` + ``_upper``
+    + ``_lower``, no ``_level``) or a bound (``_upper``/``_lower`` +
+    ``_level``, no ``_error``). A lone error is the total error and must use
+    ``total_upper``/``total_lower`` instead of a ``type@N`` triplet.
+    """
     issues = []
     tags = sorted({
         key.split('_', 1)[0]
         for key in obs
-        if re.fullmatch(r'type@\d+_(?:error|upper|lower)', key)
-    })
+        if re.fullmatch(r'type@\d+_(?:error|upper|lower|level)', key)
+    }, key=lambda tag: int(tag.split('@')[1]))
+    component_tags = []
     for tag in tags:
-        base, up, down = f'{tag}_error', f'{tag}_upper', f'{tag}_lower'
-        missing = [key for key in (base, up, down) if key not in obs]
-        if missing:
-            issues.append(
-                f"  {label}: incomplete error triplet for '{tag}'; missing "
-                f"{missing}; each component error requires '{base}', "
-                f"'{up}' and '{down}' together"
-            )
+        base, up, down, level = (
+            f'{tag}_error', f'{tag}_upper', f'{tag}_lower', f'{tag}_level'
+        )
+        has_error = base in obs
+        has_upper = up in obs
+        has_lower = down in obs
+        has_level = level in obs
+        if has_error:
+            component_tags.append(tag)
+            missing = [key for key in (up, down) if key not in obs]
+            if missing:
+                issues.append(
+                    f"  {label}: incomplete error triplet for '{tag}'; missing "
+                    f"{missing}; each component error requires '{base}', "
+                    f"'{up}' and '{down}' together"
+                )
+            if has_level:
+                issues.append(
+                    f"  {label}: '{tag}' is used both as a component error "
+                    f"('{base}') and as a bound ('{level}'); use distinct "
+                    f"type@N slots"
+                )
+            value = obs[base]
+            if not isinstance(value, str) or not value.strip():
+                issues.append(
+                    f"  {label}.{base}: error label must be a non-empty string"
+                )
+            elif value.strip() not in STANDARD_ERROR_LABELS:
+                issues.append(
+                    f"  {label}.{base}: unknown error label '{value}'; allowed "
+                    f"labels are {sorted(STANDARD_ERROR_LABELS)}"
+                )
             continue
-        value = obs[base]
-        if not isinstance(value, str) or not value.strip():
+        if not has_level:
             issues.append(
-                f"  {label}.{base}: error label must be a non-empty string"
+                f"  {label}: '{up}'/'{down}' present without '{level}'; "
+                f"error bounds need a component error, limits need a level"
             )
-        elif value.strip() not in STANDARD_ERROR_LABELS:
+        if not (has_upper or has_lower):
             issues.append(
-                f"  {label}.{base}: unknown error label '{value}'; allowed "
-                f"labels are {sorted(STANDARD_ERROR_LABELS)}"
+                f"  {label}: '{level}' present without a bound; add "
+                f"'{tag}_upper' or '{tag}_lower'"
             )
-    return issues
-
-
-def _validate_upper_limit_pairs(obs: dict, label: str) -> list[str]:
-    issues = []
-    for key in obs:
-        match = re.fullmatch(r'(type@\d+)_(upper_limit|level)', key)
-        if not match:
-            continue
-        tag, kind = match.groups()
-        sibling = kind == 'upper_limit' and f'{tag}_level' or f'{tag}_upper_limit'
-        if sibling not in obs:
-            issues.append(
-                f"  {label}: '{key}' present but missing '{sibling}'; every "
-                f"upper limit needs both '_upper_limit' (value) and '_level' "
-                f"(confidence level)"
-            )
+    if len(component_tags) == 1:
+        issues.append(
+            f"  {label}: a single error must be written as the total error "
+            f"('total_upper'/'total_lower'), not as a type@N triplet"
+        )
     return issues
 
 
@@ -725,33 +794,29 @@ def _validate_measurement_scheme(obs: dict, label: str) -> list[str]:
     issues = []
     has_value = 'value' in obs
     has_component = any(re.fullmatch(r'type@\d+_error', key) for key in obs)
-    has_total = 'error_upper' in obs or 'error_lower' in obs
-    has_upper = any(key.endswith('_upper_limit') for key in obs)
+    has_total = 'total_upper' in obs or 'total_lower' in obs
+    has_bound = any(re.fullmatch(r'type@\d+_level', key) for key in obs)
 
     if has_component and has_total:
         issues.append(
-            f"  {label}: mixes component errors (type@N_error) with "
-            f"error_upper/error_lower; use exactly one error scheme"
+            f"  {label}: mixes component errors (type@N_error) with total "
+            f"errors (total_upper/total_lower); use exactly one error scheme"
         )
-    if has_upper and not has_value and (has_component or has_total):
+    if has_value and not (has_component or has_total):
         issues.append(
-            f"  {label}: upper-limit-only entries must not carry value or "
-            f"errors; use the combined format (value + errors) when a fit "
-            f"result is also reported"
+            f"  {label}: measurement has no error; add component errors "
+            f"(type@N_error) or total_upper/total_lower"
         )
-    if has_value and has_upper and not (has_component or has_total):
+    if not has_value and not has_bound:
         issues.append(
-            f"  {label}: value + upper limit requires component errors "
-            f"(type@N_error) or error_upper/error_lower"
+            f"  {label}: missing 'value' or a bound "
+            f"(type@N_upper/type@N_lower + type@N_level)"
         )
-    if has_value and not (has_component or has_total or has_upper):
+    if not has_value and (has_component or has_total):
         issues.append(
-            f"  {label}: measurement has no error; add a type@N_error triplet "
-            f"or error_upper/error_lower"
-        )
-    if not has_value and not has_upper:
-        issues.append(
-            f"  {label}: missing 'value' or type@N_upper_limit"
+            f"  {label}: bound-only entries must not carry value or errors; "
+            f"use the combined format (value + errors) when a fit result is "
+            f"also reported"
         )
     return issues
 
@@ -768,16 +833,14 @@ def _validate_observable(obs, label: str) -> list[str]:
             issues.append(
                 f"  {label}: unknown observable field '{key}'; allowed "
                 f"fields are {sorted(OBS_EXACT_FIELDS)} plus "
-                f"type@N_error/type@N_upper/type@N_lower/"
-                f"type@N_upper_limit/type@N_level"
+                f"type@N_error/type@N_upper/type@N_lower/type@N_level"
             )
     if 'name' not in obs:
         issues.append(f"  {label}: missing required field: name")
-    issues.extend(_validate_error_triplets(obs, label))
-    issues.extend(_validate_upper_limit_pairs(obs, label))
-    has_tot_up = 'error_upper' in obs
-    if has_tot_up != ('error_lower' in obs):
-        missing = 'error_lower' if has_tot_up else 'error_upper'
+    issues.extend(_validate_component_errors_and_bounds(obs, label))
+    has_tot_up = 'total_upper' in obs
+    if has_tot_up != ('total_lower' in obs):
+        missing = 'total_lower' if has_tot_up else 'total_upper'
         issues.append(
             f"  {label}: total error is one-sided; missing '{missing}'"
         )
@@ -792,6 +855,8 @@ def _validate_observable(obs, label: str) -> list[str]:
         if key == 'unit':
             if not isinstance(obs[key], str) or not obs[key].strip():
                 issues.append(f"  {label}.{key}: must be a non-empty string")
+            else:
+                issues.extend(_scale_unit_issue(obs[key], label))
             continue
         if not _NUMERIC_OBS_KEY_RE.fullmatch(key):
             continue
@@ -825,14 +890,16 @@ def _validate_observable(obs, label: str) -> list[str]:
 
 
 def _validate_data_group(group, label: str) -> list[str]:
-    """Validate one data group: channel bundles, optional method, matrices.
+    """Validate one data group: channel bundles, metadata, matrices.
 
-    A group is an object whose non-matrix, non-``method`` keys are
+    A group is an object whose non-matrix, non-metadata keys are
     transition channels (each mapping to an object of ``obs@N`` entries).
-    The optional group-level ``method`` string applies to every observable
-    in the group and must precede any matrix key. The optional
-    ``correlation``/``covariance`` matrix aligns with the observables of
-    all channels, flattened in channel order then ``obs@N`` order.
+    The optional group-level ``dataset`` string names the data sources
+    behind the group, followed by an optional ``scheme`` string when the
+    group holds form-factor expansion coefficients. Both must precede
+    any matrix key. The optional ``correlation``/``covariance`` matrix
+    aligns with the observables of all channels, flattened in channel
+    order then ``obs@N`` order.
     """
     issues = []
     if not isinstance(group, dict):
@@ -841,26 +908,51 @@ def _validate_data_group(group, label: str) -> list[str]:
     matrix_keys = []
     channel_count = 0
     obs_total = 0
-    saw_method = False
+    saw_dataset = False
+    saw_scheme = False
     saw_matrix = False
+    has_coefficients = False
     for key in group:
-        if key == 'method':
-            if not isinstance(group[key], str) or not group[key].strip():
-                issues.append(f"  {label}.method: must be a non-empty string")
+        if key in ('dataset', 'scheme'):
+            value = group[key]
+            if not isinstance(value, str) or not value.strip():
+                issues.append(f"  {label}.{key}: must be a non-empty string")
+            elif key == 'scheme' and value not in FORM_FACTOR_SCHEMES:
+                issues.append(
+                    f"  {label}.scheme: unsupported value {value!r}; "
+                    f"use one of: {', '.join(sorted(FORM_FACTOR_SCHEMES))}"
+                )
+            elif key == 'dataset':
+                issue = _dataset_issue(value)
+                if issue:
+                    issues.append(f"  {label}.dataset: {issue}")
             if saw_matrix:
                 issues.append(
-                    f"  {label}: 'method' appears after a matrix key; "
+                    f"  {label}: '{key}' appears after a matrix key; "
                     f"keep it before the matrices"
                 )
-            saw_method = True
+            if key == 'dataset':
+                if saw_scheme:
+                    issues.append(
+                        f"  {label}: 'dataset' appears after 'scheme'; "
+                        f"keep 'dataset' first"
+                    )
+                saw_dataset = True
+            else:
+                saw_scheme = True
             continue
         if is_group_matrix_key(key):
             matrix_keys.append(key)
             saw_matrix = True
             continue
-        if saw_method:
+        if saw_dataset:
             issues.append(
-                f"  {label}: channel '{key}' appears after 'method'; "
+                f"  {label}: channel '{key}' appears after 'dataset'; "
+                f"keep all channel keys first"
+            )
+        elif saw_scheme:
+            issues.append(
+                f"  {label}: channel '{key}' appears after 'scheme'; "
                 f"keep all channel keys first"
             )
         if saw_matrix:
@@ -876,11 +968,24 @@ def _validate_data_group(group, label: str) -> list[str]:
         )
         issues.extend(channel_issues)
         obs_total += obs_count
+        if isinstance(group[key], dict):
+            has_coefficients = has_coefficients or any(
+                isinstance(obs, dict)
+                and isinstance(obs.get('name'), str)
+                and _FORM_FACTOR_COEFFICIENT_RE.fullmatch(obs['name'])
+                for obs in group[key].values()
+            )
 
     if not channel_count:
         issues.append(
             f"  {label}: no transition channel; every data group needs at "
             f"least one channel key (or 'no-transition')"
+        )
+
+    if has_coefficients and not saw_scheme:
+        issues.append(
+            f"  {label}: form-factor coefficient data must declare a "
+            f"group-level 'scheme'"
         )
 
     for key in matrix_keys:
@@ -909,7 +1014,7 @@ def _validate_data_list(groups: list) -> list[str]:
     """Validate the ``[group, ...]`` ``data`` schema.
 
     Each group may carry one or more transition channels; a channel may
-    appear in several groups to separate fit methods, kinematic bins, or
+    appear in several groups to separate datasets, kinematic bins, or
     matrices.
     """
     issues = []
@@ -988,21 +1093,15 @@ def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
     ):
         issues.append(f"  {label}.name: must be a non-empty string")
 
-    # Snapshot observables use exactly one error form, never the
+    # Snapshot observables use the total error pair only, never the
     # per-paper type@N_error triplets.
-    has_error = 'error' in obs
-    has_error_pair = 'error_upper' in obs and 'error_lower' in obs
-    if sum((has_error, has_error_pair)) > 1:
-        issues.append(
-            f"  {label}: use exactly one error form "
-            f"('error' or 'error_upper'/'error_lower')"
-        )
+    for field in ('total_upper', 'total_lower'):
+        if field not in obs:
+            issues.append(f"  {label}: missing required field: {field}")
 
     # Snapshot numbers are JSON numbers, not float-strings (json-meta.md
     # §"Shared rules for both snapshots").
-    for field in (
-        'value', 'error', 'error_upper', 'error_lower',
-    ):
+    for field in ('value', 'total_upper', 'total_lower'):
         if field in obs and (
             isinstance(obs[field], bool)
             or not isinstance(obs[field], (int, float))
@@ -1013,17 +1112,8 @@ def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
             )
     if 'unit' in obs and not isinstance(obs['unit'], str):
         issues.append(f"  {label}.unit: must be a string")
-
-    if not (has_error or has_error_pair):
-        if 'error_upper' in obs:
-            issues.append(f"  {label}: 'error_upper' present but missing 'error_lower'")
-        elif 'error_lower' in obs:
-            issues.append(f"  {label}: 'error_lower' present but missing 'error_upper'")
-        else:
-            issues.append(
-                f"  {label}: missing 'error' or "
-                f"'error_upper'/'error_lower'"
-            )
+    elif 'unit' in obs:
+        issues.extend(_scale_unit_issue(obs['unit'], label))
 
 def _validate_snapshot_correlation(
     sub: dict, label: str, n_obs: int, issues: list[str]
@@ -1225,7 +1315,7 @@ def validate_json(file_path: str) -> list[str]:
     else:
         all_issues.append(
             "  data must be an array of data groups, e.g. "
-            "[{'B0.2.Kst0.mu+.mu-': ['$B^{0}\\\\to K^{*0}\\\\mu^{+}"
+            "[{'B0.2.K*0.mu+.mu-': ['$B^{0}\\\\to K^{*0}\\\\mu^{+}"
             "\\\\mu^{-}$', {'obs@1': {...}}], 'correlation': [[1.0]]}]; "
             "channels sharing one matrix belong in the same group"
         )

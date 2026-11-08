@@ -1,0 +1,184 @@
+{
+    "inspire-hep": 1519425,
+    "author": "Ablikim, M.E.A.",
+    "collaboration": "BESIII",
+    "title": "Analysis of D+ -> K0bar e+ nu_e and D+ -> pi0 e+ nu_e Semileptonic Decays",
+    "arxiv": "[hep-ex/1703.09084v1](https://arxiv.org/pdf/1703.09084v1)",
+    "time": "2017.03.27",
+    "abstract": "Using 2.93 fb-1 of data taken at 3.773 GeV with the BESIII detector operated at the BEPCII collider, we study the semileptonic decays D+ -> K0bar e+ nu_e and D+ -> pi0 e+ nu_e. We measure the absolute decay branching fractions and the differential decay rates, and determine the form factors and CKM matrix elements.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "BR",
+                    "value": "0.0860",
+                    "total_upper": "0.0015",
+                    "total_lower": "0.0015"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "f+.Vcs",
+                    "value": "0.7053",
+                    "total_upper": "0.0117",
+                    "total_lower": "0.0117"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "f+K",
+                    "value": "0.725",
+                    "total_upper": "0.012",
+                    "total_lower": "0.012"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "Vcs",
+                    "value": "0.944",
+                    "total_upper": "0.028",
+                    "total_lower": "0.028"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "alpha",
+                    "value": "0.294",
+                    "total_upper": "0.033",
+                    "total_lower": "0.033"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "mpole",
+                    "value": "1.935",
+                    "total_upper": "0.018",
+                    "total_lower": "0.018"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "r1",
+                    "value": "-2.18",
+                    "total_upper": "0.15",
+                    "total_lower": "0.15"
+                }
+            }
+        },
+        {
+            "D+.2.K0Bar.e+.ve": {
+                "obs@1": {
+                    "name": "r1",
+                    "value": "-1.76",
+                    "total_upper": "0.25",
+                    "total_lower": "0.25"
+                },
+                "obs@2": {
+                    "name": "r2",
+                    "value": "-13.4",
+                    "total_upper": "6.4",
+                    "total_lower": "6.4"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "BR",
+                    "value": "0.00363",
+                    "total_upper": "0.00009",
+                    "total_lower": "0.00009"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "f+.Vcd",
+                    "value": "0.1400",
+                    "total_upper": "0.0029",
+                    "total_lower": "0.0029"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "f+pi",
+                    "value": "0.622",
+                    "total_upper": "0.012",
+                    "total_lower": "0.012"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "Vcd",
+                    "value": "0.210",
+                    "total_upper": "0.009",
+                    "total_lower": "0.009"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "alpha",
+                    "value": "0.285",
+                    "total_upper": "0.058",
+                    "total_lower": "0.058"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "mpole",
+                    "value": "1.898",
+                    "total_upper": "0.020",
+                    "total_lower": "0.020"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "r1",
+                    "value": "-2.01",
+                    "total_upper": "0.13",
+                    "total_lower": "0.13"
+                }
+            }
+        },
+        {
+            "D+.2.pi0.e+.ve": {
+                "obs@1": {
+                    "name": "r1",
+                    "value": "-2.23",
+                    "total_upper": "0.42",
+                    "total_lower": "0.42"
+                },
+                "obs@2": {
+                    "name": "r2",
+                    "value": "1.4",
+                    "total_upper": "2.5",
+                    "total_lower": "2.5"
+                }
+            }
+        }
+    ]
+}

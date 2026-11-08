@@ -9,22 +9,21 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B.2.D.l.nu": {
+            "B.2.D.l.v": {
                 "obs@1": {
                     "name": "Vcb",
-                    "value": "40.44",
+                    "value": "4.044e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.86",
-                    "type@1_lower": "0.86",
+                    "type@1_upper": "8.6e-4",
+                    "type@1_lower": "8.6e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.87",
-                    "type@2_lower": "0.87",
-                    "unit": "1e-3"
+                    "type@2_upper": "8.7e-4",
+                    "type@2_lower": "8.7e-4"
                 }
             }
         },
         {
-            "B0Bar.2.D+.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "dGdw",
                     "value": "0.68",
@@ -149,15 +148,13 @@
             }
         },
         {
-            "B0Bar.2.D+.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
-                    "value": "40.12",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.34",
-                    "type@1_lower": "1.34",
-                    "note": "CLN: eta_EW G(1)|Vcb| = (42.31 +- 1.41)e-3, G(1)=1.0541 +- 0.0083, rho2 = 1.180 +- 0.153",
-                    "unit": "1e-3"
+                    "value": "4.012e-2",
+                    "total_upper": "1.34e-3",
+                    "total_lower": "1.34e-3",
+                    "note": "CLN: eta_EW G(1)|Vcb| = (42.31 +- 1.41)e-3, G(1)=1.0541 +- 0.0083, rho2 = 1.180 +- 0.153"
                 }
             }
         }

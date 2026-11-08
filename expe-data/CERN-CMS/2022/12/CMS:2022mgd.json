@@ -1,0 +1,72 @@
+{
+    "inspire-hep": "[CMS:2022mgd](https://inspirehep.net/literature/2616304)",
+    "author": "Tumasyan, A. and others",
+    "collaboration": "CMS",
+    "title": "Measurement of the $B_s^0 \\to \\mu^+\\mu^-$ decay properties and search for the $B^0 \\to \\mu^+\\mu^-$ decay in proton-proton collisions at $\\sqrt{s} = 13$ TeV",
+    "arxiv": "[hep-ex/2212.10311v2](https://arxiv.org/pdf/2212.10311)",
+    "time": "2022.12.20",
+    "abstract": "Measurements are presented of the $B_s^0 \\to \\mu^+\\mu^-$ branching fraction and effective lifetime, as well as results of a search for the $B^0 \\to \\mu^+\\mu^-$ decay in proton-proton collisions at $\\sqrt{s} = 13$ TeV at the LHC. The analysis is based on data collected with the CMS detector in 2016-2018 corresponding to an integrated luminosity of 140 fb$^{-1}$. The branching fraction of the $B_s^0 \\to \\mu^+\\mu^-$ decay and the effective $B_s^0$ meson lifetime are the most precise single measurements to date. No evidence for the $B^0 \\to \\mu^+\\mu^-$ decay has been found. All results are found to be consistent with the standard model predictions and previous measurements.",
+    "transition-mode": "leptonic-decay",
+    "data": [
+        {
+            "Bs0.2.mu+.mu-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.83e-09",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.38e-09",
+                    "type@1_lower": "0.36e-09",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.19e-09",
+                    "type@2_lower": "0.16e-09",
+                    "type@3_error": "norm",
+                    "type@3_upper": "0.14e-09",
+                    "type@3_lower": "0.13e-09"
+                }
+            }
+        },
+        {
+            "Bs0.2.mu+.mu-": {
+                "obs@1": {
+                    "name": "Tau",
+                    "value": "1.83",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.23",
+                    "type@1_lower": "0.20",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.04",
+                    "type@2_lower": "0.04",
+                    "unit": "ps"
+                }
+            }
+        },
+        {
+            "B0.2.mu+.mu-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.37e-10",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.75e-10",
+                    "type@1_lower": "0.67e-10",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.08e-10",
+                    "type@2_lower": "0.09e-10"
+                }
+            }
+        },
+        {
+            "B0.2.mu+.mu-": {
+                "obs@1": {
+                    "name": "Br",
+                    "type@1_upper": "1.5e-10",
+                    "type@1_level": "90%@CL"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "type@1_upper": "1.9e-10",
+                    "type@1_level": "95%@CL"
+                }
+            }
+        }
+    ]
+}

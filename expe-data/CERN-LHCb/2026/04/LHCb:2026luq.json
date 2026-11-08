@@ -12,9 +12,9 @@
             "B+.2.pi+.mu+.e-": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "1.8e-9",
+                    "type@1_upper": "1.8e-9",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "2.2e-9",
+                    "type@2_upper": "2.2e-9",
                     "type@2_level": "95%@CLs"
                 }
             }
@@ -23,9 +23,9 @@
             "B+.2.pi+.mu-.e+": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "1.8e-9",
+                    "type@1_upper": "1.8e-9",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "2.2e-9",
+                    "type@2_upper": "2.2e-9",
                     "type@2_level": "95%@CLs"
                 }
             }

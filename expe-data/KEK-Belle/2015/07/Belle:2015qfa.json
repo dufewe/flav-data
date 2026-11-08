@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bbar.2.D.tau.nu": {
+            "BBar.2.D.tau.v": {
                 "obs@1": {
                     "name": "dBr/dq2[4.0-4.53]",
                     "value": "0.078",
@@ -193,7 +193,7 @@
             }
         },
         {
-            "B.2.D.tau.nu": {
+            "B.2.D.tau.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.375",
@@ -207,7 +207,7 @@
             }
         },
         {
-            "B.2.Dst.tau.nu": {
+            "B.2.D*.tau.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.293",
@@ -221,19 +221,18 @@
             }
         },
         {
-            "Bbar.2.Dst.tau.nu": {
+            "BBar.2.D*.tau.v": {
                 "obs@1": {
                     "name": "dBr/dq2[5.2-6.8]",
-                    "value": "0.60",
+                    "value": "6.0e-4",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.32",
-                    "type@1_lower": "0.32",
+                    "type@1_upper": "3.2e-4",
+                    "type@1_lower": "3.2e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.08",
-                    "type@2_lower": "0.08",
+                    "type@2_upper": "8e-5",
+                    "type@2_lower": "8e-5",
                     "q2min": "5.2",
-                    "q2max": "6.8",
-                    "unit": "1e-3"
+                    "q2max": "6.8"
                 },
                 "obs@2": {
                     "name": "dBr/dq2[6.8-8.4]",

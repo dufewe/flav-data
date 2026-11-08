@@ -9,17 +9,16 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.pip.ep.em": {
+            "B+.2.pi+.e+.e-": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.5",
+                    "value": "1.5e-8",
                     "type@1_error": "stat",
-                    "type@1_upper": "3.5",
-                    "type@1_lower": "2.5",
+                    "type@1_upper": "3.5e-8",
+                    "type@1_lower": "2.5e-8",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.8",
-                    "type@2_lower": "0.8",
-                    "unit": "1e-8"
+                    "type@2_upper": "8e-9",
+                    "type@2_lower": "8e-9"
                 }
             }
         }

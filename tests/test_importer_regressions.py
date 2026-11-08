@@ -1,6 +1,9 @@
 import importlib.util
+import gzip
+import io
 import json
 import os
+import tarfile
 import tempfile
 import unittest
 from pathlib import Path
@@ -46,7 +49,7 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('FL', 'R', 'RBr[mu/e]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
             self.assertEqual(json_valid.validate_observable_name(name), [], name)
 
-        for name in ('FL(B0.2.Kst0.mu+.mu-)', 'FL(B02Kstmumu)'):
+        for name in ('FL(B0.2.K*0.mu+.mu-)', 'FL(B02K*mumu)'):
             self.assertTrue(json_valid.validate_observable_name(name), name)
 
     def test_transition_mode_is_hyphenated(self):
@@ -61,15 +64,78 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(json_valid.validate_transition_mode('Higgs decay'))
         self.assertTrue(json_valid.validate_transition_mode('electroweak precision'))
 
+    def test_vector_meson_names_use_star(self):
+        for key in ('B0.2.K*0.mu+.mu-', 'B+.2.K*+.mu+.mu-',
+                    'B0.2.D*0.mu+.mu-', 'B+.2.Ds*+.mu+.mu-'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('B0.2.Kst0.mu+.mu-', 'B+.2.Kst+.mu+.mu-',
+                    'B0.2.Dst0.mu+.mu-', 'B+.2.Dsst+.mu+.mu-'):
+            self.assertTrue(json_valid.validate_transition_key(key), key)
+
+    def test_neutrino_tokens_use_v_not_nu(self):
+        for key in ('W-.2.mu-.vBar', 'B+.2.K+.v.vBar',
+                    'B+.2.mu+.ve', 'B+.2.e+.vmuBar',
+                    'B+.2.tau+.vtau'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('W-.2.mu-.nuBar', 'B+.2.K+.nu.nuBar',
+                    'B+.2.mu+.nue', 'B+.2.e+.numubar',
+                    'BBar.2.Xcl.nubar'):
+            self.assertTrue(json_valid.validate_transition_key(key), key)
+
+    def test_hadron_tokens_follow_handwritten_case(self):
+        for key in ('B0.2.pi0.mu+.mu-', 'Lambdab0.2.p.pi-.vBar',
+                    'B0.2.KS0.v.vBar', 'Sigma+.2.p.mu+.mu-',
+                    'Lambdac+.2.p.mu+.mu-', 'B0.2.KL0.v.vBar'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('B0.2.K0S.v.vBar', 'B0s.2.mu+.mu-',
+                    'B0.2.K0bar.v.vBar', 'B0.2.fbar.v.vBar',
+                    'B0.2.K0L.v.vBar',
+                    'LambdacBar-.2.pBar.mu+.mu-',
+                    'Lambda.2.pbar.vBar'):
+            self.assertTrue(json_valid.validate_transition_key(key), key)
+
+    def test_charge_uses_plus_minus_zero(self):
+        for key in ('B+.2.K*+.mu+.mu-', 'B-.2.D*0.tau-.vBar',
+                    'Bc+.2.J/psi.l+.v'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('Bp.2.K*+.mu+.mu-', 'Bm.2.D0.mu-.vBar',
+                    'B+.2.K+.mup.mum', 'B+.2.K+.ep.em',
+                    'B+.2.pip.pim', 'B+.2.D*p.D*m',
+                    'B+.2.K*p.taup.taum'):
+            issues = json_valid.validate_transition_key(key)
+            self.assertTrue(issues, key)
+            self.assertIn('writes its charge', ' '.join(issues), key)
+
+        # Lowercase antiparticle marker is rejected, capital Bar is accepted.
+        self.assertTrue(json_valid.validate_transition_key('B0.2.K*0bar.v.vBar'))
+        self.assertEqual(json_valid.validate_transition_key('BBar.2.XsBar.e+.e-'), [])
+
     @staticmethod
     def _obs(name):
         return {
             'name': name,
             'value': '1.0',
-            'type@1_error': 'stat',
-            'type@1_upper': '0.1',
-            'type@1_lower': '0.1',
+            'total_upper': '0.1',
+            'total_lower': '0.1',
         }
+
+    @classmethod
+    def _obs_with_components(cls, name):
+        obs = cls._obs(name)
+        del obs['total_upper'], obs['total_lower']
+        obs.update({
+            'type@1_error': 'stat',
+            'type@1_upper': '0.035',
+            'type@1_lower': '0.036',
+            'type@2_error': 'syst',
+            'type@2_upper': '0.017',
+            'type@2_lower': '0.017',
+        })
+        return obs
 
     @classmethod
     def _channel(cls, *obs):
@@ -93,7 +159,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_data_groups_allow_cross_channel_matrices(self):
         data = [{
-            'B0.2.Kst0.mu+.mu-': self._channel(
+            'B0.2.K*0.mu+.mu-': self._channel(
                 self._obs('FL'), self._obs('S3'),
             ),
             'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
@@ -103,7 +169,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_data_group_matrix_dimension_must_cover_all_channels(self):
         data = [{
-            'B0.2.Kst0.mu+.mu-': self._channel(
+            'B0.2.K*0.mu+.mu-': self._channel(
                 self._obs('FL'), self._obs('S3'),
             ),
             'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
@@ -115,54 +181,232 @@ class JsonValidatorTests(unittest.TestCase):
     def test_data_group_channel_must_precede_matrix(self):
         data = [{
             'correlation': [[1.0]],
-            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
         }]
         issues = self._validate_data(data)
         self.assertTrue(any('appears after a matrix key' in issue for issue in issues))
 
-    def test_group_method_sits_between_channels_and_matrix(self):
+    def test_group_dataset_sits_between_channels_and_matrix(self):
         data = [{
-            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
-            'method': 'maximum likelihood',
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dataset': 'EXPE',
             'correlation': [[1.0]],
         }]
         self.assertEqual(self._validate_data(data), [])
 
-    def test_observable_method_is_rejected(self):
-        obs = self._obs('FL')
-        obs['method'] = 'maximum likelihood'
-        issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': {'obs@1': obs},
-        }])
-        self.assertTrue(any("unknown observable field 'method'" in issue for issue in issues))
+    def test_group_dataset_accepts_canonical_sources(self):
+        for value in ('LQCD', 'LCSR', 'EXPE', 'LQCD+LCSR', 'LQCD+LCSR+EXPE'):
+            with self.subTest(dataset=value):
+                data = [{
+                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'dataset': value,
+                }]
+                self.assertEqual(self._validate_data(data), [])
 
-    def test_group_method_order_is_enforced(self):
+    def test_group_dataset_rejects_non_source_values(self):
+        for value in ('maximum likelihood', 'nominal', 'experiment',
+                      'LCSR + LQCD', 'LCSR+LQCD', 'LQCD+LQCD', 'NLO'):
+            with self.subTest(dataset=value):
+                data = [{
+                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'dataset': value,
+                }]
+                issues = self._validate_data(data)
+                self.assertTrue(
+                    any('dataset:' in issue for issue in issues), issues,
+                )
+
+    def test_observable_scheme_is_rejected(self):
+        obs = self._obs('FL')
+        obs['scheme'] = 'BCL'
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any("unknown observable field 'scheme'" in issue for issue in issues))
+
+    def test_group_metadata_order_is_enforced(self):
         after_matrix = [{
-            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
             'correlation': [[1.0]],
-            'method': 'maximum likelihood',
+            'dataset': 'EXPE',
         }]
         issues = self._validate_data(after_matrix)
-        self.assertTrue(any("'method' appears after a matrix key" in issue for issue in issues))
+        self.assertTrue(any("'dataset' appears after a matrix key" in issue for issue in issues))
 
-        after_method = [{
-            'method': 'maximum likelihood',
-            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+        after_dataset = [{
+            'dataset': 'EXPE',
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
         }]
-        issues = self._validate_data(after_method)
-        self.assertTrue(any("appears after 'method'" in issue for issue in issues))
+        issues = self._validate_data(after_dataset)
+        self.assertTrue(any("appears after 'dataset'" in issue for issue in issues))
 
-    def test_group_method_must_be_non_empty_string(self):
+        dataset_after_scheme = [{
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'scheme': 'BCL',
+            'dataset': 'LQCD+LCSR',
+        }]
+        issues = self._validate_data(dataset_after_scheme)
+        self.assertTrue(any("'dataset' appears after 'scheme'" in issue for issue in issues))
+
+    def test_group_dataset_must_be_non_empty_string(self):
         data = [{
-            'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
-            'method': '',
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dataset': '',
         }]
         issues = self._validate_data(data)
-        self.assertTrue(any('method: must be a non-empty string' in issue for issue in issues))
+        self.assertTrue(any('dataset: must be a non-empty string' in issue for issue in issues))
+
+    def test_coefficient_group_requires_scheme(self):
+        data = [{
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any(
+            "must declare a group-level 'scheme'" in issue
+            for issue in issues
+        ))
+
+    def test_coefficient_group_accepts_canonical_scheme(self):
+        for scheme in ('BGL', 'BCL', 'BSZ', 'DLM'):
+            with self.subTest(scheme=scheme):
+                data = [{
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+                    'dataset': 'LQCD+LCSR',
+                    'scheme': scheme,
+                    'correlation': [[1.0]],
+                }]
+                self.assertEqual(self._validate_data(data), [])
+
+    def test_scheme_rejects_long_or_unknown_values(self):
+        for value in ('Bourrely-Caprini-Lellouch (arXiv:0807.2722)', 'bcl',
+                      'BGL '):
+            with self.subTest(scheme=value):
+                data = [{
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+                    'scheme': value,
+                }]
+                issues = self._validate_data(data)
+                self.assertTrue(any('unsupported value' in issue for issue in issues))
+
+    def test_scheme_order_is_enforced(self):
+        after_matrix = [{
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'correlation': [[1.0]],
+            'dataset': 'LQCD',
+            'scheme': 'BCL',
+        }]
+        issues = self._validate_data(after_matrix)
+        self.assertTrue(any(
+            "'scheme' appears after a matrix key" in issue for issue in issues
+        ))
+
+        after_scheme = [{
+            'scheme': 'BCL',
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+        }]
+        issues = self._validate_data(after_scheme)
+        self.assertTrue(any(
+            "appears after 'scheme'" in issue for issue in issues
+        ))
+
+    def test_single_component_error_must_be_total(self):
+        obs = self._obs('FL')
+        del obs['total_upper'], obs['total_lower']
+        obs.update({
+            'type@1_error': 'stat',
+            'type@1_upper': '0.1',
+            'type@1_lower': '0.1',
+        })
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any(
+            'single error must be written as the total error' in issue
+            for issue in issues
+        ))
+
+    def test_multiple_component_errors_are_accepted(self):
+        obs = self._obs_with_components('FL')
+        self.assertEqual(self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }]), [])
+
+    def test_scale_factor_unit_is_rejected(self):
+        for unit in ('1e-6', '10^{-4}', '1E-3', '10^-11'):
+            obs = self._obs('Br')
+            obs['unit'] = unit
+            issues = self._validate_data([{
+                'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            }])
+            self.assertTrue(
+                any('pure scale factor' in issue for issue in issues), unit
+            )
+
+        obs = self._obs('Mass')
+        obs['unit'] = 'GeV'
+        self.assertEqual(self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }]), [])
+
+    def test_total_and_component_errors_cannot_mix(self):
+        obs = self._obs_with_components('FL')
+        obs['total_upper'] = '0.1'
+        obs['total_lower'] = '0.1'
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any(
+            'mixes component errors' in issue for issue in issues
+        ))
+
+    def test_bound_needs_level_and_no_component_error(self):
+        obs = {
+            'name': 'Br',
+            'type@1_upper': '5.9e-6',
+            'type@1_level': '90%@CLs',
+        }
+        self.assertEqual(self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }]), [])
+
+        obs.pop('type@1_level')
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any(
+            "present without 'type@1_level'" in issue for issue in issues
+        ))
+
+    def test_combined_fit_and_bound_use_distinct_slots(self):
+        obs = self._obs_with_components('Br')
+        obs.update({'type@3_upper': '5.9e-6', 'type@3_level': '90%@CLs'})
+        self.assertEqual(self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }]), [])
+
+        shared = self._obs_with_components('Br')
+        shared.update({'type@1_upper': '5.9e-6', 'type@1_level': '90%@CLs'})
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': shared},
+        }])
+        self.assertTrue(any(
+            "is used both as a component error" in issue for issue in issues
+        ))
+
+    def test_legacy_error_fields_are_rejected(self):
+        obs = self._obs('FL')
+        del obs['total_upper'], obs['total_lower']
+        obs.update({'error_upper': '0.1', 'error_lower': '0.1'})
+        issues = self._validate_data([{
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+        }])
+        self.assertTrue(any(
+            "unknown observable field 'error_upper'" in issue for issue in issues
+        ))
 
     def test_legacy_channel_to_group_dict_is_rejected(self):
         issues = self._validate_data({
-            'B0.2.Kst0.mu+.mu-': [{'obs@1': self._obs('FL')}],
+            'B0.2.K*0.mu+.mu-': [{'obs@1': self._obs('FL')}],
         })
         self.assertTrue(any('data must be an array of data groups' in issue for issue in issues))
 
@@ -171,7 +415,7 @@ class JsonValidatorTests(unittest.TestCase):
             [{'obs@1': self._obs('FL')}],
             [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': self._obs('FL')}],
         ):
-            issues = self._validate_data([{'B0.2.Kst0.mu+.mu-': channel}])
+            issues = self._validate_data([{'B0.2.K*0.mu+.mu-': channel}])
             self.assertTrue(
                 any('must be an object of obs@N entries' in issue for issue in issues),
                 channel,
@@ -179,7 +423,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_channel_latex_key_is_rejected(self):
         issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': {
+            'B0.2.K*0.mu+.mu-': {
                 'latex': r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
                 'obs@1': self._obs('FL'),
             },
@@ -196,7 +440,7 @@ class JsonValidatorTests(unittest.TestCase):
         obs = self._obs('FL')
         obs['latex'] = r'$F_L$'
         issues = self._validate_data([{
-            'B0.2.Kst0.mu+.mu-': {'obs@1': obs},
+            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
         }])
         self.assertTrue(any("unknown observable field 'latex'" in issue for issue in issues))
 
@@ -211,7 +455,7 @@ class JsonValidatorTests(unittest.TestCase):
             'pdf': 'https://arxiv.org/pdf/2401.00001',
             'transition-mode': 'semileptonic-decay',
             'data': [{
-                'B0.2.Kst0.mu+.mu-': self._channel(self._obs('FL')),
+                'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
             }],
         }
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
@@ -221,9 +465,71 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(any("Forbidden field present: 'pdf'" in issue for issue in issues))
 
 
+    def _validate_snapshot_doc(self, doc):
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
+            json.dump(doc, f)
+            f.flush()
+            return json_valid.validate_json(f.name)
+
+    @staticmethod
+    def _pdg_snapshot(obs):
+        return {
+            'inspire-hep': '[PDG:2024](https://inspirehep.net/literature/1)',
+            'author': 'Navas, S. and others',
+            'collaboration': 'PDG',
+            'title': 'Review of Particle Physics',
+            'year': '2024',
+            'data': {'PDG@W': {'obs@1': obs}},
+        }
+
+    def test_pdg_snapshot_accepts_numeric_total_error(self):
+        doc = self._pdg_snapshot({
+            'name': 'MW', 'value': 80.3692,
+            'total_upper': 0.0133, 'total_lower': 0.0133, 'unit': 'GeV',
+        })
+        self.assertEqual(self._validate_snapshot_doc(doc), [])
+
+    def test_pdg_snapshot_rejects_scalar_error(self):
+        doc = self._pdg_snapshot({
+            'name': 'MW', 'value': 80.3692, 'error': 0.0133,
+        })
+        issues = self._validate_snapshot_doc(doc)
+        self.assertTrue(any(
+            "unknown observable field 'error'" in issue for issue in issues
+        ))
+        self.assertTrue(any(
+            'missing required field: total_upper' in issue for issue in issues
+        ))
+
+    def test_pdg_snapshot_requires_numeric_total_error(self):
+        doc = self._pdg_snapshot({
+            'name': 'MW', 'value': 80.3692,
+            'total_upper': '0.0133', 'total_lower': '0.0133',
+        })
+        issues = self._validate_snapshot_doc(doc)
+        self.assertTrue(any(
+            'total_upper: must be a number' in issue for issue in issues
+        ))
+
+    def test_hflav_snapshot_accepts_numeric_total_error(self):
+        doc = {
+            'HFLAV@overview': {
+                'group': 'HFLAV',
+                'inspire-hep': '[HFLAV:2024](https://inspirehep.net/literature/1)',
+                'description': 'overview of popular observables',
+                'observables': [{
+                    'name': 'Tau(B0)', 'value': 1.517,
+                    'total_upper': 0.004, 'total_lower': 0.004, 'unit': 'ps',
+                }],
+                'correlation': None,
+            },
+        }
+        self.assertEqual(self._validate_snapshot_doc(doc), [])
+
+
 class DashboardDataTests(unittest.TestCase):
     def test_skips_invalid_month_keys_and_corrupt_details(self):
-        dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+        dashboard_path = PROJECT_ROOT / 'flav.py'
         source = dashboard_path.read_text(encoding='utf-8')
         namespace = {'__name__': 'dashboard_test'}
         exec(compile('from __future__ import annotations\n' + source, str(dashboard_path), 'exec'), namespace)
@@ -239,7 +545,7 @@ class DashboardDataTests(unittest.TestCase):
         self.assertEqual(records, [])
 
     def test_detect_years_checks_index_paths_without_loading_them(self):
-        dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+        dashboard_path = PROJECT_ROOT / 'flav.py'
         source = dashboard_path.read_text(encoding='utf-8')
         namespace = {'__name__': 'dashboard_test'}
         exec(compile('from __future__ import annotations\n' + source, str(dashboard_path), 'exec'), namespace)
@@ -256,13 +562,15 @@ class DashboardDataTests(unittest.TestCase):
         self.assertEqual(years, [2020])
 
     def test_matrix_label_reads_group_observables(self):
-        dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+        dashboard_path = PROJECT_ROOT / 'flav.py'
         source = dashboard_path.read_text(encoding='utf-8')
         namespace = {'__name__': 'dashboard_test'}
         exec(compile('from __future__ import annotations\n' + source, str(dashboard_path), 'exec'), namespace)
 
         obs = {'name': 'BR', 'type@1_error': 'stat',
-               'type@1_upper': '0.1', 'type@1_lower': '0.1'}
+               'type@1_upper': '0.1', 'type@1_lower': '0.1',
+               'type@2_error': 'syst',
+               'type@2_upper': '0.05', 'type@2_lower': '0.05'}
         group = {'B0.2.mu+.mu-': {'obs@1': obs}, 'type@1_correlation': [[1.0]]}
         self.assertEqual(
             namespace['matrix_label']('type@1_correlation', group),
@@ -271,7 +579,7 @@ class DashboardDataTests(unittest.TestCase):
 
 
 def load_dashboard():
-    dashboard_path = PROJECT_ROOT / 'flav_dashboard.py'
+    dashboard_path = PROJECT_ROOT / 'flav.py'
     namespace = {'__name__': 'dashboard_test'}
     exec(compile('from __future__ import annotations\n' + dashboard_path.read_text(encoding='utf-8'),
                  str(dashboard_path), 'exec'), namespace)
@@ -404,6 +712,55 @@ class HepDataImporterTests(unittest.TestCase):
                 self.assertEqual(hepdata_ext.main(), 0)
 
             self.assertFalse(output_dir.exists())
+
+
+class ArxivSourceTests(unittest.TestCase):
+    def test_unpack_source_extracts_archive_and_lists_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / 'src.tar.gz'
+            with tarfile.open(archive, 'w:gz') as tar:
+                for name, payload in (
+                    ('main.tex', b'\\documentclass{article}'),
+                    ('anc/coeffs.dat', b'0.404 0.013\n'),
+                ):
+                    info = tarfile.TarInfo(name)
+                    info.size = len(payload)
+                    tar.addfile(info, io.BytesIO(payload))
+
+            files = arxiv_ext.unpack_source(
+                str(archive), str(root / 'out')
+            )
+
+            self.assertEqual(files, ['anc/coeffs.dat', 'main.tex'])
+            self.assertTrue((root / 'out' / 'anc' / 'coeffs.dat').exists())
+
+    def test_unpack_source_rejects_path_traversal(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / 'src.tar.gz'
+            with tarfile.open(archive, 'w:gz') as tar:
+                payload = b'escaped'
+                info = tarfile.TarInfo('../escaped.txt')
+                info.size = len(payload)
+                tar.addfile(info, io.BytesIO(payload))
+
+            with self.assertRaises(ValueError):
+                arxiv_ext.unpack_source(str(archive), str(root / 'out'))
+            self.assertFalse((root / 'escaped.txt').exists())
+
+    def test_unpack_source_handles_single_gzipped_tex(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / '2212.11624_src'
+            with gzip.open(archive, 'wb') as f:
+                f.write(b'\\documentclass{article}')
+
+            files = arxiv_ext.unpack_source(
+                str(archive), str(root / 'out')
+            )
+
+            self.assertEqual(files, ['2212.11624.tex'])
 
 
 if __name__ == '__main__':

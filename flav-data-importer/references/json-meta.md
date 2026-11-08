@@ -18,7 +18,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": { ... },
                 "obs@2": { ... }
             },
@@ -36,28 +36,28 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | Field | Type | Required | Description | Example |
 |-------|------|----------|-------------|---------|
 | `inspire-hep` | string | Yes | Markdown link: `[TexKey](https://inspirehep.net/literature/{recid})`. TexKey is the InspireHEP BibTeX citation key; recid is the control number. Always verify via InspireHEP API. | `[LHCb:2015svh](https://inspirehep.net/literature/1409497)` |
-| `author` | string | Yes | InspireHEP BibTeX format with initials only: 1 author → `"Surname, I."`; 2–3 → all names, comma-separated with `and`; 4+ → `"Surname, I. and others"`. If no person names are found, fall back to `"{group} collaboration"`. | `Aaij, R. and others` |
+| `author` | string | Yes | InspireHEP BibTeX format with initials only: 1 author → `"Surname, I."`; 2 → `"A and B"`; 3 → `"A, B, and C"`; 4+ → `"Surname, I. and others"`. If no person names are found, fall back to `"{group} collaboration"`. | `Aaij, R. and others` |
 | `collaboration` | string | Conditional | Required for named collaborations: experimental collaborations, HFLAV/PDG, and large theory collaborations (HPQCD, JLQCD, RBC/UKQCD, ...). For multi-collaboration papers, use comma-separated names (e.g., `"ATLAS, CMS"`). **Omit the key entirely** for papers by individual authors or small theory groups. | `LHCb` |
 | `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. All Unicode characters in the original title (Greek letters, math symbols, etc.) must be converted to LaTeX. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
-| `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
-| `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. | `2015.12.14` |
+| `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. A malformed link or the string `"null"` fails validation; a legacy bare string passes and a missing `vN` only warns — new imports always use the full form. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
+| `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. The validator checks presence only, not the format. | `2015.12.14` |
 | `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
 | `transition-mode` | string | Yes | Must immediately precede `data`; `data` is the final top-level key. Describes the physical process type using a property-based category. Do NOT use non-property descriptors like "rare decay". | `semileptonic-decay` |
-| `data` | array | Yes | **Non-empty array of data groups**. Each group is an object mapping one or more canonical transition channels (`A.B.2.C.D`, or `"no-transition"`) to an `obs@N` object, plus optional group-level `correlation`/`covariance` matrices. Grouping channels together lets one matrix correlate observables across channels. | See Data Entries section |
+| `data` | array | Yes | **Non-empty array of data groups**. Each group is an object mapping one or more canonical transition channels (`A.B.2.C.D`, or `"no-transition"`) to an `obs@N` object, plus optional group-level `dataset`/`scheme` strings and `correlation`/`covariance` matrices. Grouping channels together lets one matrix correlate observables across channels. | See Data Entries section |
 
 ## Metadata Field Sources
 
 | Field | Source | Notes |
 |-------|--------|-------|
 | `inspire-hep` | InspireHEP BibTeX info | `[TexKey](https://inspirehep.net/literature/{recid})` |
-| `author` | InspireHEP BibTeX info | 1 / 2–3 / 4+ tiers; initials only (see `format_authors()` in `scripts/common.py`) |
+| `author` | InspireHEP BibTeX info | 1 / 2 / 3 / 4+ tiers; initials only (see `format_authors()` in `scripts/common.py`) |
 | `collaboration` | InspireHEP BibTeX info | Only for named collaborations; omit for individual/small-group papers |
 | `title` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
 | `abstract` | InspireHEP (arXiv-sourced preferred) | Preserves LaTeX |
 | `arxiv` | arXiv webpage | `[primary_category/arxiv_idvN](https://arxiv.org/pdf/<id>)` |
 | `time` | arXiv webpage | v1 submission date, `YYYY.MM.DD` |
 | `transition-mode` | Paper information | Property-based decay/scattering name |
-| `data` | Extracted from data source | HEPData, CDS, PDF, etc. |
+| `data` | Extracted from data source | HEPData, CDS, arXiv ancillary files, LaTeX source, PDF (see `data-source.md`) |
 
 ## Data Eligibility
 
@@ -66,23 +66,26 @@ Only two kinds of input belong in the database:
 - **Experimental measurements** — including published experimental
   combinations and the HFLAV/PDG snapshots.
 - **Theoretical calculations** — lattice QCD, perturbative QCD, and other
-  first-principles or fixed-order calculations.
+  first-principles or fixed-order calculations, including form-factor
+  parametrization fits (`aN_FF` coefficients with a group-level `scheme`).
+  Those fits are primary theory data even when they combine lattice, LCSR,
+  and experimental input (`dataset: "LQCD+LCSR+EXPE"`).
 
-Do **not** import **fit results**: Wilson-coefficient fits, CKM/parameter
-determinations, mass or coupling bounds, and averages produced by theory
-groups from existing experimental/theoretical data. Those are analysis
-outputs, not primary data.
+Do **not** import **global analyses**: Wilson-coefficient fits,
+CKM/parameter determinations, mass or coupling bounds, and world averages
+that reinterpret existing measurements. Those are analysis outputs, not
+primary data.
 
 ## Data Entries (`data[]`)
 
 `data` is a **non-empty array of data groups**. A group is an object whose
-keys are transition channels (each mapping to an `obs@N` object) plus an
-optional group-level matrix:
+keys are transition channels (each mapping to an `obs@N` object) plus
+optional group-level metadata (`dataset`, `scheme`) and matrices:
 
 ```json
 "data": [
     {
-        "B0.2.Kst0.mu+.mu-": {
+        "B0.2.K*0.mu+.mu-": {
             "obs@1": { ... },
             "obs@2": { ... }
         },
@@ -95,7 +98,7 @@ optional group-level matrix:
         "B+.2.K+.mu+.mu-": {
             "obs@1": { ... }
         },
-        "B+.2.Kst+.mu+.mu-": {
+        "B+.2.K*+.mu+.mu-": {
             "obs@1": { ... },
             "obs@2": { ... }
         },
@@ -114,28 +117,37 @@ optional group-level matrix:
    `Tau(B0)`, CKM elements, ...). The channel key alone carries the
    transition: observable `name` values must not repeat it. The validator
    rejects a transition embedded in `name` (e.g.
-   `FL(B0.2.Kst0.mu+.mu-)`); write `FL` instead. Each channel maps to an
+   `FL(B0.2.K*0.mu+.mu-)`); write `FL` instead. Each channel maps to an
    object of `obs@N` entries; no LaTeX is stored in `data`.
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables
    across them; channels placed in different groups are uncorrelated.
-3. **Group-level `method`** — an optional string describing the
-   measurement method or fit assumption shared by every observable in the
-   group (`"maximum likelihood"`, `"nominal"`, `"higher-order"`, ...).
-   It sits beside the channel keys, never inside `obs@N`.
-4. **Matrix alignment** — an N×N group matrix covers N observables in
+3. **Group-level `dataset`** — an optional string naming the data sources
+   behind the group, never the analysis technique or fit choice. Use the
+   canonical tokens `LQCD`, `LCSR`, and `EXPE`, joined with `+` in
+   that order: `"LQCD"`, `"LCSR"`, `"LQCD+LCSR"`,
+   `"LQCD+LCSR+EXPE"`. The validator rejects other tokens, spaces,
+   duplicates, and wrong order. Experimental groups normally omit the
+   key because their source is the paper itself. It sits beside the
+   channel keys, never inside `obs@N`.
+4. **Group-level `scheme`** — required for any group holding form-factor
+   expansion coefficients (`aN_FF`): one of `BGL`, `BCL`, `BSZ`, `DLM`
+   (mapping to full names and arXiv IDs in `obs-abbr.md` §2.4). Optional
+   for other groups. It follows `dataset` and precedes any matrix.
+5. **Matrix alignment** — an N×N group matrix covers N observables in
    total across the group's channels: rows follow the channel keys in
    written order, then each channel's `obs@1 … obs@N` order. Keep all
-   channel keys before `method`, and `method` before the matrix key; the
-   validator rejects a channel after `method` or any key after a matrix.
-5. **Per-channel numbering** — each channel restarts at `obs@1` and runs
+   channel keys before `dataset`, `dataset` before `scheme`, and both
+   before the matrix key; the validator rejects a channel after either
+   metadata key or any key after a matrix.
+6. **Per-channel numbering** — each channel restarts at `obs@1` and runs
    contiguously (1..N) within that channel.
-6. **Separate contexts** — different fit methods, datasets, or kinematic
-   bins go into separate groups, even for the same channel. Kinematic
-   boundaries (`q2min`/`q2max`, ...) live inside each `obs@N`, never at
-   group or channel level.
-7. **No category layer** — observables are distinguished solely by
+7. **Separate contexts** — different datasets, schemes, fit choices, or
+   kinematic bins go into separate groups, even for the same channel.
+   Kinematic boundaries (`q2min`/`q2max`, ...) live inside each `obs@N`,
+   never at group or channel level.
+8. **No category layer** — observables are distinguished solely by
    `name`.
 
 ### Form-Factor Expansion Coefficients
@@ -149,12 +161,16 @@ When the source reports one number that applies to several form factors
 and repeat the value/errors. Do not join symbols into `a0_Gv_Gp`: each
 named coefficient is its own observable.
 
-Fit choices (nominal, higher-order, ...) are **not** part of the name;
-record them in the group-level `method` field.
+Fit choices (nominal, higher-order, ...) are **not** part of the name and
+are not stored in the group metadata; keep such variants as separate
+groups. Every coefficient group also needs the group-level `scheme`
+value from `obs-abbr.md` §2.4 (`BGL`, `BCL`, `BSZ`, or `DLM`), because
+the same coefficients are meaningless without the expansion form that
+defines them.
 
 ### Standard Measurement Format
 
-Use this format when the paper reports a central value with component errors (statistical, systematic, etc.):
+Use this format when the paper reports a central value with two or more component errors (statistical, systematic, etc.). A single error uses §Total Error Format instead:
 
 ```json
 "obs@1": {
@@ -175,12 +191,12 @@ Use this format when the paper reports a central value with component errors (st
 |-------|----------|------|-------------|
 | `name` | Yes | string | Observable symbol, optionally followed by a `[condition]` or a parameter tag: `OBS`, `OBS[condition]`, `OBS(parameter)`. Do **not** embed the transition channel — the `data` key already carries it. Symbolic notation only — no full expression definitions. |
 | `value` | Yes | string | Central value. Must be a string, even for integers. |
-| `type@1_error` | Yes | string | Error type label for the first error component (usually `"stat"`). |
-| `type@1_upper` | Yes | string | Upper error bound for type 1. For symmetric errors, equals `type@1_lower`. |
-| `type@1_lower` | Yes | string | Lower error bound for type 1. |
-| `type@N_error` | No | string | Additional error type labels (e.g., `"syst"`, `"lumi"`, `"norm"`, `"theo"`). Each additional error type requires its own `_error`, `_upper`, and `_lower` triplet. |
-| `type@N_upper` | No | string | Upper error for type N. |
-| `type@N_lower` | No | string | Lower error for type N. |
+| `total_upper` | Conditional | string | Total upper error. Required whenever the measurement has exactly one error; pair with `total_lower`. For symmetric errors the two are equal. |
+| `total_lower` | Conditional | string | Total lower error. Required whenever the measurement has exactly one error. |
+| `type@N_error` | Conditional | string | Error type label for component N (e.g., `"stat"`, `"syst"`, `"lumi"`, `"norm"`, `"theo"`, `"expe"`). Only allowed when the measurement has **two or more** errors; each component requires its own `_error`, `_upper`, and `_lower` triplet. |
+| `type@N_upper` | Conditional | string | With `type@N_error`: upper error bound for component N. With `type@N_level` and no `type@N_error`: numeric upper bound (upper limit) at that confidence level. |
+| `type@N_lower` | Conditional | string | With `type@N_error`: lower error bound for component N. With `type@N_level` and no `type@N_error`: numeric lower bound (lower limit) at that confidence level. |
+| `type@N_level` | Conditional | string | Confidence level of a bound, e.g. `"90%@CLs"`, `"95%@CLs"`. Never mixed with `type@N_error`. |
 | `q2min` | Conditional | string | Lower kinematic boundary (usually q² in GeV²). String-formatted float, e.g. `"0.1"`. If the lower bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
 | `q2max` | Conditional | string | Upper kinematic boundary. String-formatted float, e.g. `"1.1"`. If the upper bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
 | `pTmin`/`pTmax` | Conditional | string | Transverse momentum boundaries. Use instead of q² for non-decay processes. |
@@ -189,13 +205,16 @@ Use this format when the paper reports a central value with component errors (st
 | `cos_min`/`cos_max` | Conditional | string | Angular boundaries for a measured decay angle. |
 | `chi_min`/`chi_max` | Conditional | string | Binned boundaries for the χ angular variable. |
 | `mxs_min`/`mxs_max` | Conditional | string | Missing-mass boundaries. |
-| `unit` | Conditional | string | Physical unit (e.g., `"GeV"`, `"ps"`, `"fb"`). Omit for dimensionless observables. |
+| `unit` | Conditional | string | Physical unit only (e.g., `"GeV"`, `"ps"`, `"fb"`). A scientific-notation scale factor (`"1e-6"`, `"10^{-4}"`) is **not** a unit: multiply `value`, `total_upper`/`total_lower`, and any bounds by it, then omit `unit`. Omit for dimensionless observables. |
 | `ref` | Conditional | string | External reference as Markdown link for cited values. Look up the arXiv ID in the paper's references, then search InspireHEP for the correct TexKey. Never guess. |
 | `dataset` | No | string | Prose description of the data sample or dataset selection. |
 | `note` | No | string | Free-form provenance note carried over from the source. |
 
-Measurement method and fit assumptions are **group-level**, not
-per-observable: see the `method` bullet in §"Data Layout" above.
+Data sources and expansion scheme are **group-level**, not
+per-observable: see the `dataset` and `scheme` bullets in §"Data Entries"
+above. The per-observable `dataset` field above is a free-form sample
+description inside one `obs@N`; it is unrelated to the group-level
+source list.
 
 **Standard error type labels** (`type@N_error`):
 | Label | Meaning |
@@ -207,73 +226,86 @@ per-observable: see the `method` bullet in §"Data Layout" above.
 | `theo` | Theoretical uncertainty |
 | `expe` | Experimental uncertainty (combined stat+syst when not split) |
 
-Any other label is rejected. Every `type@N_error` label requires the full
-`type@N_upper` + `type@N_lower` pair; a lone `type@N_error` (or a
-lone bound) is invalid.
+Any other label is rejected. A `type@N_error` triplet is only allowed when the
+measurement has **two or more** errors; every component requires the full
+`type@N_upper` + `type@N_lower` pair.
+
+**Single vs multiple errors.** If the paper reports exactly one error, record
+it as the total error (`total_upper`/`total_lower`), regardless of whether the
+source labels it stat/syst/theo. Split errors into `type@N_error` triplets
+only when there are two or more components.
 
 ### Exactly One Measurement Format
 
-Each `obs@N` uses exactly one error scheme: standard component errors
-(`value` + `type@N_error` triplets) or total error (`value` +
-`error_upper`/`error_lower`). In addition it may carry `ref` (an
-external reference) or one or more upper limits (`type@N_upper_limit` +
-`type@N_level`). An upper-limit-only entry has no `value` and no
-errors. A combined fit + limit entry has `value` plus **either**
-component errors or total errors, together with the upper limits. Do
-not mix component errors with total errors, and do not add `value` to
-an upper-limit-only entry. All numeric fields are float-as-strings
-(`"0.69"`, `"5.9e-6"`).
+Each `obs@N` uses exactly one error scheme: total error (`value` +
+`total_upper`/`total_lower`) for a single error, or component errors (`value`
++ two or more `type@N_error` triplets). In addition it may carry `ref` (an
+external reference) and/or confidence-level bounds (`type@N_upper` /
+`type@N_lower` + `type@N_level`). A bound-only entry has no `value` and no
+errors. A combined fit + bound entry has `value` plus **either** component
+errors or total errors, together with the bound slots. Do not mix component
+errors with total errors, and do not add `value` to a bound-only entry. All
+numeric fields are float-as-strings (`"0.69"`, `"5.9e-6"`).
 
 Unknown keys inside `obs@N` are rejected by the validator. The only
 allowed keys are `name`, `value`, `unit`, `ref`,
-`dataset`, `note`, the kinematic boundaries, `error_upper`/`error_lower`,
+`dataset`, `note`, the kinematic boundaries, `total_upper`/`total_lower`,
 and the `type@N_*` patterns documented here.
 
-### Upper Limit Format
+### Bound (Limit) Format
 
-Use this format when the paper reports a confidence-level upper limit rather than a measured central value:
+Use this format when the paper reports a confidence-level upper or lower
+limit rather than a measured central value. A bound occupies its own
+`type@N` slot and carries a level but no `type@N_error`:
 
 ```json
 "obs@1": {
     "name": "Br",
-    "type@1_upper_limit": "5.9e-6",
+    "type@1_upper": "5.9e-6",
     "type@1_level": "90%@CLs"
 }
 ```
 
+A lower limit uses `type@N_lower`; a two-sided interval may carry both
+`type@N_upper` and `type@N_lower` at the same level.
+
 | Field | Description |
 |-------|-------------|
-| `type@N_upper_limit` | The numeric upper limit value (string). This is the observable's maximum allowed value at the given confidence level. |
+| `type@N_upper` | Numeric upper bound at the given confidence level. |
+| `type@N_lower` | Numeric lower bound at the given confidence level. |
 | `type@N_level` | The confidence level as a string, e.g., `"90%@CLs"`, `"95%@CLs"`. |
 
-**Multiple confidence levels**: When a paper reports upper limits at multiple CLs (e.g., 90% and 95%), use `type@1_*` for the primary (typically lowest) CL and `type@2_*` for the secondary CL. Each requires its own `_upper_limit` + `_level` pair.
-
-**Critical:** `upper_limit` is the numeric value, `level` is the confidence — do not swap these fields. Do NOT use `type@N_upper` for upper limits.
+**Multiple confidence levels**: use distinct N slots (e.g. `type@1` for the
+primary 90% CL and `type@2` for 95%). **Critical:** the bound value and the
+level must not be swapped.
 
 ### Total Error Format
 
-Use this format when the paper reports a single combined (total) error without separate stat/syst breakdown, and the data comes from the current paper itself (not an external reference):
+Use this format whenever the paper reports a single error (combined or not)
+and the data comes from the current paper itself (not an external reference):
 
 ```json
 {
     "name": "FL",
     "value": "0.69",
-    "error_upper": "0.039",
-    "error_lower": "0.039",
+    "total_upper": "0.039",
+    "total_lower": "0.039",
     "q2min": "0.1",
     "q2max": "1.1"
 }
 ```
 
-### Combined Fit + Upper Limit Format
+### Combined Fit + Bound Format
 
 Use this format when the paper reports both a fit result (central value + total
-uncertainty) and CLs upper limits. Common in BSM searches where the fit can return
-a central value near zero (or negative) while the CLs method sets a physical upper
-bound. Both sets of fields are required: `value` + `error_upper`/`error_lower`
-for the fit result, and `type@N_upper_limit` + `type@N_level` for each confidence
-level. They come from different statistical procedures and coexist in the same
-`obs@N` entry.
+uncertainty) and CLs bounds. Common in BSM searches where the fit can return
+a central value near zero (or negative) while the CLs method sets a physical
+bound. Both sets of fields are required: `value` +
+`total_upper`/`total_lower` (or two or more component triplets) for the fit
+result, and `type@N_upper`/`type@N_lower` + `type@N_level` for each confidence
+level. Bound slots must use N values distinct from any component errors, e.g.
+`type@1_error` + `type@2_error` + `type@3_upper` + `type@3_level`. They come
+from different statistical procedures and coexist in the same `obs@N` entry.
 
 ### External Reference Format
 
@@ -283,8 +315,8 @@ Use this format for values taken from external sources (PDG world averages, HFLA
 {
     "name": "RBr[mu/e]",
     "value": "0.175",
-    "error_upper": "0.012",
-    "error_lower": "0.012",
+    "total_upper": "0.012",
+    "total_lower": "0.012",
     "ref": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)"
 }
 ```
@@ -298,9 +330,8 @@ inside an `obs@N` object:
 
 ```json
 {
-    "B0.2.Kst0.mu+.mu-": { "obs@1": { ... }, "obs@2": { ... } },
+    "B0.2.K*0.mu+.mu-": { "obs@1": { ... }, "obs@2": { ... } },
     "B+.2.K+.mu+.mu-": { "obs@1": { ... } },
-    "method": "maximum likelihood",
     "correlation": [
         [1.0, 0.5, 0.1],
         [0.5, 1.0, 0.2],
@@ -340,7 +371,8 @@ context:
 - **No matrix**: observables without a matrix can share a group or be split
   across groups as appropriate.
 - **Several groups**: add another element to the `data` array. Do not merge
-  groups whose properties differ (fit method, dataset, kinematic region).
+  groups whose properties differ (dataset, scheme, fit choice, kinematic
+  region).
 
 ### Combined Kinematic Bins
 
@@ -404,8 +436,14 @@ as subgroup keys).
     "year": "2024",
     "data": {
         "PDG@W": {
-            "obs@1": { "name": "MW", "value": 80.3692, "error": 0.0133, "unit": "GeV" },
-            "obs@27": { "name": "Br(W2lnu)", "value": 0.1086, "error": 0.0009 },
+            "obs@1": {
+                "name": "MW", "value": 80.3692,
+                "total_upper": 0.0133, "total_lower": 0.0133, "unit": "GeV"
+            },
+            "obs@27": {
+                "name": "Br(W2lnu)", "value": 0.1086,
+                "total_upper": 0.0009, "total_lower": 0.0009
+            },
             "correlation": null
         },
         "PDG@Z": { "...": "..." }
@@ -428,7 +466,10 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
         "inspire-hep": "[HFLAV:2024](https://...)",
         "description": "overview of popular observables",
         "observables": [
-            { "name": "Tau(B0)", "value": 1.517, "error": 0.004, "unit": "ps" }
+            {
+                "name": "Tau(B0)", "value": 1.517,
+                "total_upper": 0.004, "total_lower": 0.004, "unit": "ps"
+            }
         ],
         "correlation": null
     },
@@ -442,12 +483,13 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 - Snapshot `value`/error fields are **numbers**, not strings (the
   all-strings rule in §Key Constraints applies only to the standard
   per-paper schema).
-- Each observable needs `name` and `value`, plus one error form:
-  `error` (scalar) or `error_upper`/`error_lower`. Do not use
-  `type@N_error` triplets.
+- Each observable needs `name`, `value`, and the numeric total error pair
+  `total_upper`/`total_lower`. Snapshots never split errors into
+  components: a symmetric `error` expands to an equal pair, and an
+  asymmetric interval fills the two fields directly. Do not use
+  `type@N_*` fields.
 - Unknown observable keys are rejected: the only allowed fields are
-  `name`, `value`, `error`, `error_upper`, `error_lower`,
-  `unit`, `limit`.
+  `name`, `value`, `total_upper`, `total_lower`, `unit`, `limit`.
 - `unit` is a free-form string (`"GeV"`, `"ps"`, `"fb"`).
 - Optional subgroup `correlation` is a square N×N matrix whose
   dimension must equal the observable count; `null` is allowed.
@@ -456,24 +498,27 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 
 ## Key Constraints
 
-1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, `q2min`/`q2max`, `pTmin`/`pTmax`, all error fields, and `unit`.
+1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, the kinematic boundaries (`q2min`/`q2max`, `pTmin`/`pTmax`, ...), and every error/bound field. `unit` is a unit string, not a number.
 2. **LaTeX uses double backslash** — in `title`/`abstract`, `\\to` in the JSON file becomes `\to` after `json.load()`.
 3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
-4. **Field order** — Top-level fields follow the Top-Level Fields table order; group keys are ordered channels → `method` → matrices; each channel value is an `obs@N` object; within `obs@N`, follow the Standard Measurement table.
-5. **arxiv format** — Must include primary category and version: `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`. If no arXiv ID, use `null`.
+4. **Field order** — Top-level fields follow the Top-Level Fields table order; group keys are ordered channels → `dataset` → `scheme` → matrices; each channel value is an `obs@N` object; within `obs@N`, follow the Standard Measurement table.
+5. **arxiv format** — `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)`; no arXiv ID → `null`. Malformed links and the string `"null"` fail; legacy bare strings pass and a missing `vN` warns.
 6. **No `year`/`pdf` fields** — The standard schema has neither a top-level `year` nor `pdf` field (HFLAV/PDG snapshots use `year`; see §Non-Standard Schemas). Citations come from the `arxiv` and `inspire-hep` fields.
 7. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv`, which uses `null` when absent).
 8. **Top-level key order** — `transition-mode` must immediately precede `data`, and `data` must be the final key in the JSON object.
 9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
-10. **Author format** — initials only, with 1 / 2–3 / 4+ tiers: `"Polchinski, J."`, `"Aaij, R., Smith, J., and Oyanguren, A."`, or `"Aaij, R. and others"`. (SKILL.md rule 3.)
+10. **Author format** — initials only, 1 / 2 / 3 / 4+ tiers as in the `author` row above (`format_authors()` in `scripts/common.py`; SKILL.md rule 3).
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)
 12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, dashes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). Latin ligatures from PDF text extraction (`ﬀ`, `ﬁ`, `ﬂ`, `ﬃ`, `ﬄ`) are replaced by their plain letter sequences. (SKILL.md rule 4.)
-13. **Transition order** — Dotted `.2.` transitions follow the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses; neutral antiparticles append `Bar`. The validator fails non-canonical order.
-14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to an `obs@N` object, optionally carries one group-level `method` string, and optionally a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). JSON data stores no LaTeX for channels or observables.
-15. **One group per property set** — observables whose fit method, dataset, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).
-16. **Exactly one error scheme** — component-error triplets (`type@N_error`/`_upper`/`_lower`) or total error (`error_upper`/`error_lower`), optionally with `ref` and/or upper limits; error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`. Unknown observable fields are rejected.
+13. **Transition order** — a channel key is `A.B.2.C.D` (`no-transition` is the only exception; ratios join two full keys with `/`) and follows the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses. Charge is written `+`/`-`/`0` only (`p`/`m` suffixes are rejected); neutral antiparticles append capital `Bar` (lowercase `bar` is rejected). The validator fails non-canonical order. Particle tokens use the handwritten case (`pi0`, `Lambdab0`, `KS0`, `KL0`) and neutrinos are `v`/`vBar` (flavor: `ve`, `vmu`, `vtau`, plus `Bar`); see obs-abbr.md §1.
+14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to an `obs@N` object, optionally carries group-level `dataset`/`scheme` strings, and optionally a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). JSON data stores no LaTeX for channels or observables.
+15. **One group per property set** — observables whose dataset, scheme, fit choice, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).
+16. **Exactly one error scheme** — a single error is the total error (`total_upper`/`total_lower`); two or more errors are separate component triplets (`type@N_error`/`_upper`/`_lower`). Confidence-level bounds use `type@N_upper`/`type@N_lower` + `type@N_level` with no `type@N_error`; a combined fit + bound uses distinct N slots. Error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`. Unknown observable fields are rejected.
 17. **`collaboration` is conditional** — required for named collaborations (experiments, HFLAV/PDG, large theory groups such as HPQCD); omit the key for individual-author and small-group papers (SKILL.md rule 8).
-18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_Fp`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_Gp`); never join symbols. Fit choices go in the group-level `method`, never in the name (SKILL.md rule 9).
+18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_Fp`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_Gp`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
+19. **`unit` is a physical unit** — never store a scientific-notation scale factor (`1e-6`, `10^{-4}`) in `unit`; multiply it into `value`, `total_upper`/`total_lower`, and any bounds, then omit the field. The validator rejects scale-factor units.
+20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
+21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
 
 ## Extending This Specification
 

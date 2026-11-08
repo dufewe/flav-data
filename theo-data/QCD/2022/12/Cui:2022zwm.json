@@ -1,0 +1,203 @@
+{
+    "inspire-hep": "[Cui:2022zwm](https://inspirehep.net/literature/2617393)",
+    "author": "Cui, B.-Y. and others",
+    "title": "Precision calculations of $B_{d, s} \\to \\pi, K$ decay form factors in soft-collinear effective theory",
+    "arxiv": "[hep-ph/2212.11624v1](https://arxiv.org/pdf/2212.11624)",
+    "time": "2022.12.22",
+    "abstract": "We improve QCD calculations of the $B_{d, s} \\to \\pi, K$ form factors at large hadronic recoil by implementing the next-to-leading-logarithmic resummation for the obtained leading-power light-cone sum rules in the soft-collinear effective theory (SCET) framework. Additionally, we endeavour to investigate a variety of the subleading-power contributions to these heavy-to-light form factors at ${\\cal O}(\\alpha_s^0)$, by including the higher-order terms in the heavy-quark expansion of the hard-collinear quark propagator, by evaluating the desired effective matrix element of the next-to-leading-order term in the ${\\rm SCET_{I}}$ representation of the weak transition current, by taking into account the off-light-cone contributions of the two-body heavy-quark effective theory matrix elements as well as the three-particle higher-twist corrections from the subleading bottom-meson light-cone distribution amplitudes, and by computing the twist-five and twist-six four-body higher-twist effects with the aid of the factorization approximation. Having at our disposal the SCET sum rules for the exclusive $B$-meson decay form factors, we further explore in detail numerical implications of the newly computed subleading-power corrections by employing the three-parameter model for both the leading-twist and higher-twist $B$-meson distribution amplitudes. Taking advantage of the customary Bourrely-Caprini-Lellouch parametrization for the semileptonic $B_{d, s} \\to \\pi, K$ form factors, we then determine the correlated numerical results for the interesting series coefficients, by carrying out the simultaneous fit of the exclusive $B$-meson decay form factors to both the achieved SCET sum rule predictions and the available lattice QCD results.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_fp",
+                    "value": "0.404",
+                    "total_upper": "0.013",
+                    "total_lower": "0.013"
+                },
+                "obs@2": {
+                    "name": "a1_fp",
+                    "value": "-0.618",
+                    "total_upper": "0.063",
+                    "total_lower": "0.063"
+                },
+                "obs@3": {
+                    "name": "a2_fp",
+                    "value": "-0.473",
+                    "total_upper": "0.215",
+                    "total_lower": "0.215"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.496",
+                    "total_upper": "0.019",
+                    "total_lower": "0.019"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-1.537",
+                    "total_upper": "0.056",
+                    "total_lower": "0.056"
+                },
+                "obs@6": {
+                    "name": "a0_fT",
+                    "value": "0.396",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                },
+                "obs@7": {
+                    "name": "a1_fT",
+                    "value": "-0.553",
+                    "total_upper": "0.073",
+                    "total_lower": "0.073"
+                },
+                "obs@8": {
+                    "name": "a2_fT",
+                    "value": "-0.248",
+                    "total_upper": "0.235",
+                    "total_lower": "0.235"
+                }
+            },
+            "dataset": "LQCD+LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.0, 0.276, -0.446, 0.291, 0.164, 0.583, 0.266, -0.24],
+                [0.276, 1.0, -0.374, 0.067, 0.485, 0.234, 0.693, -0.193],
+                [-0.446, -0.374, 1.0, 0.108, 0.157, -0.185, -0.185, 0.592],
+                [0.291, 0.067, 0.108, 1.0, -0.226, 0.318, 0.06, 0.018],
+                [0.164, 0.485, 0.157, -0.226, 1.0, 0.04, 0.431, 0.165],
+                [0.583, 0.234, -0.185, 0.318, 0.04, 1.0, 0.178, -0.423],
+                [0.266, 0.693, -0.185, 0.06, 0.431, 0.178, 1.0, -0.307],
+                [-0.24, -0.193, 0.592, 0.018, 0.165, -0.423, -0.307, 1.0]
+            ]
+        },
+        {
+            "B0.2.K0.v.vBar": {
+                "obs@1": {
+                    "name": "a0_fp",
+                    "value": "0.465",
+                    "total_upper": "0.008",
+                    "total_lower": "0.008"
+                },
+                "obs@2": {
+                    "name": "a1_fp",
+                    "value": "-0.925",
+                    "total_upper": "0.053",
+                    "total_lower": "0.053"
+                },
+                "obs@3": {
+                    "name": "a2_fp",
+                    "value": "-0.355",
+                    "total_upper": "0.257",
+                    "total_lower": "0.257"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.290",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "0.246",
+                    "total_upper": "0.038",
+                    "total_lower": "0.038"
+                },
+                "obs@6": {
+                    "name": "a0_fT",
+                    "value": "0.479",
+                    "total_upper": "0.010",
+                    "total_lower": "0.010"
+                },
+                "obs@7": {
+                    "name": "a1_fT",
+                    "value": "-0.759",
+                    "total_upper": "0.074",
+                    "total_lower": "0.074"
+                },
+                "obs@8": {
+                    "name": "a2_fT",
+                    "value": "-0.479",
+                    "total_upper": "0.324",
+                    "total_lower": "0.324"
+                }
+            },
+            "dataset": "LQCD+LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.0, -0.035, -0.494, 0.711, 0.283, 0.744, 0.017, -0.281],
+                [-0.035, 1.0, -0.034, 0.16, 0.831, -0.111, 0.691, -0.056],
+                [-0.494, -0.034, 1.0, -0.038, 0.166, -0.299, -0.099, 0.533],
+                [0.711, 0.16, -0.038, 1.0, 0.422, 0.594, 0.061, -0.015],
+                [0.283, 0.831, 0.166, 0.422, 1.0, 0.141, 0.595, 0.14],
+                [0.744, -0.111, -0.299, 0.594, 0.141, 1.0, -0.023, -0.283],
+                [0.017, 0.691, -0.099, 0.061, 0.595, -0.023, 1.0, 0.305],
+                [-0.281, -0.056, 0.533, -0.015, 0.14, -0.283, 0.305, 1.0]
+            ]
+        },
+        {
+            "Bs0.2.K-.l+.v": {
+                "obs@1": {
+                    "name": "a0_fp",
+                    "value": "0.373",
+                    "total_upper": "0.010",
+                    "total_lower": "0.010"
+                },
+                "obs@2": {
+                    "name": "a1_fp",
+                    "value": "-0.731",
+                    "total_upper": "0.041",
+                    "total_lower": "0.041"
+                },
+                "obs@3": {
+                    "name": "a2_fp",
+                    "value": "-0.473",
+                    "total_upper": "0.146",
+                    "total_lower": "0.146"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.443",
+                    "total_upper": "0.010",
+                    "total_lower": "0.010"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-1.427",
+                    "total_upper": "0.045",
+                    "total_lower": "0.045"
+                },
+                "obs@6": {
+                    "name": "a0_fT",
+                    "value": "0.437",
+                    "total_upper": "0.046",
+                    "total_lower": "0.046"
+                },
+                "obs@7": {
+                    "name": "a1_fT",
+                    "value": "-0.900",
+                    "total_upper": "0.167",
+                    "total_lower": "0.167"
+                },
+                "obs@8": {
+                    "name": "a2_fT",
+                    "value": "0.091",
+                    "total_upper": "0.172",
+                    "total_lower": "0.172"
+                }
+            },
+            "dataset": "LQCD+LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.0, 0.202, -0.294, 0.653, 0.135, 0.422, -0.277, 0.103],
+                [0.202, 1.0, 0.075, 0.255, 0.683, 0.488, -0.301, 0.092],
+                [-0.294, 0.075, 1.0, 0.099, 0.366, 0.215, -0.121, 0.025],
+                [0.653, 0.255, 0.099, 1.0, -0.024, 0.407, -0.268, 0.1],
+                [0.135, 0.683, 0.366, -0.024, 1.0, 0.433, -0.262, 0.075],
+                [0.422, 0.488, 0.215, 0.407, 0.433, 1.0, -0.835, 0.55],
+                [-0.277, -0.301, -0.121, -0.268, -0.262, -0.835, 1.0, -0.914],
+                [0.103, 0.092, 0.025, 0.1, 0.075, 0.55, -0.914, 1.0]
+            ]
+        }
+    ]
+}

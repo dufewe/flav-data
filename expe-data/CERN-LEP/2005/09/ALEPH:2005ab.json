@@ -4,7 +4,7 @@
     "collaboration": "ALEPH, DELPHI, L3, OPAL, SLD, LEP Electroweak Working Group, SLD Electroweak Group, SLD Heavy Flavour Group",
     "title": "Precision electroweak measurements on the Z resonance",
     "arxiv": "[hep-ex/0509008v1](https://arxiv.org/pdf/hep-ex/0509008.pdf)",
-    "time": "2005-09-07",
+    "time": "2005.09.07",
     "abstract": "We report on the final electroweak measurements performed with data taken at the Z resonance by the experiments operating at SLC and LEP. The data consist of 17 million Z decays at LEP and 600 thousand Z decays by SLD. The mass and width of the Z boson, and its couplings to fermions are precisely measured: mZ = 91.1875 +- 0.0021 GeV, GammaZ = 2.4952 +- 0.0023 GeV, sin^2 theta_eff^lept = 0.23153 +- 0.00016. The number of light neutrino species is determined to be 2.9840 +- 0.0082.",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -13,15 +13,15 @@
                 "obs@1": {
                     "name": "mZ",
                     "value": "91.1875",
-                    "error_upper": "0.0021",
-                    "error_lower": "0.0021",
+                    "total_upper": "0.0021",
+                    "total_lower": "0.0021",
                     "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "GammaZ",
                     "value": "2.4952",
-                    "error_upper": "0.0023",
-                    "error_lower": "0.0023",
+                    "total_upper": "0.0023",
+                    "total_lower": "0.0023",
                     "unit": "GeV"
                 }
             }
@@ -31,19 +31,19 @@
                 "obs@1": {
                     "name": "sigma_had0",
                     "value": "41.540",
-                    "error_upper": "0.037",
-                    "error_lower": "0.037",
+                    "total_upper": "0.037",
+                    "total_lower": "0.037",
                     "unit": "nb"
                 }
             }
         },
         {
-            "Z.2.nu.nubar": {
+            "Z.2.v.vBar": {
                 "obs@1": {
                     "name": "Nnu",
                     "value": "2.9840",
-                    "error_upper": "0.0082",
-                    "error_lower": "0.0082"
+                    "total_upper": "0.0082",
+                    "total_lower": "0.0082"
                 }
             }
         },
@@ -52,14 +52,14 @@
                 "obs@1": {
                     "name": "sin2theta_eff_lept",
                     "value": "0.23153",
-                    "error_upper": "0.00016",
-                    "error_lower": "0.00016"
+                    "total_upper": "0.00016",
+                    "total_lower": "0.00016"
                 },
                 "obs@2": {
                     "name": "rho_lept",
                     "value": "1.0050",
-                    "error_upper": "0.0010",
-                    "error_lower": "0.0010"
+                    "total_upper": "0.0010",
+                    "total_lower": "0.0010"
                 }
             }
         }

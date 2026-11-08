@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bm.2.D0.l-.nuBar": {
+            "B-.2.D0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "2.33",
@@ -24,7 +24,7 @@
             }
         },
         {
-            "Bm.2.Dst0.l-.nuBar": {
+            "B-.2.D*0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5.83",
@@ -39,7 +39,7 @@
             }
         },
         {
-            "B0Bar.2.Dp.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "2.21",
@@ -54,7 +54,7 @@
             }
         },
         {
-            "B0Bar.2.Dstp.l-.nuBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5.49",
@@ -69,7 +69,7 @@
             }
         },
         {
-            "Bm.2.Dp.pim.l-.nuBar": {
+            "B-.2.D+.pi-.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.42",
@@ -84,7 +84,7 @@
             }
         },
         {
-            "Bm.2.Dstp.pim.l-.nuBar": {
+            "B-.2.D*+.pi-.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.59",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B0Bar.2.D0.pip.l-.nuBar": {
+            "B0Bar.2.D0.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.43",
@@ -114,7 +114,7 @@
             }
         },
         {
-            "B0Bar.2.Dst0.pip.l-.nuBar": {
+            "B0Bar.2.D*0.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.48",
@@ -129,7 +129,7 @@
             }
         },
         {
-            "Bm.2.Dst.pim.l-.nuBar": {
+            "B-.2.D*.pi-.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.52",
@@ -144,7 +144,7 @@
             }
         },
         {
-            "B0Bar.2.Dst.pip.l-.nuBar": {
+            "B0Bar.2.D*.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.37",

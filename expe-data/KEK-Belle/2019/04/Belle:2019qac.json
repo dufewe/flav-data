@@ -2,65 +2,198 @@
     "inspire-hep": "[Belle:2019qac](https://inspirehep.net/literature/1728173)",
     "author": "Abdesselam, A. and others",
     "collaboration": "Belle",
-    "title": "Test of Lepton Flavor Universality in $B\\to K^* \\ell^+ \\ell^-$ Decays at Belle",
-    "arxiv": "[hep-ex/1904.02440v1](https://arxiv.org/pdf/1904.02440)",
+    "title": "Test of Lepton-Flavor Universality in ${B\\to K^*\\ell^+\\ell^-}$ Decays at Belle",
+    "arxiv": "[hep-ex/1904.02440v3](https://arxiv.org/pdf/1904.02440)",
     "time": "2019.04.04",
-    "abstract": "We present a test of lepton flavor universality in $B\\to K^* \\ell^+ \\ell^-$ decays, where $\\ell=e,\\mu$, in the dilepton invariant mass squared bins $0.045 < q^2 < 8.0$ GeV$^2/c^4$ and $15.0 < q^2 < 19.0$ GeV$^2/c^4$. The results are based on a data sample of 772 million $B\\bar{B}$ pairs collected at the $\\Upsilon(4S)$ resonance with the Belle detector.",
+    "abstract": "We present a test of lepton-flavor universality in $B \\to K^*\\ell^+\\ell^-$ decays, where $\\ell$ is either an electron or a muon. The analysis is based on a data sample of 711 fb$^{-1}$, containing $772\\times 10^6$ $B\\bar{B}$ events, recorded at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+e^-$ collider. We measure the ratio of branching fractions $R_{K^*} = \\mathcal{B}(B \\to K^*\\mu^+\\mu^-)/\\mathcal{B}(B \\to K^*e^+e^-)$ in four bins of the squared dilepton invariant mass, $q^2$. We find the results to be consistent with Standard Model expectations. We also report absolute branching fractions for the individual modes in bins of $q^2$.",
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kstp.l+.l-": {
+            "B0.2.K*0.l+.l-": {
                 "obs@1": {
-                    "name": "Rmue",
-                    "value": "0.96",
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "q2max": "1.1",
+                    "value": "0.46",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.56",
-                    "type@1_lower": "0.35",
+                    "type@1_upper": "0.55",
+                    "type@1_lower": "0.27",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.14",
-                    "type@2_lower": "0.14",
-                    "q2min": "0.1",
-                    "q2max": "8.0"
+                    "type@2_upper": "0.13",
+                    "type@2_lower": "0.13"
                 },
                 "obs@2": {
-                    "name": "Rmue",
-                    "value": "1.40",
+                    "name": "R[mu/e]",
+                    "q2min": "1.1",
+                    "q2max": "6.0",
+                    "value": "1.06",
                     "type@1_error": "stat",
-                    "type@1_upper": "1.99",
-                    "type@1_lower": "0.68",
+                    "type@1_upper": "0.63",
+                    "type@1_lower": "0.38",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.11",
-                    "type@2_lower": "0.11",
-                    "q2min": "15.0",
-                    "q2max": "19.0"
-                }
-            }
-        },
-        {
-            "B0.2.Kst0.l+.l-": {
-                "obs@1": {
-                    "name": "Rmue",
+                    "type@2_upper": "0.14",
+                    "type@2_lower": "0.14"
+                },
+                "obs@3": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.1",
+                    "q2max": "8.0",
                     "value": "0.86",
                     "type@1_error": "stat",
                     "type@1_upper": "0.33",
                     "type@1_lower": "0.24",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.08",
-                    "type@2_lower": "0.08",
-                    "q2min": "0.1",
-                    "q2max": "8.0"
+                    "type@2_upper": "0.09",
+                    "type@2_lower": "0.09"
                 },
-                "obs@2": {
-                    "name": "Rmue",
+                "obs@4": {
+                    "name": "R[mu/e]",
+                    "q2min": "15.0",
+                    "q2max": "19.0",
                     "value": "1.12",
                     "type@1_error": "stat",
                     "type@1_upper": "0.61",
                     "type@1_lower": "0.36",
                     "type@2_error": "syst",
                     "type@2_upper": "0.10",
-                    "type@2_lower": "0.10",
+                    "type@2_lower": "0.10"
+                },
+                "obs@5": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "value": "1.12",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.27",
+                    "type@1_lower": "0.21",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.09",
+                    "type@2_lower": "0.09"
+                }
+            }
+        },
+        {
+            "B+.2.K*+.l+.l-": {
+                "obs@1": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "q2max": "1.1",
+                    "value": "0.62",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.60",
+                    "type@1_lower": "0.36",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.09",
+                    "type@2_lower": "0.09"
+                },
+                "obs@2": {
+                    "name": "R[mu/e]",
+                    "q2min": "1.1",
+                    "q2max": "6.0",
+                    "value": "0.72",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.99",
+                    "type@1_lower": "0.44",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.15",
+                    "type@2_lower": "0.15"
+                },
+                "obs@3": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.1",
+                    "q2max": "8.0",
+                    "value": "0.96",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.56",
+                    "type@1_lower": "0.35",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.14",
+                    "type@2_lower": "0.14"
+                },
+                "obs@4": {
+                    "name": "R[mu/e]",
                     "q2min": "15.0",
-                    "q2max": "19.0"
+                    "q2max": "19.0",
+                    "value": "1.40",
+                    "type@1_error": "stat",
+                    "type@1_upper": "1.99",
+                    "type@1_lower": "0.68",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.12",
+                    "type@2_lower": "0.12"
+                },
+                "obs@5": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "value": "0.70",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.24",
+                    "type@1_lower": "0.19",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.06",
+                    "type@2_lower": "0.06"
+                }
+            }
+        },
+        {
+            "B.2.K*.l+.l-": {
+                "obs@1": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "q2max": "1.1",
+                    "value": "0.52",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.36",
+                    "type@1_lower": "0.26",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.06",
+                    "type@2_lower": "0.06"
+                },
+                "obs@2": {
+                    "name": "R[mu/e]",
+                    "q2min": "1.1",
+                    "q2max": "6.0",
+                    "value": "0.96",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.45",
+                    "type@1_lower": "0.29",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.11",
+                    "type@2_lower": "0.11"
+                },
+                "obs@3": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.1",
+                    "q2max": "8.0",
+                    "value": "0.90",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.27",
+                    "type@1_lower": "0.21",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.10",
+                    "type@2_lower": "0.10"
+                },
+                "obs@4": {
+                    "name": "R[mu/e]",
+                    "q2min": "15.0",
+                    "q2max": "19.0",
+                    "value": "1.18",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.52",
+                    "type@1_lower": "0.32",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.11",
+                    "type@2_lower": "0.11"
+                },
+                "obs@5": {
+                    "name": "R[mu/e]",
+                    "q2min": "0.045",
+                    "value": "0.94",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.17",
+                    "type@1_lower": "0.14",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.08",
+                    "type@2_lower": "0.08"
                 }
             }
         }

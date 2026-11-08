@@ -16,17 +16,22 @@ base = 'expe-data/CERN-LHCb'
 target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
-    if year.isdigit():
-        idx_path = os.path.join(base, year, f'LHCb@{year}.json')
-        if os.path.exists(idx_path):
-            index = json.load(open(idx_path))
-            for month, files in index.items():
-                if target in files:
-                    print(f"Already exists: {year}/{month}/{target}.json")
-                    break
+    if not year.isdigit():
+        continue
+    idx_path = os.path.join(base, year, f'LHCb@{year}.json')
+    if not os.path.exists(idx_path):
+        continue
+    for month, files in json.load(open(idx_path)).items():
+        if target in files:
+            for folder in (os.path.join(base, year, month), os.path.join(base, year)):
+                path = os.path.join(folder, f'{target}.json')
+                if os.path.exists(path):
+                    print(f'Already exists: {path}')
 ```
 
-**Result**: Not found → proceed with import.
+**Result**: Not found → proceed with import. (This paper is now in the
+database at `expe-data/CERN-LHCb/2015/LHCb:2015svh.json` — a legacy flat
+year-level file, indexed under month `12`.)
 
 ## Step 2: Retrieve Metadata
 
@@ -107,7 +112,7 @@ Parse the YAML tables and construct the JSON entry:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.69",
@@ -131,14 +136,19 @@ Parse the YAML tables and construct the JSON entry:
                     "type@2_lower": "0.004",
                     "q2min": "0.1",
                     "q2max": "1.1"
-                },
-                "...": "..."
+                }
             },
-            "type@1_correlation": [[1.0, 0.06, ...], [0.06, 1.0, ...], ...]
+            "type@1_correlation": [
+                [1.0, 0.06],
+                [0.06, 1.0]
+            ]
         }
     ]
 }
 ```
+
+The real group holds every observable of that q² bin (`obs@3` … `obs@N`);
+the matrix is then N×N, rows in `obs@N` order, one row per line.
 
 Each q² bin from the paper becomes a separate element of the `data`
 group array. The correlation matrix from Table 9 goes into the first
@@ -150,7 +160,7 @@ matrix rows ordered by channel key and then `obs@N`.
 ## Step 5: Write File and Update Index
 
 ```bash
-# Create directory structure
+# Create directory structure (new imports use the month subdirectory)
 mkdir -p expe-data/CERN-LHCb/2015/12
 
 # Write JSON file
@@ -195,8 +205,8 @@ Remove all temporary PDFs, YAML files, and intermediate JSONs.
 
 1. **HEPData has 83 tables** — use `detect_table_type()` (structure-based), not the description text, to separate observables from matrices.
 2. **Multiple correlation matrix sets** — Appendices C–H provide likelihood and bootstrap matrices for the same q² bins; choose one set (likelihood is the paper's nominal result) and keep its binning consistent with the observable table you imported.
-3. **One group per q² bin** — each bin requires its own element in that channel's `data` group array.
-4. **Observable naming** — use `FL(B0.2.Kst0.mu+.mu-)`: abbreviation + (transition). The transition follows canonical order (`obs-abbr.md` §1): `.2.` separates initial/final states, particles ordered baryon -> meson -> charged lepton -> neutral lepton, then heaviest -> lightest within a type, then `+` -> `-` -> `0` for equal masses; hadrons capitalized, leptons lowercase.
+3. **One group per q² bin** — each bin is its own element of the paper's `data` array.
+4. **Observable naming** — `name` is the bare symbol (`FL`, `S3`, `P5p`); the transition is the channel key `B0.2.K*0.mu+.mu-`. The key follows canonical order (`obs-abbr.md` §1): `.2.` separates initial/final states, particles ordered baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within a type, then `+` → `-` → `0` for equal masses.
 5. **LaTeX escaping** — `\\to` in JSON becomes `\to` after parsing.
 6. **arxiv field** — must include primary category and version: `[hep-ex/1512.04442v1](...)`.
 7. **transition-mode** — use the hyphenated property names (e.g. `"semileptonic-decay"`), never "rare decay".

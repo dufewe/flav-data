@@ -9,19 +9,19 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.emup.mum": {
+            "B0.2.K*0.emup.mu-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.2e-7",
+                    "type@1_upper": "1.2e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.Kst0.mup.em": {
+            "B0.2.K*0.mu+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.6e-7",
+                    "type@1_upper": "1.6e-7",
                     "type@1_level": "90%@CL"
                 }
             }

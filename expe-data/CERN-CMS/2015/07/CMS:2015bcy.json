@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "FL",
                     "q2min": "1.00",
@@ -181,7 +181,7 @@
             }
         },
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "q2min": "1.00",

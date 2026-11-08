@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # Shared definitions for the flav-data Streamlit app.
-# Loaded via `exec` from main.py (and the Observable pages) so the
+# Loaded via `exec` from main.py (and the obs-info pages) so the
 # same name bindings (get_json, EXPEGROUP, ...) are available in the
 # caller's module scope. As a side effect this also injects
 # `streamlit` (as `st`), `json`, and `os` into the caller's globals.

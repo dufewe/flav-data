@@ -4,12 +4,12 @@
     "collaboration": "LHCb",
     "title": "Measurement of forward W->e nu production in pp collisions at sqrt(s)=8 TeV",
     "arxiv": "[hep-ex/1608.01484v2](https://arxiv.org/pdf/1608.01484.pdf)",
-    "time": "2016-08-04",
+    "time": "2016.08.04",
     "abstract": "A measurement of the cross-section for W->e nu production in pp collisions using 2 fb-1 at sqrt(s)=8 TeV. The inclusive W production cross-sections are measured to be sigma(W+)=1124.4 pb and sigma(W-)=809.0 pb. The ratio B(W->e nu)/B(W->mu nu)=1.020 +/- 0.002 +/- 0.019.",
     "transition-mode": "scattering",
     "data": [
         {
-            "p.p.2.W+.2.e+.nu": {
+            "p.p.2.W+.2.e+.v": {
                 "obs@1": {
                     "name": "sigma_Wpenu",
                     "value": "1124.4",
@@ -30,7 +30,7 @@
             }
         },
         {
-            "p.p.2.W-.2.e-.nubar": {
+            "p.p.2.W-.2.e-.vBar": {
                 "obs@1": {
                     "name": "sigma_Wmenu",
                     "value": "809.0",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "W.2.e.nu": {
+            "W.2.e.v": {
                 "obs@1": {
                     "name": "RWenu2Wmumu",
                     "value": "1.020",

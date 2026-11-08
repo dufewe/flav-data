@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Search for the lepton flavour violating decay $B^+ \\rightarrow K^+ \\mu^- \\tau^+$ using $B_{s2}^{*0}$ decays",
     "arxiv": "[hep-ex/2003.04352](https://arxiv.org/pdf/2003.04352)",
-    "time": "2020.01.01",
+    "time": "2020.03.09",
     "abstract": "a search for the lepton flavour violating decay $B^+ \\to K^+ \\mu^- \\tau^+$ using a sample of proton--proton collisions at centre-of-mass energies of 7, 8, and 13 TeV, corresponding to a total integrated luminosity of 9 fb$^{-1}$",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -12,12 +12,12 @@
             "no-transition": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "3.9e-05",
+                    "type@1_upper": "3.9e-05",
                     "type@1_level": "90%@CL"
                 },
                 "obs@2": {
                     "name": "Br",
-                    "type@1_upper_limit": "4.5e-05",
+                    "type@1_upper": "4.5e-05",
                     "type@1_level": "95%@CL"
                 }
             }

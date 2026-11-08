@@ -1,0 +1,32 @@
+{
+    "inspire-hep": 1640692,
+    "author": "Brown, M.A.P.E.A.",
+    "collaboration": "UCNA",
+    "title": "New result for the neutron beta-asymmetry parameter A0 from UCNA",
+    "arxiv": "[nucl-ex/1712.00884v1](https://arxiv.org/pdf/1712.00884v1)",
+    "time": "2017.12.04",
+    "abstract": "The neutron beta-decay asymmetry parameter A0 defines the angular correlation between the spin of the neutron and the momentum of the emitted electron. Values for A0 permit an extraction of the ratio of the weak axial-vector to vector coupling constants, lambda = gA/gV. We report a new result from the Ultracold Neutron Asymmetry (UCNA) experiment.",
+    "transition-mode": "neutron-beta-decay",
+    "data": [
+        {
+            "n.2.p.e-.veBar": {
+                "obs@1": {
+                    "name": "A0",
+                    "value": "-0.12015",
+                    "total_upper": "0.00072",
+                    "total_lower": "0.00072"
+                }
+            }
+        },
+        {
+            "n.2.p.e-.veBar": {
+                "obs@1": {
+                    "name": "lambda",
+                    "value": "-1.2772",
+                    "total_upper": "0.0020",
+                    "total_lower": "0.0020"
+                }
+            }
+        }
+    ]
+}

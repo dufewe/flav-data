@@ -4,115 +4,108 @@
     "collaboration": "Belle",
     "title": "Improved Measurement of the Electroweak Penguin Process $B \\to X_s \\ell^+ \\ell^-$",
     "arxiv": "[hep-ex/0503044v1](https://arxiv.org/pdf/hep-ex/0503044)",
-    "time": "2005.03.17",
+    "time": "2005.03.24",
     "abstract": "We present an improved measurement of the branching fraction for the electroweak penguin process $B \\to X_s \\ell^+ \\ell^-$, where $\\ell$ is an electron or a muon and $X_s$ is a hadronic state with strangeness $S = -1$. Averaging over both lepton flavors, the inclusive branching fraction is measured to be $\\mathcal{B}(B \\to X_s \\ell^+ \\ell^-) = (4.11 \\pm 0.83 {+0.85 \\atop -0.81}) \\times 10^{-6}$ for $M_{\\ell^+ \\ell^-} > 0.2$ GeV/$c^2$.",
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bbar.2.XsBar.ep.em": {
+            "BBar.2.XsBar.e+.e-": {
                 "obs@1": {
                     "name": "Br[Mll>0.2]",
-                    "value": "4.04",
+                    "value": "4.04e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "1.30",
-                    "type@1_lower": "1.30",
+                    "type@1_upper": "1.30e-6",
+                    "type@1_lower": "1.30e-6",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.87",
-                    "type@2_lower": "0.83",
-                    "unit": "1e-6",
+                    "type@2_upper": "8.7e-7",
+                    "type@2_lower": "8.3e-7",
                     "q2min": "0.2",
                     "q2max": "25.0"
                 }
             }
         },
         {
-            "Bbar.2.XsBar.mup.mum": {
+            "BBar.2.XsBar.mu+.mu-": {
                 "obs@1": {
                     "name": "Br[Mll>0.2]",
-                    "value": "4.13",
+                    "value": "4.13e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "1.05",
-                    "type@1_lower": "1.05",
+                    "type@1_upper": "1.05e-6",
+                    "type@1_lower": "1.05e-6",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.85",
-                    "type@2_lower": "0.81",
-                    "unit": "1e-6",
+                    "type@2_upper": "8.5e-7",
+                    "type@2_lower": "8.1e-7",
                     "q2min": "0.2",
                     "q2max": "25.0"
                 }
             }
         },
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "Br[Mll>0.2]",
-                    "value": "4.11",
+                    "value": "4.11e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.83",
-                    "type@1_lower": "0.83",
+                    "type@1_upper": "8.3e-7",
+                    "type@1_lower": "8.3e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.85",
-                    "type@2_lower": "0.81",
-                    "unit": "1e-6",
+                    "type@2_upper": "8.5e-7",
+                    "type@2_lower": "8.1e-7",
                     "q2min": "0.2",
                     "q2max": "25.0"
                 },
                 "obs@2": {
                     "name": "Br[0.04<Mll<1.0]",
-                    "value": "11.34",
+                    "value": "1.134e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "4.83",
-                    "type@1_lower": "4.83",
+                    "type@1_upper": "4.83e-7",
+                    "type@1_lower": "4.83e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "4.60",
-                    "type@2_lower": "2.71",
-                    "unit": "1e-7",
+                    "type@2_upper": "4.60e-7",
+                    "type@2_lower": "2.71e-7",
                     "q2min": "0.04",
                     "q2max": "1.0"
                 },
                 "obs@3": {
                     "name": "Br[1.0<Mll<6.0]",
-                    "value": "14.93",
+                    "value": "1.493e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "5.04",
-                    "type@1_lower": "5.04",
+                    "type@1_upper": "5.04e-7",
+                    "type@1_lower": "5.04e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "4.11",
-                    "type@2_lower": "3.21",
-                    "unit": "1e-7",
+                    "type@2_upper": "4.11e-7",
+                    "type@2_lower": "3.21e-7",
                     "q2min": "1.0",
                     "q2max": "6.0"
                 },
                 "obs@4": {
                     "name": "Br[6.0<Mll<14.4]",
-                    "value": "7.32",
+                    "value": "7.32e-7",
                     "type@1_error": "stat",
-                    "type@1_upper": "6.14",
-                    "type@1_lower": "6.14",
+                    "type@1_upper": "6.14e-7",
+                    "type@1_lower": "6.14e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "1.84",
-                    "type@2_lower": "1.91",
-                    "unit": "1e-7",
+                    "type@2_upper": "1.84e-7",
+                    "type@2_lower": "1.91e-7",
                     "q2min": "6.0",
                     "q2max": "14.4"
                 },
                 "obs@5": {
                     "name": "Br[14.4<Mll<25.0]",
-                    "value": "4.18",
+                    "value": "4.18e-7",
                     "type@1_error": "stat",
-                    "type@1_upper": "1.17",
-                    "type@1_lower": "1.17",
+                    "type@1_upper": "1.17e-7",
+                    "type@1_lower": "1.17e-7",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.61",
-                    "type@2_lower": "0.68",
-                    "unit": "1e-7",
+                    "type@2_upper": "6.1e-8",
+                    "type@2_lower": "6.8e-8",
                     "q2min": "14.4",
                     "q2max": "25.0"
                 }
             }
         },
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "dBr/dMxs",
                     "value": "3.75e-7",

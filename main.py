@@ -17,7 +17,7 @@ with open(os.path.join(HERE, 'defs.py'), 'r', encoding='utf-8') as f:
 
 import streamlit as st
 
-from flav_dashboard import run_dashboard, run_snapshot_dashboard
+from flav import run_dashboard, run_snapshot_dashboard
 
 st.set_page_config(layout="wide")
 
@@ -53,7 +53,7 @@ def _title(entry):
 main_pages = {
     "Home": [st.Page("home.py", title="Home")],
     "Observable": [
-        st.Page(f"Observable/{obs}.py", title=obs) for obs in OBSGROUP
+        st.Page(f"obs-info/{obs.lower()}.py", title=obs) for obs in OBSGROUP
     ],
     "Experimental": [
         st.Page(_experimental_page(entry), title=_title(entry),

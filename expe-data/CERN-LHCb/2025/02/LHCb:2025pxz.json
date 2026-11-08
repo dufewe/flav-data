@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.e+.e-": {
+            "B0.2.K*0.e+.e-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.58",
@@ -119,7 +119,7 @@
             ]
         },
         {
-            "B0.2.Kst0.e+.e-": {
+            "B0.2.K*0.e+.e-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.58",
@@ -229,7 +229,7 @@
             ]
         },
         {
-            "B0.2.Kst0.e+.e-": {
+            "B0.2.K*0.e+.e-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.58",
@@ -339,7 +339,7 @@
             ]
         },
         {
-            "B0.2.Kst0.e+.e-": {
+            "B0.2.K*0.e+.e-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.58",
@@ -449,7 +449,7 @@
             ]
         },
         {
-            "B0.2.Kst0.l+.l-": {
+            "B0.2.K*0.l+.l-": {
                 "obs@1": {
                     "name": "DeltaFL[mu-e]",
                     "value": "0.12",
@@ -549,7 +549,7 @@
             }
         },
         {
-            "B0.2.Kst0.l+.l-": {
+            "B0.2.K*0.l+.l-": {
                 "obs@1": {
                     "name": "QFL[mu-e]",
                     "value": "0.13",

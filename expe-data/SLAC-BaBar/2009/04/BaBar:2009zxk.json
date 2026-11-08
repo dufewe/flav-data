@@ -4,12 +4,12 @@
     "collaboration": "BaBar",
     "title": "Measurement of |V(cb)| and the Form-Factor Slope in Bbar --> D l- nubar Decays in Events Tagged by a Fully Reconstructed B Meson",
     "arxiv": "[hep-ex/0904.4063v1](https://arxiv.org/pdf/0904.4063)",
-    "time": "2009.04.27",
+    "time": "2009.04.26",
     "abstract": "We present a measurement of the Cabibbo-Kobayashi-Maskawa matrix element |V(cb)| and the form-factor slope rho^2 in Bbar --> D l- nubar decays based on 460 million B Bbar events recorded at the Upsilon(4S) resonance with the BaBar detector. We measure the differential decay rate and determine G(1) |V(cb)| = (43.0 +/- 1.9 +/- 1.4) x 10^-3 and rho^2 = 1.20 +/- 0.09 +/- 0.04.",
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.D0.l+.nu": {
+            "B+.2.D0.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.003506",
@@ -145,17 +145,16 @@
             ]
         },
         {
-            "Bbar.2.D.l-.nuBar": {
+            "BBar.2.D.l-.vBar": {
                 "obs@1": {
                     "name": "G1Vcb",
-                    "value": "43.0",
+                    "value": "4.30e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "1.9",
-                    "type@1_lower": "1.9",
+                    "type@1_upper": "1.9e-3",
+                    "type@1_lower": "1.9e-3",
                     "type@2_error": "syst",
-                    "type@2_upper": "1.4",
-                    "type@2_lower": "1.4",
-                    "unit": "1e-3"
+                    "type@2_upper": "1.4e-3",
+                    "type@2_lower": "1.4e-3"
                 },
                 "obs@2": {
                     "name": "rho2",
@@ -170,7 +169,7 @@
             }
         },
         {
-            "Bm.2.D0.l-.nuBar": {
+            "B-.2.D0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0231",
@@ -184,7 +183,7 @@
             }
         },
         {
-            "B0Bar.2.Dp.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0223",
@@ -198,7 +197,7 @@
             }
         },
         {
-            "B.2.D.l-.nuBar": {
+            "B.2.D.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0217",

@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bm.2.Dst0.em.nuBar": {
+            "B-.2.D*0.e-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5.56",
@@ -24,17 +24,16 @@
             }
         },
         {
-            "Bm.2.Dst0.em.nuBar": {
+            "B-.2.D*0.e-.vBar": {
                 "obs@1": {
                     "name": "F1Vcb",
-                    "value": "35.9",
+                    "value": "3.59e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.6",
-                    "type@1_lower": "0.6",
+                    "type@1_upper": "6e-4",
+                    "type@1_lower": "6e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "1.4",
-                    "type@2_lower": "1.4",
-                    "unit": "1e-3"
+                    "type@2_upper": "1.4e-3",
+                    "type@2_lower": "1.4e-3"
                 },
                 "obs@2": {
                     "name": "rhoA1sq",
@@ -48,14 +47,13 @@
                 },
                 "obs@3": {
                     "name": "Vcb",
-                    "value": "39.0",
+                    "value": "3.90e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.6",
-                    "type@1_lower": "0.6",
+                    "type@1_upper": "6e-4",
+                    "type@1_lower": "6e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "2.0",
-                    "type@2_lower": "2.0",
-                    "unit": "1e-3"
+                    "type@2_upper": "2.0e-3",
+                    "type@2_lower": "2.0e-3"
                 }
             }
         }

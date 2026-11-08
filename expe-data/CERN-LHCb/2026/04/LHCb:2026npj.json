@@ -13,8 +13,8 @@
                 "obs@1": {
                     "name": "gammaCKM",
                     "value": "71.3",
-                    "error_upper": "5.0",
-                    "error_lower": "5.0",
+                    "total_upper": "5.0",
+                    "total_lower": "5.0",
                     "unit": "deg"
                 }
             }
@@ -24,8 +24,8 @@
                 "obs@1": {
                     "name": "r",
                     "value": "0.0949",
-                    "error_upper": "0.0086",
-                    "error_lower": "0.0085"
+                    "total_upper": "0.0086",
+                    "total_lower": "0.0085"
                 }
             }
         },
@@ -34,8 +34,8 @@
                 "obs@1": {
                     "name": "delta",
                     "value": "121.6",
-                    "error_upper": "5.6",
-                    "error_lower": "5.9",
+                    "total_upper": "5.6",
+                    "total_lower": "5.9",
                     "unit": "deg"
                 }
             }
@@ -45,8 +45,8 @@
                 "obs@1": {
                     "name": "r",
                     "value": "0.0064",
-                    "error_upper": "0.0021",
-                    "error_lower": "0.0019"
+                    "total_upper": "0.0021",
+                    "total_lower": "0.0019"
                 }
             }
         },
@@ -55,8 +55,8 @@
                 "obs@1": {
                     "name": "delta",
                     "value": "311",
-                    "error_upper": "17",
-                    "error_lower": "20",
+                    "total_upper": "17",
+                    "total_lower": "20",
                     "unit": "deg"
                 }
             }

@@ -105,7 +105,7 @@ def extract_metadata(hit: dict) -> dict:
         abstracts = meta.get('abstracts') or [{}]
         abstract = _unicode_to_latex(abstracts[0].get('value', ''))
 
-    # Author list. Apply the 1 / 2–3 / 4+ tiers from SKILL.md rule 3.
+    # Author list. Apply the 1 / 2 / 3 / 4+ tiers from SKILL.md rule 3.
     authors = meta.get('authors', [])
     author_list = [a.get('full_name', '') for a in authors]
     author_str = format_authors(author_list)

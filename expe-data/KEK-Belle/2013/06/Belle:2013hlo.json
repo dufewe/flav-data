@@ -9,82 +9,74 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bm.2.pi0.l-.nuBar": {
+            "B-.2.pi0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.80",
+                    "value": "8.0e-5",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.08",
-                    "type@1_lower": "0.08",
+                    "type@1_upper": "8e-6",
+                    "type@1_lower": "8e-6",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.04",
-                    "type@2_lower": "0.04",
-                    "unit": "1e-4"
+                    "type@2_upper": "4e-6",
+                    "type@2_lower": "4e-6"
                 }
             }
         },
         {
-            "Bm.2.pi0.l-.nuBar": {
+            "B-.2.pi0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.81e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.2e-06",
-                    "type@1_lower": "3.2e-06",
+                    "total_upper": "3.2e-06",
+                    "total_lower": "3.2e-06",
                     "q2min": "0",
                     "q2max": "4"
                 },
                 "obs@2": {
                     "name": "dBr",
                     "value": "1.57e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "4",
                     "q2max": "8"
                 },
                 "obs@3": {
                     "name": "dBr",
                     "value": "1.08e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.7e-06",
-                    "type@1_lower": "2.7e-06",
+                    "total_upper": "2.7e-06",
+                    "total_lower": "2.7e-06",
                     "q2min": "8",
                     "q2max": "12"
                 },
                 "obs@4": {
                     "name": "dBr",
                     "value": "1.85e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "12",
                     "q2max": "16"
                 },
                 "obs@5": {
                     "name": "dBr",
                     "value": "1.07e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "16",
                     "q2max": "20"
                 },
                 "obs@6": {
                     "name": "dBr",
                     "value": "5.1e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.6e-06",
-                    "type@1_lower": "2.6e-06",
+                    "total_upper": "2.6e-06",
+                    "total_lower": "2.6e-06",
                     "q2min": "20",
                     "q2max": "24"
                 },
                 "obs@7": {
                     "name": "dBr",
                     "value": "2.3e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.5e-06",
-                    "type@1_lower": "2.5e-06",
+                    "total_upper": "2.5e-06",
+                    "total_lower": "2.5e-06",
                     "q2min": "24",
                     "q2max": "28"
                 }
@@ -100,136 +92,122 @@
             ]
         },
         {
-            "B0Bar.2.pip.l-.nuBar": {
+            "B0Bar.2.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.49",
+                    "value": "1.49e-4",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.09",
-                    "type@1_lower": "0.09",
+                    "type@1_upper": "9e-6",
+                    "type@1_lower": "9e-6",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.07",
-                    "type@2_lower": "0.07",
-                    "unit": "1e-4"
+                    "type@2_upper": "7e-6",
+                    "type@2_lower": "7e-6"
                 }
             }
         },
         {
-            "B0Bar.2.pip.l-.nuBar": {
+            "B0Bar.2.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.95e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.2e-06",
-                    "type@1_lower": "3.2e-06",
+                    "total_upper": "3.2e-06",
+                    "total_lower": "3.2e-06",
                     "q2min": "0",
                     "q2max": "2"
                 },
                 "obs@2": {
                     "name": "dBr",
                     "value": "1.06e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.7e-06",
-                    "type@1_lower": "2.7e-06",
+                    "total_upper": "2.7e-06",
+                    "total_lower": "2.7e-06",
                     "q2min": "2",
                     "q2max": "4"
                 },
                 "obs@3": {
                     "name": "dBr",
                     "value": "1.51e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "4",
                     "q2max": "6"
                 },
                 "obs@4": {
                     "name": "dBr",
                     "value": "9.7e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.3e-06",
-                    "type@1_lower": "2.3e-06",
+                    "total_upper": "2.3e-06",
+                    "total_lower": "2.3e-06",
                     "q2min": "6",
                     "q2max": "8"
                 },
                 "obs@5": {
                     "name": "dBr",
                     "value": "7.8e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.2e-06",
-                    "type@1_lower": "2.2e-06",
+                    "total_upper": "2.2e-06",
+                    "total_lower": "2.2e-06",
                     "q2min": "8",
                     "q2max": "10"
                 },
                 "obs@6": {
                     "name": "dBr",
                     "value": "1.59e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "10",
                     "q2max": "12"
                 },
                 "obs@7": {
                     "name": "dBr",
                     "value": "1.35e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.7e-06",
-                    "type@1_lower": "2.7e-06",
+                    "total_upper": "2.7e-06",
+                    "total_lower": "2.7e-06",
                     "q2min": "12",
                     "q2max": "14"
                 },
                 "obs@8": {
                     "name": "dBr",
                     "value": "1.36e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "14",
                     "q2max": "16"
                 },
                 "obs@9": {
                     "name": "dBr",
                     "value": "1.07e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.5e-06",
-                    "type@1_lower": "2.5e-06",
+                    "total_upper": "2.5e-06",
+                    "total_lower": "2.5e-06",
                     "q2min": "16",
                     "q2max": "18"
                 },
                 "obs@10": {
                     "name": "dBr",
                     "value": "1.16e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.5e-06",
-                    "type@1_lower": "2.5e-06",
+                    "total_upper": "2.5e-06",
+                    "total_lower": "2.5e-06",
                     "q2min": "18",
                     "q2max": "20"
                 },
                 "obs@11": {
                     "name": "dBr",
                     "value": "1.18e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "20",
                     "q2max": "22"
                 },
                 "obs@12": {
                     "name": "dBr",
                     "value": "6.7e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.1e-06",
-                    "type@1_lower": "2.1e-06",
+                    "total_upper": "2.1e-06",
+                    "total_lower": "2.1e-06",
                     "q2min": "22",
                     "q2max": "24"
                 },
                 "obs@13": {
                     "name": "dBr",
                     "value": "2.8e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.1e-06",
-                    "type@1_lower": "3.1e-06",
+                    "total_upper": "3.1e-06",
+                    "total_lower": "3.1e-06",
                     "q2min": "24",
                     "q2max": "26"
                 }
@@ -251,118 +229,106 @@
             ]
         },
         {
-            "Bm.2.rho0.l-.nuBar": {
+            "B-.2.rho0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.83",
+                    "value": "1.83e-4",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.10",
-                    "type@1_lower": "0.10",
+                    "type@1_upper": "1.0e-5",
+                    "type@1_lower": "1.0e-5",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.10",
-                    "type@2_lower": "0.10",
-                    "unit": "1e-4"
+                    "type@2_upper": "1.0e-5",
+                    "type@2_lower": "1.0e-5"
                 }
             }
         },
         {
-            "Bm.2.rho0.l-.nuBar": {
+            "B-.2.rho0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.24e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "0",
                     "q2max": "2"
                 },
                 "obs@2": {
                     "name": "dBr",
                     "value": "1.53e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.1e-06",
-                    "type@1_lower": "3.1e-06",
+                    "total_upper": "3.1e-06",
+                    "total_lower": "3.1e-06",
                     "q2min": "2",
                     "q2max": "4"
                 },
                 "obs@3": {
                     "name": "dBr",
                     "value": "1.79e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "4",
                     "q2max": "6"
                 },
                 "obs@4": {
                     "name": "dBr",
                     "value": "2.17e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "6",
                     "q2max": "8"
                 },
                 "obs@5": {
                     "name": "dBr",
                     "value": "1.43e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.9e-06",
-                    "type@1_lower": "2.9e-06",
+                    "total_upper": "2.9e-06",
+                    "total_lower": "2.9e-06",
                     "q2min": "8",
                     "q2max": "10"
                 },
                 "obs@6": {
                     "name": "dBr",
                     "value": "1.99e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "10",
                     "q2max": "12"
                 },
                 "obs@7": {
                     "name": "dBr",
                     "value": "2.24e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.4e-06",
-                    "type@1_lower": "3.4e-06",
+                    "total_upper": "3.4e-06",
+                    "total_lower": "3.4e-06",
                     "q2min": "12",
                     "q2max": "14"
                 },
                 "obs@8": {
                     "name": "dBr",
                     "value": "2.17e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.3e-06",
-                    "type@1_lower": "3.3e-06",
+                    "total_upper": "3.3e-06",
+                    "total_lower": "3.3e-06",
                     "q2min": "14",
                     "q2max": "16"
                 },
                 "obs@9": {
                     "name": "dBr",
                     "value": "1.75e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.2e-06",
-                    "type@1_lower": "3.2e-06",
+                    "total_upper": "3.2e-06",
+                    "total_lower": "3.2e-06",
                     "q2min": "16",
                     "q2max": "18"
                 },
                 "obs@10": {
                     "name": "dBr",
                     "value": "1.43e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.8e-06",
-                    "type@1_lower": "2.8e-06",
+                    "total_upper": "2.8e-06",
+                    "total_lower": "2.8e-06",
                     "q2min": "18",
                     "q2max": "20"
                 },
                 "obs@11": {
                     "name": "dBr",
                     "value": "5.9e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "2.6e-06",
-                    "type@1_lower": "2.6e-06",
+                    "total_upper": "2.6e-06",
+                    "total_lower": "2.6e-06",
                     "q2min": "20",
                     "q2max": "22"
                 }
@@ -382,73 +348,66 @@
             ]
         },
         {
-            "B0Bar.2.rhop.l-.nuBar": {
+            "B0Bar.2.rho+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "3.22",
+                    "value": "3.22e-4",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.27",
-                    "type@1_lower": "0.27",
+                    "type@1_upper": "2.7e-5",
+                    "type@1_lower": "2.7e-5",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.24",
-                    "type@2_lower": "0.24",
-                    "unit": "1e-4"
+                    "type@2_upper": "2.4e-5",
+                    "type@2_lower": "2.4e-5"
                 }
             }
         },
         {
-            "B0Bar.2.rhop.l-.nuBar": {
+            "B0Bar.2.rho+.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "3.73e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.06e-05",
-                    "type@1_lower": "1.06e-05",
+                    "total_upper": "1.06e-05",
+                    "total_lower": "1.06e-05",
                     "q2min": "0",
                     "q2max": "4"
                 },
                 "obs@2": {
                     "name": "dBr",
                     "value": "7.18e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.16e-05",
-                    "type@1_lower": "1.16e-05",
+                    "total_upper": "1.16e-05",
+                    "total_lower": "1.16e-05",
                     "q2min": "4",
                     "q2max": "8"
                 },
                 "obs@3": {
                     "name": "dBr",
                     "value": "8.06e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.23e-05",
-                    "type@1_lower": "1.23e-05",
+                    "total_upper": "1.23e-05",
+                    "total_lower": "1.23e-05",
                     "q2min": "8",
                     "q2max": "12"
                 },
                 "obs@4": {
                     "name": "dBr",
                     "value": "7.23e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.25e-05",
-                    "type@1_lower": "1.25e-05",
+                    "total_upper": "1.25e-05",
+                    "total_lower": "1.25e-05",
                     "q2min": "12",
                     "q2max": "16"
                 },
                 "obs@5": {
                     "name": "dBr",
                     "value": "6.26e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.15e-05",
-                    "type@1_lower": "1.15e-05",
+                    "total_upper": "1.15e-05",
+                    "total_lower": "1.15e-05",
                     "q2min": "16",
                     "q2max": "20"
                 },
                 "obs@6": {
                     "name": "dBr",
                     "value": "1.7e-06",
-                    "type@1_error": "stat",
-                    "type@1_upper": "7.9e-06",
-                    "type@1_lower": "7.9e-06",
+                    "total_upper": "7.9e-06",
+                    "total_lower": "7.9e-06",
                     "q2min": "20",
                     "q2max": "24"
                 }
@@ -463,46 +422,42 @@
             ]
         },
         {
-            "Bm.2.omega.l-.nuBar": {
+            "B-.2.omega.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.07",
+                    "value": "1.07e-4",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.16",
-                    "type@1_lower": "0.16",
+                    "type@1_upper": "1.6e-5",
+                    "type@1_lower": "1.6e-5",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.07",
-                    "type@2_lower": "0.07",
-                    "unit": "1e-4"
+                    "type@2_upper": "7e-6",
+                    "type@2_lower": "7e-6"
                 }
             }
         },
         {
-            "Bm.2.omega.l-.nuBar": {
+            "B-.2.omega.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "2.28e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "6.2e-06",
-                    "type@1_lower": "6.2e-06",
+                    "total_upper": "6.2e-06",
+                    "total_lower": "6.2e-06",
                     "q2min": "0",
                     "q2max": "7"
                 },
                 "obs@2": {
                     "name": "dBr",
                     "value": "5.65e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.06e-05",
-                    "type@1_lower": "1.06e-05",
+                    "total_upper": "1.06e-05",
+                    "total_lower": "1.06e-05",
                     "q2min": "7",
                     "q2max": "14"
                 },
                 "obs@3": {
                     "name": "dBr",
                     "value": "3.39e-05",
-                    "type@1_error": "stat",
-                    "type@1_upper": "1.15e-05",
-                    "type@1_lower": "1.15e-05",
+                    "total_upper": "1.15e-05",
+                    "total_lower": "1.15e-05",
                     "q2min": "14",
                     "q2max": "21"
                 }
@@ -514,20 +469,19 @@
             ]
         },
         {
-            "Bbar.2.pi.l-.nuBar": {
+            "BBar.2.pi.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
-                    "value": "3.52",
+                    "value": "3.52e-3",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.18",
-                    "type@1_lower": "0.18",
+                    "type@1_upper": "1.8e-4",
+                    "type@1_lower": "1.8e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.17",
-                    "type@2_lower": "0.17",
+                    "type@2_upper": "1.7e-4",
+                    "type@2_lower": "1.7e-4",
                     "type@3_error": "theo",
-                    "type@3_upper": "0.20",
-                    "type@3_lower": "0.20",
-                    "unit": "1e-3"
+                    "type@3_upper": "2.0e-4",
+                    "type@3_lower": "2.0e-4"
                 }
             }
         }

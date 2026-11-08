@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Measurement of $b$-hadron production fractions in $7~\rm{TeV}$ pp collisions",
     "arxiv": "[hep-ex/1111.2357](https://arxiv.org/pdf/1111.2357)",
-    "time": "2011.01.01",
+    "time": "2011.11.09",
     "abstract": "the ratio of strange $B$ meson to light neutral $B$ meson production $f_s/f_d$",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -13,8 +13,8 @@
                 "obs@1": {
                     "name": "fs/fd",
                     "value": "0.267",
-                    "error_upper": "0.021",
-                    "error_lower": "0.02"
+                    "total_upper": "0.021",
+                    "total_lower": "0.02"
                 }
             }
         }

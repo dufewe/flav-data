@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.pi-.l+.nu": {
+            "B0.2.pi-.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.320",
@@ -101,7 +101,7 @@
             ]
         },
         {
-            "B0.2.rho-.l+.nu": {
+            "B0.2.rho-.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.564",

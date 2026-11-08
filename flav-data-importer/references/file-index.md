@@ -4,7 +4,8 @@ This document specifies the directory layout, file naming conventions, and annua
 
 ## Directory Layout
 
-Experimental folders use the `Lab-Collaboration` format (实验室-实验组). Data file and index filenames inside keep only the collaboration name.
+Experimental measurements live in `expe-data/`, theoretical calculations in
+`theo-data/`. The tree shows the canonical layout for new imports.
 
 ```
 flav-data/
@@ -36,6 +37,11 @@ flav-data/
     │           └── Detmold:2015aaa.json           # Data file (TexKey)
     └── QCD/                                       # Perturbative QCD calculations
 ```
+
+**File depth**: new imports go to `<year>/<month>/<file>.json`, but legacy
+files may sit directly under `<year>/`. The annual index records the month
+either way, so resolve a file by checking both depths before concluding it
+is missing (the snippets below do).
 
 ## Naming Rules
 
@@ -92,9 +98,10 @@ Theoretical folders depend on the size of the group:
   small groups omit the `collaboration` key (SKILL.md rule 8), and TexKeys
   are unique, so several groups can share one method folder and index.
 
-Only experimental data and theoretical calculations are stored; fit results,
-parameter determinations, bounds and theory-group averages derived from
-existing data are not ingested (see SKILL.md §Scope).
+Only experimental data and theoretical calculations are stored; global
+analyses (Wilson-coefficient fits, parameter determinations, bounds, world
+averages) are not ingested. Form-factor parametrization fits are primary
+theory data and are imported (see SKILL.md §Scope).
 
 Only groups registered in `defs.THEOGROUP` are linked from the Streamlit
 navigation; method folders are data organization only and have no page of
@@ -149,14 +156,17 @@ base = 'expe-data/CERN-LHCb'
 target = 'LHCb:2015svh'
 
 for year in sorted(os.listdir(base)):
-    if year.isdigit():
-        idx_path = os.path.join(base, year, f'LHCb@{year}.json')
-        if os.path.exists(idx_path):
-            index = json.load(open(idx_path))
-            for month, files in index.items():
-                if target in files:
-                    print(f"Found: {year}/{month}/{target}.json")
-                    break
+    if not year.isdigit():
+        continue
+    idx_path = os.path.join(base, year, f'LHCb@{year}.json')
+    if not os.path.exists(idx_path):
+        continue
+    for month, files in json.load(open(idx_path)).items():
+        if target in files:
+            for folder in (os.path.join(base, year, month), os.path.join(base, year)):
+                path = os.path.join(folder, f'{target}.json')
+                if os.path.exists(path):
+                    print(f'Found: {path} (index month {month})')
 ```
 
 ### Verify Index Integrity
@@ -170,20 +180,20 @@ base = 'expe-data/CERN-LHCb/2015'
 index = json.load(open(f'{base}/LHCb@2015.json'))
 
 # Index file_ids
-indexed = set()
-for month_files in index.values():
-    indexed.update(month_files)
+indexed = {fid for files in index.values() for fid in files}
 
-# Disk file_ids — both month subdirectories (YYYY/MM/)
-# and flat files directly under the year directory (YYYY/)
+# Disk file_ids — both month subdirectories (YYYY/MM/) and flat files
+# under the year directory (YYYY/). correlation.json is a matrix
+# sidecar, not a paper, and is never indexed.
+def is_paper(name):
+    return name.endswith('.json') and '@' not in name and name != 'correlation.json'
+
 on_disk = set()
 for entry in sorted(os.listdir(base)):
     path = f'{base}/{entry}'
     if os.path.isdir(path) and entry.isdigit() and len(entry) == 2:
-        for fname in os.listdir(path):
-            if fname.endswith('.json') and '@' not in fname:
-                on_disk.add(fname[:-5])  # Strip .json
-    elif entry.endswith('.json') and '@' not in entry:
+        on_disk |= {f[:-5] for f in os.listdir(path) if is_paper(f)}
+    elif is_paper(entry):
         on_disk.add(entry[:-5])
 
 # Report discrepancies
@@ -278,24 +288,8 @@ with open(index_path, 'w') as f:
 print(f'Updated {index_path}: month {month} now has {len(idx[month])} entries')
 PYEOF
 
-# 3. Confirm no orphan index entries
-python3 - <<PYEOF
-import json, os
-index_path = "${INDEX}"
-base_dir   = os.path.dirname(index_path)
-with open(index_path) as f:
-    idx = json.load(f)
-orphans = []
-for month, file_ids in idx.items():
-    for fid in file_ids:
-        paper = os.path.join(base_dir, month, fid + '.json')
-        if not os.path.exists(paper):
-            orphans.append(f'{month}/{fid}.json')
-if orphans:
-    print(f'ORPHAN INDEX ENTRIES: {orphans}')
-else:
-    print(f'Index clean — {sum(len(v) for v in idx.values())} entries verified')
-PYEOF
+# 3. Confirm the index matches the files on disk (both depths)
+#    → run the "Verify Index Integrity" snippet above
 ```
 
 ### Multi-Collaboration Papers

@@ -4,17 +4,17 @@
     "collaboration": "ATLAS, CMS",
     "title": "Measurements of the Higgs boson production and decay rates and constraints on its couplings from a combined ATLAS and CMS analysis of the LHC pp collision data at sqrt(s)=7 and 8 TeV",
     "arxiv": "[hep-ex/1606.02266v1](https://arxiv.org/pdf/1606.02266.pdf)",
-    "time": "2016-06-07",
+    "time": "2016.06.07",
     "abstract": "Combined ATLAS and CMS measurements of the Higgs boson production and decay rates, as well as constraints on its couplings to vector bosons and fermions. The combined signal yield relative to the SM prediction is measured to be 1.09 +/- 0.11. The combination uses 5 fb-1 at 7 TeV and 20 fb-1 at 8 TeV per experiment.",
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fbar": {
+            "g.g.2.H.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.09",
-                    "error_upper": "0.11",
-                    "error_lower": "0.11"
+                    "total_upper": "0.11",
+                    "total_lower": "0.11"
                 }
             }
         },
@@ -75,7 +75,7 @@
             }
         },
         {
-            "H.2.b.bbar": {
+            "H.2.b.bBar": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "0.95",
@@ -89,7 +89,7 @@
             }
         },
         {
-            "H.gg.2.t.tbar": {
+            "H.gg.2.t.tBar": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.05",

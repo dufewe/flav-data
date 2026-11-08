@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Differential branching fraction and angular analysis of $\\Lambda^{0}_{b} \\rightarrow \\Lambda \\mu^+\\mu^-$ decays",
     "arxiv": "[hep-ex/1503.07138](https://arxiv.org/pdf/1503.07138)",
-    "time": "2015.01.01",
+    "time": "2015.03.24",
     "abstract": "an analysis of differential branching fraction of the rare decay $\\Lambda_b^0 \\to \\Lambda \\mu^+ \\mu^-$, using proton-proton collision data, corresponding to an integrated luminosity of 3.0 fb$^{-1}$",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -170,8 +170,7 @@
                     "type@3_upper": "9e-09",
                     "type@3_lower": "9e-09"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -247,8 +246,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -324,8 +322,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -401,8 +398,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         }
     ]
 }

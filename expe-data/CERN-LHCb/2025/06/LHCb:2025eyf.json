@@ -9,29 +9,29 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.tau-.e+": {
+            "B0.2.K*0.tau-.e+": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.7e-6",
-                    "error_upper": "2.5e-6",
-                    "error_lower": "2.5e-6",
-                    "type@1_upper_limit": "5.9e-6",
+                    "total_upper": "2.5e-6",
+                    "total_lower": "2.5e-6",
+                    "type@1_upper": "5.9e-6",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "7.1e-6",
+                    "type@2_upper": "7.1e-6",
                     "type@2_level": "95%@CLs"
                 }
             }
         },
         {
-            "B0.2.Kst0.tau+.e-": {
+            "B0.2.K*0.tau+.e-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.8e-6",
-                    "error_upper": "1.9e-6",
-                    "error_lower": "1.9e-6",
-                    "type@1_upper_limit": "4.9e-6",
+                    "total_upper": "1.9e-6",
+                    "total_lower": "1.9e-6",
+                    "type@1_upper": "4.9e-6",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "5.9e-6",
+                    "type@2_upper": "5.9e-6",
                     "type@2_level": "95%@CLs"
                 }
             }

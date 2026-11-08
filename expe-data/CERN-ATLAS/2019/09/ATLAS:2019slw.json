@@ -4,17 +4,17 @@
     "collaboration": "ATLAS",
     "title": "Combined measurements of Higgs boson production and decay using up to 80 fb-1 of proton-proton collision data at sqrt(s)=13 TeV collected with the ATLAS experiment",
     "arxiv": "[hep-ex/1909.02845v2](https://arxiv.org/pdf/1909.02845.pdf)",
-    "time": "2019-09-06",
+    "time": "2019.09.06",
     "abstract": "Combined measurements of Higgs boson production cross sections and branching fractions using up to 79.8 fb-1 at 13 TeV. The global signal strength is mu = 1.11 +0.09/-0.08. Coupling modifiers: kappa_Z=1.10+/-0.08, kappa_W=1.05+/-0.08, kappa_b=1.06+0.19/-0.18, kappa_t=1.02+0.11/-0.10, kappa_tau=1.07+/-0.15, kappa_mu < 1.53.",
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fbar": {
+            "g.g.2.H.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.11",
-                    "error_upper": "0.09",
-                    "error_lower": "0.08"
+                    "total_upper": "0.09",
+                    "total_lower": "0.08"
                 }
             }
         },
@@ -23,8 +23,8 @@
                 "obs@1": {
                     "name": "kappa_Z",
                     "value": "1.10",
-                    "error_upper": "0.08",
-                    "error_lower": "0.08"
+                    "total_upper": "0.08",
+                    "total_lower": "0.08"
                 }
             }
         },
@@ -33,8 +33,8 @@
                 "obs@1": {
                     "name": "kappa_gZ",
                     "value": "1.06",
-                    "error_upper": "0.07",
-                    "error_lower": "0.07"
+                    "total_upper": "0.07",
+                    "total_lower": "0.07"
                 }
             }
         },
@@ -43,30 +43,28 @@
                 "obs@1": {
                     "name": "kappa_W",
                     "value": "1.05",
-                    "error_upper": "0.08",
-                    "error_lower": "0.08"
+                    "total_upper": "0.08",
+                    "total_lower": "0.08"
                 }
             }
         },
         {
-            "g.g.2.H.2.b.bbar": {
+            "g.g.2.H.2.b.bBar": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "1.06",
-                    "type@1_upper": "0.19",
-                    "type@1_lower": "0.18",
-                    "type@1_error": "syst"
+                    "total_upper": "0.19",
+                    "total_lower": "0.18"
                 }
             }
         },
         {
-            "g.g.2.H.2.t.tbar": {
+            "g.g.2.H.2.t.tBar": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.02",
-                    "type@1_upper": "0.11",
-                    "type@1_lower": "0.10",
-                    "type@1_error": "syst"
+                    "total_upper": "0.11",
+                    "total_lower": "0.10"
                 }
             }
         },
@@ -75,8 +73,8 @@
                 "obs@1": {
                     "name": "kappa_tau",
                     "value": "1.07",
-                    "error_upper": "0.15",
-                    "error_lower": "0.15"
+                    "total_upper": "0.15",
+                    "total_lower": "0.15"
                 }
             }
         },
@@ -84,7 +82,7 @@
             "H.2.mu+.mu-": {
                 "obs@1": {
                     "name": "kappa_mu",
-                    "type@1_upper_limit": "1.53",
+                    "type@1_upper": "1.53",
                     "type@1_level": "95%@CL"
                 }
             }
@@ -94,9 +92,8 @@
                 "obs@1": {
                     "name": "lambda_tg",
                     "value": "1.10",
-                    "type@1_upper": "0.15",
-                    "type@1_lower": "0.14",
-                    "type@1_error": "syst"
+                    "total_upper": "0.15",
+                    "total_lower": "0.14"
                 }
             }
         },
@@ -105,9 +102,8 @@
                 "obs@1": {
                     "name": "lambda_Zg",
                     "value": "1.12",
-                    "type@1_upper": "0.15",
-                    "type@1_lower": "0.13",
-                    "type@1_error": "syst"
+                    "total_upper": "0.15",
+                    "total_lower": "0.13"
                 }
             }
         },
@@ -116,8 +112,8 @@
                 "obs@1": {
                     "name": "lambda_WZ",
                     "value": "0.95",
-                    "error_upper": "0.08",
-                    "error_lower": "0.08"
+                    "total_upper": "0.08",
+                    "total_lower": "0.08"
                 }
             }
         },
@@ -126,8 +122,8 @@
                 "obs@1": {
                     "name": "lambda_gammaZ",
                     "value": "0.94",
-                    "error_upper": "0.07",
-                    "error_lower": "0.07"
+                    "total_upper": "0.07",
+                    "total_lower": "0.07"
                 }
             }
         }

@@ -3,21 +3,26 @@
 Extract paper information from the arXiv API and download PDF files.
 
 Usage:
-    python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir] [--no-pdf]
+    python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir] [--no-pdf] [--source]
 
 Example:
     python3 arxiv-ext.py 1512.04442
     python3 arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
+    python3 arxiv-ext.py 1512.04442 --source -o /tmp/dl
 """
 
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
+import gzip
 import json
 import os
+import shutil
 import sys
+import tarfile
 import argparse
 import re
+from pathlib import Path
 
 # Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
 # See common.py for the canonical implementations and SKILL.md
@@ -28,6 +33,9 @@ from common import (
     to_bibtex, to_bibtex as _to_bibtex,
     format_authors,
 )  # noqa: E402,F401
+
+# Candidate machine-readable data files in an arXiv e-print package.
+_DATA_SUFFIXES = ('.dat', '.txt', '.csv', '.tsv', '.json', '.yaml', '.yml')
 
 
 def get_arxiv_info(arxiv_id: str) -> dict:
@@ -133,7 +141,7 @@ def get_arxiv_info(arxiv_id: str) -> dict:
         'title': title,
         'abstract': summary,
         'authors': authors,
-        # Rule 3 author tiers (1 / 2–3 / 4+), BibTeX initials only.
+        # Rule 3 author tiers (1 / 2 / 3 / 4+), BibTeX initials only.
         'author_str': format_authors(authors),
         'pdf_url': pdf_link,
         'abs_url': f'https://arxiv.org/abs/{arxiv_id}',
@@ -210,6 +218,101 @@ def download_pdf(arxiv_id: str, output_dir: str) -> str:
     return pdf_path
 
 
+def _safe_extract_tar(archive_path: str, target_dir: str) -> None:
+    """Extract a tar archive, rejecting members that escape ``target_dir``."""
+    target = os.path.realpath(target_dir)
+    with tarfile.open(archive_path) as tar:
+        for member in tar.getmembers():
+            dest = os.path.realpath(os.path.join(target, member.name))
+            if dest != target and not dest.startswith(target + os.sep):
+                raise ValueError(
+                    f"unsafe path in arXiv source archive: {member.name}"
+                )
+            if not (member.isfile() or member.isdir()):
+                raise ValueError(
+                    f"unsupported member in arXiv source archive: {member.name}"
+                )
+        tar.extractall(target_dir)
+
+
+def unpack_source(archive_path: str, source_dir: str) -> list[str]:
+    """Unpack an arXiv e-print package (tar archive or gzipped single file).
+
+    Returns the extracted files as POSIX paths relative to ``source_dir``.
+    """
+    os.makedirs(source_dir, exist_ok=True)
+    if tarfile.is_tarfile(archive_path):
+        _safe_extract_tar(archive_path, source_dir)
+    else:
+        base = os.path.basename(archive_path)
+        if base.endswith('.gz'):
+            base = base[:-3]
+        if base.endswith('_src'):
+            base = base[:-4]
+        tex_path = os.path.join(source_dir, f'{base}.tex')
+        try:
+            with gzip.open(archive_path, 'rb') as src, \
+                    open(tex_path, 'wb') as out:
+                shutil.copyfileobj(src, out)
+        except OSError as e:
+            raise ValueError(
+                f"unsupported arXiv source package: {archive_path} ({e})"
+            ) from e
+
+    root = Path(source_dir)
+    return sorted(
+        p.relative_to(root).as_posix()
+        for p in root.rglob('*') if p.is_file()
+    )
+
+
+def download_source(arxiv_id: str, output_dir: str) -> dict:
+    """Download and unpack the arXiv e-print package.
+
+    Ancillary data files (``.dat``/``.txt``/``.csv``/``.json``/``.yaml``) in
+    the package are the preferred data source; the paper tables are then used
+    to validate their numbers (see ``references/data-source.md`` §4).
+
+    Returns
+    -------
+    dict
+        ``archive_path``, ``source_dir``, ``files`` (relative paths), and
+        ``data_files`` (candidate machine-readable data files).
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    safe_id = arxiv_id.replace('/', '_')
+    archive_path = os.path.join(output_dir, f'{safe_id}_src')
+    source_dir = os.path.join(output_dir, f'{safe_id}_src_files')
+    url = f'https://arxiv.org/e-print/{arxiv_id}'
+
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as response, \
+                open(archive_path, 'wb') as out:
+            shutil.copyfileobj(response, out)
+    except urllib.error.HTTPError as e:
+        raise ValueError(
+            f"arXiv source download failed (HTTP {e.code}): {e.reason}"
+        ) from e
+    except urllib.error.URLError as e:
+        raise ValueError(
+            f"arXiv source download connection failed: {e.reason}"
+        ) from e
+
+    if os.path.exists(source_dir):
+        shutil.rmtree(source_dir)
+    files = unpack_source(archive_path, source_dir)
+    return {
+        'archive_path': archive_path,
+        'source_dir': source_dir,
+        'files': files,
+        'data_files': [
+            name for name in files
+            if name.lower().endswith(_DATA_SUFFIXES)
+        ],
+    }
+
+
 def main() -> None:
     """CLI entry point.
 
@@ -217,6 +320,7 @@ def main() -> None:
     --------
     >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442
     >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
+    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --source -o /tmp/dl
     """
     parser = argparse.ArgumentParser(
         description='Extract arXiv paper information and download PDF'
@@ -232,6 +336,11 @@ def main() -> None:
     )
     parser.add_argument(
         '--no-pdf', action='store_true', help='Skip PDF download'
+    )
+    parser.add_argument(
+        '--source', action='store_true',
+        help='Download and unpack the arXiv e-print package and list '
+             'candidate ancillary data files (needs --output_dir).'
     )
     parser.add_argument(
         '--no-write', dest='no_write', action='store_true',
@@ -271,6 +380,21 @@ def main() -> None:
             print(f"\nDownloading PDF...")
             pdf_path = download_pdf(args.arxiv_id, output_dir)
             print(f"PDF saved to: {pdf_path}")
+
+        if args.source:
+            print("\nDownloading e-print package...")
+            package = download_source(args.arxiv_id, output_dir)
+            print(f"Source unpacked to: {package['source_dir']}")
+            print(f"Files: {len(package['files'])}")
+            if package['data_files']:
+                print("Candidate data files:")
+                for name in package['data_files']:
+                    print(f"  {name}")
+            else:
+                print("No machine-readable ancillary data files found; "
+                      "use the paper tables as the data source.")
+    elif args.source:
+        print("\nError: --source needs --output_dir/-o to unpack the package.")
     else:
         print("\nNo file written (use --output_dir /path to save JSON + PDF).")
 

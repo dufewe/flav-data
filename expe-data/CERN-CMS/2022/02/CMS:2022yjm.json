@@ -1,0 +1,145 @@
+{
+    "inspire-hep": "2618188",
+    "author": "Tumasyan, A. and others",
+    "collaboration": "CMS",
+    "title": "Search for new physics in the lepton plus missing transverse momentum final state in proton-proton collisions at sqrt(s) = 13 TeV",
+    "arxiv": "[hep-ex/2202.06075v2](https://arxiv.org/pdf/2202.06075v2)",
+    "time": "2022.02.12",
+    "abstract": "A search for physics beyond the standard model (SM) in final states with an electron or muon and missing transverse momentum is presented. The analysis uses data from proton-proton collisions at a centre-of-mass energy of 13 TeV, collected with the CMS detector at the LHC in 2016-2018 and corresponding to an integrated luminosity of 138 fb^{-1}. No significant deviation from the SM prediction is observed. Model-independent limits are set on the production cross section of W' bosons decaying into lepton-plus-neutrino final states. Within the framework of the sequential standard model, with the combined results from the electron and muon decay channels a W' boson with mass less than 5.7 TeV is excluded at 95% confidence level. Results on a SM precision test, the determination of the oblique electroweak W parameter, are presented using LHC data for the first time.",
+    "transition-mode": "scattering",
+    "data": [
+        {
+            "p.p.2.Wp.2.l.v": {
+                "obs@1": {
+                    "name": "m_obs_Wp_SSM[e_mu]",
+                    "value": "5.7",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                },
+                "obs@2": {
+                    "name": "m_exp_Wp_SSM[e_mu]",
+                    "value": "5.4",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.Wp.2.l.v": {
+                "obs@1": {
+                    "name": "m_obs_Wp_SSM[e]",
+                    "value": "5.4",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                },
+                "obs@2": {
+                    "name": "m_exp_Wp_SSM[e]",
+                    "value": "5.3",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.Wp.2.l.v": {
+                "obs@1": {
+                    "name": "m_obs_Wp_SSM[mu]",
+                    "value": "5.6",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                },
+                "obs@2": {
+                    "name": "m_exp_Wp_SSM[mu]",
+                    "value": "5.4",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.Wp.2.l.v": {
+                "obs@1": {
+                    "name": "m_star_obs[composite_SSM]",
+                    "value": "3.0",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                },
+                "obs@2": {
+                    "name": "m_star_obs[composite_HVT]",
+                    "value": "1.0",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.WKK.2.l.v": {
+                "obs@1": {
+                    "name": "invR_obs_UED[mu_2TeV]",
+                    "value": "2.8",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                },
+                "obs@2": {
+                    "name": "invR_exp_UED[mu_2TeV]",
+                    "value": "2.7",
+                    "unit": "TeV",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.tau.sneutrino.2.e.v": {
+                "obs@1": {
+                    "name": "lambda_231_obs[lambda_prime_0.5]",
+                    "value": "3.7e-3",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.tau.sneutrino.2.mu.v": {
+                "obs@1": {
+                    "name": "lambda_132_obs[lambda_prime_0.5]",
+                    "value": "4.7e-3",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0"
+                }
+            }
+        },
+        {
+            "p.p.2.W.2.l.v": {
+                "obs@1": {
+                    "name": "W_param[e_mu_101fb]",
+                    "value": "-1.2e-4",
+                    "ref": "[CMS:2022yjm](https://inspirehep.net/literature/2618188)",
+                    "total_upper": "0.5e-4",
+                    "total_lower": "0.6e-4"
+                }
+            }
+        }
+    ]
+}

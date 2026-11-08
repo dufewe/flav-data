@@ -8,94 +8,83 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.p.l-.nuBar": {
+            "Lambdab0.2.p.l-.vBar": {
                 "obs@1": {
                     "name": "a0_Fp",
                     "value": "0.4382",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0315",
-                    "type@1_lower": "0.0315"
+                    "total_upper": "0.0315",
+                    "total_lower": "0.0315"
                 },
                 "obs@2": {
                     "name": "a1_Fp",
                     "value": "-0.6452",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.2093",
-                    "type@1_lower": "0.2093"
+                    "total_upper": "0.2093",
+                    "total_lower": "0.2093"
                 },
                 "obs@3": {
                     "name": "a0_F0",
                     "value": "0.4189",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0256",
-                    "type@1_lower": "0.0256"
+                    "total_upper": "0.0256",
+                    "total_lower": "0.0256"
                 },
                 "obs@4": {
                     "name": "a1_F0",
                     "value": "-0.7862",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.2038",
-                    "type@1_lower": "0.2038"
+                    "total_upper": "0.2038",
+                    "total_lower": "0.2038"
                 },
                 "obs@5": {
                     "name": "a0_Fv",
                     "value": "0.5389",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0435",
-                    "type@1_lower": "0.0435"
+                    "total_upper": "0.0435",
+                    "total_lower": "0.0435"
                 },
                 "obs@6": {
                     "name": "a1_Fv",
                     "value": "-0.8069",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.3039",
-                    "type@1_lower": "0.3039"
+                    "total_upper": "0.3039",
+                    "total_lower": "0.3039"
                 },
                 "obs@7": {
                     "name": "a0_Gv",
                     "value": "0.3912",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0198",
-                    "type@1_lower": "0.0198"
+                    "total_upper": "0.0198",
+                    "total_lower": "0.0198"
                 },
                 "obs@8": {
                     "name": "a0_Gp",
                     "value": "0.3912",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0198",
-                    "type@1_lower": "0.0198"
+                    "total_upper": "0.0198",
+                    "total_lower": "0.0198"
                 },
                 "obs@9": {
                     "name": "a1_Gp",
                     "value": "-0.8167",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.1749",
-                    "type@1_lower": "0.1749"
+                    "total_upper": "0.1749",
+                    "total_lower": "0.1749"
                 },
                 "obs@10": {
                     "name": "a0_G0",
                     "value": "0.4526",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0292",
-                    "type@1_lower": "0.0292"
+                    "total_upper": "0.0292",
+                    "total_lower": "0.0292"
                 },
                 "obs@11": {
                     "name": "a1_G0",
                     "value": "-0.7817",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.1886",
-                    "type@1_lower": "0.1886"
+                    "total_upper": "0.1886",
+                    "total_lower": "0.1886"
                 },
                 "obs@12": {
                     "name": "a1_Gv",
                     "value": "-0.9061",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.1956",
-                    "type@1_lower": "0.1956"
+                    "total_upper": "0.1956",
+                    "total_lower": "0.1956"
                 }
             },
-            "method": "nominal",
-            "type@1_correlation": [
+            "dataset": "LQCD",
+            "scheme": "DLM",
+            "correlation": [
                 [1.0, -0.9058, 0.5081, -0.4403, 0.5299, -0.3987, 0.5362, 0.5362, -0.4112, 0.6302, -0.5305, -0.3898],
                 [-0.9058, 1.0, -0.428, 0.4312, -0.4238, 0.3739, -0.4402, -0.4402, 0.3912, -0.4901, 0.4839, 0.3668],
                 [0.5081, -0.428, 1.0, -0.8533, 0.4251, -0.3226, 0.6963, 0.6963, -0.5274, 0.5504, -0.4694, -0.4886],
@@ -111,117 +100,118 @@
             ]
         },
         {
-            "Lambdab0.2.p.l-.nuBar": {
+            "Lambdab0.2.p.l-.vBar": {
                 "obs@1": {
                     "name": "a0_Fp",
                     "value": "0.4251",
-                    "error_upper": "0.0388",
-                    "error_lower": "0.0388"
+                    "total_upper": "0.0388",
+                    "total_lower": "0.0388"
                 },
                 "obs@2": {
                     "name": "a1_Fp",
                     "value": "-0.7088",
-                    "error_upper": "0.3361",
-                    "error_lower": "0.3361"
+                    "total_upper": "0.3361",
+                    "total_lower": "0.3361"
                 },
                 "obs@3": {
                     "name": "a2_Fp",
                     "value": "0.8925",
-                    "error_upper": "0.8869",
-                    "error_lower": "0.8869"
+                    "total_upper": "0.8869",
+                    "total_lower": "0.8869"
                 },
                 "obs@4": {
                     "name": "a0_F0",
                     "value": "0.4144",
-                    "error_upper": "0.0321",
-                    "error_lower": "0.0321"
+                    "total_upper": "0.0321",
+                    "total_lower": "0.0321"
                 },
                 "obs@5": {
                     "name": "a1_F0",
                     "value": "-1.0420",
-                    "error_upper": "0.3142",
-                    "error_lower": "0.3142"
+                    "total_upper": "0.3142",
+                    "total_lower": "0.3142"
                 },
                 "obs@6": {
                     "name": "a2_F0",
                     "value": "1.9260",
-                    "error_upper": "0.9190",
-                    "error_lower": "0.9190"
+                    "total_upper": "0.9190",
+                    "total_lower": "0.9190"
                 },
                 "obs@7": {
                     "name": "a0_Fv",
                     "value": "0.5214",
-                    "error_upper": "0.0520",
-                    "error_lower": "0.0520"
+                    "total_upper": "0.0520",
+                    "total_lower": "0.0520"
                 },
                 "obs@8": {
                     "name": "a1_Fv",
                     "value": "-0.8247",
-                    "error_upper": "0.4424",
-                    "error_lower": "0.4424"
+                    "total_upper": "0.4424",
+                    "total_lower": "0.4424"
                 },
                 "obs@9": {
                     "name": "a2_Fv",
                     "value": "0.7609",
-                    "error_upper": "1.2770",
-                    "error_lower": "1.2770"
+                    "total_upper": "1.2770",
+                    "total_lower": "1.2770"
                 },
                 "obs@10": {
                     "name": "a0_Gv",
                     "value": "0.3889",
-                    "error_upper": "0.0260",
-                    "error_lower": "0.0260"
+                    "total_upper": "0.0260",
+                    "total_lower": "0.0260"
                 },
                 "obs@11": {
                     "name": "a0_Gp",
                     "value": "0.3889",
-                    "error_upper": "0.0260",
-                    "error_lower": "0.0260"
+                    "total_upper": "0.0260",
+                    "total_lower": "0.0260"
                 },
                 "obs@12": {
                     "name": "a1_Gp",
                     "value": "-1.0730",
-                    "error_upper": "0.2617",
-                    "error_lower": "0.2617"
+                    "total_upper": "0.2617",
+                    "total_lower": "0.2617"
                 },
                 "obs@13": {
                     "name": "a2_Gp",
                     "value": "1.9860",
-                    "error_upper": "0.8247",
-                    "error_lower": "0.8247"
+                    "total_upper": "0.8247",
+                    "total_lower": "0.8247"
                 },
                 "obs@14": {
                     "name": "a0_G0",
                     "value": "0.4419",
-                    "error_upper": "0.0388",
-                    "error_lower": "0.0388"
+                    "total_upper": "0.0388",
+                    "total_lower": "0.0388"
                 },
                 "obs@15": {
                     "name": "a1_G0",
                     "value": "-0.8649",
-                    "error_upper": "0.3481",
-                    "error_lower": "0.3481"
+                    "total_upper": "0.3481",
+                    "total_lower": "0.3481"
                 },
                 "obs@16": {
                     "name": "a2_G0",
                     "value": "0.9969",
-                    "error_upper": "0.8955",
-                    "error_lower": "0.8955"
+                    "total_upper": "0.8955",
+                    "total_lower": "0.8955"
                 },
                 "obs@17": {
                     "name": "a1_Gv",
                     "value": "-1.0840",
-                    "error_upper": "0.2732",
-                    "error_lower": "0.2732"
+                    "total_upper": "0.2732",
+                    "total_lower": "0.2732"
                 },
                 "obs@18": {
                     "name": "a2_Gv",
                     "value": "1.4520",
-                    "error_upper": "1.0680",
-                    "error_lower": "1.0680"
+                    "total_upper": "1.0680",
+                    "total_lower": "1.0680"
                 }
             },
-            "method": "higher-order",
+            "dataset": "LQCD",
+            "scheme": "DLM",
             "correlation": [
                 [1.0, -0.7671, 0.2482, 0.5337, -0.267, -0.0922, 0.5121, -0.2469, -0.018, 0.3774, 0.3774, -0.2148, -0.0472, 0.442, -0.268, 0.0018, -0.2284, -0.0231],
                 [-0.7671, 1.0, -0.6611, -0.2486, 0.1617, 0.0653, -0.2526, 0.1671, 0.0056, -0.2177, -0.2177, 0.148, 0.0287, -0.2496, 0.1849, -0.0169, 0.1534, 0.0147],
@@ -244,94 +234,83 @@
             ]
         },
         {
-            "Lambdab0.2.Lambdac+.l-.nuBar": {
+            "Lambdab0.2.Lambdac+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_Fp",
                     "value": "0.8146",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0167",
-                    "type@1_lower": "0.0167"
+                    "total_upper": "0.0167",
+                    "total_lower": "0.0167"
                 },
                 "obs@2": {
                     "name": "a1_Fp",
                     "value": "-4.8990",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.5425",
-                    "type@1_lower": "0.5425"
+                    "total_upper": "0.5425",
+                    "total_lower": "0.5425"
                 },
                 "obs@3": {
                     "name": "a0_F0",
                     "value": "0.7439",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0125",
-                    "type@1_lower": "0.0125"
+                    "total_upper": "0.0125",
+                    "total_lower": "0.0125"
                 },
                 "obs@4": {
                     "name": "a1_F0",
                     "value": "-4.6480",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.6084",
-                    "type@1_lower": "0.6084"
+                    "total_upper": "0.6084",
+                    "total_lower": "0.6084"
                 },
                 "obs@5": {
                     "name": "a0_Fv",
                     "value": "1.0780",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0256",
-                    "type@1_lower": "0.0256"
+                    "total_upper": "0.0256",
+                    "total_lower": "0.0256"
                 },
                 "obs@6": {
                     "name": "a1_Fv",
                     "value": "-6.4170",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.8480",
-                    "type@1_lower": "0.8480"
+                    "total_upper": "0.8480",
+                    "total_lower": "0.8480"
                 },
                 "obs@7": {
                     "name": "a0_Gv",
                     "value": "0.6847",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0086",
-                    "type@1_lower": "0.0086"
+                    "total_upper": "0.0086",
+                    "total_lower": "0.0086"
                 },
                 "obs@8": {
                     "name": "a0_Gp",
                     "value": "0.6847",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0086",
-                    "type@1_lower": "0.0086"
+                    "total_upper": "0.0086",
+                    "total_lower": "0.0086"
                 },
                 "obs@9": {
                     "name": "a1_Gp",
                     "value": "-4.4310",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.3572",
-                    "type@1_lower": "0.3572"
+                    "total_upper": "0.3572",
+                    "total_lower": "0.3572"
                 },
                 "obs@10": {
                     "name": "a0_G0",
                     "value": "0.7396",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.0143",
-                    "type@1_lower": "0.0143"
+                    "total_upper": "0.0143",
+                    "total_lower": "0.0143"
                 },
                 "obs@11": {
                     "name": "a1_G0",
                     "value": "-4.3660",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.3314",
-                    "type@1_lower": "0.3314"
+                    "total_upper": "0.3314",
+                    "total_lower": "0.3314"
                 },
                 "obs@12": {
                     "name": "a1_Gv",
                     "value": "-4.4630",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.3613",
-                    "type@1_lower": "0.3613"
+                    "total_upper": "0.3613",
+                    "total_lower": "0.3613"
                 }
             },
-            "method": "nominal",
-            "type@1_correlation": [
+            "dataset": "LQCD",
+            "scheme": "DLM",
+            "correlation": [
                 [1.0, -0.6644, 0.6827, -0.4853, 0.6218, -0.3906, 0.4828, 0.4828, -0.3152, 0.5636, -0.4317, -0.3763],
                 [-0.6644, 1.0, -0.6515, 0.9445, -0.3853, 0.5109, -0.3831, -0.3831, 0.4915, -0.2979, 0.4916, 0.4764],
                 [0.6827, -0.6515, 1.0, -0.704, 0.4208, -0.362, 0.6174, 0.6174, -0.4822, 0.432, -0.4726, -0.4756],
@@ -347,117 +326,118 @@
             ]
         },
         {
-            "Lambdab0.2.Lambdac+.l-.nuBar": {
+            "Lambdab0.2.Lambdac+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_Fp",
                     "value": "0.8103",
-                    "error_upper": "0.0276",
-                    "error_lower": "0.0276"
+                    "total_upper": "0.0276",
+                    "total_lower": "0.0276"
                 },
                 "obs@2": {
                     "name": "a1_Fp",
                     "value": "-4.7480",
-                    "error_upper": "0.9429",
-                    "error_lower": "0.9429"
+                    "total_upper": "0.9429",
+                    "total_lower": "0.9429"
                 },
                 "obs@3": {
                     "name": "a2_Fp",
                     "value": "0.7862",
-                    "error_upper": "8.8020",
-                    "error_lower": "8.8020"
+                    "total_upper": "8.8020",
+                    "total_lower": "8.8020"
                 },
                 "obs@4": {
                     "name": "a0_F0",
                     "value": "0.7389",
-                    "error_upper": "0.0225",
-                    "error_lower": "0.0225"
+                    "total_upper": "0.0225",
+                    "total_lower": "0.0225"
                 },
                 "obs@5": {
                     "name": "a1_F0",
                     "value": "-4.5630",
-                    "error_upper": "0.9426",
-                    "error_lower": "0.9426"
+                    "total_upper": "0.9426",
+                    "total_lower": "0.9426"
                 },
                 "obs@6": {
                     "name": "a2_F0",
                     "value": "2.7050",
-                    "error_upper": "8.4430",
-                    "error_lower": "8.4430"
+                    "total_upper": "8.4430",
+                    "total_lower": "8.4430"
                 },
                 "obs@7": {
                     "name": "a0_Fv",
                     "value": "1.0940",
-                    "error_upper": "0.0435",
-                    "error_lower": "0.0435"
+                    "total_upper": "0.0435",
+                    "total_lower": "0.0435"
                 },
                 "obs@8": {
                     "name": "a1_Fv",
                     "value": "-6.4410",
-                    "error_upper": "1.5010",
-                    "error_lower": "1.5010"
+                    "total_upper": "1.5010",
+                    "total_lower": "1.5010"
                 },
                 "obs@9": {
                     "name": "a2_Fv",
                     "value": "2.3160",
-                    "error_upper": "11.320",
-                    "error_lower": "11.320"
+                    "total_upper": "11.320",
+                    "total_lower": "11.320"
                 },
                 "obs@10": {
                     "name": "a0_Gv",
                     "value": "0.6848",
-                    "error_upper": "0.0184",
-                    "error_lower": "0.0184"
+                    "total_upper": "0.0184",
+                    "total_lower": "0.0184"
                 },
                 "obs@11": {
                     "name": "a0_Gp",
                     "value": "0.6848",
-                    "error_upper": "0.0184",
-                    "error_lower": "0.0184"
+                    "total_upper": "0.0184",
+                    "total_lower": "0.0184"
                 },
                 "obs@12": {
                     "name": "a1_Gp",
                     "value": "-4.3790",
-                    "error_upper": "0.6954",
-                    "error_lower": "0.6954"
+                    "total_upper": "0.6954",
+                    "total_lower": "0.6954"
                 },
                 "obs@13": {
                     "name": "a2_Gp",
                     "value": "1.2810",
-                    "error_upper": "7.3650",
-                    "error_lower": "7.3650"
+                    "total_upper": "7.3650",
+                    "total_lower": "7.3650"
                 },
                 "obs@14": {
                     "name": "a0_G0",
                     "value": "0.7408",
-                    "error_upper": "0.0258",
-                    "error_lower": "0.0258"
+                    "total_upper": "0.0258",
+                    "total_lower": "0.0258"
                 },
                 "obs@15": {
                     "name": "a1_G0",
                     "value": "-4.3860",
-                    "error_upper": "0.8774",
-                    "error_lower": "0.8774"
+                    "total_upper": "0.8774",
+                    "total_lower": "0.8774"
                 },
                 "obs@16": {
                     "name": "a2_G0",
                     "value": "1.3380",
-                    "error_upper": "8.0440",
-                    "error_lower": "8.0440"
+                    "total_upper": "8.0440",
+                    "total_lower": "8.0440"
                 },
                 "obs@17": {
                     "name": "a1_Gv",
                     "value": "-4.6270",
-                    "error_upper": "0.7088",
-                    "error_lower": "0.7088"
+                    "total_upper": "0.7088",
+                    "total_lower": "0.7088"
                 },
                 "obs@18": {
                     "name": "a2_Gv",
                     "value": "1.6140",
-                    "error_upper": "7.4530",
-                    "error_lower": "7.4530"
+                    "total_upper": "7.4530",
+                    "total_lower": "7.4530"
                 }
             },
-            "method": "higher-order",
+            "dataset": "LQCD",
+            "scheme": "DLM",
             "correlation": [
                 [1.0, -0.522, 0.1623, 0.7106, -0.2661, -0.0293, 0.6259, -0.2683, 0.0077, 0.1992, 0.1992, -0.1307, -0.0277, 0.2833, -0.1838, 0.0436, -0.1611, 0.0088],
                 [-0.522, 1.0, -0.6595, -0.3199, 0.4277, 0.0649, -0.2548, 0.2618, -0.0102, -0.1403, -0.1403, 0.1878, 0.0413, -0.1575, 0.1932, -0.0364, 0.1703, 0.003],

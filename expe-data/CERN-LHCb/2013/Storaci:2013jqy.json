@@ -13,8 +13,8 @@
                 "obs@1": {
                     "name": "fs/fd",
                     "value": "0.259",
-                    "error_upper": "0.015",
-                    "error_lower": "0.015"
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
                 }
             }
         }

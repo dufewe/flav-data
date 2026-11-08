@@ -8,226 +8,197 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.D+.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.013738",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000103331",
-                    "type@1_lower": "0.000103331"
+                    "total_upper": "0.000103331",
+                    "total_lower": "0.000103331"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.0413645",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00336758",
-                    "type@1_lower": "0.00336758"
+                    "total_upper": "0.00336758",
+                    "total_lower": "0.00336758"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "0.117804",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.200653",
-                    "type@1_lower": "0.200653"
+                    "total_upper": "0.200653",
+                    "total_lower": "0.200653"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.206397",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.015485",
-                    "type@1_lower": "0.015485"
+                    "total_upper": "0.015485",
+                    "total_lower": "0.015485"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "0.557197",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.962583",
-                    "type@1_lower": "0.962583"
+                    "total_upper": "0.962583",
+                    "total_lower": "0.962583"
                 }
             },
-            "B0Bar.2.Dst+.l-.nuBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0258595",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000948869",
-                    "type@1_lower": "0.000948869"
+                    "total_upper": "0.000948869",
+                    "total_lower": "0.000948869"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "-0.109326",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0786442",
-                    "type@1_lower": "0.0786442"
+                    "total_upper": "0.0786442",
+                    "total_lower": "0.0786442"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "-0.450468",
-                    "type@1_error": "theo",
-                    "type@1_upper": "4.36911",
-                    "type@1_lower": "4.36911"
+                    "total_upper": "4.36911",
+                    "total_lower": "4.36911"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.0108002",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000200855",
-                    "type@1_lower": "0.000200855"
+                    "total_upper": "0.000200855",
+                    "total_lower": "0.000200855"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "-0.00120667",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0168465",
-                    "type@1_lower": "0.0168465"
+                    "total_upper": "0.0168465",
+                    "total_lower": "0.0168465"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "-0.0378869",
-                    "type@1_error": "theo",
-                    "type@1_upper": "1.15066",
-                    "type@1_lower": "1.15066"
+                    "total_upper": "1.15066",
+                    "total_lower": "1.15066"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "-0.00462902",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00306088",
-                    "type@1_lower": "0.00306088"
+                    "total_upper": "0.00306088",
+                    "total_lower": "0.00306088"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.045962",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.194371",
-                    "type@1_lower": "0.194371"
+                    "total_upper": "0.194371",
+                    "total_lower": "0.194371"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "-0.294938",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.074177",
-                    "type@1_lower": "0.074177"
+                    "total_upper": "0.074177",
+                    "total_lower": "0.074177"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "0.547593",
-                    "type@1_error": "theo",
-                    "type@1_upper": "4.02966",
-                    "type@1_lower": "4.02966"
+                    "total_upper": "4.02966",
+                    "total_lower": "4.02966"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.nuBar": {
+            "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.00413865",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000142115",
-                    "type@1_lower": "0.000142115"
+                    "total_upper": "0.000142115",
+                    "total_lower": "0.000142115"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.00288777",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00193994",
-                    "type@1_lower": "0.00193994"
+                    "total_upper": "0.00193994",
+                    "total_lower": "0.00193994"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "-0.0584035",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00955009",
-                    "type@1_lower": "0.00955009"
+                    "total_upper": "0.00955009",
+                    "total_lower": "0.00955009"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.0609992",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.011211",
-                    "type@1_lower": "0.011211"
+                    "total_upper": "0.011211",
+                    "total_lower": "0.011211"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "-0.0263907",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0768255",
-                    "type@1_lower": "0.0768255"
+                    "total_upper": "0.0768255",
+                    "total_lower": "0.0768255"
                 }
             },
-            "Bs0Bar.2.Dsst+.l-.nuBar": {
+            "Bs0Bar.2.Ds*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0080284",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000884441",
-                    "type@1_lower": "0.000884441"
+                    "total_upper": "0.000884441",
+                    "total_lower": "0.000884441"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "0.0211593",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0217553",
-                    "type@1_lower": "0.0217553"
+                    "total_upper": "0.0217553",
+                    "total_lower": "0.0217553"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "-0.00885452",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.133367",
-                    "type@1_lower": "0.133367"
+                    "total_upper": "0.133367",
+                    "total_lower": "0.133367"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.00354357",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000132036",
-                    "type@1_lower": "0.000132036"
+                    "total_upper": "0.000132036",
+                    "total_lower": "0.000132036"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "0.00412037",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0035855",
-                    "type@1_lower": "0.0035855"
+                    "total_upper": "0.0035855",
+                    "total_lower": "0.0035855"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "-0.00548244",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0531233",
-                    "type@1_lower": "0.0531233"
+                    "total_upper": "0.0531233",
+                    "total_lower": "0.0531233"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "0.00126008",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000916991",
-                    "type@1_lower": "0.000916991"
+                    "total_upper": "0.000916991",
+                    "total_lower": "0.000916991"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.0187839",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0155568",
-                    "type@1_lower": "0.0155568"
+                    "total_upper": "0.0155568",
+                    "total_lower": "0.0155568"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "-0.00777638",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0190374",
-                    "type@1_lower": "0.0190374"
+                    "total_upper": "0.0190374",
+                    "total_lower": "0.0190374"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "-0.224204",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.175559",
-                    "type@1_lower": "0.175559"
+                    "total_upper": "0.175559",
+                    "total_lower": "0.175559"
                 }
             },
-            "method": "BGL fit to lattice QCD only",
-            "type@1_correlation": [
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "correlation": [
                 [1.0, 0.217146, 0.127096, 0.132154, 0.168186, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
                 [0.217146, 1.0, -0.449727, 0.832375, -0.400304, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
                 [0.127096, -0.449727, 1.0, -0.492542, 0.992663, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -261,226 +232,197 @@
             ]
         },
         {
-            "B0Bar.2.D+.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.0137117",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000100837",
-                    "type@1_lower": "0.000100837"
+                    "total_upper": "0.000100837",
+                    "total_lower": "0.000100837"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.041658",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00325151",
-                    "type@1_lower": "0.00325151"
+                    "total_upper": "0.00325151",
+                    "total_lower": "0.00325151"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "0.0414986",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.112367",
-                    "type@1_lower": "0.112367"
+                    "total_upper": "0.112367",
+                    "total_lower": "0.112367"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.207188",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0146664",
-                    "type@1_lower": "0.0146664"
+                    "total_upper": "0.0146664",
+                    "total_lower": "0.0146664"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "0.188006",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.532996",
-                    "type@1_lower": "0.532996"
+                    "total_upper": "0.532996",
+                    "total_lower": "0.532996"
                 }
             },
-            "B0Bar.2.Dst+.l-.nuBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0256372",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000916529",
-                    "type@1_lower": "0.000916529"
+                    "total_upper": "0.000916529",
+                    "total_lower": "0.000916529"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "-0.100517",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0455727",
-                    "type@1_lower": "0.0455727"
+                    "total_upper": "0.0455727",
+                    "total_lower": "0.0455727"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "0.258699",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.656442",
-                    "type@1_lower": "0.656442"
+                    "total_upper": "0.656442",
+                    "total_lower": "0.656442"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.0108761",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000196495",
-                    "type@1_lower": "0.000196495"
+                    "total_upper": "0.000196495",
+                    "total_lower": "0.000196495"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "0.00806314",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0101434",
-                    "type@1_lower": "0.0101434"
+                    "total_upper": "0.0101434",
+                    "total_lower": "0.0101434"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "0.0693092",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.214005",
-                    "type@1_lower": "0.214005"
+                    "total_upper": "0.214005",
+                    "total_lower": "0.214005"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "-0.00235098",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00204473",
-                    "type@1_lower": "0.00204473"
+                    "total_upper": "0.00204473",
+                    "total_lower": "0.00204473"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.0155048",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0387862",
-                    "type@1_lower": "0.0387862"
+                    "total_upper": "0.0387862",
+                    "total_lower": "0.0387862"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "-0.209709",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0580553",
-                    "type@1_lower": "0.0580553"
+                    "total_upper": "0.0580553",
+                    "total_lower": "0.0580553"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "0.566663",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.878862",
-                    "type@1_lower": "0.878862"
+                    "total_upper": "0.878862",
+                    "total_lower": "0.878862"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.nuBar": {
+            "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.00413444",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000137125",
-                    "type@1_lower": "0.000137125"
+                    "total_upper": "0.000137125",
+                    "total_lower": "0.000137125"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.00301633",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00187576",
-                    "type@1_lower": "0.00187576"
+                    "total_upper": "0.00187576",
+                    "total_lower": "0.00187576"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "-0.0587562",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00933214",
-                    "type@1_lower": "0.00933214"
+                    "total_upper": "0.00933214",
+                    "total_lower": "0.00933214"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.0616948",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0110823",
-                    "type@1_lower": "0.0110823"
+                    "total_upper": "0.0110823",
+                    "total_lower": "0.0110823"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "-0.0232725",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0766707",
-                    "type@1_lower": "0.0766707"
+                    "total_upper": "0.0766707",
+                    "total_lower": "0.0766707"
                 }
             },
-            "Bs0Bar.2.Dsst+.l-.nuBar": {
+            "Bs0Bar.2.Ds*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.00722989",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000702533",
-                    "type@1_lower": "0.000702533"
+                    "total_upper": "0.000702533",
+                    "total_lower": "0.000702533"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "-0.00168397",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0105847",
-                    "type@1_lower": "0.0105847"
+                    "total_upper": "0.0105847",
+                    "total_lower": "0.0105847"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "-0.106676",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0848182",
-                    "type@1_lower": "0.0848182"
+                    "total_upper": "0.0848182",
+                    "total_lower": "0.0848182"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.00362975",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000124031",
-                    "type@1_lower": "0.000124031"
+                    "total_upper": "0.000124031",
+                    "total_lower": "0.000124031"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "0.00596729",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00335983",
-                    "type@1_lower": "0.00335983"
+                    "total_upper": "0.00335983",
+                    "total_lower": "0.00335983"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "0.028686",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0447134",
-                    "type@1_lower": "0.0447134"
+                    "total_upper": "0.0447134",
+                    "total_lower": "0.0447134"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "0.00134867",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000814879",
-                    "type@1_lower": "0.000814879"
+                    "total_upper": "0.000814879",
+                    "total_lower": "0.000814879"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.0220625",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0126043",
-                    "type@1_lower": "0.0126043"
+                    "total_upper": "0.0126043",
+                    "total_lower": "0.0126043"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "-0.00930257",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0145498",
-                    "type@1_lower": "0.0145498"
+                    "total_upper": "0.0145498",
+                    "total_lower": "0.0145498"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "-0.190595",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.1521",
-                    "type@1_lower": "0.1521"
+                    "total_upper": "0.1521",
+                    "total_lower": "0.1521"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR",
-            "type@1_correlation": [
+            "dataset": "LQCD+LCSR",
+            "scheme": "BGL",
+            "correlation": [
                 [1.0, 0.266277, -0.0524996, 0.196899, 0.0199016, 0.0190672, 0.0340189, -0.000534117, 0.0182577, 0.0224962, 0.0229813, 0.0314436, 0.0320936, 0.0378101, 0.00651234, -0.000186142, -7.39688e-05, 1.66553e-05, -0.00024545, 2.85524e-05, -0.000214279, 0.000104647, 0.000121679, 0.00114975, 0.000654772, 0.000203242, 0.000965415, 0.000868603, 0.00146034, 0.000784783],
                 [0.266277, 1.0, -0.464834, 0.820087, -0.3772, 0.00132603, 0.00338832, -0.00956186, 0.00255723, 0.00872212, -0.0234952, 0.0100914, -0.0157271, 0.00980926, -0.0186323, 6.2201e-05, 3.17116e-05, 9.53368e-06, 6.21733e-05, -3.26023e-05, -0.000896963, -0.000586696, -0.000163153, -0.00177392, -0.00180982, -0.000720161, 0.000433594, -0.000569467, -0.000505444, -0.000724811],
                 [-0.0524996, -0.464834, 1.0, -0.443461, 0.976575, 0.0569112, 0.0982611, 0.0306245, 0.0505141, 0.0432726, 0.153898, 0.0675251, 0.157065, 0.0890651, 0.0842185, -0.000815252, -0.000318705, 3.44161e-05, -0.000977399, 0.000206778, 0.00231412, 0.00240598, 0.00100676, 0.00972219, 0.00822422, 0.00319198, 0.00177691, 0.00476788, 0.006539, 0.00507013],
@@ -514,226 +456,197 @@
             ]
         },
         {
-            "B0Bar.2.D+.l-.nuBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.0137806",
-                    "type@1_error": "theo",
-                    "type@1_upper": "9.69633e-05",
-                    "type@1_lower": "9.69633e-05"
+                    "total_upper": "9.69633e-05",
+                    "total_lower": "9.69633e-05"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.0398021",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00317746",
-                    "type@1_lower": "0.00317746"
+                    "total_upper": "0.00317746",
+                    "total_lower": "0.00317746"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "0.112268",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0713057",
-                    "type@1_lower": "0.0713057"
+                    "total_upper": "0.0713057",
+                    "total_lower": "0.0713057"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.200433",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0143831",
-                    "type@1_lower": "0.0143831"
+                    "total_upper": "0.0143831",
+                    "total_lower": "0.0143831"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "0.558145",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.329743",
-                    "type@1_lower": "0.329743"
+                    "total_upper": "0.329743",
+                    "total_lower": "0.329743"
                 }
             },
-            "B0Bar.2.Dst+.l-.nuBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0251257",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000780089",
-                    "type@1_lower": "0.000780089"
+                    "total_upper": "0.000780089",
+                    "total_lower": "0.000780089"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "-0.110396",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0396197",
-                    "type@1_lower": "0.0396197"
+                    "total_upper": "0.0396197",
+                    "total_lower": "0.0396197"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "0.204959",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.610657",
-                    "type@1_lower": "0.610657"
+                    "total_upper": "0.610657",
+                    "total_lower": "0.610657"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.0106097",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000166993",
-                    "type@1_lower": "0.000166993"
+                    "total_upper": "0.000166993",
+                    "total_lower": "0.000166993"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "0.0112103",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00815731",
-                    "type@1_lower": "0.00815731"
+                    "total_upper": "0.00815731",
+                    "total_lower": "0.00815731"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "-0.071307",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.158348",
-                    "type@1_lower": "0.158348"
+                    "total_upper": "0.158348",
+                    "total_lower": "0.158348"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "0.00147019",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00141126",
-                    "type@1_lower": "0.00141126"
+                    "total_upper": "0.00141126",
+                    "total_lower": "0.00141126"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.00893194",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0250818",
-                    "type@1_lower": "0.0250818"
+                    "total_upper": "0.0250818",
+                    "total_lower": "0.0250818"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "-0.136378",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0490373",
-                    "type@1_lower": "0.0490373"
+                    "total_upper": "0.0490373",
+                    "total_lower": "0.0490373"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "0.565964",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.740598",
-                    "type@1_lower": "0.740598"
+                    "total_upper": "0.740598",
+                    "total_lower": "0.740598"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.nuBar": {
+            "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fp",
                     "value": "0.00421317",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000116108",
-                    "type@1_lower": "0.000116108"
+                    "total_upper": "0.000116108",
+                    "total_lower": "0.000116108"
                 },
                 "obs@2": {
                     "name": "a1_fp",
                     "value": "-0.00335021",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00152343",
-                    "type@1_lower": "0.00152343"
+                    "total_upper": "0.00152343",
+                    "total_lower": "0.00152343"
                 },
                 "obs@3": {
                     "name": "a2_fp",
                     "value": "-0.0608414",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00780639",
-                    "type@1_lower": "0.00780639"
+                    "total_upper": "0.00780639",
+                    "total_lower": "0.00780639"
                 },
                 "obs@4": {
                     "name": "a1_f0",
                     "value": "-0.0571258",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0108154",
-                    "type@1_lower": "0.0108154"
+                    "total_upper": "0.0108154",
+                    "total_lower": "0.0108154"
                 },
                 "obs@5": {
                     "name": "a2_f0",
                     "value": "-0.0358688",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0756014",
-                    "type@1_lower": "0.0756014"
+                    "total_upper": "0.0756014",
+                    "total_lower": "0.0756014"
                 }
             },
-            "Bs0Bar.2.Dsst+.l-.nuBar": {
+            "Bs0Bar.2.Ds*+.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.00714092",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000688189",
-                    "type@1_lower": "0.000688189"
+                    "total_upper": "0.000688189",
+                    "total_lower": "0.000688189"
                 },
                 "obs@2": {
                     "name": "a1_g",
                     "value": "-0.000523918",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0104739",
-                    "type@1_lower": "0.0104739"
+                    "total_upper": "0.0104739",
+                    "total_lower": "0.0104739"
                 },
                 "obs@3": {
                     "name": "a2_g",
                     "value": "-0.0963806",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0840686",
-                    "type@1_lower": "0.0840686"
+                    "total_upper": "0.0840686",
+                    "total_lower": "0.0840686"
                 },
                 "obs@4": {
                     "name": "a0_f",
                     "value": "0.00363326",
-                    "type@1_error": "theo",
-                    "type@1_upper": "8.83277e-05",
-                    "type@1_lower": "8.83277e-05"
+                    "total_upper": "8.83277e-05",
+                    "total_lower": "8.83277e-05"
                 },
                 "obs@5": {
                     "name": "a1_f",
                     "value": "0.00587873",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.00322361",
-                    "type@1_lower": "0.00322361"
+                    "total_upper": "0.00322361",
+                    "total_lower": "0.00322361"
                 },
                 "obs@6": {
                     "name": "a2_f",
                     "value": "0.0418959",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0437103",
-                    "type@1_lower": "0.0437103"
+                    "total_upper": "0.0437103",
+                    "total_lower": "0.0437103"
                 },
                 "obs@7": {
                     "name": "a1_F1",
                     "value": "0.00190866",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.000702853",
-                    "type@1_lower": "0.000702853"
+                    "total_upper": "0.000702853",
+                    "total_lower": "0.000702853"
                 },
                 "obs@8": {
                     "name": "a2_F1",
                     "value": "-0.01768",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0122093",
-                    "type@1_lower": "0.0122093"
+                    "total_upper": "0.0122093",
+                    "total_lower": "0.0122093"
                 },
                 "obs@9": {
                     "name": "a1_F2",
                     "value": "7.41696e-05",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.01361",
-                    "type@1_lower": "0.01361"
+                    "total_upper": "0.01361",
+                    "total_lower": "0.01361"
                 },
                 "obs@10": {
                     "name": "a2_F2",
                     "value": "-0.147966",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.149462",
-                    "type@1_lower": "0.149462"
+                    "total_upper": "0.149462",
+                    "total_lower": "0.149462"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR + experiment",
-            "type@1_correlation": [
+            "dataset": "LQCD+LCSR+EXPE",
+            "scheme": "BGL",
+            "correlation": [
                 [1.0, 0.240884, -0.212033, 0.18318, -0.110102, 0.0336723, 0.0238217, -0.00710284, 0.094742, 0.0280469, -0.0154282, 0.0321503, -0.0207451, 0.024359, -0.0274787, 0.0173503, 0.00542971, -0.00266422, 0.0187596, -0.0042266, 0.00610516, 0.00578884, 0.00137139, 0.0596235, 0.000359739, 0.000137625, -0.000845553, -0.00181487, 0.00848114, 0.00100216],
                 [0.240884, 1.0, -0.651945, 0.814453, -0.531509, 0.0192205, 0.0172044, -0.0114423, 0.0513567, 0.0220701, -0.0180247, 0.022796, -0.0167245, 0.019966, -0.0230143, 0.0101368, 0.00314535, -0.00155586, 0.0109252, -0.00247382, 0.00285734, 0.00316402, 0.000810191, 0.033434, -0.00082275, -0.000218239, -0.000238594, -0.00150808, 0.00458104, 0.000202488],
                 [-0.212033, -0.651945, 1.0, -0.558797, 0.941916, 0.0267637, 0.00799048, 0.0218741, 0.0872573, 0.00288511, 0.0172522, 0.0113572, 0.000340688, 0.000759642, 0.00141213, 0.0129169, 0.00418038, -0.00196825, 0.0141242, -0.00313228, 0.00708823, 0.00504112, 0.000960294, 0.0496719, 0.00375448, 0.00104351, -0.00135368, 0.000212033, 0.0077851, 0.00208036],
@@ -767,148 +680,136 @@
             ]
         },
         {
-            "B0Bar.2.D+.tau-.nuBar": {
+            "B0Bar.2.D+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.3004",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0143",
-                    "type@1_lower": "0.0143"
+                    "total_upper": "0.0143",
+                    "total_lower": "0.0143"
                 }
             },
-            "method": "BGL fit to lattice QCD only"
+            "dataset": "LQCD"
         },
         {
-            "B0Bar.2.D+.tau-.nuBar": {
+            "B0Bar.2.D+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.3066",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0081",
-                    "type@1_lower": "0.0081"
+                    "total_upper": "0.0081",
+                    "total_lower": "0.0081"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR"
+            "dataset": "LQCD+LCSR"
         },
         {
-            "B0Bar.2.D+.tau-.nuBar": {
+            "B0Bar.2.D+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2986",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0042",
-                    "type@1_lower": "0.0042"
+                    "total_upper": "0.0042",
+                    "total_lower": "0.0042"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR + experiment"
+            "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "B0Bar.2.Dst+.tau-.nuBar": {
+            "B0Bar.2.D*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2718",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.03",
-                    "type@1_lower": "0.03"
+                    "total_upper": "0.03",
+                    "total_lower": "0.03"
                 }
             },
-            "method": "BGL fit to lattice QCD only"
+            "dataset": "LQCD"
         },
         {
-            "B0Bar.2.Dst+.tau-.nuBar": {
+            "B0Bar.2.D*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2585",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0054",
-                    "type@1_lower": "0.0054"
+                    "total_upper": "0.0054",
+                    "total_lower": "0.0054"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR"
+            "dataset": "LQCD+LCSR"
         },
         {
-            "B0Bar.2.Dst+.tau-.nuBar": {
+            "B0Bar.2.D*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.25",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0016",
-                    "type@1_lower": "0.0016"
+                    "total_upper": "0.0016",
+                    "total_lower": "0.0016"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR + experiment"
+            "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.nuBar": {
+            "Bs0Bar.2.Ds+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2993",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0046",
-                    "type@1_lower": "0.0046"
+                    "total_upper": "0.0046",
+                    "total_lower": "0.0046"
                 }
             },
-            "method": "BGL fit to lattice QCD only"
+            "dataset": "LQCD"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.nuBar": {
+            "Bs0Bar.2.Ds+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2996",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0045",
-                    "type@1_lower": "0.0045"
+                    "total_upper": "0.0045",
+                    "total_lower": "0.0045"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR"
+            "dataset": "LQCD+LCSR"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.nuBar": {
+            "Bs0Bar.2.Ds+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2971",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0042",
-                    "type@1_lower": "0.0042"
+                    "total_upper": "0.0042",
+                    "total_lower": "0.0042"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR + experiment"
+            "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "Bs0Bar.2.Dsst+.tau-.nuBar": {
+            "Bs0Bar.2.Ds*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2488",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0058",
-                    "type@1_lower": "0.0058"
+                    "total_upper": "0.0058",
+                    "total_lower": "0.0058"
                 }
             },
-            "method": "BGL fit to lattice QCD only"
+            "dataset": "LQCD"
         },
         {
-            "Bs0Bar.2.Dsst+.tau-.nuBar": {
+            "Bs0Bar.2.Ds*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2506",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.004",
-                    "type@1_lower": "0.004"
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR"
+            "dataset": "LQCD+LCSR"
         },
         {
-            "Bs0Bar.2.Dsst+.tau-.nuBar": {
+            "Bs0Bar.2.Ds*+.tau-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2461",
-                    "type@1_error": "theo",
-                    "type@1_upper": "0.0024",
-                    "type@1_lower": "0.0024"
+                    "total_upper": "0.0024",
+                    "total_lower": "0.0024"
                 }
             },
-            "method": "BGL fit to lattice QCD + LCSR + experiment"
+            "dataset": "LQCD+LCSR+EXPE"
         }
     ]
 }

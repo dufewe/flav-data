@@ -1,0 +1,43 @@
+{
+    "inspire-hep": "1699929",
+    "author": "J. K. Ahn et al.",
+    "collaboration": "KOTO",
+    "title": "Search for the $K_L \\!\\to\\! \\pi^0 \\nu \\overline{\\nu}$ and $K_L \\!\\to\\! \\pi^0 X^0$ decays at the J-PARC KOTO experiment",
+    "arxiv": "1810.09655v2 [hep-ex]",
+    "time": "2018.10.23",
+    "abstract": "A search for the rare decay $K_L \\to \\pi^0 \\nu \\bar{\\nu}$ was performed. With the data collected in 2015, corresponding to $2.2 \\times 10^{19}$ protons on target, a single event was observed with an expected background of $0.42 \\pm 0.18$ events. An upper limit on the branching ratio of $\\mathcal{B}(K_L \\to \\pi^0 \\nu \\bar{\\nu}) < 4.9 \\times 10^{-9}$ at the 90% confidence level was obtained. The single event sensitivity was $(1.30 \\pm 0.01_{\\rm stat} \\pm 0.14_{\\rm syst}) \\times 10^{-9}$.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "KL0.2.pi0.v.vBar": {
+                "obs@1": {
+                    "name": "BR",
+                    "type@1_upper": "4.9e-9",
+                    "type@1_level": "90%@CL"
+                }
+            }
+        },
+        {
+            "KL0.2.pi0.v.vBar": {
+                "obs@1": {
+                    "name": "SES",
+                    "value": "1.30e-9",
+                    "total_upper": "0.14e-9",
+                    "total_lower": "0.14e-9"
+                },
+                "obs@2": {
+                    "name": "N_obs",
+                    "value": "1",
+                    "total_upper": "0",
+                    "total_lower": "0"
+                },
+                "obs@3": {
+                    "name": "N_bg",
+                    "value": "0.42",
+                    "total_upper": "0.18",
+                    "total_lower": "0.18"
+                }
+            }
+        }
+    ]
+}

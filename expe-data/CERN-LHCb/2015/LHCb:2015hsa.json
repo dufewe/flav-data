@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "First measurement of the differential branching fraction and CP asymmetry of the $B^\\pm\\to\\pi^\\pm\\mu^+\\mu^-$ decay",
     "arxiv": "[hep-ex/1509.00414](https://arxiv.org/pdf/1509.00414)",
-    "time": "2015.01.01",
+    "time": "2015.09.01",
     "abstract": "an analysis of the differential branching fraction with respect to the dimuon invariant mass squared and the CP asymmetry of the $B^\\pm \\to \\pi^\\pm \\mu^+ \\mu^-$ decay, using proton-proton collision data corresponding to an integrated luminosity of 3.0 fb$^{-1}$ at centre-of- mass energies of 7 and 8 TeV",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -153,8 +153,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -175,14 +174,14 @@
                 "obs@1": {
                     "name": "|Vtd|",
                     "value": "0.0072",
-                    "error_upper": "0.0009",
-                    "error_lower": "0.0008"
+                    "total_upper": "0.0009",
+                    "total_lower": "0.0008"
                 },
                 "obs@2": {
                     "name": "|Vts|",
                     "value": "0.032",
-                    "error_upper": "0.004",
-                    "error_lower": "0.004"
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
                 }
             }
         },

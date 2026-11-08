@@ -4,7 +4,7 @@
     "collaboration": "SINDRUM II",
     "title": "Test of lepton flavor conservation in mu -> e conversion on titanium",
     "arxiv": "no arxiv (published in Phys.Lett.B)",
-    "time": "1993-01-01",
+    "time": "1993.01.01",
     "abstract": "A search for mu->e conversion in muonic atoms using the SINDRUM II spectrometer at PSI. A first measurement on Ti gives upper limits on the branching ratios for ground-state transitions of R(mu- Ti -> e- Ti g.s.) / R(mu- Ti capture) < 4.3e-12 and R(mu- Ti -> e+ Ca g.s.) / R(mu- Ti capture) < 4.3e-12 (90% CL).",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -12,7 +12,7 @@
             "mu-.Ti.2.e-.Ti": {
                 "obs@1": {
                     "name": "R_mue_conv",
-                    "type@1_upper_limit": "4.3e-12",
+                    "type@1_upper": "4.3e-12",
                     "type@1_level": "90%@CL"
                 }
             }
@@ -21,7 +21,7 @@
             "mu-.Ti.2.e+.Ca": {
                 "obs@1": {
                     "name": "R_muconv",
-                    "type@1_upper_limit": "4.3e-12",
+                    "type@1_upper": "4.3e-12",
                     "type@1_level": "90%@CL"
                 }
             }

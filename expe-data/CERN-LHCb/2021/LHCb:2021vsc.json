@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Analysis of Neutral B-Meson Decays into Two Muons",
     "arxiv": "[hep-ex/2108.09284](https://arxiv.org/pdf/2108.09284)",
-    "time": "2021.01.01",
+    "time": "2021.08.20",
     "abstract": "an analysis of branching fraction and effective lifetime measurements of the rare decay $B^0_s \\to \\mu^+ \\mu^-$ and searches for the decays $B^0 \\to \\mu^+ \\mu^-$ and $B^0_s \\to \\mu^+ \\mu^- \\gamma$, using proton-proton collision data collected at centre-of-mass energies of 7, 8 and 13 TeV, corresponding to a luminosity of 9 fb$^{-1}$",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -22,12 +22,12 @@
                 },
                 "obs@2": {
                     "name": "Br",
-                    "type@1_upper_limit": "2.6e-10",
+                    "type@1_upper": "2.6e-10",
                     "type@1_level": "95%@CL"
                 },
                 "obs@3": {
                     "name": "Br",
-                    "type@1_upper_limit": "2e-09",
+                    "type@1_upper": "2e-09",
                     "type@1_level": "95%@CL"
                 }
             }

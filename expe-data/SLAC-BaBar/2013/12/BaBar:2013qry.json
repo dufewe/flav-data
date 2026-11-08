@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bbar.2.XsBar.e+.e-": {
+            "BBar.2.XsBar.e+.e-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.93",
@@ -85,7 +85,7 @@
             }
         },
         {
-            "Bbar.2.XsBar.mu+.mu-": {
+            "BBar.2.XsBar.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.66",
@@ -161,7 +161,7 @@
             }
         },
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.60",
@@ -237,27 +237,26 @@
             }
         },
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "Br[tot]",
-                    "value": "6.73",
+                    "value": "6.73e-6",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.70",
-                    "type@1_lower": "0.64",
+                    "type@1_upper": "7.0e-7",
+                    "type@1_lower": "6.4e-7",
                     "type@2_error": "expe",
-                    "type@2_upper": "0.34",
-                    "type@2_lower": "0.25",
+                    "type@2_upper": "3.4e-7",
+                    "type@2_lower": "2.5e-7",
                     "type@3_error": "theo",
-                    "type@3_upper": "0.50",
-                    "type@3_lower": "0.50",
-                    "unit": "1e-6",
+                    "type@3_upper": "5.0e-7",
+                    "type@3_lower": "5.0e-7",
                     "q2min": "0.1",
                     "q2max": "25.0"
                 }
             }
         },
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "ACP[tot]",
                     "value": "0.04",

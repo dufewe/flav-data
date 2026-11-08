@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Measurements of the S-wave fraction in $B^{0}\\rightarrow K^{+}\\pi^{-}\\mu^{+}\\mu^{-}$ decays and the $B^{0}\\rightarrow K^{\\ast}(892)^{0}\\mu^{+}\\mu^{-}$ differential branching fraction",
     "arxiv": "[hep-ex/1606.04731](https://arxiv.org/pdf/1606.04731)",
-    "time": "2016.01.01",
+    "time": "2016.06.15",
     "abstract": "a measurement of the differential branching fraction of $B^0 \\to K^\\ast(892)^0 \\mu^+ \\mu^-$ with a determination of the S-wave fraction of the $K^+ \\pi^-$ system in $B^0 \\to K^+ \\pi^- \\mu^+ \\mu^-$, based on $pp$-collision data with an integrated luminosity of 3.0 fb$^{-1}$.",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -130,8 +130,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -255,8 +254,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -420,8 +418,7 @@
                     "type@3_upper": "1.8e-09",
                     "type@3_lower": "1.9e-09"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {

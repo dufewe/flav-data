@@ -58,10 +58,10 @@ st.markdown('''
 ## Features
 
 - **Standardized JSON format** — every entry follows the same schema with metadata, data arrays, and transition-mode classification
-- **Machine-parseable naming** — `data` keys carry transition symbols (`A.B.2.C.D`) and observable names are bare symbols with optional `[condition]` qualifiers
+- **Machine-parseable naming** — each data group maps transition keys (`A.B.2.C.D`) to observables named by bare symbols with optional `[condition]` qualifiers
 - **Year-indexed organization** — annual index files (`LHCb@2025.json`) for fast lookup
 - **Month subdirectories** — files organized by arXiv v1 submission date
-- **Complete error breakdown** — component-level (stat/syst) errors with optional correlation matrices
+- **Complete error breakdown** — component errors (stat/syst) when split, total errors otherwise, plus confidence bounds and optional correlation matrices
 - **Cross-paper merging** — multiple arXiv papers describing the same measurement merged into a single JSON
 ''')
 
@@ -79,9 +79,10 @@ with col1:
 
     - **Flavor** — Transition symbols, particle abbreviations,
       observable naming rules, angular coefficients, CP asymmetries,
-      optimized observables (P), LFU differences (Q), CKM parameters
-    - **EWPO** — Electroweak precision observables: Z-pole,
-      W boson, weak mixing angle, Higgs, S/T/U parameters
+      optimized observables (P), LFU differences (Delta), CKM parameters
+    - **EWPO** — Electroweak precision observables: intrinsic
+      quantities (`no-transition`), process observables, ratios,
+      and `transition-mode` classification
     ''')
 
 with col2:
@@ -127,7 +128,7 @@ st.code('''{
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.69",
@@ -153,7 +154,9 @@ st.markdown('''
 | Principle | Implementation |
 |-----------|----------------|
 | All numeric values are strings | `"0.69"` not `0.69` |
-| Component errors preferred | Separate `type@1_error` (stat), `type@2_error` (syst) |
+| Multiple errors | Split into `type@1_error` (stat), `type@2_error` (syst), ... |
+| Single error | Written as the total error: `total_upper`/`total_lower` |
+| Limits | `type@N_upper`/`type@N_lower` with `type@N_level` |
 | Correlation matrices at group level | `correlation`/`type@1_correlation` alongside channel keys |
 | Transition key | group channel key `A.B.2.C.D` replaces $A + B \\to C + D$ |
 | No channel LaTeX | transition is encoded by the channel key; `data` stores no LaTeX |

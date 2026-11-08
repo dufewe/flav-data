@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Angular analysis and differential branching fraction of the decay $B^0_s\\to\\phi\\mu^+\\mu^-$",
     "arxiv": "[hep-ex/1506.08777](https://arxiv.org/pdf/1506.08777)",
-    "time": "2015.01.01",
+    "time": "2015.06.29",
     "abstract": "an angular analysis and a measurement of the differential branching fraction of the decay $B^0_s \\to \\phi \\mu^+ \\mu^-$, using data corresponding to an integrated luminosity of 3.0 fb$^{-1}$ of $pp$ collisions at $\\sqrt{s} = 7$ and $8$ TeV",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -138,8 +138,7 @@
                     "type@3_upper": "3.9e-09",
                     "type@3_lower": "3.8e-09"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -240,7 +239,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, 0.03, -0.15, 0.0, 0.02, 0.1, 0.03, 0.0],
                 [0.03, 1.0, 0.04, 0.07, 0.0, 0.05, -0.18, -0.05],
@@ -351,7 +349,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, -0.05, 0.27, 0.04, -0.09, 0.02, 0.02, -0.16],
                 [-0.05, 1.0, -0.23, -0.06, -0.05, 0.2, -0.11, 0.4],
@@ -462,7 +459,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, -0.03, -0.01, 0.11, 0.01, 0.03, -0.07, 0.09],
                 [-0.03, 1.0, -0.03, -0.01, -0.02, -0.18, 0.0, 0.05],
@@ -573,7 +569,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, 0.21, 0.11, 0.2, 0.06, 0.21, -0.05, 0.03],
                 [0.21, 1.0, 0.02, 0.12, 0.18, 0.08, -0.02, 0.04],
@@ -684,7 +679,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, -0.01, -0.01, 0.07, -0.05, 0.06, -0.06, -0.06],
                 [-0.01, 1.0, 0.03, -0.06, 0.11, -0.08, -0.06, 0.15],
@@ -795,7 +789,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, -0.12, 0.08, -0.32, 0.06, -0.04, 0.15, -0.01],
                 [-0.12, 1.0, -0.04, 0.4, 0.16, 0.22, 0.0, 0.02],
@@ -906,7 +899,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, -0.02, 0.08, 0.08, -0.04, 0.07, 0.03, -0.05],
                 [-0.02, 1.0, -0.07, 0.13, -0.13, 0.1, -0.06, 0.12],
@@ -1017,7 +1009,6 @@
                     "type@2_error": "syst"
                 }
             },
-            "method": "maximum likelihood",
             "correlation": [
                 [1.0, 0.01, -0.05, -0.03, 0.0, 0.07, -0.04, -0.08],
                 [0.01, 1.0, -0.03, 0.16, 0.09, 0.05, 0.02, 0.07],

@@ -4,12 +4,12 @@
     "collaboration": "ATLAS",
     "title": "Measurements of the Higgs boson production and decay rates and coupling strengths using pp collision data at sqrt(s)=7 and 8 TeV in the ATLAS experiment",
     "arxiv": "[hep-ex/1507.04548v1](https://arxiv.org/pdf/1507.04548.pdf)",
-    "time": "2015-07-16",
+    "time": "2015.07.16",
     "abstract": "Combined analyses of the Higgs boson production and decay rates and coupling strengths to vector bosons and fermions using 4.7 fb-1 at 7 TeV and 20.3 fb-1 at 8 TeV. The global signal strength is mu = 1.18 +0.15-0.14. Production mode signal strengths: mu_ggF=1.23, mu_VBF=1.23.",
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fbar": {
+            "g.g.2.H.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.18",
@@ -30,8 +30,8 @@
                 "obs@1": {
                     "name": "mu_ggF",
                     "value": "1.23",
-                    "error_upper": "0.23",
-                    "error_lower": "0.20"
+                    "total_upper": "0.23",
+                    "total_lower": "0.20"
                 }
             }
         },
@@ -40,18 +40,18 @@
                 "obs@1": {
                     "name": "mu_VBF",
                     "value": "1.23",
-                    "error_upper": "0.32",
-                    "error_lower": "0.32"
+                    "total_upper": "0.32",
+                    "total_lower": "0.32"
                 }
             }
         },
         {
-            "q.qbar.2.V.2.H.2.all": {
+            "q.qBar.2.V.2.H.2.all": {
                 "obs@1": {
                     "name": "mu_VH",
                     "value": "1.02",
-                    "error_upper": "0.31",
-                    "error_lower": "0.27"
+                    "total_upper": "0.31",
+                    "total_lower": "0.27"
                 }
             }
         }

@@ -4,12 +4,12 @@
     "collaboration": "Belle",
     "title": "Moments of the Electron Energy Spectrum and Partial Branching Fraction of $\\bar{B} \\to X_c e^- \\bar{\\nu}_e$ Decays at Belle",
     "arxiv": "[hep-ex/0610012v1](https://arxiv.org/pdf/hep-ex/0610012)",
-    "time": "2006.10.04",
+    "time": "2006.10.06",
     "abstract": "We report a measurement of the inclusive electron energy spectrum for charmed semileptonic decays of $B$ mesons in a 140 fb$^{-1}$ data sample collected at the $\\Upsilon(4S)$ resonance with the Belle detector at the KEKB asymmetric-energy $e^+e^-$ collider. We determine the first four moments of the electron energy spectrum for threshold values of the electron energy between 0.4 and 2.0 GeV. We measure the independent $B^+$ and $B^0$ partial branching fractions with electron threshold energies of 0.4 GeV to be $\\Delta\\mathcal{B}(B^+ \\to X_c e^- \\bar{\\nu}_e) = (10.79 \\pm 0.25 \\pm 0.27)\\%$ and $\\Delta\\mathcal{B}(B^0 \\to X_c e^- \\bar{\\nu}_e) = (10.08 \\pm 0.30 \\pm 0.22)\\%$.",
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Xce.nuBar": {
+            "B+.2.Xce.vBar": {
                 "obs@1": {
                     "name": "dBr[Ecut>0.4]",
                     "value": "10.79",
@@ -39,7 +39,7 @@
             }
         },
         {
-            "B0Bar.2.Xce.nuBar": {
+            "B0Bar.2.Xce.vBar": {
                 "obs@1": {
                     "name": "dBr[Ecut>0.4]",
                     "value": "10.08",
@@ -69,7 +69,7 @@
             }
         },
         {
-            "B.2.Xce.nuBar": {
+            "B.2.Xce.vBar": {
                 "obs@1": {
                     "name": "M1[Ecut>0.4]",
                     "value": "1393.92",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B.2.Xce.nuBar": {
+            "B.2.Xce.vBar": {
                 "obs@1": {
                     "name": "M1[Ecut>0.4]",
                     "value": "1393.92",
@@ -609,7 +609,7 @@
             ]
         },
         {
-            "B.2.Xce.nuBar": {
+            "B.2.Xce.vBar": {
                 "obs@1": {
                     "name": "dBr[Ecut>0.4]",
                     "value": "10.44",

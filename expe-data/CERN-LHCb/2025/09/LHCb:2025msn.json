@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "W+.2.mu+.nu": {
+            "W+.2.mu+.v": {
                 "obs@1": {
                     "name": "dSigma/dpT",
                     "value": "11.93",
@@ -183,7 +183,7 @@
             ]
         },
         {
-            "W+.2.mu+.nu": {
+            "W+.2.mu+.v": {
                 "obs@1": {
                     "name": "Sigma",
                     "value": "300.9",
@@ -203,7 +203,7 @@
             }
         },
         {
-            "W-.2.mu-.nuBar": {
+            "W-.2.mu-.vBar": {
                 "obs@1": {
                     "name": "dSigma/dpT",
                     "value": "14.81",
@@ -377,7 +377,7 @@
             ]
         },
         {
-            "W-.2.mu-.nuBar": {
+            "W-.2.mu-.vBar": {
                 "obs@1": {
                     "name": "Sigma",
                     "value": "236.9",

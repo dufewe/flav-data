@@ -1,0 +1,52 @@
+{
+    "inspire-hep": "2138787",
+    "author": "D. Babusci et al.",
+    "collaboration": "KLOE-2",
+    "title": "Measurement of the $K_{S}\\to \\pi e \\nu$ branching fraction with the KLOE experiment",
+    "arxiv": "2208.04872v4 [hep-ex]",
+    "time": "2022.08.09",
+    "abstract": "The ratio $\\mathcal{R} = \\Gamma(K_{S}\\to \\pi e \\nu)/\\Gamma(K_{S}\\to \\pi^+ \\pi^-)$ has been measured with a sample of 300 million $K_{S}$ mesons produced in $\\phi \\to K_{L} K_{S}$ decays recorded by the KLOE experiment at the DA$\\Phi$NE $e^+ e^-$ collider. With $49647 \\pm 316$ signal events we measure $\\mathcal{R} = (1.0421 \\pm 0.0066_{\\rm stat} \\pm 0.0075_{\\rm syst}) \\times 10^{-3}$. The combination with our previous measurement gives $\\mathcal{R} = (1.0338 \\pm 0.0054_{\\rm stat} \\pm 0.0064_{\\rm syst}) \\times 10^{-3}$. From this value we derive the branching fraction $\\mathcal{B}(K_{S} \\to \\pi e \\nu) = (7.153 \\pm 0.037_{\\rm stat} \\pm 0.044_{\\rm syst}) \\times 10^{-4}$ and $f_+(0)|V_{us}| = 0.2170 \\pm 0.0009$.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "KS0.2.pi-.e+.ve/KS0.2.pi+.pi-": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "1.0421e-3",
+                    "total_upper": "0.0100e-3",
+                    "total_lower": "0.0100e-3"
+                }
+            }
+        },
+        {
+            "KS0.2.pi-.e+.ve/KS0.2.pi+.pi-": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "1.0338e-3",
+                    "total_upper": "0.0084e-3",
+                    "total_lower": "0.0084e-3"
+                }
+            }
+        },
+        {
+            "KS0.2.pi-.e+.ve": {
+                "obs@1": {
+                    "name": "BR",
+                    "value": "7.153e-4",
+                    "total_upper": "0.058e-4",
+                    "total_lower": "0.058e-4"
+                }
+            }
+        },
+        {
+            "KS0.2.pi-.e+.ve": {
+                "obs@1": {
+                    "name": "Vus.f+",
+                    "value": "0.2170",
+                    "total_upper": "0.0009",
+                    "total_lower": "0.0009"
+                }
+            }
+        }
+    ]
+}

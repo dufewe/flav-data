@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Search for the lepton-flavour violating decays $B_{(s)}^{0} \\to e^{\\pm}\\mu^{\\mp}$",
     "arxiv": "[hep-ex/1710.04111](https://arxiv.org/pdf/1710.04111)",
-    "time": "2017.01.01",
+    "time": "2017.10.11",
     "abstract": "a search for the lepton-flavour violating decays $B^0_s \\to e^\\pm \\mu^\\mp$ and $B^0 \\to e^\\pm \\mu^\\mp$ based on a sample of proton-proton collision data corresponding to an integrated luminosity of 3 fb$^{-1}$ at centre-of-mass energies of 7 and 8 TeV",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -12,46 +12,43 @@
             "no-transition": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "5.4e-09",
+                    "type@1_upper": "5.4e-09",
                     "type@1_level": "90@CL"
                 },
                 "obs@2": {
                     "name": "Br",
-                    "type@1_upper_limit": "6.3e-09",
+                    "type@1_upper": "6.3e-09",
                     "type@1_level": "95@CL"
                 }
-            },
-            "method": "heavy dominance"
+            }
         },
         {
             "no-transition": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "6e-09",
+                    "type@1_upper": "6e-09",
                     "type@1_level": "90@CL"
                 },
                 "obs@2": {
                     "name": "Br",
-                    "type@1_upper_limit": "7.2e-09",
+                    "type@1_upper": "7.2e-09",
                     "type@1_level": "95@CL"
                 }
-            },
-            "method": "light dominance"
+            }
         },
         {
             "no-transition": {
                 "obs@1": {
                     "name": "Br",
-                    "type@1_upper_limit": "1e-09",
+                    "type@1_upper": "1e-09",
                     "type@1_level": "90@CL"
                 },
                 "obs@2": {
                     "name": "Br",
-                    "type@1_upper_limit": "1.3e-09",
+                    "type@1_upper": "1.3e-09",
                     "type@1_level": "95@CL"
                 }
-            },
-            "method": "light dominance"
+            }
         }
     ]
 }

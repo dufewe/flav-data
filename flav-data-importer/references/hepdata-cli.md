@@ -150,7 +150,8 @@ python3 flav-data-importer/scripts/hepdata-ext.py 1409497 -o /tmp/hd --table "Ta
 ## Notes
 
 1. **Must use hepdata-cli** — direct `curl`/`urllib` is blocked by Cloudflare.
-2. **Theory papers** rarely have HEPData — fall through to PDF extraction.
+2. **Theory papers** rarely have HEPData — check the arXiv ancillary files
+   and e-print LaTeX source next (`data-source.md` §4), PDF last.
 3. **Table names are passed verbatim** — `hepdata-cli` handles quoting/encoding.
 4. **Missing matrix entries**: `value: "-"` (or any non-numeric cell) is
    substituted with `0.0` and reported as a warning, keeping the matrix square.

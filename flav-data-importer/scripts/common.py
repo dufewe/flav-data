@@ -102,7 +102,7 @@ _UNICODE_TO_LATEX_MAP = {
     '\u207e': '^{)}',        # ⁾
 }
 
-# Multi-character replacements (applied after single-char map)
+# Typographic replacements (applied before the single-char map)
 _MULTI_CHAR_REPLACEMENTS = [
     # en-dash, em-dash → LaTeX escape (write as literal ---/--)
     ('\u2013', '--'),    # en-dash
@@ -125,74 +125,37 @@ _MULTI_CHAR_REPLACEMENTS = [
 
 
 def unicode_to_latex(text: str) -> str:
-    """Replace all supported Unicode characters in *text* with LaTeX equivalents.
+    """Replace supported Unicode characters with LaTeX (SKILL.md rule 4).
 
-    Applies the mapping defined in SKILL.md "Core Conventions" rule 4:
-    Greek letters, math symbols, smart quotes, dashes, and common
-    typographic characters are converted. Unrecognised characters pass
-    through unchanged.
-
-    Parameters
-    ----------
-    text : str
-        The input string, possibly containing Unicode characters.
-
-    Returns
-    -------
-    str
-        The converted string with LaTeX escape sequences.
+    Covers Greek letters, math symbols, dashes, smart quotes, ligatures,
+    and invisible characters. Anything else passes through unchanged.
     """
     if not isinstance(text, str):
         return text
     result = text
-    # Multi-char replacements first (so e.g. smart quotes aren't
-    # corrupted by single-char Greek substitutions).
     for char, replacement in _MULTI_CHAR_REPLACEMENTS:
         result = result.replace(char, replacement)
-    # Single-char replacements
     for char, replacement in _UNICODE_TO_LATEX_MAP.items():
         result = result.replace(char, replacement)
     return result
 
 
 # ---------------------------------------------------------------------------
-# BibTeX author-name formatting
+# BibTeX author-name formatting (SKILL.md rule 3)
 # ---------------------------------------------------------------------------
-# Rule 3 (SKILL.md "Core Conventions"):
-#   Author field must use InspireHEP BibTeX format:
-#       "Surname, Initials."
-#   Example: "Aaij, Roel" → "Aaij, R."
-#   Already-initials form ("A.M.") passes through unchanged.
-#   Fallback (no person names): "{group} collaboration".
 
 def to_bibtex(full_name: str) -> str:
-    """Convert an InspireHEP full author name to BibTeX initials form.
+    """Shorten an InspireHEP name to BibTeX initials: ``"Aaij, Roel"`` → ``"Aaij, R."``.
 
-    InspireHEP stores authors as ``"Surname, Full First Name"``
-    (e.g. ``"Aaij, Roel"``).  This function shortens the given/first
-    names to initials only: ``"Aaij, R."``.  If the name is already
-    in initials form (e.g. ``"A.M."``) it passes through unchanged.
-
-    Parameters
-    ----------
-    full_name : str
-        Author name in any of these forms:
-
-        - ``"Surname, Full First Name"`` (most common from InspireHEP)
-        - ``"Surname, F."`` (already initials — pass through)
-        - ``"Surname"`` (no comma — pass through)
-        - ``"Collaboration collaboration"`` (fallback — pass through)
-
-    Returns
-    -------
-    str
-        The BibTeX-formatted name string.
+    Already-initials forms (``"R."``, ``"A.M."``), surname-only strings, and
+    group fallbacks pass through. Hyphenated given names keep both initials
+    (``"Jean-Luc"`` → ``"J.-L."``).
     """
     if not isinstance(full_name, str) or not full_name.strip():
         return full_name or ''
 
     name = full_name.strip()
-    
+
     # No comma → surname-only or group name; return as-is.
     if ',' not in name:
         return name
@@ -201,23 +164,18 @@ def to_bibtex(full_name: str) -> str:
     surname = parts[0].strip()
     first_part = parts[1].strip()
 
-    # If first_part is a single letter or already dotted initials
-    # (e.g. "R." or "A.M." or "R"), pass through as-is.
+    # Up to three uppercase letters means the name is already initials.
     first_clean = first_part.replace('.', '').replace(' ', '')
     if len(first_clean) <= 3 and all(c.isupper() for c in first_clean):
-        # Already initials form — normalise spacing
-        # "R" → "R.",  "A M" → "A.M.",  "A. M." → "A.M."
+        # Normalise spacing: "R" → "R.", "A. M." → "A.M."
         initials = first_part.replace(' ', '')
         if not initials.endswith('.'):
             initials += '.'
         return f'{surname}, {initials}'
 
-    # Full first name → extract initials
-    # "Roel" → "R.",  "John Paul" → "J.P."
     tokens = first_part.split()
     initials_list = []
     for token in tokens:
-        # Handle hyphenated first names: "Jean-Luc" → "J.-L."
         sub_tokens = token.split('-')
         sub_initials = [st[0].upper() + '.' for st in sub_tokens if st]
         initials_list.append('-'.join(sub_initials))
@@ -229,9 +187,9 @@ def to_bibtex(full_name: str) -> str:
 def format_authors(full_names: list[str]) -> str:
     """Format an author list per SKILL.md rule 3.
 
-    Tiers: 1 author → ``"Surname, I."``; 2–3 → comma-separated BibTeX
-    names with ``and``; 4+ → ``"Surname, I. and others"``. An empty list
-    returns ``''``; the caller substitutes a collaboration fallback.
+    Tiers: 1 → ``"Surname, I."``; 2 → ``"A and B"``; 3 → ``"A, B, and C"``;
+    4+ → ``"A and others"``. An empty list returns ``''``; the caller
+    substitutes a collaboration fallback.
     """
     names = [name for name in (full_names or []) if name]
     if not names:

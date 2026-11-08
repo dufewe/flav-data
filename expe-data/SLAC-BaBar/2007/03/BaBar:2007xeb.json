@@ -4,69 +4,69 @@
     "collaboration": "BaBar",
     "title": "Search for the Rare Decay $B \\to \\pi \\ell^{+} \\ell^{-}$",
     "arxiv": "[hep-ex/0703018v1](https://arxiv.org/pdf/hep-ex/0703018)",
-    "time": "2007.03.07",
+    "time": "2007.03.09",
     "abstract": "We have performed a search for the flavor-changing neutral-current decays $B \\to \\pi \\ell^{+} \\ell^{-}$, where $\\ell^{+} \\ell^{-}$ is either $e^{+} e^{-}$ or $\\mu^{+} \\mu^{-}$, using a sample of 230 million $B\\bar{B}$ events collected with the BaBar detector at the $\\Upsilon(4S)$ resonance. We observe no evidence of a signal and measure the upper limit on the isospin-averaged branching fraction to be $\\mathcal{B}(B \\to \\pi \\ell^{+} \\ell^{-}) < 9.1 \\times 10^{-8}$ at 90% confidence level. We also search for the lepton-flavor-violating decays $B \\to \\pi e^{\\pm} \\mu^{\\mp}$ and measure an upper limit on the isospin-averaged branching fraction of $\\mathcal{B}(B \\to \\pi e^{\\pm} \\mu^{\\mp}) < 9.2 \\times 10^{-8}$ at 90% confidence level.",
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.pip.ep.em": {
+            "B+.2.pi+.e+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.8e-7",
+                    "type@1_upper": "1.8e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.pi0.ep.em": {
+            "B0.2.pi0.e+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.4e-7",
+                    "type@1_upper": "1.4e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.pip.mup.mum": {
+            "B+.2.pi+.mu+.mu-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "2.8e-7",
+                    "type@1_upper": "2.8e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.pi0.mup.mum": {
+            "B0.2.pi0.mu+.mu-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.1e-7",
+                    "type@1_upper": "5.1e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.pip.mup.em": {
+            "B+.2.pi+.mu+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.7e-7",
+                    "type@1_upper": "1.7e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.pi0.mup.em": {
+            "B0.2.pi0.mu+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.4e-7",
+                    "type@1_upper": "1.4e-7",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "Bp.2.pip.l+.l-": {
+            "B+.2.pi+.l+.l-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.2e-7",
+                    "type@1_upper": "1.2e-7",
                     "type@1_level": "90%@CL"
                 }
             }
@@ -75,7 +75,7 @@
             "B0.2.pi0.l+.l-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.2e-7",
+                    "type@1_upper": "1.2e-7",
                     "type@1_level": "90%@CL"
                 }
             }
@@ -84,16 +84,16 @@
             "B.2.pi.l+.l-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "9.1e-8",
+                    "type@1_upper": "9.1e-8",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.pi.mup.em": {
+            "B.2.pi.mu+.e-": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "9.2e-8",
+                    "type@1_upper": "9.2e-8",
                     "type@1_level": "90%@CL"
                 }
             }

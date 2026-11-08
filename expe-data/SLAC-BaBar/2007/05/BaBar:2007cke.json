@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.Dstm.l+.nu": {
+            "B0Bar.2.D*-.l+.v": {
                 "obs@1": {
                     "name": "rho2",
                     "value": "1.157",
@@ -22,33 +22,31 @@
                 },
                 "obs@2": {
                     "name": "F1Vcb",
-                    "value": "34.7",
+                    "value": "3.47e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.4",
-                    "type@1_lower": "0.4",
+                    "type@1_upper": "4e-4",
+                    "type@1_lower": "4e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "1.0",
-                    "type@2_lower": "1.0",
-                    "unit": "1e-3"
+                    "type@2_upper": "1.0e-3",
+                    "type@2_lower": "1.0e-3"
                 },
                 "obs@3": {
                     "name": "Vcb",
-                    "value": "37.8",
+                    "value": "3.78e-2",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.4",
-                    "type@1_lower": "0.4",
+                    "type@1_upper": "4e-4",
+                    "type@1_lower": "4e-4",
                     "type@2_error": "syst",
-                    "type@2_upper": "1.1",
-                    "type@2_lower": "1.1",
+                    "type@2_upper": "1.1e-3",
+                    "type@2_lower": "1.1e-3",
                     "type@3_error": "theo",
-                    "type@3_upper": "1.2",
-                    "type@3_lower": "1.2",
-                    "unit": "1e-3"
+                    "type@3_upper": "1.2e-3",
+                    "type@3_lower": "1.2e-3"
                 }
             }
         },
         {
-            "B0Bar.2.Dstm.l+.nu": {
+            "B0Bar.2.D*-.l+.v": {
                 "obs@1": {
                     "name": "R1",
                     "value": "1.327",
@@ -72,7 +70,7 @@
             }
         },
         {
-            "B0Bar.2.Dstm.l+.nu": {
+            "B0Bar.2.D*-.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "4.72",

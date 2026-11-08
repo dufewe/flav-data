@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kp.mup.mu-": {
+            "B+.2.K+.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "4.5e-07",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "Bp.2.Kp.mup.mu-": {
+            "B+.2.K+.mu+.mu-": {
                 "obs@1": {
                     "name": "AFB",
                     "q2min": "0.00",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B0.2.Kst0.mup.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.14e-06",
@@ -113,7 +113,7 @@
             }
         },
         {
-            "B0.2.Kst0.mup.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "FL",
                     "q2min": "0.00",
@@ -333,7 +333,7 @@
             }
         },
         {
-            "B0.2.Kst0.mup.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "Aim",
                     "q2min": "0.00",
@@ -409,7 +409,7 @@
             }
         },
         {
-            "Bs0.2.phi.mup.mu-": {
+            "Bs0.2.phi.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.17e-06",
@@ -423,7 +423,7 @@
             }
         },
         {
-            "B0.2.KS0.mup.mu-": {
+            "B0.2.KS0.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "3.3e-07",
@@ -437,7 +437,7 @@
             }
         },
         {
-            "Bp.2.Kstp.mup.mu-": {
+            "B+.2.K*+.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "8.9e-07",
@@ -451,7 +451,7 @@
             }
         },
         {
-            "Lambdab0.2.Lambda.mup.mu-": {
+            "Lambdab0.2.Lambda.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.95e-06",

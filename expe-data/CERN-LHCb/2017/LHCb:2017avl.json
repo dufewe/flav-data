@@ -4,14 +4,14 @@
     "collaboration": "LHCb",
     "title": "Test of lepton universality with $B^{0} \\rightarrow K^{*0}\\ell^{+}\\ell^{-}$ decays",
     "arxiv": "[hep-ex/1705.05802](https://arxiv.org/pdf/1705.05802)",
-    "time": "2017.01.01",
+    "time": "2017.05.16",
     "abstract": "a test of lepton universality, performed by measuring the ratio of the branching fractions of the $B^0 \\to K^{\\ast0} \\mu^+ \\mu^-$ and $B^0 \\to K^{\\ast0} e^+ e^-$ decays, $R_{K^{\\ast0}}$, where the $K^{\\ast0}$ meson is reconstructed in the final state $K^+ \\pi^-$, using proton-proton collision data with an integrated luminosity of about 3 fb$^{-1}$ at centre-of-mass energies of 7 and 8 TeV",
     "transition-mode": "leptonic-decay",
     "data": [
         {
             "no-transition": {
                 "obs@1": {
-                    "name": "RKst0[mu/e]",
+                    "name": "RK*0[mu/e]",
                     "value": "0.66",
                     "q2min": "0.045",
                     "q2max": "1.1",
@@ -23,7 +23,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@2": {
-                    "name": "RKst0[mu/e]",
+                    "name": "RK*0[mu/e]",
                     "value": "0.69",
                     "q2min": "1.1",
                     "q2max": "6.0",

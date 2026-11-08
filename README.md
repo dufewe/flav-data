@@ -56,7 +56,7 @@ Each paper corresponds to one JSON file with the following structure:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.Kst0.mu+.mu-": {
+            "B0.2.K*0.mu+.mu-": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.69",
@@ -78,10 +78,15 @@ Each paper corresponds to one JSON file with the following structure:
 ```
 
 `data` is an array of groups. Each group maps one or more transition
-channels to an `obs@N` object and may carry a group-level matrix whose
-rows follow the channel keys, then their `obs@N` order. The channel key
-alone encodes the transition; `data` stores no LaTeX. Add another group
-for different kinematic bins, fit methods, or datasets.
+channels to an `obs@N` object and may carry group-level `dataset` /
+`scheme` strings plus a matrix whose rows follow the channel
+keys, then their `obs@N` order. The channel key alone encodes the
+transition; `data` stores no LaTeX. `dataset` records data sources only
+(`LQCD`, `LCSR`, `EXPE`, joined with `+` in that order). Groups of
+form-factor expansion coefficients (`aN_FF`) must name their expansion in
+`scheme` as one of `BGL`, `BCL`, `BSZ`, or `DLM` (full names and arXiv IDs
+in the importer's `references/obs-abbr.md`). Add another group for
+different kinematic bins, fit choices, or datasets.
 
 ### Key Design Principles
 
@@ -102,10 +107,14 @@ Represents $A + B \to C + D$ with `2` replacing the arrow.
 
 | Rule | Example |
 |------|---------|
-| Charge ordering: `+` → `-` → `0` | `B+.2.K+.mu+.mu-` |
-| Antiparticles: name + `Bar` | `B0Bar.2.e+.e-` |
-| Charged particles: use charge directly | `W-.2.mu-.nuBar` |
-| Neutrinos: no flavor tag | `nu`, `nuBar` |
+| Particle-type order: baryon → meson → charged lepton → neutral lepton | `Lambdab0.2.p.J/psi.pi-` |
+| Mass order within a type: heaviest → lightest | `B0.2.K*0.tau-.e+` |
+| Charge order for equal masses: `+` → `-` → `0` | `B+.2.K+.mu+.mu-` |
+| Antiparticles: name + `Bar` (baryons: `Bar` last) | `B0Bar.2.e+.e-`, `Lambdac+Bar` |
+| Charged particles: use charge directly | `W-.2.mu-.vBar` |
+| Neutrinos: `v`/`vBar`, flavor appended only when the signature fixes it | `v`, `vBar`, `ve` |
+| Particle case follows the handwritten symbol | `pi0`, `Lambdab0`, `KS0` |
+| Antiparticle marker is capital `Bar` | `K0Bar`, `pBar`, `fBar` |
 | Multi-step: additional `2` separators | `p.p.2.Z.2.mu+.mu-` |
 
 ### Observable Name: `OBS` / `OBS[condition]`
@@ -132,10 +141,10 @@ symbol plus optional condition/method tags.
 | Lifetimes | `Tau` |
 | Masses | `Mass`, `mass`, `DeltaMass` |
 | Cross sections | `Sigma`, `dSigma/dpT`, `dSigma/deta` |
-| Angular coefficients | `FL`, `S3`–`S9`, `AFB`, `FH` |
-| CP asymmetries | `ACP`, `DeltaACP`, `A3`–`A9`, `SigmaAFB`, `DeltaAFB` |
-| Optimized (P) | `P1`–`P3`, `P4p`, `P5p`, `P6p`, `P8p` |
-| LFU differences (Q) | `QFL`, `Q1`–`Q6`, `Q8` |
+| Angular coefficients | `FL`, `S1c`–`S9`, `AFB`, `FS`, `FH`, `SS1re`–`SS5im` |
+| CP asymmetries | `ACP`, `DeltaACP`, `AFB_CP`, `AFS`, `A1c`–`A9`, `AS1re`–`AS5im` |
+| Optimized (P) | `P1`–`P3`, `P4p`, `P5p`, `P6p`, `P6cp`, `P8p` |
+| LFU differences (`Delta`) | `DeltaFL`, `DeltaP1`–`DeltaP3`, `DeltaP4p`, `DeltaP5p`, `DeltaP6p`, `DeltaP8p` |
 | Ratios | `R`, `r` |
 | CKM parameters | `gammaCKM`, `r`, `delta` |
 
@@ -155,14 +164,14 @@ flav-data/
 ├── theo-data/
 │   ├── HPQCD/                       # Large collaborations: own folder
 │   └── LQCD/, QCD/                  # Smaller calculation groups, grouped by method
-├── Observable/
-│   ├── Flavor.py                    # Observable naming guide
-│   └── EWPO.py                      # EWPO naming guide
+├── obs-info/
+│   ├── flavor.py                    # Observable naming guide
+│   └── ewpo.py                      # EWPO naming guide
 ├── tests/
 │   └── test_importer_regressions.py
 ├── main.py                          # Streamlit app entry (builds all pages)
 ├── home.py                          # Homepage
-├── flav_dashboard.py                # Dashboard renderers (standard + snapshot)
+├── flav.py                          # Dashboard renderers (standard + snapshot)
 └── defs.py                          # Shared definitions
 ```
 
@@ -204,7 +213,7 @@ The full Lab-Collaboration folder convention is:
 - **HFLAV** and **PDG** store data in a non-standard flav-data schema
   (one snapshot JSON per year whose keys are subgroup names containing
   nested observables). `main.py` routes them to
-  `run_snapshot_dashboard` in `flav_dashboard.py`, which bypasses
+  `run_snapshot_dashboard` in `flav.py`, which bypasses
   `run_dashboard`.
 
 The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) drop data into `expe-data/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index. `main.py` generates the page automatically.

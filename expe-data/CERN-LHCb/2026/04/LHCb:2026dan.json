@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "p.p.2.W+.2.mu+.nu": {
+            "p.p.2.W+.2.mu+.v": {
                 "obs@1": {
                     "name": "Sigma",
                     "value": "1754.2",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "p.p.2.W-.2.mu-.nuBar": {
+            "p.p.2.W-.2.mu-.vBar": {
                 "obs@1": {
                     "name": "Sigma",
                     "value": "1178.1",

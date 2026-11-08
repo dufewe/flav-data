@@ -13,11 +13,11 @@
                 "obs@1": {
                     "name": "Br",
                     "value": "-0.1e-8",
-                    "error_upper": "1.1e-8",
-                    "error_lower": "1.1e-8",
-                    "type@1_upper_limit": "1.9e-8",
+                    "total_upper": "1.1e-8",
+                    "total_lower": "1.1e-8",
+                    "type@1_upper": "1.9e-8",
                     "type@1_level": "90%@CLs",
-                    "type@2_upper_limit": "2.3e-8",
+                    "type@2_upper": "2.3e-8",
                     "type@2_level": "95%@CLs"
                 }
             }

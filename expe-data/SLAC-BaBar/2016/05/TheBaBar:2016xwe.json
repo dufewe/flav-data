@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kp.tau+.tau-": {
+            "B+.2.K+.tau+.tau-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.00131",
@@ -22,7 +22,7 @@
                 },
                 "obs@2": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "0.00225",
+                    "type@1_upper": "0.00225",
                     "type@1_level": "90%@CL"
                 }
             }

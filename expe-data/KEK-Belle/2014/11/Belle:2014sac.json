@@ -12,7 +12,7 @@
             "Bs0.2.gamma.gamma": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "3.1e-6",
+                    "type@1_upper": "3.1e-6",
                     "type@1_level": "90%@CL"
                 }
             }
@@ -21,17 +21,16 @@
             "Bs0.2.phi.gamma": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "3.6",
+                    "value": "3.6e-5",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.5",
-                    "type@1_lower": "0.5",
+                    "type@1_upper": "5e-6",
+                    "type@1_lower": "5e-6",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.3",
-                    "type@2_lower": "0.3",
+                    "type@2_upper": "3e-6",
+                    "type@2_lower": "3e-6",
                     "type@3_error": "theo",
-                    "type@3_upper": "0.6",
-                    "type@3_lower": "0.6",
-                    "unit": "1e-5"
+                    "type@3_upper": "6e-6",
+                    "type@3_lower": "6e-6"
                 }
             }
         }

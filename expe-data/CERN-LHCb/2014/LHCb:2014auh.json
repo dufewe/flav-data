@@ -4,7 +4,7 @@
     "collaboration": "LHCb",
     "title": "Angular analysis of charged and neutral $B \\to K \\mu^+\\mu^-$  decays",
     "arxiv": "[hep-ex/1403.8045](https://arxiv.org/pdf/1403.8045)",
-    "time": "2014.01.01",
+    "time": "2014.03.31",
     "abstract": "an analysis of the angular distributions of the rare decays $B^+ \\to K^+ \\mu^+ \\mu^-$ and $B^0 \\to K^0_S \\mu^+ \\mu^-$ with data corresponding to 3 fb$^{-1}$ of integrated luminosity, collected in proton-proton collisions at 7 and 8 TeV centre-of-mass energies",
     "transition-mode": "leptonic-decay",
     "data": [
@@ -238,8 +238,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -471,8 +470,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         },
         {
             "no-transition": {
@@ -560,8 +558,7 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            },
-            "method": "maximum likelihood"
+            }
         }
     ]
 }

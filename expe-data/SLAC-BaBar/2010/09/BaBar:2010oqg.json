@@ -9,94 +9,84 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bp.2.Kp.nu.nuBar": {
+            "B+.2.K+.v.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.8",
-                    "type@1_lower": "0.7",
-                    "unit": "1e-5"
+                    "value": "2e-6",
+                    "total_upper": "8e-6",
+                    "total_lower": "7e-6"
                 },
                 "obs@2": {
                     "name": "Br[low-q2]",
-                    "value": "0.2",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.6",
-                    "type@1_lower": "0.5",
-                    "unit": "1e-5",
+                    "value": "2e-6",
+                    "total_upper": "6e-6",
+                    "total_lower": "5e-6",
                     "q2min": "0.0",
                     "q2max": "11.2"
                 },
                 "obs@3": {
                     "name": "Br[high-q2]",
-                    "value": "-1.8",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.8",
-                    "type@1_lower": "3.8",
-                    "unit": "1e-5",
+                    "value": "-1.8e-5",
+                    "total_upper": "3.8e-5",
+                    "total_lower": "3.8e-5",
                     "q2min": "11.2",
                     "q2max": "28.3"
                 }
             }
         },
         {
-            "Bp.2.Kp.nu.nuBar": {
+            "B+.2.K+.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.3e-5",
+                    "type@1_upper": "1.3e-5",
                     "type@1_level": "90%@CL"
                 },
                 "obs@2": {
                     "name": "Br[low-q2][90%@CL]",
-                    "type@1_upper_limit": "0.9e-5",
+                    "type@1_upper": "0.9e-5",
                     "type@1_level": "90%@CL"
                 },
                 "obs@3": {
                     "name": "Br[high-q2][90%@CL]",
-                    "type@1_upper_limit": "3.1e-5",
+                    "type@1_upper": "3.1e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B0.2.K0.nu.nuBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.7",
-                    "type@1_error": "stat",
-                    "type@1_upper": "3.1",
-                    "type@1_lower": "2.1",
-                    "unit": "1e-5"
+                    "value": "1.7e-5",
+                    "total_upper": "3.1e-5",
+                    "total_lower": "2.1e-5"
                 }
             }
         },
         {
-            "B0.2.K0.nu.nuBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "5.6e-5",
+                    "type@1_upper": "5.6e-5",
                     "type@1_level": "90%@CL"
                 }
             }
         },
         {
-            "B.2.K.nu.nuBar": {
+            "B.2.K.v.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.5",
-                    "type@1_error": "stat",
-                    "type@1_upper": "0.7",
-                    "type@1_lower": "0.7",
-                    "unit": "1e-5"
+                    "value": "5e-6",
+                    "total_upper": "7e-6",
+                    "total_lower": "7e-6"
                 }
             }
         },
         {
-            "B.2.K.nu.nuBar": {
+            "B.2.K.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
-                    "type@1_upper_limit": "1.4e-5",
+                    "type@1_upper": "1.4e-5",
                     "type@1_level": "90%@CL"
                 }
             }

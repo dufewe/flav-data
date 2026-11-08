@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bbar.2.XsBar.l+.l-": {
+            "BBar.2.XsBar.l+.l-": {
                 "obs@1": {
                     "name": "AFB",
                     "value": "0.30",

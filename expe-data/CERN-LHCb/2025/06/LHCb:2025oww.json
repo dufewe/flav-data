@@ -45,15 +45,15 @@
                 "obs@1": {
                     "name": "Tau(Omegac0)",
                     "value": "274.8",
-                    "error_upper": "10.5",
-                    "error_lower": "10.5",
+                    "total_upper": "10.5",
+                    "total_lower": "10.5",
                     "unit": "fs"
                 },
                 "obs@2": {
                     "name": "Tau(Xic0)",
                     "value": "150.7",
-                    "error_upper": "1.6",
-                    "error_lower": "1.6",
+                    "total_upper": "1.6",
+                    "total_lower": "1.6",
                     "unit": "fs"
                 }
             }
