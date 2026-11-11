@@ -1,0 +1,103 @@
+{
+    "inspire-hep": "[Leljak:2021vte](https://inspirehep.net/literature/1846695)",
+    "author": "Leljak, D., Meli\\'{c}, B., and van Dyk, D.",
+    "title": "The $\\bar{B}\\to \\pi$ form factors from QCD and their impact on $|V_{ub}|$",
+    "arxiv": "[hep-ph/2102.07233v2](https://arxiv.org/pdf/2102.07233)",
+    "time": "2021.02.14",
+    "abstract": "We revisit light-cone sum rules with pion distribution amplitudes to determine the full set of local $B \\to \\pi$ form factors. To this end, we determine all duality threshold parameters from a Bayesian fit for the first time. Our results, obtained at small momentum transfer $q^2$, are extrapolated to large $q^2$ where they agree with precise lattice QCD results. We find that a modification to the commonly used BCL parametrization is crucial to interpolate the scalar form factor between the two $q^2$ regions. We provide numerical results for the form factor parameters -- including their covariance -- based on simultaneous fit of all three form factors to both the sum rule and lattice QCD results. Our predictions for the form factors agree well with measurements of the $q^2$ spectrum of the semileptonic decay $\\bar{B}^0\\to \\pi^+\\ell^-\\bar\\nu$. From the world average of the latter we obtain $|V_{ub}| = (3.77 \\pm 0.15)\\cdot 10^{-3}$, which is in agreement with the most recent inclusive determination at the $1\\,\\sigma$ level.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_fp",
+                    "value": "0.234676",
+                    "total_upper": "0.018956",
+                    "total_lower": "0.018956"
+                },
+                "obs@2": {
+                    "name": "a1_fp",
+                    "value": "-2.45084",
+                    "total_upper": "0.50589",
+                    "total_lower": "0.50589"
+                },
+                "obs@3": {
+                    "name": "a2_fp",
+                    "value": "-0.150972",
+                    "total_upper": "1.1483",
+                    "total_lower": "1.1483"
+                },
+                "obs@4": {
+                    "name": "a3_fp",
+                    "value": "-0.90246",
+                    "total_upper": "4.0494",
+                    "total_lower": "4.0494"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "0.399089",
+                    "total_upper": "0.18732",
+                    "total_lower": "0.18732"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "0.0697391",
+                    "total_upper": "1.0878",
+                    "total_lower": "1.0878"
+                },
+                "obs@7": {
+                    "name": "a3_f0",
+                    "value": "3.66744",
+                    "total_upper": "1.6285",
+                    "total_lower": "1.6285"
+                },
+                "obs@8": {
+                    "name": "a4_f0",
+                    "value": "1.47249",
+                    "total_upper": "13.494",
+                    "total_lower": "13.494"
+                },
+                "obs@9": {
+                    "name": "a0_fT",
+                    "value": "0.235008",
+                    "total_upper": "0.017211",
+                    "total_lower": "0.017211"
+                },
+                "obs@10": {
+                    "name": "a1_fT",
+                    "value": "-2.44908",
+                    "total_upper": "0.47282",
+                    "total_lower": "0.47282"
+                },
+                "obs@11": {
+                    "name": "a2_fT",
+                    "value": "-1.07896",
+                    "total_upper": "0.69665",
+                    "total_lower": "0.69665"
+                },
+                "obs@12": {
+                    "name": "a3_fT",
+                    "value": "2.55919",
+                    "total_upper": "2.0668",
+                    "total_lower": "2.0668"
+                }
+            },
+            "dataset": "LQCD+LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1, 0.824048, 0.468884, -0.339763, 0.484347, 0.619087, 0.0671899, -0.30726, 0.686984, 0.553266, 0.0929316, -0.230297],
+                [0.824048, 1, 0.371887, -0.67125, 0.665963, 0.765378, -0.209276, -0.564201, 0.600287, 0.630539, -0.0634034, -0.371516],
+                [0.468884, 0.371887, 1, -0.589319, 0.423586, 0.704234, -0.102775, -0.597331, 0.220532, 0.0319787, 0.319433, 0.14381],
+                [-0.339763, -0.67125, -0.589319, 1, -0.734591, -0.853813, 0.54012, 0.893107, -0.241142, -0.261237, 0.0364793, 0.193126],
+                [0.484347, 0.665963, 0.423586, -0.734591, 1, 0.847433, -0.816297, -0.90062, 0.365362, 0.360243, -0.0495516, -0.242062],
+                [0.619087, 0.765378, 0.704234, -0.853813, 0.847433, 1, -0.49442, -0.90926, 0.416679, 0.373559, 0.0517994, -0.194389],
+                [0.0671899, -0.209276, -0.102775, 0.54012, -0.816297, -0.49442, 1, 0.773299, -0.00490075, -0.0663594, 0.140401, 0.143942],
+                [-0.30726, -0.564201, -0.597331, 0.893107, -0.90062, -0.90926, 0.773299, 1, -0.217259, -0.21294, 0.0112386, 0.155239],
+                [0.686984, 0.600287, 0.220532, -0.241142, 0.365362, 0.416679, -0.00490075, -0.217259, 1, 0.777662, 0.221871, -0.263727],
+                [0.553266, 0.630539, 0.0319787, -0.261237, 0.360243, 0.373559, -0.0663594, -0.21294, 0.777662, 1, -0.214821, -0.700832],
+                [0.0929316, -0.0634034, 0.319433, 0.0364793, -0.0495516, 0.0517994, 0.140401, 0.0112386, 0.221871, -0.214821, 1, 0.50029],
+                [-0.230297, -0.371516, 0.14381, 0.193126, -0.242062, -0.194389, 0.143942, 0.155239, -0.263727, -0.700832, 0.50029, 1]
+            ]
+        }
+    ]
+}
