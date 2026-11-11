@@ -26,6 +26,7 @@ json_valid = load_script('json_valid', 'json-valid.py')
 hepdata_ext = load_script('hepdata_ext', 'hepdata-ext.py')
 inspirehep_ext = load_script('inspirehep_ext', 'inspirehep-ext.py')
 arxiv_ext = load_script('arxiv_ext', 'arxiv-ext.py')
+common = load_script('common', 'common.py')
 
 
 class JsonValidatorTests(unittest.TestCase):
@@ -527,6 +528,72 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertEqual(self._validate_snapshot_doc(doc), [])
 
 
+class CorrelationMatrixTests(unittest.TestCase):
+    def test_valid_correlation_passes(self):
+        matrix = [[1.0, 0.5], [0.5, 1.0]]
+        self.assertEqual(json_valid.validate_correlation(matrix, 'm'), [])
+
+    def test_correlation_diagonal_must_be_one(self):
+        matrix = [[1.0, 0.5], [0.5, 0.9]]
+        self.assertTrue(any('expected 1.0' in issue for issue in
+                            json_valid.validate_correlation(matrix, 'm')))
+
+    def test_correlation_off_diagonal_range(self):
+        matrix = [[1.0, 1.5], [1.5, 1.0]]
+        self.assertTrue(any('outside [-1, 1]' in issue for issue in
+                            json_valid.validate_correlation(matrix, 'm')))
+
+    def test_correlation_rejects_non_finite(self):
+        for bad in (float('nan'), float('inf')):
+            matrix = [[1.0, bad], [bad, 1.0]]
+            self.assertTrue(any('not finite' in issue for issue in
+                                json_valid.validate_correlation(matrix, 'm')))
+
+    def test_correlation_rejects_boolean_element(self):
+        matrix = [[1.0, True], [True, 1.0]]
+        self.assertTrue(any('not numeric' in issue for issue in
+                            json_valid.validate_correlation(matrix, 'm')))
+
+    def test_correlation_rejects_asymmetry(self):
+        matrix = [[1.0, 0.5], [0.2, 1.0]]
+        self.assertTrue(any('not symmetric' in issue for issue in
+                            json_valid.validate_correlation(matrix, 'm')))
+
+    def test_covariance_diagonal_matches_variance(self):
+        matrix = [[0.25, 0.1], [0.1, 0.49]]
+        self.assertEqual(
+            json_valid.validate_correlation(matrix, 'm', True, [0.5, 0.7]), [])
+
+    def test_covariance_diagonal_wrong_scale_fails(self):
+        matrix = [[999.0, 0.0], [0.0, 999.0]]
+        self.assertTrue(any('does not match the observable variance' in issue
+                            for issue in json_valid.validate_correlation(
+                                matrix, 'm', True, [0.5, 0.7])))
+
+    def test_covariance_negative_diagonal_fails(self):
+        matrix = [[-0.25, 0.0], [0.0, 0.49]]
+        self.assertTrue(any('negative' in issue for issue in
+                            json_valid.validate_correlation(
+                                matrix, 'm', True, [0.5, 0.7])))
+
+    def test_covariance_tolerates_rounding_but_not_gross_error(self):
+        self.assertEqual(
+            json_valid.validate_correlation([[0.26]], 'm', True, [0.5]), [])
+        self.assertTrue(
+            json_valid.validate_correlation([[0.30]], 'm', True, [0.5]))
+
+    def test_observable_sigma_total_and_components(self):
+        total = {'total_upper': '0.4', 'total_lower': '0.6'}
+        self.assertAlmostEqual(json_valid._observable_sigma(total), 0.5)
+        comp = {
+            'type@1_error': 'stat', 'type@1_upper': '0.3', 'type@1_lower': '0.3',
+            'type@2_error': 'syst', 'type@2_upper': '0.4', 'type@2_lower': '0.4',
+        }
+        self.assertAlmostEqual(json_valid._observable_sigma(comp), 0.5)
+        self.assertAlmostEqual(json_valid._observable_sigma(comp, 'type@1'), 0.3)
+        self.assertIsNone(json_valid._observable_sigma({'value': '1.0'}))
+
+
 class DashboardDataTests(unittest.TestCase):
     def test_skips_invalid_month_keys_and_corrupt_details(self):
         dashboard_path = PROJECT_ROOT / 'flav.py'
@@ -620,7 +687,79 @@ class StreamlitSnapshotTests(unittest.TestCase):
         self.assertEqual(found[0], '2022')
 
 
+class AuthorFormattingTests(unittest.TestCase):
+    def test_arxiv_name_to_bibtex_handles_particles_and_mononyms(self):
+        self.assertEqual(common.arxiv_name_to_bibtex('Danny van Dyk'), 'van Dyk, Danny')
+        self.assertEqual(common.arxiv_name_to_bibtex('Roel Aaij'), 'Aaij, Roel')
+        self.assertEqual(common.arxiv_name_to_bibtex('LHCb'), 'LHCb')
+        self.assertEqual(common.arxiv_name_to_bibtex('Aaij, Roel'), 'Aaij, Roel')
+
+    def test_arxiv_author_str_uses_bibtex_tiers(self):
+        names = ['Danny van Dyk', 'Blaženka Melić', 'Roel Aaij']
+        result = common.format_authors(
+            [common.arxiv_name_to_bibtex(n) for n in names])
+        self.assertEqual(result, "van Dyk, D., Meli\\'{c}, B., and Aaij, R.")
+
+    def test_format_authors_converts_unicode(self):
+        self.assertEqual(common.format_authors(['Melić, B.']), "Meli\\'{c}, B.")
+
+    def test_unicode_to_latex_accented_latin(self):
+        cases = {
+            'Melić': "Meli\\'{c}",
+            'Čičić': "\\v{C}i\\v{c}i\\'{c}",
+            'François': 'Fran\\c{c}ois',
+            'Müller': 'M\\"{u}ller',
+            'Łukasz': '\\Lukasz',
+            'Øystein': '\\Oystein',
+            'Straße': 'Stra\\sse',
+            'µ': '\\mu',
+        }
+        for src, expected in cases.items():
+            self.assertEqual(common.unicode_to_latex(src), expected, src)
+
+    def test_unicode_to_latex_handles_decomposed_input(self):
+        self.assertEqual(common.unicode_to_latex('e\u0301'), "\\'{e}")
+
+    def test_validator_flags_non_ascii_author(self):
+        with tempfile.NamedTemporaryFile(
+                mode='w', suffix='.json', encoding='utf-8') as f:
+            json.dump({'author': 'Melić'}, f)
+            f.flush()
+            issues = json_valid.validate_json(f.name)
+        self.assertTrue(any('author' in i and 'non-ASCII' in i for i in issues))
+
+
 class ExternalMetadataTests(unittest.TestCase):
+    def test_inspire_arxiv_link_old_style_id_no_double_prefix(self):
+        hit = {'metadata': {
+            'control_number': '123', 'texkeys': ['Boyd:1995bx'],
+            'arxiv_eprints': [{'value': 'hep-ph/9504235', 'categories': ['hep-ph']}],
+        }}
+        link = inspirehep_ext.extract_metadata(hit)['arxiv_link']
+        self.assertEqual(link, '[hep-ph/9504235](https://arxiv.org/pdf/hep-ph/9504235)')
+
+    def test_inspire_arxiv_link_new_style_id_keeps_category(self):
+        hit = {'metadata': {
+            'control_number': '123', 'texkeys': ['LHCb:2015svh'],
+            'arxiv_eprints': [{'value': '1512.04442', 'categories': ['hep-ex']}],
+        }}
+        link = inspirehep_ext.extract_metadata(hit)['arxiv_link']
+        self.assertEqual(link, '[hep-ex/1512.04442](https://arxiv.org/pdf/1512.04442)')
+
+    def test_arxiv_output_filename_sanitizes_old_style_id(self):
+        info = {
+            'title': 'T', 'author_str': 'A', 'published': '', 'time': '',
+            'primary_category': 'hep-ph', 'arxiv_id_with_version': 'hep-ph/9504235v1',
+            'categories': ['hep-ph'], 'journal_ref': '', 'doi': '', 'comment': '',
+            'pdf_url': '', 'abs_url': '',
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            args = ['arxiv-ext.py', 'hep-ph/9504235', '--output_dir', directory, '--no-pdf']
+            with patch.object(arxiv_ext.sys, 'argv', args), \
+                    patch.object(arxiv_ext, 'get_arxiv_info', return_value=info):
+                arxiv_ext.main()
+            self.assertEqual(os.listdir(directory), ['hep-ph_9504235_arxiv.json'])
+
     def test_inspire_output_filename_stays_inside_output_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             args = ['inspirehep-ext.py', '--recid', '123', '--output_dir', directory]
@@ -678,6 +817,47 @@ class ImporterDocumentationTests(unittest.TestCase):
 
 
 class HepDataImporterTests(unittest.TestCase):
+    def test_detect_table_type_matrix_without_header(self):
+        yaml_text = (
+            "dependent_variables:\n"
+            "- header: {name: ''}\n"
+            "  values: [{value: 1.0}, {value: 0.0}, {value: 0.0}, {value: 1.0}]\n"
+        )
+        self.assertEqual(hepdata_ext.detect_table_type(yaml_text), 'correlation')
+
+    def test_detect_table_type_observable_with_axis_not_matrix(self):
+        yaml_text = (
+            "dependent_variables:\n"
+            "- header: {name: 'DSIG/DQ2'}\n"
+            "  values: [{value: 1}, {value: 2}, {value: 3}, {value: 4}]\n"
+            "independent_variables:\n"
+            "- header: {name: 'Q2'}\n"
+            "  values: [{value: 1}, {value: 2}, {value: 3}, {value: 4}]\n"
+        )
+        self.assertEqual(hepdata_ext.detect_table_type(yaml_text), 'observable')
+
+    def test_detect_table_type_covariance_header(self):
+        yaml_text = (
+            "dependent_variables:\n"
+            "- header: {name: 'Covariance'}\n"
+            "  values: [{value: 0.25}]\n"
+        )
+        self.assertEqual(hepdata_ext.detect_table_type(yaml_text), 'covariance')
+
+    def test_download_metadata_skips_derived_summary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            summary = Path(directory) / 'hepdata_summary.json'
+            summary.write_text(json.dumps({
+                'record': {'inspire_id': '1409497'}, 'total_tables': 0,
+            }), encoding='utf-8')
+            real = Path(directory) / 'metadata.json'
+            real.write_text(json.dumps({
+                'inspire_id': '1409497', 'data_tables': [{'name': 'Table 1'}],
+            }), encoding='utf-8')
+            with patch.object(hepdata_ext, 'HEPDATA_CLI', '/fake/hepdata-cli'):
+                result = hepdata_ext.download_metadata('1409497', directory)
+            self.assertEqual(result, str(real))
+
     def test_download_metadata_ignores_unrelated_existing_json(self):
         with tempfile.TemporaryDirectory() as directory:
             stale = Path(directory) / 'old.json'

@@ -71,16 +71,17 @@ and put the transition in the `data` key:
 | Decay fraction | `f` | `Z.2.mu+.mu-` |
 | Partial or total width | `Gamma` | `Z.2.mu+.mu-` |
 | Forward-backward asymmetry | `AFB` | `e+.e-.2.Z.2.mu+.mu-` |
-| Cross section | `Sigma` | `p.p.2.W+.2.mu+.nu` |
-| Differential cross section in $p_T$ | `dSigma/dpT` | `p.p.2.W+.2.mu+.nu` |
-| Differential cross section in $\eta$ | `dSigma/deta` | `p.p.2.W+.2.mu+.nu` |
+| Cross section | `Sigma` | `p.p.2.W+.2.mu+.v` |
+| Differential cross section in $p_T$ | `dSigma/dpT` | `p.p.2.W+.2.mu+.v` |
+| Differential cross section in $\eta$ | `dSigma/deta` | `p.p.2.W+.2.mu+.v` |
 | Charge asymmetry | `AC` | `B+.2.J/psi.K+` |
 | Direct CP asymmetry | `ACP` | channel of the decay |
 
 Transition keys follow the full rules used everywhere else in the
 database: initial state, `2`, final state, with cascades repeating `2`
-(`p.p.2.W+.2.mu+.nu`). See the **Flavor** guide for particle ordering,
-charge indicators, antiparticle `Bar`, and the compact legacy form.
+(`p.p.2.W+.2.mu+.v`). See the **Flavor** guide for particle ordering,
+charge indicators, and antiparticle `Bar`; compact keys without `.2.`
+are rejected.
 
 ## Ratios and Differences
 
@@ -98,7 +99,7 @@ the final state; do not repeat that state in the name.
 The importer reference is the contract. Quantities without an entry in
 `obs-abbr.md` §3 — for example the effective weak mixing angle, Higgs
 signal strengths, or coupling modifiers — must first be given a symbol
-and added to that table (see §7 of the reference), then used in JSON.
+and added to that table (see §6 of the reference), then used in JSON.
 Do not invent a page-only spelling that the importer does not validate.
 
 The same applies to new particles or intermediate states: add them to

@@ -6,6 +6,7 @@ Usage:
 """
 
 import json
+import math
 import re
 import sys
 import os
@@ -529,9 +530,88 @@ def validate_latex(text: str, field_name: str, obs_key: str) -> list[str]:
     return issues
 
 
-def validate_correlation(matrix: list, label: str, is_covariance: bool = False) -> list[str]:
-    """Check correlation matrix: symmetric with diagonal = 1.0.
-    Covariance matrix: only symmetry (diagonal = err², verified manually)."""
+def _field_number(value):
+    """Parse a numeric observable field (number or float-string) to float."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return float(value) if math.isfinite(value) else None
+    if isinstance(value, str):
+        try:
+            number = float(value)
+        except ValueError:
+            return None
+        return number if math.isfinite(number) else None
+    return None
+
+
+def _symmetric_sigma(upper, lower):
+    """Average asymmetric bounds into one sigma; None when both absent."""
+    if upper is None and lower is None:
+        return None
+    if upper is None:
+        return abs(lower)
+    if lower is None:
+        return abs(upper)
+    return (abs(upper) + abs(lower)) / 2
+
+
+def _observable_sigma(obs, component=None):
+    """Total (or single-component) uncertainty of an observable, or None.
+
+    ``component`` (e.g. ``'type@1'``) selects one component error; otherwise
+    the total error is used (``total_upper``/``total_lower``, or the
+    component errors added in quadrature). ``type@N_error`` holds the label,
+    so magnitudes come from ``type@N_upper``/``_lower``.
+    """
+    if not isinstance(obs, dict):
+        return None
+    if component is not None:
+        return _symmetric_sigma(
+            _field_number(obs.get(f'{component}_upper')),
+            _field_number(obs.get(f'{component}_lower')),
+        )
+    total = _symmetric_sigma(
+        _field_number(obs.get('total_upper')),
+        _field_number(obs.get('total_lower')),
+    )
+    if total is not None:
+        return total
+    tags = sorted({
+        key.split('_', 1)[0] for key in obs
+        if re.fullmatch(r'type@\d+_(?:upper|lower)', key)
+    }, key=lambda tag: int(tag.split('@')[1]))
+    squares = []
+    for tag in tags:
+        sigma = _symmetric_sigma(
+            _field_number(obs.get(f'{tag}_upper')),
+            _field_number(obs.get(f'{tag}_lower')),
+        )
+        if sigma is not None:
+            squares.append(sigma * sigma)
+    if not squares:
+        return None
+    return math.sqrt(sum(squares))
+
+
+def _ordered_channel_obs(channel):
+    """Observable dicts of a channel in obs@N order (matrix flattening)."""
+    if not isinstance(channel, dict):
+        return []
+    keys = [key for key in channel if re.fullmatch(r'obs@\d+', key)]
+    keys.sort(key=lambda key: int(key.split('@', 1)[1]))
+    return [channel[key] for key in keys]
+
+
+def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
+                         sigmas: list | None = None) -> list[str]:
+    """Check a correlation/covariance matrix.
+
+    Both: numeric (bool rejected), finite, symmetric. Correlation: diagonal
+    = 1.0 and off-diagonal within [-1, 1]. Covariance: diagonal is the
+    variance, checked against the per-observable total error (``sigmas``,
+    flattened in channel then obs@N order) when available.
+    """
     issues = []
     n = len(matrix)
     # Check rectangular
@@ -543,27 +623,55 @@ def validate_correlation(matrix: list, label: str, is_covariance: bool = False) 
                 f"does not match column count ({n})"
             )
             return issues
-    # Check element types
+    # Check element types and finiteness
     for i in range(n):
         for j in range(n):
-            if not isinstance(matrix[i][j], (int, float)):
+            element = matrix[i][j]
+            if isinstance(element, bool) or not isinstance(element, (int, float)):
                 issues.append(
                     f"  {label}: matrix element [{i}][{j}] "
-                    f"is not numeric (type: {type(matrix[i][j]).__name__})"
+                    f"is not numeric (type: {type(element).__name__})"
+                )
+                return issues
+            if not math.isfinite(element):
+                issues.append(
+                    f"  {label}: matrix element [{i}][{j}] "
+                    f"is not finite ({element})"
                 )
                 return issues
     for i in range(n):
-        if not is_covariance:
-            if abs(matrix[i][i] - 1.0) > 0.001:
+        if is_covariance:
+            if matrix[i][i] < 0:
                 issues.append(
-                    f"  {label}: correlation matrix diagonal "
-                    f"[{i}][{i}] = {matrix[i][i]}, expected 1.0"
+                    f"  {label}: covariance diagonal [{i}][{i}] = "
+                    f"{matrix[i][i]} is negative"
                 )
+            if sigmas is not None and i < len(sigmas) and sigmas[i] is not None:
+                expected = sigmas[i] ** 2
+                # Reported errors are rounded (often 2 significant figures),
+                # so the variance matches only approximately; 5% tolerates
+                # rounding while still catching gross mistakes.
+                if expected > 0 and abs(matrix[i][i] - expected) > 0.05 * expected:
+                    issues.append(
+                        f"  {label}: covariance diagonal [{i}][{i}] = "
+                        f"{matrix[i][i]} does not match the observable "
+                        f"variance {expected:.6g} (error {sigmas[i]:.6g})"
+                    )
+        elif abs(matrix[i][i] - 1.0) > 0.001:
+            issues.append(
+                f"  {label}: correlation matrix diagonal "
+                f"[{i}][{i}] = {matrix[i][i]}, expected 1.0"
+            )
         for j in range(i + 1, n):
             if abs(matrix[i][j] - matrix[j][i]) > 0.001:
                 issues.append(
                     f"  {label}: matrix not symmetric "
                     f"[{i}][{j}] = {matrix[i][j]} vs [{j}][{i}] = {matrix[j][i]}"
+                )
+            if not is_covariance and abs(matrix[i][j]) > 1.001:
+                issues.append(
+                    f"  {label}: correlation element [{i}][{j}] = "
+                    f"{matrix[i][j]} outside [-1, 1]"
                 )
     return issues
 
@@ -908,6 +1016,7 @@ def _validate_data_group(group, label: str) -> list[str]:
     matrix_keys = []
     channel_count = 0
     obs_total = 0
+    ordered_obs = []
     saw_dataset = False
     saw_scheme = False
     saw_matrix = False
@@ -968,6 +1077,7 @@ def _validate_data_group(group, label: str) -> list[str]:
         )
         issues.extend(channel_issues)
         obs_total += obs_count
+        ordered_obs.extend(_ordered_channel_obs(group[key]))
         if isinstance(group[key], dict):
             has_coefficients = has_coefficients or any(
                 isinstance(obs, dict)
@@ -995,10 +1105,16 @@ def _validate_data_group(group, label: str) -> list[str]:
         if not isinstance(matrix, list):
             issues.append(f"  {label}['{key}']: expected 2D array")
             continue
+        is_covariance = 'covariance' in key
+        sigmas = None
+        if is_covariance:
+            prefix = re.match(r'(type@\d+)_', key)
+            component = prefix.group(1) if prefix else None
+            sigmas = [_observable_sigma(obs, component) for obs in ordered_obs]
         issues.extend(
             validate_correlation(
                 matrix, f"{label}['{key}']",
-                is_covariance='covariance' in key,
+                is_covariance=is_covariance, sigmas=sigmas,
             )
         )
         if len(matrix) != obs_total:
@@ -1274,9 +1390,9 @@ def validate_json(file_path: str) -> list[str]:
     if not all_issues:
         print("  [OK] Top-level fields complete")
 
-    # 2b. Check Unicode-free LaTeX in title and abstract (per SKILL.md rule 4
-    # and json-meta.md §"Key Constraints" rule 12).
-    for field in ('title', 'abstract'):
+    # 2b. Check Unicode-free LaTeX in author, title and abstract (per
+    # SKILL.md rule 4 and json-meta.md §"Key Constraints" rule 12).
+    for field in ('author', 'title', 'abstract'):
         if field in data and isinstance(data[field], str):
             all_issues.extend(validate_latex(data[field], field, '<top-level>'))
 
@@ -1315,8 +1431,8 @@ def validate_json(file_path: str) -> list[str]:
     else:
         all_issues.append(
             "  data must be an array of data groups, e.g. "
-            "[{'B0.2.K*0.mu+.mu-': ['$B^{0}\\\\to K^{*0}\\\\mu^{+}"
-            "\\\\mu^{-}$', {'obs@1': {...}}], 'correlation': [[1.0]]}]; "
+            "[{'B0.2.K*0.mu+.mu-': {'obs@1': {...}}, "
+            "'correlation': [[1.0]]}]; "
             "channels sharing one matrix belong in the same group"
         )
 

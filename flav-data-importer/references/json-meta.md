@@ -347,9 +347,12 @@ inside an `obs@N` object:
   unprefixed key describes the total uncertainty. A group carries at most
   one unprefixed matrix and one matrix per component prefix; all share the
   same dimension and ordering.
-- **Diagonal** — correlation matrices must have 1.0 on the diagonal;
-  covariance diagonals are the squared errors and must be verified against
-  the reported uncertainties. Both must be symmetric: `M[i][j] == M[j][i]`.
+- **Diagonal** — correlation matrices must have 1.0 on the diagonal and
+  off-diagonal elements within `[-1, 1]`; covariance diagonals are the
+  squared errors and are checked against the reported total uncertainties
+  (5% relative tolerance to absorb rounding of the reported errors). Both
+  must be symmetric (`M[i][j] == M[j][i]`) with finite numeric elements
+  (no `null`, `NaN`, `Infinity`, or booleans).
 - **Dimension** — N×N must equal the total number of observables in all
   channels of the group.
 - **Order** — channel keys in written order, then `obs@N` order within each
@@ -509,7 +512,7 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 9. **Matrix layout: row-per-line** — Each `*_correlation`/`*_covariance` row is on a single line. (SKILL.md rule 1.)
 10. **Author format** — initials only, 1 / 2 / 3 / 4+ tiers as in the `author` row above (`format_authors()` in `scripts/common.py`; SKILL.md rule 3).
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)
-12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, dashes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). Latin ligatures from PDF text extraction (`ﬀ`, `ﬁ`, `ﬂ`, `ﬃ`, `ﬄ`) are replaced by their plain letter sequences. (SKILL.md rule 4.)
+12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, dashes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). Latin ligatures from PDF text extraction (`ﬀ`, `ﬁ`, `ﬂ`, `ﬃ`, `ﬄ`) are replaced by their plain letter sequences. Accented Latin letters in author names (`ć`, `č`, `ç`, `ü`, `ø`, `ß`) become LaTeX accents (`\'{c}`, `\v{c}`, `\c{c}`, `\"{u}`, `\o`, `\ss`). The `author`, `title` and `abstract` fields are validated Unicode-free. (SKILL.md rule 4.)
 13. **Transition order** — a channel key is `A.B.2.C.D` (`no-transition` is the only exception; ratios join two full keys with `/`) and follows the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses. Charge is written `+`/`-`/`0` only (`p`/`m` suffixes are rejected); neutral antiparticles append capital `Bar` (lowercase `bar` is rejected). The validator fails non-canonical order. Particle tokens use the handwritten case (`pi0`, `Lambdab0`, `KS0`, `KL0`) and neutrinos are `v`/`vBar` (flavor: `ve`, `vmu`, `vtau`, plus `Bar`); see obs-abbr.md §1.
 14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to an `obs@N` object, optionally carries group-level `dataset`/`scheme` strings, and optionally a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). JSON data stores no LaTeX for channels or observables.
 15. **One group per property set** — observables whose dataset, scheme, fit choice, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).

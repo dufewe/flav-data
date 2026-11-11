@@ -186,11 +186,17 @@ def extract_metadata(hit: dict) -> dict:
             if texkey and recid else None
         ),
         'arxiv_link': (
-            f'[{primary_cat}/{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-            if arxiv_id and primary_cat
+            # Old-style IDs already carry their category (hep-ph/9504235);
+            # do not prepend primary_cat twice.
+            f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+            if arxiv_id and '/' in arxiv_id
             else (
-                f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-                if arxiv_id else None
+                f'[{primary_cat}/{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+                if arxiv_id and primary_cat
+                else (
+                    f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
+                    if arxiv_id else None
+                )
             )
         ),
         'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}' if arxiv_id else None,

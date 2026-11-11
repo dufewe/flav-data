@@ -224,12 +224,15 @@ process:
 ## Multi-Transition Observables
 
 For observables comparing several transitions, the `data` key holds the
-shared part of the process and shared particles use generic names:
-`l1`/`l2` (leptons), `q1`/`q2` (quarks), `v1`/`v2` (neutrinos),
-`h1`/`h2` (hadrons).
+shared part of the process. Shared charged leptons are written `l+`/`l-`
+(or `l`) and shared quarks `q1`/`q2` (or `q`); these are listed under
+`non_orderable` in `particle-masses.json` and skip the order check.
+Neutrinos are not placeholders: use `v`/`vBar` (or `ve`, `vmu`, `vtau`).
+Numbered lepton, neutrino, or hadron placeholders (`l1`, `v1`, `h1`) are
+rejected.
 
-`[condition]` encodes the flavor mapping (`[mu/e]`: `l1` = $\mu$,
-`l2` = $e$):
+`[condition]` encodes the flavor mapping (`[mu/e]` = the muon mode over
+the electron mode):
 
 - `/` means a ratio: `RBr[mu/e]` =
   $\mathcal{B}(B^0\to K^{*0}\mu^+\mu^-)/\mathcal{B}(B^0\to K^{*0}e^+e^-)$.

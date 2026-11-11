@@ -130,6 +130,17 @@ def _metadata_matches(path: str, inspire_id: str) -> bool:
     return str(record.get('inspire_id', '')) == str(inspire_id)
 
 
+def _is_raw_metadata(path: str) -> bool:
+    """True for raw HEPData metadata (carries ``data_tables``), not the
+    derived ``hepdata_summary.json`` output, which lacks that field."""
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return False
+    return isinstance(data, dict) and 'data_tables' in data
+
+
 def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     """Download HEPData metadata JSON.
 
@@ -151,7 +162,8 @@ def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     # Reuse an existing download for the same record (idempotent re-runs).
     for filename in sorted(os.listdir(output_dir)):
         path = os.path.join(output_dir, filename)
-        if filename.endswith('.json') and _metadata_matches(path, inspire_id):
+        if (filename.endswith('.json') and _metadata_matches(path, inspire_id)
+                and _is_raw_metadata(path)):
             return path
 
     existing_json = {
@@ -187,7 +199,8 @@ def download_metadata(inspire_id: str, output_dir: str) -> str | None:
     # Some hepdata-cli versions overwrite an existing metadata filename.
     for filename in sorted(os.listdir(output_dir)):
         path = os.path.join(output_dir, filename)
-        if filename.endswith('.json') and _metadata_matches(path, inspire_id):
+        if (filename.endswith('.json') and _metadata_matches(path, inspire_id)
+                and _is_raw_metadata(path)):
             return path
     return None
 
@@ -517,6 +530,17 @@ def detect_table_type(yaml_text: str) -> str:
         if all('cov' in name for name in names):
             return 'covariance'
         if all('corr' in name for name in names):
+            return 'correlation'
+
+    # Structural fallback: a flattened square matrix carries a single
+    # dependent variable, no independent kinematic axis, and n² row-major
+    # values. A genuine observable table always has an independent axis,
+    # so requiring none keeps this from misclassifying n-bin observables.
+    dependent = data.get('dependent_variables', [])
+    if len(dependent) == 1 and not data.get('independent_variables'):
+        values = dependent[0].get('values', [])
+        n = int(len(values) ** 0.5)
+        if n >= 2 and n * n == len(values):
             return 'correlation'
 
     return 'observable'

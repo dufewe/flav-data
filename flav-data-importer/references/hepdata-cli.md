@@ -108,6 +108,13 @@ n = int(len(values) ** 0.5)
 matrix = [values[i*n:(i+1)*n] for i in range(n)]
 ```
 
+`detect_table_type` recognises this shape even with an empty header: a
+single dependent variable, **no** independent variable, and a perfect-square
+number of values (n², n ≥ 2) is classified as a matrix. Observable tables
+always carry an independent kinematic axis, so they are not misclassified.
+A `correlation`/`covariance` header (or repeated `CORR`/`COV` independent
+variables) takes precedence when present.
+
 ## Python API (`scripts/hepdata-ext.py`)
 
 The script wraps the `hepdata-cli` binary and exposes:

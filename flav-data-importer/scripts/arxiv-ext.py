@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
     unicode_to_latex, unicode_to_latex as _unicode_to_latex,
     to_bibtex, to_bibtex as _to_bibtex,
-    format_authors,
+    format_authors, arxiv_name_to_bibtex,
 )  # noqa: E402,F401
 
 # Candidate machine-readable data files in an arXiv e-print package.
@@ -142,7 +142,8 @@ def get_arxiv_info(arxiv_id: str) -> dict:
         'abstract': summary,
         'authors': authors,
         # Rule 3 author tiers (1 / 2 / 3 / 4+), BibTeX initials only.
-        'author_str': format_authors(authors),
+        # arXiv gives "First Last"; normalise to "Last, First" first.
+        'author_str': format_authors([arxiv_name_to_bibtex(a) for a in authors]),
         'pdf_url': pdf_link,
         'abs_url': f'https://arxiv.org/abs/{arxiv_id}',
         # Markdown link for JSON arxiv field. Old-style IDs already
@@ -371,7 +372,10 @@ def main() -> None:
     output_dir = args.output_dir
     if output_dir and not args.no_write:
         os.makedirs(output_dir, exist_ok=True)
-        json_path = os.path.join(output_dir, f'{args.arxiv_id}_arxiv.json')
+        # Old-style IDs contain '/' (e.g. hep-ph/9504235); keep the file
+        # inside output_dir instead of creating a subdirectory.
+        safe_id = args.arxiv_id.replace('/', '_')
+        json_path = os.path.join(output_dir, f'{safe_id}_arxiv.json')
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(info, f, indent=4, ensure_ascii=False)
         print(f"\nJSON saved to: {json_path}")

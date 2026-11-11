@@ -334,10 +334,12 @@ reference doc points back to these.
 4. **No Unicode** — replace with LaTeX equivalents:
    `μ`→`\mu`, `Δ`→`\Delta`, `±`→`\pm`, `→`→`\to`,
    `°`→`^{\circ}`, `¯`→`\bar{}`, smart quotes → `` ` ``/`'`/`` `` ``/`''`.
-   The mapping lives in `scripts/common.py`: Greek letters and math
-   symbols, plus typographic replacements (dashes, smart quotes, Latin
-   ligatures, BOM, zero-width space). Characters outside it pass through
-   unchanged — convert those by hand.
+   The mapping lives in `scripts/common.py`: Greek letters, math
+   symbols, accented Latin letters (author names, e.g. `ć`→`\'{c}`,
+   `ç`→`\c{c}`, `ü`→`\"{u}`), plus typographic replacements (dashes,
+   smart quotes, Latin ligatures, BOM, zero-width space). `author`,
+   `title` and `abstract` are validated Unicode-free. Characters outside
+   the mapping pass through unchanged — convert those by hand.
 
 5. **Transition symbol order** — inside a `data` transition key, the
    transition follows `obs-abbr.md` §1:

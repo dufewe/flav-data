@@ -4,6 +4,8 @@
 Shared helpers re-exported by all extraction scripts; import from any of them.
 """
 
+import unicodedata
+
 # ---------------------------------------------------------------------------
 # Unicode → LaTeX mapping (SKILL.md rule 4)
 # ---------------------------------------------------------------------------
@@ -100,6 +102,25 @@ _UNICODE_TO_LATEX_MAP = {
     '\u207c': '^{=',         # ⁼
     '\u207d': '^{(}',        # ⁽
     '\u207e': '^{)}',        # ⁾
+    # ---- Latin letters with no NFD decomposition (author names) ----
+    '\u00b5': '\\mu',         # µ (micro sign)
+    '\u00c6': '\\AE',         # Æ
+    '\u00e6': '\\ae',         # æ
+    '\u0152': '\\OE',         # Œ
+    '\u0153': '\\oe',         # œ
+    '\u00d8': '\\O',          # Ø
+    '\u00f8': '\\o',          # ø
+    '\u0141': '\\L',          # Ł
+    '\u0142': '\\l',          # ł
+    '\u0110': '\\DJ',         # Đ
+    '\u0111': '\\dj',         # đ
+    '\u00d0': '\\DH',         # Ð
+    '\u00f0': '\\dh',         # ð
+    '\u00de': '\\TH',         # Þ
+    '\u00fe': '\\th',         # þ
+    '\u00df': '\\ss',         # ß
+    '\u0131': '\\i',          # ı (dotless i)
+    '\u0130': '\\.{I}',       # İ
 }
 
 # Typographic replacements (applied before the single-char map)
@@ -124,11 +145,67 @@ _MULTI_CHAR_REPLACEMENTS = [
 ]
 
 
+# Combining diacritical marks → LaTeX accent commands (applied after NFD
+# decomposition, so any precomposed accented Latin letter is covered).
+_COMBINING_TO_LATEX = {
+    '\u0300': '`',   # grave
+    '\u0301': "'",   # acute
+    '\u0302': '^',   # circumflex
+    '\u0303': '~',   # tilde
+    '\u0304': '=',   # macron
+    '\u0306': 'u',   # breve
+    '\u0307': '.',   # dot above
+    '\u0308': '"',   # diaeresis
+    '\u030a': 'r',   # ring above
+    '\u030b': 'H',   # double acute
+    '\u030c': 'v',   # caron
+    '\u0323': 'd',   # dot below
+    '\u0327': 'c',   # cedilla
+    '\u0328': 'k',   # ogonek
+    '\u0331': 'b',   # macron below
+}
+
+
+def _apply_latex_accents(text: str) -> str:
+    """Render accented Latin letters as LaTeX accents via NFD decomposition.
+
+    ``é`` → ``\\\'{e}``, ``č`` → ``\\v{c}``, ``ç`` → ``\\c{c}``. Marks without a
+    known command are left untouched rather than dropped.
+    """
+    decomposed = unicodedata.normalize('NFD', text)
+    out = []
+    i = 0
+    n = len(decomposed)
+    while i < n:
+        base = decomposed[i]
+        j = i + 1
+        marks = []
+        while j < n and unicodedata.combining(decomposed[j]):
+            marks.append(decomposed[j])
+            j += 1
+        if marks and not unicodedata.combining(base):
+            rendered = base
+            for mark in marks:
+                command = _COMBINING_TO_LATEX.get(mark)
+                if command is None:
+                    rendered = None
+                    break
+                rendered = f'\\{command}{{{rendered}}}'
+            if rendered is not None:
+                out.append(rendered)
+                i = j
+                continue
+        out.append(base)
+        i += 1
+    return ''.join(out)
+
+
 def unicode_to_latex(text: str) -> str:
     """Replace supported Unicode characters with LaTeX (SKILL.md rule 4).
 
     Covers Greek letters, math symbols, dashes, smart quotes, ligatures,
-    and invisible characters. Anything else passes through unchanged.
+    invisible characters, and accented Latin letters. Anything else passes
+    through unchanged.
     """
     if not isinstance(text, str):
         return text
@@ -137,7 +214,7 @@ def unicode_to_latex(text: str) -> str:
         result = result.replace(char, replacement)
     for char, replacement in _UNICODE_TO_LATEX_MAP.items():
         result = result.replace(char, replacement)
-    return result
+    return _apply_latex_accents(result)
 
 
 # ---------------------------------------------------------------------------
@@ -184,6 +261,39 @@ def to_bibtex(full_name: str) -> str:
     return f'{surname}, {initials}'
 
 
+# Surname particles kept with the family name when converting arXiv
+# "First Last" names (e.g. "Danny van Dyk" → "van Dyk, D.").
+_SURNAME_PARTICLES = {
+    'van', 'von', 'de', 'del', 'della', 'di', 'da', 'dos', 'das', 'du',
+    'le', 'la', 'ter', 'ten', 'bin', 'al', 'el', 'den', 'der', 'het', 'te',
+}
+
+
+def arxiv_name_to_bibtex(full_name: str) -> str:
+    """Normalise an arXiv ``"First Last"`` name to ``"Last, First"`` form.
+
+    InspireHEP names already carry a comma and pass through. Single-token
+    names (mononyms / collaborations) are returned unchanged. The family
+    name absorbs preceding particles (``van``, ``de``, ...); ``to_bibtex``
+    then shortens the given names to initials.
+    """
+    if not isinstance(full_name, str) or not full_name.strip():
+        return full_name or ''
+    name = full_name.strip()
+    if ',' in name:
+        return name
+    tokens = name.split()
+    if len(tokens) == 1:
+        return name
+    surname_start = len(tokens) - 1
+    while (surname_start > 1
+           and tokens[surname_start - 1].lower() in _SURNAME_PARTICLES):
+        surname_start -= 1
+    surname = ' '.join(tokens[surname_start:])
+    given = ' '.join(tokens[:surname_start])
+    return f'{surname}, {given}'
+
+
 def format_authors(full_names: list[str]) -> str:
     """Format an author list per SKILL.md rule 3.
 
@@ -196,9 +306,11 @@ def format_authors(full_names: list[str]) -> str:
         return ''
     bibtex = [to_bibtex(name) for name in names]
     if len(bibtex) == 1:
-        return bibtex[0]
-    if len(bibtex) == 2:
-        return f'{bibtex[0]} and {bibtex[1]}'
-    if len(bibtex) == 3:
-        return f'{bibtex[0]}, {bibtex[1]}, and {bibtex[2]}'
-    return f'{bibtex[0]} and others'
+        result = bibtex[0]
+    elif len(bibtex) == 2:
+        result = f'{bibtex[0]} and {bibtex[1]}'
+    elif len(bibtex) == 3:
+        result = f'{bibtex[0]}, {bibtex[1]}, and {bibtex[2]}'
+    else:
+        result = f'{bibtex[0]} and others'
+    return unicode_to_latex(result)

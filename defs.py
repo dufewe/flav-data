@@ -108,7 +108,8 @@ EXPEGROUP = [
 ]
 
 THEOGROUP = [
-    "HPQCD",
+    "LQCD",
+    "QCD",
 ]
 
 OBSGROUP = ["Flavor", "EWPO"]

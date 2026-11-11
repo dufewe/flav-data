@@ -319,6 +319,14 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                     data = json_detail.get('data', [])
                     for data_group in iter_data_groups(data):
                         with st.container(border=True):
+                            for meta_key in ('dataset', 'scheme'):
+                                if data_group.get(meta_key):
+                                    st.markdown(
+                                        '- **{}**: {}'.format(
+                                            meta_key.upper(),
+                                            data_group[meta_key],
+                                        )
+                                    )
                             for channel, obs_bundle in data_group.items():
                                 if is_matrix_key(channel):
                                     continue

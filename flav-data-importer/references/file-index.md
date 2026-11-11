@@ -103,9 +103,10 @@ analyses (Wilson-coefficient fits, parameter determinations, bounds, world
 averages) are not ingested. Form-factor parametrization fits are primary
 theory data and are imported (see SKILL.md §Scope).
 
-Only groups registered in `defs.THEOGROUP` are linked from the Streamlit
-navigation; method folders are data organization only and have no page of
-their own.
+The Streamlit navigation links every entry in `defs.THEOGROUP`. The
+method folders `LQCD` and `QCD` are registered there, so each gets a
+navigation page scanning its year/month tree. A large-collaboration folder
+(e.g. `HPQCD`) is added to `THEOGROUP` the same way once it exists on disk.
 
 **Special cases**:
 
