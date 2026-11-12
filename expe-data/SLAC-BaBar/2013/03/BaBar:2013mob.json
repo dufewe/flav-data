@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B.2.D.tau.v": {
+            "B0.2.D-.tau+.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.440",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "B.2.D*.tau.v": {
+            "B0.2.D*-.tau+.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.332",

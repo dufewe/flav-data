@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "p.pBar.2.W.2.l.v": {
+            "p+.p+Bar.2.W-.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80387",
@@ -20,7 +20,7 @@
             }
         },
         {
-            "p.pBar.2.W.2.l.v.world": {
+            "p+.p+Bar.2.W-.2.l.v.world": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80385",
@@ -31,7 +31,7 @@
             }
         },
         {
-            "p.pBar.2.W.2.l.v.CDF": {
+            "p+.p+Bar.2.W-.2.l.v.CDF": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80387",
@@ -46,7 +46,7 @@
             }
         },
         {
-            "p.pBar.2.W.2.l.v.D0": {
+            "p+.p+Bar.2.W-.2.l.v.D0": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80367",

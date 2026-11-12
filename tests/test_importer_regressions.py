@@ -53,6 +53,21 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('FL(B0.2.K*0.mu+.mu-)', 'FL(B02K*mumu)'):
             self.assertTrue(json_valid.validate_observable_name(name), name)
 
+    def test_obsolete_lfu_q_symbols_are_rejected(self):
+        for name in ('Q1[mu-e]', 'Q4[mu-e]', 'Q5[mu/e]', 'Q6[mu-e]',
+                     'Q8[mu-e]', 'QFL[mu-e]'):
+            with self.subTest(name=name):
+                issues = json_valid.validate_observable_name(name)
+                self.assertTrue(any(
+                    'obsolete LFU-difference symbol' in issue for issue in issues
+                ))
+
+    def test_lfu_delta_symbols_are_accepted(self):
+        for name in ('DeltaFL[mu-e]', 'DeltaP1[mu-e]', 'DeltaP3[mu-e]',
+                     'DeltaP4p[mu-e]', 'DeltaP5p[mu-e]', 'DeltaP6p[mu-e]',
+                     'DeltaP8p[mu-e]'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
     def test_transition_mode_is_hyphenated(self):
         for mode in ('leptonic-decay', 'semileptonic-decay', 'non-leptonic-decay',
                      'radiative-decay', 'neutron-beta-decay', 'higgs-decay',
@@ -86,21 +101,21 @@ class JsonValidatorTests(unittest.TestCase):
             self.assertTrue(json_valid.validate_transition_key(key), key)
 
     def test_hadron_tokens_follow_handwritten_case(self):
-        for key in ('B0.2.pi0.mu+.mu-', 'Lambdab0.2.p.pi-.vBar',
-                    'B0.2.KS0.v.vBar', 'Sigma+.2.p.mu+.mu-',
-                    'Lambdac+.2.p.mu+.mu-', 'B0.2.KL0.v.vBar'):
+        for key in ('B0.2.pi0.mu+.mu-', 'Lambdab0.2.p+.pi-.vBar',
+                    'B0.2.KS0.v.vBar', 'Sigma+.2.p+.mu+.mu-',
+                    'Lambdac+.2.p+.mu+.mu-', 'B0.2.KL0.v.vBar'):
             self.assertEqual(json_valid.validate_transition_key(key), [], key)
 
         for key in ('B0.2.K0S.v.vBar', 'B0s.2.mu+.mu-',
                     'B0.2.K0bar.v.vBar', 'B0.2.fbar.v.vBar',
                     'B0.2.K0L.v.vBar',
-                    'LambdacBar-.2.pBar.mu+.mu-',
-                    'Lambda.2.pbar.vBar'):
+                    'LambdacBar-.2.p+Bar.mu+.mu-',
+                    'Lambda0.2.p+bar.vBar'):
             self.assertTrue(json_valid.validate_transition_key(key), key)
 
     def test_charge_uses_plus_minus_zero(self):
         for key in ('B+.2.K*+.mu+.mu-', 'B-.2.D*0.tau-.vBar',
-                    'Bc+.2.J/psi.l+.v'):
+                    'Bc+.2.J/psi0.l+.v'):
             self.assertEqual(json_valid.validate_transition_key(key), [], key)
 
         for key in ('Bp.2.K*+.mu+.mu-', 'Bm.2.D0.mu-.vBar',
@@ -113,7 +128,41 @@ class JsonValidatorTests(unittest.TestCase):
 
         # Lowercase antiparticle marker is rejected, capital Bar is accepted.
         self.assertTrue(json_valid.validate_transition_key('B0.2.K*0bar.v.vBar'))
-        self.assertEqual(json_valid.validate_transition_key('BBar.2.XsBar.e+.e-'), [])
+        self.assertEqual(json_valid.validate_transition_key('B0Bar.2.XsBar.e+.e-'), [])
+
+    def test_particle_states_require_an_explicit_charge(self):
+        for key in ('p+.p+.2.Z.2.mu+.mu-', 'n0.2.p+.e-.veBar',
+                    'Lambda0.2.p+.pi-', 'B0.2.phi0.K*0',
+                    'B0.2.J/psi0.K*0', 'H0.2.W+.W-',
+                    'B+.2.D*+Bar.mu-.vBar', 'B0Bar.2.K*0Bar.v.vBar'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('p.p.2.Z.2.mu+.mu-', 'B0.2.phi.mu+.mu-',
+                    'Lambdab0.2.p.J/psi.pi-', 'n.2.p.e-.veBar',
+                    'H.2.W.W', 'Lambda.2.p+.vBar',
+                    'B0.2.J/psi.K*0', 'B0.2.K*.mu+.mu-',
+                    'B+.2.mu.e'):
+            issues = json_valid.validate_transition_key(key)
+            self.assertTrue(issues, key)
+            self.assertIn('no charge marker', ' '.join(issues), key)
+
+    def test_particle_grammar_exemptions(self):
+        for key in ('W-.2.mu-.vBar', 'B0.2.K*0.v.vBar',
+                    'W-.2.e-.vBar', 'B0.2.KS0.v.vBar',
+                    'B0.2.Xs.gamma', 'p+.p+.2.Z.2.l+.l-',
+                    'B0.2.K+.l+.v', 'B0.2.D0.q.qBar'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+    def test_particle_grammar_placement(self):
+        for key, expected in (
+            ('B+.2.D+*.e+.ve', 'vector marker'),
+            ('B0.2.K*Bar+.mu+.mu-', 'vector marker'),
+            ('LambdacBar-.2.p+.mu+.mu-', 'Bar'),
+            ('B0.2.K*0bar.v.vBar', 'lowercase'),
+        ):
+            issues = json_valid.validate_transition_key(key)
+            self.assertTrue(issues, key)
+            self.assertIn(expected, ' '.join(issues), key)
 
     @staticmethod
     def _obs(name):
@@ -242,7 +291,7 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(any("appears after 'dataset'" in issue for issue in issues))
 
         dataset_after_scheme = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
             'scheme': 'BCL',
             'dataset': 'LQCD+LCSR',
         }]
@@ -259,7 +308,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_coefficient_group_requires_scheme(self):
         data = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
         }]
         issues = self._validate_data(data)
         self.assertTrue(any(
@@ -271,10 +320,33 @@ class JsonValidatorTests(unittest.TestCase):
         for scheme in ('BGL', 'BCL', 'BSZ', 'DLM'):
             with self.subTest(scheme=scheme):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
                     'dataset': 'LQCD+LCSR',
                     'scheme': scheme,
                     'correlation': [[1.0]],
+                }]
+                self.assertEqual(self._validate_data(data), [])
+
+    def test_obsolete_form_factor_symbols_are_rejected(self):
+        for name in ('a0_fp', 'a1_Fp', 'a2_Gp', 'a0_hp', 'a1_htp'):
+            with self.subTest(name=name):
+                data = [{
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'dataset': 'LQCD',
+                    'scheme': 'BCL',
+                }]
+                issues = self._validate_data(data)
+                self.assertTrue(any(
+                    'obsolete form-factor symbol' in issue for issue in issues
+                ))
+
+    def test_form_factor_helicity_plus_symbols_are_accepted(self):
+        for name in ('a0_h+', 'a1_ht+'):
+            with self.subTest(name=name):
+                data = [{
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'dataset': 'LQCD',
+                    'scheme': 'BCL',
                 }]
                 self.assertEqual(self._validate_data(data), [])
 
@@ -283,7 +355,7 @@ class JsonValidatorTests(unittest.TestCase):
                       'BGL '):
             with self.subTest(scheme=value):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
                     'scheme': value,
                 }]
                 issues = self._validate_data(data)
@@ -291,7 +363,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_scheme_order_is_enforced(self):
         after_matrix = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
             'correlation': [[1.0]],
             'dataset': 'LQCD',
             'scheme': 'BCL',
@@ -303,7 +375,7 @@ class JsonValidatorTests(unittest.TestCase):
 
         after_scheme = [{
             'scheme': 'BCL',
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_fp')),
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
         }]
         issues = self._validate_data(after_scheme)
         self.assertTrue(any(

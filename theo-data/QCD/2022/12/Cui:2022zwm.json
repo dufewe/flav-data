@@ -10,19 +10,19 @@
         {
             "B0Bar.2.pi+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.404",
                     "total_upper": "0.013",
                     "total_lower": "0.013"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.618",
                     "total_upper": "0.063",
                     "total_lower": "0.063"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.473",
                     "total_upper": "0.215",
                     "total_lower": "0.215"
@@ -74,19 +74,19 @@
         {
             "B0.2.K0.v.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.465",
                     "total_upper": "0.008",
                     "total_lower": "0.008"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.925",
                     "total_upper": "0.053",
                     "total_lower": "0.053"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.355",
                     "total_upper": "0.257",
                     "total_lower": "0.257"
@@ -138,19 +138,19 @@
         {
             "Bs0.2.K-.l+.v": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.373",
                     "total_upper": "0.010",
                     "total_lower": "0.010"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.731",
                     "total_upper": "0.041",
                     "total_lower": "0.041"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.473",
                     "total_upper": "0.146",
                     "total_lower": "0.146"

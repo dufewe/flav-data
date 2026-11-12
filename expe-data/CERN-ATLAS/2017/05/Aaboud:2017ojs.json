@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "H.2.mu+.mu-": {
+            "H0.2.mu+.mu-": {
                 "obs@1": {
                     "name": "mu_Hmumu[13TeV]",
                     "type@1_upper": "3.0",
@@ -18,7 +18,7 @@
             }
         },
         {
-            "H.2.mu+.mu-": {
+            "H0.2.mu+.mu-": {
                 "obs@1": {
                     "name": "mu_Hmumu[comb]",
                     "type@1_upper": "2.8",

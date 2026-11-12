@@ -28,7 +28,7 @@ flav-data/
 │   ├── LANL-UCNA/, NIST-aCORN/
 │   └── HFLAV/, PDG/                               # No-lab aggregation
 └── theo-data/
-    ├── HPQCD/                                     # Large collaborations keep a group folder
+    ├── FNAL-MILC/                                 # Large collaborations keep a group folder
     │   └── <year>/...
     ├── LQCD/                                      # Method folder for smaller groups
     │   └── 2015/
@@ -86,10 +86,13 @@ the folder retain only the collaboration name (not the lab prefix).
 
 Theoretical folders depend on the size of the group:
 
-- **Large collaborations** (HPQCD, JLQCD, RBC/UKQCD, ...) keep their own
-  top-level folder and follow the normal layout:
+- **Large collaborations** (HPQCD, JLQCD, RBC/UKQCD, FNAL/MILC, ...) keep
+  their own top-level folder and follow the normal layout:
   `theo-data/<Group>/<year>/<month>/<TexKey>.json` with the annual index
-  `theo-data/<Group>/<year>/<Group>@<year>.json`.
+  `theo-data/<Group>/<year>/<Group>@<year>.json`. A joint collaboration
+  whose name contains `/` writes `-` in the folder and registry name
+  (`FNAL-MILC`, `RBC-UKQCD`); the JSON `collaboration` field keeps the
+  conventional slash spelling (`FNAL/MILC`).
 - **Smaller calculation groups** are collected by the method they use:
   `theo-data/<Method>/<year>/<month>/<TexKey>.json`, with a method-level
   annual index `theo-data/<Method>/<year>/<Method>@<year>.json`. The
@@ -106,13 +109,13 @@ theory data and are imported (see SKILL.md §Scope).
 The Streamlit navigation links every entry in `defs.THEOGROUP`. The
 method folders `LQCD` and `QCD` are registered there, so each gets a
 navigation page scanning its year/month tree. A large-collaboration folder
-(e.g. `HPQCD`) is added to `THEOGROUP` the same way once it exists on disk.
+(e.g. `FNAL-MILC`) is added to `THEOGROUP` the same way once it exists on disk.
 
 **Special cases**:
 
 - **HFLAV** and **PDG** use a non-standard flav-data schema (one
   snapshot JSON per year whose keys are subgroup names containing
-  nested observables). See `../references/json-meta.md` for details.
+  nested observables). See `json-meta.md` for details.
   When importing data into these groups, build a single year-level
   snapshot file rather than per-paper JSONs.
 
@@ -298,7 +301,7 @@ PYEOF
 When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS combination):
 - Use the primary collaboration (first in the TexKey) for the directory and filename.
 - The `collaboration` field in JSON lists all involved groups (e.g. `"ATLAS, CMS"`).
-- Fill corresponding data entries for all involved groups under their respective database directories — this means creating separate data files in each group's folder when each group's dataset differs, or a single file in the primary group's folder when the measurement is a joint combination.
+- Store the paper as a single JSON in the primary collaboration's directory. When each group's dataset differs, distinguish them with separate data groups (group-level `dataset`) inside that file — do not duplicate the paper across folders.
 
 ## Notes
 

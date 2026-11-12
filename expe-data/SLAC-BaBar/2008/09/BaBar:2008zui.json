@@ -39,7 +39,7 @@
             }
         },
         {
-            "BBar.2.D.l-.vBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "G1Vcb",
                     "value": "4.31e-2",
@@ -63,7 +63,7 @@
             }
         },
         {
-            "BBar.2.D.l-.vBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.99e-2",
@@ -80,7 +80,7 @@
             }
         },
         {
-            "BBar.2.D*.l-.vBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "F1Vcb",
                     "value": "3.59e-2",
@@ -104,7 +104,7 @@
             }
         },
         {
-            "BBar.2.D*.l-.vBar": {
+            "B0Bar.2.D*+.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.86e-2",

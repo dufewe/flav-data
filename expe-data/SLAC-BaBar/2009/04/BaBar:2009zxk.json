@@ -145,7 +145,7 @@
             ]
         },
         {
-            "BBar.2.D.l-.vBar": {
+            "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
                     "name": "G1Vcb",
                     "value": "4.30e-2",
@@ -197,7 +197,7 @@
             }
         },
         {
-            "B.2.D.l-.vBar": {
+            "B-.2.D0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0217",

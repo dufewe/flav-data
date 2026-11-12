@@ -10,25 +10,25 @@
         {
             "B0Bar.2.pi+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.234676",
                     "total_upper": "0.018956",
                     "total_lower": "0.018956"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-2.45084",
                     "total_upper": "0.50589",
                     "total_lower": "0.50589"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.150972",
                     "total_upper": "1.1483",
                     "total_lower": "1.1483"
                 },
                 "obs@4": {
-                    "name": "a3_fp",
+                    "name": "a3_f+",
                     "value": "-0.90246",
                     "total_upper": "4.0494",
                     "total_lower": "4.0494"

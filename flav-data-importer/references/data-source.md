@@ -60,7 +60,7 @@ to use from the table structure.
 - Many BSM search papers (mass limits, exclusion contours) do not upload tabulated data.
 - For these cases move on to the arXiv ancillary files (§4), not straight to the PDF.
 
-See `../references/hepdata-cli.md` for detailed YAML parsing guidance.
+See `hepdata-cli.md` for detailed YAML parsing guidance.
 
 ### 2. CDS (CERN Document Server)
 
@@ -148,7 +148,7 @@ for page in doc:
 Prefer the LaTeX source from the e-print package over the PDF when a table is
 needed: `\begin{tabular}` blocks keep row/column alignment that PDF text loses.
 
-**Important**: pymupdf must be available in the Python environment. Run via terminal, not the execute_code sandbox.
+**Important**: pymupdf must be installed in the Python environment (`pip install pymupdf`).
 
 **Limitations**:
 - Table extraction from PDF text is error-prone. Column alignment may be lost.
@@ -186,7 +186,7 @@ then cross-check them against the paper text.
 **InspireHEP API** provides paper metadata (title, authors, collaboration, TexKey, DOI) but NOT experimental data. Query it in parallel with steps 1–7 for every paper:
 
 - **Why**: metadata (not data values) is always needed.
-- **How**: query by arXiv ID, recid, TexKey, or DOI (see `../references/inspirehep-api.md`).
+- **How**: query by arXiv ID, recid, TexKey, or DOI (see `inspirehep-api.md`).
 
 ## Scenario Guide
 
@@ -196,7 +196,7 @@ then cross-check them against the paper text.
 | LHCb branching fraction | HEPData or CDS | Check both |
 | Belle/BaBar data | HEPData or PDF | Many older Belle papers lack HEPData |
 | BESIII data | PDF (pymupdf) or HEPData | Some BESIII papers have HEPData; many don't |
-| CDF/D0 data | InspireHEP files or PDF | Older Tevatron papers often lack HEPData |
+| CDF/D0 data | HEPData or PDF | Older Tevatron papers often lack HEPData |
 | PDG world averages | PDG website or HEPData | PDG review PDFs at pdg.lbl.gov |
 | HFLAV averages | HFLAV website | Dedicated combination results |
 | Theory calculations | arXiv ancillary files or LaTeX source | Theory papers rarely have HEPData; check the e-print package first |

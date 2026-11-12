@@ -81,7 +81,7 @@
             }
         },
         {
-            "B.2.K.v.vBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.6e-5",
@@ -90,7 +90,7 @@
             }
         },
         {
-            "B.2.K.v.vBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "R[exp/sm][90%@CL]",
                     "type@1_upper": "3.9",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B.2.K*.v.vBar": {
+            "B0.2.K*0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "2.7e-5",
@@ -108,7 +108,7 @@
             }
         },
         {
-            "B.2.K*.v.vBar": {
+            "B0.2.K*0.v.vBar": {
                 "obs@1": {
                     "name": "R[exp/sm][90%@CL]",
                     "type@1_upper": "2.7",
@@ -117,7 +117,7 @@
             }
         },
         {
-            "B.2.pi.v.vBar": {
+            "B0.2.pi0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "0.8e-5",
@@ -126,7 +126,7 @@
             }
         },
         {
-            "B.2.rho.v.vBar": {
+            "B0.2.rho0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "2.8e-5",

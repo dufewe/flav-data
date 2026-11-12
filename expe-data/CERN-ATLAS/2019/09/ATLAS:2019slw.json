@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fBar": {
+            "g.g.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.11",
@@ -19,7 +19,7 @@
             }
         },
         {
-            "g.g.2.H.2.Z.Z": {
+            "g.g.2.H0.2.Z.Z": {
                 "obs@1": {
                     "name": "kappa_Z",
                     "value": "1.10",
@@ -29,7 +29,7 @@
             }
         },
         {
-            "g.g.2.H.2.Z.Z": {
+            "g.g.2.H0.2.Z.Z": {
                 "obs@1": {
                     "name": "kappa_gZ",
                     "value": "1.06",
@@ -39,7 +39,7 @@
             }
         },
         {
-            "H.2.W.W": {
+            "H0.2.W+.W-": {
                 "obs@1": {
                     "name": "kappa_W",
                     "value": "1.05",
@@ -49,7 +49,7 @@
             }
         },
         {
-            "g.g.2.H.2.b.bBar": {
+            "g.g.2.H0.2.b.bBar": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "1.06",
@@ -59,7 +59,7 @@
             }
         },
         {
-            "g.g.2.H.2.t.tBar": {
+            "g.g.2.H0.2.t.tBar": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.02",
@@ -69,7 +69,7 @@
             }
         },
         {
-            "g.g.2.H.2.tau.tau": {
+            "g.g.2.H0.2.tau+.tau-": {
                 "obs@1": {
                     "name": "kappa_tau",
                     "value": "1.07",
@@ -79,7 +79,7 @@
             }
         },
         {
-            "H.2.mu+.mu-": {
+            "H0.2.mu+.mu-": {
                 "obs@1": {
                     "name": "kappa_mu",
                     "type@1_upper": "1.53",
@@ -108,7 +108,7 @@
             }
         },
         {
-            "kappa.W.2.kappa.Z": {
+            "kappa.W+.2.kappa.Z": {
                 "obs@1": {
                     "name": "lambda_WZ",
                     "value": "0.95",

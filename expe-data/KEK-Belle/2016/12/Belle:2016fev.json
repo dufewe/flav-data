@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B.2.K*.l+.l-": {
+            "B0.2.K*0.l+.l-": {
                 "obs@1": {
                     "name": "P4p",
                     "q2min": "1.00",
@@ -109,9 +109,9 @@
             }
         },
         {
-            "B.2.K*.l+.l-": {
+            "B0.2.K*0.l+.l-": {
                 "obs@1": {
-                    "name": "Q4[mu/e]",
+                    "name": "DeltaP4p[mu-e]",
                     "q2min": "1.00",
                     "q2max": "6.00",
                     "value": "0.498",
@@ -123,7 +123,7 @@
                     "type@2_lower": "0.166"
                 },
                 "obs@2": {
-                    "name": "Q4[mu/e]",
+                    "name": "DeltaP4p[mu-e]",
                     "q2min": "0.10",
                     "q2max": "4.00",
                     "value": "-0.723",
@@ -135,7 +135,7 @@
                     "type@2_lower": "0.163"
                 },
                 "obs@3": {
-                    "name": "Q4[mu/e]",
+                    "name": "DeltaP4p[mu-e]",
                     "q2min": "4.00",
                     "q2max": "8.00",
                     "value": "0.448",
@@ -147,7 +147,7 @@
                     "type@2_lower": "0.076"
                 },
                 "obs@4": {
-                    "name": "Q4[mu/e]",
+                    "name": "DeltaP4p[mu-e]",
                     "q2min": "14.18",
                     "q2max": "19.00",
                     "value": "0.041",
@@ -159,7 +159,7 @@
                     "type@2_lower": "0.082"
                 },
                 "obs@5": {
-                    "name": "Q5[mu/e]",
+                    "name": "DeltaP5p[mu-e]",
                     "q2min": "1.00",
                     "q2max": "6.00",
                     "value": "0.656",
@@ -171,7 +171,7 @@
                     "type@2_lower": "0.103"
                 },
                 "obs@6": {
-                    "name": "Q5[mu/e]",
+                    "name": "DeltaP5p[mu-e]",
                     "q2min": "0.10",
                     "q2max": "4.00",
                     "value": "-0.097",
@@ -183,7 +183,7 @@
                     "type@2_lower": "0.164"
                 },
                 "obs@7": {
-                    "name": "Q5[mu/e]",
+                    "name": "DeltaP5p[mu-e]",
                     "q2min": "4.00",
                     "q2max": "8.00",
                     "value": "0.498",
@@ -195,7 +195,7 @@
                     "type@2_lower": "0.095"
                 },
                 "obs@8": {
-                    "name": "Q5[mu/e]",
+                    "name": "DeltaP5p[mu-e]",
                     "q2min": "14.18",
                     "q2max": "19.00",
                     "value": "0.778",

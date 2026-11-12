@@ -107,15 +107,17 @@ Represents $A + B \to C + D$ with `2` replacing the arrow.
 
 | Rule | Example |
 |------|---------|
-| Particle-type order: baryon → meson → charged lepton → neutral lepton | `Lambdab0.2.p.J/psi.pi-` |
+| Particle state: `<name>[*]<charge>[Bar]`; charge is mandatory | `phi0`, `p+`, `D*+`, `W-`, `n0` |
+| Particle-type order: baryon → meson → charged lepton → neutral lepton | `Lambdab0.2.p+.J/psi0.pi-` |
 | Mass order within a type: heaviest → lightest | `B0.2.K*0.tau-.e+` |
 | Charge order for equal masses: `+` → `-` → `0` | `B+.2.K+.mu+.mu-` |
 | Antiparticles: name + `Bar` (baryons: `Bar` last) | `B0Bar.2.e+.e-`, `Lambdac+Bar` |
 | Charged particles: use charge directly | `W-.2.mu-.vBar` |
 | Neutrinos: `v`/`vBar`, flavor appended only when the signature fixes it | `v`, `vBar`, `ve` |
+| Only neutrinos and `Z`/`gamma`/`g` omit the charge | `Z`, `gamma` |
 | Particle case follows the handwritten symbol | `pi0`, `Lambdab0`, `KS0` |
-| Antiparticle marker is capital `Bar` | `K0Bar`, `pBar`, `fBar` |
-| Multi-step: additional `2` separators | `p.p.2.Z.2.mu+.mu-` |
+| Antiparticle marker is capital `Bar` | `K0Bar`, `p+Bar`, `fBar` |
+| Multi-step: additional `2` separators | `p+.p+.2.Z.2.mu+.mu-` |
 
 ### Observable Name: `OBS` / `OBS[condition]`
 

@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fBar": {
+            "g.g.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.09",
@@ -19,7 +19,7 @@
             }
         },
         {
-            "H.gg.2.Z.Z": {
+            "H0.gg.2.Z.Z": {
                 "obs@1": {
                     "name": "kappa_gZ",
                     "value": "1.09",
@@ -33,7 +33,7 @@
             }
         },
         {
-            "H.2.W.W": {
+            "H0.2.W+.W-": {
                 "obs@1": {
                     "name": "kappa_W",
                     "value": "1.00",
@@ -47,7 +47,7 @@
             }
         },
         {
-            "H.2.Z.Z": {
+            "H0.2.Z.Z": {
                 "obs@1": {
                     "name": "kappa_Z",
                     "value": "1.04",
@@ -61,7 +61,7 @@
             }
         },
         {
-            "H.2.tau.tau": {
+            "H0.2.tau+.tau-": {
                 "obs@1": {
                     "name": "kappa_tau",
                     "value": "1.04",
@@ -75,7 +75,7 @@
             }
         },
         {
-            "H.2.b.bBar": {
+            "H0.2.b.bBar": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "0.95",
@@ -89,7 +89,7 @@
             }
         },
         {
-            "H.gg.2.t.tBar": {
+            "H0.gg.2.t.tBar": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.05",

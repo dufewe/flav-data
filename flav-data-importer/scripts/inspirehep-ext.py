@@ -19,14 +19,12 @@ import sys
 import argparse
 import re
 
-# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
-# See common.py for the canonical implementations and SKILL.md
-# "Core Conventions" rules 3 + 4 for the policies.
+# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion),
+# re-exported for callers. See common.py for the canonical implementations
+# and SKILL.md "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
-    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
-    to_bibtex, to_bibtex as _to_bibtex,
-    format_authors,
+    unicode_to_latex, to_bibtex, format_authors,
 )  # noqa: E402,F401
 
 
@@ -88,22 +86,22 @@ def extract_metadata(hit: dict) -> dict:
     title = ''
     for t in meta.get('titles', []):
         if t.get('source') == 'arXiv':
-            title = _unicode_to_latex(t['title'])
+            title = unicode_to_latex(t['title'])
             break
     if not title:
         titles = meta.get('titles') or [{}]
-        title = _unicode_to_latex(titles[0].get('title', ''))
+        title = unicode_to_latex(titles[0].get('title', ''))
 
     # Abstract (prefer arXiv source, preserves LaTeX format).
     # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Core Conventions".
     abstract = ''
     for a in meta.get('abstracts', []):
         if a.get('source') == 'arXiv':
-            abstract = _unicode_to_latex(a['value'])
+            abstract = unicode_to_latex(a['value'])
             break
     if not abstract:
         abstracts = meta.get('abstracts') or [{}]
-        abstract = _unicode_to_latex(abstracts[0].get('value', ''))
+        abstract = unicode_to_latex(abstracts[0].get('value', ''))
 
     # Author list. Apply the 1 / 2 / 3 / 4+ tiers from SKILL.md rule 3.
     authors = meta.get('authors', [])
@@ -116,9 +114,6 @@ def extract_metadata(hit: dict) -> dict:
             author_str = f"{collaborations[0]['value']} collaboration"
         else:
             author_str = ''
-
-    # First author full info (includes email, etc.)
-    first_author = meta.get('first_author', {})
 
     # Collaboration: join multi-collaboration papers with ", ".
     collaborations = meta.get('collaborations', [])

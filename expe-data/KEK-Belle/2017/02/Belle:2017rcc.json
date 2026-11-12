@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B.2.D*.l.v": {
+            "B0.2.D*-.l.v": {
                 "obs@1": {
                     "name": "Rmue",
                     "value": "0.96",

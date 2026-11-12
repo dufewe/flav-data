@@ -9,7 +9,7 @@
     "transition-mode": "non-leptonic-decay",
     "data": [
         {
-            "Lambdab0.2.p.J/psi": {
+            "Lambdab0.2.p+.J/psi0": {
                 "obs@1": {
                     "name": "R[pi/K]",
                     "value": "0.0824",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "Lambdab0.2.p.J/psi": {
+            "Lambdab0.2.p+.J/psi0": {
                 "obs@1": {
                     "name": "DeltaACP[pi-K]",
                     "value": "5.7e-2",

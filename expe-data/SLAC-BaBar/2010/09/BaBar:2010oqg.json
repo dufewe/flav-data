@@ -73,7 +73,7 @@
             }
         },
         {
-            "B.2.K.v.vBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5e-6",
@@ -83,7 +83,7 @@
             }
         },
         {
-            "B.2.K.v.vBar": {
+            "B0.2.K0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.4e-5",

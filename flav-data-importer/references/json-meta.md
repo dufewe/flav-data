@@ -118,7 +118,15 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    transition: observable `name` values must not repeat it. The validator
    rejects a transition embedded in `name` (e.g.
    `FL(B0.2.K*0.mu+.mu-)`); write `FL` instead. Each channel maps to an
-   object of `obs@N` entries; no LaTeX is stored in `data`.
+   object of `obs@N` entries; no LaTeX is stored in `data`. Every particle
+   token follows `<name>[*]<charge>[Bar]` and must carry an explicit
+   charge: neutral states get `0` (`phi0`, `J/psi0`, `n0`, `Lambda0`),
+   charged states get `+`/`-` (`p+`, `B-`, `l+`). The only charge-less
+   exceptions are neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`) and the
+   neutral gauge bosons `Z`, `gamma`, `g`. Placeholders, partons,
+   inclusive systems, nuclei, and pseudo-labels (`l`, `q`, `Xs`, `Au`,
+   `all`, `had`, ...) have no charge slot. Charge-averaged measurements
+   use one concrete charge-conjugate representative.
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables
@@ -143,10 +151,12 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    metadata key or any key after a matrix.
 6. **Per-channel numbering** — each channel restarts at `obs@1` and runs
    contiguously (1..N) within that channel.
-7. **Separate contexts** — different datasets, schemes, fit choices, or
-   kinematic bins go into separate groups, even for the same channel.
-   Kinematic boundaries (`q2min`/`q2max`, ...) live inside each `obs@N`,
-   never at group or channel level.
+7. **Separate contexts** — different datasets, schemes, or fit choices
+   always go into separate groups, even for the same channel. Different
+   kinematic bins go into separate groups unless one source matrix
+   couples their observables (§Data Grouping). Kinematic boundaries
+   (`q2min`/`q2max`, ...) live inside each `obs@N`, never at group or
+   channel level.
 8. **No category layer** — observables are distinguished solely by
    `name`.
 
@@ -154,11 +164,11 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
 
 Coefficients of a form-factor expansion are named `aN_FF`, where `N` is
 the expansion order (0, 1, 2, ...) and `FF` is the form-factor symbol
-(`obs-abbr.md` §2.4). Examples: `a0_Fp`, `a1_F0`, `a2_Fv`, `a0_Gv`.
+(`obs-abbr.md` §2.4). Examples: `a0_F+`, `a1_F0`, `a2_Fv`, `a0_Gv`.
 
 When the source reports one number that applies to several form factors
-(e.g. both `a0_Gv` and `a0_Gp`), write **one observable per form factor**
-and repeat the value/errors. Do not join symbols into `a0_Gv_Gp`: each
+(e.g. both `a0_Gv` and `a0_G+`), write **one observable per form factor**
+and repeat the value/errors. Do not join symbols into `a0_Gv_G+`: each
 named coefficient is its own observable.
 
 Fit choices (nominal, higher-order, ...) are **not** part of the name and
@@ -488,8 +498,8 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
   per-paper schema).
 - Each observable needs `name`, `value`, and the numeric total error pair
   `total_upper`/`total_lower`. Snapshots never split errors into
-  components: a symmetric `error` expands to an equal pair, and an
-  asymmetric interval fills the two fields directly. Do not use
+  components: write a symmetric source error as an equal pair, and an
+  asymmetric interval directly into the two fields. Do not use
   `type@N_*` fields.
 - Unknown observable keys are rejected: the only allowed fields are
   `name`, `value`, `total_upper`, `total_lower`, `unit`, `limit`.
@@ -513,12 +523,12 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 10. **Author format** — initials only, 1 / 2 / 3 / 4+ tiers as in the `author` row above (`format_authors()` in `scripts/common.py`; SKILL.md rule 3).
 11. **Abstract = single line** — Collapse multi-line `align*`/`gather*`/etc. blocks to single-line LaTeX. Line breaks (`\\`) become `, ` separators, with `and` before the last. (SKILL.md rule 2.)
 12. **No Unicode** — Replace all Unicode chars (`μ`, `Δ`, `±`, `×`, `→`, `°`, smart quotes, dashes) with LaTeX equivalents (`\mu`, `\Delta`, `\pm`, `\times`, `\to`, `^{\circ}`, `` ` ``/`'`/`` `` ``/`''`). Latin ligatures from PDF text extraction (`ﬀ`, `ﬁ`, `ﬂ`, `ﬃ`, `ﬄ`) are replaced by their plain letter sequences. Accented Latin letters in author names (`ć`, `č`, `ç`, `ü`, `ø`, `ß`) become LaTeX accents (`\'{c}`, `\v{c}`, `\c{c}`, `\"{u}`, `\o`, `\ss`). The `author`, `title` and `abstract` fields are validated Unicode-free. (SKILL.md rule 4.)
-13. **Transition order** — a channel key is `A.B.2.C.D` (`no-transition` is the only exception; ratios join two full keys with `/`) and follows the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses. Charge is written `+`/`-`/`0` only (`p`/`m` suffixes are rejected); neutral antiparticles append capital `Bar` (lowercase `bar` is rejected). The validator fails non-canonical order. Particle tokens use the handwritten case (`pi0`, `Lambdab0`, `KS0`, `KL0`) and neutrinos are `v`/`vBar` (flavor: `ve`, `vmu`, `vtau`, plus `Bar`); see obs-abbr.md §1.
+13. **Transition order** — a channel key is `A.B.2.C.D` (`no-transition` is the only exception; ratios join two full keys with `/`) and follows the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses. Every particle state is `<name>[*]<charge>[Bar]`: charge is mandatory and written `+`/`-`/`0` only (`p`/`m` suffixes and charge-less names are rejected); `*` sits between the name and the charge; neutral antiparticles append capital `Bar` after the charge (lowercase `bar` is rejected). Only neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`) and the neutral gauge bosons `Z`, `gamma`, `g` may omit the charge. The validator fails non-canonical order. Particle tokens use the handwritten case (`pi0`, `Lambdab0`, `KS0`, `KL0`); see obs-abbr.md §1.
 14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to an `obs@N` object, optionally carries group-level `dataset`/`scheme` strings, and optionally a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). JSON data stores no LaTeX for channels or observables.
 15. **One group per property set** — observables whose dataset, scheme, fit choice, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).
 16. **Exactly one error scheme** — a single error is the total error (`total_upper`/`total_lower`); two or more errors are separate component triplets (`type@N_error`/`_upper`/`_lower`). Confidence-level bounds use `type@N_upper`/`type@N_lower` + `type@N_level` with no `type@N_error`; a combined fit + bound uses distinct N slots. Error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`. Unknown observable fields are rejected.
 17. **`collaboration` is conditional** — required for named collaborations (experiments, HFLAV/PDG, large theory groups such as HPQCD); omit the key for individual-author and small-group papers (SKILL.md rule 8).
-18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_Fp`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_Gp`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
+18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_F+`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_G+`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
 19. **`unit` is a physical unit** — never store a scientific-notation scale factor (`1e-6`, `10^{-4}`) in `unit`; multiply it into `value`, `total_upper`/`total_lower`, and any bounds, then omit the field. The validator rejects scale-factor units.
 20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
 21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
@@ -528,9 +538,9 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 When a paper introduces metadata or data structures not covered by this document:
 
 1. **Identify the new pattern** — is it a new field, a new error type, a new kinematic variable, or a new data format?
-2. **Check existing conventions** — review this document and `../references/obs-abbr.md` for naming patterns that can be extended.
+2. **Check existing conventions** — review this document and `obs-abbr.md` for naming patterns that can be extended.
 3. **Add the new pattern** to the relevant section of this document.
-4. **Update the validator** (`../scripts/json-valid.py`) if the new pattern requires structural checks.
+4. **Update the validator** (`scripts/json-valid.py`) if the new pattern requires structural checks.
 5. **Keep it consistent** — use the same naming conventions, string types, and ordering rules as existing fields.
 
 Examples of extensions:

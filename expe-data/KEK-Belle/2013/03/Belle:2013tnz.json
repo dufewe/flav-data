@@ -81,7 +81,7 @@
             }
         },
         {
-            "B0.2.phi.v.vBar": {
+            "B0.2.phi0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "12.7e-5",

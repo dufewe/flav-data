@@ -8,15 +8,15 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.p.l-.vBar": {
+            "Lambdab0.2.p+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_Fp",
+                    "name": "a0_F+",
                     "value": "0.4382",
                     "total_upper": "0.0315",
                     "total_lower": "0.0315"
                 },
                 "obs@2": {
-                    "name": "a1_Fp",
+                    "name": "a1_F+",
                     "value": "-0.6452",
                     "total_upper": "0.2093",
                     "total_lower": "0.2093"
@@ -52,13 +52,13 @@
                     "total_lower": "0.0198"
                 },
                 "obs@8": {
-                    "name": "a0_Gp",
+                    "name": "a0_G+",
                     "value": "0.3912",
                     "total_upper": "0.0198",
                     "total_lower": "0.0198"
                 },
                 "obs@9": {
-                    "name": "a1_Gp",
+                    "name": "a1_G+",
                     "value": "-0.8167",
                     "total_upper": "0.1749",
                     "total_lower": "0.1749"
@@ -100,21 +100,21 @@
             ]
         },
         {
-            "Lambdab0.2.p.l-.vBar": {
+            "Lambdab0.2.p+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_Fp",
+                    "name": "a0_F+",
                     "value": "0.4251",
                     "total_upper": "0.0388",
                     "total_lower": "0.0388"
                 },
                 "obs@2": {
-                    "name": "a1_Fp",
+                    "name": "a1_F+",
                     "value": "-0.7088",
                     "total_upper": "0.3361",
                     "total_lower": "0.3361"
                 },
                 "obs@3": {
-                    "name": "a2_Fp",
+                    "name": "a2_F+",
                     "value": "0.8925",
                     "total_upper": "0.8869",
                     "total_lower": "0.8869"
@@ -162,19 +162,19 @@
                     "total_lower": "0.0260"
                 },
                 "obs@11": {
-                    "name": "a0_Gp",
+                    "name": "a0_G+",
                     "value": "0.3889",
                     "total_upper": "0.0260",
                     "total_lower": "0.0260"
                 },
                 "obs@12": {
-                    "name": "a1_Gp",
+                    "name": "a1_G+",
                     "value": "-1.0730",
                     "total_upper": "0.2617",
                     "total_lower": "0.2617"
                 },
                 "obs@13": {
-                    "name": "a2_Gp",
+                    "name": "a2_G+",
                     "value": "1.9860",
                     "total_upper": "0.8247",
                     "total_lower": "0.8247"
@@ -236,13 +236,13 @@
         {
             "Lambdab0.2.Lambdac+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_Fp",
+                    "name": "a0_F+",
                     "value": "0.8146",
                     "total_upper": "0.0167",
                     "total_lower": "0.0167"
                 },
                 "obs@2": {
-                    "name": "a1_Fp",
+                    "name": "a1_F+",
                     "value": "-4.8990",
                     "total_upper": "0.5425",
                     "total_lower": "0.5425"
@@ -278,13 +278,13 @@
                     "total_lower": "0.0086"
                 },
                 "obs@8": {
-                    "name": "a0_Gp",
+                    "name": "a0_G+",
                     "value": "0.6847",
                     "total_upper": "0.0086",
                     "total_lower": "0.0086"
                 },
                 "obs@9": {
-                    "name": "a1_Gp",
+                    "name": "a1_G+",
                     "value": "-4.4310",
                     "total_upper": "0.3572",
                     "total_lower": "0.3572"
@@ -328,19 +328,19 @@
         {
             "Lambdab0.2.Lambdac+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_Fp",
+                    "name": "a0_F+",
                     "value": "0.8103",
                     "total_upper": "0.0276",
                     "total_lower": "0.0276"
                 },
                 "obs@2": {
-                    "name": "a1_Fp",
+                    "name": "a1_F+",
                     "value": "-4.7480",
                     "total_upper": "0.9429",
                     "total_lower": "0.9429"
                 },
                 "obs@3": {
-                    "name": "a2_Fp",
+                    "name": "a2_F+",
                     "value": "0.7862",
                     "total_upper": "8.8020",
                     "total_lower": "8.8020"
@@ -388,19 +388,19 @@
                     "total_lower": "0.0184"
                 },
                 "obs@11": {
-                    "name": "a0_Gp",
+                    "name": "a0_G+",
                     "value": "0.6848",
                     "total_upper": "0.0184",
                     "total_lower": "0.0184"
                 },
                 "obs@12": {
-                    "name": "a1_Gp",
+                    "name": "a1_G+",
                     "value": "-4.3790",
                     "total_upper": "0.6954",
                     "total_lower": "0.6954"
                 },
                 "obs@13": {
-                    "name": "a2_Gp",
+                    "name": "a2_G+",
                     "value": "1.2810",
                     "total_upper": "7.3650",
                     "total_lower": "7.3650"

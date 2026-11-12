@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "W.2.tau.vtau": {
+            "W-.2.tau-.vtau": {
                 "obs@1": {
                     "name": "Rtaumu",
                     "value": "0.992",

@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "p.p.2.Wp.2.l.v": {
+            "p+.p+.2.Wp+.2.l.v": {
                 "obs@1": {
                     "name": "m_obs_Wp_SSM[e_mu]",
                     "value": "6.0",
@@ -29,7 +29,7 @@
             }
         },
         {
-            "p.p.2.Wp.2.l.v": {
+            "p+.p+.2.Wp+.2.l.v": {
                 "obs@1": {
                     "name": "m_obs_Wp_SSM[e]",
                     "value": "6.0",
@@ -49,7 +49,7 @@
             }
         },
         {
-            "p.p.2.Wp.2.l.v": {
+            "p+.p+.2.Wp+.2.l.v": {
                 "obs@1": {
                     "name": "m_obs_Wp_SSM[mu]",
                     "value": "5.1",

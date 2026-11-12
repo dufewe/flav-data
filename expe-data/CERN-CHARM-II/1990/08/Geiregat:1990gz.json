@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "e.v.2.e.v": {
+            "e-.v.2.e-.v": {
                 "obs@1": {
                     "name": "sin2theta_W",
                     "value": "0.2309",

@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdac+.2.p.mu+.mu-": {
+            "Lambdac+.2.p+.mu+.mu-": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-1.1e-2",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "Lambdac+.2.p.mu+.mu-": {
+            "Lambdac+.2.p+.mu+.mu-": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-0.8e-2",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "Lambdac+.2.p.mu+.mu-": {
+            "Lambdac+.2.p+.mu+.mu-": {
                 "obs@1": {
                     "name": "SigmaAFB",
                     "value": "3.9e-2",
@@ -65,7 +65,7 @@
             }
         },
         {
-            "Lambdac+.2.p.mu+.mu-": {
+            "Lambdac+.2.p+.mu+.mu-": {
                 "obs@1": {
                     "name": "DeltaAFB",
                     "value": "3.1e-2",
@@ -79,7 +79,7 @@
             }
         },
         {
-            "Lambdac+.2.p.mu+.mu-": {
+            "Lambdac+.2.p+.mu+.mu-": {
                 "obs@1": {
                     "name": "AFB",
                     "value": "11.7e-2",
@@ -107,7 +107,7 @@
             }
         },
         {
-            "Lambdac+Bar.2.pBar.mu+.mu-": {
+            "Lambdac+Bar.2.p+Bar.mu+.mu-": {
                 "obs@1": {
                     "name": "AFB",
                     "value": "2.2e-2",

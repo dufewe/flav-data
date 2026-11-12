@@ -9,7 +9,7 @@
     "transition-mode": "neutron-beta-decay",
     "data": [
         {
-            "n.2.p.e-.veBar": {
+            "n0.2.p+.e-.veBar": {
                 "obs@1": {
                     "name": "an",
                     "value": "-0.1090",

@@ -81,7 +81,7 @@
             }
         },
         {
-            "B+.2.K+.tau.mu": {
+            "B+.2.K+.tau-.mu+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.8e-5",
@@ -90,7 +90,7 @@
             }
         },
         {
-            "B+.2.K+.tau.e": {
+            "B+.2.K+.tau-.e+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "3.0e-5",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B+.2.pi+.tau.mu": {
+            "B+.2.pi+.tau-.mu+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "7.2e-5",
@@ -108,7 +108,7 @@
             }
         },
         {
-            "B+.2.pi+.tau.e": {
+            "B+.2.pi+.tau-.e+": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "7.5e-5",

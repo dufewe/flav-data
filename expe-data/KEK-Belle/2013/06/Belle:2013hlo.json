@@ -422,7 +422,7 @@
             ]
         },
         {
-            "B-.2.omega.l-.vBar": {
+            "B-.2.omega0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.07e-4",
@@ -436,7 +436,7 @@
             }
         },
         {
-            "B-.2.omega.l-.vBar": {
+            "B-.2.omega0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "2.28e-05",
@@ -469,7 +469,7 @@
             ]
         },
         {
-            "BBar.2.pi.l-.vBar": {
+            "B0Bar.2.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.52e-3",

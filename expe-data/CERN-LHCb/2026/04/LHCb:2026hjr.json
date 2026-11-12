@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.J/psi(2.l+.l-).K*0": {
+            "B0.2.J/psi0(2.l+.l-).K*0": {
                 "obs@1": {
                     "name": "r[mu/e]",
                     "value": "1.035",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "B0.2.psi(2S)(2.l+.l-).K*0": {
+            "B0.2.psi(2S)0(2.l+.l-).K*0": {
                 "obs@1": {
                     "name": "R[mu/e]",
                     "value": "1.034",

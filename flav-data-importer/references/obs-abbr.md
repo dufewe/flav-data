@@ -10,14 +10,14 @@ Every decay or scattering process is encoded as a transition symbol using the fo
 
 1. **State separator `2`**: `A.B.2.C.D` represents $A+B \to C+D$. The `2`
    always separates the initial state from the final state. Cascades repeat
-   the separator: `p.p.2.W+.2.mu+.v` = $pp \to W^+ \to \mu^+\nu$.
+   the separator: `p+.p+.2.W+.2.mu+.v` = $pp \to W^+ \to \mu^+\nu$.
 2. **Particle-type order**: Within each state (initial or final), write
    particles left to right by type: **baryon → meson → charged lepton →
    neutral lepton**. Example: $\Lambda_b^0 \to p\,J/\psi\,\pi^-$ is
-   `Lambdab0.2.p.J/psi.pi-` (baryon, then mesons).
+   `Lambdab0.2.p+.J/psi0.pi-` (baryon, then mesons).
 3. **Mass order within a type**: Among particles of the same type, write
    **heaviest → lightest**. Example: the same $\Lambda_b^0$ decay is
-   `Lambdab0.2.p.J/psi.pi-` ($J/\psi$ = 3.10 GeV before $\pi^-$ = 0.14 GeV);
+   `Lambdab0.2.p+.J/psi0.pi-` ($J/\psi$ = 3.10 GeV before $\pi^-$ = 0.14 GeV);
    $B^0 \to K^{*0}\tau^- e^+$ is `B0.2.K*0.tau-.e+` ($\tau$ = 1.78 GeV
    before $e$ = 0.0005 GeV). Mass ordering is applied **within each type**:
    a lighter baryon still precedes a heavier meson.
@@ -25,23 +25,40 @@ Every decay or scattering process is encoded as a transition symbol using the fo
    mass, write **`+` → `-` → `0`**. Example: $B^0 \to e^+ e^-$ is
    `B0.2.e+.e-`; $\tau^+ \tau^-$ is `tau+.tau-`. Mass ordering takes
    precedence, so charge only breaks equal-mass ties.
-5. **Charge indicators**: a charge is written `+`, `-`, or `0` (`B+`,
-   `B-`, `B0`, `D*+`). There is no other charge syntax — `p`/`m` suffixes
-   (`Bp`, `pip`, `ep`) are rejected. A token may omit the charge only
-   when the source does not fix it, as in ratios and flavor comparisons
-   (`B`, `D`, `K*`, `pi`, `tau`, `e`, `mu`, `l`).
-6. **Antiparticles**: Neutral antiparticles append `Bar`: $B^0$ →
-   `B0Bar`, $K^{*0}$ → `K*0Bar`. For baryons, `Bar` goes at the very end
-   after any charge indicator (`Lambdac+Bar`, `Lambdab0Bar`, `pBar`);
-   for charged mesons, leptons, and bosons the charge sign already denotes
-   the antiparticle (`B+`/`B-`, `W+`/`W-`, `mu+`/`mu-`) — do **not** add
-   `Bar` to these. The marker is always capital `Bar`; lowercase `bar` is
-   not accepted.
+5. **Particle-state grammar**: every particle state is
+   `<name>[*]<charge>[Bar]`:
+   - `name` is the particle symbol (`e`, `mu`, `tau`, `Bs`, `B`, `D`,
+     `K`, `pi`, `J/psi`, ...), with the letter case of Rule 7.
+   - `*` marks a vector meson (`K*`, `D*`, `Ds*`) and sits between the
+     name and the charge.
+   - `charge` is **mandatory** and is `+`, `-`, or `0`: charged states
+     take their sign (`B+`, `B-`, `D*+`, `p+`, `W-`), neutral states
+     take `0` (`B0`, `K*0`, `pi0`, `phi0`, `J/psi0`, `Lambda0`, `n0`,
+     `H0`). The only charge-less states are neutrinos (`v`, `vBar`,
+     `ve`, `vmu`, `vtau`, ...) and the neutral gauge bosons `Z`,
+     `gamma`, and `g`.
+   - `Bar` is the antiparticle marker of a neutral state or a baryon
+     (`B0Bar`, `K*0Bar`, `n0Bar`, `p+Bar`, `Lambda0Bar`). Charged
+     mesons, leptons, and bosons use the opposite charge sign instead
+     (`B+`/`B-`, `mu+`/`mu-`, `W+`/`W-`) and do not take `Bar`.
+   There is no other charge syntax: `p`/`m` suffixes (`Bp`, `pip`, `ep`)
+   are rejected. A charge-agnostic token such as `B`, `D`, `K*`, `pi`,
+   `e`, `mu`, or `tau` is no longer a valid particle state; a
+   charge-averaged measurement is written with a concrete
+   charge-conjugate representative. Generic placeholders (`l`, `q`,
+   `q1`, `q2`) and non-particle labels (`all`, `had`, `med`, `world`,
+   `CDF`, `kappa`) are exempt because they are not particle states;
+   placeholders are allowed only in shared multi-transition keys
+   (§2.2.2).
+6. **Antiparticles**: the marker is always capital `Bar`, placed last.
+   Neutral states insert it after the charge (`B0Bar`, `K*0Bar`,
+   `n0Bar`); baryons keep it after the charge (`p+Bar`,
+   `Lambdac+Bar`, `Lambda0Bar`). Lowercase `bar` is not accepted.
 7. **Particle-name case follows the handwritten symbol**: keep the letter
    case of the particle symbol itself. Latin hadrons and capital Greek
    letters stay capital (`B0`, `K+`, `D*0`, `K*0`, `Lambdab0`, `Sigma-`,
    `Omega-`); lower-case Greek letters stay lower case (`pi0`, `pi+`,
-   `rho+`, `phi`, `eta`, `omega`, `gamma`). Subscripts stay lower case and
+   `rho+`, `phi0`, `eta0`, `omega0`, `gamma`). Subscripts stay lower case and
    a superscript is appended as a plain digit: $\pi^0$ → `pi0`,
    $\Lambda_b^0$ → `Lambdab0`, $D_s^{*+}$ → `Ds*+`, $K_S^0$ → `KS0`.
 8. **Neutrinos**: Write the handwritten $\nu$ as the letter `v`: use `v` or
@@ -54,19 +71,22 @@ Every decay or scattering process is encoded as a transition symbol using the fo
    rejected by the validator.
 9. **Intermediate resonances**: When an intermediate state decays to a
    dilepton pair, append `(2.l+.l-)` to the resonance name:
-   `B0.2.J/psi.K*0(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$
+   `B0.2.J/psi0.K*0(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$
    (mesons heavy to light: $J/\psi$ before $K^{*0}$).
 
 Rules 1–5 are **enforced by `scripts/json-valid.py`**: every data key is
 `A.B.2.C.D`, and `no-transition` is the only key without `.2.` (a
 multi-transition ratio joins two full keys with `/`, e.g.
 `B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-`). Non-canonical order is a validation
-failure, as are `p`/`m` charge suffixes and lowercase `bar`. Ordering is
+failure, as are `p`/`m` charge suffixes, lowercase `bar`, a missing
+charge marker, and a `Bar`/`*` in the wrong position. Ordering is
 skipped for states containing particles outside the four listed types
-(W/Z/$\gamma$, quarks, generic placeholders such as `l`/`q`); a particle
-missing from `particle-masses.json` is still an error unless it is listed
-under `non_orderable`. HFLAV/PDG snapshots keep their own subgroup names
-(`HFLAV@B02pilnu`); those are not channel keys and are not order-checked.
+(Z/$\gamma$/gluon, quarks, generic placeholders such as `l`/`q`); a
+particle missing from `particle-masses.json` is still an error unless it
+is listed under `non_orderable`. The charge markers of the exempt
+neutrinos and neutral gauge bosons are not required. HFLAV/PDG snapshots
+keep their own subgroup names (`HFLAV@B02pilnu`); those are not channel
+keys and are not order-checked.
 
 ### Examples
 
@@ -76,38 +96,38 @@ under `non_orderable`. HFLAV/PDG snapshots keep their own subgroup names
 | $\bar{B}^0 \to e^+ e^-$ | Leptonic decay | `B0Bar.2.e+.e-` | Neutral antiparticle uses Bar |
 | $B^+ \to K^+ \mu^+ \mu^-$ | Semileptonic | `B+.2.K+.mu+.mu-` | Meson first, then leptons (+ then -) |
 | $W^- \to \mu^- \bar{\nu}_\mu$ | Leptonic decay | `W-.2.mu-.vBar` | Charged lepton before neutral lepton |
-| $B_s^0 \to \phi \mu^+ \mu^-$ | Semileptonic | `Bs0.2.phi.mu+.mu-` | Bs meson notation |
-| $\Lambda_b^0 \to J/\psi\, p\, \pi^-$ | Non-leptonic | `Lambdab0.2.p.J/psi.pi-` | Baryon first; mesons heavy to light (`J/psi` before `pi-`) |
-| $pp \to Z \to \mu^+ \mu^-$ | Scattering | `p.p.2.Z.2.mu+.mu-` | Two-step process |
+| $B_s^0 \to \phi \mu^+ \mu^-$ | Semileptonic | `Bs0.2.phi0.mu+.mu-` | Neutral $\phi$ takes `0` |
+| $\Lambda_b^0 \to J/\psi\, p\, \pi^-$ | Non-leptonic | `Lambdab0.2.p+.J/psi0.pi-` | Baryon first; mesons heavy to light (`J/psi0` before `pi-`) |
+| $pp \to Z \to \mu^+ \mu^-$ | Scattering | `p+.p+.2.Z.2.mu+.mu-` | Two-step process; `Z` is an exempt gauge boson |
 | $e^+ e^- \to \mu^+ \mu^-$ | Scattering | `e+.e-.2.mu+.mu-` | Collider process |
 
 ### 1.5 Rejected Forms
 
 Compact keys without `.2.` (`B02K*mumu`), `p`/`m` charge suffixes (`Bp`,
-`pip`, `ep`), and lowercase `bar` (`B0bar`) are all invalid. New imports
-use the spellings in the tables below.
+`pip`, `ep`), lowercase `bar` (`B0bar`), and particles without a charge
+marker (`B.2.D.l.v`, `B0.2.phi.mu+.mu-`, `Lambdab0.2.p.J/psi.pi-`) are
+all invalid. New imports use the spellings in the tables below.
 
 ### Particle Abbreviations
 
 #### Mesons
 | Particle | Symbol | Notes |
 |----------|--------|-------|
-| $B^0$, $B^+$, $B^-$ | `B0`, `B+`, `B-` | Charged particles always use charge indicator |
+| $B^0$, $B^+$, $B^-$ | `B0`, `B+`, `B-` | `B` is the $B_u$ particle token; no `Bu` prefix is used |
 | $\bar{B}^0$ | `B0Bar` | Neutral antiparticles use Bar |
 | $B_s^0$, $\bar{B}_s^0$ | `Bs0`, `Bs0Bar` | |
 | $K^+$, $K^0$ | `K+`, `K0` | |
-| $K_S^0$, $K_L^0$ | `KS0`, `KL0` | Subscript before superscript; `K0S`, `K0s`, `K0L`, and `KL0` variants other than these are rejected |
+| $K_S^0$, $K_L^0$ | `KS0`, `KL0` | Subscript before superscript; variants such as `K0S`, `K0s`, `K0L` are rejected |
 | $K^{*0}$, $\bar{K}^{*0}$ | `K*0`, `K*0Bar` | K* resonance |
 | $D^0$, $D^+$ | `D0`, `D+` | |
 | $D^{*0}$, $D^{*+}$, $D^{*-}$ | `D*0`, `D*+`, `D*-` | D* resonance (anti-particle is the charged `D*-`) |
-| $D^{*\pm}_{\text{generic}}$ | `D*` | D* (no charge specified, context-dependent) |
 | $\pi^0$, $\pi^+$, $\pi^-$ | `pi0`, `pi+`, `pi-` | |
 | $\rho^0$, $\rho^+$, $\rho^-$ | `rho0`, `rho+`, `rho-` | |
-| $\phi$ | `phi` | Neutral vector meson |
-| $\omega$ | `omega` | Neutral vector meson (no charged $\omega^\pm$ exists) |
-| $J/\psi$ | `J/psi` | Charmonium |
-| $\psi(2S)$ | `psi(2S)` | Charmonium excited state |
-| $\eta$, $\eta'$ | `eta`, `etaprime` | |
+| $\phi$ | `phi0` | Neutral vector meson |
+| $\omega$ | `omega0` | Neutral vector meson (no charged $\omega^\pm$ exists) |
+| $J/\psi$ | `J/psi0` | Charmonium |
+| $\psi(2S)$ | `psi(2S)0` | Charmonium excited state |
+| $\eta$, $\eta'$ | `eta0`, `etaprime0` | |
 | $D_s^+$, $D_s^{*+}$ | `Ds+`, `Ds*+` | Strange charmed meson |
 | $B_c^+$ | `Bc+` | Bottom-charmed meson |
 | $X_s$ | `Xs` | Inclusive strange hadronic system |
@@ -116,11 +136,11 @@ use the spellings in the tables below.
 
 | Particle | Symbol | Notes |
 |----------|--------|-------|
-| $\Lambda$, $\Lambda_c^+$, $\Lambda_b^0$ | `Lambda`, `Lambdac+`, `Lambdab0` | Anti-baryons append `Bar` at the very end of the symbol: `LambdaBar`, `Lambdac+Bar`, `Lambdab0Bar`. For charged mesons and leptons, the charge indicator already serves as the antiparticle marker (e.g., `B+`/`B-`, `W+`/`W-`, `mu+`/`mu-`); do NOT use `Bar` for these. |
+| $\Lambda$, $\Lambda_c^+$, $\Lambda_b^0$ | `Lambda0`, `Lambdac+`, `Lambdab0` | Anti-baryons append `Bar` after the charge: `Lambda0Bar`, `Lambdac+Bar`, `Lambdab0Bar` (Rule 5: charged mesons/leptons use the opposite charge instead, never `Bar`) |
 | $\Sigma^+$, $\Sigma^0$, $\Sigma^-$ | `Sigma+`, `Sigma0`, `Sigma-` | Anti-baryons: `Sigma-Bar`, `Sigma0Bar`, `Sigma+Bar` |
 | $\Xi_c^0$, $\Xi_b^0$ | `Xic0`, `Xib0` | Anti-baryons: `Xic0Bar`, `Xib0Bar` |
 | $\Omega_c^0$ | `Omegac0` | Anti-baryon: `Omegac0Bar` |
-| $p$, $n$ | `p`, `n` | Anti-baryons: `pBar`, `nBar` |
+| $p$, $n$ | `p+`, `n0` | Anti-baryons: `p+Bar`, `n0Bar` |
 
 #### Leptons and Bosons
 
@@ -132,7 +152,15 @@ use the spellings in the tables below.
 | $\nu$ (any flavor), $\bar{\nu}$ | `v`, `vBar` | No flavor tag; flavor-specific signatures use `ve`, `vmu`, `vtau` (antiparticles append `Bar`) |
 | $W^+$, $W^-$, $Z$ | `W+`, `W-`, `Z` | |
 | $\gamma$ | `gamma` | Photon |
-| $t$, $\bar{t}$ | `t`, `tBar` | Top quark |
+| $t$, $\bar{t}$ | `t`, `tBar` | Top quark; quarks keep PDG parton symbols without a charge slot |
+
+Neutrinos and the neutral gauge bosons `Z`, `gamma`, and `g` are the only
+charge-less particle states. Quarks/partons (`b`, `c`, `t`, `q`), generic
+placeholders (`l`, `q1`, `q2`), inclusive systems (`Xs`, `Xce`, `Xcl`),
+nuclei (`Au`, `Ca`, `Ti`), and detector/BSM pseudo-labels (`all`, `had`,
+`med`, `world`, `CDF`, `kappa`) are not single particle states; they
+carry no charge slot and appear only in legacy keys or shared
+multi-transition keys.
 
 ## 2. Observable Naming: `OBS` / `OBS[condition]`
 
@@ -144,7 +172,7 @@ repeat it:
 - **condition**: an optional qualifier in square brackets, used ONLY for multi-transition observables such as ratios or differences between different lepton flavors. Do NOT use `[condition]` to distinguish measurements at different q² bins — use separate groups with `q2min`/`q2max` instead.
 - **parameter tags**: optional parentheses for non-transition qualifiers, e.g. `Vcb(CLN)`, `R1(CLN)`, `f+.Vcs`. A transition inside parentheses is invalid.
 
-Examples: `FL`, `Br`, `dBr/dq2`, `Q6[mu-e]`, `RBr[mu/e]`, `Vcb(CLN)`.
+Examples: `FL`, `Br`, `dBr/dq2`, `DeltaP6p[mu-e]`, `RBr[mu/e]`, `Vcb(CLN)`.
 
 ### 2.1 Basic Observables (No Transition)
 
@@ -163,7 +191,7 @@ Examples: `FL`, `Br`, `dBr/dq2`, `Q6[mu-e]`, `RBr[mu/e]`, `Vcb(CLN)`.
 |--------|----------|----------|
 | `MZ` | $Z$ boson | `Mass(Z)` |
 | `MW` | $W$ boson | `Mass(W)` |
-| `Mtop`, `MH`, `Mh` | top quark, Higgs, light Higgs | `Mass(t)`, `Mass(H)`, `Mass(h)` |
+| `Mtop`, `MH`, `Mh` | top quark, Higgs, light Higgs | `Mass(t)`, `Mass(H0)`, `Mass(h0)` |
 
 **Bare names** (no transition) — `gammaCKM`, `r`, `delta`, `|Vtd|`,
 `|Vts|`, `|Vub|`, `|Vcb|`, `R_b`, `R_c`, `S_phigamma`, `C_phigamma`,
@@ -186,8 +214,8 @@ For observables measuring a single process, no condition is needed:
 | Branching fraction $\mathcal{B}(B^0 \to e^+ e^-)$ | $\mathcal{B}$ | `Br` | `B0.2.e+.e-` |
 | Decay width $\Gamma(K^{*0} \to K^+ \pi^-)$ | $\Gamma$ | `Gamma` | `K*0.2.K+.pi-` |
 | Differential branching fraction | $d\mathcal{B}/dq^2$ | `dBr/dq2` | `B0.2.Xs.gamma` |
-| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma(pp \to e^+ e^-)$ | `Sigma` | `p.p.2.e+.e-` |
-| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC` | `B+.2.J/psi.K+` |
+| Cross section $\sigma(pp \to e^+ e^-)$ | $\sigma(pp \to e^+ e^-)$ | `Sigma` | `p+.p+.2.e+.e-` |
+| Charge asymmetry $A_C(B^+ \to J/\psi K^+)$ | $A_C(B^+ \to J/\psi K^+)$ | `AC` | `B+.2.J/psi0.K+` |
 | Mass difference $\Delta M_s$ | $\Delta M_s$ | `DeltaMass` | `Bs0.2.Bs0Bar` |
 | Decay fraction $f(Z \to \mu^+ \mu^-)$ | $f(Z \to \mu^+ \mu^-)$ | `f` | `Z.2.mu+.mu-` |
 
@@ -245,14 +273,14 @@ named `aN_FF`:
 - `N` — expansion order: 0, 1, 2, ...
 - `FF` — form-factor symbol from the table below.
 
-Examples: `a0_Fp`, `a1_F0`, `a2_Fv`, `a0_Gv`. When the source quotes one
+Examples: `a0_F+`, `a1_F0`, `a2_Fv`, `a0_Gv`. When the source quotes one
 number for several form factors, write one observable per symbol and
-repeat the value/errors (`a0_Gv` and `a0_Gp`), never joined into a
-single name such as `a0_Gv_Gp`.
+repeat the value/errors (`a0_Gv` and `a0_G+`), never joined into a
+single name such as `a0_Gv_G+`.
 
 The prefix always marks the expansion order, even when the paper labels its
 coefficients differently: a BCL fit that writes `b_i^+`, `b_i^0`, `b_i^T`
-becomes `a0_fp`, `a1_fp`, ..., `a0_f0`, ..., `a0_fT`, ... .
+becomes `a0_f+`, `a1_f+`, ..., `a0_f0`, ..., `a0_fT`, ... .
 
 Fit choices (nominal, higher-order, ...) are **not** part of the name and
 are not stored in the group metadata; keep such variants as separate
@@ -279,7 +307,7 @@ decomposition; these are the standard symbols):
 
 | Symbol | Form factor |
 |--------|-------------|
-| `fp` | $f_+$ |
+| `f+` | $f_+$ |
 | `f0` | $f_0$ |
 | `fT` | $f_T$ |
 | `V` | $V$ |
@@ -289,15 +317,15 @@ decomposition; these are the standard symbols):
 | `T1` | $T_1$ |
 | `T2` | $T_2$ |
 | `T23` | $T_{23}$ |
-| `Fp` | helicity $f_+$ |
+| `F+` | helicity $f_+$ |
 | `F0` | helicity $f_0$ |
 | `Fv` | helicity $f_\perp$ |
-| `Gp` | helicity $g_+$ |
+| `G+` | helicity $g_+$ |
 | `G0` | helicity $g_0$ |
 | `Gv` | helicity $g_\perp$ |
-| `hp` | helicity $h_+$ |
+| `h+` | helicity $h_+$ |
 | `hv` | helicity $h_\perp$ |
-| `htp` | helicity $\tilde{h}_+$ |
+| `ht+` | helicity $\tilde{h}_+$ |
 | `htv` | helicity $\tilde{h}_\perp$ |
 | `g` | BGL $g$ ($\bar B \to D^*$) |
 | `f` | BGL $f$ ($\bar B \to D^*$) |
@@ -307,14 +335,19 @@ decomposition; these are the standard symbols):
 For a BGL $z$-series fit of the $\bar B_{(s)} \to D_{(s)}^{(*)}
 \ell\bar\nu_\ell$ form factors, the basis is $f_+, f_0$ for the
 pseudoscalar channel and $g, f, F_1, F_2$ for the vector channel, so the
-coefficients are named `aN_fp`, `aN_f0`, `aN_g`, `aN_f`, `aN_F1`,
-`aN_F2` (e.g. `a0_fp`, `a2_F1`).
+coefficients are named `aN_f+`, `aN_f0`, `aN_g`, `aN_f`, `aN_F1`,
+`aN_F2` (e.g. `a0_f+`, `a2_F1`).
 
 Baryon semileptonic decays ($\Lambda_b \to \Lambda_c \ell^- \bar{\nu}$,
 $\Lambda_b \to p \ell^- \bar{\nu}$) use the helicity set, with the
-mapping $f_+ \to$ `Fp`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`,
-$g_+ \to$ `Gp`, $g_0 \to$ `G0`, $g_\perp \to$ `Gv`,
-$h_+ \to$ `hp`, $h_\perp \to$ `hv`.
+mapping $f_+ \to$ `F+`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`,
+$g_+ \to$ `G+`, $g_0 \to$ `G0`, $g_\perp \to$ `Gv`,
+$h_+ \to$ `h+`, $h_\perp \to$ `hv`.
+
+The fraction spellings `fp`, `Fp`, `Gp`, `hp`, and `htp` are obsolete and
+rejected by the validator; write the plus charge explicitly (`f+`, `F+`,
+`G+`, `h+`, `ht+`). `Fv`, `Gv`, `hv`, and `htv` keep their existing
+spelling.
 
 ## 3. Observable Abbreviations
 
@@ -463,7 +496,7 @@ These are constructed to reduce theoretical uncertainties from hadronic form fac
 
 ### LFU Difference Observables
 
-Differences of angular coefficients between muon and electron modes, used to test lepton flavor universality with reduced theoretical uncertainties. Named with the `Delta` prefix: $\Delta X = X^{\mu} - X^{e}$ (paper often labels these as $Q_X$).
+Differences of angular coefficients between muon and electron modes, used to test lepton flavor universality with reduced theoretical uncertainties: $\Delta X = X^{\mu} - X^{e}$. The JSON `name` always uses the unified `DeltaOBS` form with the `[mu-e]` condition tag (§2.3), e.g. `DeltaFL[mu-e]`, `DeltaP5p[mu-e]`. Papers label these $Q_X$ ($Q_i \equiv \Delta P_i$, $Q_{F_L} \equiv \Delta F_L$); the table maps that notation to the flav-data name. The $Q$ spelling is rejected by the validator.
 
 | Abbr | LaTeX | Paper Notation | Definition |
 |------|-------|---------------|-----------|

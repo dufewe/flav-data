@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "p.p.2.W.2.l.v": {
+            "p+.p+.2.W-.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80370",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "p.p.2.W+.2.l+.v": {
+            "p+.p+.2.W+.2.l+.v": {
                 "obs@1": {
                     "name": "dmW",
                     "value": "-29",

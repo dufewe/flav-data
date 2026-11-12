@@ -24,14 +24,12 @@ import argparse
 import re
 from pathlib import Path
 
-# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion).
-# See common.py for the canonical implementations and SKILL.md
-# "Core Conventions" rules 3 + 4 for the policies.
+# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion),
+# re-exported for callers. See common.py for the canonical implementations
+# and SKILL.md "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import (
-    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
-    to_bibtex, to_bibtex as _to_bibtex,
-    format_authors, arxiv_name_to_bibtex,
+    unicode_to_latex, to_bibtex, format_authors, arxiv_name_to_bibtex,
 )  # noqa: E402,F401
 
 # Candidate machine-readable data files in an arXiv e-print package.
@@ -71,9 +69,9 @@ def get_arxiv_info(arxiv_id: str) -> dict:
     updated_elem = entry.find('atom:updated', ns)
     updated = updated_elem.text if updated_elem is not None else ''
     title_elem = entry.find('atom:title', ns)
-    title = _unicode_to_latex(title_elem.text.strip()) if title_elem is not None else ''
+    title = unicode_to_latex(title_elem.text.strip()) if title_elem is not None else ''
     summary_elem = entry.find('atom:summary', ns)
-    summary = _unicode_to_latex(summary_elem.text.strip()) if summary_elem is not None else ''
+    summary = unicode_to_latex(summary_elem.text.strip()) if summary_elem is not None else ''
 
     # Authors (full names; convert first to BibTeX form for `author_str`).
     # Strip XML whitespace: arXiv payloads for collaboration papers wrap

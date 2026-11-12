@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fBar": {
+            "g.g.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.18",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "g.g.2.H.2.all": {
+            "g.g.2.H0.2.all": {
                 "obs@1": {
                     "name": "mu_ggF",
                     "value": "1.23",
@@ -36,7 +36,7 @@
             }
         },
         {
-            "q.q.2.H.2.all": {
+            "q.q.2.H0.2.all": {
                 "obs@1": {
                     "name": "mu_VBF",
                     "value": "1.23",
@@ -46,7 +46,7 @@
             }
         },
         {
-            "q.qBar.2.V.2.H.2.all": {
+            "q.qBar.2.V.2.H0.2.all": {
                 "obs@1": {
                     "name": "mu_VH",
                     "value": "1.02",

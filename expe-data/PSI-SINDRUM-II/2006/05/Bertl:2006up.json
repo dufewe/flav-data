@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "mu.Au.2.e.Au": {
+            "mu-.Au.2.e-.Au": {
                 "obs@1": {
                     "name": "Rmue",
                     "type@1_upper": "7e-13",

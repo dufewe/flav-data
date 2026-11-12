@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H.2.f.fBar": {
+            "g.g.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_ggF",
                     "value": "1.22",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "q.q.2.H.2.f.fBar": {
+            "q.q.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_VBF",
                     "value": "0.73",
@@ -37,7 +37,7 @@
             }
         },
         {
-            "q.qBar.2.W.2.H.2.f.fBar": {
+            "q.qBar.2.W+.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_WH",
                     "value": "2.18",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "q.qBar.2.Z.2.H.2.f.fBar": {
+            "q.qBar.2.Z.2.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_ZH",
                     "value": "0.87",
@@ -65,7 +65,7 @@
             }
         },
         {
-            "t.tBar.2.t.tBar.H.2.f.fBar": {
+            "t.tBar.2.t.tBar.H0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_ttH",
                     "value": "1.18",
@@ -79,7 +79,7 @@
             }
         },
         {
-            "H.2.b.bBar": {
+            "H0.2.b.bBar": {
                 "obs@1": {
                     "name": "mu_bb",
                     "value": "1.12",
@@ -93,7 +93,7 @@
             }
         },
         {
-            "H.2.b.bBar": {
+            "H0.2.b.bBar": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "1.03",
@@ -107,7 +107,7 @@
             }
         },
         {
-            "H.2.tau.tau": {
+            "H0.2.tau+.tau-": {
                 "obs@1": {
                     "name": "mu_tautau",
                     "value": "1.02",
@@ -121,7 +121,7 @@
             }
         },
         {
-            "H.2.tau.tau": {
+            "H0.2.tau+.tau-": {
                 "obs@1": {
                     "name": "kappa_tau",
                     "value": "1.01",
@@ -131,7 +131,7 @@
             }
         },
         {
-            "H.2.W.W": {
+            "H0.2.W+.W-": {
                 "obs@1": {
                     "name": "mu_WW",
                     "value": "1.28",
@@ -145,7 +145,7 @@
             }
         },
         {
-            "H.2.W.W": {
+            "H0.2.W+.W-": {
                 "obs@1": {
                     "name": "kappa_W",
                     "value": "1.01",
@@ -155,7 +155,7 @@
             }
         },
         {
-            "H.2.Z.Z": {
+            "H0.2.Z.Z": {
                 "obs@1": {
                     "name": "mu_ZZ",
                     "value": "1.06",
@@ -169,7 +169,7 @@
             }
         },
         {
-            "H.2.Z.Z": {
+            "H0.2.Z.Z": {
                 "obs@1": {
                     "name": "kappa_Z",
                     "value": "1.09",
@@ -179,7 +179,7 @@
             }
         },
         {
-            "H.2.gamma.gamma": {
+            "H0.2.gamma.gamma": {
                 "obs@1": {
                     "name": "mu_gammagamma",
                     "value": "1.20",
@@ -193,7 +193,7 @@
             }
         },
         {
-            "H.gg.2.t.tBar": {
+            "H0.gg.2.t.tBar": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.05",

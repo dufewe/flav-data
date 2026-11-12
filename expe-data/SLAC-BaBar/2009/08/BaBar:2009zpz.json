@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "BBar.2.Xcl.vBar": {
+            "B0Bar.2.Xcl.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.1064",

@@ -9,7 +9,7 @@
     "transition-mode": "scattering",
     "data": [
         {
-            "p.p.2.W+.2.e+.v": {
+            "p+.p+.2.W+.2.e+.v": {
                 "obs@1": {
                     "name": "sigma_Wpenu",
                     "value": "1124.4",
@@ -30,7 +30,7 @@
             }
         },
         {
-            "p.p.2.W-.2.e-.vBar": {
+            "p+.p+.2.W-.2.e-.vBar": {
                 "obs@1": {
                     "name": "sigma_Wmenu",
                     "value": "809.0",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "W.2.e.v": {
+            "W-.2.e-.v": {
                 "obs@1": {
                     "name": "RWenu2Wmumu",
                     "value": "1.020",

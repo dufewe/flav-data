@@ -409,7 +409,7 @@
             }
         },
         {
-            "Bs0.2.phi.mu+.mu-": {
+            "Bs0.2.phi0.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.17e-06",
@@ -451,7 +451,7 @@
             }
         },
         {
-            "Lambdab0.2.Lambda.mu+.mu-": {
+            "Lambdab0.2.Lambda0.mu+.mu-": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.95e-06",

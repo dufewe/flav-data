@@ -463,7 +463,7 @@
                     "q2max": "6.0"
                 },
                 "obs@2": {
-                    "name": "Q1[mu-e]",
+                    "name": "DeltaP1[mu-e]",
                     "value": "-0.10",
                     "type@1_error": "stat",
                     "type@1_upper": "0.26",
@@ -475,7 +475,7 @@
                     "q2max": "6.0"
                 },
                 "obs@3": {
-                    "name": "Q2[mu-e]",
+                    "name": "DeltaP2[mu-e]",
                     "value": "0.07",
                     "type@1_error": "stat",
                     "type@1_upper": "0.10",
@@ -487,7 +487,7 @@
                     "q2max": "6.0"
                 },
                 "obs@4": {
-                    "name": "Q3[mu-e]",
+                    "name": "DeltaP3[mu-e]",
                     "value": "0.22",
                     "type@1_error": "stat",
                     "type@1_upper": "0.14",
@@ -499,7 +499,7 @@
                     "q2max": "6.0"
                 },
                 "obs@5": {
-                    "name": "Q4[mu-e]",
+                    "name": "DeltaP4p[mu-e]",
                     "value": "-0.07",
                     "type@1_error": "stat",
                     "type@1_upper": "0.17",
@@ -511,7 +511,7 @@
                     "q2max": "6.0"
                 },
                 "obs@6": {
-                    "name": "Q5[mu-e]",
+                    "name": "DeltaP5p[mu-e]",
                     "value": "0.05",
                     "type@1_error": "stat",
                     "type@1_upper": "0.13",
@@ -523,7 +523,7 @@
                     "q2max": "6.0"
                 },
                 "obs@7": {
-                    "name": "Q6[mu-e]",
+                    "name": "DeltaP6p[mu-e]",
                     "value": "-0.05",
                     "type@1_error": "stat",
                     "type@1_upper": "0.14",
@@ -535,7 +535,7 @@
                     "q2max": "6.0"
                 },
                 "obs@8": {
-                    "name": "Q8[mu-e]",
+                    "name": "DeltaP8p[mu-e]",
                     "value": "-0.28",
                     "type@1_error": "stat",
                     "type@1_upper": "0.17",
@@ -551,7 +551,7 @@
         {
             "B0.2.K*0.l+.l-": {
                 "obs@1": {
-                    "name": "QFL[mu-e]",
+                    "name": "DeltaFL[mu-e]",
                     "value": "0.13",
                     "type@1_error": "stat",
                     "type@1_upper": "0.05",
@@ -563,7 +563,7 @@
                     "q2max": "7.0"
                 },
                 "obs@2": {
-                    "name": "Q1[mu-e]",
+                    "name": "DeltaP1[mu-e]",
                     "value": "-0.03",
                     "type@1_error": "stat",
                     "type@1_upper": "0.25",
@@ -575,7 +575,7 @@
                     "q2max": "7.0"
                 },
                 "obs@3": {
-                    "name": "Q2[mu-e]",
+                    "name": "DeltaP2[mu-e]",
                     "value": "0.11",
                     "type@1_error": "stat",
                     "type@1_upper": "0.09",
@@ -587,7 +587,7 @@
                     "q2max": "7.0"
                 },
                 "obs@4": {
-                    "name": "Q3[mu-e]",
+                    "name": "DeltaP3[mu-e]",
                     "value": "0.21",
                     "type@1_error": "stat",
                     "type@1_upper": "0.13",
@@ -599,7 +599,7 @@
                     "q2max": "7.0"
                 },
                 "obs@5": {
-                    "name": "Q4[mu-e]",
+                    "name": "DeltaP4p[mu-e]",
                     "value": "-0.13",
                     "type@1_error": "stat",
                     "type@1_upper": "0.15",
@@ -611,7 +611,7 @@
                     "q2max": "7.0"
                 },
                 "obs@6": {
-                    "name": "Q5[mu-e]",
+                    "name": "DeltaP5p[mu-e]",
                     "value": "-0.01",
                     "type@1_error": "stat",
                     "type@1_upper": "0.12",
@@ -623,7 +623,7 @@
                     "q2max": "7.0"
                 },
                 "obs@7": {
-                    "name": "Q6[mu-e]",
+                    "name": "DeltaP6p[mu-e]",
                     "value": "-0.08",
                     "type@1_error": "stat",
                     "type@1_upper": "0.12",
@@ -635,7 +635,7 @@
                     "q2max": "7.0"
                 },
                 "obs@8": {
-                    "name": "Q8[mu-e]",
+                    "name": "DeltaP8p[mu-e]",
                     "value": "-0.15",
                     "type@1_error": "stat",
                     "type@1_upper": "0.15",

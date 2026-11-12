@@ -112,8 +112,21 @@ def is_group_matrix_key(key: str) -> bool:
 
 
 # Form-factor expansion coefficients (``aN_FF``) come from a fit to a
-# named expansion form, recorded once per data group.
-_FORM_FACTOR_COEFFICIENT_RE = re.compile(r'a\d+_[A-Za-z0-9]+')
+# named expansion form, recorded once per data group.  The ``+`` in
+# symbols such as ``f+``/``F+``/``G+`` is part of the form-factor name.
+_FORM_FACTOR_COEFFICIENT_RE = re.compile(r'a\d+_[A-Za-z0-9+]+')
+# Obsolete fraction spellings; the plus charge is written explicitly.
+_DEPRECATED_FORM_FACTOR_NAMES = {
+    'fp': 'f+', 'Fp': 'F+', 'Gp': 'G+', 'hp': 'h+', 'htp': 'ht+',
+}
+# LFU-difference Q notation (the papers' Q_i / Q_FL) is stored as the
+# unified Delta form; see references/obs-abbr.md §"LFU Difference
+# Observables" for the correspondence.
+_DEPRECATED_LFU_Q_NAMES = {
+    'Q1': 'DeltaP1', 'Q2': 'DeltaP2', 'Q3': 'DeltaP3',
+    'Q4': 'DeltaP4p', 'Q5': 'DeltaP5p', 'Q6': 'DeltaP6p',
+    'Q8': 'DeltaP8p', 'QFL': 'DeltaFL',
+}
 FORM_FACTOR_SCHEMES = {'BGL', 'BCL', 'BSZ', 'DLM'}
 
 # Group-level ``dataset`` names the data sources behind a group, in this
@@ -169,6 +182,27 @@ _TYPE_NAMES = {
     1: 'baryon', 2: 'meson', 3: 'charged lepton', 4: 'neutral lepton',
 }
 
+# Particle-state grammar: <name>[*]<charge>[Bar].  Neutrinos keep the
+# conventional ``v``/``vBar`` spelling without a charge slot, and neutral
+# gauge bosons stay bare.  The remaining tokens are not single PDG
+# particle states (placeholders, partons, nuclei, inclusive systems, or
+# experimental/BSM pseudo-labels) and therefore have no charge slot.
+_CHARGE_EXEMPT_TOKENS = _NEUTRAL_LEPTONS | {
+    'Z', 'gamma', 'g', 'gg', 'gamma+gamma',
+    'l', 'l+', 'l-', 'q', 'q1', 'q2', 'qBar',
+    'b', 'bBar', 'c', 'cBar', 's', 'sBar', 't', 'tBar',
+    'u', 'uBar', 'd', 'dBar', 'bs', 'cb', 'uds', '0+',
+    'Xs', 'XsBar', 'Xce', 'Xcl',
+    'all', 'had', 'med', 'world', 'CDF', 'kappa',
+    'Au', 'Ca', 'Ti', 'V', 'VH', 'Zp', 'emup',
+    'f', 'fBar',
+}
+# Neutral or charged states outside ``particle-masses.json`` that still
+# need an explicit charge marker.
+_CHARGE_REQUIRED_EXTRA = {
+    'H', 'W', 'Wp', 'WKK', 'Gstar', 'sneutrino', 'omegal',
+}
+
 # Masses come from the PDG-backed reference file, not from guesses in
 # this script. See references/particle-masses.json for values and source.
 def _load_mass_reference() -> tuple[dict[str, float], set[str]]:
@@ -209,6 +243,10 @@ def _particle_mass(token: str) -> float | None:
         return _PARTICLE_MASS[stem[:-1] + '+']
     if stem.endswith('+') and stem[:-1] + '-' in _PARTICLE_MASS:
         return _PARTICLE_MASS[stem[:-1] + '-']
+    # A charge marker appended to a bare particle name (``phi0``,
+    # ``Lambda0``, ``p+``) shares the bare particle's mass.
+    if stem.endswith(('+', '-', '0')) and stem[:-1] in _PARTICLE_MASS:
+        return _PARTICLE_MASS[stem[:-1]]
     return None
 
 
@@ -259,14 +297,14 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
     stem = _strip_bar(token)
     if stem in _NON_ORDERABLE:
         return None, None
-    if stem in ('p', 'n'):
-        if token == 'p':
-            return 1, 0
-        if token == 'pBar':
-            return 1, 1
-        if token in ('n', 'nBar'):
-            return 1, 2
-        return 1, None
+    name_core = re.sub(r'[+\-0]$', '', stem)
+    if name_core in ('p', 'n'):
+        charge = _charge_rank(stem)
+        if charge is None:
+            charge = 2 if name_core == 'n' or '0' in stem else 0
+        if token.endswith('Bar'):
+            charge = 1
+        return 1, charge
     if stem.startswith(_BARYON_STEMS):
         charge = _charge_rank(token)
         if charge is None and ('0' in stem or stem in ('Lambda', 'Lambdab')):
@@ -291,6 +329,44 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
         return 2, charge
 
     return None, None
+
+
+def _particle_grammar_issues(token: str, label: str) -> list[str]:
+    """Check one particle state against ``<name>[*]<charge>[Bar]``."""
+    issues = []
+    bare = _strip_resonance(token)
+    if bare.count('*') > 1:
+        issues.append(
+            f"  {label}: particle '{token}' has more than one vector marker "
+            f"'*'; the grammar is <name>[*]<charge>[Bar]"
+        )
+    elif '*' in bare:
+        tail = bare.split('*', 1)[1]
+        if not re.fullmatch(r'(?:\+|-|0)(?:Bar)?', tail):
+            issues.append(
+                f"  {label}: particle '{token}' places characters around the "
+                f"vector marker '*'; write <name>[*]<+|-|0>[Bar] "
+                f"(e.g. 'D*0', 'D*+Bar')"
+            )
+    if 'Bar' in bare and not bare.endswith('Bar'):
+        issues.append(
+            f"  {label}: particle '{token}' places 'Bar' inside the symbol; "
+            f"the antiparticle marker goes last, after the charge"
+        )
+
+    stem = _strip_bar(bare)
+    name_core = re.sub(r'[+\-0]$', '', stem)
+    if (stem in _CHARGE_EXEMPT_TOKENS
+            or name_core in _CHARGE_EXEMPT_TOKENS):
+        return issues
+    if stem in _PARTICLE_MASS or name_core in _CHARGE_REQUIRED_EXTRA:
+        if not re.search(r'[+\-0]$', stem):
+            issues.append(
+                f"  {label}: particle '{token}' has no charge marker; write "
+                f"<name>[*]<+|-|0>[Bar] (e.g. 'phi0', 'p+', 'W-'); only "
+                f"neutrinos and neutral gauge bosons are exempt"
+            )
+    return issues
 
 
 def _parenthetical_blocks(name: str) -> list[tuple[int, int, str]]:
@@ -378,6 +454,7 @@ def _order_issues_for_body(
                     f"write the antiparticle marker as capital 'Bar'"
                 )
                 continue
+            issues.extend(_particle_grammar_issues(token, label))
             if _particle_mass(token) is None and token not in _NEUTRAL_LEPTONS:
                 stem = _strip_bar(token)
                 if stem in _NON_ORDERABLE or token in _NON_ORDERABLE:
@@ -496,6 +573,19 @@ def validate_observable_name(name: str) -> list[str]:
     ``OBS``, ``OBS[condition]``, ``OBS(parameter)``, ``f+.Vcs``.
     """
     issues = []
+    match = re.fullmatch(r'a\d+_([A-Za-z0-9]+)', name)
+    if match and match.group(1) in _DEPRECATED_FORM_FACTOR_NAMES:
+        issues.append(
+            f"  Observable '{name}': obsolete form-factor symbol "
+            f"'{match.group(1)}'; write "
+            f"'{_DEPRECATED_FORM_FACTOR_NAMES[match.group(1)]}' instead"
+        )
+    symbol = re.split(r'[\[(]', name, 1)[0]
+    if symbol in _DEPRECATED_LFU_Q_NAMES:
+        issues.append(
+            f"  Observable '{name}': obsolete LFU-difference symbol "
+            f"'{symbol}'; write '{_DEPRECATED_LFU_Q_NAMES[symbol]}' instead"
+        )
     for _, _, body in _parenthetical_blocks(name):
         if _looks_like_transition(body):
             issues.append(

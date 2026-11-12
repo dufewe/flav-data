@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "Z.2.mu.e": {
+            "Z.2.mu-.e+": {
                 "obs@1": {
                     "name": "Br",
                     "type@1_upper": "7.5e-7",

@@ -18,7 +18,7 @@
             }
         },
         {
-            "Bs0.2.phi.gamma": {
+            "Bs0.2.phi0.gamma": {
                 "obs@1": {
                     "name": "Br",
                     "value": "3.6e-5",

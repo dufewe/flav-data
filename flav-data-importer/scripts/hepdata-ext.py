@@ -30,10 +30,7 @@ except ImportError:
 # See common.py for the canonical implementations and SKILL.md
 # "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (
-    unicode_to_latex, unicode_to_latex as _unicode_to_latex,
-    to_bibtex, to_bibtex as _to_bibtex,
-)  # noqa: E402,F401
+from common import unicode_to_latex, to_bibtex  # noqa: E402,F401
 
 def _resolve_hepdata_cli() -> str | None:
     """Locate the ``hepdata-cli`` executable.
@@ -309,7 +306,7 @@ def _independent_point(cell) -> tuple[str | None, str | None]:
     )
 
 
-def parse_yaml_observables(yaml_text: str) -> dict:
+def parse_yaml_observables(yaml_text: str) -> tuple[list[dict], dict]:
     """Parse observable YAML data from a HEPData ``dependent_variables`` table.
 
     A HEPData "observable table" describes one observable measured at one or
@@ -441,7 +438,7 @@ def parse_yaml_observables(yaml_text: str) -> dict:
     return observables, {'global': independent_vars}
 
 
-def parse_yaml_correlation(yaml_text: str) -> dict:
+def parse_yaml_correlation(yaml_text: str) -> tuple[str, list[list[float]], dict]:
     """Parse correlation/covariance matrix YAML data.
 
     Returns: (matrix_type, matrix, qualifiers)
@@ -651,7 +648,7 @@ def main() -> int:
 
     # Download specific table (optional)
     if args.table:
-        print(f"\n=== Step 4: Downloading {args.table} ===")
+        print(f"\n=== Downloading {args.table} ===")
         yaml_data = download_table_yaml(inspire_id, args.table)
         yaml_path = os.path.join(
             output_dir, f'{args.table.replace(" ", "_")}.yaml'

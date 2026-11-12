@@ -10,19 +10,19 @@
         {
             "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.013738",
                     "total_upper": "0.000103331",
                     "total_lower": "0.000103331"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.0413645",
                     "total_upper": "0.00336758",
                     "total_lower": "0.00336758"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "0.117804",
                     "total_upper": "0.200653",
                     "total_lower": "0.200653"
@@ -104,19 +104,19 @@
             },
             "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.00413865",
                     "total_upper": "0.000142115",
                     "total_lower": "0.000142115"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.00288777",
                     "total_upper": "0.00193994",
                     "total_lower": "0.00193994"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.0584035",
                     "total_upper": "0.00955009",
                     "total_lower": "0.00955009"
@@ -234,19 +234,19 @@
         {
             "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.0137117",
                     "total_upper": "0.000100837",
                     "total_lower": "0.000100837"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.041658",
                     "total_upper": "0.00325151",
                     "total_lower": "0.00325151"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "0.0414986",
                     "total_upper": "0.112367",
                     "total_lower": "0.112367"
@@ -328,19 +328,19 @@
             },
             "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.00413444",
                     "total_upper": "0.000137125",
                     "total_lower": "0.000137125"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.00301633",
                     "total_upper": "0.00187576",
                     "total_lower": "0.00187576"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.0587562",
                     "total_upper": "0.00933214",
                     "total_lower": "0.00933214"
@@ -458,19 +458,19 @@
         {
             "B0Bar.2.D+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.0137806",
                     "total_upper": "9.69633e-05",
                     "total_lower": "9.69633e-05"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.0398021",
                     "total_upper": "0.00317746",
                     "total_lower": "0.00317746"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "0.112268",
                     "total_upper": "0.0713057",
                     "total_lower": "0.0713057"
@@ -552,19 +552,19 @@
             },
             "Bs0Bar.2.Ds+.l-.vBar": {
                 "obs@1": {
-                    "name": "a0_fp",
+                    "name": "a0_f+",
                     "value": "0.00421317",
                     "total_upper": "0.000116108",
                     "total_lower": "0.000116108"
                 },
                 "obs@2": {
-                    "name": "a1_fp",
+                    "name": "a1_f+",
                     "value": "-0.00335021",
                     "total_upper": "0.00152343",
                     "total_lower": "0.00152343"
                 },
                 "obs@3": {
-                    "name": "a2_fp",
+                    "name": "a2_f+",
                     "value": "-0.0608414",
                     "total_upper": "0.00780639",
                     "total_lower": "0.00780639"

@@ -129,7 +129,7 @@
             }
         },
         {
-            "B-.2.D*.pi-.l-.vBar": {
+            "B-.2.D*+.pi-.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.52",
@@ -144,7 +144,7 @@
             }
         },
         {
-            "B0Bar.2.D*.pi+.l-.vBar": {
+            "B0Bar.2.D*0.pi+.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.37",

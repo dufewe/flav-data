@@ -69,7 +69,7 @@
             }
         },
         {
-            "B.2.Xce.vBar": {
+            "B0.2.Xce.vBar": {
                 "obs@1": {
                     "name": "M1[Ecut>0.4]",
                     "value": "1393.92",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B.2.Xce.vBar": {
+            "B0.2.Xce.vBar": {
                 "obs@1": {
                     "name": "M1[Ecut>0.4]",
                     "value": "1393.92",
@@ -609,7 +609,7 @@
             ]
         },
         {
-            "B.2.Xce.vBar": {
+            "B0.2.Xce.vBar": {
                 "obs@1": {
                     "name": "dBr[Ecut>0.4]",
                     "value": "10.44",

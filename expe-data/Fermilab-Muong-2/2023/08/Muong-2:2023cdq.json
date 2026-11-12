@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "mu.2.mu.gamma": {
+            "mu-.2.mu-.gamma": {
                 "obs@1": {
                     "name": "a_mu[FNAL.Combined]",
                     "value": "1.16592055e-3",
