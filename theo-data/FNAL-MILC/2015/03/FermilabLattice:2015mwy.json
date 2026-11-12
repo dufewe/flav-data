@@ -1,0 +1,140 @@
+{
+    "inspire-hep": "[FermilabLattice:2015mwy](https://inspirehep.net/literature/1356283)",
+    "author": "Bailey, J.A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "$|V_{ub}|$ from $B\\to\\pi\\ell\\nu$ decays and (2+1)-flavor lattice QCD",
+    "abstract": "We present a lattice-QCD calculation of the $B\\to\\pi\\ell\\nu$ semileptonic form factors and a new determination of the CKM matrix element $|V_{ub}|$. We use the MILC asqtad 2+1-flavor lattice configurations at four lattice spacings and light-quark masses down to 1/20 of the physical strange-quark mass. We extrapolate the lattice form factors to the continuum using staggered chiral perturbation theory in the hard-pion and SU(2) limits. We employ a model-independent $z$ parameterization to extrapolate our lattice form factors from large-recoil momentum to the full kinematic range. We introduce a new functional method to propagate information from the chiral-continuum extrapolation to the $z$ expansion. We present our results together with a complete systematic error budget, including a covariance matrix to enable the combination of our form factors with other lattice-QCD and experimental results. To obtain $|V_{ub}|$, we simultaneously fit the experimental data for the $B\\to\\pi\\ell\\nu$ differential decay rate obtained by the BaBar and Belle collaborations together with our lattice form-factor results. We find $|V_{ub}|=(3.72\\pm 0.16)\\times 10^{-3}$ where the error is from the combined fit to lattice plus experiments and includes all sources of uncertainty. Our form-factor results bring the QCD error on $|V_{ub}|$ to the same level as the experimental error. We also provide results for the $B\\to\\pi\\ell\\nu$ vector and scalar form factors obtained from the combined lattice and experiment fit, which are more precisely-determined than from our lattice-QCD calculation alone. These results can be used in other phenomenological applications and to test other approaches to QCD.",
+    "arxiv": "[hep-lat/1503.07839v2](https://arxiv.org/pdf/1503.07839)",
+    "time": "2015.03.26",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.407",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.65",
+                    "total_upper": "0.16",
+                    "total_lower": "0.16"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.46",
+                    "total_upper": "0.88",
+                    "total_lower": "0.88"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "0.4",
+                    "total_upper": "1.3",
+                    "total_lower": "1.3"
+                },
+                "obs@5": {
+                    "name": "a0_f0",
+                    "value": "0.507",
+                    "total_upper": "0.022",
+                    "total_lower": "0.022"
+                },
+                "obs@6": {
+                    "name": "a1_f0",
+                    "value": "-1.77",
+                    "total_upper": "0.18",
+                    "total_lower": "0.18"
+                },
+                "obs@7": {
+                    "name": "a2_f0",
+                    "value": "1.27",
+                    "total_upper": "0.81",
+                    "total_lower": "0.81"
+                },
+                "obs@8": {
+                    "name": "a3_f0",
+                    "value": "4.2",
+                    "total_upper": "1.4",
+                    "total_lower": "1.4"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "correlation": [
+                [1, 0.451, 0.161, 0.102, 0.331, 0.346, 0.292, 0.216],
+                [0.451, 1, 0.757, 0.665, 0.430, 0.817, 0.854, 0.699],
+                [0.161, 0.757, 1, 0.988, 0.482, 0.847, 0.951, 0.795],
+                [0.102, 0.665, 0.988, 1, 0.484, 0.833, 0.913, 0.714],
+                [0.331, 0.430, 0.482, 0.484, 1, 0.447, 0.359, 0.189],
+                [0.346, 0.817, 0.847, 0.833, 0.447, 1, 0.827, 0.500],
+                [0.292, 0.854, 0.951, 0.913, 0.359, 0.827, 1, 0.838],
+                [0.216, 0.699, 0.795, 0.714, 0.189, 0.500, 0.838, 1]
+            ]
+        },
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.419",
+                    "total_upper": "0.013",
+                    "total_lower": "0.013"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.495",
+                    "total_upper": "0.054",
+                    "total_lower": "0.054"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.43",
+                    "total_upper": "0.13",
+                    "total_lower": "0.13"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "0.22",
+                    "total_upper": "0.31",
+                    "total_lower": "0.31"
+                },
+                "obs@5": {
+                    "name": "a0_f0",
+                    "value": "0.510",
+                    "total_upper": "0.019",
+                    "total_lower": "0.019"
+                },
+                "obs@6": {
+                    "name": "a1_f0",
+                    "value": "-1.700",
+                    "total_upper": "0.082",
+                    "total_lower": "0.082"
+                },
+                "obs@7": {
+                    "name": "a2_f0",
+                    "value": "1.53",
+                    "total_upper": "0.19",
+                    "total_lower": "0.19"
+                },
+                "obs@8": {
+                    "name": "a3_f0",
+                    "value": "4.52",
+                    "total_upper": "0.83",
+                    "total_lower": "0.83"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BCL",
+            "correlation": [
+                [1, 0.140, -0.455, -0.342, 0.224, 0.174, 0.047, -0.033],
+                [0.140, 1, -0.789, -0.874, -0.068, 0.142, 0.025, -0.007],
+                [-0.455, -0.789, 1, 0.879, -0.051, -0.253, 0.098, 0.234],
+                [-0.342, -0.874, 0.879, 1, 0.076, 0.038, 0.018, -0.200],
+                [0.224, -0.068, -0.051, 0.076, 1, -0.043, -0.604, -0.388],
+                [0.174, 0.142, -0.253, 0.038, -0.043, 1, -0.408, -0.758],
+                [0.047, 0.025, 0.098, 0.018, -0.604, -0.408, 1, 0.457],
+                [-0.033, -0.007, 0.234, -0.200, -0.388, -0.758, 0.457, 1]
+            ]
+        }
+    ]
+}

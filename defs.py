@@ -108,6 +108,7 @@ EXPEGROUP = [
 ]
 
 THEOGROUP = [
+    "FNAL-MILC",
     "LQCD",
     "QCD",
 ]

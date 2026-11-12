@@ -1,0 +1,112 @@
+{
+    "inspire-hep": "[Bailey:2012rr](https://inspirehep.net/literature/1090964)",
+    "author": "Bailey, J.A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "$B_s\\to D_s/B\\to D$ Semileptonic Form-Factor Ratios and Their Application to $\\mathrm{BR}(B^0_s\\to\\mu^+\\mu^-)$",
+    "abstract": "We calculate form-factor ratios between the semileptonic decays $\\bar{B}\\to D^+\\ell^-\\bar{\\nu}$ and $\\bar{B}_s\\to D_s^+\\ell^-\\bar{\\nu}$ with lattice QCD. These ratios are a key theoretical input in a new strategy to determine the fragmentation fractions of the neutral B decays, which are needed for measurements of $\\mathrm{BR}(B^0_s\\to\\mu^+\\mu^-)$. We use the MILC ensembles of gauge configurations with 2+1 flavors of sea quarks at two lattice spacings of approximately 0.12 fm and 0.09 fm. We use the model-independent z-parametrization to extrapolate our simulation results at small recoil toward maximum recoil. Our results for the form-factor ratios are $f_0^{(s)}(M^2_\\pi)/f_0^{(d)}(M^2_K)=1.046(44)_{\\mathrm{stat.}}(15)_{\\mathrm{syst.}}$ and $f_0^{(s)}(M^2_\\pi)/f_0^{(d)}(M^2_\\pi)=1.054(47)_{\\mathrm{stat.}}(17)_{\\mathrm{syst.}}$. In contrast to a QCD sum-rule calculation, no significant departure from U-spin ($d\\leftrightarrow s$) symmetry is observed.",
+    "arxiv": "[hep-lat/1202.6346v2](https://arxiv.org/pdf/1202.6346)",
+    "time": "2012.02.28",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0126",
+                    "total_upper": "0.0001",
+                    "total_lower": "0.0001"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.106",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.32",
+                    "total_upper": "0.09",
+                    "total_lower": "0.09"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.01130",
+                    "total_upper": "0.00007",
+                    "total_lower": "0.00007"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-0.061",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "0.03",
+                    "total_upper": "0.10",
+                    "total_lower": "0.10"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "correlation": [
+                [1, -0.273, -0.012, 0.664, -0.061, -0.014],
+                [-0.273, 1, -0.293, -0.306, 0.917, -0.164],
+                [-0.012, -0.293, 1, 0.045, -0.311, 0.976],
+                [0.664, -0.306, 0.045, 1, -0.299, 0.009],
+                [-0.061, 0.917, -0.311, -0.299, 1, -0.231],
+                [-0.014, -0.164, 0.976, 0.009, -0.231, 1]
+            ]
+        },
+        {
+            "Bs0Bar.2.Ds+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.01191",
+                    "total_upper": "0.00006",
+                    "total_lower": "0.00006"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.111",
+                    "total_upper": "0.002",
+                    "total_lower": "0.002"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.47",
+                    "total_upper": "0.05",
+                    "total_lower": "0.05"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.01081",
+                    "total_upper": "0.00004",
+                    "total_lower": "0.00004"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-0.066",
+                    "total_upper": "0.002",
+                    "total_lower": "0.002"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "0.18",
+                    "total_upper": "0.06",
+                    "total_lower": "0.06"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "correlation": [
+                [1, -0.055, -0.002, 0.593, 0.254, 0.014],
+                [-0.055, 1, -0.318, -0.067, 0.867, -0.180],
+                [-0.002, -0.318, 1, -0.038, -0.307, 0.974],
+                [0.593, -0.067, -0.038, 1, -0.050, -0.054],
+                [0.254, 0.867, -0.307, -0.050, 1, -0.233],
+                [0.014, -0.180, 0.974, -0.054, -0.233, 1]
+            ]
+        }
+    ]
+}
