@@ -343,6 +343,13 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                                     st.markdown('- **OBSERVABLE**')
                                     st.table(data_obs)
 
+                            if data_group.get('note'):
+                                st.markdown(
+                                    '- **NOTE**: {}'.format(
+                                        data_group['note']
+                                    )
+                                )
+
                             for key, matrix in data_group.items():
                                 if not is_matrix_key(key) or matrix is None:
                                     continue

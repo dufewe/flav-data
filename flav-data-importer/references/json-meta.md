@@ -143,21 +143,26 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    expansion coefficients (`aN_FF`): one of `BGL`, `BCL`, `BSZ`, `DLM`
    (mapping to full names and arXiv IDs in `obs-abbr.md` §2.4). Optional
    for other groups. It follows `dataset` and precedes any matrix.
-5. **Matrix alignment** — an N×N group matrix covers N observables in
+5. **Group-level `note`** — optional non-empty string placed after
+   `scheme` and immediately before the matrix. It documents the
+   accompanying matrix, for example a coefficient that the source prints
+   outside `[-1, 1]`; such an element is then reported as a warning
+   instead of an error.
+6. **Matrix alignment** — an N×N group matrix covers N observables in
    total across the group's channels: rows follow the channel keys in
    written order, then each channel's `obs@1 … obs@N` order. Keep all
-   channel keys before `dataset`, `dataset` before `scheme`, and both
-   before the matrix key; the validator rejects a channel after either
-   metadata key or any key after a matrix.
-6. **Per-channel numbering** — each channel restarts at `obs@1` and runs
+   channel keys before `dataset`, `dataset` before `scheme`, `scheme`
+   before `note`, and all of them before the matrix key; the validator
+   rejects a channel after any metadata key or any key after a matrix.
+7. **Per-channel numbering** — each channel restarts at `obs@1` and runs
    contiguously (1..N) within that channel.
-7. **Separate contexts** — different datasets, schemes, or fit choices
+8. **Separate contexts** — different datasets, schemes, or fit choices
    always go into separate groups, even for the same channel. Different
    kinematic bins go into separate groups unless one source matrix
    couples their observables (§Data Grouping). Kinematic boundaries
    (`q2min`/`q2max`, ...) live inside each `obs@N`, never at group or
    channel level.
-8. **No category layer** — observables are distinguished solely by
+9. **No category layer** — observables are distinguished solely by
    `name`.
 
 ### Form-Factor Expansion Coefficients
@@ -363,6 +368,15 @@ inside an `obs@N` object:
   (5% relative tolerance to absorb rounding of the reported errors). Both
   must be symmetric (`M[i][j] == M[j][i]`) with finite numeric elements
   (no `null`, `NaN`, `Infinity`, or booleans).
+- **Out-of-range elements** — off-diagonal correlation elements must lie in
+  `[-1, 1]`. An element outside that range is an error unless the same
+  group carries a group-level `note`, in which case it is reported as a
+  warning and the value is imported exactly as published. Do not round the
+  value or relax the global `[-1, 1]` rule.
+- **Note** — optional group-level `note` (non-empty string) placed after
+  `scheme` and before the matrix; it documents the accompanying matrix.
+  Keep the explanation factual (what the source prints) and do not use it
+  to acknowledge unrelated cells.
 - **Dimension** — N×N must equal the total number of observables in all
   channels of the group.
 - **Order** — channel keys in written order, then `obs@N` order within each

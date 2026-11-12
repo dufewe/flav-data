@@ -30,10 +30,12 @@ The database covers measurements from **1990** to the present, organized by coll
 
 | Group | Scope |
 |-------|-------|
-| **HPQCD** | Lattice QCD calculations |
+| **FNAL-MILC** | Fermilab Lattice and MILC lattice QCD |
+| **RBC-UKQCD** | RBC and UKQCD lattice QCD |
+| **LQCD** | Other lattice QCD calculations |
+| **QCD** | Other QCD-based calculations |
 
-Only **HPQCD** is currently registered in `THEOGROUP` and exposed in the
-navigation; other theoretical groups' data is not yet wired into the app.
+Every group in `THEOGROUP` is exposed in the navigation.
 The database stores only experimental measurements and theoretical
 calculations — fits, parameter determinations, bounds and theory-group
 averages derived from existing data are not ingested. Small calculation

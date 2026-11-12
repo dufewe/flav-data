@@ -694,13 +694,19 @@ def _ordered_channel_obs(channel):
 
 
 def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
-                         sigmas: list | None = None) -> list[str]:
+                         sigmas: list | None = None,
+                         acknowledged: bool = False) -> list[str]:
     """Check a correlation/covariance matrix.
 
     Both: numeric (bool rejected), finite, symmetric. Correlation: diagonal
     = 1.0 and off-diagonal within [-1, 1]. Covariance: diagonal is the
     variance, checked against the per-observable total error (``sigmas``,
     flattened in channel then obs@N order) when available.
+
+    An out-of-range correlation element in a group that carries a
+    group-level ``note`` is reported as a warning instead of an error, so
+    the published value can be imported as-is and documented beside the
+    matrix.
     """
     issues = []
     n = len(matrix)
@@ -759,10 +765,15 @@ def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
                     f"[{i}][{j}] = {matrix[i][j]} vs [{j}][{i}] = {matrix[j][i]}"
                 )
             if not is_covariance and abs(matrix[i][j]) > 1.001:
-                issues.append(
+                message = (
                     f"  {label}: correlation element [{i}][{j}] = "
                     f"{matrix[i][j]} outside [-1, 1]"
                 )
+                if acknowledged:
+                    print("  [WARN] " + message.strip()
+                          + " (documented by the group-level 'note')")
+                else:
+                    issues.append(message)
     return issues
 
 
@@ -1094,7 +1105,9 @@ def _validate_data_group(group, label: str) -> list[str]:
     transition channels (each mapping to an object of ``obs@N`` entries).
     The optional group-level ``dataset`` string names the data sources
     behind the group, followed by an optional ``scheme`` string when the
-    group holds form-factor expansion coefficients. Both must precede
+    group holds form-factor expansion coefficients. An optional
+    group-level ``note`` documents the accompanying matrix (e.g. a
+    published out-of-range correlation element). These keys must precede
     any matrix key. The optional ``correlation``/``covariance`` matrix
     aligns with the observables of all channels, flattened in channel
     order then ``obs@N`` order.
@@ -1109,10 +1122,11 @@ def _validate_data_group(group, label: str) -> list[str]:
     ordered_obs = []
     saw_dataset = False
     saw_scheme = False
+    saw_note = False
     saw_matrix = False
     has_coefficients = False
     for key in group:
-        if key in ('dataset', 'scheme'):
+        if key in ('dataset', 'scheme', 'note'):
             value = group[key]
             if not isinstance(value, str) or not value.strip():
                 issues.append(f"  {label}.{key}: must be a non-empty string")
@@ -1136,9 +1150,21 @@ def _validate_data_group(group, label: str) -> list[str]:
                         f"  {label}: 'dataset' appears after 'scheme'; "
                         f"keep 'dataset' first"
                     )
+                elif saw_note:
+                    issues.append(
+                        f"  {label}: 'dataset' appears after 'note'; "
+                        f"keep 'dataset' first"
+                    )
                 saw_dataset = True
-            else:
+            elif key == 'scheme':
+                if saw_note:
+                    issues.append(
+                        f"  {label}: 'scheme' appears after 'note'; "
+                        f"keep 'scheme' before 'note'"
+                    )
                 saw_scheme = True
+            else:
+                saw_note = True
             continue
         if is_group_matrix_key(key):
             matrix_keys.append(key)
@@ -1152,6 +1178,11 @@ def _validate_data_group(group, label: str) -> list[str]:
         elif saw_scheme:
             issues.append(
                 f"  {label}: channel '{key}' appears after 'scheme'; "
+                f"keep all channel keys first"
+            )
+        elif saw_note:
+            issues.append(
+                f"  {label}: channel '{key}' appears after 'note'; "
                 f"keep all channel keys first"
             )
         if saw_matrix:
@@ -1188,6 +1219,9 @@ def _validate_data_group(group, label: str) -> list[str]:
             f"group-level 'scheme'"
         )
 
+    acknowledged = isinstance(group.get('note'), str) and bool(
+        group['note'].strip()
+    )
     for key in matrix_keys:
         matrix = group[key]
         if matrix is None:
@@ -1205,6 +1239,7 @@ def _validate_data_group(group, label: str) -> list[str]:
             validate_correlation(
                 matrix, f"{label}['{key}']",
                 is_covariance=is_covariance, sigmas=sigmas,
+                acknowledged=acknowledged,
             )
         )
         if len(matrix) != obs_total:

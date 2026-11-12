@@ -1,0 +1,113 @@
+{
+    "inspire-hep": "[Flynn:2015mha](https://inspirehep.net/literature/1340702)",
+    "author": "Flynn, J.M., Izubuchi, T., Kawanai, T., Lehner, C., Soni, A., Van de Water, R.S., and Witzel, O.",
+    "collaboration": "RBC/UKQCD",
+    "title": "$B \\to \\pi \\ell \\nu$ and $B_s \\to K \\ell \\nu$ form factors and $|V_{ub}|$ from 2+1-flavor lattice QCD with domain-wall light quarks and relativistic heavy quarks",
+    "abstract": "We calculate the $B \\to\\pi\\ell\\nu$ and $B_s \\to K \\ell\\nu$ form factors in dynamical lattice QCD. We use the (2+1)-flavor RBC-UKQCD gauge-field ensembles generated with the domain-wall fermion and Iwasaki gauge actions. For the $b$ quarks we use the anisotropic clover action with a relativistic heavy-quark interpretation. We analyze two lattice spacings $a \\approx 0.11, 0.086$ fm and unitary pion masses as light as $M_\\pi \\approx 290$ MeV. We simultaneously extrapolate our numerical results to the physical light-quark masses and to the continuum and interpolate in the pion/kaon energy using SU(2) \"hard-pion\" chiral perturbation theory. We provide complete error budgets for the form factors $f_+(q^2)$ and $f_0(q^2)$ at three momenta that span the $q^2$ range accessible in our numerical simulations. We extrapolate these results to $q^2 = 0$ using a model-independent $z$-parametrization and present our final form factors as the $z$-coefficients and the matrix of correlations between them. Our results agree with other lattice determinations using staggered light quarks and provide important independent cross-checks. Both $B \\to\\pi\\ell\\nu$ and $B_s \\to K \\ell \\nu$ decays enable a determination of the CKM matrix element $|V_{ub}|$. To illustrate this, we perform a combined $z$-fit of our numerical $B\\to\\pi\\ell\\nu$ form-factor data with the experimental branching-fraction measurements leaving the relative normalization as a free parameter; we obtain $|V_{ub}| = 3.61(32) \\times 10^{-3}$, where the error includes statistical and systematic uncertainties. This approach can be applied to $B_s\\to K \\ell\\nu$ decay to determine $|V_{ub}|$ once the process has been measured experimentally. Finally, in anticipation of future measurements, we make predictions for $B \\to \\pi\\ell\\nu$ and $B_s\\to K \\ell\\nu$ Standard-Model differential branching fractions and forward-backward asymmetries.",
+    "arxiv": "[hep-lat/1501.05373v3](https://arxiv.org/pdf/1501.05373)",
+    "time": "2015.01.22",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.412",
+                    "total_upper": "0.039",
+                    "total_lower": "0.039"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.511",
+                    "total_upper": "0.184",
+                    "total_lower": "0.184"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.524",
+                    "total_upper": "0.612",
+                    "total_lower": "0.612"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.520",
+                    "total_upper": "0.060",
+                    "total_lower": "0.060"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-1.657",
+                    "total_upper": "0.182",
+                    "total_lower": "0.182"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "2.146",
+                    "total_upper": "0.682",
+                    "total_lower": "0.682"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "correlation": [
+                [1.000, 0.337, -0.076, 0.679, 0.045, 0.100],
+                [0.337, 1.000, 0.150, 0.222, 0.698, 0.581],
+                [-0.076, 0.150, 1.000, 0.029, 0.436, 0.659],
+                [0.679, 0.222, 0.029, 1.000, -0.258, -0.224],
+                [0.045, 0.698, 0.436, -0.258, 1.000, 0.564],
+                [0.100, 0.581, 0.659, -0.224, 0.564, 1.000]
+            ]
+        },
+        {
+            "Bs0Bar.2.K+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.338",
+                    "total_upper": "0.024",
+                    "total_lower": "0.024"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-1.161",
+                    "total_upper": "0.192",
+                    "total_lower": "0.192"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.458",
+                    "total_upper": "1.009",
+                    "total_lower": "1.009"
+                },
+                "obs@4": {
+                    "name": "a0_f0",
+                    "value": "0.210",
+                    "total_upper": "0.017",
+                    "total_lower": "0.017"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-0.169",
+                    "total_upper": "0.202",
+                    "total_lower": "0.202"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "-1.235",
+                    "total_upper": "0.880",
+                    "total_lower": "0.880"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Source table prints the (b+2, b0_1) correlation as 1.060; imported as published.",
+            "correlation": [
+                [1.000, 0.255, 0.146, 0.873, 0.603, 0.423],
+                [0.255, 1.000, 0.823, 0.311, 0.954, 0.770],
+                [0.146, 0.823, 1.000, 0.346, 1.060, 0.901],
+                [0.873, 0.311, 0.346, 1.000, 0.556, 0.479],
+                [0.603, 0.954, 1.060, 0.556, 1.000, 0.965],
+                [0.423, 0.770, 0.901, 0.479, 0.965, 1.000]
+            ]
+        }
+    ]
+}

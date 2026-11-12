@@ -111,6 +111,7 @@ THEOGROUP = [
     "FNAL-MILC",
     "LQCD",
     "QCD",
+    "RBC-UKQCD",
 ]
 
 OBSGROUP = ["Flavor", "EWPO"]

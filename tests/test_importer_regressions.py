@@ -217,6 +217,37 @@ class JsonValidatorTests(unittest.TestCase):
         }]
         self.assertEqual(self._validate_data(data), [])
 
+    def test_group_note_acknowledges_out_of_range_correlation(self):
+        data = [{
+            'B0.2.K*0.mu+.mu-': self._channel(
+                self._obs('FL'), self._obs('S3'),
+            ),
+            'note': 'Authors print rho = 1.06 for this pair.',
+            'correlation': [[1.0, 1.06], [1.06, 1.0]],
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_group_note_must_be_non_empty_string(self):
+        for value in ('', '   ', 1):
+            with self.subTest(note=value):
+                data = [{
+                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'note': value,
+                }]
+                issues = self._validate_data(data)
+                self.assertTrue(any('note: must be a non-empty string' in issue
+                                    for issue in issues))
+
+    def test_group_note_sits_before_matrix(self):
+        data = [{
+            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'correlation': [[1.0]],
+            'note': 'documented',
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any("'note' appears after a matrix key" in issue
+                            for issue in issues))
+
     def test_data_group_matrix_dimension_must_cover_all_channels(self):
         data = [{
             'B0.2.K*0.mu+.mu-': self._channel(
@@ -614,6 +645,17 @@ class CorrelationMatrixTests(unittest.TestCase):
         matrix = [[1.0, 1.5], [1.5, 1.0]]
         self.assertTrue(any('outside [-1, 1]' in issue for issue in
                             json_valid.validate_correlation(matrix, 'm')))
+
+    def test_correlation_out_of_range_is_an_error_by_default(self):
+        matrix = [[1.0, 1.060], [1.060, 1.0]]
+        self.assertTrue(any('outside [-1, 1]' in issue
+                            for issue in json_valid.validate_correlation(
+                                matrix, 'm')))
+
+    def test_correlation_out_of_range_warns_when_acknowledged(self):
+        matrix = [[1.0, 1.060], [1.060, 1.0]]
+        self.assertEqual(json_valid.validate_correlation(
+            matrix, 'm', acknowledged=True), [])
 
     def test_correlation_rejects_non_finite(self):
         for bad in (float('nan'), float('inf')):
