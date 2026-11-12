@@ -31,7 +31,10 @@ The database covers measurements from **1990** to the present, organized by coll
 | Group | Scope |
 |-------|-------|
 | **FNAL-MILC** | Fermilab Lattice and MILC lattice QCD |
+| **HPQCD** | HPQCD lattice QCD |
+| **JLQCD** | JLQCD lattice QCD |
 | **RBC-UKQCD** | RBC and UKQCD lattice QCD |
+| **LCSR** | Other light-cone sum rule calculations |
 | **LQCD** | Other lattice QCD calculations |
 | **QCD** | Other QCD-based calculations |
 
@@ -39,8 +42,8 @@ Every group in `THEOGROUP` is exposed in the navigation.
 The database stores only experimental measurements and theoretical
 calculations — fits, parameter determinations, bounds and theory-group
 averages derived from existing data are not ingested. Small calculation
-groups are filed under a method folder (`theo-data/LQCD/`,
-`theo-data/QCD/`) instead of their own group folder.
+groups are filed under a method folder (`theo-data/LCSR/`,
+`theo-data/LQCD/`, `theo-data/QCD/`) instead of their own group folder.
 
 ## Data Format
 
@@ -86,7 +89,7 @@ keys, then their `obs@N` order. The channel key alone encodes the
 transition; `data` stores no LaTeX. `dataset` records data sources only
 (`LQCD`, `LCSR`, `EXPE`, joined with `+` in that order). Groups of
 form-factor expansion coefficients (`aN_FF`) must name their expansion in
-`scheme` as one of `BGL`, `BCL`, `BSZ`, or `DLM` (full names and arXiv IDs
+`scheme` as one of `BK`, `BGL`, `BCL`, `BSZ`, or `DLM` (full names and arXiv IDs
 in the importer's `references/obs-abbr.md`). Add another group for
 different kinematic bins, fit choices, or datasets.
 
@@ -167,7 +170,7 @@ flav-data/
 │   └── ...                         # Other experimental groups
 ├── theo-data/
 │   ├── HPQCD/                       # Large collaborations: own folder
-│   └── LQCD/, QCD/                  # Smaller calculation groups, grouped by method
+│   └── LCSR/, LQCD/, QCD/           # Smaller calculation groups, grouped by method
 ├── obs-info/
 │   ├── flavor.py                    # Observable naming guide
 │   └── ewpo.py                      # EWPO naming guide

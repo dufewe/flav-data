@@ -1,0 +1,91 @@
+{
+    "inspire-hep": "[Bouchard:2013eph](https://inspirehep.net/literature/1238109)",
+    "author": "Bouchard, C. and others",
+    "collaboration": "HPQCD",
+    "title": "Rare decay $B \\to K \\ell^+ \\ell^-$ form factors from lattice QCD",
+    "abstract": "We calculate, for the first time using unquenched lattice QCD, form factors for the rare decay $B \\to K \\ell^+ \\ell^-$ in and beyond the Standard Model. Our lattice QCD calculation utilizes a nonrelativistic QCD formulation for the $b$ valence quarks, the highly improved staggered quark formulation for the light valence quarks, and employs the MILC $2+1$ asqtad ensembles. The form factor results, based on the $z$ expansion, are valid over the full kinematic range of $q^2$. We construct the ratios $f_0/f_+$ and $f_T/f_+$, which are useful in constraining new physics and verifying effective theory form factor symmetry relations. We also discuss the calculation of Standard Model observables.",
+    "arxiv": "[hep-lat/1306.2384v3](https://arxiv.org/pdf/1306.2384)",
+    "time": "2013.06.10",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.K0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_f0",
+                    "value": "0.550",
+                    "total_upper": "0.020",
+                    "total_lower": "0.020"
+                },
+                "obs@2": {
+                    "name": "a1_f0",
+                    "value": "-1.89",
+                    "total_upper": "0.23",
+                    "total_lower": "0.23"
+                },
+                "obs@3": {
+                    "name": "a2_f0",
+                    "value": "1.98",
+                    "total_upper": "1.24",
+                    "total_lower": "1.24"
+                },
+                "obs@4": {
+                    "name": "a3_f0",
+                    "value": "-0.02",
+                    "total_upper": "2.00",
+                    "total_lower": "2.00"
+                },
+                "obs@5": {
+                    "name": "a0_f+",
+                    "value": "0.432",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                },
+                "obs@6": {
+                    "name": "a1_f+",
+                    "value": "-0.65",
+                    "total_upper": "0.23",
+                    "total_lower": "0.23"
+                },
+                "obs@7": {
+                    "name": "a2_f+",
+                    "value": "-0.97",
+                    "total_upper": "1.24",
+                    "total_lower": "1.24"
+                },
+                "obs@8": {
+                    "name": "a0_fT",
+                    "value": "0.388",
+                    "total_upper": "0.023",
+                    "total_lower": "0.023"
+                },
+                "obs@9": {
+                    "name": "a1_fT",
+                    "value": "-0.67",
+                    "total_upper": "0.34",
+                    "total_lower": "0.34"
+                },
+                "obs@10": {
+                    "name": "a2_fT",
+                    "value": "-1.05",
+                    "total_upper": "1.70",
+                    "total_lower": "1.70"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Coefficients follow the paper's unnormalized BCL form, so a0 is not the form factor at q2=0 (f0(0)=f+(0)=0.319, fT(0)=0.270); the covariance covers fit errors only, with an additional 4% matching systematic quoted on the form factors.",
+            "correlation": [
+                [1.0, 0.423494, 0.230783, -0.079781, 0.717139, 0.546375, 0.398473, 0.184861, 0.122336, 0.061738],
+                [0.423494, 1.0, 0.835167, -0.154262, 0.691436, 0.94126, 0.831993, 0.234758, 0.274253, 0.145766],
+                [0.230783, 0.835167, 1.0, 0.04268, 0.523988, 0.860921, 0.882403, 0.153842, 0.230225, 0.144277],
+                [-0.079781, -0.154262, 0.04268, 1.0, 0.002521, 0.006118, 0.005481, -0.005643, -0.010531, -0.008479],
+                [0.717139, 0.691436, 0.523988, 0.002521, 1.0, 0.740508, 0.439226, 0.386024, 0.278641, 0.112221],
+                [0.546375, 0.94126, 0.860921, 0.006118, 0.740508, 1.0, 0.806168, 0.258169, 0.307428, 0.147335],
+                [0.398473, 0.831993, 0.882403, 0.005481, 0.439226, 0.806168, 1.0, 0.039925, 0.124202, 0.127439],
+                [0.184861, 0.234758, 0.153842, -0.005643, 0.386024, 0.258169, 0.039925, 1.0, 0.711315, 0.49991],
+                [0.122336, 0.274253, 0.230225, -0.010531, 0.278641, 0.307428, 0.124202, 0.711315, 1.0, 0.743728],
+                [0.061738, 0.145766, 0.144277, -0.008479, 0.112221, 0.147335, 0.127439, 0.49991, 0.743728, 1.0]
+            ]
+        }
+    ]
+}

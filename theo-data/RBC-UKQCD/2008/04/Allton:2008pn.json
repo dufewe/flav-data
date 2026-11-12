@@ -1,0 +1,113 @@
+{
+    "inspire-hep": "[Allton:2008pn](https://inspirehep.net/literature/782657)",
+    "author": "Allton, C. and others",
+    "collaboration": "RBC/UKQCD",
+    "title": "Physical Results from 2+1 Flavor Domain Wall QCD and SU(2) Chiral Perturbation Theory",
+    "abstract": "We have simulated QCD using 2+1 flavors of domain wall quarks on a $(2.74 {\\rm fm})^3$ volume with an inverse lattice scale of $a^{-1} = 1.729(28)$ GeV. The up and down (light) quarks are degenerate in our calculations and we have used four values for the ratio of light quark masses to the strange (heavy) quark mass in our simulations: 0.217, 0.350, 0.617 and 0.884. We have measured pseudoscalar meson masses and decay constants, the kaon bag parameter $B_K$ and vector meson couplings. We have used SU(2) chiral perturbation theory, which assumes only the up and down quark masses are small, and SU(3) chiral perturbation theory to extrapolate to the physical values for the light quark masses. While next-to-leading order formulae from both approaches fit our data for light quarks, we find the higher order corrections for SU(3) very large, making such fits unreliable. We also find that SU(3) does not fit our data when the quark masses are near the physical strange quark mass. Thus, we rely on SU(2) chiral perturbation theory for accurate results. We use the masses of the $\\Omega$ baryon, and the $\\pi$ and $K$ mesons to set the lattice scale and determine the quark masses. We then find $f_\\pi = 124.1(3.6)_{\\rm stat}(6.9)_{\\rm syst} {\\rm MeV}$, $f_K = 149.6(3.6)_{\\rm stat}(6.3)_{\\rm syst} {\\rm MeV}$ and $f_K/f_\\pi = 1.205(0.018)_{\\rm stat}(0.062)_{\\rm syst}$. Using non-perturbative renormalization to relate lattice regularized quark masses to RI-MOM masses, and perturbation theory to relate these to $\\bar{\\rm MS}$ we find $ m_{ud}^{\\bar{\\rm MS}}(2 {\\rm GeV}) = 3.72(0.16)_{\\rm stat}(0.33)_{\\rm ren}(0.18)_{\\rm syst} {\\rm MeV}$ and $m_{s}^{\\bar{\\rm MS}}(2 {\\rm GeV}) = 107.3(4.4)_{\\rm stat}(9.7)_{\\rm ren}(4.9)_{\\rm syst} {\\rm MeV}$.",
+    "arxiv": "[hep-lat/0804.0473v1](https://arxiv.org/pdf/0804.0473)",
+    "time": "2008.04.03",
+    "transition-mode": "low-energy",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "fpi",
+                    "value": "124.1",
+                    "type@1_error": "stat",
+                    "type@1_upper": "3.6",
+                    "type@1_lower": "3.6",
+                    "type@2_error": "syst",
+                    "type@2_upper": "6.9",
+                    "type@2_lower": "6.9",
+                    "unit": "MeV"
+                },
+                "obs@2": {
+                    "name": "fK",
+                    "value": "149.6",
+                    "type@1_error": "stat",
+                    "type@1_upper": "3.6",
+                    "type@1_lower": "3.6",
+                    "type@2_error": "syst",
+                    "type@2_upper": "6.3",
+                    "type@2_lower": "6.3",
+                    "unit": "MeV"
+                },
+                "obs@3": {
+                    "name": "fK/fpi",
+                    "value": "1.205",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.018",
+                    "type@1_lower": "0.018",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.062",
+                    "type@2_lower": "0.062"
+                }
+            },
+            "dataset": "LQCD"
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "mud",
+                    "value": "3.72",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.16",
+                    "type@1_lower": "0.16",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.376",
+                    "type@2_lower": "0.376",
+                    "unit": "MeV"
+                },
+                "obs@2": {
+                    "name": "ms",
+                    "value": "107.3",
+                    "type@1_error": "stat",
+                    "type@1_upper": "4.4",
+                    "type@1_lower": "4.4",
+                    "type@2_error": "syst",
+                    "type@2_upper": "10.9",
+                    "type@2_lower": "10.9",
+                    "unit": "MeV"
+                },
+                "obs@3": {
+                    "name": "ms/mud",
+                    "value": "28.8",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.4",
+                    "type@1_lower": "0.4",
+                    "type@2_error": "syst",
+                    "type@2_upper": "1.6",
+                    "type@2_lower": "1.6"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "Quark masses are MSbar masses at 2 GeV. The systematic errors on mud and ms combine the paper's renormalization and systematic errors in quadrature: 0.33 (ren) and 0.18 (syst) for mud; 9.7 (ren) and 4.9 (syst) for ms."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "BK",
+                    "value": "0.524",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.010",
+                    "type@1_lower": "0.010",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.028",
+                    "type@2_lower": "0.028"
+                },
+                "obs@2": {
+                    "name": "BhatK",
+                    "value": "0.720",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.013",
+                    "type@1_lower": "0.013",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.037",
+                    "type@2_lower": "0.037"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "BK is the MSbar value at 2 GeV; BhatK is the renormalization-group-invariant value. The 0.028 (0.037) systematic error is the quadrature sum of the paper's 0.013 (0.014) renormalization and 0.025 (0.034) systematic errors."
+        }
+    ]
+}

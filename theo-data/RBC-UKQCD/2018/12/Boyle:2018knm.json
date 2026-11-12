@@ -1,0 +1,58 @@
+{
+    "inspire-hep": "[Boyle:2018knm](https://inspirehep.net/literature/1711109)",
+    "author": "Boyle, P.A. and others",
+    "collaboration": "RBC/UKQCD",
+    "title": "$SU(3)$-breaking ratios for $D_{(s)}$ and $B_{(s)}$ mesons",
+    "abstract": "We present results for the $SU(3)$ breaking ratios of decay constants $f_{D_s}/f_D$ and $f_{B_s}/f_B$ and - for the first time with physical pion masses - the ratio of bag parameters $B_{B_s}/B_{B_d}$, as well as the ratio $\\xi$, forming the ratio of the non-perturbative contributions to neutral $B_{(s)}$ meson mixing. Our results are based on Lattice QCD simulations with chirally symmetric 2+1 dynamical flavours of domain wall fermions. Eight ensembles at three different lattice spacings in the range $a = 0.11 - 0.07\\,\\mathrm{fm}$ enter the analysis, two of which feature physical light quark masses. Multiple heavy-quark masses are simulated ranging from below the charm quark mass to half the bottom-quark mass. The $SU(3)$ breaking ratios display a very benign heavy-mass behaviour allowing for extrapolation to the physical bottom-quark mass. The results in the continuum limit including all sources of systematic errors are $f_{D_s}/f_D = 1.1740(51)_{\\mathrm{stat}}(^{+68}_{-68})_{\\mathrm{sys}}$, $f_{B_s}/f_B = 1.1949(60)_{\\mathrm{stat}}(^{+95}_{-175})_{\\mathrm{sys}}$, $B_{B_s}/B_{B_d} = 0.9984(45)_{\\mathrm{stat}}(^{+80}_{-63})_{\\mathrm{sys}}$ and $\\xi = 1.1939(67)_{\\mathrm{stat}}(^{+95}_{-177})_{\\mathrm{sys}}$. Combining these with experimentally measured values we extract the ratios of CKM matrix elements $|V_{cd}/V_{cs}| = 0.2164(57)_{\\mathrm{exp}}(^{+12}_{-12})_{\\mathrm{lat}}$ and $|V_{td}/V_{ts}| = 0.20329(41)_{\\mathrm{exp}}(^{+162}_{-301})_{\\mathrm{lat}}$.",
+    "arxiv": "[hep-lat/1812.08791v2](https://arxiv.org/pdf/1812.08791)",
+    "time": "2018.12.20",
+    "transition-mode": "low-energy",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "fDs/fD",
+                    "value": "1.1740",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0051",
+                    "type@1_lower": "0.0051",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0045",
+                    "type@2_lower": "0.0044"
+                },
+                "obs@2": {
+                    "name": "fBs/fB",
+                    "value": "1.1949",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0060",
+                    "type@1_lower": "0.0060",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0073",
+                    "type@2_lower": "0.0165"
+                },
+                "obs@3": {
+                    "name": "BBs/BBd",
+                    "value": "0.9984",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0045",
+                    "type@1_lower": "0.0045",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0066",
+                    "type@2_lower": "0.0045"
+                },
+                "obs@4": {
+                    "name": "xi",
+                    "value": "1.1939",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0067",
+                    "type@1_lower": "0.0067",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0067",
+                    "type@2_lower": "0.0164"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "The paper labels the second error as sys, but it is the total (stat+syst) uncertainty; the systematic components used here come from the error-budget table."
+        }
+    ]
+}

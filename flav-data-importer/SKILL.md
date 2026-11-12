@@ -420,11 +420,12 @@ reference doc points back to these.
    choices (nominal, higher-order, ...) are neither part of the name nor
    stored in the group metadata; keep such variants as separate groups.
    Every coefficient group declares its expansion form in the group-level
-   `scheme` field as a short code: `BGL`, `BCL`, `BSZ`, or `DLM`. The
-   full names and defining papers are in `references/obs-abbr.md` §2.4:
+   `scheme` field as a short code: `BK`, `BGL`, `BCL`, `BSZ`, or `DLM`.
+   The full names and defining papers are in `references/obs-abbr.md` §2.4:
 
    | Scheme | Parametrization | Source |
    |--------|-----------------|--------|
+   | `BK` | Becirevic-Kaidalov | arXiv:hep-ph/9904490 |
    | `BGL` | Boyd-Grinstein-Lebed | arXiv:hep-ph/9504235 |
    | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
    | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
@@ -516,7 +517,10 @@ A measurement with **exactly one error** records it as the total error
 (`total_upper`/`total_lower`) even when the source labels it stat or theo.
 Only **two or more** errors become component triplets (`type@N_error` +
 `type@N_upper` + `type@N_lower`), each labelled `stat`, `syst`, `lumi`,
-`norm`, `theo`, or `expe`. Never mix component errors with total errors,
+`norm`, `theo`, or `expe`. When the source splits its theory error by
+input, name the input after the label (`theo:<source>`, e.g.
+`theo:mu_pi`; lowercase ASCII letters, digits, and underscores). Never mix
+component errors with total errors,
 and never create a lone `type@N` triplet. Confidence-level bounds use
 `type@N_upper`/`type@N_lower` with a required `type@N_level` and no
 `type@N_error`; a combined fit + bound keeps the bound on N values
@@ -558,10 +562,10 @@ Before committing any new or updated JSON file:
       triplets), optionally with `ref` and/or confidence bounds; bound-only
       entries carry `type@N_upper`/`type@N_lower` + `type@N_level` and no
       `value` or errors
-- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields are allowed alongside them; the canonical source list and `scheme` are group-level keys
+- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, or `theo:<source>` for a theory input named after the colon; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields are allowed alongside them; the canonical source list and `scheme` are group-level keys
 - [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted; the group-level `dataset` uses canonical source names (`LQCD`, `LCSR`, `EXPE`)
 - [ ] Groups that differ in dataset, scheme, fit choice, or kinematic region are separate elements of the `data` array, not merged
-- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BGL`, `BCL`, `BSZ`, `DLM`
+- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
 - [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
 - [ ] Annual index file includes the new paper if added (or excludes if deleted)

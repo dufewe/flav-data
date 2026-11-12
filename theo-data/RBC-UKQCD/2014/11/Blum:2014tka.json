@@ -1,0 +1,98 @@
+{
+    "inspire-hep": "[Blum:2014tka](https://inspirehep.net/literature/1329971)",
+    "author": "Blum, T. and others",
+    "collaboration": "RBC/UKQCD",
+    "title": "Domain wall QCD with physical quark masses",
+    "abstract": "We present results for several light hadronic quantities ($f_\\pi$, $f_K$, $B_K$, $m_{ud}$, $m_s$, $t_0^{1/2}$, $w_0$) obtained from simulations of 2+1 flavor domain wall lattice QCD with large physical volumes and nearly-physical pion masses at two lattice spacings. We perform a short, $\\mathcal{O}(3)\\%$, extrapolation in pion mass to the physical values by combining our new data in a simultaneous chiral/continuum 'global fit' with a number of other ensembles with heavier pion masses. We use the physical values of $m_\\pi$, $m_K$ and $m_\\Omega$ to determine the two quark masses and the scale - all other quantities are outputs from our simulations. We obtain results with sub-percent statistical errors and negligible chiral and finite-volume systematics for these light hadronic quantities, including: $f_\\pi = 130.2(9)$ MeV; $f_K = 155.5(8)$ MeV; the average up/down quark mass and strange quark mass in the $\\overline{\\rm MS}$ scheme at 3 GeV, $2.997(49)$ and $81.64(1.17)$ MeV respectively; and the neutral kaon mixing parameter, $B_K$, in the RGI scheme, $0.750(15)$ and the $\\overline{\\rm MS}$ scheme at 3 GeV, $0.530(11)$.",
+    "arxiv": "[hep-lat/1411.7017v2](https://arxiv.org/pdf/1411.7017)",
+    "time": "2014.11.25",
+    "transition-mode": "low-energy",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "fpi",
+                    "value": "130.19",
+                    "total_upper": "0.89",
+                    "total_lower": "0.89",
+                    "unit": "MeV"
+                },
+                "obs@2": {
+                    "name": "fK",
+                    "value": "155.51",
+                    "total_upper": "0.83",
+                    "total_lower": "0.83",
+                    "unit": "MeV"
+                },
+                "obs@3": {
+                    "name": "fK/fpi",
+                    "value": "1.1945",
+                    "total_upper": "0.0045",
+                    "total_lower": "0.0045"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "The quoted errors are statistical; the paper states that chiral-extrapolation and finite-volume systematics are negligible for these quantities."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "mud",
+                    "value": "2.997",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.036",
+                    "type@1_lower": "0.036",
+                    "type@2_error": "theo",
+                    "type@2_upper": "0.033",
+                    "type@2_lower": "0.033",
+                    "unit": "MeV"
+                },
+                "obs@2": {
+                    "name": "ms",
+                    "value": "81.64",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.77",
+                    "type@1_lower": "0.77",
+                    "type@2_error": "theo",
+                    "type@2_upper": "0.88",
+                    "type@2_lower": "0.88",
+                    "unit": "MeV"
+                },
+                "obs@3": {
+                    "name": "ms/mud",
+                    "value": "27.34",
+                    "total_upper": "0.21",
+                    "total_lower": "0.21"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "Quark masses are MSbar masses at 3 GeV. The second error is the paper's perturbative-truncation error from matching the intermediate RI-SMOM scheme to MSbar; no separate chiral or finite-volume systematic is quoted. The ms/mud ratio carries only a statistical error because the matching error cancels."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "BK",
+                    "value": "0.5293",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0017",
+                    "type@1_lower": "0.0017",
+                    "type@2_error": "theo",
+                    "type@2_upper": "0.0106",
+                    "type@2_lower": "0.0106"
+                },
+                "obs@2": {
+                    "name": "BhatK",
+                    "value": "0.7499",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0024",
+                    "type@1_lower": "0.0024",
+                    "type@2_error": "theo",
+                    "type@2_upper": "0.0150",
+                    "type@2_lower": "0.0150"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "BK is the MSbar value at 3 GeV; BhatK is the renormalization-group-invariant value. The second error is the paper's perturbative-truncation error, estimated as the difference between the two RI-SMOM intermediate schemes."
+        }
+    ]
+}

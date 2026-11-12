@@ -1,0 +1,41 @@
+{
+    "inspire-hep": "[SentitemsuImsong:2014plu](https://inspirehep.net/literature/1319306)",
+    "author": "Sentitemsu Imsong, I., Khodjamirian, A., Mannel, Th., and van Dyk, D.",
+    "title": "Extrapolation and unitarity bounds for the $B\\to \\pi$ form factor",
+    "abstract": "We address the problem of extrapolating the vector form factor $f_{B\\pi}^+$, which is relevant to $B\\to \\pi\\ell\\nu_\\ell$ decays, from the region of small to the region of large momentum transfer. As input, we use the QCD light-cone sum rule at small momentum transfer. We carry out a comprehensive Bayesian uncertainty analysis and obtain correlated uncertainties for the normalization and shape parameters of the form factor. The $z$-series parametrization for $f_{B\\pi}^+$ is employed to extrapolate our results to large momentum transfer, and to compare with the lattice QCD results. To test the validity of our extrapolation we use the upper and lower bounds from the unitarity and positivity of the two-point correlator of heavy-light quark currents. This correlator is updated by including the NNLO perturbative term and the NLO correction to the quark condensate contribution. We demonstrate that an additional input including the form factor, its first and second derivative calculated at one value of momentum transfer from the light-cone sum rules, considerably improves the bounds. This only holds when the correlations between the form factor parameters are taken into account. We further combine our results with the latest experimental measurements of $B\\to \\pi\\ell\\nu_\\ell$ by the BaBar and Belle collaborations, and obtain $|V_{ub}|= (3.32^{+0.26}_{-0.22}) \\cdot 10^{-3}$ from a Bayesian analysis.",
+    "arxiv": "[hep-ph/1409.7816v2](https://arxiv.org/pdf/1409.7816)",
+    "time": "2014.09.27",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.307",
+                    "total_upper": "0.020",
+                    "total_lower": "0.020"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-1.31",
+                    "total_upper": "0.42",
+                    "total_lower": "0.42"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.904",
+                    "total_upper": "0.444",
+                    "total_lower": "0.444"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "note": "BCL $K=3$ parameters store the Gaussian posterior of the fit to the six LCSR inputs; the best-fit point is $(f^+_{B\\pi}(0),b_1^+,b_2^+)=(0.310,-1.25,-0.962)$.",
+            "correlation": [
+                [1.000, 0.503, -0.391],
+                [0.503, 1.000, -0.824],
+                [-0.391, -0.824, 1.000]
+            ]
+        }
+    ]
+}

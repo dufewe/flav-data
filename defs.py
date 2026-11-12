@@ -109,6 +109,9 @@ EXPEGROUP = [
 
 THEOGROUP = [
     "FNAL-MILC",
+    "HPQCD",
+    "JLQCD",
+    "LCSR",
     "LQCD",
     "QCD",
     "RBC-UKQCD",

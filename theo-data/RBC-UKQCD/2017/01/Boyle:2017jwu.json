@@ -1,0 +1,50 @@
+{
+    "inspire-hep": "[Boyle:2017jwu](https://inspirehep.net/literature/1508489)",
+    "author": "Boyle, P.A. and others",
+    "collaboration": "RBC/UKQCD",
+    "title": "The decay constants ${\\mathbf{f_D}}$ and ${\\mathbf{f_{D_{s}}}}$ in the continuum limit of ${\\mathbf{N_f=2+1}}$ domain wall lattice QCD",
+    "abstract": "We present results for the decay constants of the $D$ and $D_s$ mesons computed in lattice QCD with $N_f=2+1$ dynamical flavours. The simulations are based on RBC/UKQCD's domain wall ensembles with both physical and unphysical light-quark masses and lattice spacings in the range 0.11--0.07$\\,$fm. We employ the domain wall discretisation for all valence quarks. The results in the continuum limit are $f_D=208.7(2.8)_{\\mathrm{stat}}\\left(^{+2.1}_{-1.8}\\right)_{\\mathrm{sys}}\\,\\mathrm{MeV}$ and $f_{D_{s}}=246.4(1.3)_{\\mathrm{stat}}\\left(^{+1.3}_{-1.9}\\right)_{\\mathrm{sys}}\\,\\mathrm{MeV}$ and $f_{D_s}/f_D=1.1667(77)_{\\mathrm{stat}}\\left(^{+57}_{-43}\\right)_{\\mathrm{sys}}$. Using these results in a Standard Model analysis we compute the predictions $|V_{cd}|=0.2185(50)_{\\mathrm{exp}}\\left(^{+35}_{-37}\\right)_{\\mathrm{lat}}$ and $|V_{cs}|=1.011(16)_{\\mathrm{exp}}\\left(^{+4}_{-9}\\right)_{\\mathrm{lat}}$ for the CKM matrix elements.",
+    "arxiv": "[hep-lat/1701.02644v1](https://arxiv.org/pdf/1701.02644)",
+    "time": "2017.01.10",
+    "transition-mode": "low-energy",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "fD",
+                    "value": "208.7",
+                    "type@1_error": "stat",
+                    "type@1_upper": "2.8",
+                    "type@1_lower": "2.8",
+                    "type@2_error": "syst",
+                    "type@2_upper": "2.1",
+                    "type@2_lower": "1.8",
+                    "unit": "MeV"
+                },
+                "obs@2": {
+                    "name": "fDs",
+                    "value": "246.4",
+                    "type@1_error": "stat",
+                    "type@1_upper": "1.9",
+                    "type@1_lower": "1.9",
+                    "type@2_error": "syst",
+                    "type@2_upper": "1.3",
+                    "type@2_lower": "1.9",
+                    "unit": "MeV"
+                },
+                "obs@3": {
+                    "name": "fDs/fD",
+                    "value": "1.1667",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.0077",
+                    "type@1_lower": "0.0077",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.0057",
+                    "type@2_lower": "0.0043"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "Systematic errors are the paper's total systematic. The abstract gives fDs = 246.4(1.3)_stat, while the results section and error budget give 1.9; the body value is used."
+        }
+    ]
+}

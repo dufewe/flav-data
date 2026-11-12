@@ -292,6 +292,7 @@ the full name and defining paper live in this table:
 
 | Scheme | Parametrization | Source |
 |--------|-----------------|--------|
+| `BK` | Becirevic-Kaidalov | arXiv:hep-ph/9904490 |
 | `BGL` | Boyd-Grinstein-Lebed | arXiv:hep-ph/9504235 |
 | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
 | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
@@ -556,6 +557,35 @@ under the `no-transition` channel key.
 | `\|Vcb\|` | $\|V_{cb}\|$ | $\|V_{cb}\|$ | CKM matrix element magnitude |
 | `r` | $r$ | $r_B$, $r_D$ | Amplitude ratio (decay channel specified in transition) |
 | `delta` | $\delta$ | $\delta_B$, $\delta_D$ | Strong phase difference |
+
+### Decay Constants, Quark Masses, and Bag Parameters (No Transition)
+
+Intrinsic QCD quantities reported by lattice or sum-rule calculations sit
+under `no-transition`. Quark masses are $\overline{\text{MS}}$ masses at
+2 GeV unless the paper states another scale; the scale belongs in the
+group-level `note`, not in the name.
+
+| Abbr | LaTeX | Paper Notation | Description |
+|------|-------|---------------|-------------|
+| `fpi` | $f_\pi$ | $f_\pi$ | Pion decay constant |
+| `fK` | $f_K$ | $f_K$ | Kaon decay constant |
+| `fK/fpi` | $f_K/f_\pi$ | $f_K/f_\pi$ | Decay-constant ratio |
+| `fD` | $f_D$ | $f_D$ | $D$ decay constant |
+| `fDs` | $f_{D_s}$ | $f_{D_s}$ | $D_s$ decay constant |
+| `fDs/fD` | $f_{D_s}/f_D$ | $f_{D_s}/f_D$ | Decay-constant ratio |
+| `fB0` | $f_{B^0}$ | $f_{B^0}$ | $B^0$ decay constant |
+| `fB+` | $f_{B^+}$ | $f_{B^+}$ | $B^+$ decay constant |
+| `fBs` | $f_{B_s}$ | $f_{B_s}$ | $B_s$ decay constant |
+| `fBs/fB` | $f_{B_s}/f_B$ | $f_{B_s}/f_B$ | Decay-constant ratio (isospin average) |
+| `fBs/fB0` | $f_{B_s}/f_{B^0}$ | $f_{B_s}/f_{B^0}$ | Decay-constant ratio |
+| `fBs/fB+` | $f_{B_s}/f_{B^+}$ | $f_{B_s}/f_{B^+}$ | Decay-constant ratio |
+| `xi` | $\xi$ | $\xi$ | $SU(3)$-breaking ratio $\xi=f_{B_s}\sqrt{B_{B_s}}/(f_B\sqrt{B_{B_d}})$ |
+| `mud` | $m_{ud}$ | $m_{ud}$ | Average light-quark mass, $m_{ud}=(m_u+m_d)/2$ |
+| `ms` | $m_s$ | $m_s$ | Strange-quark mass |
+| `ms/mud` | $m_s/m_{ud}$ | $m_s/m_{ud}$ | Quark-mass ratio |
+| `BK` | $B_K$ | $B_K$ | Kaon bag parameter |
+| `BhatK` | $\hat{B}_K$ | $\hat{B}_K$ | Renormalization-group-invariant kaon bag parameter |
+| `BBs/BBd` | $B_{B_s}/B_{B_d}$ | $B_{B_s}/B_{B_d}$ | Bag-parameter ratio |
 
 ## 4. LaTeX Notation
 

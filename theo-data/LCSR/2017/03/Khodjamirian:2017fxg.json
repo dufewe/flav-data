@@ -1,0 +1,143 @@
+{
+    "inspire-hep": "[Khodjamirian:2017fxg](https://inspirehep.net/literature/1517488)",
+    "author": "Khodjamirian, A. and Rusov, A. V.",
+    "title": "$B_{s}\\to K \\ell \\nu_\\ell$ and $B_{(s)} \\to \\pi (K) \\ell^+\\ell^-$ decays at large recoil and CKM matrix elements",
+    "abstract": "We provide hadronic input for the $B$-meson semileptonic transitions to a light pseudoscalar meson at large recoil. The $B_s\\to K$ form factor calculated from QCD light-cone sum rule is updated, to be used for a $|V_{ub}|$ determination from the $B_s\\to K \\ell \\nu$ width. Furthermore, we calculate the hadronic input for the binned observables of $B \\to \\pi\\ell^+ \\ell^-$ and $B \\to K \\ell^+ \\ell^-$. In addition to the form factors, the nonlocal hadronic matrix elements are obtained, combining QCD factorization and light-cone sum rules with hadronic dispersion relations. We emphasize that, due to nonlocal effects, the ratio of branching fractions of these decays is not sufficient for an accurate extraction of the $|V_{td}/V_{ts}|$ ratio. Instead, we suggest to determine the Wolfenstein parameters $A,\\rho,\\eta$ of the CKM matrix, combining the branching fractions of $B \\to K \\ell^+ \\ell^-$ and $B \\to \\pi \\ell^+ \\ell^-$ with the direct $CP$-asymmetry in the latter decay. We also obtain the hadronic matrix elements for a yet unexplored channel $B_s \\to K \\ell^+ \\ell^-$.",
+    "arxiv": "[hep-ph/1703.04765v2](https://arxiv.org/pdf/1703.04765)",
+    "time": "2017.03.14",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bs0Bar.2.K+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.336",
+                    "total_upper": "0.023",
+                    "total_lower": "0.023"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-2.53",
+                    "total_upper": "1.17",
+                    "total_lower": "1.17"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.79],
+                [0.79, 1.00]
+            ]
+        },
+        {
+            "Bs0Bar.2.K+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_fT",
+                    "value": "0.320",
+                    "total_upper": "0.019",
+                    "total_lower": "0.019"
+                },
+                "obs@2": {
+                    "name": "a1_fT",
+                    "value": "-1.08",
+                    "total_upper": "1.53",
+                    "total_lower": "1.53"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.74],
+                [0.74, 1.00]
+            ]
+        },
+        {
+            "B0.2.K0.v.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.395",
+                    "total_upper": "0.033",
+                    "total_lower": "0.033"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-1.42",
+                    "total_upper": "1.52",
+                    "total_lower": "1.52"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.72],
+                [0.72, 1.00]
+            ]
+        },
+        {
+            "B0.2.K0.v.vBar": {
+                "obs@1": {
+                    "name": "a0_fT",
+                    "value": "0.381",
+                    "total_upper": "0.027",
+                    "total_lower": "0.027"
+                },
+                "obs@2": {
+                    "name": "a1_fT",
+                    "value": "-0.87",
+                    "total_upper": "1.72",
+                    "total_lower": "1.72"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.75],
+                [0.75, 1.00]
+            ]
+        },
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.301",
+                    "total_upper": "0.023",
+                    "total_lower": "0.023"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-1.72",
+                    "total_upper": "1.14",
+                    "total_lower": "1.14"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.74],
+                [0.74, 1.00]
+            ]
+        },
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_fT",
+                    "value": "0.273",
+                    "total_upper": "0.021",
+                    "total_lower": "0.021"
+                },
+                "obs@2": {
+                    "name": "a1_fT",
+                    "value": "-1.54",
+                    "total_upper": "1.42",
+                    "total_lower": "1.42"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "correlation": [
+                [1.00, 0.78],
+                [0.78, 1.00]
+            ]
+        }
+    ]
+}

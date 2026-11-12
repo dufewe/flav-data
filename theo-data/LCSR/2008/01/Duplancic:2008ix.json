@@ -1,0 +1,43 @@
+{
+    "inspire-hep": "[Duplancic:2008ix](https://inspirehep.net/literature/777266)",
+    "author": "Duplan\\v{c}i\\'{c}, G., Khodjamirian, A., Mannel, Th., Meli\\'{c}, B., and Offen, N.",
+    "title": "Light-cone sum rules for $B\\to \\pi$ form factors revisited",
+    "abstract": "We reconsider and update the QCD light-cone sum rules for $B\\to \\pi$ form factors. The gluon radiative corrections to the twist-2 and twist-3 terms in the correlation functions are calculated. The $\\overline{MS}$ $b$-quark mass is employed, instead of the one-loop pole mass used in the previous analyses. The light-cone sum rule for $f^+_{B\\pi}(q^2)$ is fitted to the measured $q^2$-distribution in $B\\to \\pi l \\nu_l$, fixing the input parameters with the largest uncertainty: the Gegenbauer moments of the pion distribution amplitude. For the $B\\to \\pi$ vector form factor at zero momentum transfer we predict $f^+_{B\\pi}(0)= 0.26^{+0.04}_{-0.03}$. Combining it with the value of the product $|V_{ub}f^+_{B\\pi}(0)|$ extracted from experiment, we obtain $|V_{ub}|=(3.5\\pm 0.4\\pm 0.2\\pm 0.1) \\times 10^{-3}$. In addition, the scalar and penguin $B\\to \\pi$ form factors $f^0_{B\\pi}(q^2)$ and $f^T_{B\\pi}(q^2)$ are calculated.",
+    "arxiv": "[hep-ph/0801.1796v1](https://arxiv.org/pdf/0801.1796)",
+    "time": "2008.01.11",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.263",
+                    "type@1_error": "theo:m2_s0",
+                    "type@1_upper": "0.004",
+                    "type@1_lower": "0.005",
+                    "type@2_error": "theo:mu",
+                    "type@2_upper": "0.009",
+                    "type@2_lower": "0.004",
+                    "type@3_error": "theo:shape",
+                    "type@3_upper": "0.02",
+                    "type@3_lower": "0.02",
+                    "type@4_error": "theo:mu_pi",
+                    "type@4_upper": "0.03",
+                    "type@4_lower": "0.02",
+                    "type@5_error": "theo:m_b",
+                    "type@5_upper": "0.001",
+                    "type@5_lower": "0.001"
+                },
+                "obs@2": {
+                    "name": "a0_fT",
+                    "value": "0.255",
+                    "total_upper": "0.035",
+                    "total_lower": "0.035"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BK",
+            "note": "Only the $q^2=0$ normalizations are given; the $q^2$-shape follows the BK parametrization with the slope $\\alpha_{BK}=0.53\\pm 0.06$ taken from experiment, which is not stored."
+        }
+    ]
+}

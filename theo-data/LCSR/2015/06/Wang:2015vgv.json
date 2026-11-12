@@ -1,0 +1,62 @@
+{
+    "inspire-hep": "[Wang:2015vgv](https://inspirehep.net/literature/1374215)",
+    "author": "Wang, Y.-M. and Shen, Y.-L.",
+    "title": "QCD corrections to $B\\to\\pi$ form factors from light-cone sum rules",
+    "abstract": "We compute perturbative corrections to $B \\to \\pi$ form factors from QCD light-cone sum rules with $B$-meson distribution amplitudes. Applying the method of regions we demonstrate factorization of the vacuum-to-$B$-meson correlation function defined with an interpolating current for pion, at one-loop level, explicitly in the heavy quark limit. The short-distance functions in the factorization formulae of the correlation function involves both hard and hard-collinear scales; and these functions can be further factorized into hard coefficients by integrating out the hard fluctuations and jet functions encoding the hard-collinear information. Resummation of large logarithms in the short-distance functions is then achieved via the standard renormalization-group approach. We further show that structures of the factorization formulae for $f_{B \\pi}^{+}(q^2)$ and $f_{B \\pi}^{0}(q^2)$ at large hadronic recoil from QCD light-cone sum rules match that derived in QCD factorization. In particular, we perform an exploratory phenomenological analysis of $B \\to \\pi$ form factors, paying attention to various sources of perturbative and systematic uncertainties, and extract $|V_{ub}|= \\left(3.05^{+0.54}_{-0.38} |_{\\rm th.} \\pm 0.09 |_{\\rm exp.}\\right) \\times 10^{-3}$ with the inverse moment of the $B$-meson distribution amplitude $\\phi_B^{+}(\\omega)$ determined by reproducing $f_{B \\pi}^{+}(q^2=0)$ obtained from the light-cone sum rules with $\\pi$ distribution amplitudes. Furthermore, we present the invariant-mass distributions of the lepton pair for $B \\to \\pi \\ell \\nu_{\\ell}$ ($\\ell= \\mu \\,, \\tau$) in the whole kinematic region. Finally, we discuss non-valence Fock state contributions to the $B \\to \\pi$ form factors $f_{B \\pi}^{+}(q^2)$ and $f_{B \\pi}^{0}(q^2)$ in brief.",
+    "arxiv": "[hep-ph/1506.00667v1](https://arxiv.org/pdf/1506.00667)",
+    "time": "2015.06.01",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a1_f+",
+                    "value": "-3.92",
+                    "type@1_error": "theo:omega0",
+                    "type@1_upper": "0.09",
+                    "type@1_lower": "0.10",
+                    "type@2_error": "theo:sigma_b",
+                    "type@2_upper": "0.03",
+                    "type@2_lower": "0.03",
+                    "type@3_error": "theo:mu",
+                    "type@3_upper": "0.06",
+                    "type@3_lower": "0.00",
+                    "type@4_error": "theo:mu_h",
+                    "type@4_upper": "0.06",
+                    "type@4_lower": "0.01",
+                    "type@5_error": "theo:m2_s0",
+                    "type@5_upper": "0.08",
+                    "type@5_lower": "0.09",
+                    "type@6_error": "theo:phi_b",
+                    "type@6_upper": "0.14",
+                    "type@6_lower": "0.95"
+                },
+                "obs@2": {
+                    "name": "a1_f0",
+                    "value": "-5.37",
+                    "type@1_error": "theo:omega0",
+                    "type@1_upper": "0.12",
+                    "type@1_lower": "0.13",
+                    "type@2_error": "theo:sigma_b",
+                    "type@2_upper": "0.03",
+                    "type@2_lower": "0.03",
+                    "type@3_error": "theo:mu",
+                    "type@3_upper": "0.21",
+                    "type@3_lower": "0.41",
+                    "type@4_error": "theo:mu_h",
+                    "type@4_upper": "0.05",
+                    "type@4_lower": "0.00",
+                    "type@5_error": "theo:m2_s0",
+                    "type@5_upper": "0.11",
+                    "type@5_lower": "0.12",
+                    "type@6_error": "theo:phi_b",
+                    "type@6_upper": "0.17",
+                    "type@6_lower": "1.15"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "note": "$f^+_{B\\pi}(0)=0.281$ in the fit table is the Khodjamirian:2011ub input used to fix $\\omega_0$, so only $b_1$ and $\\tilde b_1$ are stored."
+        }
+    ]
+}

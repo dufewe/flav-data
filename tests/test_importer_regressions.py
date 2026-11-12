@@ -348,7 +348,7 @@ class JsonValidatorTests(unittest.TestCase):
         ))
 
     def test_coefficient_group_accepts_canonical_scheme(self):
-        for scheme in ('BGL', 'BCL', 'BSZ', 'DLM'):
+        for scheme in ('BK', 'BGL', 'BCL', 'BSZ', 'DLM'):
             with self.subTest(scheme=scheme):
                 data = [{
                     'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
@@ -434,6 +434,26 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertEqual(self._validate_data([{
             'B0.2.K*0.mu+.mu-': {'obs@1': obs},
         }]), [])
+
+    def test_theo_source_labels_are_accepted(self):
+        obs = self._obs_with_components('a0_f+')
+        obs['type@1_error'] = 'theo:a2_a4'
+        obs['type@2_error'] = 'theo:mu_pi'
+        self.assertEqual(self._validate_data([{
+            'B0Bar.2.pi+.l-.vBar': {'obs@1': obs},
+            'scheme': 'BCL',
+        }]), [])
+
+    def test_theo_source_label_grammar_is_enforced(self):
+        for label in ('theo:', 'theo:MU', 'theo:mu pi', 'theo:mu-pi'):
+            obs = self._obs_with_components('a0_f+')
+            obs['type@1_error'] = label
+            issues = self._validate_data([{
+                'B0Bar.2.pi+.l-.vBar': {'obs@1': obs},
+                'scheme': 'BCL',
+            }])
+            self.assertTrue(issues, label)
+            self.assertIn('unknown error label', ' '.join(issues), label)
 
     def test_scale_factor_unit_is_rejected(self):
         for unit in ('1e-6', '10^{-4}', '1E-3', '10^-11'):

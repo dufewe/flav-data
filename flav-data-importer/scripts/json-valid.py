@@ -34,10 +34,12 @@ SNAPSHOT_OBS_ALLOWED_FIELDS = {
 }
 
 # Standard measurement error labels (json-meta.md §"Standard error type
-# labels"). Labels outside this set are rejected.
+# labels"). Labels outside this set are rejected; a ``theo`` component may
+# append the theoretical input it comes from (``theo:mu_pi``).
 STANDARD_ERROR_LABELS = {
     'stat', 'syst', 'lumi', 'norm', 'theo', 'expe',
 }
+THEO_SOURCE_LABEL_RE = re.compile(r'theo:[a-z0-9_]+')
 
 # Per-paper observable fields. ``type@N_*`` keys are matched by pattern;
 # everything else must match exactly.
@@ -127,7 +129,7 @@ _DEPRECATED_LFU_Q_NAMES = {
     'Q4': 'DeltaP4p', 'Q5': 'DeltaP5p', 'Q6': 'DeltaP6p',
     'Q8': 'DeltaP8p', 'QFL': 'DeltaFL',
 }
-FORM_FACTOR_SCHEMES = {'BGL', 'BCL', 'BSZ', 'DLM'}
+FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM'}
 
 # Group-level ``dataset`` names the data sources behind a group, in this
 # canonical order, joined with ``+`` (e.g. ``LQCD+LCSR``).
@@ -974,10 +976,12 @@ def _validate_component_errors_and_bounds(obs: dict, label: str) -> list[str]:
                 issues.append(
                     f"  {label}.{base}: error label must be a non-empty string"
                 )
-            elif value.strip() not in STANDARD_ERROR_LABELS:
+            elif (value.strip() not in STANDARD_ERROR_LABELS
+                  and not THEO_SOURCE_LABEL_RE.fullmatch(value.strip())):
                 issues.append(
                     f"  {label}.{base}: unknown error label '{value}'; allowed "
-                    f"labels are {sorted(STANDARD_ERROR_LABELS)}"
+                    f"labels are {sorted(STANDARD_ERROR_LABELS)} or "
+                    f"'theo:<source>'"
                 )
             continue
         if not has_level:

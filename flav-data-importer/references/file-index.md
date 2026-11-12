@@ -30,6 +30,8 @@ flav-data/
 └── theo-data/
     ├── FNAL-MILC/                                 # Large collaborations keep a group folder
     │   └── <year>/...
+    ├── LCSR/                                      # Light-cone sum rules calculations
+    │   └── <year>/<month>/<TexKey>.json
     ├── LQCD/                                      # Method folder for smaller groups
     │   └── 2015/
     │       ├── LQCD@2015.json                     # Method-level annual index
@@ -96,7 +98,8 @@ Theoretical folders depend on the size of the group:
 - **Smaller calculation groups** are collected by the method they use:
   `theo-data/<Method>/<year>/<month>/<TexKey>.json`, with a method-level
   annual index `theo-data/<Method>/<year>/<Method>@<year>.json`. The
-  method folders are `LQCD` (lattice QCD) and `QCD` (perturbative QCD);
+  method folders are `LCSR` (light-cone sum rules), `LQCD` (lattice QCD)
+  and `QCD` (perturbative QCD);
   add a new method folder only for a new calculation method. Papers from
   small groups omit the `collaboration` key (SKILL.md rule 8), and TexKeys
   are unique, so several groups can share one method folder and index.
@@ -107,7 +110,7 @@ averages) are not ingested. Form-factor parametrization fits are primary
 theory data and are imported (see SKILL.md §Scope).
 
 The Streamlit navigation links every entry in `defs.THEOGROUP`. The
-method folders `LQCD` and `QCD` are registered there, so each gets a
+method folders `LCSR`, `LQCD` and `QCD` are registered there, so each gets a
 navigation page scanning its year/month tree. A large-collaboration folder
 (e.g. `FNAL-MILC`) is added to `THEOGROUP` the same way once it exists on disk.
 

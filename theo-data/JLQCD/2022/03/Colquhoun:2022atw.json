@@ -1,0 +1,114 @@
+{
+    "inspire-hep": "[Colquhoun:2022atw](https://inspirehep.net/literature/1768628)",
+    "author": "Colquhoun, B. and others",
+    "collaboration": "JLQCD",
+    "title": "Form factors of $B\\to\\pi\\ell\\nu$ and a determination of $|V_{ub}|$ with M\\\"{o}bius domain-wall fermions",
+    "abstract": "Using a fully relativistic lattice fermion action, we compute the form factors of the semileptonic decay $B\\to\\pi\\ell\\nu$, which is required for the determination of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{ub}|$. We employ the M\\\"{o}bius domain-wall fermion formalism for the generation of lattice ensembles with 2+1 sea quark flavours as well as for the valence heavy and light quarks. We compute the form factors at various values of the lattice spacing and multiple light and heavy quark masses, and extrapolate the results to the physical point. We combine our lattice results with the available experimental data to obtain $|V_{ub}| = (3.93\\pm 0.41)\\times 10^{-3}$.",
+    "arxiv": "[hep-lat/2203.04938v2](https://arxiv.org/pdf/2203.04938)",
+    "time": "2022.03.09",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.391",
+                    "total_upper": "0.040",
+                    "total_lower": "0.040"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.450",
+                    "total_upper": "0.092",
+                    "total_lower": "0.092"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.92",
+                    "total_upper": "0.29",
+                    "total_lower": "0.29"
+                },
+                "obs@4": {
+                    "name": "a1_f0",
+                    "value": "-1.35",
+                    "total_upper": "0.11",
+                    "total_lower": "0.11"
+                },
+                "obs@5": {
+                    "name": "a2_f0",
+                    "value": "0.33",
+                    "total_upper": "0.31",
+                    "total_lower": "0.31"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "b0_0 is fixed by f+(0)=f0(0) and is omitted; the paper quotes b0_0=0.535(35).",
+            "correlation": [
+                [1.000, -0.515, -0.281, -0.100, 0.102],
+                [-0.515, 1.000, 0.496, 0.447, 0.531],
+                [-0.281, 0.496, 1.000, 0.606, 0.790],
+                [-0.100, 0.447, 0.606, 1.000, 0.638],
+                [0.102, 0.531, 0.790, 0.638, 1.000]
+            ]
+        },
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.389",
+                    "total_upper": "0.040",
+                    "total_lower": "0.040"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.391",
+                    "total_upper": "0.066",
+                    "total_lower": "0.066"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.62",
+                    "total_upper": "0.15",
+                    "total_lower": "0.15"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "0.22",
+                    "total_upper": "0.52",
+                    "total_lower": "0.52"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-1.33",
+                    "total_upper": "0.12",
+                    "total_lower": "0.12"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "0.68",
+                    "total_upper": "0.16",
+                    "total_lower": "0.16"
+                },
+                "obs@7": {
+                    "name": "a3_f0",
+                    "value": "1.03",
+                    "total_upper": "0.96",
+                    "total_lower": "0.96"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BCL",
+            "note": "b0_0 is fixed by f+(0)=f0(0) and is omitted; the paper quotes b0_0=0.536(35).",
+            "correlation": [
+                [1.000, -0.652, -0.379, 0.048, -0.067, 0.392, 0.064],
+                [-0.652, 1.000, -0.024, -0.570, 0.093, -0.349, -0.159],
+                [-0.379, -0.024, 1.000, -0.192, 0.153, 0.066, -0.050],
+                [0.048, -0.570, -0.192, 1.000, -0.158, 0.126, 0.251],
+                [-0.067, 0.093, 0.153, -0.158, 1.000, 0.388, -0.647],
+                [0.392, -0.349, 0.066, 0.126, 0.388, 1.000, -0.376],
+                [0.064, -0.159, -0.050, 0.251, -0.647, -0.376, 1.000]
+            ]
+        }
+    ]
+}

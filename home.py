@@ -103,8 +103,8 @@ with col3:
 
     {", ".join(THEOGROUP)}
 
-    Includes lattice QCD calculations of form factors, decay constants,
-    and other non-perturbative parameters.
+    Includes lattice QCD and light-cone sum rule calculations of form
+    factors, decay constants, and other non-perturbative parameters.
     ''')
 
 st.divider()

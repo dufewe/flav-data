@@ -1,0 +1,68 @@
+{
+    "inspire-hep": "[Khodjamirian:2011ub](https://inspirehep.net/literature/892431)",
+    "author": "Khodjamirian, A. and others",
+    "title": "$B\\to \\pi\\ell\\nu_l$ Width and $|V_{ub}|$ from QCD Light-Cone Sum Rules",
+    "abstract": "We employ the $B\\to\\pi$ form factors obtained from QCD light-cone sum rules and calculate the $B\\to \\pi \\ell \\nu_l$ width ($\\ell=e,\\mu$) in units of $1/|V_{ub}|^2$, integrated over the region of accessible momentum transfers, $0\\leq q^2\\leq 12.0 ~GeV^2$. Using the most recent BABAR-collaboration measurements we extract $|V_{ub}|=(3.50^{+0.38}_{-0.33}\\big|_{th.}\\pm 0.11 \\big|_{exp.})\\times 10^{-3}$. The sum rule results for the form factors, taken as an input for a $z$-series parameterization, yield the $q^2$-shape in the whole semileptonic region of $B\\to \\pi\\ell\\nu_\\ell$. We also present the charged lepton energy spectrum in this decay. Furthermore, the current situation with $B\\to \\tau\\nu_\\tau$ is discussed from the QCD point of view. We suggest to use the ratio of the $B\\to \\pi \\tau\\nu_\\tau$ and $B\\to \\pi\\ell \\nu_l ~(\\ell =\\mu,e) $ widths as an additional test of Standard Model. The sensitivity of this observable to new physics is illustrated by including a charged Higgs-boson contribution in the semileptonic decay amplitude.",
+    "arxiv": "[hep-ph/1103.2655v2](https://arxiv.org/pdf/1103.2655)",
+    "time": "2011.03.14",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.281",
+                    "type@1_error": "theo:a2_a4",
+                    "type@1_upper": "0.002",
+                    "type@1_lower": "0.003",
+                    "type@2_error": "theo:mu_pi",
+                    "type@2_upper": "0.018",
+                    "type@2_lower": "0.014",
+                    "type@3_error": "theo:mu",
+                    "type@3_upper": "0.008",
+                    "type@3_lower": "0.005",
+                    "type@4_error": "theo:m2_s0",
+                    "type@4_upper": "0.010",
+                    "type@4_lower": "0.022",
+                    "type@5_error": "theo:mbar2_s0",
+                    "type@5_upper": "0.016",
+                    "type@5_lower": "0.010"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-1.62",
+                    "type@1_error": "theo:a2_a4",
+                    "type@1_upper": "0.43",
+                    "type@1_lower": "0.44",
+                    "type@2_error": "theo:mu_pi",
+                    "type@2_upper": "0.05",
+                    "type@2_lower": "0.06",
+                    "type@3_error": "theo:mu",
+                    "type@3_upper": "0.53",
+                    "type@3_lower": "0.07",
+                    "type@4_error": "theo:m2_s0",
+                    "type@4_upper": "0.30",
+                    "type@4_lower": "0.49"
+                },
+                "obs@3": {
+                    "name": "a1_f0",
+                    "value": "-3.98",
+                    "type@1_error": "theo:a2_a4",
+                    "type@1_upper": "0.56",
+                    "type@1_lower": "0.57",
+                    "type@2_error": "theo:mu_pi",
+                    "type@2_upper": "0.23",
+                    "type@2_lower": "0.28",
+                    "type@3_error": "theo:mu",
+                    "type@3_upper": "0.96",
+                    "type@3_lower": "0.08",
+                    "type@4_error": "theo:m2_s0",
+                    "type@4_upper": "0.28",
+                    "type@4_lower": "0.42"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL"
+        }
+    ]
+}

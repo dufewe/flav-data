@@ -140,7 +140,7 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    key because their source is the paper itself. It sits beside the
    channel keys, never inside `obs@N`.
 4. **Group-level `scheme`** — required for any group holding form-factor
-   expansion coefficients (`aN_FF`): one of `BGL`, `BCL`, `BSZ`, `DLM`
+   expansion coefficients (`aN_FF`): one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`
    (mapping to full names and arXiv IDs in `obs-abbr.md` §2.4). Optional
    for other groups. It follows `dataset` and precedes any matrix.
 5. **Group-level `note`** — optional non-empty string placed after
@@ -179,7 +179,7 @@ named coefficient is its own observable.
 Fit choices (nominal, higher-order, ...) are **not** part of the name and
 are not stored in the group metadata; keep such variants as separate
 groups. Every coefficient group also needs the group-level `scheme`
-value from `obs-abbr.md` §2.4 (`BGL`, `BCL`, `BSZ`, or `DLM`), because
+value from `obs-abbr.md` §2.4 (`BK`, `BGL`, `BCL`, `BSZ`, or `DLM`), because
 the same coefficients are meaningless without the expansion form that
 defines them.
 
@@ -208,7 +208,7 @@ Use this format when the paper reports a central value with two or more componen
 | `value` | Yes | string | Central value. Must be a string, even for integers. |
 | `total_upper` | Conditional | string | Total upper error. Required whenever the measurement has exactly one error; pair with `total_lower`. For symmetric errors the two are equal. |
 | `total_lower` | Conditional | string | Total lower error. Required whenever the measurement has exactly one error. |
-| `type@N_error` | Conditional | string | Error type label for component N (e.g., `"stat"`, `"syst"`, `"lumi"`, `"norm"`, `"theo"`, `"expe"`). Only allowed when the measurement has **two or more** errors; each component requires its own `_error`, `_upper`, and `_lower` triplet. |
+| `type@N_error` | Conditional | string | Error type label for component N (e.g., `"stat"`, `"syst"`, `"lumi"`, `"norm"`, `"theo"`, `"expe"`; a `theo` component may name its input as `"theo:<source>"`). Only allowed when the measurement has **two or more** errors; each component requires its own `_error`, `_upper`, and `_lower` triplet. |
 | `type@N_upper` | Conditional | string | With `type@N_error`: upper error bound for component N. With `type@N_level` and no `type@N_error`: numeric upper bound (upper limit) at that confidence level. |
 | `type@N_lower` | Conditional | string | With `type@N_error`: lower error bound for component N. With `type@N_level` and no `type@N_error`: numeric lower bound (lower limit) at that confidence level. |
 | `type@N_level` | Conditional | string | Confidence level of a bound, e.g. `"90%@CLs"`, `"95%@CLs"`. Never mixed with `type@N_error`. |
@@ -240,10 +240,15 @@ source list.
 | `norm` | Normalisation uncertainty |
 | `theo` | Theoretical uncertainty |
 | `expe` | Experimental uncertainty (combined stat+syst when not split) |
+| `theo:<source>` | Theoretical uncertainty from one named input |
 
-Any other label is rejected. A `type@N_error` triplet is only allowed when the
-measurement has **two or more** errors; every component requires the full
-`type@N_upper` + `type@N_lower` pair.
+Any other label is rejected. Keep the bare `theo` label for a theory error
+that is not attributed to a specific input; when the source splits its
+theory error by input parameter, name each input after the colon, e.g.
+`theo:mu_pi`, `theo:m2_s0`. `<source>` is lowercase ASCII letters, digits
+and underscores only (no spaces, LaTeX, or uppercase). A `type@N_error`
+triplet is only allowed when the measurement has **two or more** errors;
+every component requires the full `type@N_upper` + `type@N_lower` pair.
 
 **Single vs multiple errors.** If the paper reports exactly one error, record
 it as the total error (`total_upper`/`total_lower`), regardless of whether the
@@ -540,12 +545,12 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 13. **Transition order** — a channel key is `A.B.2.C.D` (`no-transition` is the only exception; ratios join two full keys with `/`) and follows the canonical order (SKILL.md rule 5): baryon → meson → charged lepton → neutral lepton, then heaviest → lightest within each type, then `+` → `-` → `0` for equal masses. Every particle state is `<name>[*]<charge>[Bar]`: charge is mandatory and written `+`/`-`/`0` only (`p`/`m` suffixes and charge-less names are rejected); `*` sits between the name and the charge; neutral antiparticles append capital `Bar` after the charge (lowercase `bar` is rejected). Only neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`) and the neutral gauge bosons `Z`, `gamma`, `g` may omit the charge. The validator fails non-canonical order. Particle tokens use the handwritten case (`pi0`, `Lambdab0`, `KS0`, `KL0`); see obs-abbr.md §1.
 14. **`data` is an array of groups** — each group maps one or more transition keys (`A.B.2.C.D` or `no-transition`) to an `obs@N` object, optionally carries group-level `dataset`/`scheme` strings, and optionally a group-level matrix; channels that share a matrix belong to the same group (SKILL.md rule 7). JSON data stores no LaTeX for channels or observables.
 15. **One group per property set** — observables whose dataset, scheme, fit choice, or kinematic region differ belong to separate groups, even when they share a transition channel (SKILL.md rule 6).
-16. **Exactly one error scheme** — a single error is the total error (`total_upper`/`total_lower`); two or more errors are separate component triplets (`type@N_error`/`_upper`/`_lower`). Confidence-level bounds use `type@N_upper`/`type@N_lower` + `type@N_level` with no `type@N_error`; a combined fit + bound uses distinct N slots. Error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`. Unknown observable fields are rejected.
+16. **Exactly one error scheme** — a single error is the total error (`total_upper`/`total_lower`); two or more errors are separate component triplets (`type@N_error`/`_upper`/`_lower`). Confidence-level bounds use `type@N_upper`/`type@N_lower` + `type@N_level` with no `type@N_error`; a combined fit + bound uses distinct N slots. Error labels are limited to `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, plus `theo:<source>` when a theory component comes from a named input. Unknown observable fields are rejected.
 17. **`collaboration` is conditional** — required for named collaborations (experiments, HFLAV/PDG, large theory groups such as HPQCD); omit the key for individual-author and small-group papers (SKILL.md rule 8).
 18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_F+`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_G+`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
 19. **`unit` is a physical unit** — never store a scientific-notation scale factor (`1e-6`, `10^{-4}`) in `unit`; multiply it into `value`, `total_upper`/`total_lower`, and any bounds, then omit the field. The validator rejects scale-factor units.
 20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
-21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
+21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BK`, `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
 
 ## Extending This Specification
 
