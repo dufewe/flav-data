@@ -235,9 +235,20 @@ def _strip_resonance(token: str) -> str:
     return re.sub(r'\(2\.[^()]*\)$', '', token)
 
 
+def _split_mass_tag(token: str) -> tuple[str, float | None]:
+    """Split a trailing PDG mass label in MeV, e.g. ``D0*+(2300)``."""
+    match = re.fullmatch(r'(.*)\((\d{3,4})\)', token)
+    if not match:
+        return token, None
+    return match.group(1), float(match.group(2)) / 1000.0
+
+
 def _particle_mass(token: str) -> float | None:
     """Return the particle mass in GeV, or ``None`` when it is unknown."""
-    stem = _strip_resonance(_strip_bar(token))
+    base, tagged_mass = _split_mass_tag(_strip_resonance(token))
+    if tagged_mass is not None:
+        return tagged_mass
+    stem = _strip_bar(base)
     if stem in _PARTICLE_MASS:
         return _PARTICLE_MASS[stem]
     # Antiparticles share the mass of their partner.
@@ -296,7 +307,8 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
     if token in _NEUTRAL_LEPTONS:
         return 4, 0
 
-    stem = _strip_bar(token)
+    base, _ = _split_mass_tag(_strip_resonance(token))
+    stem = _strip_bar(base)
     if stem in _NON_ORDERABLE:
         return None, None
     name_core = re.sub(r'[+\-0]$', '', stem)
@@ -304,26 +316,26 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
         charge = _charge_rank(stem)
         if charge is None:
             charge = 2 if name_core == 'n' or '0' in stem else 0
-        if token.endswith('Bar'):
+        if base.endswith('Bar'):
             charge = 1
         return 1, charge
     if stem.startswith(_BARYON_STEMS):
-        charge = _charge_rank(token)
+        charge = _charge_rank(base)
         if charge is None and ('0' in stem or stem in ('Lambda', 'Lambdab')):
             charge = 2
         return 1, charge
 
     core = re.sub(r'[+\-]$', '', stem)
     if core in _LEP_STEMS:
-        if core == 'l' and not token.endswith(('+', '-')):
+        if core == 'l' and not base.endswith(('+', '-')):
             # Bare generic lepton: its charge is unknown, so skip the state.
             return None, None
-        return 3, _charge_rank(token)
+        return 3, _charge_rank(base)
 
     if stem.startswith(_MESON_STEMS):
-        charge = _charge_rank(token)
+        charge = _charge_rank(base)
         if charge is None and (
-            token in _NEUTRAL_MESONS
+            base in _NEUTRAL_MESONS
             or stem in _NEUTRAL_MESONS
             or '0' in stem
         ):
@@ -336,7 +348,7 @@ def _classify_particle(token: str) -> tuple[int | None, int | None]:
 def _particle_grammar_issues(token: str, label: str) -> list[str]:
     """Check one particle state against ``<name>[*]<charge>[Bar]``."""
     issues = []
-    bare = _strip_resonance(token)
+    bare, _ = _split_mass_tag(_strip_resonance(token))
     if bare.count('*') > 1:
         issues.append(
             f"  {label}: particle '{token}' has more than one vector marker "

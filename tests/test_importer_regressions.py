@@ -53,6 +53,48 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('FL(B0.2.K*0.mu+.mu-)', 'FL(B02K*mumu)'):
             self.assertTrue(json_valid.validate_observable_name(name), name)
 
+    def test_form_factor_value_names_are_accepted(self):
+        for name in ('f+', 'f-', 'V', 'A0', 'A1', 'A2', 'A12'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
+    def test_form_factor_value_group_needs_no_scheme(self):
+        data = [{
+            'Bc-.2.J/psi0.l-.vBar': self._channel(
+                {**self._obs('V'), 'q2min': '-20', 'q2max': '-20'},
+            ),
+            'dataset': 'QCDSR',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_hqet_basis_form_factor_names_are_accepted(self):
+        for name in ('f1', 'f2', 'g2', 'F1', 'F2'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
+    def test_hqet_basis_value_groups_need_no_scheme(self):
+        data = [
+            {
+                'Lambdab0.2.p+.l-.vBar': self._channel(
+                    {**self._obs('f1'), 'q2min': '0', 'q2max': '0'},
+                    {**self._obs('f2'), 'q2min': '0', 'q2max': '0'},
+                ),
+                'dataset': 'LCSR',
+            },
+            {
+                'Lambdab0.2.Lambda0.l-.vBar': self._channel(
+                    {**self._obs('g2'), 'q2min': '0', 'q2max': '0'},
+                ),
+                'dataset': 'LCSR',
+            },
+            {
+                'Lambdab0.2.p+.l-.vBar': self._channel(
+                    self._obs_with_components('F1'),
+                    self._obs_with_components('F2'),
+                ),
+                'dataset': 'LQCD',
+            },
+        ]
+        self.assertEqual(self._validate_data(data), [])
+
     def test_obsolete_lfu_q_symbols_are_rejected(self):
         for name in ('Q1[mu-e]', 'Q4[mu-e]', 'Q5[mu/e]', 'Q6[mu-e]',
                      'Q8[mu-e]', 'QFL[mu-e]'):
@@ -163,6 +205,17 @@ class JsonValidatorTests(unittest.TestCase):
             issues = json_valid.validate_transition_key(key)
             self.assertTrue(issues, key)
             self.assertIn(expected, ' '.join(issues), key)
+
+    def test_scalar_meson_mass_tags(self):
+        for key in ('B0Bar.2.D0*+(2300).l-.vBar',
+                    'Bs0Bar.2.Ds0*+(2317).l-.vBar',
+                    'B0Bar.2.D0*+(2451).l-.vBar'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+        for key in ('B0Bar.2.D0*+(23xx).l-.vBar',
+                    'B0Bar.2.D0*+2300.l-.vBar',
+                    'B0Bar.2.D0*+(2300)+.l-.vBar'):
+            self.assertTrue(json_valid.validate_transition_key(key), key)
 
     @staticmethod
     def _obs(name):

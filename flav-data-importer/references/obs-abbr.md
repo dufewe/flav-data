@@ -73,6 +73,13 @@ Every decay or scattering process is encoded as a transition symbol using the fo
    dilepton pair, append `(2.l+.l-)` to the resonance name:
    `B0.2.J/psi0.K*0(2.l+.l-)` for $B^0 \to K^{*0} J/\psi(\to \ell^+\ell^-)$
    (mesons heavy to light: $J/\psi$ before $K^{*0}$).
+10. **PDG mass labels**: A trailing `(NNNN)` after the charge is the PDG
+    mass label in MeV, e.g. `D0*+(2300)` for $D_0^*(2300)^+$. Use it for
+    states whose PDG symbol carries a mass label, and follow the PDG
+    notation for the spin-parity: $J^P=0^+$ states keep the star
+    ($D_0^*$, $D_{s0}^*$), $1^+$ states do not ($D_1$). The label only
+    identifies the state; the mass used in the calculation belongs in the
+    group note.
 
 Rules 1–5 are **enforced by `scripts/json-valid.py`**: every data key is
 `A.B.2.C.D`, and `no-transition` is the only key without `.2.` (a
@@ -130,6 +137,8 @@ all invalid. New imports use the spellings in the tables below.
 | $\eta$, $\eta'$ | `eta0`, `etaprime0` | |
 | $D_s^+$, $D_s^{*+}$ | `Ds+`, `Ds*+` | Strange charmed meson |
 | $B_c^+$ | `Bc+` | Bottom-charmed meson |
+| $D_0^*(2300)^+$ | `D0*+(2300)` | Scalar $0^+$; the trailing label is the PDG mass in MeV |
+| $D_{s0}^*(2317)^+$ | `Ds0*+(2317)` | Scalar $0^+$; PDG mass label in MeV |
 | $X_s$ | `Xs` | Inclusive strange hadronic system |
 
 #### Baryons
@@ -309,6 +318,7 @@ decomposition; these are the standard symbols):
 | Symbol | Form factor |
 |--------|-------------|
 | `f+` | $f_+$ |
+| `f-` | $f_-$ |
 | `f0` | $f_0$ |
 | `fT` | $f_T$ |
 | `V` | $V$ |
@@ -345,6 +355,23 @@ mapping $f_+ \to$ `F+`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`,
 $g_+ \to$ `G+`, $g_0 \to$ `G0`, $g_\perp \to$ `Gv`,
 $h_+ \to$ `h+`, $h_\perp \to$ `hv`.
 
+Papers that work directly in the HQET basis, rather than the helicity
+set, keep their own symbols:
+
+| Symbol | Form factor |
+|--------|-------------|
+| `f1` | Dirac vector form factor $f_1$ ($\Lambda_b \to p,\Lambda$) |
+| `f2` | Dirac tensor form factor $f_2$, in GeV$^{-1}$ |
+| `g2` | Dirac axial form factor $g_2$ ($\Lambda_b \to \Lambda$) |
+| `F1` | HQET-basis form factor $F_1$ |
+| `F2` | HQET-basis form factor $F_2$ |
+
+`F1` and `F2` also name the BGL vector-channel coefficients; the
+transition key disambiguates the two bases. These symbols name
+form-factor values at a fixed kinematic point, not expansion
+coefficients, so such a group carries no `scheme`; record the basis and
+the kinematic point in the group `note`.
+
 The fraction spellings `fp`, `Fp`, `Gp`, `hp`, and `htp` are obsolete and
 rejected by the validator; write the plus charge explicitly (`f+`, `F+`,
 `G+`, `h+`, `ht+`). `Fv`, `Gv`, `hv`, and `htv` keep their existing
@@ -360,6 +387,16 @@ $h_{A_1}(1)$ and `Bs0Bar.2.Ds*+.l-.vBar` carries the $B_s$ value
 $h^s_{A_1}(1)$. The parenthetical `(1)` is a parameter tag, not a
 multi-transition condition. This symbol names a form-factor value, not an
 expansion coefficient, so the group does not need `scheme`.
+
+### 2.6 Form-Factor Values at Fixed `q2`
+
+A form-factor value at a fixed momentum transfer uses the bare symbol from
+the table in §2.4 (`V`, `A0`, `A1`, `A2`, `A12`, `f+`, `f-`, ...), not the
+`aN_FF` coefficient form. Each `obs@N` sets `q2min` and `q2max` to the same
+value when the source quotes a point, so repeated symbols at different
+`q2` stay distinguishable; a value group carries no `scheme`. The group
+`note` records how the values were obtained (fit, sum rule, ...) and
+whether correlations were published.
 
 ## 3. Observable Abbreviations
 

@@ -125,8 +125,10 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    exceptions are neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`) and the
    neutral gauge bosons `Z`, `gamma`, `g`. Placeholders, partons,
    inclusive systems, nuclei, and pseudo-labels (`l`, `q`, `Xs`, `Au`,
-   `all`, `had`, ...) have no charge slot. Charge-averaged measurements
-   use one concrete charge-conjugate representative.
+   `all`, `had`, ...) have no charge slot. A trailing `(NNNN)` is a PDG
+   mass label in MeV (`D0*+(2300)`, `Ds0*+(2317)`; `obs-abbr.md` rule 10).
+   Charge-averaged measurements use one concrete charge-conjugate
+   representative.
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables
@@ -183,6 +185,18 @@ groups. Every coefficient group also needs the group-level `scheme`
 value from `obs-abbr.md` §2.4 (`BK`, `BGL`, `BCL`, `BSZ`, or `DLM`), because
 the same coefficients are meaningless without the expansion form that
 defines them.
+
+### Form-Factor Values
+
+A form-factor value at a fixed `q2` uses the bare symbol from `obs-abbr.md`
+§2.4 (`f+`, `f-`, `V`, `A1`, ...) and carries `q2min` = `q2max` inside the
+observable. Such a group has no `scheme` and no `aN_FF` names. Use one
+group per source table or fit scenario, and record in the `note` how the
+values were obtained and whether a correlation matrix was published.
+Baryon values in the HQET basis keep the paper's symbols (`f1`, `f2`,
+`g2`, `F1`, `F2`); if the source specifies the point by an energy
+variable rather than `q2`, omit `q2min`/`q2max` and state the point in
+the `note`.
 
 ### Standard Measurement Format
 
