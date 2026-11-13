@@ -1,0 +1,126 @@
+{
+    "inspire-hep": "[Harrison:2017fmw](https://inspirehep.net/literature/1639448)",
+    "author": "Harrison, J., Davies, C., and Wingate, M.",
+    "collaboration": "HPQCD",
+    "title": "Lattice QCD calculation of the $B_{(s)}\\to D_{(s)}^{*}\\ell\\nu$ form factors at zero recoil and implications for $|V_{cb}|$",
+    "abstract": "We present results of a lattice QCD calculation of $B\\to D^*$ and $B_s\\to D_s^*$ axial vector matrix elements with both states at rest. These zero recoil matrix elements provide the normalization necessary to infer a value for the CKM matrix element $|V_{cb}|$ from experimental measurements of $\\bar{B}^0\\to D^{*+}\\ell^-\\bar{\\nu}$ and $\\bar{B}^0_s\\to D_s^{*+}\\ell^-\\bar{\\nu}$ decay. Results are derived from correlation functions computed with highly improved staggered quarks (HISQ) for light, strange, and charm quark propagators, and nonrelativistic QCD for the bottom quark propagator. The calculation of correlation functions employs MILC Collaboration ensembles over a range of three lattice spacings. These gauge field configurations include sea quark effects of charm, strange, and equal-mass up and down quarks. We use ensembles with physically light up and down quarks, as well as heavier values. Our main results are $\\mathcal{F}^{B\\to D^*}(1)= 0.895\\pm 0.010_{\\mathrm{stat}}\\pm{{0.024}_{\\mathrm{sys}}}$ and $\\mathcal{F}^{B_s\\to D_s^*}(1)= 0.883\\pm 0.012_{\\mathrm{stat}}\\pm{0.028_{\\mathrm{sys}}}$. We discuss the consequences for $|V_{cb}|$ in light of recent investigations into the extrapolation of experimental data to zero recoil.",
+    "arxiv": "[hep-lat/1711.11013v3](https://arxiv.org/pdf/1711.11013)",
+    "time": "2017.11.29",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "hA1(1)",
+                    "value": "0.895",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.010",
+                    "type@1_lower": "0.010",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.024",
+                    "type@2_lower": "0.024"
+                }
+            },
+            "Bs0Bar.2.Ds*+.l-.vBar": {
+                "obs@1": {
+                    "name": "hA1(1)",
+                    "value": "0.883",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.012",
+                    "type@1_lower": "0.012",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.028",
+                    "type@2_lower": "0.028"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "The $B\\to D^*$ channel stores $h_{A_1}(1)=(M_B+M_{D^*})A_1(q^2_\\mathrm{max})/(2\\sqrt{M_BM_{D^*}})$; the $B_s\\to D_s^*$ channel stores the corresponding $h^s_{A_1}(1)$. The INSPIRE abstract metadata quotes $0.010_\\mathrm{stat}$ for the $B_s$ value, while the paper abstract and text give $0.012_\\mathrm{stat}$; the paper value is stored."
+        },
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f",
+                    "value": "0.01228",
+                    "total_upper": "0.00016",
+                    "total_lower": "0.00016"
+                },
+                "obs@2": {
+                    "name": "a1_f",
+                    "value": "-0.049",
+                    "total_upper": "0.036",
+                    "total_lower": "0.036"
+                },
+                "obs@3": {
+                    "name": "a0_F1",
+                    "value": "0.002057",
+                    "total_upper": "0.000026",
+                    "total_lower": "0.000026"
+                },
+                "obs@4": {
+                    "name": "a1_F1",
+                    "value": "-0.0102",
+                    "total_upper": "0.0059",
+                    "total_lower": "0.0059"
+                },
+                "obs@5": {
+                    "name": "a0_g",
+                    "value": "0.0129",
+                    "total_upper": "0.0085",
+                    "total_lower": "0.0085"
+                },
+                "obs@6": {
+                    "name": "a1_g",
+                    "value": "0.66",
+                    "total_upper": "0.33",
+                    "total_lower": "0.33"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "Benchmark BGL fit to the unfolded Belle data [Abdesselam:2017kjf] with $n_B^+=4$, $n_B^-=3$, $K=4$; $t_0=t_-$, and $F_1(0)=(M_B-M_{D^*})f(0)$ imposed at the $1\\%$ level. Only $a_0$ and $a_1$ are tabulated; higher orders are consistent with zero, and unitarity bounds are not imposed."
+        },
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f",
+                    "value": "0.01502",
+                    "total_upper": "0.00019",
+                    "total_lower": "0.00019"
+                },
+                "obs@2": {
+                    "name": "a1_f",
+                    "value": "-0.311",
+                    "total_upper": "0.042",
+                    "total_lower": "0.042"
+                },
+                "obs@3": {
+                    "name": "a0_F1",
+                    "value": "0.002946",
+                    "total_upper": "0.000038",
+                    "total_lower": "0.000038"
+                },
+                "obs@4": {
+                    "name": "a1_F1",
+                    "value": "-0.0152",
+                    "total_upper": "0.0083",
+                    "total_lower": "0.0083"
+                },
+                "obs@5": {
+                    "name": "a0_g",
+                    "value": "0.109",
+                    "total_upper": "0.016",
+                    "total_lower": "0.016"
+                },
+                "obs@6": {
+                    "name": "a1_g",
+                    "value": "-0.29",
+                    "total_upper": "0.038",
+                    "total_lower": "0.038"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BCL",
+            "note": "BCL fit with $K=4$, $Q_F(t)=N_F/(1-t/M_P^2)$, $N_f=300$, $N_{F_1}=7000$, $N_g=5$, the same $q^2=0$ constraint, and the same unfolded Belle data as the BGL group. The printed $K=4$ and $K=5$ rows are identical and differ markedly from $K=3$; the values are stored as printed."
+        }
+    ]
+}

@@ -350,6 +350,17 @@ rejected by the validator; write the plus charge explicitly (`f+`, `F+`,
 `G+`, `h+`, `ht+`). `Fv`, `Gv`, `hv`, and `htv` keep their existing
 spelling.
 
+### 2.5 Zero-Recoil Form-Factor Normalization: `hA1(1)`
+
+The zero-recoil normalization of the $\bar B \to D^*$ axial form factor is
+written `hA1(1)`:
+$h_{A_1}(1)=(M_B+M_{D^*})A_1(q^2_\mathrm{max})/(2\sqrt{M_BM_{D^*}})$.
+The transition key selects the channel: `B0Bar.2.D*+.l-.vBar` carries
+$h_{A_1}(1)$ and `Bs0Bar.2.Ds*+.l-.vBar` carries the $B_s$ value
+$h^s_{A_1}(1)$. The parenthetical `(1)` is a parameter tag, not a
+multi-transition condition. This symbol names a form-factor value, not an
+expansion coefficient, so the group does not need `scheme`.
+
 ## 3. Observable Abbreviations
 
 Each observable is listed with its flav-data abbreviation, LaTeX symbol, typical paper notation, and description.
