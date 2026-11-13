@@ -143,9 +143,10 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    key because their source is the paper itself. It sits beside the
    channel keys, never inside `obs@N`.
 4. **Group-level `scheme`** — required for any group holding form-factor
-   expansion coefficients (`aN_FF`): one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`
-   (mapping to full names and arXiv IDs in `obs-abbr.md` §2.4). Optional
-   for other groups. It follows `dataset` and precedes any matrix.
+   expansion coefficients (`aN_FF`): one of `BK`, `BGL`, `BCL`, `BSZ`,
+   `DLM`, `MR` (mapping to full names and arXiv IDs in `obs-abbr.md`
+   §2.4). Optional for other groups. It follows `dataset` and precedes
+   any matrix.
 5. **Group-level `note`** — optional non-empty string placed after
    `scheme` and immediately before the matrix. It documents the
    accompanying matrix, for example a coefficient that the source prints
@@ -182,9 +183,9 @@ named coefficient is its own observable.
 Fit choices (nominal, higher-order, ...) are **not** part of the name and
 are not stored in the group metadata; keep such variants as separate
 groups. Every coefficient group also needs the group-level `scheme`
-value from `obs-abbr.md` §2.4 (`BK`, `BGL`, `BCL`, `BSZ`, or `DLM`), because
-the same coefficients are meaningless without the expansion form that
-defines them.
+value from `obs-abbr.md` §2.4 (`BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or
+`MR`), because the same coefficients are meaningless without the
+expansion form that defines them.
 
 ### Form-Factor Values
 
@@ -565,7 +566,7 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_F+`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_G+`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
 19. **`unit` is a physical unit** — never store a scientific-notation scale factor (`1e-6`, `10^{-4}`) in `unit`; multiply it into `value`, `total_upper`/`total_lower`, and any bounds, then omit the field. The validator rejects scale-factor units.
 20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `QCDSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+QCDSR`, `LQCD+LCSR+QCDSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
-21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BK`, `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
+21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or `MR`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
 
 ## Extending This Specification
 

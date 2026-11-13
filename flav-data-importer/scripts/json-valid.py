@@ -116,7 +116,7 @@ def is_group_matrix_key(key: str) -> bool:
 # Form-factor expansion coefficients (``aN_FF``) come from a fit to a
 # named expansion form, recorded once per data group.  The ``+`` in
 # symbols such as ``f+``/``F+``/``G+`` is part of the form-factor name.
-_FORM_FACTOR_COEFFICIENT_RE = re.compile(r'a\d+_[A-Za-z0-9+]+')
+_FORM_FACTOR_COEFFICIENT_RE = re.compile(r"a\d+_[A-Za-z0-9+']+")
 # Obsolete fraction spellings; the plus charge is written explicitly.
 _DEPRECATED_FORM_FACTOR_NAMES = {
     'fp': 'f+', 'Fp': 'F+', 'Gp': 'G+', 'hp': 'h+', 'htp': 'ht+',
@@ -129,7 +129,7 @@ _DEPRECATED_LFU_Q_NAMES = {
     'Q4': 'DeltaP4p', 'Q5': 'DeltaP5p', 'Q6': 'DeltaP6p',
     'Q8': 'DeltaP8p', 'QFL': 'DeltaFL',
 }
-FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM'}
+FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM', 'MR'}
 
 # Group-level ``dataset`` names the data sources behind a group, in this
 # canonical order, joined with ``+`` (e.g. ``LQCD+LCSR``).

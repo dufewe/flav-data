@@ -420,7 +420,8 @@ reference doc points back to these.
    choices (nominal, higher-order, ...) are neither part of the name nor
    stored in the group metadata; keep such variants as separate groups.
    Every coefficient group declares its expansion form in the group-level
-   `scheme` field as a short code: `BK`, `BGL`, `BCL`, `BSZ`, or `DLM`.
+   `scheme` field as a short code: `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or
+   `MR`.
    The full names and defining papers are in `references/obs-abbr.md` §2.4:
 
    | Scheme | Parametrization | Source |
@@ -430,6 +431,7 @@ reference doc points back to these.
    | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
    | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
    | `DLM` | Detmold-Lehner-Meinel | arXiv:1503.01421 |
+   | `MR` | Meinel-Rendon $w$-expansion, with or without a pole factor | arXiv:2009.09313, arXiv:2107.13140 |
 
    The JSON stores only the short code; the validator rejects any other
    spelling and rejects a coefficient group without `scheme`.
@@ -565,7 +567,7 @@ Before committing any new or updated JSON file:
 - [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, or `theo:<source>` for a theory input named after the colon; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields are allowed alongside them; the canonical source list and `scheme` are group-level keys
 - [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted; the group-level `dataset` uses canonical source names (`LQCD`, `LCSR`, `QCDSR`, `EXPE`)
 - [ ] Groups that differ in dataset, scheme, fit choice, or kinematic region are separate elements of the `data` array, not merged
-- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`
+- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, `MR`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
 - [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
 - [ ] Annual index file includes the new paper if added (or excludes if deleted)

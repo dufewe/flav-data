@@ -310,10 +310,12 @@ code:
 
 | Scheme | Parametrization | Source |
 |--------|-----------------|--------|
+| `BK` | Becirevic-Kaidalov | arXiv:hep-ph/9904490 |
 | `BGL` | Boyd-Grinstein-Lebed | arXiv:hep-ph/9504235 |
 | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
 | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
 | `DLM` | Detmold-Lehner-Meinel | arXiv:1503.01421 |
+| `MR` | Meinel-Rendon $w$-expansion (with or without a pole factor) | arXiv:2009.09313, arXiv:2107.13140 |
 
 | Symbol | Form factor | Symbol | Form factor |
 |--------|-------------|--------|-------------|
@@ -327,12 +329,17 @@ code:
 | `G0` | helicity $g_0$ | `Gv` | helicity $g_\perp$ |
 | `h+` | helicity $h_+$ | `hv` | helicity $h_\perp$ |
 | `ht+` | helicity $\tilde{h}_+$ | `htv` | helicity $\tilde{h}_\perp$ |
+| `Fv'` | helicity $f_{\perp'}$ | `Gv'` | helicity $g_{\perp'}$ |
+| `hv'` | helicity $h_{\perp'}$ | `htv'` | helicity $\tilde{h}_{\perp'}$ |
 | `g` | BGL $g$ ($\bar{B}\to D^*$) | `f` | BGL $f$ ($\bar{B}\to D^*$) |
 | `F1` | BGL $F_1$ ($\bar{B}\to D^*$) | `F2` | BGL $F_2$ ($\bar{B}\to D^*$) |
 
 Baryon semileptonic decays use the helicity set with
 $f_+ \to$ `F+`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`, $g_+ \to$ `G+`,
 $g_0 \to$ `G0`, $g_\perp \to$ `Gv`, $h_+ \to$ `h+`, $h_\perp \to$ `hv`.
+$J^P=3/2^-$ final states add the primed set
+$f_{\perp'} \to$ `Fv'`, $g_{\perp'} \to$ `Gv'`,
+$h_{\perp'} \to$ `hv'`, $\tilde{h}_{\perp'} \to$ `htv'`.
 The obsolete spellings `fp`, `Fp`, `Gp`, `hp`, and `htp` are rejected;
 `Fv`, `Gv`, `hv`, and `htv` keep their existing spelling.
 ''')

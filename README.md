@@ -89,7 +89,7 @@ keys, then their `obs@N` order. The channel key alone encodes the
 transition; `data` stores no LaTeX. `dataset` records data sources only
 (`LQCD`, `LCSR`, `EXPE`, joined with `+` in that order). Groups of
 form-factor expansion coefficients (`aN_FF`) must name their expansion in
-`scheme` as one of `BK`, `BGL`, `BCL`, `BSZ`, or `DLM` (full names and arXiv IDs
+`scheme` as one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or `MR` (full names and arXiv IDs
 in the importer's `references/obs-abbr.md`). Add another group for
 different kinematic bins, fit choices, or datasets.
 

@@ -306,6 +306,7 @@ the full name and defining paper live in this table:
 | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
 | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
 | `DLM` | Detmold-Lehner-Meinel | arXiv:1503.01421 |
+| `MR` | Meinel-Rendon $w$-expansion, $f(q^2)=[1-q^2/(m_{\rm pole}^f)^2]^{-1}\sum_n a_n^f (w-1)^n$ (pole factor omitted where the source does not use one) | arXiv:2009.09313, arXiv:2107.13140 |
 
 The key sits beside the channel keys, after `dataset` and before any
 matrix: channel keys → `dataset` → `scheme` → matrices. The validator
@@ -331,13 +332,17 @@ decomposition; these are the standard symbols):
 | `F+` | helicity $f_+$ |
 | `F0` | helicity $f_0$ |
 | `Fv` | helicity $f_\perp$ |
+| `Fv'` | helicity $f_{\perp'}$ ($J^P=3/2^-$) |
 | `G+` | helicity $g_+$ |
 | `G0` | helicity $g_0$ |
 | `Gv` | helicity $g_\perp$ |
+| `Gv'` | helicity $g_{\perp'}$ ($J^P=3/2^-$) |
 | `h+` | helicity $h_+$ |
 | `hv` | helicity $h_\perp$ |
+| `hv'` | helicity $h_{\perp'}$ ($J^P=3/2^-$) |
 | `ht+` | helicity $\tilde{h}_+$ |
 | `htv` | helicity $\tilde{h}_\perp$ |
+| `htv'` | helicity $\tilde{h}_{\perp'}$ ($J^P=3/2^-$) |
 | `g` | BGL $g$ ($\bar B \to D^*$) |
 | `f` | BGL $f$ ($\bar B \to D^*$) |
 | `F1` | BGL $F_1$ ($\bar B \to D^*$) |
@@ -353,7 +358,10 @@ Baryon semileptonic decays ($\Lambda_b \to \Lambda_c \ell^- \bar{\nu}$,
 $\Lambda_b \to p \ell^- \bar{\nu}$) use the helicity set, with the
 mapping $f_+ \to$ `F+`, $f_0 \to$ `F0`, $f_\perp \to$ `Fv`,
 $g_+ \to$ `G+`, $g_0 \to$ `G0`, $g_\perp \to$ `Gv`,
-$h_+ \to$ `h+`, $h_\perp \to$ `hv`.
+$h_+ \to$ `h+`, $h_\perp \to$ `hv`. The $J^P=3/2^-$ final states carry
+four additional primed form factors, mapped with a trailing apostrophe:
+$f_{\perp'} \to$ `Fv'`, $g_{\perp'} \to$ `Gv'`,
+$h_{\perp'} \to$ `hv'`, $\tilde{h}_{\perp'} \to$ `htv'`.
 
 Papers that work directly in the HQET basis, rather than the helicity
 set, keep their own symbols:

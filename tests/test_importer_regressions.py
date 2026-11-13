@@ -403,7 +403,7 @@ class JsonValidatorTests(unittest.TestCase):
         ))
 
     def test_coefficient_group_accepts_canonical_scheme(self):
-        for scheme in ('BK', 'BGL', 'BCL', 'BSZ', 'DLM'):
+        for scheme in ('BK', 'BGL', 'BCL', 'BSZ', 'DLM', 'MR'):
             with self.subTest(scheme=scheme):
                 data = [{
                     'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
@@ -433,6 +433,16 @@ class JsonValidatorTests(unittest.TestCase):
                     'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
                     'dataset': 'LQCD',
                     'scheme': 'BCL',
+                }]
+                self.assertEqual(self._validate_data(data), [])
+
+    def test_primed_baryon_helicity_symbols_are_accepted(self):
+        for name in ("a0_Fv'", "a1_Gv'", "a2_hv'", "a0_htv'"):
+            with self.subTest(name=name):
+                data = [{
+                    'Lambdab0.2.Lambda0(1520).l+.l-': self._channel(self._obs(name)),
+                    'dataset': 'LQCD',
+                    'scheme': 'MR',
                 }]
                 self.assertEqual(self._validate_data(data), [])
 
