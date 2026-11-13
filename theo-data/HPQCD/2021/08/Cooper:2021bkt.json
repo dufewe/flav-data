@@ -1,0 +1,398 @@
+{
+    "inspire-hep": "[Cooper:2021bkt](https://inspirehep.net/literature/2002345)",
+    "author": "Cooper, L. J., Davies, C. T. H., and Wingate, M.",
+    "collaboration": "HPQCD",
+    "title": "Form factors for the processes $B_c^+ \\to D^0 \\ell^+ \\nu_{\\ell}$ and $B_c^+ \\to D_s^+ \\ell^+ \\ell^- (\\nu \\overline{\\nu})$ from lattice QCD",
+    "abstract": "We present results of the first lattice QCD calculations of the weak matrix elements for the decays $B_c^+ \\to D^0 \\ell^+ \\nu_{\\ell}$, $B_c^+ \\to D_s^+ \\ell^+ \\ell^-$ and $B_c^+ \\to D_s^+ \\nu \\overline{\\nu}$. Form factors across the entire physical $q^2$ range are then extracted and extrapolated to the continuum limit with physical quark masses. Results are derived from correlation functions computed on MILC collaboration gauge configurations with three different lattice spacings and including 2+1+1 flavours of sea quarks in the Highly Improved Staggered Quark (HISQ) formalism. HISQ is also used for all of the valence quarks. The uncertainty on the decay widths from our form factors for $B_c^+ \\to D^0 \\ell^+ \\nu_{\\ell}$ is similar in size to that from the present value for $V_{ub}$. We obtain the ratio $\\Gamma(B_{c}^{+} \\rightarrow D^0 \\mu^{+} \\nu_{\\mu}) / |\\eta_{\\mathrm{EW}} V_{ub}|^{2} = 4.43(63) \\times 10^{12}\\ \\mathrm{s}^{-1}$. Combining our form factors with those found previously by HPQCD for $B_{c}^{+} \\rightarrow J/\\psi \\mu^{+} \\nu_{\\mu}$, we find $|V_{cb}/V_{ub}|^2 \\Gamma(B_c^+ \\to D^0 \\mu^+ \\nu_\\mu)/\\Gamma(B_{c}^{+} \\rightarrow J/\\psi \\mu^{+} \\nu_{\\mu}) = 0.257(36)_{B_c \\to D}(18)_{B_c \\to J/\\psi}$. We calculate the differential decay widths of $B_c^+ \\to D_s^+ \\ell^+ \\ell^-$ across the full $q^2$ range, and give integrated results in $q^2$ bins that avoid possible effects from charmonium and $u \\overline{u}$ resonances. For example, we find that the ratio of differential branching fractions integrated over the range $q^2 = 1\\ \\mathrm{GeV}^2 - 6\\ \\mathrm{GeV}^2$ for $B_c^+ \\to D_s^+ \\mu^+ \\mu^-$ and $B_{c}^{+} \\rightarrow J/\\psi \\mu^{+} \\nu_{\\mu}$ is $6.31(90)_{B_c \\to D_s}(65)_{B_c \\to J/\\psi} \\times 10^{-6}$. We also give results for the branching fraction of $B_c^+ \\to D_s^+ \\nu \\overline{\\nu}$. Prospects for reducing our errors in the future are discussed.",
+    "arxiv": "[2108.11242v2](https://arxiv.org/pdf/2108.11242)",
+    "time": "2021.08.25",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bc+.2.D0.l+.v": {
+                "obs@1": {
+                    "name": "a0_f0",
+                    "value": "0.186281743",
+                    "total_upper": "0.023055",
+                    "total_lower": "0.023055"
+                },
+                "obs@2": {
+                    "name": "a1_f0",
+                    "value": "-0.116035294",
+                    "total_upper": "0.189163",
+                    "total_lower": "0.189163"
+                },
+                "obs@3": {
+                    "name": "a2_f0",
+                    "value": "0.340238665",
+                    "total_upper": "0.706705",
+                    "total_lower": "0.706705"
+                },
+                "obs@4": {
+                    "name": "a3_f0",
+                    "value": "-0.874062275",
+                    "total_upper": "1.685865",
+                    "total_lower": "1.685865"
+                },
+                "obs@5": {
+                    "name": "a0_f+",
+                    "value": "0.186281743",
+                    "total_upper": "0.023055",
+                    "total_lower": "0.023055"
+                },
+                "obs@6": {
+                    "name": "a1_f+",
+                    "value": "-0.400743085",
+                    "total_upper": "0.254088",
+                    "total_lower": "0.254088"
+                },
+                "obs@7": {
+                    "name": "a2_f+",
+                    "value": "2.550527803",
+                    "total_upper": "1.382541",
+                    "total_lower": "1.382541"
+                },
+                "obs@8": {
+                    "name": "a3_f+",
+                    "value": "-0.369769466",
+                    "total_upper": "2.095937",
+                    "total_lower": "2.095937"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Coefficients of the BCL $z$-series for $B_c \\to D$ in the ancillary file $\\texttt{cn\\_BcDl.py}$ (the coefficient tables in the paper are commented out). The $z$ variable uses $t_0=0$ and $t_+=(M_B+M_\\pi)^2$, the truncation is $N_n=3$ with $N_r=2$, and the pole factor $P(q^2)=1-q^2/M_\\mathrm{res}^2$ uses $M_{B_{0^+}}=5.627$ GeV for $f_0$ and $M_{B_{1^-}}=5.324$ GeV for $f_+$. Because $t_0=0$, $a_0^{f_0}=f_0(0)$ and $a_0^{f_+}=f_+(0)$. The fit imposes $f_0(0)=f_+(0)$, so $a_0^{f_0}=a_0^{f_+}$ and the $8\\times8$ covariance matrix is singular (rows 1 and 5 coincide); drop one of them before inverting it. The coefficients are taken from the v1 ancillary file: the v2 file gives different $c^{f_0}$ values that do not reproduce the published $f_0(0)=0.186(23)$ and $f_0(q^2_\\mathrm{max})=0.668(20)$, whereas v1 does. Errors are the total fit errors (square roots of the covariance-matrix diagonal).",
+            "covariance": [
+                [
+                    0.000531555,
+                    0.003836941,
+                    0.004535264,
+                    -0.009593079,
+                    0.000531555,
+                    0.002933011,
+                    0.003131623,
+                    -4.3658e-05
+                ],
+                [
+                    0.003836941,
+                    0.035782555,
+                    0.083512595,
+                    0.016788882,
+                    0.003836941,
+                    0.028336515,
+                    0.039529339,
+                    -0.003483391
+                ],
+                [
+                    0.004535264,
+                    0.083512595,
+                    0.499431553,
+                    0.937422141,
+                    0.004535264,
+                    0.074582566,
+                    0.250224883,
+                    -0.031124351
+                ],
+                [
+                    -0.009593079,
+                    0.016788882,
+                    0.937422141,
+                    2.842142347,
+                    -0.009593079,
+                    0.03347536,
+                    0.535936466,
+                    -0.072377594
+                ],
+                [
+                    0.000531555,
+                    0.003836941,
+                    0.004535264,
+                    -0.009593079,
+                    0.000531555,
+                    0.002933011,
+                    0.003131623,
+                    -4.3658e-05
+                ],
+                [
+                    0.002933011,
+                    0.028336515,
+                    0.074582566,
+                    0.03347536,
+                    0.002933011,
+                    0.064560935,
+                    0.255410372,
+                    0.032993055
+                ],
+                [
+                    0.003131623,
+                    0.039529339,
+                    0.250224883,
+                    0.535936466,
+                    0.003131623,
+                    0.255410372,
+                    1.911418431,
+                    0.856048372
+                ],
+                [
+                    -4.3658e-05,
+                    -0.003483391,
+                    -0.031124351,
+                    -0.072377594,
+                    -4.3658e-05,
+                    0.032993055,
+                    0.856048372,
+                    4.392950073
+                ]
+            ]
+        },
+        {
+            "Bc+.2.Ds+.l+.l-": {
+                "obs@1": {
+                    "name": "a0_f0",
+                    "value": "0.217412044",
+                    "total_upper": "0.018421",
+                    "total_lower": "0.018421"
+                },
+                "obs@2": {
+                    "name": "a1_f0",
+                    "value": "-0.220124597",
+                    "total_upper": "0.233034",
+                    "total_lower": "0.233034"
+                },
+                "obs@3": {
+                    "name": "a2_f0",
+                    "value": "1.300675348",
+                    "total_upper": "0.9453",
+                    "total_lower": "0.9453"
+                },
+                "obs@4": {
+                    "name": "a3_f0",
+                    "value": "-0.508919499",
+                    "total_upper": "1.944802",
+                    "total_lower": "1.944802"
+                },
+                "obs@5": {
+                    "name": "a0_f+",
+                    "value": "0.217412044",
+                    "total_upper": "0.018421",
+                    "total_lower": "0.018421"
+                },
+                "obs@6": {
+                    "name": "a1_f+",
+                    "value": "-0.559599481",
+                    "total_upper": "0.263326",
+                    "total_lower": "0.263326"
+                },
+                "obs@7": {
+                    "name": "a2_f+",
+                    "value": "5.149167762",
+                    "total_upper": "1.730513",
+                    "total_lower": "1.730513"
+                },
+                "obs@8": {
+                    "name": "a3_f+",
+                    "value": "-0.217163837",
+                    "total_upper": "2.019189",
+                    "total_lower": "2.019189"
+                },
+                "obs@9": {
+                    "name": "a0_fT",
+                    "value": "0.299250211",
+                    "total_upper": "0.053678",
+                    "total_lower": "0.053678"
+                },
+                "obs@10": {
+                    "name": "a1_fT",
+                    "value": "-1.50184686",
+                    "total_upper": "0.723259",
+                    "total_lower": "0.723259"
+                },
+                "obs@11": {
+                    "name": "a2_fT",
+                    "value": "3.579309489",
+                    "total_upper": "2.807409",
+                    "total_lower": "2.807409"
+                },
+                "obs@12": {
+                    "name": "a3_fT",
+                    "value": "-0.348176216",
+                    "total_upper": "2.075086",
+                    "total_lower": "2.075086"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Coefficients of the BCL $z$-series for $B_c \\to D_s$ in the ancillary file $\\texttt{cn\\_BcDs.py}$ (the coefficient tables in the paper are commented out). The $z$ variable uses $t_0=0$ and $t_+=(M_B+M_K)^2$, the truncation is $N_n=3$ with $N_r=2$, and the pole factor $P(q^2)=1-q^2/M_\\mathrm{res}^2$ uses $M_{B_s(0^+)}=5.711$ GeV for $f_0$ and $M_{B_s(1^-)}=5.4158$ GeV for $f_+$ and $f_T$. Because $t_0=0$, $a_0^{f_0}=f_0(0)$ and $a_0^{f_+}=f_+(0)$. The tensor form factor is in the $\\overline{\\mathrm{MS}}$ scheme at $4.8$ GeV. The fit imposes $f_0(0)=f_+(0)$, so $a_0^{f_0}=a_0^{f_+}$ and the $12\\times12$ covariance matrix is singular (rows 1 and 5 coincide); drop one of them before inverting it. Errors are the total fit errors (square roots of the covariance-matrix diagonal).",
+            "covariance": [
+                [
+                    0.000339325,
+                    0.003941894,
+                    0.011292678,
+                    6.6748e-05,
+                    0.000339325,
+                    0.003222734,
+                    0.006940725,
+                    6.0136e-05,
+                    0.000108114,
+                    0.000931666,
+                    0.002115672,
+                    -0.000141659
+                ],
+                [
+                    0.003941894,
+                    0.054304922,
+                    0.188389336,
+                    0.082146766,
+                    0.003941894,
+                    0.043485077,
+                    0.083270612,
+                    -0.000159673,
+                    0.001200501,
+                    0.011412994,
+                    0.028221493,
+                    -0.002043026
+                ],
+                [
+                    0.011292678,
+                    0.188389336,
+                    0.893592086,
+                    1.149233134,
+                    0.011292678,
+                    0.151126793,
+                    0.355733112,
+                    -0.008873402,
+                    0.003147131,
+                    0.030967293,
+                    0.083388952,
+                    -0.006082228
+                ],
+                [
+                    6.6748e-05,
+                    0.082146766,
+                    1.149233134,
+                    3.782253982,
+                    6.6748e-05,
+                    0.063313634,
+                    0.572389699,
+                    -0.032895398,
+                    -0.000577589,
+                    -0.008383327,
+                    -0.033564698,
+                    0.003501305
+                ],
+                [
+                    0.000339325,
+                    0.003941894,
+                    0.011292678,
+                    6.6748e-05,
+                    0.000339325,
+                    0.003222734,
+                    0.006940725,
+                    6.0136e-05,
+                    0.000108114,
+                    0.000931666,
+                    0.002115672,
+                    -0.000141659
+                ],
+                [
+                    0.003222734,
+                    0.043485077,
+                    0.151126793,
+                    0.063313634,
+                    0.003222734,
+                    0.069340797,
+                    0.306812255,
+                    0.014956419,
+                    0.001098016,
+                    0.0111891,
+                    0.028505886,
+                    -0.002035362
+                ],
+                [
+                    0.006940725,
+                    0.083270612,
+                    0.355733112,
+                    0.572389699,
+                    0.006940725,
+                    0.306812255,
+                    2.994676797,
+                    0.581377557,
+                    0.002577312,
+                    0.028320313,
+                    0.114467485,
+                    -0.008540355
+                ],
+                [
+                    6.0136e-05,
+                    -0.000159673,
+                    -0.008873402,
+                    -0.032895398,
+                    6.0136e-05,
+                    0.014956419,
+                    0.581377557,
+                    4.077124677,
+                    3.7397e-05,
+                    0.000202547,
+                    -0.002909919,
+                    0.000343368
+                ],
+                [
+                    0.000108114,
+                    0.001200501,
+                    0.003147131,
+                    -0.000577589,
+                    0.000108114,
+                    0.001098016,
+                    0.002577312,
+                    3.7397e-05,
+                    0.002881345,
+                    0.033886269,
+                    0.103021081,
+                    -0.005505073
+                ],
+                [
+                    0.000931666,
+                    0.011412994,
+                    0.030967293,
+                    -0.008383327,
+                    0.000931666,
+                    0.0111891,
+                    0.028320313,
+                    0.000202547,
+                    0.033886269,
+                    0.523103804,
+                    1.90003755,
+                    -0.058088317
+                ],
+                [
+                    0.002115672,
+                    0.028221493,
+                    0.083388952,
+                    -0.033564698,
+                    0.002115672,
+                    0.028505886,
+                    0.114467485,
+                    -0.002909919,
+                    0.103021081,
+                    1.90003755,
+                    7.881546507,
+                    0.504531633
+                ],
+                [
+                    -0.000141659,
+                    -0.002043026,
+                    -0.006082228,
+                    0.003501305,
+                    -0.000141659,
+                    -0.002035362,
+                    -0.008540355,
+                    0.000343368,
+                    -0.005505073,
+                    -0.058088317,
+                    0.504531633,
+                    4.305981782
+                ]
+            ]
+        }
+    ]
+}
