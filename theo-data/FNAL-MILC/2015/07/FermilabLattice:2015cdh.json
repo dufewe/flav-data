@@ -1,0 +1,49 @@
+{
+    "inspire-hep": "[FermilabLattice:2015cdh](https://inspirehep.net/literature/1381770)",
+    "author": "Bailey, J.A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "$B\\to\\pi\\ell\\ell$ form factors for new-physics searches from lattice QCD",
+    "abstract": "The rare decay $B\\to\\pi\\ell^+\\ell^-$ arises from $b\\to d$ flavor-changing neutral currents and could be sensitive to physics beyond the Standard Model. Here, we present the first $ab$-$initio$ QCD calculation of the $B\\to\\pi$ tensor form factor $f_T$. Together with the vector and scalar form factors $f_+$ and $f_0$ from our companion work [J. A. Bailey $et~al.$, Phys. Rev. D 92, 014024 (2015)], these parameterize the hadronic contribution to $B\\to\\pi$ semileptonic decays in any extension of the Standard Model. We obtain the total branching ratio ${\\text{BR}}(B^+\\to\\pi^+\\mu^+\\mu^-)=20.4(2.1)\\times10^{-9}$ in the Standard Model, which is the most precise theoretical determination to date, and agrees with the recent measurement from the LHCb experiment [R. Aaij $et~al.$, JHEP 1212, 125 (2012)]. Note added: after this paper was submitted for publication, LHCb announced a new measurement of the differential decay rate for this process [T. Tekampe, talk at DPF 2015], which we now compare to the shape and normalization of the Standard-Model prediction.",
+    "arxiv": "[hep-ph/1507.01618v3](https://arxiv.org/pdf/1507.01618)",
+    "time": "2015.07.06",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.pi+.l+.l-": {
+                "obs@1": {
+                    "name": "a0_fT",
+                    "value": "0.393",
+                    "total_upper": "0.017",
+                    "total_lower": "0.017"
+                },
+                "obs@2": {
+                    "name": "a1_fT",
+                    "value": "-0.65",
+                    "total_upper": "0.23",
+                    "total_lower": "0.23"
+                },
+                "obs@3": {
+                    "name": "a2_fT",
+                    "value": "-0.6",
+                    "total_upper": "1.5",
+                    "total_lower": "1.5"
+                },
+                "obs@4": {
+                    "name": "a3_fT",
+                    "value": "0.1",
+                    "total_upper": "2.8",
+                    "total_lower": "2.8"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "BCL $z$-expansion of $f_T$ with $N_z=4$, the $B^*$ pole factored out and $t_0=(M_B+M_\\pi)(\\sqrt{M_B}-\\sqrt{M_\\pi})^2$ (Eq. (3)). The correlation matrix covers the four $f_T$ coefficients only; the cross-correlations with the $f_+$ and $f_0$ coefficients of 1503.07839 are not stored.",
+            "correlation": [
+                [1.0, 0.4, 0.204, 0.166],
+                [0.4, 1.0, 0.862, 0.806],
+                [0.204, 0.862, 1.0, 0.989],
+                [0.166, 0.806, 0.989, 1.0]
+            ]
+        }
+    ]
+}
