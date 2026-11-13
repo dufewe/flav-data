@@ -1,0 +1,41 @@
+{
+    "inspire-hep": "[Gao:2021sav](https://inspirehep.net/literature/1996662)",
+    "author": "Gao, J. and others",
+    "title": "$B\\to D \\ell \\nu_\\ell$ form factors beyond leading power and extraction of $|V_{cb}|$ and $R(D)$",
+    "abstract": "We investigate the subleading-power corrections to the exclusive $B\\to D \\ell \\nu_\\ell$ form factors at ${\\cal O} (\\alpha_s^0)$ in the light-cone sum rules (LCSR) framework by including the two- and three-particle higher-twist contributions from the $B$-meson light-cone distribution amplitudes up to the twist-six accuracy, by taking into account the subleading terms in expanding the hard-collinear charm-quark propagator, and by evaluating the hadronic matrix element of the subleading effective current $\\bar q \\, \\gamma_{\\mu} \\, i \\not\\!\\!{D}_\\perp / (2 \\, m_b) \\, h_v$. Employing further the available leading-power results for the semileptonic $B \\to D$ form factors at the next-to-leading-logarithmic level and combining our improved LCSR predictions with the recent lattice determinations, we then carry out a comprehensive phenomenological analysis on the semi-leptonic $B\\to D \\ell \\nu_\\ell$ decay. We extract $|V_{cb}| = \\big( 40.2^{+0.6}_{-0.5} {\\big |_{\\rm th}}\\,\\, {}^{+1.4}_{-1.4} {\\big |_{\\rm exp}} \\big)\\times 10^{-3}$ ($|V_{cb}| = \\big( 40.9^{+0.6}_{-0.5} {\\big |_{\\rm th}}\\,\\, {}^{+1.0}_{-1.0} {\\big |_{\\rm exp}} \\big)\\times 10^{-3}$) using the BaBar (Belle) experimental data, and particularly obtain for the gold-plated ratio $R(D) = 0.302\\pm 0.003$.",
+    "arxiv": "[hep-ph/2112.12674v2](https://arxiv.org/pdf/2112.12674)",
+    "time": "2021.12.23",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0155",
+                    "total_upper": "0.0001",
+                    "total_lower": "0.0001"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.041",
+                    "total_upper": "0.003",
+                    "total_lower": "0.003"
+                },
+                "obs@3": {
+                    "name": "a1_f0",
+                    "value": "-0.206",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                }
+            },
+            "dataset": "LQCD+LCSR",
+            "scheme": "BGL",
+            "note": "BGL $z$-expansion truncated at $\\mathcal{O}(z)$ with $t_0=t_-$. $b_0$ is fixed by the exact relation $b_0=4.797a_0+0.311a_1-0.065b_1$ from $f_+(0)=f_0(0)$, so a0_f0 is not an independent entry. The fit combines the LCSR points with FNAL/MILC and HPQCD lattice points, hence dataset LQCD+LCSR.",
+            "correlation": [
+                [1.0, 0.170, 0.276],
+                [0.170, 1.0, 0.937],
+                [0.276, 0.937, 1.0]
+            ]
+        }
+    ]
+}
