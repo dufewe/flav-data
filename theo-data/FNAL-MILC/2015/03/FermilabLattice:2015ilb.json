@@ -1,0 +1,70 @@
+{
+    "inspire-hep": "[FermilabLattice:2015ilb](https://inspirehep.net/literature/1355553)",
+    "author": "Bailey, J. A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "$B\\to D\\ell\\nu$ form factors at nonzero recoil and $|V_{cb}|$ from 2+1-flavor lattice QCD",
+    "abstract": "We present the first unquenched lattice-QCD calculation of the hadronic form factors for the exclusive decay $\\bar{B}\\to D\\ell\\bar{\\nu}$ at nonzero recoil. We carry out numerical simulations on 14 ensembles of gauge-field configurations generated with 2+1 flavors of asqtad-improved staggered sea quarks. The ensembles encompass a wide range of lattice spacings (approximately 0.045 to 0.12 fm) and ratios of light (up and down) to strange sea-quark masses ranging from 0.05 to 0.4. For the $b$ and $c$ valence quarks we use improved Wilson fermions with the Fermilab interpretation, while for the light valence quarks we use asqtad-improved staggered fermions. We extrapolate our results to the physical point using rooted staggered heavy-light meson chiral perturbation theory. We then parametrize the form factors and extend them to the full kinematic range using model-independent functions based on analyticity and unitarity. We present our final results for $f_+(q^2)$ and $f_0(q^2)$, including statistical and systematic errors, as coefficients of a series in the variable $z$ and the covariance matrix between these coefficients. We then fit the lattice form-factor data jointly with the experimentally measured differential decay rate from BABAR to determine the CKM matrix element, $|V_{cb}|=(39.6\\pm1.7_{\\mathrm{QCD+exp}}\\pm0.2_{\\mathrm{QED}})\\times10^{-3}$. As a byproduct of the joint fit we obtain the form factors with improved precision at large recoil. Finally, we use them to update our calculation of the ratio $R(D)$ in the Standard Model, which yields $R(D)=0.299(11)$.",
+    "arxiv": "[1503.07237v1](https://arxiv.org/pdf/1503.07237)",
+    "time": "2015.03.24",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.01262",
+                    "total_upper": "0.00010",
+                    "total_lower": "0.00010"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.0969",
+                    "total_upper": "0.0034",
+                    "total_lower": "0.0034"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.50",
+                    "total_upper": "0.17",
+                    "total_lower": "0.17"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.06",
+                    "total_upper": "0.90",
+                    "total_lower": "0.90"
+                },
+                "obs@5": {
+                    "name": "a1_f0",
+                    "value": "-0.0597",
+                    "total_upper": "0.0029",
+                    "total_lower": "0.0029"
+                },
+                "obs@6": {
+                    "name": "a2_f0",
+                    "value": "0.31",
+                    "total_upper": "0.15",
+                    "total_lower": "0.15"
+                },
+                "obs@7": {
+                    "name": "a3_f0",
+                    "value": "0.06",
+                    "total_upper": "0.91",
+                    "total_lower": "0.91"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "note": "BGL z-expansion of the lattice-only synthetic-data fit with the kinematic constraint f+(0) = f0(0), cubic truncation N = 3 (Table tab:N3corr); the joint lattice+BABAR fit is not tabulated. No pole factors are used, P_i(z) = 1, and the outer functions are phi_+ with Phi_+ = 1.1213 and phi_0 with Phi_0 = 0.5299. Because of the constraint a_{0,0} = 0.01142(14) is inferred rather than fitted and is not an independent entry of the 7x7 correlation matrix. Errors include statistics and systematics.",
+            "correlation": [
+                [1.0, 0.21726, 0.07203, 0.00387, 0.19347, 0.15590, -0.00364],
+                [0.21726, 1.0, -0.47505, 0.25544, 0.80946, -0.26302, -0.18212],
+                [0.07203, -0.47505, 1.0, -0.45415, -0.43845, 0.85491, 0.25116],
+                [0.00387, 0.25544, -0.45415, 1.0, 0.11415, -0.15582, 0.21768],
+                [0.19347, 0.80946, -0.43845, 0.11415, 1.0, -0.42932, -0.03556],
+                [0.15590, -0.26302, 0.85491, -0.15582, -0.42932, 1.0, -0.06062],
+                [-0.00364, -0.18212, 0.25116, 0.21768, -0.03556, -0.06062, 1.0]
+            ]
+        }
+    ]
+}

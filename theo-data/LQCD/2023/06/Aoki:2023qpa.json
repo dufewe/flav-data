@@ -1,0 +1,91 @@
+{
+    "inspire-hep": "[Aoki:2023qpa](https://inspirehep.net/literature/2667537)",
+    "author": "Aoki, Y. and others",
+    "collaboration": "JLQCD",
+    "title": "$B\\to D^*\\ell\\nu_\\ell$ semileptonic form factors from lattice QCD with M\\\"obius domain-wall quarks",
+    "abstract": "We calculate the form factors for the $B\\to D^*\\ell\\nu_\\ell$ decay in 2+1 flavor lattice QCD. For all quark flavors, we employ the M\\\"obius domain-wall action, which preserves chiral symmetry to a good precision. Our gauge ensembles are generated at three lattice cutoffs $a^{-1}\\sim 2.5$, 3.6 and 4.5 GeV with pion masses as low as $M_\\pi\\sim 230$ MeV. The physical lattice size $L$ satisfies the condition $M_\\pi L\\geq 4$ to control finite volume effects (FVEs), while we simulate a smaller size at the smallest $M_\\pi$ to directly examine FVEs. The bottom quark masses are chosen in a range from the physical charm quark mass to $0.7\\,a^{-1}$ to control discretization effects. We extrapolate the form factors to the continuum limit and physical quark masses based on heavy meson chiral perturbation theory at next-to-leading order. Then the recoil parameter dependence is parametrized using a model independent form leading to our estimate of the decay rate ratio between the tau ($\\ell=\\tau$) and light lepton ($\\ell=e,\\mu$) channels $R(D^*)=0.252(22)$ in the Standard Model. A simultaneous fit with recent data from the Belle experiment yields $|V_{cb}|=39.19(91)\\times 10^{-3}$, which is consistent with previous exclusive determinations, and shows good consistency in the kinematical distribution of the differential decay rate between the lattice and experimental data.",
+    "arxiv": "[2306.05657v2](https://arxiv.org/pdf/2306.05657)",
+    "time": "2023.06.09",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_g",
+                    "value": "0.0291",
+                    "total_upper": "0.0018",
+                    "total_lower": "0.0018"
+                },
+                "obs@2": {
+                    "name": "a1_g",
+                    "value": "-0.045",
+                    "total_upper": "0.035",
+                    "total_lower": "0.035"
+                },
+                "obs@3": {
+                    "name": "a2_g",
+                    "value": "-1.0",
+                    "total_upper": "1.7",
+                    "total_lower": "1.7"
+                },
+                "obs@4": {
+                    "name": "a0_f",
+                    "value": "0.01198",
+                    "total_upper": "0.00019",
+                    "total_lower": "0.00019"
+                },
+                "obs@5": {
+                    "name": "a1_f",
+                    "value": "0.018",
+                    "total_upper": "0.011",
+                    "total_lower": "0.011"
+                },
+                "obs@6": {
+                    "name": "a2_f",
+                    "value": "-0.10",
+                    "total_upper": "0.45",
+                    "total_lower": "0.45"
+                },
+                "obs@7": {
+                    "name": "a1_F1",
+                    "value": "0.0013",
+                    "total_upper": "0.0041",
+                    "total_lower": "0.0041"
+                },
+                "obs@8": {
+                    "name": "a2_F1",
+                    "value": "-0.03",
+                    "total_upper": "0.21",
+                    "total_lower": "0.21"
+                },
+                "obs@9": {
+                    "name": "a1_F2",
+                    "value": "-0.059",
+                    "total_upper": "0.087",
+                    "total_lower": "0.087"
+                },
+                "obs@10": {
+                    "name": "a2_F2",
+                    "value": "-0.9",
+                    "total_upper": "1.1",
+                    "total_lower": "1.1"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "note": "Coefficients of the BGL $z$-series fit to synthetic lattice data (Table tbl:q2-param:bgl of the paper), with a quadratic truncation $N=2$ for $g$, $f$, $F_1$ and $F_2$ and $\\chi^2/\\mathrm{dof}=0.51$. The Blaschke factors use the input-A resonance masses of Table tbl:q2-param:reso, and the outer functions use $n_I=2.6$ with the perturbative susceptibilities $\\chi^T_{1^+}(0)=3.894\\times10^{-4}$, $\\chi^T_{1^-}(0)=5.131\\times10^{-4}$ and $\\chi^L_{1^+}(0)=1.9421\\times10^{-2}$ GeV$^{-2}$. The constants $a_{F_1,0}$ and $a_{F_2,0}$ are fixed by the kinematical constraints at $w=1$ and $w_\\mathrm{max}$ and are not independent fit parameters, so the $10\\times10$ correlation matrix covers only the remaining ten coefficients. Errors are the total errors of the synthetic data, including statistics and systematics.",
+            "correlation": [
+                [1.0, 0.46208, 0.00157, 0.23345, 0.01973, -0.00342, -0.00136, 0.01362, -0.00553, 0.01628],
+                [0.46208, 1.0, 0.01024, 0.06133, 0.21056, 0.06890, -0.01804, 0.02956, 0.00394, 0.03000],
+                [0.00157, 0.01024, 1.0, 0.01137, 0.02396, -0.01746, -0.00789, 0.01312, 0.01056, 0.00708],
+                [0.23345, 0.06133, 0.01137, 1.0, 0.06216, 0.12057, 0.07462, -0.09380, 0.19208, -0.13641],
+                [0.01973, 0.21056, 0.02396, 0.06216, 1.0, -0.49732, 0.49162, -0.24351, 0.45046, -0.25008],
+                [-0.00342, 0.06890, -0.01746, 0.12057, -0.49732, 1.0, -0.33668, 0.20338, -0.23045, 0.19828],
+                [-0.00136, -0.01804, -0.00789, 0.07462, 0.49162, -0.33668, 1.0, -0.51671, 0.84705, -0.49244],
+                [0.01362, 0.02956, 0.01312, -0.09380, -0.24351, 0.20338, -0.51671, 1.0, -0.48706, 0.98112],
+                [-0.00553, 0.00394, 0.01056, 0.19208, 0.45046, -0.23045, 0.84705, -0.48706, 1.0, -0.55376],
+                [0.01628, 0.03000, 0.00708, -0.13641, -0.25008, 0.19828, -0.49244, 0.98112, -0.55376, 1.0]
+            ]
+        }
+    ]
+}

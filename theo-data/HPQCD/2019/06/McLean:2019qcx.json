@@ -1,0 +1,63 @@
+{
+    "inspire-hep": "[McLean:2019qcx](https://inspirehep.net/literature/1737717)",
+    "author": "McLean, E. and others",
+    "collaboration": "HPQCD",
+    "title": "$B_s\\to D_s \\ell\\nu$ Form Factors for the full $q^2$ range from Lattice QCD with non-perturbatively normalized currents",
+    "abstract": "We present a lattice QCD determination of the $B_s \\to D_s \\ell\\nu$ scalar and vector form factors over the full physical range of momentum transfer. The result is derived from correlation functions computed using the Highly Improved Staggered Quark (HISQ) formalism, on the second generation MILC gluon ensembles accounting for up, down, strange and charm contributions from the sea. We calculate correlation functions for three lattice spacing values and an array of unphysically-light $b$-quark masses, and extrapolate to the physical value. Using the HISQ formalism for all quarks means that the lattice current coupling to the $W$ can be renormalized non-perturbatively, giving a result free from perturbative matching errors for the first time. Our results are in agreement with, and more accurate than, previous determinations of these form factors. From the form factors we also determine the ratio of branching fractions that is sensitive to violation of lepton universality: $R(D_s) = \\mathcal{B}(B_s\\to D_s \\tau \\nu_{\\tau})/\\mathcal{B}(B_s\\to D_s \\ell \\nu_{l})$, where $\\ell$ is an electron or a muon. We find $R(D_s) = 0.2987(46)$, which is also more accurate than previous lattice QCD results. Combined with a future measurement of $R(D_s)$, this could supply a new test of the Standard Model. We also compare the dependence on heavy quark mass of our form factors to expectations from Heavy Quark Effective Theory.",
+    "arxiv": "[1906.00701v2](https://arxiv.org/pdf/1906.00701)",
+    "time": "2019.06.03",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bs0Bar.2.Ds+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f0",
+                    "value": "0.66574",
+                    "total_upper": "0.01225",
+                    "total_lower": "0.01225"
+                },
+                "obs@2": {
+                    "name": "a1_f0",
+                    "value": "-0.25944",
+                    "total_upper": "0.2476",
+                    "total_lower": "0.2476"
+                },
+                "obs@3": {
+                    "name": "a2_f0",
+                    "value": "-0.10636",
+                    "total_upper": "1.815",
+                    "total_lower": "1.815"
+                },
+                "obs@4": {
+                    "name": "a0_f+",
+                    "value": "0.66574",
+                    "total_upper": "0.01225",
+                    "total_lower": "0.01225"
+                },
+                "obs@5": {
+                    "name": "a1_f+",
+                    "value": "-3.23599",
+                    "total_upper": "0.4521",
+                    "total_lower": "0.4521"
+                },
+                "obs@6": {
+                    "name": "a2_f+",
+                    "value": "-0.07478",
+                    "total_upper": "2.011",
+                    "total_lower": "2.011"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Coefficients of the BCL parametrization (Appendix, Table tab:coeffs) with $K=3$. The $z$ variable uses $t_0=0$, $z=(\\sqrt{t_+-q^2}-\\sqrt{t_+})/(\\sqrt{t_+-q^2}+\\sqrt{t_+})$ with $t_+=(M_{B_s}+M_{D_s})^2$, and the pole masses are $M_{B_{c0}}=6.704$ GeV and $M_{B_c^*}=6.329$ GeV. The fit imposes $f_+(0)=f_0(0)$, so $a_0^+=a_0^0$ and the $6\\times6$ covariance matrix is singular (the first and fourth rows coincide); drop one of the two before inverting it. Errors are the square roots of the covariance-matrix diagonal.",
+            "covariance": [
+                [0.00015, 0.00188, 0.00070, 0.00015, 0.00022, 0.00003],
+                [0.00188, 0.06129, 0.16556, 0.00188, 0.01449, 0.00001],
+                [0.00070, 0.16556, 3.29493, 0.00070, 0.18757, -0.00614],
+                [0.00015, 0.00188, 0.00070, 0.00015, 0.00022, 0.00003],
+                [0.00022, 0.01449, 0.18757, 0.00022, 0.20443, 0.10080],
+                [0.00003, 0.00001, -0.00614, 0.00003, 0.10080, 4.04413]
+            ]
+        }
+    ]
+}

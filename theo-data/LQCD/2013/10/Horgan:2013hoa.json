@@ -1,0 +1,617 @@
+{
+    "inspire-hep": "[Horgan:2013hoa](https://inspirehep.net/literature/1258407)",
+    "author": "Horgan, R. R. and others",
+    "title": "Lattice QCD calculation of form factors describing the rare decays $B \\to K^* \\ell^+ \\ell^-$ and $B_s \\to \\phi \\ell^+ \\ell^-$",
+    "arxiv": "[1310.3722v2](https://arxiv.org/pdf/1310.3722)",
+    "time": "2013.10.14",
+    "abstract": "The rare decays $B^0 \\to K^{*0} \\mu^+ \\mu^-$ and $B_s \\to \\phi \\mu^+ \\mu^-$ are now being observed with enough precision to test Standard Model predictions. A full understanding of these decays requires accurate determinations of the corresponding hadronic form factors. Here we present results of lattice QCD calculations of the $B \\to K^*$ and $B_s \\to \\phi$ form factors. We also determine the form factors relevant for the decays $B_s \\to K^* \\ell \\nu$ and $B_s \\to \\bar{K}^{*0} \\ell^+ \\ell^-$. We use full-QCD configurations including $2+1$ flavors of sea quarks using an improved staggered action, and we employ lattice nonrelativistic QCD to describe the bottom quark.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_V",
+                    "value": "0.496",
+                    "total_upper": "0.067",
+                    "total_lower": "0.067"
+                },
+                "obs@2": {
+                    "name": "a1_V",
+                    "value": "-2.03",
+                    "total_upper": "0.92",
+                    "total_lower": "0.92"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 135 MeV for V (Table V). V was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.86
+                ],
+                [
+                    0.86,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A0",
+                    "value": "0.469",
+                    "total_upper": "0.061",
+                    "total_lower": "0.061"
+                },
+                "obs@2": {
+                    "name": "a1_A0",
+                    "value": "-2.11",
+                    "total_upper": "0.88",
+                    "total_lower": "0.88"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 87 MeV for A0 (Table V). A0 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.86
+                ],
+                [
+                    0.86,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A1",
+                    "value": "0.286",
+                    "total_upper": "0.024",
+                    "total_lower": "0.024"
+                },
+                "obs@2": {
+                    "name": "a1_A1",
+                    "value": "0.19",
+                    "total_upper": "0.28",
+                    "total_lower": "0.28"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 550 MeV for A1 (Table V). A1 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.94
+                ],
+                [
+                    0.94,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A12",
+                    "value": "0.216",
+                    "total_upper": "0.027",
+                    "total_lower": "0.027"
+                },
+                "obs@2": {
+                    "name": "a1_A12",
+                    "value": "0.32",
+                    "total_upper": "0.38",
+                    "total_lower": "0.38"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 550 MeV for A12 (Table V). A12 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.91
+                ],
+                [
+                    0.91,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T23",
+                    "value": "0.520",
+                    "total_upper": "0.045",
+                    "total_lower": "0.045"
+                },
+                "obs@2": {
+                    "name": "a1_T23",
+                    "value": "0.0",
+                    "total_upper": "0.63",
+                    "total_lower": "0.63"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 550 MeV for T23 (Table V). T23 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.84
+                ],
+                [
+                    0.84,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T1",
+                    "value": "0.422",
+                    "total_upper": "0.024",
+                    "total_lower": "0.024"
+                },
+                "obs@2": {
+                    "name": "a1_T1",
+                    "value": "-1.37",
+                    "total_upper": "0.25",
+                    "total_lower": "0.25"
+                },
+                "obs@3": {
+                    "name": "a0_T2",
+                    "value": "0.2830",
+                    "total_upper": "0.0197",
+                    "total_lower": "0.0197"
+                },
+                "obs@4": {
+                    "name": "a1_T2",
+                    "value": "0.10",
+                    "total_upper": "0.24",
+                    "total_lower": "0.24"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 135 MeV for T1 and 550 MeV for T2 (Table V). T1 and T2 come from a single fit with the constraint T1(0) = T2(0), separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.48,
+                    0.86,
+                    0.82
+                ],
+                [
+                    0.48,
+                    1.0,
+                    0.81,
+                    0.86
+                ],
+                [
+                    0.86,
+                    0.81,
+                    1.0,
+                    0.91
+                ],
+                [
+                    0.82,
+                    0.86,
+                    0.91,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_V",
+                    "value": "0.452",
+                    "total_upper": "0.030",
+                    "total_lower": "0.030"
+                },
+                "obs@2": {
+                    "name": "a1_V",
+                    "value": "-2.40",
+                    "total_upper": "0.50",
+                    "total_lower": "0.50"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 45 MeV for V (Table V). V was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.8
+                ],
+                [
+                    0.8,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A0",
+                    "value": "0.525",
+                    "total_upper": "0.021",
+                    "total_lower": "0.021"
+                },
+                "obs@2": {
+                    "name": "a1_A0",
+                    "value": "-1.63",
+                    "total_upper": "0.39",
+                    "total_lower": "0.39"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 0 MeV for A0 (Table V). A0 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.83
+                ],
+                [
+                    0.83,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A1",
+                    "value": "0.2803",
+                    "total_upper": "0.0113",
+                    "total_lower": "0.0113"
+                },
+                "obs@2": {
+                    "name": "a1_A1",
+                    "value": "0.121",
+                    "total_upper": "0.150",
+                    "total_lower": "0.150"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 440 MeV for A1 (Table V). A1 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.92
+                ],
+                [
+                    0.92,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A12",
+                    "value": "0.2098",
+                    "total_upper": "0.0115",
+                    "total_lower": "0.0115"
+                },
+                "obs@2": {
+                    "name": "a1_A12",
+                    "value": "0.447",
+                    "total_upper": "0.186",
+                    "total_lower": "0.186"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 440 MeV for A12 (Table V). A12 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.92
+                ],
+                [
+                    0.92,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T23",
+                    "value": "0.5194",
+                    "total_upper": "0.0157",
+                    "total_lower": "0.0157"
+                },
+                "obs@2": {
+                    "name": "a1_T23",
+                    "value": "0.51",
+                    "total_upper": "0.25",
+                    "total_lower": "0.25"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 440 MeV for T23 (Table V). T23 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.88
+                ],
+                [
+                    0.88,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.phi0.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T1",
+                    "value": "0.4070",
+                    "total_upper": "0.0104",
+                    "total_lower": "0.0104"
+                },
+                "obs@2": {
+                    "name": "a1_T1",
+                    "value": "-1.093",
+                    "total_upper": "0.119",
+                    "total_lower": "0.119"
+                },
+                "obs@3": {
+                    "name": "a0_T2",
+                    "value": "0.2890",
+                    "total_upper": "0.0081",
+                    "total_lower": "0.0081"
+                },
+                "obs@4": {
+                    "name": "a1_T2",
+                    "value": "0.265",
+                    "total_upper": "0.097",
+                    "total_lower": "0.097"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 45 MeV for T1 and 440 MeV for T2 (Table V). T1 and T2 come from a single fit with the constraint T1(0) = T2(0), separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.22,
+                    0.78,
+                    0.74
+                ],
+                [
+                    0.22,
+                    1.0,
+                    0.73,
+                    0.78
+                ],
+                [
+                    0.78,
+                    0.73,
+                    1.0,
+                    0.89
+                ],
+                [
+                    0.74,
+                    0.78,
+                    0.89,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_V",
+                    "value": "0.322",
+                    "total_upper": "0.048",
+                    "total_lower": "0.048"
+                },
+                "obs@2": {
+                    "name": "a1_V",
+                    "value": "-3.04",
+                    "total_upper": "0.67",
+                    "total_lower": "0.67"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = -42 MeV for V (Table V). V was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.91
+                ],
+                [
+                    0.91,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A0",
+                    "value": "0.476",
+                    "total_upper": "0.042",
+                    "total_lower": "0.042"
+                },
+                "obs@2": {
+                    "name": "a1_A0",
+                    "value": "-2.29",
+                    "total_upper": "0.74",
+                    "total_lower": "0.74"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = -87 MeV for A0 (Table V). A0 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.92
+                ],
+                [
+                    0.92,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A1",
+                    "value": "0.2342",
+                    "total_upper": "0.0122",
+                    "total_lower": "0.0122"
+                },
+                "obs@2": {
+                    "name": "a1_A1",
+                    "value": "0.100",
+                    "total_upper": "0.174",
+                    "total_lower": "0.174"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 350 MeV for A1 (Table V). A1 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.9
+                ],
+                [
+                    0.9,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_A12",
+                    "value": "0.1954",
+                    "total_upper": "0.0133",
+                    "total_lower": "0.0133"
+                },
+                "obs@2": {
+                    "name": "a1_A12",
+                    "value": "0.350",
+                    "total_upper": "0.190",
+                    "total_lower": "0.190"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 350 MeV for A12 (Table V). A12 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.89
+                ],
+                [
+                    0.89,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T23",
+                    "value": "0.472",
+                    "total_upper": "0.024",
+                    "total_lower": "0.024"
+                },
+                "obs@2": {
+                    "name": "a1_T23",
+                    "value": "0.35",
+                    "total_upper": "0.31",
+                    "total_lower": "0.31"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = 350 MeV for T23 (Table V). T23 was fitted separately from the other form factors, so no cross-form-factor correlations are published.",
+            "correlation": [
+                [
+                    1.0,
+                    0.89
+                ],
+                [
+                    0.89,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Bs0.2.K*0Bar.l+.l-": {
+                "obs@1": {
+                    "name": "a0_T1",
+                    "value": "0.3519",
+                    "total_upper": "0.0137",
+                    "total_lower": "0.0137"
+                },
+                "obs@2": {
+                    "name": "a1_T1",
+                    "value": "-0.992",
+                    "total_upper": "0.168",
+                    "total_lower": "0.168"
+                },
+                "obs@3": {
+                    "name": "a0_T2",
+                    "value": "0.2460",
+                    "total_upper": "0.0108",
+                    "total_lower": "0.0108"
+                },
+                "obs@4": {
+                    "name": "a1_T2",
+                    "value": "0.169",
+                    "total_upper": "0.124",
+                    "total_lower": "0.124"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Symmetric errors cover statistics, the fit and quark-mass extrapolation; the paper's 5% matching systematic (Table VI) is not included. a0 and a1 are the fit parameters, which equal the physical-point coefficients (the fit's c01 and c01s quark-mass slopes vanish at Delta x = Delta x_s = 0); t0 = 12 GeV^2, t+ = (m_B(s)+m_V)^2, and the pole factor P(t;dm) = 1 - t/(m_B(s)+dm)^2 uses dm = -42 MeV for T1 and 350 MeV for T2 (Table V). T1 and T2 come from a single fit with the constraint T1(0) = T2(0), separately from the other form factors, so no cross-form-factor correlations are published. The T2 pole mass in Table V and in the figure file name is 350 MeV; the 440 MeV in the table caption is a typo.",
+            "correlation": [
+                [
+                    1.0,
+                    0.09,
+                    0.71,
+                    0.65
+                ],
+                [
+                    0.09,
+                    1.0,
+                    0.72,
+                    0.78
+                ],
+                [
+                    0.71,
+                    0.72,
+                    1.0,
+                    0.88
+                ],
+                [
+                    0.65,
+                    0.78,
+                    0.88,
+                    1.0
+                ]
+            ]
+        }
+    ]
+}
