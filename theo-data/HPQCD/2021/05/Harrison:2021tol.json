@@ -1,0 +1,133 @@
+{
+    "inspire-hep": "[Harrison:2021tol](https://inspirehep.net/literature/1864871)",
+    "author": "Harrison, J. and Davies, C.T.",
+    "collaboration": "HPQCD",
+    "title": "$B_s \\rightarrow D_s^*$ Form Factors for the full $q^2$ range from Lattice QCD",
+    "abstract": "We compute the Standard Model semileptonic vector and axial-vector form factors for $B_s\\to D_s^*$ decay across the full $q^2$ range using lattice QCD. We use the Highly Improved Staggered Quark (HISQ) action for all valence quarks, enabling us to normalise weak currents nonperturbatively. We use gluon field configurations including $u$, $d$, $s$ and $c$ HISQ sea quarks and multiple HISQ heavy quarks with masses from the $c$ mass up to that of the $b$ on our finest lattices. We determine the physical form factors, with which we construct the differential and total rates for $\\Gamma(B_s^0\\to D_s^{*-}\\ell^+{\\nu}_\\ell)$. We find $\\Gamma_{\\ell=e}/|\\eta_\\mathrm{EW}V_{cb}|^2=2.07(17)_\\mathrm{latt}(2)_\\mathrm{EM}\\times 10^{13} ~\\mathrm{s}^{-1}$, $\\Gamma_{\\ell=\\mu}/|\\eta_\\mathrm{EW}V_{cb}|^2=2.06(16)_\\mathrm{latt}(2)_\\mathrm{EM}\\times 10^{13} ~\\mathrm{s}^{-1}$ and $\\Gamma_{\\ell=\\tau}/|\\eta_\\mathrm{EW}V_{cb}|^2=5.14(37)_\\mathrm{latt}(5)_\\mathrm{EM}\\times 10^{12} ~\\mathrm{s}^{-1}$, where $\\eta_\\mathrm{EW}$ contains the electroweak correction to $G_F$, the first uncertainty is from our lattice calculation, and the second allows for long-distance QED effects. We compute the ratio $R(D_s^{*-})\\equiv \\Gamma_{\\ell=\\tau}/\\Gamma_{\\ell=\\mu}=0.2490(60)_\\mathrm{latt}(35)_\\mathrm{EM}$ and obtain a value for the ratio of decay rates $\\Gamma_{\\ell=\\mu}(B_s\\to D_s)/\\Gamma_{\\ell=\\mu}(B_s\\to D_s^*)=0.443(40)_\\mathrm{latt}(4)_\\mathrm{EM}$, which agrees well with recent LHCb results. We determine $|V_{cb}|=42.2 (1.5)_\\mathrm{latt}(1.7)_\\mathrm{exp}(0.4)_\\mathrm{EM} \\times 10^{-3}$ by combining our lattice results across the full q^2 range with experimental results from LHCb. A comparison of our results to the normalised differential decay rate from LHCb shows good agreement. We also test the impact of new physics couplings on observables sensitive to lepton flavor universality violation.",
+    "arxiv": "[hep-lat/2105.11433v2](https://arxiv.org/pdf/2105.11433)",
+    "time": "2021.05.24",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bs0Bar.2.Ds*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_A0",
+                    "value": "0.1047397789",
+                    "total_upper": "0.00566614406",
+                    "total_lower": "0.00566614406"
+                },
+                "obs@2": {
+                    "name": "a1_A0",
+                    "value": "-0.4306269758",
+                    "total_upper": "0.1260110092",
+                    "total_lower": "0.1260110092"
+                },
+                "obs@3": {
+                    "name": "a2_A0",
+                    "value": "-0.1013304455",
+                    "total_upper": "0.9645535514",
+                    "total_lower": "0.9645535514"
+                },
+                "obs@4": {
+                    "name": "a3_A0",
+                    "value": "-0.02507453601",
+                    "total_upper": "0.9989695065",
+                    "total_lower": "0.9989695065"
+                },
+                "obs@5": {
+                    "name": "a0_A1",
+                    "value": "0.05523807429",
+                    "total_upper": "0.002058935612",
+                    "total_lower": "0.002058935612"
+                },
+                "obs@6": {
+                    "name": "a1_A1",
+                    "value": "-0.01011320034",
+                    "total_upper": "0.05365304531",
+                    "total_lower": "0.05365304531"
+                },
+                "obs@7": {
+                    "name": "a2_A1",
+                    "value": "-0.03344471181",
+                    "total_upper": "0.7745094758",
+                    "total_lower": "0.7745094758"
+                },
+                "obs@8": {
+                    "name": "a3_A1",
+                    "value": "0.06348503205",
+                    "total_upper": "0.9883994835",
+                    "total_lower": "0.9883994835"
+                },
+                "obs@9": {
+                    "name": "a0_A2",
+                    "value": "0.05909940833",
+                    "total_upper": "0.01123662897",
+                    "total_lower": "0.01123662897"
+                },
+                "obs@10": {
+                    "name": "a1_A2",
+                    "value": "-0.1087887619",
+                    "total_upper": "0.216190675",
+                    "total_lower": "0.216190675"
+                },
+                "obs@11": {
+                    "name": "a2_A2",
+                    "value": "-0.2472688756",
+                    "total_upper": "0.7897399614",
+                    "total_lower": "0.7897399614"
+                },
+                "obs@12": {
+                    "name": "a3_A2",
+                    "value": "-0.04689433559",
+                    "total_upper": "0.9951818651",
+                    "total_lower": "0.9951818651"
+                },
+                "obs@13": {
+                    "name": "a0_V",
+                    "value": "0.09972089808",
+                    "total_upper": "0.01098618095",
+                    "total_lower": "0.01098618095"
+                },
+                "obs@14": {
+                    "name": "a1_V",
+                    "value": "-0.1825756709",
+                    "total_upper": "0.271564572",
+                    "total_lower": "0.271564572"
+                },
+                "obs@15": {
+                    "name": "a2_V",
+                    "value": "-0.005778560586",
+                    "total_upper": "0.9982338135",
+                    "total_lower": "0.9982338135"
+                },
+                "obs@16": {
+                    "name": "a3_V",
+                    "value": "4.178764291e-05",
+                    "total_upper": "0.9999954929",
+                    "total_lower": "0.9999954929"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "Coefficients of the physical-continuum $z$-expansion $F(q^2)=\\sum_{n=0}^{3}a_n z^n/P(q^2)$ in the $A_0,A_1,A_2,V$ basis, taken from the ancillary file $\\texttt{CORRELATIONS.txt}$ (Table \\texttt{zexpcoefficients} gives the same values rounded). The fit uses $t_0=t_-=(M_{B_s}-M_{D_s^*})^2$ and $t_+=(M_H+M_{D^*})^2$, and $P(q^2)=\\prod z(q^2,M_\\mathrm{pole}^2)$ with the $B_c$ resonances of Table \\texttt{poletab}. The outer functions are not included, so these $a_n$ are not the $a_n^\\mathrm{BGL}$ of Table \\texttt{bglparams}, which reparameterises the same fit and is not stored. Errors are the square roots of the covariance-matrix diagonal.",
+            "correlation": [
+                [1.0, -0.378094, -0.007023, -0.004275, 0.277646, -0.022249, 0.104404, 0.013223, -0.381582, 0.293897, -0.092074, -0.006694, -0.002394, -0.012655, -0.000435, -2.2e-05],
+                [-0.378094, 1.0, -0.168128, 0.00345, 0.047914, 0.00069, -0.21419, -0.027505, 0.033165, -0.478286, 0.186938, 0.015448, 0.003344, 0.012684, 0.000509, 2.6e-05],
+                [-0.007023, -0.168128, 1.0, -0.002318, -0.017228, 0.037419, 0.050605, -0.003768, 0.124604, -0.208724, -0.016772, 0.004254, -0.001888, 0.003397, 0.00031, 1.8e-05],
+                [-0.004275, 0.00345, -0.002318, 1.0, 0.003371, -0.008893, 0.027896, 0.006599, 0.005469, -0.001225, -0.034657, -0.004052, 0.000146, 0.000145, 2.4e-05, 1e-06],
+                [0.277646, 0.047914, -0.017228, 0.003371, 1.0, -0.030427, -0.015831, -0.015879, 0.332719, -0.096566, 0.065996, 0.011241, 0.008341, 0.009546, 0.0008, 4.4e-05],
+                [-0.022249, 0.00069, 0.037419, -0.008893, -0.030427, 1.0, -0.314404, 0.029581, 0.432625, 0.043034, -0.15413, -0.023239, 0.010892, 0.020478, 0.000892, 4.4e-05],
+                [0.104404, -0.21419, 0.050605, 0.027896, -0.015831, -0.314404, 1.0, -0.09184, -0.301559, 0.508675, 0.484963, 0.050265, -0.000702, 0.016541, 0.000803, 4.2e-05],
+                [0.013223, -0.027505, -0.003768, 0.006599, -0.015879, 0.029581, -0.09184, 1.0, -0.005564, -0.007639, 0.114937, 0.01492, -0.001079, 0.000523, 2e-06, 0.0],
+                [-0.381582, 0.033165, 0.124604, 0.005469, 0.332719, 0.432625, -0.301559, -0.005564, 1.0, -0.60332, 0.123694, -0.001915, 0.011548, -0.024995, -0.000755, -3.6e-05],
+                [0.293897, -0.478286, -0.208724, -0.001225, -0.096566, 0.043034, 0.508675, -0.007639, -0.60332, 1.0, -0.209377, 0.010387, -0.002784, 0.044925, 0.001724, 8.5e-05],
+                [-0.092074, 0.186938, -0.016772, -0.034657, 0.065996, -0.15413, 0.484963, 0.114937, 0.123694, -0.209377, 1.0, -0.070819, 0.003861, -0.002808, 0.000103, 7e-06],
+                [-0.006694, 0.015448, 0.004254, -0.004052, 0.011241, -0.023239, 0.050265, 0.01492, -0.001915, 0.010387, -0.070819, 1.0, 0.000879, 4.2e-05, 2.2e-05, 1e-06],
+                [-0.002394, 0.003344, -0.001888, 0.000146, 0.008341, 0.010892, -0.000702, -0.001079, 0.011548, -0.002784, 0.003861, 0.000879, 1.0, -0.450161, 0.015499, 0.000751],
+                [-0.012655, 0.012684, 0.003397, 0.000145, 0.009546, 0.020478, 0.016541, 0.000523, -0.024995, 0.044925, -0.002808, 4.2e-05, -0.450161, 1.0, -0.104264, -0.003208],
+                [-0.000435, 0.000509, 0.00031, 2.4e-05, 0.0008, 0.000892, 0.000803, 2e-06, -0.000755, 0.001724, 0.000103, 2.2e-05, 0.015499, -0.104264, 1.0, -0.000171],
+                [-2.2e-05, 2.6e-05, 1.8e-05, 1e-06, 4.4e-05, 4.4e-05, 4.2e-05, 0.0, -3.6e-05, 8.5e-05, 7e-06, 1e-06, 0.000751, -0.003208, -0.000171, 1.0]
+            ]
+        }
+    ]
+}
