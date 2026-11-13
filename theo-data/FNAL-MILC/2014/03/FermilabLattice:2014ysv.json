@@ -1,0 +1,28 @@
+{
+    "inspire-hep": "[FermilabLattice:2014ysv](https://inspirehep.net/literature/1283613)",
+    "author": "Bailey, J.A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "Update of $|V_{cb}|$ from the $\\bar{B}\\to D^*\\ell\\bar{\\nu}$ Form Factor at Zero Recoil with Three-Flavor Lattice QCD",
+    "abstract": "We compute the zero-recoil form factor for the semileptonic decay $\\bar{B}^0\\to D^{*+}\\ell^-\\bar{\\nu}$ (and modes related by isospin and charge conjugation) using lattice QCD with three flavors of sea quarks. We use an improved staggered action for the light valence and sea quarks (the MILC asqtad configurations), and the Fermilab action for the heavy quarks. Our calculations incorporate higher statistics, finer lattice spacings, and lighter quark masses than our 2008 work. As a byproduct of tuning the new data set, we obtain the $D_s$ and $B_s$ hyperfine splittings with few-MeV accuracy. For the zero-recoil form factor, we obtain $\\mathcal{F}(1)=0.906(4)(12)$, where the first error is statistical and the second is the sum in quadrature of all systematic errors. With the latest HFAG average of experimental results and a cautious treatment of QED effects, we find $|V_{cb}| = (39.04 \\pm 0.49_\\text{expt} \\pm 0.53_\\text{QCD} \\pm 0.19_\\text{QED})\\times10^{-3}$. The QCD error is now commensurate with the experimental error.",
+    "arxiv": "[hep-lat/1403.0635v2](https://arxiv.org/pdf/1403.0635)",
+    "time": "2014.03.03",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "hA1(1)",
+                    "value": "0.906",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.004",
+                    "type@1_lower": "0.004",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.012",
+                    "type@2_lower": "0.012"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "$\\mathcal{F}(1)=h_{A_1}(1)$; the second error is the quadrature sum of all systematic uncertainties, whose individual components are not stored."
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "inspire-hep": "[Detmold:2012vy](https://inspirehep.net/literature/1208115)",
+    "author": "Detmold, W. and others",
+    "title": "Lambda_b -> Lambda l+ l- form factors and differential branching fraction from lattice QCD",
+    "abstract": "We present the first lattice QCD determination of the $\\Lambda_b \\to \\Lambda$ transition form factors that govern the rare baryonic decays $\\Lambda_b \\to \\Lambda l^+ l^-$ at leading order in heavy-quark effective theory. Our calculations are performed with 2+1 flavors of domain-wall fermions, at two lattice spacings and with pion masses down to 227 MeV. Three-point functions with a wide range of source-sink separations are used to extract the ground-state contributions. The form factors are extrapolated to the physical values of the light-quark masses and to the continuum limit. We use our results to calculate the differential branching fractions for $\\Lambda_b \\to \\Lambda l^+ l^-$ with $l=e,\\mu,\\tau$ within the standard model. We find agreement with a recent CDF measurement of the $\\Lambda_b \\to \\Lambda \\mu^+ \\mu^-$ differential branching fraction.",
+    "arxiv": "[hep-lat/1212.4827v1](https://arxiv.org/pdf/1212.4827)",
+    "time": "2012.12.19",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Lambdab0.2.Lambda0.l-.vBar": {
+                "obs@1": {
+                    "name": "F1",
+                    "value": "1.26",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.04",
+                    "type@1_lower": "0.04",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.10",
+                    "type@2_lower": "0.10",
+                    "q2min": "20.2835",
+                    "q2max": "20.2835"
+                },
+                "obs@2": {
+                    "name": "F2",
+                    "value": "-0.288",
+                    "type@1_error": "stat",
+                    "type@1_upper": "0.025",
+                    "type@1_lower": "0.025",
+                    "type@2_error": "syst",
+                    "type@2_upper": "0.023",
+                    "type@2_lower": "0.023",
+                    "q2min": "20.2835",
+                    "q2max": "20.2835"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "Physical-point values at zero recoil (conclusions), where $q^2=q^2_{\\rm max}=(m_{\\Lambda_b}-m_\\Lambda)^2=20.2835$ GeV$^2$ with PDG baryon masses. The two errors are statistical/fitting and systematic; the results use leading-order HQET for the $b$ quark and are matched to $\\overline{\\rm MS}$ at $\\mu=m_b$. The dipole fit parameters, the bare lattice tables and the derived ratio $F_2/F_1$ are not stored."
+        }
+    ]
+}

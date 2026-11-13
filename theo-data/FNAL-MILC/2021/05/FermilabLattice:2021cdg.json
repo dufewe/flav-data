@@ -1,0 +1,479 @@
+{
+    "inspire-hep": "[FermilabLattice:2021cdg](https://inspirehep.net/literature/1865940)",
+    "author": "Bazavov, A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "Semileptonic form factors for $B \\to D^\\ast\\ell\\nu$ at nonzero recoil from 2 + 1-flavor lattice QCD",
+    "abstract": "We present the first unquenched lattice-QCD calculation of the form factors for the decay $B\\rightarrow D^\\ast\\ell\\nu$ at nonzero recoil. Our analysis includes 15 MILC ensembles with $N_f=2+1$ flavors of asqtad sea quarks, with a strange quark mass close to its physical mass. The lattice spacings range from $a\\approx 0.15$ fm down to $0.045$ fm, while the ratio between the light- and the strange-quark masses ranges from 0.05 to 0.4. The valence $b$ and $c$ quarks are treated using the Wilson-clover action with the Fermilab interpretation, whereas the light sector employs asqtad staggered fermions. We extrapolate our results to the physical point in the continuum limit using rooted staggered heavy-light meson chiral perturbation theory. Then we apply a model-independent parametrization to extend the form factors to the full kinematic range. With this parametrization we perform a joint lattice-QCD/experiment fit using several experimental datasets to determine the CKM matrix element $|V_{cb}|$. We obtain $\\left|V_{cb}\\right| = (38.40 \\pm 0.68_{\\textrm{th}} \\pm 0.34_{\\textrm{exp}} \\pm 0.18_{\\textrm{EM}})\\times 10^{-3}$. The first error is theoretical, the second comes from experiment and the last one includes electromagnetic and electroweak uncertainties, with an overall $\\chi^2\\text{/dof} = 126/84$, which illustrates the tensions between the experimental data sets, and between theory and experiment. This result is in agreement with previous exclusive determinations, but the tension with the inclusive determination remains. Finally, we integrate the differential decay rate obtained solely from lattice data to predict $R(D^\\ast) = 0.265 \\pm 0.013$, which confirms the current tension between theory and experiment.",
+    "arxiv": "[hep-lat/2105.14019v3](https://arxiv.org/pdf/2105.14019)",
+    "time": "2021.05.28",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_g",
+                    "value": "0.03303572421",
+                    "total_upper": "0.0012318363",
+                    "total_lower": "0.0012318363"
+                },
+                "obs@2": {
+                    "name": "a1_g",
+                    "value": "-0.1561784311",
+                    "total_upper": "0.054943616",
+                    "total_lower": "0.054943616"
+                },
+                "obs@3": {
+                    "name": "a2_g",
+                    "value": "-0.1203586756",
+                    "total_upper": "0.98322026",
+                    "total_lower": "0.98322026"
+                },
+                "obs@4": {
+                    "name": "a0_f",
+                    "value": "0.01229194081",
+                    "total_upper": "0.00023097828",
+                    "total_lower": "0.00023097828"
+                },
+                "obs@5": {
+                    "name": "a1_f",
+                    "value": "-0.003363095948",
+                    "total_upper": "0.012234737",
+                    "total_lower": "0.012234737"
+                },
+                "obs@6": {
+                    "name": "a2_f",
+                    "value": "0.06700760806",
+                    "total_upper": "0.52651678",
+                    "total_lower": "0.52651678"
+                },
+                "obs@7": {
+                    "name": "a1_F1",
+                    "value": "-0.005812936726",
+                    "total_upper": "0.0024752643",
+                    "total_lower": "0.0024752643"
+                },
+                "obs@8": {
+                    "name": "a2_F1",
+                    "value": "-0.0132330783",
+                    "total_upper": "0.090624265",
+                    "total_lower": "0.090624265"
+                },
+                "obs@9": {
+                    "name": "a0_F2",
+                    "value": "0.05086532459",
+                    "total_upper": "0.0015338463",
+                    "total_lower": "0.0015338463"
+                },
+                "obs@10": {
+                    "name": "a1_F2",
+                    "value": "-0.3282753382",
+                    "total_upper": "0.066905035",
+                    "total_lower": "0.066905035"
+                },
+                "obs@11": {
+                    "name": "a2_F2",
+                    "value": "-0.02336165582",
+                    "total_upper": "0.95901127",
+                    "total_lower": "0.95901127"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "note": "Quadratic BGL fit coefficients from the ancillary file $\\texttt{FitResults.PyDat}$ (the rounded values appear in Table \\texttt{SynthResults}/\\texttt{CompResults}). Each form factor is $P_i(z)\\phi_i(z)F_i(z)=\\sum_n a_n z^n$ with the Blaschke factors and outer functions of Sec.~5.1; $z=(\\sqrt{w+1}-\\sqrt{2})/(\\sqrt{w+1}+\\sqrt{2})$, so $t_0=t_-$. The coefficients multiply $g$ ($a_n$), $f$ ($b_n$), $\\mathcal{F}_1$ ($c_n$) and $\\mathcal{F}_2$ ($d_n$). The constant term $c_0$ is fixed by the zero-recoil constraint $\\mathcal{F}_1(1)=M_B(1-r)f(1)$ and is not stored; quadratic and higher coefficients carry $0(1)$ priors. $|V_{cb}|$ and $R(D^\\ast)$ are fit outputs and are not stored. This group is the fit to lattice-QCD synthetic data only.",
+            "correlation": [
+                [
+                    1.0,
+                    -0.194423,
+                    0.020145,
+                    0.122236,
+                    -0.016185,
+                    -0.011371,
+                    0.071386,
+                    -0.022345,
+                    0.357457,
+                    -0.094432,
+                    0.000448
+                ],
+                [
+                    -0.194423,
+                    1.0,
+                    -0.281757,
+                    -0.048514,
+                    0.23812,
+                    0.173875,
+                    0.173639,
+                    0.177936,
+                    -0.057426,
+                    0.423922,
+                    0.031943
+                ],
+                [
+                    0.020145,
+                    -0.281757,
+                    1.0,
+                    0.005439,
+                    -0.006455,
+                    0.009797,
+                    -0.002205,
+                    -0.000632,
+                    0.006251,
+                    -0.006367,
+                    0.008938
+                ],
+                [
+                    0.122236,
+                    -0.048514,
+                    0.005439,
+                    1.0,
+                    -0.168782,
+                    0.047197,
+                    -0.024418,
+                    0.041627,
+                    0.668921,
+                    -0.050907,
+                    0.010579
+                ],
+                [
+                    -0.016185,
+                    0.23812,
+                    -0.006455,
+                    -0.168782,
+                    1.0,
+                    -0.522708,
+                    0.747691,
+                    -0.389546,
+                    -0.136839,
+                    0.549593,
+                    -0.171479
+                ],
+                [
+                    -0.011371,
+                    0.173875,
+                    0.009797,
+                    0.047197,
+                    -0.522708,
+                    1.0,
+                    -0.411417,
+                    0.769446,
+                    0.006097,
+                    -0.008854,
+                    0.321871
+                ],
+                [
+                    0.071386,
+                    0.173639,
+                    -0.002205,
+                    -0.024418,
+                    0.747691,
+                    -0.411417,
+                    1.0,
+                    -0.378522,
+                    0.222875,
+                    0.562845,
+                    -0.144637
+                ],
+                [
+                    -0.022345,
+                    0.177936,
+                    -0.000632,
+                    0.041627,
+                    -0.389546,
+                    0.769446,
+                    -0.378522,
+                    1.0,
+                    -0.063083,
+                    0.247537,
+                    0.349942
+                ],
+                [
+                    0.357457,
+                    -0.057426,
+                    0.006251,
+                    0.668921,
+                    -0.136839,
+                    0.006097,
+                    0.222875,
+                    -0.063083,
+                    1.0,
+                    -0.193233,
+                    0.004238
+                ],
+                [
+                    -0.094432,
+                    0.423922,
+                    -0.006367,
+                    -0.050907,
+                    0.549593,
+                    -0.008854,
+                    0.562845,
+                    0.247537,
+                    -0.193233,
+                    1.0,
+                    -0.172394
+                ],
+                [
+                    0.000448,
+                    0.031943,
+                    0.008938,
+                    0.010579,
+                    -0.171479,
+                    0.321871,
+                    -0.144637,
+                    0.349942,
+                    0.004238,
+                    -0.172394,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "B0Bar.2.D*+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_g",
+                    "value": "0.03205313971",
+                    "total_upper": "0.0010405588",
+                    "total_lower": "0.0010405588"
+                },
+                "obs@2": {
+                    "name": "a1_g",
+                    "value": "-0.1471770188",
+                    "total_upper": "0.031031672",
+                    "total_lower": "0.031031672"
+                },
+                "obs@3": {
+                    "name": "a2_g",
+                    "value": "-0.6337064009",
+                    "total_upper": "0.19818958",
+                    "total_lower": "0.19818958"
+                },
+                "obs@4": {
+                    "name": "a0_f",
+                    "value": "0.01248759737",
+                    "total_upper": "0.00021842236",
+                    "total_lower": "0.00021842236"
+                },
+                "obs@5": {
+                    "name": "a1_f",
+                    "value": "0.002105673197",
+                    "total_upper": "0.0042815672",
+                    "total_lower": "0.0042815672"
+                },
+                "obs@6": {
+                    "name": "a2_f",
+                    "value": "0.07296618828",
+                    "total_upper": "0.10577642",
+                    "total_lower": "0.10577642"
+                },
+                "obs@7": {
+                    "name": "a1_F1",
+                    "value": "0.0006153773956",
+                    "total_upper": "0.00086348519",
+                    "total_lower": "0.00086348519"
+                },
+                "obs@8": {
+                    "name": "a2_F1",
+                    "value": "0.06002149941",
+                    "total_upper": "0.026398552",
+                    "total_lower": "0.026398552"
+                },
+                "obs@9": {
+                    "name": "a3_F1",
+                    "value": "-0.9387403624",
+                    "total_upper": "0.48410365",
+                    "total_lower": "0.48410365"
+                },
+                "obs@10": {
+                    "name": "a0_F2",
+                    "value": "0.053082542",
+                    "total_upper": "0.0013619976",
+                    "total_lower": "0.0013619976"
+                },
+                "obs@11": {
+                    "name": "a1_F2",
+                    "value": "-0.2008883502",
+                    "total_upper": "0.042038761",
+                    "total_lower": "0.042038761"
+                },
+                "obs@12": {
+                    "name": "a2_F2",
+                    "value": "0.0006894293922",
+                    "total_upper": "0.89797418",
+                    "total_lower": "0.89797418"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BGL",
+            "note": "Quadratic BGL fit coefficients from the ancillary file $\\texttt{FitResults.PyDat}$ (the rounded values appear in Table \\texttt{SynthResults}/\\texttt{CompResults}). Each form factor is $P_i(z)\\phi_i(z)F_i(z)=\\sum_n a_n z^n$ with the Blaschke factors and outer functions of Sec.~5.1; $z=(\\sqrt{w+1}-\\sqrt{2})/(\\sqrt{w+1}+\\sqrt{2})$, so $t_0=t_-$. The coefficients multiply $g$ ($a_n$), $f$ ($b_n$), $\\mathcal{F}_1$ ($c_n$) and $\\mathcal{F}_2$ ($d_n$). The constant term $c_0$ is fixed by the zero-recoil constraint $\\mathcal{F}_1(1)=M_B(1-r)f(1)$ and is not stored; quadratic and higher coefficients carry $0(1)$ priors. $|V_{cb}|$ and $R(D^\\ast)$ are fit outputs and are not stored. This group is the preferred joint fit to lattice-QCD synthetic data, Belle's 2018 untagged dataset and BaBar's 2019 synthetic data; it includes the cubic term $c_3$.",
+            "correlation": [
+                [
+                    1.0,
+                    -0.759917,
+                    -0.562664,
+                    0.273817,
+                    -0.177763,
+                    0.353847,
+                    0.034335,
+                    0.242953,
+                    -0.22588,
+                    0.414149,
+                    -0.22049,
+                    0.018415
+                ],
+                [
+                    -0.759917,
+                    1.0,
+                    0.643766,
+                    0.151288,
+                    0.254049,
+                    -0.578431,
+                    0.161957,
+                    -0.377583,
+                    0.282338,
+                    -0.057594,
+                    0.286338,
+                    -0.03749
+                ],
+                [
+                    -0.562664,
+                    0.643766,
+                    1.0,
+                    0.144666,
+                    -0.190117,
+                    -0.011383,
+                    -0.159224,
+                    0.267974,
+                    -0.240784,
+                    -0.020242,
+                    0.176569,
+                    -0.027357
+                ],
+                [
+                    0.273817,
+                    0.151288,
+                    0.144666,
+                    1.0,
+                    -0.022487,
+                    -0.0603,
+                    0.013333,
+                    -0.048006,
+                    0.032784,
+                    0.691938,
+                    0.007899,
+                    -0.014803
+                ],
+                [
+                    -0.177763,
+                    0.254049,
+                    -0.190117,
+                    -0.022487,
+                    1.0,
+                    -0.546939,
+                    0.570964,
+                    -0.203651,
+                    -0.073769,
+                    -0.110564,
+                    0.344584,
+                    -0.04575
+                ],
+                [
+                    0.353847,
+                    -0.578431,
+                    -0.011383,
+                    -0.0603,
+                    -0.546939,
+                    1.0,
+                    -0.227315,
+                    0.144044,
+                    -0.004161,
+                    0.078295,
+                    -0.306766,
+                    0.054578
+                ],
+                [
+                    0.034335,
+                    0.161957,
+                    -0.159224,
+                    0.013333,
+                    0.570964,
+                    -0.227315,
+                    1.0,
+                    -0.437409,
+                    -0.153141,
+                    0.138472,
+                    0.252137,
+                    -0.05856
+                ],
+                [
+                    0.242953,
+                    -0.377583,
+                    0.267974,
+                    -0.048006,
+                    -0.203651,
+                    0.144044,
+                    -0.437409,
+                    1.0,
+                    -0.776735,
+                    -0.054468,
+                    0.006882,
+                    -0.006101
+                ],
+                [
+                    -0.22588,
+                    0.282338,
+                    -0.240784,
+                    0.032784,
+                    -0.073769,
+                    -0.004161,
+                    -0.153141,
+                    -0.776735,
+                    1.0,
+                    -0.035198,
+                    -0.152248,
+                    0.054556
+                ],
+                [
+                    0.414149,
+                    -0.057594,
+                    -0.020242,
+                    0.691938,
+                    -0.110564,
+                    0.078295,
+                    0.138472,
+                    -0.054468,
+                    -0.035198,
+                    1.0,
+                    -0.379514,
+                    0.011032
+                ],
+                [
+                    -0.22049,
+                    0.286338,
+                    0.176569,
+                    0.007899,
+                    0.344584,
+                    -0.306766,
+                    0.252137,
+                    0.006882,
+                    -0.152248,
+                    -0.379514,
+                    1.0,
+                    -0.418102
+                ],
+                [
+                    0.018415,
+                    -0.03749,
+                    -0.027357,
+                    -0.014803,
+                    -0.04575,
+                    0.054578,
+                    -0.05856,
+                    -0.006101,
+                    0.054556,
+                    0.011032,
+                    -0.418102,
+                    1.0
+                ]
+            ]
+        }
+    ]
+}

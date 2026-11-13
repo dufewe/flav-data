@@ -1,0 +1,137 @@
+{
+    "inspire-hep": "[Bordone:2022drp](https://inspirehep.net/literature/2153688)",
+    "author": "Bordone, M., Khodjamirian, A., and Mannel, T.",
+    "title": "New Sum Rules for the $B_c \\to J/\\psi$ Form Factors",
+    "abstract": "We derive new sum rules for the form factors of the $B_c\\to J/\\psi\\, \\ell \\bar{\\nu}_\\ell$ semileptonic transitions, employing the vacuum-to-$B_c$ correlation function of the $J/\\psi$-interpolating and $b\\to c$ weak currents. In the heavy quark limit and at a space-like momentum transfer to the weak current, a local operator-product expansion is valid for this correlation function. As a result, in the leading power, the non-perturbative input is reduced to the decay constant of $B_c$ meson. Furthermore, applying hadronic dispersion relation in the $J/\\psi$ channel, we find that a non-vanishing OPE spectral density in the duality interval of $J/\\psi$ emerges only at $\\mathcal{O}(\\alpha_s)$. We calculate this density in the relevant kinematic regime. The $B_c\\to J/\\psi$ form factors at space-like momentum transfer are then calculated from the new sum rules.",
+    "arxiv": "[hep-ph/2209.08851v2](https://arxiv.org/pdf/2209.08851)",
+    "time": "2022.09.19",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bc-.2.J/psi0.l-.vBar": {
+                "obs@1": {
+                    "name": "V",
+                    "value": "0.044",
+                    "total_upper": "0.016",
+                    "total_lower": "0.013",
+                    "q2min": "-20",
+                    "q2max": "-20"
+                },
+                "obs@2": {
+                    "name": "V",
+                    "value": "0.112",
+                    "total_upper": "0.043",
+                    "total_lower": "0.035",
+                    "q2min": "-10",
+                    "q2max": "-10"
+                },
+                "obs@3": {
+                    "name": "V",
+                    "value": "0.705",
+                    "total_upper": "0.364",
+                    "total_lower": "0.253",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@4": {
+                    "name": "A1",
+                    "value": "0.042",
+                    "total_upper": "0.015",
+                    "total_lower": "0.012",
+                    "q2min": "-20",
+                    "q2max": "-20"
+                },
+                "obs@5": {
+                    "name": "A1",
+                    "value": "0.090",
+                    "total_upper": "0.034",
+                    "total_lower": "0.027",
+                    "q2min": "-10",
+                    "q2max": "-10"
+                },
+                "obs@6": {
+                    "name": "A1",
+                    "value": "0.451",
+                    "total_upper": "0.222",
+                    "total_lower": "0.158",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@7": {
+                    "name": "A0",
+                    "value": "0.028",
+                    "total_upper": "0.010",
+                    "total_lower": "0.008",
+                    "q2min": "-20",
+                    "q2max": "-20"
+                },
+                "obs@8": {
+                    "name": "A0",
+                    "value": "0.071",
+                    "total_upper": "0.026",
+                    "total_lower": "0.021",
+                    "q2min": "-10",
+                    "q2max": "-10"
+                },
+                "obs@9": {
+                    "name": "A0",
+                    "value": "0.443",
+                    "total_upper": "0.219",
+                    "total_lower": "0.156",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@10": {
+                    "name": "A2",
+                    "value": "0.033",
+                    "total_upper": "0.012",
+                    "total_lower": "0.010",
+                    "q2min": "-20",
+                    "q2max": "-20"
+                },
+                "obs@11": {
+                    "name": "A2",
+                    "value": "0.081",
+                    "total_upper": "0.031",
+                    "total_lower": "0.025",
+                    "q2min": "-10",
+                    "q2max": "-10"
+                },
+                "obs@12": {
+                    "name": "A2",
+                    "value": "0.466",
+                    "total_upper": "0.228",
+                    "total_lower": "0.162",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@13": {
+                    "name": "A12",
+                    "value": "0.009",
+                    "total_upper": "0.003",
+                    "total_lower": "0.002",
+                    "q2min": "-20",
+                    "q2max": "-20"
+                },
+                "obs@14": {
+                    "name": "A12",
+                    "value": "0.017",
+                    "total_upper": "0.006",
+                    "total_lower": "0.005",
+                    "q2min": "-10",
+                    "q2max": "-10"
+                },
+                "obs@15": {
+                    "name": "A12",
+                    "value": "0.085",
+                    "total_upper": "0.042",
+                    "total_lower": "0.030",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "QCDSR",
+            "note": "Values of $V$, $A_1$, $A_0$, $A_2$ and $A_{12}$ at $q^2=-20$, $-10$ and $0$ GeV$^2$ (Table 3). The central values are medians and the errors the 68% confidence intervals, which are asymmetric because the predictions are non-Gaussian. The sum rules hold at space-like momentum transfer $q^2\\lesssim 0$; the source does not publish a correlation matrix, and states that its form factors are highly correlated, preventing a reliable extrapolation to $0<q^2<(m_{B_c}-m_{J/\\psi})^2$. The HPQCD values quoted for comparison at $q^2=0$ are not stored."
+        }
+    ]
+}

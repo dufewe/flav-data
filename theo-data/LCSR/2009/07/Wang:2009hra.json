@@ -1,0 +1,47 @@
+{
+    "inspire-hep": "[Wang:2009hra](https://inspirehep.net/literature/826617)",
+    "author": "Wang, Y.-M., Shen, Y.-L., and Lu, C.-D.",
+    "title": "$\\Lambda_b \\to p, \\Lambda$ transition form factors from QCD light-cone sum rules",
+    "abstract": "Light-cone sum rules for the $\\Lambda_b \\to p, \\Lambda$ transition form factors are derived from the correlation functions expanded by the twist of the distribution amplitudes of $\\Lambda_b$ baryon. In terms of the $\\Lambda_b$ three-quark distribution amplitudes models constrained by the QCD theory, we calculate the form factors at small momentum transfers and compare the results with that estimated in the conventional light-cone sum rules (LCSR) and perturbative QCD approaches. Our results indicate that the two different version of sum rules can lead to the consistent numbers of form factors responsible for $\\Lambda_b \\to p$ transition. The $\\Lambda_b \\to \\Lambda$ transition form factors from LCSR with the asymptotic $\\Lambda$ baryon distribution amplitudes are found to be almost one order larger than that obtained in the $\\Lambda_b$-baryon LCSR, implying that the pre-asymptotic corrections to the baryonic distribution amplitudes are of great importance. Moreover, SU(3) symmetry breaking effect between the form factors $f_1^{\\Lambda_b \\to p}$ and $f_1^{\\Lambda_b \\to \\Lambda}$ are computed as $28^{+14}_{-8} %$ in the framework of $\\Lambda_b$-baryon LCSR.",
+    "arxiv": "[hep-ph/0907.4008v1](https://arxiv.org/pdf/0907.4008)",
+    "time": "2009.07.23",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Lambdab0.2.p+.l-.vBar": {
+                "obs@1": {
+                    "name": "f1",
+                    "value": "0.023",
+                    "total_upper": "0.006",
+                    "total_lower": "0.005",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "f2",
+                    "value": "-0.039",
+                    "total_upper": "0.009",
+                    "total_lower": "0.009",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Values at $q^2=0$ (Table II) from the $\\Lambda_b$-baryon LCSR, not the light-baryon LCSR. Only the Dirac form factors $f_1$ and $f_2$ are given; $f_2$ is in GeV$^{-1}$. Errors combine the Borel-mass, threshold and distribution-amplitude uncertainties; no correlation matrix is published. The $\\xi$-polynomial fit and the plotted $q^2$ dependence are not stored."
+        },
+        {
+            "Lambdab0.2.Lambda0.l-.vBar": {
+                "obs@1": {
+                    "name": "g2",
+                    "value": "0.018",
+                    "total_upper": "0.003",
+                    "total_lower": "0.003",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Value at $q^2=0$ (Table II) from the $\\Lambda_b$-baryon LCSR. At leading order $g_2=f_1$; only $g_2$ is given. Errors combine the Borel-mass, threshold and distribution-amplitude uncertainties; no correlation matrix is published."
+        }
+    ]
+}

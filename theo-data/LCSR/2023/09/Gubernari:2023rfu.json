@@ -1,0 +1,227 @@
+{
+    "inspire-hep": "[Gubernari:2023rfu](https://inspirehep.net/literature/2699633)",
+    "author": "Gubernari, N. and others",
+    "title": "$B\\to D_0^*$ and $B_s\\to D_{s0}^*$ form factors from QCD light-cone sum rules",
+    "abstract": "We present the first application of QCD light-cone sum rules (LCSRs) with $B_{(s)}$-meson distribution amplitudes to the $B_{(s)}\\!\\to\\! D_{(s)0}^*$ form factors, where $D_{(s)0}^*$ is a charmed scalar meson. We consider two scenarios for the $D_0^*$ spectrum. In the first one, we follow the Particle Data Group and consider a single broad resonance $D_0^*(2300)$. In the second one, we assume the existence of two scalar resonances, $D_0^*(2105)$ and $D_0^*(2451)$, as follows from a recent theoretically motivated analysis of $B\\to D\\pi\\pi$ decays. The $B\\!\\to\\! D_0^*$ form factors are calculated in both scenarios, also taking into account the large total width of $D_0^*(2300)$. Furthermore, we calculate the $B_s\\!\\to\\! D_{s0}^*$ form factors, considering in this case only the one-resonance scenario with $D_{s0}(2317)$. In this LCSRs calculation, the $c$-quark mass is kept finite and the $s$-quark mass is taken into account. We also include contributions of the two- and three-particle distribution amplitudes up to twist-four. Our predictions for semileptonic $B\\!\\to\\! D_0^*\\ell\\nu_\\ell$ and $B_s\\!\\to\\! D_{s0}^*\\ell\\nu_\\ell$ branching ratios are compared with the available data and HQET-based predictions. As a byproduct, we also obtain the $D_0^*$- and $D_{s0}^*$-meson decay constants and predict the lepton flavour universality ratios $R(D_0^*)$ and $R(D_{s0}^*)$.",
+    "arxiv": "[hep-ph/2309.10165v2](https://arxiv.org/pdf/2309.10165)",
+    "time": "2023.09.18",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "B0Bar.2.D0*+(2300).l-.vBar": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "-0.35",
+                    "total_upper": "0.20",
+                    "total_lower": "0.21",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "f+",
+                    "value": "-0.41",
+                    "total_upper": "0.22",
+                    "total_lower": "0.25",
+                    "q2min": "4.31216",
+                    "q2max": "4.31216"
+                },
+                "obs@3": {
+                    "name": "f+",
+                    "value": "-0.48",
+                    "total_upper": "0.26",
+                    "total_lower": "0.30",
+                    "q2min": "8.62432",
+                    "q2max": "8.62432"
+                },
+                "obs@4": {
+                    "name": "f-",
+                    "value": "0.49",
+                    "total_upper": "0.34",
+                    "total_lower": "0.37",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@5": {
+                    "name": "f-",
+                    "value": "0.57",
+                    "total_upper": "0.40",
+                    "total_lower": "0.45",
+                    "q2min": "4.31216",
+                    "q2max": "4.31216"
+                },
+                "obs@6": {
+                    "name": "f-",
+                    "value": "0.67",
+                    "total_upper": "0.47",
+                    "total_lower": "0.56",
+                    "q2min": "8.62432",
+                    "q2max": "8.62432"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Values of $f_+$ and $f_-$ at $q^2=0$, $\\frac12 q^2_\\mathrm{max}$ and $q^2_\\mathrm{max}=(m_B-m_{D_0^*})^2$ (Table V) for scenario 1: a single broad $D_0^*(2300)$ with $M=2343$ MeV and $\\Gamma=229$ MeV. The numeric $q^2$ points use $m_B=5.27972$ GeV. Errors are the quoted asymmetric intervals; no correlation matrix is published. The decay constants, branching ratios and $R(D_0^*)$ are not stored."
+        },
+        {
+            "Bs0Bar.2.Ds0*+(2317).l-.vBar": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "-0.24",
+                    "total_upper": "0.21",
+                    "total_lower": "0.21",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "f+",
+                    "value": "-0.28",
+                    "total_upper": "0.25",
+                    "total_lower": "0.25",
+                    "q2min": "4.6486",
+                    "q2max": "4.6486"
+                },
+                "obs@3": {
+                    "name": "f+",
+                    "value": "-0.32",
+                    "total_upper": "0.29",
+                    "total_lower": "0.31",
+                    "q2min": "9.29719",
+                    "q2max": "9.29719"
+                },
+                "obs@4": {
+                    "name": "f-",
+                    "value": "0.27",
+                    "total_upper": "0.36",
+                    "total_lower": "0.37",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@5": {
+                    "name": "f-",
+                    "value": "0.30",
+                    "total_upper": "0.43",
+                    "total_lower": "0.45",
+                    "q2min": "4.6486",
+                    "q2max": "4.6486"
+                },
+                "obs@6": {
+                    "name": "f-",
+                    "value": "0.34",
+                    "total_upper": "0.52",
+                    "total_lower": "0.56",
+                    "q2min": "9.29719",
+                    "q2max": "9.29719"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Values of $f_+$ and $f_-$ at $q^2=0$, $\\frac12 q^2_\\mathrm{max}$ and $q^2_\\mathrm{max}=(m_{B_s}-m_{D_{s0}^*})^2$ (Table V) for the single-resonance scenario $D_{s0}^*(2317)$ with $M=2317.8$ MeV and $\\Gamma<3.8$ MeV. The numeric $q^2$ points use $m_{B_s}=5.36693$ GeV. Errors are the quoted asymmetric intervals; no correlation matrix is published. The decay constants, branching ratios and $R(D_{s0}^*)$ are not stored."
+        },
+        {
+            "B0Bar.2.D0*+(2105).l-.vBar": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "-0.20",
+                    "total_upper": "0.15",
+                    "total_lower": "0.14",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "f+",
+                    "value": "-0.23",
+                    "total_upper": "0.18",
+                    "total_lower": "0.17",
+                    "q2min": "5.03942",
+                    "q2max": "5.03942"
+                },
+                "obs@3": {
+                    "name": "f+",
+                    "value": "-0.27",
+                    "total_upper": "0.21",
+                    "total_lower": "0.21",
+                    "q2min": "10.0788",
+                    "q2max": "10.0788"
+                },
+                "obs@4": {
+                    "name": "f-",
+                    "value": "0.25",
+                    "total_upper": "0.25",
+                    "total_lower": "0.24",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@5": {
+                    "name": "f-",
+                    "value": "0.29",
+                    "total_upper": "0.30",
+                    "total_lower": "0.30",
+                    "q2min": "5.03942",
+                    "q2max": "5.03942"
+                },
+                "obs@6": {
+                    "name": "f-",
+                    "value": "0.34",
+                    "total_upper": "0.36",
+                    "total_lower": "0.37",
+                    "q2min": "10.0788",
+                    "q2max": "10.0788"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Values of $f_+$ and $f_-$ at $q^2=0$, $\\frac12 q^2_\\mathrm{max}$ and $q^2_\\mathrm{max}=(m_B-m_{D_0^*})^2$ (Table V) for scenario 2, where the ground state is $D_0^*(2105)$ with $M=2105$ MeV and $\\Gamma=204$ MeV. The numeric $q^2$ points use $m_B=5.27972$ GeV. Errors are the quoted asymmetric intervals; no correlation matrix is published. The decay constants, branching ratios and $R(D_0^*)$ are not stored."
+        },
+        {
+            "B0Bar.2.D0*+(2451).l-.vBar": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.22",
+                    "total_upper": "0.16",
+                    "total_lower": "0.23",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "f+",
+                    "value": "0.25",
+                    "total_upper": "0.19",
+                    "total_lower": "0.28",
+                    "q2min": "4.00083",
+                    "q2max": "4.00083"
+                },
+                "obs@3": {
+                    "name": "f+",
+                    "value": "0.30",
+                    "total_upper": "0.23",
+                    "total_lower": "0.35",
+                    "q2min": "8.00166",
+                    "q2max": "8.00166"
+                },
+                "obs@4": {
+                    "name": "f-",
+                    "value": "-0.49",
+                    "total_upper": "0.24",
+                    "total_lower": "0.22",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@5": {
+                    "name": "f-",
+                    "value": "-0.58",
+                    "total_upper": "0.29",
+                    "total_lower": "0.28",
+                    "q2min": "4.00083",
+                    "q2max": "4.00083"
+                },
+                "obs@6": {
+                    "name": "f-",
+                    "value": "-0.70",
+                    "total_upper": "0.35",
+                    "total_lower": "0.35",
+                    "q2min": "8.00166",
+                    "q2max": "8.00166"
+                }
+            },
+            "dataset": "LCSR",
+            "note": "Values of $f_+$ and $f_-$ at $q^2=0$, $\\frac12 q^2_\\mathrm{max}$ and $q^2_\\mathrm{max}=(m_B-m_{D_0^*})^2$ (Table V) for the second scalar resonance $D_0^{*\\prime}=D_0^*(2451)$ of scenario 2, with $M=2451$ MeV and $\\Gamma=268$ MeV. The numeric $q^2$ points use $m_B=5.27972$ GeV. Errors are the quoted asymmetric intervals; no correlation matrix is published."
+        }
+    ]
+}
