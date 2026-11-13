@@ -1,0 +1,149 @@
+{
+    "inspire-hep": "[FermilabLattice:2019ikx](https://inspirehep.net/literature/1712821)",
+    "author": "Bazavov, A. and others",
+    "collaboration": "FNAL/MILC",
+    "title": "$B_s\\to K\\ell\\nu$ decay from lattice QCD",
+    "abstract": "We use lattice QCD to calculate the form factors $f_+(q^2)$ and $f_0(q^2)$ for the semileptonic decay $B_s\\to K\\ell\\nu$. Our calculation uses six MILC asqtad 2+1 flavor gauge-field ensembles with three lattice spacings. At the smallest and largest lattice spacing the light-quark sea mass is set to 1/10 the strange-quark mass. At the intermediate lattice spacing, we use four values for the light-quark sea mass ranging from 1/5 to 1/20 of the strange-quark mass. We use the asqtad improved staggered action for the light valence quarks, and the clover action with the Fermilab interpolation for the heavy valence bottom quark. We use SU(2) hard-kaon heavy-meson rooted staggered chiral perturbation theory to take the chiral-continuum limit. A functional $z$ expansion is used to extend the form factors to the full kinematic range. We present predictions for the differential decay rate for both $B_s\\to K\\mu\\nu$ and $B_s\\to K\\tau\\nu$. We also present results for the forward-backward asymmetry, the lepton polarization asymmetry, ratios of the scalar and vector form factors for the decays $B_s\\to K\\ell\\nu$ and $B_s\\to D_s \\ell\\nu$. Our results, together with future experimental measurements, can be used to determine the magnitude of the Cabibbo-Kobayashi-Maskawa matrix element $|V_{ub}|$.",
+    "arxiv": "[hep-lat/1901.02561v1](https://arxiv.org/pdf/1901.02561)",
+    "time": "2019.01.08",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bs0.2.K-.l+.v": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.3623",
+                    "total_upper": "0.0178",
+                    "total_lower": "0.0178"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.9559",
+                    "total_upper": "0.1307",
+                    "total_lower": "0.1307"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.8525",
+                    "total_upper": "0.4783",
+                    "total_lower": "0.4783"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "0.2785",
+                    "total_upper": "0.6892",
+                    "total_lower": "0.6892"
+                },
+                "obs@5": {
+                    "name": "a0_f0",
+                    "value": "0.1981",
+                    "total_upper": "0.0101",
+                    "total_lower": "0.0101"
+                },
+                "obs@6": {
+                    "name": "a1_f0",
+                    "value": "-0.1661",
+                    "total_upper": "0.1130",
+                    "total_lower": "0.1130"
+                },
+                "obs@7": {
+                    "name": "a2_f0",
+                    "value": "-0.6430",
+                    "total_upper": "0.4385",
+                    "total_lower": "0.4385"
+                },
+                "obs@8": {
+                    "name": "a3_f0",
+                    "value": "-0.3754",
+                    "total_upper": "0.4535",
+                    "total_lower": "0.4535"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BCL",
+            "note": "Values are the paper's b_i from the preferred K=4 BCL fit (Table X), including the B*(1-) and B*(0+) pole factors and the -(-1)^(k-K)(k/K) z^K subtraction in f+, so a0 is not f(q2=0). The kinematic constraint f+(0)=f0(0) is imposed with width 1e-10, leaving the correlation matrix with one near-zero eigenvalue; invert it only after dropping one row and column (the paper drops b3^0). The z mapping uses tcut=(M_B+M_pi)^2=29.3 GeV^2 and t0=16.5 GeV^2, so the coefficients are not directly comparable with fits using a different z mapping (e.g. a BsK threshold).",
+            "correlation": [
+                [
+                    1.0,
+                    0.6023,
+                    0.0326,
+                    -0.1288,
+                    0.7122,
+                    0.6035,
+                    0.5659,
+                    0.5516
+                ],
+                [
+                    0.6023,
+                    1.0,
+                    0.4735,
+                    0.2677,
+                    0.7518,
+                    0.9086,
+                    0.9009,
+                    0.8903
+                ],
+                [
+                    0.0326,
+                    0.4735,
+                    1.0,
+                    0.9187,
+                    0.5833,
+                    0.7367,
+                    0.734,
+                    0.7005
+                ],
+                [
+                    -0.1288,
+                    0.2677,
+                    0.9187,
+                    1.0,
+                    0.4355,
+                    0.5553,
+                    0.5633,
+                    0.5461
+                ],
+                [
+                    0.7122,
+                    0.7518,
+                    0.5833,
+                    0.4355,
+                    1.0,
+                    0.8667,
+                    0.7742,
+                    0.7337
+                ],
+                [
+                    0.6035,
+                    0.9086,
+                    0.7367,
+                    0.5553,
+                    0.8667,
+                    1.0,
+                    0.9687,
+                    0.9359
+                ],
+                [
+                    0.5659,
+                    0.9009,
+                    0.734,
+                    0.5633,
+                    0.7742,
+                    0.9687,
+                    1.0,
+                    0.9899
+                ],
+                [
+                    0.5516,
+                    0.8903,
+                    0.7005,
+                    0.5461,
+                    0.7337,
+                    0.9359,
+                    0.9899,
+                    1.0
+                ]
+            ]
+        }
+    ]
+}
