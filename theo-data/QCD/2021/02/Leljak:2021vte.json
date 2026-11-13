@@ -84,6 +84,7 @@
             },
             "dataset": "LQCD+LCSR",
             "scheme": "BCL",
+            "note": "Modified BCL parametrization (Eq. (3)) with $f_+(0)=f_0(0)$ and the $B$ pole at $m_{B0}=5.54$ GeV, so there is no $a_0^{f_0}$ coefficient. Only the $K=4$ LQCD+LCSR fit (the paper's main result) is stored; values and correlations are from the ancillary file, whereas the paper's table quotes asymmetric $68\\%$ intervals.",
             "correlation": [
                 [1, 0.824048, 0.468884, -0.339763, 0.484347, 0.619087, 0.0671899, -0.30726, 0.686984, 0.553266, 0.0929316, -0.230297],
                 [0.824048, 1, 0.371887, -0.67125, 0.665963, 0.765378, -0.209276, -0.564201, 0.600287, 0.630539, -0.0634034, -0.371516],
