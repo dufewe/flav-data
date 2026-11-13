@@ -1,0 +1,66 @@
+{
+    "inspire-hep": "[Zhang:2022opp](https://inspirehep.net/literature/2029209)",
+    "author": "Zhang, Y. and others",
+    "title": "The ratio $\\mathcal{R}(D_s)$ for $B_s \\to D_s \\ell\\nu_\\ell$ by using the QCD light-cone sum rules within the framework of heavy quark effective field theory",
+    "abstract": "In the paper, we study the $B_s\\to D_s$ transition form factors by using the light-cone sum rules within the framework of heavy quark effective field theory. We adopt a chiral current correlation function to do the calculation, the resultant transition form factors $f_+^{B_s\\to D_s}(q^2)$ and $f_0^{B_s\\to D_s}(q^2)$ are dominated by the contribution of $D_s$-meson leading-twist distribution amplitude, while the contributions from less certain $D_s$-meson twist-3 distribution amplitudes are greatly suppressed. At the largest recoil point, we obtain $f_{+,0}^{B_s \\to D_s}(0)=0.533^{+0.112}_{-0.094}$. By further extrapolating the transition form factors into all the physically allowable $q^2$ region with the help of the $z$-series parametrization approach, we calculate the branching fractions $\\mathcal{B}(B_s \\to D_s \\ell^\\prime \\nu_{\\ell^\\prime})$ with $(\\ell^\\prime= e,\\mu)$ and $\\mathcal{B}(B_s \\to D_s \\tau \\nu_\\tau)$, which gives $\\mathcal{R}(D_s)=0.334\\pm 0.017$.",
+    "arxiv": "[hep-ph/2202.02730v1](https://arxiv.org/pdf/2202.02730)",
+    "time": "2022.02.06",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Bs0Bar.2.Ds+.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.533",
+                    "total_upper": "0.112",
+                    "total_lower": "0.094"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-4.389",
+                    "total_upper": "0.000",
+                    "total_lower": "1.070"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "-0.641",
+                    "total_upper": "0.000",
+                    "total_lower": "3.601"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "123.375",
+                    "total_upper": "86.412",
+                    "total_lower": "0.000"
+                },
+                "obs@5": {
+                    "name": "a0_f0",
+                    "value": "0.533",
+                    "total_upper": "0.112",
+                    "total_lower": "0.094"
+                },
+                "obs@6": {
+                    "name": "a1_f0",
+                    "value": "-2.378",
+                    "total_upper": "0.000",
+                    "total_lower": "2.268"
+                },
+                "obs@7": {
+                    "name": "a2_f0",
+                    "value": "-19.414",
+                    "total_upper": "6.964",
+                    "total_lower": "0.000"
+                },
+                "obs@8": {
+                    "name": "a3_f0",
+                    "value": "196.397",
+                    "total_upper": "84.847",
+                    "total_lower": "0.000"
+                }
+            },
+            "dataset": "LCSR",
+            "scheme": "BCL",
+            "note": "$z$-series with $N=4$, $t_0=t_+(1-\\sqrt{1-t_+/t_-})$ and $t_\\pm=(m_{B_s}\\pm m_{D_s})^2$; $f_+$ carries the pole factor $1-q^2/m_{B_s^*}^2$ (numeric $m_{B_s^*}$ not quoted) while $f_0$ has no pole. The $b_k$ errors are the envelope of the three fits with $f(0)$ at its central value and at $\\pm 1\\sigma$, so they are correlated with the $a_0$ errors (a zero on one side means no shift in that direction). The text quotes $f_{+,0}(0)=0.533^{+0.160}_{-0.128}$ from quadrature of the components, whereas the abstract and the fit table give $^{+0.112}_{-0.094}$; the table value is stored."
+        }
+    ]
+}
