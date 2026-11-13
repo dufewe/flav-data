@@ -406,6 +406,15 @@ value when the source quotes a point, so repeated symbols at different
 `note` records how the values were obtained (fit, sum rule, ...) and
 whether correlations were published.
 
+### 2.7 Zero-Recoil Sum-Rule Integrals: `I0A`, `I0V`
+
+A zero-recoil OPE sum rule bounds a form-factor combination from above
+through the dimensionless integrals $I_{0,A}$ and $I_{0,V}$, written
+`I0A` and `I0V`. The transition key selects the channel, and the group
+`note` records the scale $\epsilon_M=\mu$ and which combination each
+integral bounds; no `scheme` is needed because these are sum-rule
+integrals, not expansion coefficients.
+
 ## 3. Observable Abbreviations
 
 Each observable is listed with its flav-data abbreviation, LaTeX symbol, typical paper notation, and description.

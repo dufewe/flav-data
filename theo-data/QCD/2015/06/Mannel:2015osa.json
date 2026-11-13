@@ -1,0 +1,29 @@
+{
+    "inspire-hep": "[Mannel:2015osa](https://inspirehep.net/literature/1380198)",
+    "author": "Mannel, T. and van Dyk, D.",
+    "title": "Zero-recoil sum rules for $\\Lambda_b \\to \\Lambda_c$ form factors",
+    "arxiv": "[hep-ph/1506.08780v1](https://arxiv.org/pdf/1506.08780)",
+    "time": "2015.06.29",
+    "abstract": "We set up a zero recoil sum rule to constrain the form factors of the $\\Lambda_b \\to \\Lambda_c$ transition. Our results are compared with the recent lattice calculation for these transitions. We find the same situation as in the case for $B \\to D^*$: The lattice results practically saturate the sum rules, leaving basically no room for excited states.",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Lambdab0.2.Lambdac+.l-.vBar": {
+                "obs@1": {
+                    "name": "I0A",
+                    "value": "0.811",
+                    "total_upper": "0.025",
+                    "total_lower": "0.026"
+                },
+                "obs@2": {
+                    "name": "I0V",
+                    "value": "0.965",
+                    "total_upper": "0.013",
+                    "total_lower": "0.013"
+                }
+            },
+            "dataset": "QCDSR",
+            "note": "OPE zero-recoil sum-rule integrals at $\\epsilon_M=\\mu=0.75$ GeV: $I_{0,V}$ bounds $|f_0(w=1)|^2$ and $I_{0,A}$ bounds $\\frac{1}{3}[2|g_\\perp(w=1)|^2+|g_+(w=1)|^2]$ from above. The perturbative, $1/m^{2,3}$ and inelastic contributions discussed in the source are not stored."
+        }
+    ]
+}

@@ -342,6 +342,14 @@ $f_{\perp'} \to$ `Fv'`, $g_{\perp'} \to$ `Gv'`,
 $h_{\perp'} \to$ `hv'`, $\tilde{h}_{\perp'} \to$ `htv'`.
 The obsolete spellings `fp`, `Fp`, `Gp`, `hp`, and `htp` are rejected;
 `Fv`, `Gv`, `hv`, and `htv` keep their existing spelling.
+
+## Zero-Recoil Sum-Rule Integrals: `I0A`, `I0V`
+
+A zero-recoil OPE sum rule bounds a form-factor combination from above
+through the dimensionless integrals $I_{0,A}$ and $I_{0,V}$, written
+`I0A` and `I0V`. The transition key selects the channel, and the group
+`note` records the scale $\epsilon_M=\mu$ and which combination each
+integral bounds; no `scheme` is needed.
 ''')
 
 # ---------------------------------------------------------
