@@ -563,7 +563,7 @@ Before committing any new or updated JSON file:
       entries carry `type@N_upper`/`type@N_lower` + `type@N_level` and no
       `value` or errors
 - [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, or `theo:<source>` for a theory input named after the colon; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields are allowed alongside them; the canonical source list and `scheme` are group-level keys
-- [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted; the group-level `dataset` uses canonical source names (`LQCD`, `LCSR`, `EXPE`)
+- [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted; the group-level `dataset` uses canonical source names (`LQCD`, `LCSR`, `QCDSR`, `EXPE`)
 - [ ] Groups that differ in dataset, scheme, fit choice, or kinematic region are separate elements of the `data` array, not merged
 - [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation

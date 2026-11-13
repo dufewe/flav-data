@@ -133,7 +133,7 @@ FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM'}
 
 # Group-level ``dataset`` names the data sources behind a group, in this
 # canonical order, joined with ``+`` (e.g. ``LQCD+LCSR``).
-DATASET_SOURCES = ('LQCD', 'LCSR', 'EXPE')
+DATASET_SOURCES = ('LQCD', 'LCSR', 'QCDSR', 'EXPE')
 
 
 def _dataset_issue(value) -> str:

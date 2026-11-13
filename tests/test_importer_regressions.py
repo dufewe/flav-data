@@ -276,7 +276,8 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertEqual(self._validate_data(data), [])
 
     def test_group_dataset_accepts_canonical_sources(self):
-        for value in ('LQCD', 'LCSR', 'EXPE', 'LQCD+LCSR', 'LQCD+LCSR+EXPE'):
+        for value in ('LQCD', 'LCSR', 'QCDSR', 'EXPE', 'LQCD+LCSR',
+                      'LQCD+LCSR+QCDSR', 'LQCD+LCSR+QCDSR+EXPE'):
             with self.subTest(dataset=value):
                 data = [{
                     'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
@@ -286,7 +287,8 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_group_dataset_rejects_non_source_values(self):
         for value in ('maximum likelihood', 'nominal', 'experiment',
-                      'LCSR + LQCD', 'LCSR+LQCD', 'LQCD+LQCD', 'NLO'):
+                      'LCSR + LQCD', 'LCSR+LQCD', 'LQCD+LQCD', 'NLO',
+                      'LQCD+QCDSR+LCSR'):
             with self.subTest(dataset=value):
                 data = [{
                     'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),

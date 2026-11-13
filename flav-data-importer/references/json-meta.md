@@ -133,9 +133,10 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    across them; channels placed in different groups are uncorrelated.
 3. **Group-level `dataset`** — an optional string naming the data sources
    behind the group, never the analysis technique or fit choice. Use the
-   canonical tokens `LQCD`, `LCSR`, and `EXPE`, joined with `+` in
+   canonical tokens `LQCD`, `LCSR`, `QCDSR`, and `EXPE`, joined with `+` in
    that order: `"LQCD"`, `"LCSR"`, `"LQCD+LCSR"`,
-   `"LQCD+LCSR+EXPE"`. The validator rejects other tokens, spaces,
+   `"LQCD+LCSR+QCDSR"`, `"LQCD+LCSR+QCDSR+EXPE"`. The validator rejects
+   other tokens, spaces,
    duplicates, and wrong order. Experimental groups normally omit the
    key because their source is the paper itself. It sits beside the
    channel keys, never inside `obs@N`.
@@ -549,7 +550,7 @@ with `group`, `arxiv`, `inspire-hep`, `description`, an
 17. **`collaboration` is conditional** — required for named collaborations (experiments, HFLAV/PDG, large theory groups such as HPQCD); omit the key for individual-author and small-group papers (SKILL.md rule 8).
 18. **Form-factor coefficients use `aN_FF`** — expansion order first, form-factor symbol second (`a0_F+`, `a2_Gv`). When several form factors take the same number, repeat the observable once per symbol (`a0_Gv`, `a0_G+`); never join symbols. The group must declare `scheme`; fit choices are not stored in the name or metadata (SKILL.md rule 9).
 19. **`unit` is a physical unit** — never store a scientific-notation scale factor (`1e-6`, `10^{-4}`) in `unit`; multiply it into `value`, `total_upper`/`total_lower`, and any bounds, then omit the field. The validator rejects scale-factor units.
-20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
+20. **`dataset` lists data sources only** — canonical tokens `LQCD`, `LCSR`, `QCDSR`, `EXPE` joined by `+` in that order (`LQCD`, `LQCD+LCSR`, `LQCD+LCSR+QCDSR`, `LQCD+LCSR+QCDSR+EXPE`). Analysis techniques, fit choices, and the expansion scheme never go there; experimental groups normally omit the key.
 21. **`scheme` is the expansion short code** — form-factor coefficient groups carry exactly `BK`, `BGL`, `BCL`, `BSZ`, or `DLM`; the full names and arXiv IDs are in `obs-abbr.md` §2.4 and are never written into the JSON. The validator rejects any other value.
 
 ## Extending This Specification
