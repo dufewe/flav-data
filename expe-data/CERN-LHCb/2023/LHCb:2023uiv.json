@@ -3,7 +3,7 @@
     "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Test of lepton flavor universality using $B^0 \\to D^{*-} \\tau^+ \\nu_\\tau$ decays with hadronic \\tau channels",
-    "arxiv": "[hep-ex/2305.01463](https://arxiv.org/pdf/2305.01463)",
+    "arxiv": "[hep-ex/2305.01463v2](https://arxiv.org/pdf/2305.01463)",
     "time": "2023.05.02",
     "abstract": "an analysis of the branching fraction $\\mathcal{B}(B^0 \\to D^{\\ast-} \\tau^+ \\nu_\\tau) relative to that of the normalization mode $B^0 \\to D^{\\ast-} \\pi^+ \\pi^- \\pi^+$ using hadronic $\\tau^+ \\to \\pi^+ \\pi^- \\pi^+ (\\pi^0) \\bar{\\nu}_\\tau$ decays and the lepton universality $R(D^{\\ast-})$, in proton-proton collision data at a center-of-mass energy of 13 TeV, corresponding to an integrated luminosity of 2 fb$^{-1}$",
     "transition-mode": "leptonic-decay",

@@ -3,7 +3,7 @@
     "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Search for the lepton-flavour-violating decays $B^{0}_{s}\\to\\tau^{\\pm}\\mu^{\\mp}$ and $B^{0}\\to\\tau^{\\pm}\\mu^{\\mp}$",
-    "arxiv": "[hep-ex/1905.06614](https://arxiv.org/pdf/1905.06614)",
+    "arxiv": "[hep-ex/1905.06614v2](https://arxiv.org/pdf/1905.06614)",
     "time": "2019.05.16",
     "abstract": "a search for the rare decays $B^0_s \\to \\tau^\\pm \\mu^\\mp$ and $B^0 \\to \\tau^\\pm \\mu^\\mp$, where the tau lepton is reconstructed in the channel $\\tau^- \\to \\pi^- \\pi^+ \\pi^- \\nu_\\tau$, based on a data sample corresponding to 3 fb$^{-1}$ of proton-proton collisions recorded in 2011 and 2012",
     "transition-mode": "leptonic-decay",

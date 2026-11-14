@@ -297,7 +297,7 @@ def run_dashboard(lab, group, year_min, year_max, get_json_func,
                               'collaboration', 'time']:
                     st.markdown(
                         fr'- **{items.upper()}**: '
-                        fr'{json_detail.get(items, "N/A")}'
+                        fr'{json_detail.get(items) or "N/A"}'
                     )
 
             with col2:
