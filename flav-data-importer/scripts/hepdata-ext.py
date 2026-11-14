@@ -25,14 +25,11 @@ try:
 except ImportError:
     HAS_YAML = False
 
-# Re-export shared helpers so callers can
-# `from hepdata_ext import to_bibtex, unicode_to_latex`.
-# See common.py for the canonical implementations and SKILL.md
-# "Core Conventions" rules 3 + 4 for the policies.
+# Shared JSON writer; see common.py.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import unicode_to_latex, to_bibtex  # noqa: E402,F401
+from common import write_json  # noqa: E402
 
-def _resolve_hepdata_cli() -> str | None:
+def _resolve_hepdata_cli() -> str:
     """Locate the ``hepdata-cli`` executable.
 
     Search order: $PATH, active venv bin/, ~/.local/bin/, Homebrew prefixes.
@@ -691,8 +688,7 @@ def main() -> int:
     # Save JSON summary
     if not args.no_write:
         summary_path = os.path.join(output_dir, 'hepdata_summary.json')
-        with open(summary_path, 'w', encoding='utf-8') as f:
-            json.dump(info, f, indent=4, ensure_ascii=False)
+        write_json(summary_path, info)
         print(f"\nSummary saved to: {summary_path}")
 
     if temp_output:

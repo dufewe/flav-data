@@ -99,7 +99,7 @@ the final state; do not repeat that state in the name.
 The importer reference is the contract. Quantities without an entry in
 `obs-abbr.md` §3 — for example the effective weak mixing angle, Higgs
 signal strengths, or coupling modifiers — must first be given a symbol
-and added to that table (see §6 of the reference), then used in JSON.
+and added to that table (see §5 of the reference), then used in JSON.
 Do not invent a page-only spelling that the importer does not validate.
 
 The same applies to new particles or intermediate states: add them to

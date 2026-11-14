@@ -11,34 +11,26 @@ Example:
     python3 inspirehep-ext.py --recid 1409497
 """
 
-import urllib.request
-import urllib.error
 import json
 import os
 import sys
 import argparse
 import re
 
-# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion),
-# re-exported for callers. See common.py for the canonical implementations
-# and SKILL.md "Core Conventions" rules 3 + 4 for the policies.
+# Shared helpers: see common.py for the implementations and SKILL.md
+# "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (
-    unicode_to_latex, to_bibtex, format_authors,
-)  # noqa: E402,F401
+from common import (  # noqa: E402
+    unicode_to_latex, format_authors, open_url, write_json,
+)
 
 
 def get_inspire_by_arxiv(arxiv_id: str) -> dict:
     """Query InspireHEP by arXiv ID."""
     url = f'https://inspirehep.net/api/literature?q=eprint:{arxiv_id}'
-    req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    try:
-        response = urllib.request.urlopen(req, timeout=15)
-    except urllib.error.HTTPError as e:
-        raise ValueError(f"InspireHEP API request failed (HTTP {e.code}): {e.reason}")
-    except urllib.error.URLError as e:
-        raise ValueError(f"InspireHEP API connection failed: {e.reason}")
-    data = json.loads(response.read().decode('utf-8'))
+    with open_url(url, label='InspireHEP API',
+                  headers={'Accept': 'application/json'}) as response:
+        data = json.loads(response.read().decode('utf-8'))
 
     hits = data.get('hits', {}).get('hits', [])
     requested_id = arxiv_id.split('v', 1)[0]
@@ -55,14 +47,9 @@ def get_inspire_by_arxiv(arxiv_id: str) -> dict:
 def get_inspire_by_recid(recid: str) -> dict:
     """Query InspireHEP directly by control number."""
     url = f'https://inspirehep.net/api/literature/{recid}'
-    req = urllib.request.Request(url, headers={'Accept': 'application/json'})
-    try:
-        response = urllib.request.urlopen(req, timeout=15)
-    except urllib.error.HTTPError as e:
-        raise ValueError(f"InspireHEP API request failed (HTTP {e.code}): {e.reason}")
-    except urllib.error.URLError as e:
-        raise ValueError(f"InspireHEP API connection failed: {e.reason}")
-    data = json.loads(response.read().decode('utf-8'))
+    with open_url(url, label='InspireHEP API',
+                  headers={'Accept': 'application/json'}) as response:
+        data = json.loads(response.read().decode('utf-8'))
 
     return data
 
@@ -269,12 +256,10 @@ def main() -> None:
 
     output_dir = args.output_dir
     if output_dir and not args.no_write:
-        os.makedirs(output_dir, exist_ok=True)
         safe_texkey = re.sub(r'[^A-Za-z0-9._-]', '_', info['texkey']).strip('._-')
         filename = f"{safe_texkey or info['recid']}_inspire.json"
         json_path = os.path.join(output_dir, filename)
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(info, f, indent=4, ensure_ascii=False)
+        write_json(json_path, info)
         print(f"\nJSON saved to: {json_path}")
     else:
         print("\nNo file written (use --output_dir /path to save the JSON dump).")

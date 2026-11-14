@@ -46,10 +46,9 @@ Every decay or scattering process is encoded as a transition symbol using the fo
    `e`, `mu`, or `tau` is no longer a valid particle state; a
    charge-averaged measurement is written with a concrete
    charge-conjugate representative. Generic placeholders (`l`, `q`,
-   `q1`, `q2`) and non-particle labels (`all`, `had`, `med`, `world`,
-   `CDF`, `kappa`) are exempt because they are not particle states;
-   placeholders are allowed only in shared multi-transition keys
-   (§2.2.2).
+   `q1`, `q2`) and non-particle labels are not particle states and carry
+   no charge slot; they are listed after the Leptons and Bosons table
+   below and are allowed only in shared multi-transition keys (§2.2.2).
 6. **Antiparticles**: the marker is always capital `Bar`, placed last.
    Neutral states insert it after the charge (`B0Bar`, `K*0Bar`,
    `n0Bar`); baryons keep it after the charge (`p+Bar`,
@@ -85,8 +84,10 @@ Rules 1–5 are **enforced by `scripts/json-valid.py`**: every data key is
 `A.B.2.C.D`, and `no-transition` is the only key without `.2.` (a
 multi-transition ratio joins two full keys with `/`, e.g.
 `B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-`). Non-canonical order is a validation
-failure, as are `p`/`m` charge suffixes, lowercase `bar`, a missing
-charge marker, and a `Bar`/`*` in the wrong position. Ordering is
+failure, as are compact keys without `.2.` (`B02K*mumu`), `p`/`m` charge
+suffixes (`Bp`, `pip`, `ep`), lowercase `bar` (`B0bar`), a missing charge
+marker (`B0.2.phi.mu+.mu-`, `Lambdab0.2.p.J/psi.pi-`), and a `Bar`/`*` in
+the wrong position. Ordering is
 skipped for states containing particles outside the four listed types
 (Z/$\gamma$/gluon, quarks, generic placeholders such as `l`/`q`); a
 particle missing from `particle-masses.json` is still an error unless it
@@ -107,13 +108,6 @@ keys and are not order-checked.
 | $\Lambda_b^0 \to J/\psi\, p\, \pi^-$ | Non-leptonic | `Lambdab0.2.p+.J/psi0.pi-` | Baryon first; mesons heavy to light (`J/psi0` before `pi-`) |
 | $pp \to Z \to \mu^+ \mu^-$ | Scattering | `p+.p+.2.Z.2.mu+.mu-` | Two-step process; `Z` is an exempt gauge boson |
 | $e^+ e^- \to \mu^+ \mu^-$ | Scattering | `e+.e-.2.mu+.mu-` | Collider process |
-
-### 1.5 Rejected Forms
-
-Compact keys without `.2.` (`B02K*mumu`), `p`/`m` charge suffixes (`Bp`,
-`pip`, `ep`), lowercase `bar` (`B0bar`), and particles without a charge
-marker (`B.2.D.l.v`, `B0.2.phi.mu+.mu-`, `Lambdab0.2.p.J/psi.pi-`) are
-all invalid. New imports use the spellings in the tables below.
 
 ### Particle Abbreviations
 
@@ -325,6 +319,7 @@ decomposition; these are the standard symbols):
 | `V` | $V$ |
 | `A0` | $A_0$ |
 | `A1` | $A_1$ |
+| `A2` | $A_2$ |
 | `A12` | $A_{12}$ |
 | `T1` | $T_1$ |
 | `T2` | $T_2$ |
@@ -443,7 +438,7 @@ genuinely couples them (SKILL.md rule 6).
 
 | Abbr | LaTeX | Paper Notation | Description |
 |------|-------|---------------|-------------|
-| `Mass` | $M_f$ | $M$ | On-shell mass (uppercase). Written as `Mass(f)` where $f$ is the particle symbol. Common single-token forms: `MZ`, `MW`, `Mtop`, `MH`, `Mh`. |
+| `Mass` | $M_f$ | $M$ | On-shell mass (uppercase). Written as `Mass(f)` where $f$ is the particle symbol; single-token shortcuts are in §2.1. |
 | `mass` | $m$ | $m$ | $\overline{\text{MS}}$ mass (lowercase) |
 | `DeltaMass` | $\Delta M$ | $\Delta M_s$, $\Delta M_d$ | Mass difference / neutral meson mixing parameter |
 | `DeltaGamma` | $\Delta\Gamma$ | $\Delta\Gamma_s$, $\Delta\Gamma_d$ | Decay width difference / neutral meson mixing parameter |
@@ -654,26 +649,13 @@ group-level `note`, not in the name.
 
 ## 4. LaTeX Notation
 
-The LaTeX symbol for each abbreviation is listed in §3 tables (column
-"LaTeX") as a notation reference for papers and plots. JSON data stores
-no LaTeX for transitions or observables: the channel key carries the
-transition and each observable carries only its bare `name`.
+The §3 tables list each abbreviation's LaTeX symbol (column "LaTeX") and
+the notation papers typically use (column "Paper Notation") — a reference
+for papers and plots only. JSON data stores no LaTeX for transitions or
+observables; the escaping rule for `title`/`abstract` is in `json-meta.md`
+§"Key Constraints".
 
-**JSON escaping**: In top-level `title`/`abstract` LaTeX, a single backslash (e.g., the `\t` in `\to`) must be written as a double backslash (`\\to`) in JSON file text. Python's `json.load()` restores the single backslash automatically.
-
-## 5. Common q² Intervals (GeV²)
-
-These are the most frequently used q² bin boundaries in B → K(*)ℓℓ analyses. **Always use the exact values reported in the paper** — this table is a quick reference only; paper-specific binning takes precedence.
-
-| Region | Intervals |
-|--------|-----------|
-| Very low (electron mode) | [0.0008, 0.257], [0.002, 1.12] |
-| Low q² | [0.06, 0.98], [0.1, 1.1], [1.1, 2.5], [1.1, 4.0], [1.1, 6.0], [2.0, 3.0], [2.0, 4.0], [3.0, 4.0], [4.0, 5.0], [4.0, 6.0], [5.0, 6.0], [6.0, 7.0], [6.0, 8.0] |
-| Fine binning (comprehensive analyses) | [0.06, 0.54], [0.54, 0.98], [1.1, 1.8], [1.8, 2.5], [2.5, 3.25], [3.25, 4.0], [4.0, 5.0], [5.0, 6.0], [6.0, 7.0], [7.0, 8.0], [11.0, 11.75], [11.75, 12.5], [15.0, 16.0], [16.0, 17.0], [17.0, 18.0], [18.0, 19.0] |
-| Charmonium veto | [8.0, 11.0], [11.0, 12.5] — usually excluded due to resonances |
-| High q² | [14.0, 22.0], [14.3, ∞], [15.0, 17.0], [15.0, 19.0], [16.0, 17.0], [17.0, 19.0], [18.0, 19.0] |
-
-## 6. Adding New Observables
+## 5. Adding New Observables
 
 When a paper introduces an observable not listed in this document:
 

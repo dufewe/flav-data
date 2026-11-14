@@ -3,7 +3,8 @@
 Extract paper metadata from the arXiv API for flav-data JSON files.
 
 **Endpoint**: `https://export.arxiv.org/api/query` — returns Atom XML.
-Rate-limited (~1 req/3s); avoid rapid successive requests.
+Rate-limited (~1 req/3s). The script issues one request per run with no
+pacing or retry, so space successive runs yourself.
 
 ## Query Methods
 
@@ -85,7 +86,11 @@ python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442
 python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl
 python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --no-pdf   # metadata only
 python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --source -o /tmp/dl  # e-print package
+python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --no-write   # stdout only
 ```
+
+Without `--output_dir` nothing is written; `--no-write` forces stdout-only
+even when a directory is given.
 
 ## Notes
 

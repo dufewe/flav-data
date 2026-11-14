@@ -9,13 +9,8 @@ prefixes. Raises `RuntimeError` with install instructions if not found.
 
 ## CLI Commands
 
-```bash
-hepdata-cli --help
-  download     Download HEPData record data (metadata + table URLs)
-  fetch-names  List available table names for a record
-  find         Search HEPData records by keyword or ID
-  upload       Upload data to HEPData (not used in this workflow)
-```
+This workflow uses only `fetch-names` and `download` (invocations below);
+`find` and `upload` exist but are unused.
 
 ## Workflow
 
@@ -42,16 +37,10 @@ shells out to `hepdata-cli download -f yaml -t <table>`, so Cloudflare never see
 plain `curl` — do not re-implement it with `urllib`/`requests`.
 
 ```python
-import importlib.util
-from pathlib import Path
-
-script = Path("flav-data-importer/scripts/hepdata-ext.py")
-spec = importlib.util.spec_from_file_location("hepdata_ext", script)
-hepdata_ext = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(hepdata_ext)
+hepdata_ext = load_script("hepdata_ext")   # SKILL.md §"Python Helpers"
 
 yaml_text = hepdata_ext.download_table_yaml("1409497", "Table 1")
-table_type = hepdata_ext.detect_table_type(yaml_text)  # 'observable' | 'correlation' | 'covariance'
+table_type = hepdata_ext.detect_table_type(yaml_text)  # 'observable' | 'correlation' | 'covariance' | 'unknown'
 if table_type == 'observable':
     observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
 else:
@@ -124,7 +113,7 @@ The script wraps the `hepdata-cli` binary and exposes:
 | `fetch_table_names(inspire_id)` → `list[str] \| None` | List table names for a record |
 | `download_metadata(inspire_id, output_dir)` → `str \| None` | Download (or reuse an existing matching) metadata JSON |
 | `download_table_yaml(inspire_id, table_name)` → `str` | Fetch one table's YAML through `hepdata-cli` |
-| `detect_table_type(yaml_text)` → `str` | `'observable'`, `'correlation'`, or `'covariance'` |
+| `detect_table_type(yaml_text)` → `str` | `'observable'`, `'correlation'`, `'covariance'`, or `'unknown'` (PyYAML missing / unparseable YAML) |
 | `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into per-point entries (incl. `q2min`/`q2max`) |
 | `parse_yaml_correlation(yaml_text)` → `(matrix_type: str, matrix: list[list[float]], qualifiers: dict)` | Parse correlation/covariance matrix YAML |
 | `parse_metadata(metadata_path)` → `dict` | Parse downloaded metadata JSON |
@@ -132,15 +121,10 @@ The script wraps the `hepdata-cli` binary and exposes:
 Constants: `HEPDATA_CLI` (absolute path to binary, or `''`) and
 `HAS_YAML` (whether PyYAML is available).
 
-**Loading the script** (hyphen in filename prevents direct import):
-```python
-import importlib.util, os
-spec = importlib.util.spec_from_file_location(
-    "hepdata_ext", "flav-data-importer/scripts/hepdata-ext.py",
-)
-hepdata_ext = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(hepdata_ext)
+**Loading the script**: `load_script("hepdata_ext")` from SKILL.md
+§"Python Helpers" — the hyphen in the filename prevents a direct import.
 
+```python
 tables = hepdata_ext.fetch_table_names(1409497)
 meta = hepdata_ext.parse_metadata(
     hepdata_ext.download_metadata(1409497, "/tmp/hd")
@@ -152,7 +136,11 @@ meta = hepdata_ext.parse_metadata(
 ```bash
 python3 flav-data-importer/scripts/hepdata-ext.py 1409497
 python3 flav-data-importer/scripts/hepdata-ext.py 1409497 -o /tmp/hd --table "Table 1"
+python3 flav-data-importer/scripts/hepdata-ext.py 1409497 --no-write   # stdout only
 ```
+
+Without `--output_dir` nothing is written; `--no-write` forces stdout-only
+even when a directory is given.
 
 ## Notes
 

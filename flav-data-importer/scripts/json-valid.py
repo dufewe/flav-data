@@ -21,7 +21,8 @@ REQUIRED_TOP_FIELDS = [
 # and large theory groups). Individual/small-group papers omit it entirely.
 CONDITIONAL_TOP_FIELDS = ['collaboration']
 
-# Fields that must NOT appear in the JSON
+# Fields that must NOT appear in a per-paper JSON. HFLAV/PDG snapshots
+# have their own schema and do allow ``year`` (see _validate_snapshot).
 FORBIDDEN_FIELDS = ['year', 'pdf']
 
 # Snapshot (HFLAV/PDG) observable fields. Unknown keys are rejected so
@@ -287,6 +288,29 @@ def _split_top_level(text: str, separator: str) -> list[str]:
     return [part for part in parts if part]
 
 
+# Particle names that contain the ratio separator (``J/psi``).
+_SLASH_PARTICLE_TOKENS = tuple(sorted(
+    (token for token in _PARTICLE_MASS if '/' in token),
+    key=len, reverse=True,
+))
+
+
+def _split_ratio(body: str) -> list[str]:
+    """Split a ratio key on ``/`` without cutting particle names.
+
+    ``J/psi`` carries a slash of its own, so the separator is masked out
+    before splitting. The slash-bearing names come from the mass
+    reference rather than a hard-coded list.
+    """
+    masked = body
+    for token in _SLASH_PARTICLE_TOKENS:
+        masked = masked.replace(token, token.replace('/', '\x00'))
+    return [
+        part.replace('\x00', '/')
+        for part in _split_top_level(masked, '/')
+    ]
+
+
 def _charge_rank(token: str) -> int | None:
     """Return ordering rank for an explicit charge: + -> 0, - -> 1."""
     if token.endswith('+'):
@@ -445,7 +469,7 @@ def _order_issues_for_body(
     check.
     """
     issues = []
-    parts = _split_top_level(body, '/')
+    parts = _split_ratio(body)
     if len(parts) > 1 and all('.2.' in part for part in parts):
         for part in parts:
             if '.2.' in part:
@@ -579,6 +603,11 @@ def _order_issues_for_body(
     return issues
 
 
+def _observable_symbol(name: str) -> str:
+    """Return the bare symbol, dropping a ``[condition]``/``(parameter)`` tag."""
+    return re.split(r'[\[(]', name, maxsplit=1)[0]
+
+
 def validate_observable_name(name: str) -> list[str]:
     """Check that the observable name does not embed a transition channel.
 
@@ -587,14 +616,14 @@ def validate_observable_name(name: str) -> list[str]:
     ``OBS``, ``OBS[condition]``, ``OBS(parameter)``, ``f+.Vcs``.
     """
     issues = []
-    match = re.fullmatch(r'a\d+_([A-Za-z0-9]+)', name)
+    symbol = _observable_symbol(name)
+    match = re.fullmatch(r'a\d+_([A-Za-z0-9]+)', symbol)
     if match and match.group(1) in _DEPRECATED_FORM_FACTOR_NAMES:
         issues.append(
             f"  Observable '{name}': obsolete form-factor symbol "
             f"'{match.group(1)}'; write "
             f"'{_DEPRECATED_FORM_FACTOR_NAMES[match.group(1)]}' instead"
         )
-    symbol = re.split(r'[\[(]', name, 1)[0]
     if symbol in _DEPRECATED_LFU_Q_NAMES:
         issues.append(
             f"  Observable '{name}': obsolete LFU-difference symbol "
@@ -612,7 +641,7 @@ def validate_observable_name(name: str) -> list[str]:
 def validate_latex(text: str, field_name: str, obs_key: str) -> list[str]:
     """Check that the LaTeX field is non-empty and Unicode-free.
 
-    Per SKILL.md rule 4 and json-meta.md §"Key Constraints" rule 12,
+    Per SKILL.md rule 4 and json-meta.md §"Key Constraints",
     every non-ASCII character must be replaced by its LaTeX equivalent
     before writing the JSON. This deliberately flags *all* non-ASCII
     characters rather than a hand-maintained blocklist; scripts/common.py
@@ -1219,7 +1248,9 @@ def _validate_data_group(group, label: str) -> list[str]:
             has_coefficients = has_coefficients or any(
                 isinstance(obs, dict)
                 and isinstance(obs.get('name'), str)
-                and _FORM_FACTOR_COEFFICIENT_RE.fullmatch(obs['name'])
+                and _FORM_FACTOR_COEFFICIENT_RE.fullmatch(
+                    _observable_symbol(obs['name'])
+                )
                 for obs in group[key].values()
             )
 
@@ -1493,12 +1524,22 @@ def _validate_snapshot(data: dict, file_path: str, kind: str) -> list[str]:
 
 def validate_json(file_path: str) -> list[str]:
     """Validate a single flav-data JSON file."""
-    all_issues = []
+    # 1. Parse JSON. ``json.load`` silently keeps the last of a repeated
+    # key, which would drop a channel or an observable without any error.
+    duplicates: list[str] = []
 
-    # 1. Parse JSON
+    def _reject_duplicate_keys(pairs):
+        obj = {}
+        for key, value in pairs:
+            if key in obj and key not in duplicates:
+                duplicates.append(key)
+            obj[key] = value
+        return obj
+
+    all_issues = []
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+            data = json.load(f, object_pairs_hook=_reject_duplicate_keys)
         print("  [OK] JSON format correct")
     except json.JSONDecodeError as e:
         print(f"  [FAIL] JSON parse error: {e}")
@@ -1508,6 +1549,18 @@ def validate_json(file_path: str) -> list[str]:
     if not isinstance(data, dict):
         print(f"  [FAIL] Top-level JSON must be an object, got {type(data).__name__}")
         return [f"Top-level JSON must be an object, got {type(data).__name__}"]
+
+    if duplicates:
+        for key in duplicates:
+            all_issues.append(
+                f"  Duplicate JSON key '{key}': a repeated key silently "
+                f"overwrites the earlier value; merge the entries or rename "
+                f"one of them"
+            )
+        print(f"  [FAIL] Found {len(all_issues)} issue(s):")
+        for issue in all_issues:
+            print(issue)
+        return all_issues
 
     # Detect non-standard schema (HFLAV / PDG snapshots).
     snapshot_kind = _detect_snapshot(data)
@@ -1532,7 +1585,7 @@ def validate_json(file_path: str) -> list[str]:
         print("  [OK] Top-level fields complete")
 
     # 2b. Check Unicode-free LaTeX in author, title and abstract (per
-    # SKILL.md rule 4 and json-meta.md §"Key Constraints" rule 12).
+    # SKILL.md rule 4 and json-meta.md §"Key Constraints").
     for field in ('author', 'title', 'abstract'):
         if field in data and isinstance(data[field], str):
             all_issues.extend(validate_latex(data[field], field, '<top-level>'))

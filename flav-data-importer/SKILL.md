@@ -24,11 +24,12 @@ flav-data-importer/
 │   ├── data-source.md          # Source priority, scope
 │   ├── arxiv-api.md            # arXiv API usage
 │   ├── inspirehep-api.md       # InspireHEP API usage
-│   └── hepdata-cli.md          # HEPData CLI usage
+│   ├── hepdata-cli.md          # HEPData CLI usage
+│   └── particle-masses.json    # PDG masses + non-orderable tokens
 ├── assets/
-│   └── workflow-lhcb-2015svh.md # Full import example
+│   └── workflow-lhcb-2015svh.md # Paper-specific import notes
 └── scripts/
-    ├── common.py               # Shared: Unicode→LaTeX + BibTeX helpers
+    ├── common.py               # Shared: Unicode→LaTeX, BibTeX, I/O helpers
     ├── arxiv-ext.py            # arXiv metadata + PDF download
     ├── inspirehep-ext.py       # InspireHEP metadata
     ├── hepdata-ext.py          # HEPData table extraction
@@ -88,11 +89,11 @@ to_bibtex("Aaij, Roel")               # → "Aaij, R."
 
 | Script | Use |
 |--------|-----|
-| `scripts/common.py` | Unicode → LaTeX mapping + BibTeX author-name conversion (`to_bibtex`, `format_authors`). Imported by every other script. |
+| `scripts/common.py` | Unicode → LaTeX mapping, BibTeX author-name conversion (`to_bibtex`, `format_authors`), and shared I/O (`open_url` normalises HTTP/connection failures to `ValueError`; `write_json` writes 4-space-indented JSON, creating parent dirs). Imported by every other script. |
 | `scripts/arxiv-ext.py` | arXiv API metadata + PDF and e-print source download (`--source` lists ancillary data files). `python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442`. |
 | `scripts/inspirehep-ext.py` | InspireHEP API metadata. `python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442`. |
 | `scripts/hepdata-ext.py` | HEPData table extraction (YAML parsing, q² pairing, matrix detection). `python3 flav-data-importer/scripts/hepdata-ext.py <inspire_id>`. |
-| `scripts/json-valid.py` | JSON schema validator (standard + auto-detected HFLAV/PDG snapshots). `python3 flav-data-importer/scripts/json-valid.py <file>`. |
+| `scripts/json-valid.py` | JSON schema validator (standard + auto-detected HFLAV/PDG snapshots). `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]`. |
 
 ## Scope
 
@@ -178,14 +179,12 @@ common = load_script("common")
    carries its own `q2min`/`q2max` (pairing is positional with
    `independent_variables`), so one q² bin becomes one group in the
    `data` array, holding that channel's observables.
-   If HEPData is unavailable or incomplete, check the arXiv ancillary files
-   before falling back to the PDF: download the e-print package with
-   `arxiv_ext.download_source(arxiv_id, output_dir)`, use any machine-readable
-   data file (`.dat`/`.txt`/`.csv`/`.json`/`.yaml`) as the primary source, and
-   validate its numbers against the paper's own tables. Only when no ancillary
-   data exists, extract from the e-print LaTeX source (preferred over the PDF)
-   and cross-check each table. See `references/data-source.md` §4 and
-   `references/arxiv-api.md` "Ancillary Files".
+   If HEPData is unavailable or incomplete, unpack the arXiv e-print with
+   `arxiv_ext.download_source(arxiv_id, output_dir)`: prefer a
+   machine-readable ancillary data file (`.dat`/`.txt`/`.csv`/`.json`/`.yaml`),
+   then the LaTeX source, then the PDF, validating every number against the
+   paper's own tables (`references/data-source.md` §4,
+   `references/arxiv-api.md` §"Ancillary Files and the e-Print Package").
 
 4. **Write the JSON file** at the canonical path. The full assembly:
 
@@ -277,7 +276,7 @@ Run these commands from the project root:
 
 ```bash
 # 1. Validate every changed file
-python3 flav-data-importer/scripts/json-valid.py expe-data/CERN-LHCb/2015/LHCb:2015svh.json
+python3 flav-data-importer/scripts/json-valid.py expe-data/CERN-LHCb/2015/12/LHCb:2015svh.json
 
 # 2. Rebuild the year index if you added or removed papers
 # (manual edit; see flav-data-importer/references/file-index.md)
@@ -331,54 +330,32 @@ reference doc points back to these.
    `title` and `abstract` are validated Unicode-free. Characters outside
    the mapping pass through unchanged — convert those by hand.
 
-5. **Transition symbol order** — inside a `data` transition key, the
-   transition follows `obs-abbr.md` §1:
-   - `.2.` separates the initial state from the final state (repeat it for
-     cascades, e.g. `p+.p+.2.W+.2.mu+.v`).
-   - Within each state, order by particle type:
-     **baryon → meson → charged lepton → neutral lepton**.
-   - Among particles of the same type, order by mass:
-     **heaviest → lightest** (e.g. `Lambdab0.2.p+.J/psi0.pi-`,
-     `B0.2.K*0.tau-.e+`).
-   - Equal-mass particles of the same type follow charge order:
-     **`+` → `-` → `0`** (e.g. `e+.e-`, `mu+.mu-`).
-   - Every particle state is `<name>[*]<charge>[Bar]`. The charge is
-     mandatory: `+`, `-`, or `0` (`B+`, `B-`, `D*+`, `phi0`, `p+`, `n0`,
-     `Lambda0`, `H0`). Neutral states take `0`; charged states take their
-     sign. The only exceptions are neutrinos (`v`/`vBar`, `ve`, `vmu`,
-     `vtau`, ...) and the neutral gauge bosons `Z`, `gamma`, `g`.
-     `p`/`m` suffixes (`Bp`, `pip`, `ep`) and charge-less states (`B`,
-     `D`, `K*`, `pi`, `e`, `mu`, `tau`) are rejected; a charge-averaged
-     measurement uses a concrete charge-conjugate representative.
-   - The vector marker `*` sits between the name and the charge
-     (`D*0`, `K*+`); `Bar` goes last, after the charge (`B0Bar`,
-     `K*0Bar`, `p+Bar`, `Lambda0Bar`). lowercase `bar` and misplaced
-     `Bar`/`*` are invalid.
-   - Particle-name case follows the handwritten symbol: Latin hadrons and
-     capital Greek letters stay capital (`B0`, `Lambdab0`, `Sigma-`),
-     lower-case Greek letters stay lower case (`pi0`, `rho+`, `phi0`);
-     lepton symbols keep their conventional case (`e+`, `mu-`, `tau-`).
-     Subscripts precede superscripts ($K_S^0$ → `KS0`, $K_L^0$ → `KL0`)
-     and superscripts are appended as digits ($\pi^0$ → `pi0`,
-     $\Lambda_b^0$ → `Lambdab0`).
-   - Neutrinos are written `v`/`vBar`; flavor-specific signatures append
-     the flavor (`ve`, `vmu`, `vtau`, `veBar`, ...). They are the only
-     leptons without a charge slot. `nu`/`nuBar` and lowercase-`bar`
-     forms are rejected.
-   - Generic placeholders (`l`, `q1`, `q2`), partons, inclusive systems,
-     nuclei, and detector/BSM pseudo-labels are not particle states and
-     carry no charge; use them only in shared multi-transition keys.
+5. **Transition symbol order** — a `data` channel key is `A.B.2.C.D`
+   (`no-transition` is the only exception; a multi-transition ratio joins
+   two full keys with `/`, e.g. `B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-`).
+   `.2.` separates the initial from the final state and repeats for
+   cascades (`p+.p+.2.W+.2.mu+.v`). Within each state, order by
+   - particle type: **baryon → meson → charged lepton → neutral lepton**;
+   - then mass: **heaviest → lightest** (`Lambdab0.2.p+.J/psi0.pi-`,
+     `B0.2.K*0.tau-.e+`);
+   - then charge for equal masses: **`+` → `-` → `0`** (`e+.e-`, `mu+.mu-`).
 
-   `json-valid.py` reports non-canonical order and a missing or
-   misplaced charge/`Bar`/`*` marker as a failure. Every key is
-   `A.B.2.C.D`; `no-transition` is the only exception, and a
-   multi-transition ratio joins two full keys with `/`
-   (`B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-`). Generic placeholders (`l+`, `q1`)
-   and states containing Z/γ/gluon particles are not order-checked. Mass
-   values come from `references/particle-masses.json` (PDG 2024). A
-   particle with no mass there is an error for a transition key; add its
-   PDG mass (or list it under `non_orderable` when it cannot be ordered)
-   before using the transition.
+   Every particle state is `<name>[*]<charge>[Bar]`: the charge is
+   mandatory (`+`/`-`/`0`), `*` sits between name and charge, `Bar` goes
+   last. `p`/`m` suffixes (`Bp`), charge-less states (`B`, `pi`, `mu`),
+   lowercase `bar` and misplaced `Bar`/`*` are rejected; a charge-averaged
+   measurement uses a concrete charge-conjugate representative. Only
+   neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`, ...) and the neutral gauge
+   bosons `Z`, `gamma`, `g` omit the charge. Placeholders (`l`, `q1`),
+   partons, inclusive systems, nuclei and detector/BSM pseudo-labels carry
+   no charge and appear only in shared multi-transition keys. Letter case,
+   intermediate resonances and PDG mass labels: `obs-abbr.md` §1 rules 5–10.
+
+   `json-valid.py` fails non-canonical order and bad markers. Masses come
+   from `references/particle-masses.json` (PDG 2024); a particle missing
+   there is an error — add its PDG mass, or list it under `non_orderable`
+   when it cannot be ordered. Placeholders and Z/γ/gluon states are not
+   order-checked.
 
 6. **One group per property set** — a data group is a set of observables
    linked by one correlation/covariance matrix and one measurement
@@ -417,24 +394,15 @@ reference doc points back to these.
    number applies to several form factors (e.g. both `a0_Gv` and
    `a0_G+`), write one observable per form factor and repeat its
    value/errors; never join symbols into a name like `a0_Gv_G+`. Fit
-   choices (nominal, higher-order, ...) are neither part of the name nor
-   stored in the group metadata; keep such variants as separate groups.
+   choices (nominal, higher-order, ...) are not part of the name and get
+   no dedicated field: keep such variants as separate groups and say
+   which is which in the group `note`.
    Every coefficient group declares its expansion form in the group-level
    `scheme` field as a short code: `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or
-   `MR`.
-   The full names and defining papers are in `references/obs-abbr.md` §2.4:
-
-   | Scheme | Parametrization | Source |
-   |--------|-----------------|--------|
-   | `BK` | Becirevic-Kaidalov | arXiv:hep-ph/9904490 |
-   | `BGL` | Boyd-Grinstein-Lebed | arXiv:hep-ph/9504235 |
-   | `BCL` | Bourrely-Caprini-Lellouch | arXiv:0807.2722 |
-   | `BSZ` | Bharucha-Straub-Zwicky | arXiv:1503.05534 |
-   | `DLM` | Detmold-Lehner-Meinel | arXiv:1503.01421 |
-   | `MR` | Meinel-Rendon $w$-expansion, with or without a pole factor | arXiv:2009.09313, arXiv:2107.13140 |
-
-   The JSON stores only the short code; the validator rejects any other
-   spelling and rejects a coefficient group without `scheme`.
+   `MR`; the full names and defining papers are in
+   `references/obs-abbr.md` §2.4. The JSON stores only the short code; the
+   validator rejects any other spelling and rejects a coefficient group
+   without `scheme`.
 
 ## Decision Points
 
@@ -478,12 +446,8 @@ Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
   more components.
 - `mixes component errors (type@N_error) with total errors` — pick one
   error scheme per observable.
-- `transition-mode: invalid value` — must be one of:
-  `leptonic-decay`, `semileptonic-decay`, `non-leptonic-decay`,
-  `radiative-decay`, `neutron-beta-decay`, `higgs-decay`, `mixing`,
-  `scattering`, `electroweak-precision`, `w-production`,
-  `higgs-production`, `low-energy`, `oblique-corrections`
-  (see `references/json-meta.md` §"transition-mode Values").
+- `transition-mode: invalid value` — pick a hyphenated value from the
+  whitelist in `references/json-meta.md` §"transition-mode Values".
 - `matrix not symmetric [i][j] != [j][i]` — fix the matrix entries.
   Re-check the source PDF table for the correct `ij`/`ji` pair.
 
@@ -503,30 +467,26 @@ lifetimes, CKM parameters, EW parameters) use their documented forms:
 more transition channels to an `obs@N` object
 (`{"B0.2.K*0.mu+.mu-": {"obs@1": {...}, "obs@2": {...}}, "correlation": [...]}`);
 each `obs@N` value must itself be an object. See
-`assets/workflow-lhcb-2015svh.md` Step 4 for the canonical shape.
+`references/json-meta.md` §"Data Entries" for the canonical shape.
 
 ### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet" / "single error must be written as the total error"
 
 Per-paper files accept only the documented `obs@N` fields:
 `name`, `value`, `unit`, `ref`, `dataset`, `note`,
 the kinematic boundaries, `total_upper`/`total_lower`, and the
-`type@N_*` keys. The canonical data-source list (`LQCD`/`LCSR`/`EXPE`)
-and the expansion `scheme` are **group-level** keys beside the channel
-keys; the per-observable `dataset` is only a free-form sample
-description. Fit choices are not stored in the JSON.
+`type@N_*` keys. The canonical data-source list and the expansion `scheme`
+are **group-level** keys beside the channel keys (`references/json-meta.md`
+§"Data Entries"); the per-observable `dataset` is only a free-form sample
+description. Fit choices get no dedicated field: separate groups plus a
+group `note` carry them.
 
 A measurement with **exactly one error** records it as the total error
-(`total_upper`/`total_lower`) even when the source labels it stat or theo.
-Only **two or more** errors become component triplets (`type@N_error` +
-`type@N_upper` + `type@N_lower`), each labelled `stat`, `syst`, `lumi`,
-`norm`, `theo`, or `expe`. When the source splits its theory error by
-input, name the input after the label (`theo:<source>`, e.g.
-`theo:mu_pi`; lowercase ASCII letters, digits, and underscores). Never mix
-component errors with total errors,
-and never create a lone `type@N` triplet. Confidence-level bounds use
-`type@N_upper`/`type@N_lower` with a required `type@N_level` and no
-`type@N_error`; a combined fit + bound keeps the bound on N values
-distinct from the error components.
+(`total_upper`/`total_lower`) even when the source labels it stat or theo;
+only **two or more** errors become complete `type@N_error`/`_upper`/`_lower`
+triplets. Never mix the two schemes. Labels and every allowed field are
+tabulated in `references/json-meta.md` §"Standard Measurement Format"
+onward (including bound-only entries, which carry `type@N_upper`/`_lower`
+plus a required `type@N_level` and no `type@N_error`).
 
 ### Error: "HEPData 401 / Cloudflare blocked"
 
@@ -558,14 +518,9 @@ Before committing any new or updated JSON file:
 - [ ] `author` follows the 1 / 2 / 3 / 4+ tier rule (initials only)
 - [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
 - [ ] `data` is a non-empty array of groups; each group maps channel keys to an `obs@N` object, then an optional group-level `dataset` string, then a `scheme` string for coefficient groups, then any group matrices; no observable repeats the channel in its `name`, and any group matrix dimension matches the group's observable count
-- [ ] Each `obs@N` has `name`, plus exactly one error scheme
-      (`value` + `total_upper`/`total_lower` for a single error, or
-      `value` + two or more complete `type@N_error`/`_upper`/`_lower`
-      triplets), optionally with `ref` and/or confidence bounds; bound-only
-      entries carry `type@N_upper`/`type@N_lower` + `type@N_level` and no
-      `value` or errors
-- [ ] Error labels are one of `stat`, `syst`, `lumi`, `norm`, `theo`, `expe`, or `theo:<source>` for a theory input named after the colon; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields are allowed alongside them; the canonical source list and `scheme` are group-level keys
-- [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted; the group-level `dataset` uses canonical source names (`LQCD`, `LCSR`, `QCDSR`, `EXPE`)
+- [ ] Each `obs@N` has `name` plus exactly one error scheme: single error → `total_upper`/`total_lower`; two or more → complete `type@N` triplets; bound-only → `type@N_upper`/`_lower` + `type@N_level` and no `value`
+- [ ] Error labels are `stat`, `syst`, `lumi`, `norm`, `theo`, `expe` or `theo:<source>`; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields accompany them
+- [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted
 - [ ] Groups that differ in dataset, scheme, fit choice, or kinematic region are separate elements of the `data` array, not merged
 - [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, `MR`
 - [ ] Matrix fields use row-per-line layout, symmetric for correlation
@@ -624,8 +579,8 @@ example.
 
 ## See Also
 
-- `assets/workflow-lhcb-2015svh.md` — worked import example (LHCb
-  B⁰ → K*⁰ μ⁺μ⁻ angular analysis, arXiv 1512.04442)
+- `assets/workflow-lhcb-2015svh.md` — paper-specific notes for a worked
+  import (LHCb B⁰ → K*⁰ μ⁺μ⁻ angular analysis, arXiv 1512.04442)
 - `references/json-meta.md` — full JSON field specification
 - `references/obs-abbr.md` — transition symbols and observable naming
 - `references/file-index.md` — directory layout and index format

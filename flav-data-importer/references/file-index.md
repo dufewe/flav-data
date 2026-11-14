@@ -9,36 +9,21 @@ Experimental measurements live in `expe-data/`, theoretical calculations in
 
 ```
 flav-data/
-├── expe-data/                                     # Experimental measurement data
-│   ├── CERN-LHCb/                                 # Lab-Collaboration folder
-│   │   ├── 2015/
-│   │   │   ├── LHCb@2015.json                     # Annual index
-│   │   │   └── 12/
-│   │   │       └── LHCb:2015svh.json              # Data file (Collaboration:TexKey)
-│   ├── CERN-ATLAS/, CERN-CMS/, CERN-DELPHI/, CERN-OPAL/,
-│   ├── CERN-LEP/                                  # Combined LEP (ALEPH+DELPHI+L3+OPAL)
-│   ├── CERN-NA62/, CERN-CHARM-II/
-│   ├── KEK-Belle/, KEK-KOTO/
-│   ├── SLAC-BaBar/, SLAC-SLD/
-│   ├── Fermilab-CDF/, Fermilab-D0/, Fermilab-Tevatron/, Fermilab-Muong-2/
-│   ├── IHEP-BESIII/, IHEP-ISTRA+/
-│   ├── INFN-KLOE-2/
-│   ├── BNL-E949/, Cornell-CLEO/, TRIUMF-PiENu/
-│   ├── PSI-SINDRUM-II/, PSI-nTRV/
-│   ├── LANL-UCNA/, NIST-aCORN/
-│   └── HFLAV/, PDG/                               # No-lab aggregation
+├── expe-data/
+│   └── <Lab>-<Collaboration>/                 # e.g. CERN-LHCb; HFLAV/ and PDG/ have no lab
+│       └── <year>/
+│           ├── <Collaboration>@<year>.json    # Annual index
+│           └── <month>/
+│               └── <Collaboration>:<TexKey>.json
 └── theo-data/
-    ├── FNAL-MILC/                                 # Large collaborations keep a group folder
-    │   └── <year>/...
-    ├── LCSR/                                      # Light-cone sum rules calculations
-    │   └── <year>/<month>/<TexKey>.json
-    ├── LQCD/                                      # Method folder for smaller groups
-    │   └── 2015/
-    │       ├── LQCD@2015.json                     # Method-level annual index
-    │       └── 03/
-    │           └── Detmold:2015aaa.json           # Data file (TexKey)
-    └── QCD/                                       # Perturbative QCD calculations
+    └── <Group-or-Method>/                     # e.g. FNAL-MILC, LQCD, LCSR, QCD
+        └── <year>/
+            ├── <Group-or-Method>@<year>.json
+            └── <month>/
+                └── <TexKey>.json
 ```
+
+The folder table below lists every experimental group currently on disk.
 
 **File depth**: new imports go to `<year>/<month>/<file>.json`, but legacy
 files may sit directly under `<year>/`. The annual index records the month
@@ -80,7 +65,7 @@ the folder retain only the collaboration name (not the lab prefix).
 | `Cornell-CLEO` | Cornell | CLEO | CESR |
 | `TRIUMF-PiENu` | TRIUMF | PiENu | |
 | `PSI-SINDRUM-II` | PSI | SINDRUM-II | Mu-e conversion |
-| `PSI-nTRV` | PSI | nTRV | Neutron trimer |
+| `PSI-nTRV` | PSI | nTRV | Neutron decay electron polarization |
 | `LANL-UCNA` | LANL | UCNA | |
 | `NIST-aCORN` | NIST | aCORN | |
 | `HFLAV` | — | HFLAV | No parent lab; non-standard schema |
@@ -104,10 +89,8 @@ Theoretical folders depend on the size of the group:
   small groups omit the `collaboration` key (SKILL.md rule 8), and TexKeys
   are unique, so several groups can share one method folder and index.
 
-Only experimental data and theoretical calculations are stored; global
-analyses (Wilson-coefficient fits, parameter determinations, bounds, world
-averages) are not ingested. Form-factor parametrization fits are primary
-theory data and are imported (see SKILL.md §Scope).
+Import eligibility (measurements and calculations only, no global analyses)
+is defined in `data-source.md` §Scope.
 
 The Streamlit navigation links every entry in `defs.THEOGROUP`. The
 method folders `LCSR`, `LQCD` and `QCD` are registered there, so each gets a
@@ -127,10 +110,6 @@ navigation page scanning its year/month tree. A large-collaboration folder
 Format: `{Collaboration}:{TexKey}.json`
 
 The filename uses only the collaboration name (not the full `Lab-Collaboration` folder name). For example, under `expe-data/CERN-LHCb/`, the data file is `LHCb:2015svh.json`. TexKey comes from InspireHEP.
-
-| Example | Description |
-|---------|-------------|
-| `LHCb:2015svh.json` | LHCb paper, TexKey LHCb:2015svh |
 
 **TexKey selection**: When a paper has both a collaboration-level and an author-level TexKey, the collaboration-level TexKey is canonical for filenames, paper indexing, and cross-references throughout this database. The author-level key is kept for citation but is not used in paths.
 
@@ -156,25 +135,15 @@ Location: within the `Lab-Collaboration` folder's year subdirectory (e.g., `expe
 
 ### Check if a Paper Exists
 
-```python
-import json, os
+Search both depths before concluding a paper is missing (SKILL.md Step 1):
 
-base = 'expe-data/CERN-LHCb'
-target = 'LHCb:2015svh'
-
-for year in sorted(os.listdir(base)):
-    if not year.isdigit():
-        continue
-    idx_path = os.path.join(base, year, f'LHCb@{year}.json')
-    if not os.path.exists(idx_path):
-        continue
-    for month, files in json.load(open(idx_path)).items():
-        if target in files:
-            for folder in (os.path.join(base, year, month), os.path.join(base, year)):
-                path = os.path.join(folder, f'{target}.json')
-                if os.path.exists(path):
-                    print(f'Found: {path} (index month {month})')
+```bash
+find expe-data/CERN-LHCb -mindepth 2 -maxdepth 3 -name 'LHCb:2015svh.json'
 ```
+
+To check the index rather than the disk, load each
+`<Collaboration>@<year>.json` under the group folder and look for the
+file_id in its month arrays.
 
 ### Verify Index Integrity
 
@@ -232,72 +201,42 @@ When removing a file:
 
 #### Concrete Recipe (add new paper)
 
-The index file (`expe-data/CERN-LHCb/2015/LHCb@2015.json`) does NOT
-store submission dates — only file_ids — so re-sorting requires reading
-each referenced JSON's `time` field. The most reliable workflow:
+The index stores only file_ids, not submission dates, so re-sorting means
+reading each referenced paper's `time` field. Papers may sit in
+`<year>/<month>/` or flat under `<year>/`, hence `resolve()` tries both.
 
 ```bash
-# Variables
-TEXKEY="LHCb:2015svh"
-COLLAB="LHCb"
-YEAR="2015"
-MONTH="12"  # zero-padded, from paper's arXiv v1 submission date
-FILE_ID="LHCb:2015svh"  # TexKey, equals filename without ".json"
-BASE="expe-data/CERN-LHCb/${YEAR}"
-INDEX="${BASE}/${COLLAB}@${YEAR}.json"
+BASE="expe-data/CERN-LHCb/2015"
+INDEX="${BASE}/LHCb@2015.json"
+MONTH="12"                       # zero-padded, from the arXiv v1 date
+FILE_ID="LHCb:2015svh"           # TexKey = filename without ".json"
 PAPER="${BASE}/${MONTH}/${FILE_ID}.json"
 
-# 1. Confirm the paper JSON exists and parses
 python3 flav-data-importer/scripts/json-valid.py "${PAPER}"
 
-# 2. Create index file (or load existing) and add file_id to month array.
-#    Uses a small inline Python snippet — no separate script required.
 python3 - <<PYEOF
 import json, os
-index_path = "${INDEX}"
-paper_path = "${PAPER}"
-file_id    = "${FILE_ID}"
-month      = "${MONTH}"
-
-if os.path.exists(index_path):
-    with open(index_path) as f:
-        idx = json.load(f)
-else:
-    idx = {}
-
-# Add the file_id to its month (de-duplicate)
-month_list = idx.setdefault(month, [])
-if file_id not in month_list:
-    month_list.append(file_id)
-
-# Re-sort by arXiv v1 date (read 'time' field from each paper JSON).
-# Papers may live in a YYYY/MM/ subdirectory or flat under YYYY/.
-month_dir = os.path.dirname(paper_path)
+idx = json.load(open("${INDEX}")) if os.path.exists("${INDEX}") else {}
+month_list = idx.setdefault("${MONTH}", [])
+if "${FILE_ID}" not in month_list:
+    month_list.append("${FILE_ID}")
 
 def resolve(fid):
-    for candidate in (
-        os.path.join(month_dir, fid + '.json'),
-        os.path.join(os.path.dirname(month_dir), fid + '.json'),
-    ):
-        if os.path.exists(candidate):
-            return candidate
-    raise FileNotFoundError(f'{fid}.json not found under {month_dir} or its parent')
+    for folder in ("${BASE}/${MONTH}", "${BASE}"):
+        path = os.path.join(folder, fid + '.json')
+        if os.path.exists(path):
+            return path
+    raise FileNotFoundError(fid)
 
-def v1_date(fid):
-    with open(resolve(fid)) as f:
-        return json.load(f)['time']
-idx[month] = sorted(month_list, key=v1_date)
-
-os.makedirs(os.path.dirname(index_path), exist_ok=True)
-with open(index_path, 'w') as f:
+idx["${MONTH}"] = sorted(
+    month_list, key=lambda fid: json.load(open(resolve(fid)))['time'])
+with open("${INDEX}", 'w') as f:
     json.dump(idx, f, indent=4, sort_keys=True)
     f.write('\n')
-print(f'Updated {index_path}: month {month} now has {len(idx[month])} entries')
 PYEOF
-
-# 3. Confirm the index matches the files on disk (both depths)
-#    → run the "Verify Index Integrity" snippet above
 ```
+
+Then run "Verify Index Integrity" above to confirm the index matches disk.
 
 ### Multi-Collaboration Papers
 
@@ -308,9 +247,6 @@ When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS 
 
 ## Notes
 
-1. **Always update the index** after adding or deleting a JSON file.
-2. **Month assignment** is based on the arXiv v1 submission date.
-3. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
-4. **Validate** with `python3 flav-data-importer/scripts/json-valid.py` after writing (it also handles HFLAV/PDG snapshots — see json-meta.md).
-5. **Backup before modifying** — especially when updating indices or replacing existing files.
-6. **Index file ordering**: Within each month array, file_ids are sorted by arXiv v1 submission date. Since the index file itself doesn't store dates, re-sort whenever adding a new entry — look up each file's `time` field from its JSON content, then sort.
+1. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
+2. **Validate** with `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]` after writing (it also handles HFLAV/PDG snapshots — see json-meta.md).
+3. **Backup before modifying** — especially when updating indices or replacing existing files.

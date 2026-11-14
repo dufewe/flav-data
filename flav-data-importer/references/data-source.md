@@ -29,31 +29,13 @@ Try sources in the following order. Move to the next source only if the current 
 
 **When to use**: Experimental papers that have uploaded their data to HEPData. Most LHC and many Belle/BaBar papers have HEPData entries.
 
-**How to access**:
-```bash
-# hepdata-cli install + lookup: see ./hepdata-cli.md.
-# Briefly: install with `pip install hepdata-cli`; the importer resolves
-# the binary at runtime from $PATH / venv bin / ~/.local/bin.
-HEPDATA_CLI="hepdata-cli"
-
-# List available tables for a paper
-$HEPDATA_CLI fetch-names -i inspire <inspire_recid>
-
-# Download metadata (contains table URLs and paper info)
-$HEPDATA_CLI download -f json -i inspire <inspire_recid> -d <output_dir>
-```
-
-**Downloading specific tables**:
-```bash
-# HEPData blocks plain HTTP clients (Cloudflare), so always go through
-# hepdata-cli rather than curl/wget.
-$HEPDATA_CLI download -f yaml -i inspire <inspire_recid> \
-  -t "Table 1" -d <output_dir>
-```
-`scripts/hepdata-ext.py` wraps this in `download_table_yaml()` and then
-parses the YAML with `parse_yaml_observables()` /
-`parse_yaml_correlation()`; `detect_table_type()` decides which parser
-to use from the table structure.
+**How to access**: through `hepdata-cli` only — HEPData blocks plain HTTP
+clients (Cloudflare), so never reach it with `curl`/`wget`/`urllib`.
+Install, binary resolution, the `fetch-names`/`download` commands and the
+YAML structure are all in `hepdata-cli.md`. `scripts/hepdata-ext.py` wraps
+them: `download_table_yaml()` fetches one table, `detect_table_type()`
+picks the parser from the table structure, and `parse_yaml_observables()`
+/ `parse_yaml_correlation()` read it.
 
 **Limitations**:
 - Theory papers almost never have HEPData entries.
@@ -112,17 +94,12 @@ HEPData entry omits).
    (better than PDF text) as the data source and still cross-check every value
    against the paper's table.
 
-**How to access**:
-```bash
-# e-print package: usually a .tar.gz, sometimes a single gzipped file
-curl -sL -A 'Mozilla/5.0' -o src.tar.gz "https://arxiv.org/e-print/<arxiv_id>"
-tar tzf src.tar.gz
-
-# or via the helper (downloads, unpacks, lists candidate data files)
-python3 flav-data-importer/scripts/arxiv-ext.py <arxiv_id> --source -o <output_dir>
-```
-Ancillary data is usually small text/CSV; the package also carries the LaTeX
-source, which preserves table structure that PDF extraction loses.
+**How to access**: see `arxiv-api.md`
+§"Ancillary Files and the e-Print Package". Briefly,
+`python3 flav-data-importer/scripts/arxiv-ext.py <arxiv_id> --source -o <output_dir>`
+downloads and unpacks the e-print package and lists candidate data files.
+The package also carries the LaTeX source, which preserves table structure
+that PDF extraction loses.
 
 ### 5. arXiv PDF / LaTeX Source (Last Resort)
 
@@ -200,15 +177,9 @@ then cross-check them against the paper text.
 | PDG world averages | PDG website or HEPData | PDG review PDFs at pdg.lbl.gov |
 | HFLAV averages | HFLAV website | Dedicated combination results |
 | Theory calculations | arXiv ancillary files or LaTeX source | Theory papers rarely have HEPData; check the e-print package first |
-| Any arXiv paper before PDF | arXiv ancillary files | Prefer machine-readable files; validate against the paper tables |
-| Table screenshots | Image reading | User-provided images |
 | CMS PAS | CDS | CMS preliminary analyses on CDS |
 
 ## Output Formatting Rules
 
-See SKILL.md "Core Conventions" — the 9 hard rules there (matrix layout,
-single-line abstract, InspireHEP author format, LaTeX-only Unicode,
-canonical transition order, one group per property set, the `data`
-array of channel-keyed groups, conditional
-`collaboration`, and `aN_FF` form-factor naming)
-apply to all JSON output.
+The 9 hard rules in SKILL.md §"Core Conventions" apply to all JSON output;
+the field-level specification is `json-meta.md`.

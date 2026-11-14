@@ -11,11 +11,8 @@ Example:
     python3 arxiv-ext.py 1512.04442 --source -o /tmp/dl
 """
 
-import urllib.request
-import urllib.error
 import xml.etree.ElementTree as ET
 import gzip
-import json
 import os
 import shutil
 import sys
@@ -24,13 +21,12 @@ import argparse
 import re
 from pathlib import Path
 
-# Shared helpers (Unicode -> LaTeX mapping, BibTeX name conversion),
-# re-exported for callers. See common.py for the canonical implementations
-# and SKILL.md "Core Conventions" rules 3 + 4 for the policies.
+# Shared helpers: see common.py for the implementations and SKILL.md
+# "Core Conventions" rules 3 + 4 for the policies.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (
-    unicode_to_latex, to_bibtex, format_authors, arxiv_name_to_bibtex,
-)  # noqa: E402,F401
+from common import (  # noqa: E402
+    unicode_to_latex, format_authors, arxiv_name_to_bibtex, open_url, write_json,
+)
 
 # Candidate machine-readable data files in an arXiv e-print package.
 _DATA_SUFFIXES = ('.dat', '.txt', '.csv', '.tsv', '.json', '.yaml', '.yml')
@@ -39,14 +35,9 @@ _DATA_SUFFIXES = ('.dat', '.txt', '.csv', '.tsv', '.json', '.yaml', '.yml')
 def get_arxiv_info(arxiv_id: str) -> dict:
     """Fetch paper information from the arXiv API."""
     url = f'https://export.arxiv.org/api/query?id_list={arxiv_id}'
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    try:
-        response = urllib.request.urlopen(req, timeout=15)
-    except urllib.error.HTTPError as e:
-        raise ValueError(f"arXiv API request failed (HTTP {e.code}): {e.reason}")
-    except urllib.error.URLError as e:
-        raise ValueError(f"arXiv API connection failed: {e.reason}")
-    xml_data = response.read().decode('utf-8')
+    with open_url(url, label='arXiv API',
+                  headers={'User-Agent': 'Mozilla/5.0'}) as response:
+        xml_data = response.read().decode('utf-8')
 
     root = ET.fromstring(xml_data)
     ns = {'atom': 'http://www.w3.org/2005/Atom',
@@ -188,10 +179,8 @@ def download_pdf(arxiv_id: str, output_dir: str) -> str:
 
     Raises
     ------
-    urllib.error.URLError
-        If the network request fails.
     ValueError
-        If the arXiv server returns an HTTP error (via urllib).
+        If the download fails (HTTP error or connection failure).
     OSError
         If the PDF cannot be written to disk.
     """
@@ -200,19 +189,10 @@ def download_pdf(arxiv_id: str, output_dir: str) -> str:
     safe_id = arxiv_id.replace('/', '_')
     pdf_path = os.path.join(output_dir, f'{safe_id}.pdf')
 
-    req = urllib.request.Request(pdf_url, headers={'User-Agent': 'Mozilla/5.0'})
-    try:
-        response = urllib.request.urlopen(req, timeout=30)
-    except urllib.error.HTTPError as e:
-        raise ValueError(
-            f"arXiv PDF download failed (HTTP {e.code}): {e.reason}"
-        ) from e
-    except urllib.error.URLError as e:
-        raise ValueError(
-            f"arXiv PDF download connection failed: {e.reason}"
-        ) from e
-    with open(pdf_path, 'wb') as f:
-        f.write(response.read())
+    with open_url(pdf_url, label='arXiv PDF download', timeout=30,
+                  headers={'User-Agent': 'Mozilla/5.0'}) as response:
+        with open(pdf_path, 'wb') as f:
+            f.write(response.read())
 
     return pdf_path
 
@@ -284,19 +264,10 @@ def download_source(arxiv_id: str, output_dir: str) -> dict:
     source_dir = os.path.join(output_dir, f'{safe_id}_src_files')
     url = f'https://arxiv.org/e-print/{arxiv_id}'
 
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    try:
-        with urllib.request.urlopen(req, timeout=60) as response, \
-                open(archive_path, 'wb') as out:
-            shutil.copyfileobj(response, out)
-    except urllib.error.HTTPError as e:
-        raise ValueError(
-            f"arXiv source download failed (HTTP {e.code}): {e.reason}"
-        ) from e
-    except urllib.error.URLError as e:
-        raise ValueError(
-            f"arXiv source download connection failed: {e.reason}"
-        ) from e
+    with open_url(url, label='arXiv source download', timeout=60,
+                  headers={'User-Agent': 'Mozilla/5.0'}) as response, \
+            open(archive_path, 'wb') as out:
+        shutil.copyfileobj(response, out)
 
     if os.path.exists(source_dir):
         shutil.rmtree(source_dir)
@@ -369,13 +340,11 @@ def main() -> None:
     # Save JSON + download PDF (only when --output_dir is given and not --no-write)
     output_dir = args.output_dir
     if output_dir and not args.no_write:
-        os.makedirs(output_dir, exist_ok=True)
         # Old-style IDs contain '/' (e.g. hep-ph/9504235); keep the file
         # inside output_dir instead of creating a subdirectory.
         safe_id = args.arxiv_id.replace('/', '_')
         json_path = os.path.join(output_dir, f'{safe_id}_arxiv.json')
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(info, f, indent=4, ensure_ascii=False)
+        write_json(json_path, info)
         print(f"\nJSON saved to: {json_path}")
 
         if not args.no_pdf:

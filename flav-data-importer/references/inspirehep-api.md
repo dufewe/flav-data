@@ -55,9 +55,14 @@ returns a dict with these 22 keys:
 CLI usage:
 ```bash
 python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442
+python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442   # same as positional
 python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
 python3 flav-data-importer/scripts/inspirehep-ext.py --recid 1409497
+python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442 --no-write   # stdout only
 ```
+
+Without `--output_dir` nothing is written; `--no-write` forces stdout-only
+even when a directory is given.
 
 ## Notes
 
@@ -68,5 +73,7 @@ python3 flav-data-importer/scripts/inspirehep-ext.py --recid 1409497
 5. TexKeys can change when papers are updated — always verify before writing indices.
 6. `inspire_hep_link`, `arxiv_link`, and `pdf_url` are `None` when the required
    identifiers are absent — never build `[]()` / `(...)` stubs.
-7. On timeout/empty response, retry after 2s delay, or use the bibtex fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
+7. The script issues a single request with no retry or backoff. On
+   timeout/empty response, wait ~2s and rerun it yourself, or fetch the
+   bibtex fallback: `https://inspirehep.net/api/literature/{recid}?format=bibtex`.
 8. `arxiv_eprints.value` does NOT include version number — use arXiv API for that.

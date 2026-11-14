@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Unicode→LaTeX and BibTeX-author formatting (SKILL.md rules 3 & 4).
+"""Unicode→LaTeX, BibTeX-author formatting, and shared I/O helpers.
 
-Shared helpers re-exported by all extraction scripts; import from any of them.
+Canonical implementations for the extraction scripts (SKILL.md rules 3 & 4).
 """
 
+import contextlib
+import json
+import os
 import unicodedata
+import urllib.error
+import urllib.request
 
 # ---------------------------------------------------------------------------
 # Unicode → LaTeX mapping (SKILL.md rule 4)
@@ -314,3 +319,35 @@ def format_authors(full_names: list[str]) -> str:
     else:
         result = f'{bibtex[0]} and others'
     return unicode_to_latex(result)
+
+
+# ---------------------------------------------------------------------------
+# Shared I/O helpers
+# ---------------------------------------------------------------------------
+
+@contextlib.contextmanager
+def open_url(url: str, *, label: str, headers: dict[str, str] | None = None,
+             timeout: int = 15):
+    """GET ``url`` and yield the open response, closing it afterwards.
+
+    ``label`` names the caller in the error message ("arXiv API", ...).
+    HTTP and connection failures become ``ValueError`` so callers have a
+    single exception type to handle.
+    """
+    req = urllib.request.Request(url, headers=headers or {})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            yield response
+    except urllib.error.HTTPError as e:
+        raise ValueError(
+            f"{label} request failed (HTTP {e.code}): {e.reason}"
+        ) from e
+    except urllib.error.URLError as e:
+        raise ValueError(f"{label} connection failed: {e.reason}") from e
+
+
+def write_json(path: str, payload: dict) -> None:
+    """Write ``payload`` as 4-space-indented JSON, creating parent directories."""
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, indent=4, ensure_ascii=False)

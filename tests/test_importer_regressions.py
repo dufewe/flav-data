@@ -6,6 +6,7 @@ import os
 import tarfile
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 from unittest.mock import patch
 
@@ -217,6 +218,52 @@ class JsonValidatorTests(unittest.TestCase):
                     'B0Bar.2.D0*+(2300)+.l-.vBar'):
             self.assertTrue(json_valid.validate_transition_key(key), key)
 
+    def test_ratio_key_keeps_slash_inside_particle_name(self):
+        for key in ('B0.2.J/psi0.KS0/B0.2.J/psi0.KL0',
+                    'B+.2.J/psi0.K+/B0.2.J/psi0.KS0',
+                    'B0.2.J/psi0.mu+.mu-/B0.2.J/psi0.e+.e-',
+                    'B0.2.psi(2S)0(2.mu+.mu-).KS0/B0.2.J/psi0.KS0',
+                    'B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-'):
+            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+
+    def test_ratio_key_still_checks_each_side(self):
+        key = 'B0.2.mu+.mu-.K*0/B0.2.K*0.mu+.mu-'
+        self.assertTrue(json_valid.validate_transition_key(key), key)
+
+    def _validate_raw(self, raw):
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
+            f.write(raw)
+            f.flush()
+            return json_valid.validate_json(f.name)
+
+    def test_duplicate_json_keys_are_rejected(self):
+        obs = ('{"name": "f+", "value": "0.4", '
+               '"total_upper": "0.02", "total_lower": "0.02"}')
+        channel = '{"obs@1": %s}' % obs
+        cases = {
+            'B0.2.pi-.l+.v': (
+                '"data": [{"B0.2.pi-.l+.v": %s, "B0.2.pi-.l+.v": %s}]'
+                % (channel, channel)
+            ),
+            'obs@1': (
+                '"data": [{"B0.2.pi-.l+.v": {"obs@1": %s, "obs@1": %s}}]'
+                % (obs, obs)
+            ),
+            'title': '"title": "Second", "data": []',
+        }
+        for key, tail in cases.items():
+            with self.subTest(key=key):
+                raw = ('{"inspire-hep": "[T:2024](https://inspirehep.net/literature/1)", '
+                       '"author": "Doe, J.", "title": "Test", '
+                       '"arxiv": "[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)", '
+                       '"time": "2024.01.01", "abstract": "Test abstract.", '
+                       '"transition-mode": "semileptonic-decay", ' + tail + '}')
+                issues = self._validate_raw(raw)
+                self.assertTrue(
+                    any(f"Duplicate JSON key '{key}'" in issue for issue in issues),
+                    issues,
+                )
+
     @staticmethod
     def _obs(name):
         return {
@@ -412,6 +459,31 @@ class JsonValidatorTests(unittest.TestCase):
                     'correlation': [[1.0]],
                 }]
                 self.assertEqual(self._validate_data(data), [])
+
+    def test_tagged_coefficient_name_still_requires_scheme(self):
+        for name in ('a0_F+(nominal)', 'a1_f+[higher-order]', 'a0_f+'):
+            with self.subTest(name=name):
+                data = [{
+                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'dataset': 'LQCD',
+                }]
+                issues = self._validate_data(data)
+                self.assertTrue(any(
+                    "must declare a group-level 'scheme'" in issue
+                    for issue in issues
+                ), issues)
+
+        data = [{
+            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_F+(nominal)')),
+            'dataset': 'LQCD',
+            'scheme': 'BCL',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_obsolete_symbol_with_tag_is_rejected(self):
+        for name in ('a0_fp(nominal)', 'a1_Fp[higher-order]', 'Q5[mu-e]'):
+            with self.subTest(name=name):
+                self.assertTrue(json_valid.validate_observable_name(name), name)
 
     def test_obsolete_form_factor_symbols_are_rejected(self):
         for name in ('a0_fp', 'a1_Fp', 'a2_Gp', 'a0_hp', 'a1_htp'):
@@ -928,6 +1000,22 @@ class AuthorFormattingTests(unittest.TestCase):
         self.assertTrue(any('author' in i and 'non-ASCII' in i for i in issues))
 
 
+class FakeResponse:
+    """urlopen() stand-in supporting the context-manager protocol."""
+
+    def __init__(self, payload: bytes):
+        self._payload = payload
+
+    def read(self):
+        return self._payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
 class ExternalMetadataTests(unittest.TestCase):
     def test_inspire_arxiv_link_old_style_id_no_double_prefix(self):
         hit = {'metadata': {
@@ -984,10 +1072,8 @@ class ExternalMetadataTests(unittest.TestCase):
                 {'metadata': {'arxiv_eprints': [{'value': '1512.04442'}]}},
             ]}
         }
-        response = type('Response', (), {
-            'read': lambda self: json.dumps(payload).encode('utf-8')
-        })()
-        with patch.object(inspirehep_ext.urllib.request, 'urlopen', return_value=response):
+        response = FakeResponse(json.dumps(payload).encode('utf-8'))
+        with patch.object(common.urllib.request, 'urlopen', return_value=response):
             hit = inspirehep_ext.get_inspire_by_arxiv('1512.04442v2')
         self.assertEqual(hit['metadata']['arxiv_eprints'][0]['value'], '1512.04442')
 
@@ -995,14 +1081,44 @@ class ExternalMetadataTests(unittest.TestCase):
         xml = '''<feed xmlns="http://www.w3.org/2005/Atom" xmlns:arxiv="http://arxiv.org/schemas/atom">
           <entry><published>2020-01-01</published><updated>2020-01-01</updated>
           <title>Title</title><summary>Abstract</summary></entry></feed>'''
-        response = type('Response', (), {'read': lambda self: xml.encode('utf-8')})()
-        with patch.object(arxiv_ext.urllib.request, 'urlopen', return_value=response):
+        response = FakeResponse(xml.encode('utf-8'))
+        with patch.object(common.urllib.request, 'urlopen', return_value=response):
             with self.assertRaisesRegex(ValueError, 'missing atom:id'):
                 arxiv_ext.get_arxiv_info('2001.00001')
 
     def test_texkey_path_separators_are_sanitized(self):
         source = (IMPORTER_ROOT / 'scripts' / 'inspirehep-ext.py').read_text(encoding='utf-8')
         self.assertIn("re.sub(r'[^A-Za-z0-9._-]', '_', info['texkey'])", source)
+
+
+class SharedHelperTests(unittest.TestCase):
+    def test_open_url_normalizes_http_error(self):
+        error = urllib.error.HTTPError('https://x', 404, 'Not Found', None, None)
+        with patch.object(common.urllib.request, 'urlopen', side_effect=error):
+            with self.assertRaisesRegex(ValueError, r'arXiv API request failed \(HTTP 404\)'):
+                with common.open_url('https://x', label='arXiv API'):
+                    pass
+
+    def test_open_url_normalizes_connection_error(self):
+        error = urllib.error.URLError('timed out')
+        with patch.object(common.urllib.request, 'urlopen', side_effect=error):
+            with self.assertRaisesRegex(ValueError, 'InspireHEP API connection failed: timed out'):
+                with common.open_url('https://x', label='InspireHEP API'):
+                    pass
+
+    def test_open_url_closes_response(self):
+        response = FakeResponse(b'body')
+        with patch.object(common.urllib.request, 'urlopen', return_value=response):
+            with common.open_url('https://x', label='arXiv API') as r:
+                self.assertEqual(r.read(), b'body')
+
+    def test_write_json_creates_parents_and_keeps_unicode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, 'nested', 'sub', 'out.json')
+            common.write_json(path, {'title': 'B \\to K', 'n': 1})
+            text = Path(path).read_text(encoding='utf-8')
+            self.assertIn('\n    "title"', text)
+            self.assertEqual(json.loads(text), {'title': 'B \\to K', 'n': 1})
 
 
 class ImporterDocumentationTests(unittest.TestCase):
