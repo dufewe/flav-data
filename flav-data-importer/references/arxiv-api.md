@@ -95,8 +95,7 @@ even when a directory is given.
 ## Notes
 
 1. **`published` is v1 time**, `updated` is the latest version — always use `published`.
-2. **Ancillary data first** — if the package ships machine-readable tables, read the values from them and validate against the paper's tables; only fall back to the LaTeX/PDF tables when no ancillary data exists.
-3. **Author tiering**: `author_str` follows SKILL.md rule 3 with InspireHEP BibTeX initials — `"Polchinski, J."` for 1, `"Aaij, R. and Smith, J."` for 2, `"Aaij, R., Smith, J., and Oyanguren, A."` for 3, `"Aaij, R. and others"` for 4+.
-4. **Unicode escaping**: Replace all Unicode with LaTeX equivalents (see SKILL.md rule 4).
-5. **Network access**: arXiv API may be unreachable from restricted environments — use the local terminal.
-6. **Error handling**: HTTP 200 even for missing IDs, but `<total>0</total>`. Check for `<atom:entry>`.
+2. **Author tiering**: `author_str` follows SKILL.md rule 3.
+3. **Unicode escaping**: Replace all Unicode with LaTeX equivalents (see SKILL.md rule 4).
+4. **Network access**: arXiv API may be unreachable from restricted environments — use the local terminal.
+5. **Error handling**: HTTP 200 even for missing IDs, but `<total>0</total>`. Check for `<atom:entry>`.

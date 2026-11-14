@@ -11,7 +11,7 @@
         {
             "no-transition": {
                 "obs@1": {
-                    "name": "MZ",
+                    "name": "Mass(Z)",
                     "value": "91185.7",
                     "type@1_error": "stat",
                     "type@1_upper": "8.3",

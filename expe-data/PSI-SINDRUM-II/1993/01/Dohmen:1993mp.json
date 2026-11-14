@@ -9,22 +9,24 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "mu-.Ti.2.e-.Ti": {
+            "mu_I??_1+n_0.n~22~48.2.e_I??_1+n_0.n~22~48": {
                 "obs@1": {
-                    "name": "R_mue_conv",
+                    "name": "R",
                     "type@1_upper": "4.3e-12",
                     "type@1_level": "90%@CL"
                 }
-            }
+            },
+            "note": "Rate normalised to ordinary muon capture on the same nucleus."
         },
         {
-            "mu-.Ti.2.e+.Ca": {
+            "mu_I??_1+n_0.n~22~48.2.E_I??_1+n_0.n~20~40": {
                 "obs@1": {
-                    "name": "R_muconv",
+                    "name": "R",
                     "type@1_upper": "4.3e-12",
                     "type@1_level": "90%@CL"
                 }
-            }
+            },
+            "note": "Rate normalised to ordinary muon capture on the same nucleus."
         }
     ]
 }

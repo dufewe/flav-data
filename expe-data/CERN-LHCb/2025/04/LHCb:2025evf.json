@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Sigma+.2.p+.mu+.mu-": {
+            "uus_I2?_1+n_0.2.uud_I1?_1+n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.08e-8",

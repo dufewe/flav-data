@@ -9,7 +9,7 @@
     "transition-mode": "radiative-decay",
     "data": [
         {
-            "B0.2.rho0.gamma": {
+            "dB_I1?_0-n_0.2.qQ_I2+_1--_0.ph_I??_1--_0": {
                 "obs@1": {
                     "name": "Br/Br",
                     "value": "0.0189",

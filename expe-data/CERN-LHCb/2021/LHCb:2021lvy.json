@@ -9,9 +9,9 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "no-transition": {
+            "dB_I1?_0-n_0.2.qQ_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.qQ_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "RKS0[mu/e]",
+                    "name": "R",
                     "value": "0.66",
                     "q2min": "1.1",
                     "q2max": "6.0",
@@ -21,9 +21,11 @@
                     "type@2_lower": "0.04",
                     "type@1_error": "stat",
                     "type@2_error": "syst"
-                },
-                "obs@2": {
-                    "name": "RK*+[mu/e]",
+                }
+            },
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "R",
                     "value": "0.7",
                     "q2min": "0.045",
                     "q2max": "6.0",

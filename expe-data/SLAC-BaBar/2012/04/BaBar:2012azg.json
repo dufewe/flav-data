@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "B+.2.K+.tau-.mu+": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.tau_I??_1+n_0.MU_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.5e-5",
@@ -18,7 +18,7 @@
             }
         },
         {
-            "B+.2.K+.tau+.mu-": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.TAU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "2.8e-5",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "B+.2.K+.tau-.e+": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.tau_I??_1+n_0.E_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.3e-5",
@@ -36,7 +36,7 @@
             }
         },
         {
-            "B+.2.K+.tau+.e-": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.TAU_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.5e-5",
@@ -45,7 +45,7 @@
             }
         },
         {
-            "B+.2.pi+.tau-.mu+": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.tau_I??_1+n_0.MU_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "6.2e-5",
@@ -54,7 +54,7 @@
             }
         },
         {
-            "B+.2.pi+.tau+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.TAU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.5e-5",
@@ -63,7 +63,7 @@
             }
         },
         {
-            "B+.2.pi+.tau-.e+": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.tau_I??_1+n_0.E_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "7.4e-5",
@@ -72,7 +72,7 @@
             }
         },
         {
-            "B+.2.pi+.tau+.e-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.TAU_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "2.0e-5",
@@ -81,7 +81,7 @@
             }
         },
         {
-            "B+.2.K+.tau-.mu+": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.tau_I??_1+n_0.MU_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.8e-5",
@@ -90,7 +90,7 @@
             }
         },
         {
-            "B+.2.K+.tau-.e+": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.tau_I??_1+n_0.E_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "3.0e-5",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "B+.2.pi+.tau-.mu+": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.tau_I??_1+n_0.MU_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "7.2e-5",
@@ -108,7 +108,7 @@
             }
         },
         {
-            "B+.2.pi+.tau-.e+": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.tau_I??_1+n_0.E_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "7.5e-5",

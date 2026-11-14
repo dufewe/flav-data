@@ -14,7 +14,7 @@ flav-data/
 │       └── <year>/
 │           ├── <Collaboration>@<year>.json    # Annual index
 │           └── <month>/
-│               └── <Collaboration>:<TexKey>.json
+│               └── <TexKey>.json
 └── theo-data/
     └── <Group-or-Method>/                     # e.g. FNAL-MILC, LQCD, LCSR, QCD
         └── <year>/
@@ -37,8 +37,7 @@ is missing (the snippets below do).
 Experimental directories use the `Lab-Collaboration` format (实验室-实验组).
 When there is no parent lab (aggregation groups like HFLAV/PDG, or
 standalone individual measurements), the collaboration/group name is
-used directly as the folder. Data files and annual index files inside
-the folder retain only the collaboration name (not the lab prefix).
+used directly as the folder.
 
 | Folder | Lab | Collaboration | Notes |
 |--------|-----|--------------|-------|
@@ -68,8 +67,8 @@ the folder retain only the collaboration name (not the lab prefix).
 | `PSI-nTRV` | PSI | nTRV | Neutron decay electron polarization |
 | `LANL-UCNA` | LANL | UCNA | |
 | `NIST-aCORN` | NIST | aCORN | |
-| `HFLAV` | — | HFLAV | No parent lab; non-standard schema |
-| `PDG` | — | PDG | No parent lab; non-standard schema |
+| `HFLAV` | — | HFLAV | No parent lab; world averages |
+| `PDG` | — | PDG | No parent lab; world averages |
 
 Theoretical folders depend on the size of the group:
 
@@ -97,21 +96,16 @@ method folders `LCSR`, `LQCD` and `QCD` are registered there, so each gets a
 navigation page scanning its year/month tree. A large-collaboration folder
 (e.g. `FNAL-MILC`) is added to `THEOGROUP` the same way once it exists on disk.
 
-**Special cases**:
-
-- **HFLAV** and **PDG** use a non-standard flav-data schema (one
-  snapshot JSON per year whose keys are subgroup names containing
-  nested observables). See `json-meta.md` for details.
-  When importing data into these groups, build a single year-level
-  snapshot file rather than per-paper JSONs.
+HFLAV and PDG follow this layout like any other collaboration: one JSON per
+compilation under `<year>/<month>/`, with `transition-mode: world-average`.
 
 ### Data Files
 
-Format: `{Collaboration}:{TexKey}.json`
+Format: the full InspireHEP TexKey, `{Collaboration}:{id}.json`
 
-The filename uses only the collaboration name (not the full `Lab-Collaboration` folder name). For example, under `expe-data/CERN-LHCb/`, the data file is `LHCb:2015svh.json`. TexKey comes from InspireHEP.
+The TexKey carries the collaboration name, not the `Lab-Collaboration` folder name. Under `expe-data/CERN-LHCb/` the file is `LHCb:2015svh.json`; under `theo-data/FNAL-MILC/` it is `FermilabLattice:2014ysv.json`.
 
-**TexKey selection**: When a paper has both a collaboration-level and an author-level TexKey, the collaboration-level TexKey is canonical for filenames, paper indexing, and cross-references throughout this database. The author-level key is kept for citation but is not used in paths.
+**TexKey selection**: When a paper has both a collaboration-level and an author-level TexKey, the collaboration-level TexKey is canonical for filenames, paper indexing, and cross-references throughout this database. The author-level key is kept for citation but is not used in paths. If InspireHEP has no TexKey at all, use `{Collaboration}:{recid}` as the stem and record it in the annual index.
 
 ### Annual Index Files
 
@@ -159,10 +153,9 @@ index = json.load(open(f'{base}/LHCb@2015.json'))
 indexed = {fid for files in index.values() for fid in files}
 
 # Disk file_ids — both month subdirectories (YYYY/MM/) and flat files
-# under the year directory (YYYY/). correlation.json is a matrix
-# sidecar, not a paper, and is never indexed.
+# under the year directory (YYYY/).
 def is_paper(name):
-    return name.endswith('.json') and '@' not in name and name != 'correlation.json'
+    return name.endswith('.json') and '@' not in name
 
 on_disk = set()
 for entry in sorted(os.listdir(base)):
@@ -248,5 +241,4 @@ When a paper is a joint effort between multiple collaborations (e.g., ATLAS+CMS 
 ## Notes
 
 1. **File size limit**: Keep JSON files under 10MB; split large correlation matrices.
-2. **Validate** with `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]` after writing (it also handles HFLAV/PDG snapshots — see json-meta.md).
-3. **Backup before modifying** — especially when updating indices or replacing existing files.
+2. **Validate** with `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]` after writing.

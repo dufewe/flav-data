@@ -9,9 +9,9 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "no-transition": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_1-n_0.mu_I??_1+n_0.vBar": {
                 "obs@1": {
-                    "name": "RD*[tau/mu]",
+                    "name": "R",
                     "value": "0.281",
                     "type@1_upper": "0.018",
                     "type@1_lower": "0.018",
@@ -19,9 +19,11 @@
                     "type@2_lower": "0.024",
                     "type@1_error": "stat",
                     "type@2_error": "syst"
-                },
-                "obs@2": {
-                    "name": "RD0[tau/mu]",
+                }
+            },
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.tau_I??_1+n_0.vBar/Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.mu_I??_1+n_0.vBar": {
+                "obs@1": {
+                    "name": "R",
                     "value": "0.441",
                     "type@1_upper": "0.06",
                     "type@1_lower": "0.06",

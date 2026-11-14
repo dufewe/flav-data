@@ -58,7 +58,7 @@ st.markdown('''
 ## Features
 
 - **Standardized JSON format** — every entry follows the same schema with metadata, data arrays, and transition-mode classification
-- **Machine-parseable naming** — each data group maps transition keys (`A.B.2.C.D`) to observables named by bare symbols with optional `[condition]` qualifiers
+- **Machine-parseable naming** — each data group maps transition keys (pids joined by `.2.`) to observables named by bare symbols with optional `[condition]` qualifiers
 - **Year-indexed organization** — annual index files (`LHCb@2025.json`) for fast lookup
 - **Month subdirectories** — files organized by arXiv v1 submission date
 - **Complete error breakdown** — component errors (stat/syst) when split, total errors otherwise, plus confidence bounds and optional correlation matrices
@@ -77,7 +77,7 @@ with col1:
     st.markdown('''
     Browse the naming conventions and observable abbreviations:
 
-    - **Flavor** — Transition symbols, particle abbreviations,
+    - **Flavor** — Channel keys (pid transitions), common pids,
       observable naming rules, angular coefficients, CP asymmetries,
       optimized observables (P), LFU differences (Delta), CKM parameters
     - **EWPO** — Electroweak precision observables: intrinsic
@@ -128,7 +128,7 @@ st.code('''{
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.mu+.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.69",
@@ -158,7 +158,7 @@ st.markdown('''
 | Single error | Written as the total error: `total_upper`/`total_lower` |
 | Limits | `type@N_upper`/`type@N_lower` with `type@N_level` |
 | Correlation matrices at group level | `correlation`/`type@1_correlation` alongside channel keys |
-| Transition key | group channel key `A.B.2.C.D` replaces $A + B \\to C + D$ |
+| Transition key | group channel key joins pids with `.2.` in place of $A + B \\to C + D$ |
 | No channel LaTeX | transition is encoded by the channel key; `data` stores no LaTeX |
 | LaTeX escaping | `\\\\to` in `title`/`abstract` JSON → `\\to` after parsing |
 | Observable naming | bare `OBS` symbol; `[condition]` only for multi-transition ratios |

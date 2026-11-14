@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambda0.2.p+.mu-.vBar": {
+            "uds_I0?_1+n_0.2.uud_I1?_1+n_0.mu_I??_1+n_0.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.462e-4",
@@ -26,9 +26,9 @@
             }
         },
         {
-            "Lambda0.2.p+.l-.vBar": {
+            "uds_I0?_1+n_0.2.uud_I1?_1+n_0.mu_I??_1+n_0.vBar/uds_I0?_1+n_0.2.uud_I1?_1+n_0.e_I??_1+n_0.vBar": {
                 "obs@1": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "value": "0.175",
                     "total_upper": "0.012",
                     "total_lower": "0.012"

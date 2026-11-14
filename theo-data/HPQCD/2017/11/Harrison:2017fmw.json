@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "hA1(1)",
                     "value": "0.895",
@@ -21,7 +21,7 @@
                     "type@2_lower": "0.024"
                 }
             },
-            "Bs0Bar.2.Ds*+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "hA1(1)",
                     "value": "0.883",
@@ -37,7 +37,7 @@
             "note": "The $B\\to D^*$ channel stores $h_{A_1}(1)=(M_B+M_{D^*})A_1(q^2_\\mathrm{max})/(2\\sqrt{M_BM_{D^*}})$; the $B_s\\to D_s^*$ channel stores the corresponding $h^s_{A_1}(1)$. The INSPIRE abstract metadata quotes $0.010_\\mathrm{stat}$ for the $B_s$ value, while the paper abstract and text give $0.012_\\mathrm{stat}$; the paper value is stored."
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f",
                     "value": "0.01228",
@@ -80,7 +80,7 @@
             "note": "Benchmark BGL fit to the unfolded Belle data [Abdesselam:2017kjf] with $n_B^+=4$, $n_B^-=3$, $K=4$; $t_0=t_-$, and $F_1(0)=(M_B-M_{D^*})f(0)$ imposed at the $1\\%$ level. Only $a_0$ and $a_1$ are tabulated; higher orders are consistent with zero, and unitarity bounds are not imposed."
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f",
                     "value": "0.01502",

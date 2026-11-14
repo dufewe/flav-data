@@ -26,9 +26,9 @@
             }
         },
         {
-            "no-transition": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.TAU_I??_1+n_0.v/dB_I1?_0-n_0.2.dC_I1?_1-n_0.MU_I??_1+n_0.v": {
                 "obs@1": {
-                    "name": "RD*-[tau/mu]",
+                    "name": "R",
                     "value": "0.291",
                     "type@1_upper": "0.013",
                     "type@1_lower": "0.013",

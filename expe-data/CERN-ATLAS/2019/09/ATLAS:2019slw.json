@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "g.g.2.H0.2.f.fBar": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.f.fBar": {
                 "obs@1": {
                     "name": "mu_H",
                     "value": "1.11",
@@ -19,7 +19,7 @@
             }
         },
         {
-            "g.g.2.H0.2.Z.Z": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.Z_I??_1??_0.Z_I??_1??_0": {
                 "obs@1": {
                     "name": "kappa_Z",
                     "value": "1.10",
@@ -29,7 +29,7 @@
             }
         },
         {
-            "g.g.2.H0.2.Z.Z": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.Z_I??_1??_0.Z_I??_1??_0": {
                 "obs@1": {
                     "name": "kappa_gZ",
                     "value": "1.06",
@@ -39,7 +39,7 @@
             }
         },
         {
-            "H0.2.W+.W-": {
+            "H_I??_0++_0.2.W_I??_1??_0.WB_I??_1??_0": {
                 "obs@1": {
                     "name": "kappa_W",
                     "value": "1.05",
@@ -49,7 +49,7 @@
             }
         },
         {
-            "g.g.2.H0.2.b.bBar": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.b_I??_1+n_0.B_I??_1+n_0": {
                 "obs@1": {
                     "name": "kappa_b",
                     "value": "1.06",
@@ -59,7 +59,7 @@
             }
         },
         {
-            "g.g.2.H0.2.t.tBar": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.t_I??_1+n_0.T_I??_1+n_0": {
                 "obs@1": {
                     "name": "kappa_t",
                     "value": "1.02",
@@ -69,7 +69,7 @@
             }
         },
         {
-            "g.g.2.H0.2.tau+.tau-": {
+            "g_I??_1--_0.g_I??_1--_0.2.H_I??_0++_0.2.TAU_I??_1+n_0.tau_I??_1+n_0": {
                 "obs@1": {
                     "name": "kappa_tau",
                     "value": "1.07",
@@ -79,7 +79,7 @@
             }
         },
         {
-            "H0.2.mu+.mu-": {
+            "H_I??_0++_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "kappa_mu",
                     "type@1_upper": "1.53",
@@ -88,7 +88,7 @@
             }
         },
         {
-            "kappa.t.2.kappa.g": {
+            "kappa.t_I??_1+n_0.2.kappa.g_I??_1--_0": {
                 "obs@1": {
                     "name": "lambda_tg",
                     "value": "1.10",
@@ -98,7 +98,7 @@
             }
         },
         {
-            "kappa.Z.2.kappa.g": {
+            "kappa.Z_I??_1??_0.2.kappa.g_I??_1--_0": {
                 "obs@1": {
                     "name": "lambda_Zg",
                     "value": "1.12",
@@ -108,7 +108,7 @@
             }
         },
         {
-            "kappa.W+.2.kappa.Z": {
+            "kappa.W_I??_1??_0.2.kappa.Z_I??_1??_0": {
                 "obs@1": {
                     "name": "lambda_WZ",
                     "value": "0.95",
@@ -118,7 +118,7 @@
             }
         },
         {
-            "kappa.gamma.2.kappa.Z": {
+            "kappa.ph_I??_1--_0.2.kappa.Z_I??_1??_0": {
                 "obs@1": {
                     "name": "lambda_gammaZ",
                     "value": "0.94",

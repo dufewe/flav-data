@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.K+.l+.l-": {
+            "uB_I1?_0-n_0.2.cC_I0-_1--_0.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.cC_I0-_1--_0.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "r[J/psi]",
+                    "name": "R",
                     "value": "0.997",
                     "type@1_error": "stat",
                     "type@1_upper": "0.003",
@@ -19,9 +19,11 @@
                     "type@2_error": "syst",
                     "type@2_upper": "0.055",
                     "type@2_lower": "0.055"
-                },
-                "obs@2": {
-                    "name": "R[psi(2S)]",
+                }
+            },
+            "uB_I1?_0-n_0.2.cC_I0-_1--_1.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.cC_I0-_1--_1.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "R",
                     "value": "1.002",
                     "type@1_error": "stat",
                     "type@1_upper": "0.009",
@@ -29,9 +31,11 @@
                     "type@2_error": "syst",
                     "type@2_upper": "0.004",
                     "type@2_lower": "0.004"
-                },
-                "obs@3": {
-                    "name": "R[mu/e]",
+                }
+            },
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "R",
                     "value": "1.08",
                     "type@1_error": "stat",
                     "type@1_upper": "0.11",

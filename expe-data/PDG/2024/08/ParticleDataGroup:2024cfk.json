@@ -1,0 +1,1334 @@
+{
+    "inspire-hep": "[ParticleDataGroup:2024cfk](https://inspirehep.net/literature/2817040)",
+    "author": "Navas, S. and others",
+    "collaboration": "PDG",
+    "title": "Review of particle physics",
+    "arxiv": null,
+    "time": "2024.08.01",
+    "abstract": "The Review summarizes much of particle physics and cosmology. Using data from previous editions, plus 2,717 new measurements from 869 papers, we list, evaluate, and average measured properties of gauge bosons and the recently discovered Higgs boson, leptons, quarks, mesons, and baryons. We summarize searches for hypothetical particles such as supersymmetric particles, heavy bosons, axions, dark photons, etc. Particle properties and search limits are listed in Summary Tables. We give numerous tables, figures, formulae, and reviews of topics such as Higgs Boson Physics, Supersymmetry, Grand Unified Theories, Neutrino Mixing, Dark Energy, Dark Matter, Cosmology, Particle Detectors, Colliders, Probability and Statistics. Most of the 120 reviews are updated, including many that are heavily revised. The Review is divided into two volumes. Volume 1 includes the Summary Tables and 97 review articles. Volume 2 consists of the Particle Listings and contains also 23 reviews that address specific aspects of the data presented in the Listings. The complete Review (both volumes) is published online on the website of the Particle Data Group (pdg.lbl.gov) and in a journal. Volume 1 is available in print as the PDG Book. A Particle Physics Booklet with the Summary Tables and essential tables, figures, and equations from selected review articles is available in print, as a web version optimized for use on phones, and as an Android app. The 2024 edition of the Review of Particle Physics should be cited as: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024)",
+    "transition-mode": "world-average",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "GF",
+                    "value": "1.1663788e-05",
+                    "total_upper": "6e-12",
+                    "total_lower": "6e-12",
+                    "unit": "GeV-2"
+                },
+                "obs@2": {
+                    "name": "alphas(MZ)",
+                    "value": "0.118",
+                    "total_upper": "0.0009",
+                    "total_lower": "0.0009"
+                },
+                "obs@3": {
+                    "name": "Mass(pi+)",
+                    "value": "0.13957039",
+                    "total_upper": "1.8e-07",
+                    "total_lower": "1.8e-07",
+                    "unit": "GeV"
+                },
+                "obs@4": {
+                    "name": "Mass(pi0)",
+                    "value": "0.1349768",
+                    "total_upper": "5e-07",
+                    "total_lower": "5e-07",
+                    "unit": "GeV"
+                },
+                "obs@5": {
+                    "name": "Mass(eta)",
+                    "value": "0.547862",
+                    "total_upper": "1.7e-05",
+                    "total_lower": "1.7e-05",
+                    "unit": "GeV"
+                },
+                "obs@6": {
+                    "name": "Mass(rho0)",
+                    "value": "0.77526",
+                    "total_upper": "0.00023",
+                    "total_lower": "0.00023",
+                    "unit": "GeV"
+                },
+                "obs@7": {
+                    "name": "Mass(rho+)",
+                    "value": "0.77526",
+                    "total_upper": "0.00023",
+                    "total_lower": "0.00023",
+                    "unit": "GeV"
+                },
+                "obs@8": {
+                    "name": "Mass(omega)",
+                    "value": "0.78266",
+                    "total_upper": "0.00013",
+                    "total_lower": "0.00013",
+                    "unit": "GeV"
+                },
+                "obs@9": {
+                    "name": "Mass(etaprime)",
+                    "value": "0.95778",
+                    "total_upper": "6e-05",
+                    "total_lower": "6e-05",
+                    "unit": "GeV"
+                },
+                "obs@10": {
+                    "name": "Mass(phi)",
+                    "value": "1.019461",
+                    "total_upper": "1.6e-05",
+                    "total_lower": "1.6e-05",
+                    "unit": "GeV"
+                },
+                "obs@11": {
+                    "name": "Mass(K+)",
+                    "value": "0.493677",
+                    "total_upper": "1.5e-05",
+                    "total_lower": "1.5e-05",
+                    "unit": "GeV"
+                },
+                "obs@12": {
+                    "name": "Mass(K0)",
+                    "value": "0.497611",
+                    "total_upper": "1.3e-05",
+                    "total_lower": "1.3e-05",
+                    "unit": "GeV"
+                },
+                "obs@13": {
+                    "name": "Mass(K*)",
+                    "value": "0.89167",
+                    "total_upper": "0.00026",
+                    "total_lower": "0.00026",
+                    "unit": "GeV"
+                },
+                "obs@14": {
+                    "name": "Mass(D+)",
+                    "value": "1.86966",
+                    "total_upper": "5e-05",
+                    "total_lower": "5e-05",
+                    "unit": "GeV"
+                },
+                "obs@15": {
+                    "name": "Mass(D0)",
+                    "value": "1.86484",
+                    "total_upper": "5e-05",
+                    "total_lower": "5e-05",
+                    "unit": "GeV"
+                },
+                "obs@16": {
+                    "name": "Mass(D*0)",
+                    "value": "2.00685",
+                    "total_upper": "5e-05",
+                    "total_lower": "5e-05",
+                    "unit": "GeV"
+                },
+                "obs@17": {
+                    "name": "Mass(D*+)",
+                    "value": "2.01026",
+                    "total_upper": "5e-05",
+                    "total_lower": "5e-05",
+                    "unit": "GeV"
+                },
+                "obs@18": {
+                    "name": "Mass(Ds+)",
+                    "value": "1.96835",
+                    "total_upper": "7e-05",
+                    "total_lower": "7e-05",
+                    "unit": "GeV"
+                },
+                "obs@19": {
+                    "name": "Mass(Ds*+)",
+                    "value": "2.1122",
+                    "total_upper": "0.0004",
+                    "total_lower": "0.0004",
+                    "unit": "GeV"
+                },
+                "obs@20": {
+                    "name": "Mass(J/psi)",
+                    "value": "3.0969",
+                    "total_upper": "6e-06",
+                    "total_lower": "6e-06",
+                    "unit": "GeV"
+                },
+                "obs@21": {
+                    "name": "|Vub|",
+                    "value": "0.00382",
+                    "total_upper": "0.0002",
+                    "total_lower": "0.0002"
+                },
+                "obs@22": {
+                    "name": "|Vcb|",
+                    "value": "0.0411",
+                    "total_upper": "0.0012",
+                    "total_lower": "0.0012"
+                },
+                "obs@23": {
+                    "name": "lambda",
+                    "value": "0.22501",
+                    "total_upper": "0.00068",
+                    "total_lower": "0.00068"
+                },
+                "obs@24": {
+                    "name": "A",
+                    "value": "0.826",
+                    "total_upper": "0.016",
+                    "total_lower": "0.015"
+                },
+                "obs@25": {
+                    "name": "rhobar",
+                    "value": "0.1591",
+                    "total_upper": "0.0094",
+                    "total_lower": "0.0094"
+                },
+                "obs@26": {
+                    "name": "etabar",
+                    "value": "0.3523",
+                    "total_upper": "0.0073",
+                    "total_lower": "0.0071"
+                }
+            },
+            "note": "PDG Review 2024 input parameters; lambda, A, rhobar and etabar come from the global CKM fit."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(W)",
+                    "value": "80.3692",
+                    "total_upper": "0.0133",
+                    "total_lower": "0.0133",
+                    "unit": "GeV"
+                }
+            }
+        },
+        {
+            "W_I??_1??_0.2.l.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1086",
+                    "total_upper": "0.0009",
+                    "total_lower": "0.0009"
+                }
+            },
+            "note": "Charge-averaged W+/W- rate; the W+ key stands for both charges."
+        },
+        {
+            "W_I??_1??_0.2.E_I??_1+n_0.ve_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1071",
+                    "total_upper": "0.0016",
+                    "total_lower": "0.0016"
+                }
+            },
+            "note": "Charge-averaged W+/W- rate; the W+ key stands for both charges."
+        },
+        {
+            "W_I??_1??_0.2.MU_I??_1+n_0.vmu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1063",
+                    "total_upper": "0.0015",
+                    "total_lower": "0.0015"
+                }
+            },
+            "note": "Charge-averaged W+/W- rate; the W+ key stands for both charges."
+        },
+        {
+            "W_I??_1??_0.2.TAU_I??_1+n_0.vtau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1138",
+                    "total_upper": "0.0021",
+                    "total_lower": "0.0021"
+                }
+            },
+            "note": "Charge-averaged W+/W- rate; the W+ key stands for both charges."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(Z)",
+                    "value": "91.188",
+                    "total_upper": "0.002",
+                    "total_lower": "0.002",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "Gamma(Z)",
+                    "value": "2.4955",
+                    "total_upper": "0.0023",
+                    "total_lower": "0.0023",
+                    "unit": "GeV"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.1515",
+                    "total_upper": "0.0019",
+                    "total_lower": "0.0019"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "value": "0.033632",
+                    "total_upper": "4.2e-05",
+                    "total_lower": "4.2e-05"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.142",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "value": "0.033662",
+                    "total_upper": "6.6e-05",
+                    "total_lower": "6.6e-05"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.TAU_I??_1+n_0.tau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.143",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "value": "0.033696",
+                    "total_upper": "8.3e-05",
+                    "total_lower": "8.3e-05"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.s_I??_1+n_0.S_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.9",
+                    "total_upper": "0.09",
+                    "total_lower": "0.09"
+                },
+                "obs@2": {
+                    "name": "AFB0",
+                    "value": "0.098",
+                    "total_upper": "0.011",
+                    "total_lower": "0.011"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.c_I??_1+n_0.C_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.67",
+                    "total_upper": "0.027",
+                    "total_lower": "0.027"
+                },
+                "obs@2": {
+                    "name": "AFB0",
+                    "value": "0.0707",
+                    "total_upper": "0.0035",
+                    "total_lower": "0.0035"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.b_I??_1+n_0.B_I??_1+n_0": {
+                "obs@1": {
+                    "name": "A",
+                    "value": "0.923",
+                    "total_upper": "0.02",
+                    "total_lower": "0.02"
+                },
+                "obs@2": {
+                    "name": "AFB0",
+                    "value": "0.0992",
+                    "total_upper": "0.0016",
+                    "total_lower": "0.0016"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.l+.l-": {
+                "obs@1": {
+                    "name": "AFB0",
+                    "value": "0.0171",
+                    "total_upper": "0.001",
+                    "total_lower": "0.001"
+                },
+                "obs@2": {
+                    "name": "Br",
+                    "value": "0.033658",
+                    "total_upper": "2.3e-05",
+                    "total_lower": "2.3e-05"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.u_I??_1+n_0.U_I??_1+n_0": {
+                "obs@1": {
+                    "name": "AFB0",
+                    "value": "0.04",
+                    "total_upper": "0.07",
+                    "total_lower": "0.07"
+                }
+            }
+        },
+        {
+            "Z_I??_1??_0.2.v.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.2",
+                    "total_upper": "0.00055",
+                    "total_lower": "0.00055"
+                }
+            },
+            "note": "Sum over all neutrino species."
+        },
+        {
+            "Z_I??_1??_0.2.had": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.69911",
+                    "total_upper": "0.00056",
+                    "total_lower": "0.00056"
+                }
+            }
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(H)",
+                    "value": "125.2",
+                    "total_upper": "0.11",
+                    "total_lower": "0.11",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "Gamma(H)",
+                    "value": "0.0037",
+                    "total_upper": "0.0019",
+                    "total_lower": "0.0014",
+                    "unit": "GeV"
+                }
+            }
+        },
+        {
+            "H_I??_0++_0.2.W_I??_1??_0.WB_I??_1??_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.257",
+                    "total_upper": "0.025",
+                    "total_lower": "0.025"
+                }
+            },
+            "note": "Includes the off-shell contribution (H -> W W*)."
+        },
+        {
+            "H_I??_0++_0.2.Z_I??_1??_0.Z_I??_1??_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.028",
+                    "total_upper": "0.003",
+                    "total_lower": "0.003"
+                }
+            },
+            "note": "Includes the off-shell contribution (H -> Z Z*)."
+        },
+        {
+            "H_I??_0++_0.2.ph_I??_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0025",
+                    "total_upper": "0.0002",
+                    "total_lower": "0.0002"
+                }
+            }
+        },
+        {
+            "H_I??_0++_0.2.b_I??_1+n_0.B_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.53",
+                    "total_upper": "0.08",
+                    "total_lower": "0.08"
+                }
+            }
+        },
+        {
+            "H_I??_0++_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00026",
+                    "total_upper": "0.00013",
+                    "total_lower": "0.00013"
+                }
+            }
+        },
+        {
+            "H_I??_0++_0.2.TAU_I??_1+n_0.tau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.06",
+                    "total_upper": "0.008",
+                    "total_lower": "0.007"
+                }
+            }
+        },
+        {
+            "H_I??_0++_0.2.Z_I??_1??_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0034",
+                    "total_upper": "0.0011",
+                    "total_lower": "0.0011"
+                }
+            }
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(e-)",
+                    "value": "0.000510999",
+                    "total_upper": "0.0",
+                    "total_lower": "0.0",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "Mass(mu-)",
+                    "value": "0.1056583755",
+                    "total_upper": "2.3e-09",
+                    "total_lower": "2.3e-09",
+                    "unit": "GeV"
+                },
+                "obs@3": {
+                    "name": "Tau(mu-)",
+                    "value": "2.1969811e-06",
+                    "total_upper": "2.2e-12",
+                    "total_lower": "2.2e-12",
+                    "unit": "s"
+                },
+                "obs@4": {
+                    "name": "Mass(tau-)",
+                    "value": "1.77693",
+                    "total_upper": "9e-05",
+                    "total_lower": "9e-05",
+                    "unit": "GeV"
+                },
+                "obs@5": {
+                    "name": "Tau(tau-)",
+                    "value": "2.903e-13",
+                    "total_upper": "5e-16",
+                    "total_lower": "5e-16",
+                    "unit": "s"
+                }
+            },
+            "note": "The negative-charge label stands for both charges."
+        },
+        {
+            "tau_I??_1+n_0.2.mu_I??_1+n_0.VMU_I??_1+n_0.vtau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1739",
+                    "total_upper": "0.0004",
+                    "total_lower": "0.0004"
+                }
+            }
+        },
+        {
+            "tau_I??_1+n_0.2.e_I??_1+n_0.VE_I??_1+n_0.vtau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1782",
+                    "total_upper": "0.0004",
+                    "total_lower": "0.0004"
+                }
+            }
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "mu",
+                    "value": "0.00216",
+                    "total_upper": "7e-05",
+                    "total_lower": "7e-05",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "md",
+                    "value": "0.0047",
+                    "total_upper": "7e-05",
+                    "total_lower": "7e-05",
+                    "unit": "GeV"
+                },
+                "obs@3": {
+                    "name": "ms",
+                    "value": "0.0935",
+                    "total_upper": "0.0008",
+                    "total_lower": "0.0008",
+                    "unit": "GeV"
+                },
+                "obs@4": {
+                    "name": "mc",
+                    "value": "1.273",
+                    "total_upper": "0.0046",
+                    "total_lower": "0.0046",
+                    "unit": "GeV"
+                },
+                "obs@5": {
+                    "name": "mb",
+                    "value": "4.183",
+                    "total_upper": "0.007",
+                    "total_lower": "0.007",
+                    "unit": "GeV"
+                },
+                "obs@6": {
+                    "name": "Mass(t)",
+                    "value": "172.57",
+                    "total_upper": "0.29",
+                    "total_lower": "0.29",
+                    "unit": "GeV"
+                },
+                "obs@7": {
+                    "name": "Gamma(t)",
+                    "value": "1.42",
+                    "total_upper": "0.19",
+                    "total_lower": "0.15",
+                    "unit": "GeV"
+                }
+            },
+            "note": "mu, md, ms are MS-bar at 2 GeV; mc and mb are MS-bar at their own scale; Mass(t) is the pole mass."
+        },
+        {
+            "t_I??_1+n_0.2.b_I??_1+n_0.E_I??_1+n_0.ve_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.111",
+                    "total_upper": "0.003",
+                    "total_lower": "0.003"
+                }
+            }
+        },
+        {
+            "t_I??_1+n_0.2.b_I??_1+n_0.MU_I??_1+n_0.vmu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.114",
+                    "total_upper": "0.002",
+                    "total_lower": "0.002"
+                }
+            }
+        },
+        {
+            "t_I??_1+n_0.2.b_I??_1+n_0.TAU_I??_1+n_0.vtau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.107",
+                    "total_upper": "0.005",
+                    "total_lower": "0.005"
+                }
+            }
+        },
+        {
+            "t_I??_1+n_0.2.b_I??_1+n_0.q.qBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.665",
+                    "total_upper": "0.014",
+                    "total_lower": "0.014"
+                }
+            }
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(B+)",
+                    "value": "5.27941",
+                    "total_upper": "7e-05",
+                    "total_lower": "7e-05",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "Tau(B+)",
+                    "value": "1.638e-12",
+                    "total_upper": "4e-15",
+                    "total_lower": "4e-15",
+                    "unit": "s"
+                },
+                "obs@3": {
+                    "name": "Mass(B0)",
+                    "value": "5.27972",
+                    "total_upper": "8e-05",
+                    "total_lower": "8e-05",
+                    "unit": "GeV"
+                },
+                "obs@4": {
+                    "name": "Tau(B0)",
+                    "value": "1.517e-12",
+                    "total_upper": "4e-15",
+                    "total_lower": "4e-15",
+                    "unit": "s"
+                },
+                "obs@5": {
+                    "name": "Mass(Bs0)",
+                    "value": "5.36693",
+                    "total_upper": "0.0001",
+                    "total_lower": "0.0001",
+                    "unit": "GeV"
+                },
+                "obs@6": {
+                    "name": "Tau(Bs0)",
+                    "value": "1.52e-12",
+                    "total_upper": "5e-15",
+                    "total_lower": "5e-15",
+                    "unit": "s"
+                },
+                "obs@7": {
+                    "name": "Mass(Bc+)",
+                    "value": "6.27447",
+                    "total_upper": "0.00032",
+                    "total_lower": "0.00032",
+                    "unit": "GeV"
+                },
+                "obs@8": {
+                    "name": "Tau(Bc+)",
+                    "value": "5.1e-13",
+                    "total_upper": "9e-15",
+                    "total_lower": "9e-15",
+                    "unit": "s"
+                }
+            },
+            "note": "Tau(Bs0) is the flavour-averaged lifetime; the Bs0 label stands for both flavours."
+        },
+        {
+            "uB_I1?_0-n_0.2.XcBar.E_I??_1+n_0.ve_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.108",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.Xu.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00165",
+                    "total_upper": "0.00021",
+                    "total_lower": "0.00021"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.Uc_I1?_0-n_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0221",
+                    "total_upper": "0.0006",
+                    "total_lower": "0.0006"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.Uc_I1?_0-n_0.TAU_I??_1+n_0.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0077",
+                    "total_upper": "0.0025",
+                    "total_lower": "0.0025"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.Uc_I1?_1-n_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0553",
+                    "total_upper": "0.0022",
+                    "total_lower": "0.0022"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.Uc_I1?_1-n_0.TAU_I??_1+n_0.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0188",
+                    "total_upper": "0.002",
+                    "total_lower": "0.002"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I2-_0-+_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "7.8e-05",
+                    "total_upper": "2.7e-06",
+                    "total_lower": "2.7e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0+_0-+_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.5e-05",
+                    "total_upper": "4e-06",
+                    "total_lower": "4e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0+_0-+_1.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.4e-05",
+                    "total_upper": "7e-06",
+                    "total_lower": "7e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0-_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000119",
+                    "total_upper": "9e-06",
+                    "total_lower": "9e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I2+_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000158",
+                    "total_upper": "1.1e-05",
+                    "total_lower": "1.1e-05"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.TAU_I??_1+n_0.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000109",
+                    "total_upper": "2.4e-05",
+                    "total_lower": "2.4e-05"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.92e-05",
+                    "total_upper": "2.2e-06",
+                    "total_lower": "2.2e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uD_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.8e-07",
+                    "total_upper": "2.5e-07",
+                    "total_lower": "2.5e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.78e-08",
+                    "total_upper": "2.3e-09",
+                    "total_lower": "2.3e-09"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.7e-07",
+                    "total_upper": "5e-08",
+                    "total_lower": "5e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "5.6e-07",
+                    "total_upper": "6e-08",
+                    "total_lower": "6e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.53e-07",
+                    "total_upper": "3.5e-08",
+                    "total_lower": "3.5e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.01e-06",
+                    "total_upper": "1.1e-07",
+                    "total_lower": "1.1e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.55e-06",
+                    "total_upper": "4e-07",
+                    "total_lower": "3.1e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.6e-07",
+                    "total_upper": "1e-07",
+                    "total_lower": "1e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.Db_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "DeltaMass",
+                    "value": "0.5069",
+                    "total_upper": "0.0019",
+                    "total_lower": "0.0019",
+                    "unit": "ps-1"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Xc.e_I??_1+n_0.VE_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.101",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Xu.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00151",
+                    "total_upper": "0.00019",
+                    "total_lower": "0.00019"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0212",
+                    "total_upper": "0.0006",
+                    "total_lower": "0.0006"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0099",
+                    "total_upper": "0.0021",
+                    "total_lower": "0.0021"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.049",
+                    "total_upper": "0.0012",
+                    "total_lower": "0.0012"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0145",
+                    "total_upper": "0.001",
+                    "total_lower": "0.001"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.uD_I2+_1--_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000294",
+                    "total_upper": "2.1e-05",
+                    "total_lower": "2.1e-05"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00015",
+                    "total_upper": "6e-06",
+                    "total_lower": "6e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.18e-05",
+                    "total_upper": "2.5e-06",
+                    "total_lower": "2.5e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.qQ_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "8.6e-07",
+                    "total_upper": "1.5e-07",
+                    "total_lower": "1.5e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.qQ_I0-_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.4e-07",
+                    "total_upper": "1.8e-07",
+                    "total_lower": "1.6e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.3e-07",
+                    "total_upper": "6e-08",
+                    "total_lower": "6e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.5e-07",
+                    "total_upper": "1.1e-07",
+                    "total_lower": "9e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.39e-07",
+                    "total_upper": "3.5e-08",
+                    "total_lower": "3.5e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.9e-07",
+                    "total_upper": "1.2e-07",
+                    "total_lower": "1.1e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.03e-06",
+                    "total_upper": "1.9e-07",
+                    "total_lower": "1.7e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.4e-07",
+                    "total_upper": "5e-08",
+                    "total_lower": "5e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.sB_I0?_0-n_0": {
+                "obs@1": {
+                    "name": "DeltaMass",
+                    "value": "17.765",
+                    "total_upper": "0.006",
+                    "total_lower": "0.006",
+                    "unit": "ps-1"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.mu_I??_1+n_0.VMU_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0231",
+                    "total_upper": "0.0021",
+                    "total_lower": "0.0021"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.mu_I??_1+n_0.VMU_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.052",
+                    "total_upper": "0.005",
+                    "total_lower": "0.005"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.uS_I1?_0-n_0.mu_I??_1+n_0.VMU_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000106",
+                    "total_upper": "9e-06",
+                    "total_lower": "9e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.qQ_I0-_1--_1.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.4e-05",
+                    "total_upper": "4e-06",
+                    "total_lower": "4e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.34e-09",
+                    "total_upper": "2.7e-10",
+                    "total_lower": "2.7e-10"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.9e-08",
+                    "total_upper": "1.1e-08",
+                    "total_lower": "1.1e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "Sb_I0?_0-n_0.2.qQ_I0-_1--_1.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "8.4e-07",
+                    "total_upper": "4e-08",
+                    "total_lower": "4e-08"
+                }
+            },
+            "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Mass(p)",
+                    "value": "0.93827208816",
+                    "total_upper": "2.9e-10",
+                    "total_lower": "2.9e-10",
+                    "unit": "GeV"
+                },
+                "obs@2": {
+                    "name": "Mass(n)",
+                    "value": "0.9395654205",
+                    "total_upper": "5e-10",
+                    "total_lower": "5e-10",
+                    "unit": "GeV"
+                },
+                "obs@3": {
+                    "name": "Mass(Lambda)",
+                    "value": "1.115683",
+                    "total_upper": "6e-06",
+                    "total_lower": "6e-06",
+                    "unit": "GeV"
+                },
+                "obs@4": {
+                    "name": "Mass(Lambdac+)",
+                    "value": "2.28646",
+                    "total_upper": "0.00014",
+                    "total_lower": "0.00014",
+                    "unit": "GeV"
+                },
+                "obs@5": {
+                    "name": "Mass(Lambdab0)",
+                    "value": "5.6196",
+                    "total_upper": "0.00017",
+                    "total_lower": "0.00017",
+                    "unit": "GeV"
+                },
+                "obs@6": {
+                    "name": "Tau(Lambdab0)",
+                    "value": "1.471e-12",
+                    "total_upper": "9e-15",
+                    "total_lower": "9e-15",
+                    "unit": "s"
+                }
+            },
+            "note": "The neutral-baryon label stands for both particle and antiparticle."
+        },
+        {
+            "udb_I0?_1+n_0.2.udc_I0?_1+n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.062",
+                    "total_upper": "0.014",
+                    "total_lower": "0.013"
+                }
+            },
+            "note": "PDG charge-averaged rate; the neutral-baryon key stands for both particle and antiparticle."
+        },
+        {
+            "udb_I0?_1+n_0.2.udc_I0?_1+n_0.tau_I??_1+n_0.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.019",
+                    "total_upper": "0.005",
+                    "total_lower": "0.005"
+                }
+            },
+            "note": "PDG charge-averaged rate; the neutral-baryon key stands for both particle and antiparticle."
+        },
+        {
+            "udb_I0?_1+n_0.2.uud_I1?_1+n_0.mu_I??_1+n_0.VMU_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00041",
+                    "total_upper": "0.0001",
+                    "total_lower": "0.0001"
+                }
+            },
+            "note": "PDG charge-averaged rate; the neutral-baryon key stands for both particle and antiparticle."
+        },
+        {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.08e-06",
+                    "total_upper": "2.8e-07",
+                    "total_lower": "2.8e-07"
+                }
+            },
+            "note": "PDG charge-averaged rate; the neutral-baryon key stands for both particle and antiparticle."
+        },
+        {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "7.1e-06",
+                    "total_upper": "1.7e-06",
+                    "total_lower": "1.7e-06"
+                }
+            },
+            "note": "PDG charge-averaged rate; the neutral-baryon key stands for both particle and antiparticle."
+        }
+    ]
+}

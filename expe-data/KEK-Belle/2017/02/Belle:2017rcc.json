@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.D*-.l.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.MU_I??_1+n_0.v/dB_I1?_0-n_0.2.dC_I1?_1-n_0.E_I??_1+n_0.v": {
                 "obs@1": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "0.96",
                     "type@1_error": "stat",
                     "type@1_upper": "0.05",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "4.92e-2",
@@ -37,15 +37,15 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dGdw",
-                    "value": "1.32",
-                    "total_upper": "0.11",
-                    "total_lower": "0.11",
+                    "value": "1.32e-15",
+                    "total_upper": "1.1e-16",
+                    "total_lower": "1.1e-16",
                     "w_min": "1.00",
                     "w_max": "1.05",
-                    "unit": "1e-15 GeV"
+                    "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "dGdw",
@@ -122,15 +122,15 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dGdcosthetav",
-                    "value": "2.80",
-                    "total_upper": "0.20",
-                    "total_lower": "0.20",
+                    "value": "2.80e-15",
+                    "total_upper": "2.0e-16",
+                    "total_lower": "2.0e-16",
                     "cos_min": "-1.00",
                     "cos_max": "-0.80",
-                    "unit": "1e-15 GeV"
+                    "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "dGdcosthetav",
@@ -207,15 +207,15 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dGdcosthetall",
-                    "value": "0.73",
-                    "total_upper": "0.07",
-                    "total_lower": "0.07",
+                    "value": "7.3e-16",
+                    "total_upper": "7e-17",
+                    "total_lower": "7e-17",
                     "cos_min": "-1.00",
                     "cos_max": "-0.80",
-                    "unit": "1e-15 GeV"
+                    "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "dGdcosthetall",
@@ -292,15 +292,15 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dGdchi",
-                    "value": "1.86",
-                    "total_upper": "0.16",
-                    "total_lower": "0.16",
+                    "value": "1.86e-15",
+                    "total_upper": "1.6e-16",
+                    "total_lower": "1.6e-16",
                     "chi_min": "0.00",
                     "chi_max": "0.314",
-                    "unit": "1e-15 GeV"
+                    "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "dGdchi",
@@ -377,7 +377,7 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.82e-2",

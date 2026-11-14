@@ -8,7 +8,7 @@
     "transition-mode": "radiative-decay",
     "data": [
         {
-            "B0.2.Xs.gamma": {
+            "dB_I1?_0-n_0.2.XsBar.ph_I??_1--_0": {
                 "obs@1": {
                     "name": "Bsmu_gamma",
                     "value": "3.31e-4",

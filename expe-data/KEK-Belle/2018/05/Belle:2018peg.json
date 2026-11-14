@@ -9,16 +9,17 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.emup.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.mu_I??_1+n_0.E_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.2e-7",
                     "type@1_level": "90%@CL"
                 }
-            }
+            },
+            "note": "source quotes $B^0\\to K^{*0}e^\\pm\\mu^\\mp$; stored with the $e^+\\mu^-$ representative"
         },
         {
-            "B0.2.K*0.mu+.e-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.6e-7",

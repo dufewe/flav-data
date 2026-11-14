@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.mu+.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "FL",
                     "q2min": "1.00",
@@ -181,7 +181,7 @@
             }
         },
         {
-            "B0.2.K*0.mu+.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "q2min": "1.00",
@@ -193,7 +193,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "3.0e-09",
                     "type@2_lower": "3.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@2": {
                     "name": "dBr/dq2",
@@ -206,7 +206,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "2.0e-09",
                     "type@2_lower": "2.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@3": {
                     "name": "dBr/dq2",
@@ -219,7 +219,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "3.0e-09",
                     "type@2_lower": "3.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@4": {
                     "name": "dBr/dq2",
@@ -232,7 +232,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "3.0e-09",
                     "type@2_lower": "3.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@5": {
                     "name": "dBr/dq2",
@@ -245,7 +245,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "5.0e-09",
                     "type@2_lower": "5.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@6": {
                     "name": "dBr/dq2",
@@ -258,7 +258,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "5.0e-09",
                     "type@2_lower": "5.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 },
                 "obs@7": {
                     "name": "dBr/dq2",
@@ -271,7 +271,7 @@
                     "type@2_error": "syst",
                     "type@2_upper": "3.0e-09",
                     "type@2_lower": "3.0e-09",
-                    "unit": "GeV$^{-2}$"
+                    "unit": "GeV-2"
                 }
             }
         }

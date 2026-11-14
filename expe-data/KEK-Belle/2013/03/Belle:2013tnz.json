@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.K+.v.vBar": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "5.5e-5",
@@ -18,7 +18,7 @@
             }
         },
         {
-            "B0.2.KS0.v.vBar": {
+            "dB_I1?_0-n_0.2.qQ_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "9.7e-5",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "B+.2.K*+.v.vBar": {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "4.0e-5",
@@ -36,7 +36,7 @@
             }
         },
         {
-            "B0.2.K*0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "5.5e-5",
@@ -45,7 +45,7 @@
             }
         },
         {
-            "B+.2.pi+.v.vBar": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "9.8e-5",
@@ -54,7 +54,7 @@
             }
         },
         {
-            "B0.2.pi0.v.vBar": {
+            "dB_I1?_0-n_0.2.qQ_I2-_0-+_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "6.9e-5",
@@ -63,7 +63,7 @@
             }
         },
         {
-            "B+.2.rho+.v.vBar": {
+            "uB_I1?_0-n_0.2.uD_I2+_1--_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "21.3e-5",
@@ -72,7 +72,7 @@
             }
         },
         {
-            "B0.2.rho0.v.vBar": {
+            "dB_I1?_0-n_0.2.qQ_I2+_1--_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "20.8e-5",
@@ -81,7 +81,7 @@
             }
         },
         {
-            "B0.2.phi0.v.vBar": {
+            "dB_I1?_0-n_0.2.qQ_I0-_1--_1.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "12.7e-5",

@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.K+.tau+.tau-": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.TAU_I??_1+n_0.tau_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.00131",

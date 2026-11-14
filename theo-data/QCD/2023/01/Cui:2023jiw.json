@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.013738",
@@ -40,7 +40,7 @@
                     "total_lower": "0.962583"
                 }
             },
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0258595",
@@ -102,7 +102,7 @@
                     "total_lower": "4.02966"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.00413865",
@@ -134,7 +134,7 @@
                     "total_lower": "0.0768255"
                 }
             },
-            "Bs0Bar.2.Ds*+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0080284",
@@ -232,7 +232,7 @@
             ]
         },
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.0137117",
@@ -264,7 +264,7 @@
                     "total_lower": "0.532996"
                 }
             },
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0256372",
@@ -326,7 +326,7 @@
                     "total_lower": "0.878862"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.00413444",
@@ -358,7 +358,7 @@
                     "total_lower": "0.0766707"
                 }
             },
-            "Bs0Bar.2.Ds*+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.00722989",
@@ -456,7 +456,7 @@
             ]
         },
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.0137806",
@@ -488,7 +488,7 @@
                     "total_lower": "0.329743"
                 }
             },
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.0251257",
@@ -550,7 +550,7 @@
                     "total_lower": "0.740598"
                 }
             },
-            "Bs0Bar.2.Ds+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.00421317",
@@ -582,7 +582,7 @@
                     "total_lower": "0.0756014"
                 }
             },
-            "Bs0Bar.2.Ds*+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_g",
                     "value": "0.00714092",
@@ -680,7 +680,7 @@
             ]
         },
         {
-            "B0Bar.2.D+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.3004",
@@ -691,7 +691,7 @@
             "dataset": "LQCD"
         },
         {
-            "B0Bar.2.D+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.3066",
@@ -702,7 +702,7 @@
             "dataset": "LQCD+LCSR"
         },
         {
-            "B0Bar.2.D+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2986",
@@ -713,7 +713,7 @@
             "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "B0Bar.2.D*+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2718",
@@ -724,7 +724,7 @@
             "dataset": "LQCD"
         },
         {
-            "B0Bar.2.D*+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2585",
@@ -735,7 +735,7 @@
             "dataset": "LQCD+LCSR"
         },
         {
-            "B0Bar.2.D*+.tau-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.25",
@@ -746,7 +746,7 @@
             "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2993",
@@ -757,7 +757,7 @@
             "dataset": "LQCD"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2996",
@@ -768,7 +768,7 @@
             "dataset": "LQCD+LCSR"
         },
         {
-            "Bs0Bar.2.Ds+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2971",
@@ -779,7 +779,7 @@
             "dataset": "LQCD+LCSR+EXPE"
         },
         {
-            "Bs0Bar.2.Ds*+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2488",
@@ -790,7 +790,7 @@
             "dataset": "LQCD"
         },
         {
-            "Bs0Bar.2.Ds*+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2506",
@@ -801,7 +801,7 @@
             "dataset": "LQCD+LCSR"
         },
         {
-            "Bs0Bar.2.Ds*+.tau-.vBar": {
+            "Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.tau_I??_1+n_0.vBar/Sb_I0?_0-n_0.2.Sc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.2461",

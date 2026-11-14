@@ -21,18 +21,9 @@ REQUIRED_TOP_FIELDS = [
 # and large theory groups). Individual/small-group papers omit it entirely.
 CONDITIONAL_TOP_FIELDS = ['collaboration']
 
-# Fields that must NOT appear in a per-paper JSON. HFLAV/PDG snapshots
-# have their own schema and do allow ``year`` (see _validate_snapshot).
+# Fields that must NOT appear in a per-paper JSON. The publication year
+# is the directory name, not a field.
 FORBIDDEN_FIELDS = ['year', 'pdf']
-
-# Snapshot (HFLAV/PDG) observable fields. Unknown keys are rejected so
-# the per-paper error formats (type@N_error, ref, ...) cannot leak into a
-# snapshot. See references/json-meta.md §"Non-Standard Schemas".
-SNAPSHOT_OBS_ALLOWED_FIELDS = {
-    'name', 'value',
-    'total_upper', 'total_lower',
-    'unit', 'limit',
-}
 
 # Standard measurement error labels (json-meta.md §"Standard error type
 # labels"). Labels outside this set are rejected; a ``theo`` component may
@@ -56,9 +47,7 @@ _OBS_KEY_RE = re.compile(
 _NUMERIC_OBS_KEY_RE = re.compile(
     r'(?:value|type@\d+_(?:upper|lower)|total_upper|total_lower)$'
 )
-_SCALE_UNIT_RE = re.compile(
-    r'(?:1e[+-]?\d+|10\^\{?[+-]?\d+\}?)$', re.IGNORECASE
-)
+_UNIT_RE = re.compile(r'[A-Za-z]{1,4}(?:-?\d+)?')
 
 
 def is_observable_field(key: str) -> bool:
@@ -83,21 +72,15 @@ VALID_TRANSITION_MODES = [
     'higgs-production',
     'low-energy',
     'oblique-corrections',
+    'world-average',
 ]
 
-# Top-level fields allowed in the standard (per-paper) schema.
+# Top-level fields allowed in the schema.
 TOP_LEVEL_ALLOWED_FIELDS = set(REQUIRED_TOP_FIELDS) | set(CONDITIONAL_TOP_FIELDS)
-
-# Snapshot schemas (json-meta.md §"Non-Standard Schemas").
-PDG_SUBGROUP_ALLOWED_FIELDS = {'correlation'}
-HFLAV_SUBGROUP_ALLOWED_FIELDS = {
-    'group', 'arxiv', 'inspire-hep', 'description',
-    'observables', 'correlation',
-}
 
 # Kinematic boundary fields, valid inside an ``obs@N`` object.
 DATA_ENTRY_KINEMATIC_FIELDS = {
-    'q2min', 'q2max', 'pTmin', 'pTmax', 'etamin', 'etamax',
+    'q2min', 'q2max', 'emin', 'emax', 'pTmin', 'pTmax', 'etamin', 'etamax',
     # Additional kinematic boundaries used by existing measurements.
     'w_min', 'w_max', 'cos_min', 'cos_max',
     'chi_min', 'chi_max', 'mxs_min', 'mxs_max',
@@ -123,12 +106,18 @@ _DEPRECATED_FORM_FACTOR_NAMES = {
     'fp': 'f+', 'Fp': 'F+', 'Gp': 'G+', 'hp': 'h+', 'htp': 'ht+',
 }
 # LFU-difference Q notation (the papers' Q_i / Q_FL) is stored as the
-# unified Delta form; see references/obs-abbr.md §"LFU Difference
+# unified Delta form; see references/observable-naming.md §"LFU Difference
 # Observables" for the correspondence.
 _DEPRECATED_LFU_Q_NAMES = {
     'Q1': 'DeltaP1', 'Q2': 'DeltaP2', 'Q3': 'DeltaP3',
     'Q4': 'DeltaP4p', 'Q5': 'DeltaP5p', 'Q6': 'DeltaP6p',
     'Q8': 'DeltaP8p', 'QFL': 'DeltaFL',
+}
+# Single-token mass shortcuts; the argument form takes the PDG particle
+# label (references/observable-naming.md §2.1).
+_DEPRECATED_MASS_NAMES = {
+    'MZ': 'Mass(Z)', 'MW': 'Mass(W)', 'Mtop': 'Mass(t)',
+    'MH': 'Mass(H)', 'Mh': 'Mass(H)',
 }
 FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM', 'MR'}
 
@@ -158,253 +147,133 @@ def _dataset_issue(value) -> str:
     return ""
 
 
-# --- Canonical transition ordering (obs-abbr.md §1) -------------------
-# Particle tokens are classified into the four orderable types from the
-# spec. Hadrons keep their conventional capitalisation; leptons and light
-# mesons stay lowercase (e+, mu-, pi-, v).
-_BARYON_STEMS = (
-    'Lambdac', 'Lambdab', 'Lambda', 'Sigma', 'Xic', 'Xib',
-    'Omegac', 'Omega', 'Xi',
-)
-_MESON_STEMS = (
-    'J/psi', 'psi', 'K*', 'Bc', 'Bs0', 'B0', 'B',
-    'D*', 'Ds', 'D0', 'D', 'KS0', 'KL0',
-    'K0', 'K', 'pi', 'rho', 'phi', 'omega', 'eta', 'Xs', 'Xce', 'Xcl', 'f',
-)
-_MESON_CHARGED_STEMS = ('B', 'Bc', 'D', 'D*', 'Ds', 'K', 'K*', 'pi', 'rho')
-_LEP_STEMS = ('mu', 'tau', 'e', 'l')
-_NEUTRAL_MESONS = {
-    'J/psi', 'psi', 'phi', 'omega', 'eta', 'etaprime', 'Xs', 'Xce', 'Xcl',
-    'f', 'D0', 'B0', 'Bs0', 'K0', 'K*0', 'D*0',
-    'KL0', 'KS0', 'B0Bar',
-}
-_NEUTRAL_LEPTONS = {
-    'v', 'vBar', 've', 'veBar', 'vmu', 'vmuBar', 'vtau', 'vtauBar',
-}
+# --- Particle registry and transition ordering (particle-naming.md) ----------
+# The registry tables in references/particle-naming.md are the single
+# source of pids, masses and charges. A table with ``pid`` and ``mass``
+# columns registers orderable states; a ``pid`` table without ``mass``
+# (exotics) or a ``token`` table (placeholders) registers non-orderable
+# tokens.
 _TYPE_NAMES = {
     1: 'baryon', 2: 'meson', 3: 'charged lepton', 4: 'neutral lepton',
 }
+_CHARGED_LEPTON_CORES = {'e', 'E', 'mu', 'MU', 'tau', 'TAU'}
+_NEUTRAL_LEPTON_CORES = {'ve', 'VE', 'vmu', 'VMU', 'vtau', 'VTAU'}
 
-# Particle-state grammar: <name>[*]<charge>[Bar].  Neutrinos keep the
-# conventional ``v``/``vBar`` spelling without a charge slot, and neutral
-# gauge bosons stay bare.  The remaining tokens are not single PDG
-# particle states (placeholders, partons, nuclei, inclusive systems, or
-# experimental/BSM pseudo-labels) and therefore have no charge slot.
-_CHARGE_EXEMPT_TOKENS = _NEUTRAL_LEPTONS | {
-    'Z', 'gamma', 'g', 'gg', 'gamma+gamma',
-    'l', 'l+', 'l-', 'q', 'q1', 'q2', 'qBar',
-    'b', 'bBar', 'c', 'cBar', 's', 'sBar', 't', 'tBar',
-    'u', 'uBar', 'd', 'dBar', 'bs', 'cb', 'uds', '0+',
-    'Xs', 'XsBar', 'Xce', 'Xcl',
-    'all', 'had', 'med', 'world', 'CDF', 'kappa',
-    'Au', 'Ca', 'Ti', 'V', 'VH', 'Zp', 'emup',
-    'f', 'fBar',
-}
-# Neutral or charged states outside ``particle-masses.json`` that still
-# need an explicit charge marker.
-_CHARGE_REQUIRED_EXTRA = {
-    'H', 'W', 'Wp', 'WKK', 'Gstar', 'sneutrino', 'omegal',
-}
 
-# Masses come from the PDG-backed reference file, not from guesses in
-# this script. See references/particle-masses.json for values and source.
-def _load_mass_reference() -> tuple[dict[str, float], set[str]]:
+def _load_registry() -> tuple[
+    dict[str, tuple[float, int | None]], set[str], set[str]
+]:
     here = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(here, '..', 'references', 'particle-masses.json')
+    path = os.path.join(here, '..', 'references', 'particle-naming.md')
     with open(os.path.abspath(path), 'r', encoding='utf-8') as handle:
-        payload = json.load(handle)
-    masses = payload.get('masses', {})
-    if not isinstance(masses, dict) or not masses:
-        raise RuntimeError(
-            f'{path}: missing non-empty "masses" object'
-        )
-    non_orderable = set(payload.get('non_orderable', []))
-    return masses, non_orderable
+        lines = handle.readlines()
 
+    states: dict[str, tuple[float, int | None]] = {}
+    non_orderable: set[str] = set()
+    fundamental: set[str] = set()
 
-_PARTICLE_MASS, _NON_ORDERABLE = _load_mass_reference()
+    def backticked(cell: str) -> list[str]:
+        return re.findall(r'`([^`]+)`', cell)
 
+    def cells(row: str) -> list[str]:
+        return [part.strip() for part in row.strip().strip('|').split('|')]
 
-def _strip_bar(token: str) -> str:
-    # Only the canonical capital ``Bar`` at the very end is stripped;
-    # lowercase ``bar`` and the legacy mid-symbol placement are invalid.
-    return re.sub(r'Bar$', '', token)
+    def charge(cell: str) -> int | None:
+        try:
+            return int(cell.strip().strip('$'))
+        except ValueError:
+            return None
 
-
-def _strip_resonance(token: str) -> str:
-    """Drop the trailing ``(2.l+.l-)`` resonance-decay annotation."""
-    return re.sub(r'\(2\.[^()]*\)$', '', token)
-
-
-def _split_mass_tag(token: str) -> tuple[str, float | None]:
-    """Split a trailing PDG mass label in MeV, e.g. ``D0*+(2300)``."""
-    match = re.fullmatch(r'(.*)\((\d{3,4})\)', token)
-    if not match:
-        return token, None
-    return match.group(1), float(match.group(2)) / 1000.0
-
-
-def _particle_mass(token: str) -> float | None:
-    """Return the particle mass in GeV, or ``None`` when it is unknown."""
-    base, tagged_mass = _split_mass_tag(_strip_resonance(token))
-    if tagged_mass is not None:
-        return tagged_mass
-    stem = _strip_bar(base)
-    if stem in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem]
-    # Antiparticles share the mass of their partner.
-    if stem.endswith('-') and stem[:-1] + '+' in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem[:-1] + '+']
-    if stem.endswith('+') and stem[:-1] + '-' in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem[:-1] + '-']
-    # A charge marker appended to a bare particle name (``phi0``,
-    # ``Lambda0``, ``p+``) shares the bare particle's mass.
-    if stem.endswith(('+', '-', '0')) and stem[:-1] in _PARTICLE_MASS:
-        return _PARTICLE_MASS[stem[:-1]]
-    return None
-
-
-def _split_top_level(text: str, separator: str) -> list[str]:
-    """Split on *separator* only outside balanced parentheses.
-
-    Keeps resonance tokens such as ``psi(2S)(2.l+.l-)`` intact.
-    """
-    parts, buffer, depth = [], [], 0
     index = 0
-    while index < len(text):
-        char = text[index]
-        if char == '(':
-            depth += 1
-        elif char == ')':
-            depth = max(0, depth - 1)
-        if depth == 0 and text.startswith(separator, index):
-            parts.append(''.join(buffer))
-            buffer = []
-            index += len(separator)
+    while index < len(lines):
+        if not lines[index].strip().startswith('|'):
+            index += 1
             continue
-        buffer.append(char)
-        index += 1
-    parts.append(''.join(buffer))
-    return [part for part in parts if part]
-
-
-# Particle names that contain the ratio separator (``J/psi``).
-_SLASH_PARTICLE_TOKENS = tuple(sorted(
-    (token for token in _PARTICLE_MASS if '/' in token),
-    key=len, reverse=True,
-))
-
-
-def _split_ratio(body: str) -> list[str]:
-    """Split a ratio key on ``/`` without cutting particle names.
-
-    ``J/psi`` carries a slash of its own, so the separator is masked out
-    before splitting. The slash-bearing names come from the mass
-    reference rather than a hard-coded list.
-    """
-    masked = body
-    for token in _SLASH_PARTICLE_TOKENS:
-        masked = masked.replace(token, token.replace('/', '\x00'))
-    return [
-        part.replace('\x00', '/')
-        for part in _split_top_level(masked, '/')
-    ]
-
-
-def _charge_rank(token: str) -> int | None:
-    """Return ordering rank for an explicit charge: + -> 0, - -> 1."""
-    if token.endswith('+'):
-        return 0
-    if token.endswith('-'):
-        return 1
-    return None
-
-
-def _classify_particle(token: str) -> tuple[int | None, int | None]:
-    """Classify a transition token as ``(type_rank, charge_rank)``.
-
-    ``None`` means the token is not part of the four orderable types or its
-    charge is implicit — such states are left unchecked rather than guessed.
-    """
-    if token in _NON_ORDERABLE:
-        return None, None
-    if token in _NEUTRAL_LEPTONS:
-        return 4, 0
-
-    base, _ = _split_mass_tag(_strip_resonance(token))
-    stem = _strip_bar(base)
-    if stem in _NON_ORDERABLE:
-        return None, None
-    name_core = re.sub(r'[+\-0]$', '', stem)
-    if name_core in ('p', 'n'):
-        charge = _charge_rank(stem)
-        if charge is None:
-            charge = 2 if name_core == 'n' or '0' in stem else 0
-        if base.endswith('Bar'):
-            charge = 1
-        return 1, charge
-    if stem.startswith(_BARYON_STEMS):
-        charge = _charge_rank(base)
-        if charge is None and ('0' in stem or stem in ('Lambda', 'Lambdab')):
-            charge = 2
-        return 1, charge
-
-    core = re.sub(r'[+\-]$', '', stem)
-    if core in _LEP_STEMS:
-        if core == 'l' and not base.endswith(('+', '-')):
-            # Bare generic lepton: its charge is unknown, so skip the state.
-            return None, None
-        return 3, _charge_rank(base)
-
-    if stem.startswith(_MESON_STEMS):
-        charge = _charge_rank(base)
-        if charge is None and (
-            base in _NEUTRAL_MESONS
-            or stem in _NEUTRAL_MESONS
-            or '0' in stem
-        ):
-            charge = 2
-        return 2, charge
-
-    return None, None
-
-
-def _particle_grammar_issues(token: str, label: str) -> list[str]:
-    """Check one particle state against ``<name>[*]<charge>[Bar]``."""
-    issues = []
-    bare, _ = _split_mass_tag(_strip_resonance(token))
-    if bare.count('*') > 1:
-        issues.append(
-            f"  {label}: particle '{token}' has more than one vector marker "
-            f"'*'; the grammar is <name>[*]<charge>[Bar]"
+        block = []
+        while index < len(lines) and lines[index].strip().startswith('|'):
+            block.append(lines[index].strip())
+            index += 1
+        if len(block) < 3:
+            continue
+        header = [cell.lower() for cell in cells(block[0])]
+        if 'token' in header:
+            column = header.index('token')
+            for row in block[2:]:
+                non_orderable.update(backticked(cells(row)[column]))
+            continue
+        if 'pid' not in header:
+            continue
+        pid_column = header.index('pid')
+        anti_column = (
+            header.index('antiparticle pid')
+            if 'antiparticle pid' in header else None
         )
-    elif '*' in bare:
-        tail = bare.split('*', 1)[1]
-        if not re.fullmatch(r'(?:\+|-|0)(?:Bar)?', tail):
-            issues.append(
-                f"  {label}: particle '{token}' places characters around the "
-                f"vector marker '*'; write <name>[*]<+|-|0>[Bar] "
-                f"(e.g. 'D*0', 'D*+Bar')"
+        mass_column = header.index('mass') if 'mass' in header else None
+        charge_column = header.index('q') if 'q' in header else None
+        for row in block[2:]:
+            row_cells = cells(row)
+            pids = backticked(row_cells[pid_column])
+            if not pids:
+                continue
+            if mass_column is None:
+                non_orderable.update(pids)
+                continue
+            try:
+                mass = float(row_cells[mass_column])
+            except ValueError:
+                non_orderable.update(pids)
+                continue
+            q = (
+                charge(row_cells[charge_column])
+                if charge_column is not None else None
             )
-    if 'Bar' in bare and not bare.endswith('Bar'):
-        issues.append(
-            f"  {label}: particle '{token}' places 'Bar' inside the symbol; "
-            f"the antiparticle marker goes last, after the charge"
-        )
+            for pid in pids:
+                states[pid] = (mass, q)
+            if anti_column is not None:
+                anti_pids = backticked(row_cells[anti_column])
+                fundamental.update(pids)
+                fundamental.update(anti_pids)
+                for anti_pid in anti_pids:
+                    states[anti_pid] = (mass, -q if q is not None else None)
 
-    stem = _strip_bar(bare)
-    name_core = re.sub(r'[+\-0]$', '', stem)
-    if (stem in _CHARGE_EXEMPT_TOKENS
-            or name_core in _CHARGE_EXEMPT_TOKENS):
-        return issues
-    if stem in _PARTICLE_MASS or name_core in _CHARGE_REQUIRED_EXTRA:
-        if not re.search(r'[+\-0]$', stem):
-            issues.append(
-                f"  {label}: particle '{token}' has no charge marker; write "
-                f"<name>[*]<+|-|0>[Bar] (e.g. 'phi0', 'p+', 'W-'); only "
-                f"neutrinos and neutral gauge bosons are exempt"
-            )
-    return issues
+    if not states:
+        raise RuntimeError(
+            f'{path}: no registry tables with pid and mass columns'
+        )
+    return states, non_orderable, fundamental
+
+
+_REGISTRY, _NON_ORDERABLE, _FUNDAMENTAL_PIDS = _load_registry()
+
+
+def _charge_rank(charge_value: int | None) -> int | None:
+    """Map a charge to the equal-mass order: + -> 0, - -> 1, 0 -> 2."""
+    return {1: 0, -1: 1, 0: 2}.get(charge_value)
+
+
+def _particle_meta(token: str) -> tuple[int | None, int | None, float | None]:
+    """Return ``(type_rank, charge_rank, mass)`` for a registered pid."""
+    entry = _REGISTRY.get(token)
+    if entry is None:
+        return None, None, None
+    mass, q = entry
+    core = token.split('_', 1)[0]
+    if token in _FUNDAMENTAL_PIDS:
+        if core in _CHARGED_LEPTON_CORES:
+            type_rank = 3
+        elif core in _NEUTRAL_LEPTON_CORES:
+            type_rank = 4
+        else:
+            type_rank = None
+    elif token.startswith('n~') or core == 'x':
+        type_rank = None
+    elif len(core) == 2:
+        type_rank = 2
+    elif len(core) == 3:
+        type_rank = 1
+    else:
+        type_rank = None
+    return type_rank, _charge_rank(q), mass
 
 
 def _parenthetical_blocks(name: str) -> list[tuple[int, int, str]]:
@@ -441,9 +310,7 @@ def _parenthetical_blocks(name: str) -> list[tuple[int, int, str]]:
 
 def _looks_like_transition(text: str) -> bool:
     """Heuristic: does ``text`` contain a particle transition?"""
-    if '.2.' in text:
-        return True
-    return bool(re.search(r'[A-Za-z0-9][+\-]?2[A-Za-z0-9(]', text))
+    return '.2.' in text
 
 
 def validate_transition_key(key: str) -> list[str]:
@@ -453,76 +320,139 @@ def validate_transition_key(key: str) -> list[str]:
     if '.2.' not in key:
         return [
             f"  data key '{key}' is not a transition channel; expected "
-            f"A.B.2.C.D (or 'no-transition' for observables without one)"
+            f"<pid>.<pid>.2.<pid>.<pid> (or 'no-transition' for "
+            f"observables without one)"
         ]
-    return _order_issues_for_body(key, f"data key '{key}'", require_known=True)
+    if any(
+        not stage.replace('.', '')
+        for part in key.split('/')
+        for stage in part.split('.2.')
+    ):
+        return [
+            f"  data key '{key}': empty particle state; every stage separated "
+            f"by '.2.' must name at least one pid"
+        ]
+    issues = _order_issues_for_body(key, f"data key '{key}'")
+    issues.extend(_flow_issues(key, f"data key '{key}'"))
+    return issues
 
 
-def _order_issues_for_body(
-    body: str, label: str, require_known: bool = False,
-) -> list[str]:
-    """Check one transition body (``A.B.2.C.D``) and return order issues.
+# An anti-b meson decays through anti-b -> anti-c/anti-s, so its inclusive
+# system is barred; a b meson decays through b -> c/s and takes the
+# unbarred token. The charge-averaged ``B`` and ``Xu`` carry no flavour
+# constraint.
+_B_QUARK_CONTENT = {
+    'uB': 'bar', 'dB': 'bar', 'sB': 'bar', 'cB': 'bar',
+    'Ub': 'quark', 'Db': 'quark', 'Sb': 'quark', 'Cb': 'quark',
+}
+_INCLUSIVE_FLAVOUR = {
+    'Xc': 'quark', 'XcBar': 'bar', 'Xs': 'quark', 'XsBar': 'bar',
+}
+_LEPTON_CHARGE = {
+    'e': -1, 'mu': -1, 'tau': -1, 'l-': -1,
+    'E': 1, 'MU': 1, 'TAU': 1, 'l+': 1,
+}
+# Neutrino token -> (charged-lepton flavour, partner lepton charge). A
+# neutrino accompanies l+, an antineutrino accompanies l-; ``None`` is the
+# flavour-unspecified generic token.
+_NEUTRINO_PARTNER = {
+    'v': (None, 1), 'vBar': (None, -1),
+    've': ('e', 1), 'VE': ('e', -1),
+    'vmu': ('mu', 1), 'VMU': ('mu', -1),
+    'vtau': ('tau', 1), 'VTAU': ('tau', -1),
+}
+_NEUTRINO_TOKEN = {
+    partner: token for token, partner in _NEUTRINO_PARTNER.items()
+}
 
-    With ``require_known=True`` (new dict-schema keys) every particle token
-    must be in ``references/particle-masses.json`` or listed as
-    non-orderable; otherwise the state would silently escape the ordering
-    check.
+
+def _flow_issues(key: str, label: str) -> list[str]:
+    """Check quark-flavour flow and lepton/neutrino charge correlation.
+
+    Only the final state of each transition is inspected. Scattering (a
+    neutrino already in the initial state), exotic ``x_`` cascades and the
+    flavour-ambiguous ``l`` are left alone.
     """
     issues = []
-    parts = _split_ratio(body)
+    for part in key.split('/'):
+        stages = [
+            [token for token in stage.split('.') if token]
+            for stage in part.split('.2.')
+        ]
+        if len(stages) < 2:
+            continue
+        initial, final = stages[0], stages[-1]
+        cores = [token.split('_', 1)[0] for token in final]
+        label_part = f"{label} state '{'.'.join(final)}'"
+
+        wanted = _B_QUARK_CONTENT.get(initial[0].split('_', 1)[0])
+        if wanted:
+            for core in cores:
+                if _INCLUSIVE_FLAVOUR.get(core) not in (None, wanted):
+                    expected = core[:-3] if wanted == 'quark' else core + 'Bar'
+                    quark = 'a b' if wanted == 'quark' else 'an anti-b'
+                    issues.append(
+                        f"  {label_part}: '{initial[0]}' decays through "
+                        f"{quark} quark, so "
+                        f"the inclusive system is '{expected}', not '{core}'"
+                    )
+
+        if any(token.startswith('x_') for token in part.split('.')):
+            continue
+        if any(
+            token.split('_', 1)[0] in _NEUTRINO_PARTNER
+            for stage in stages[:-1] for token in stage
+        ):
+            continue
+        leptons = [core for core in cores if core in _LEPTON_CHARGE]
+        neutrinos = [core for core in cores if core in _NEUTRINO_PARTNER]
+        if len(leptons) != 1 or len(neutrinos) != 1 or leptons[0] == 'l':
+            continue
+        lepton, neutrino = leptons[0], neutrinos[0]
+        flavour, charge = _NEUTRINO_PARTNER[neutrino]
+        if flavour is not None and flavour != lepton.lower():
+            issues.append(
+                f"  {label_part}: neutrino '{neutrino}' does not match the "
+                f"charged lepton '{lepton}'"
+            )
+        elif charge != _LEPTON_CHARGE[lepton]:
+            expected = _NEUTRINO_TOKEN[(flavour, _LEPTON_CHARGE[lepton])]
+            issues.append(
+                f"  {label_part}: '{lepton}' must be accompanied by "
+                f"'{expected}', not '{neutrino}'"
+            )
+    return issues
+
+
+def _order_issues_for_body(body: str, label: str) -> list[str]:
+    """Check one transition body and return order/registry issues.
+
+    Every particle token must be a pid registered in
+    ``references/particle-naming.md`` or a placeholder listed there as
+    non-orderable; otherwise the state would silently escape the checks.
+    """
+    issues = []
+    parts = [part for part in body.split('/') if part]
     if len(parts) > 1 and all('.2.' in part for part in parts):
         for part in parts:
-            if '.2.' in part:
-                issues.extend(
-                    _order_issues_for_body(part, label, require_known)
-                )
+            issues.extend(_order_issues_for_body(part, label))
         return issues
-    stages = _split_top_level(body, '.2.')
-    for stage in stages:
-        tokens = _split_top_level(stage, '.')
-        classified = [_classify_particle(token) for token in tokens]
+    for stage in body.split('.2.'):
+        tokens = [token for token in stage.split('.') if token]
+        classified = [_particle_meta(token) for token in tokens]
         types = [entry[0] for entry in classified]
         charges = [entry[1] for entry in classified]
-        masses = [_particle_mass(token) for token in tokens]
+        masses = [entry[2] for entry in classified]
 
-        for token, (type_rank, _) in zip(tokens, classified):
-            if 'Bar' not in token and 'bar' in token:
-                issues.append(
-                    f"  {label}: particle '{token}' uses lowercase 'bar'; "
-                    f"write the antiparticle marker as capital 'Bar'"
-                )
+        for token in tokens:
+            if token in _NON_ORDERABLE or token in _REGISTRY:
                 continue
-            issues.extend(_particle_grammar_issues(token, label))
-            if _particle_mass(token) is None and token not in _NEUTRAL_LEPTONS:
-                stem = _strip_bar(token)
-                if stem in _NON_ORDERABLE or token in _NON_ORDERABLE:
-                    continue
-                if token[-1:] in ('p', 'm') and _particle_mass(token[:-1]):
-                    sign = '+' if token[-1] == 'p' else '-'
-                    issues.append(
-                        f"  {label}: particle '{token}' writes its charge with "
-                        f"'{token[-1]}'; write '{token[:-1]}{sign}' instead"
-                    )
-                    continue
-                if token == 'K0L':
-                    issues.append(
-                        f"  {label}: particle 'K0L' is written 'KL0' "
-                        f"(subscript before superscript)"
-                    )
-                    continue
-                if type_rank is not None:
-                    issues.append(
-                        f"  {label}: state '{stage}' particle '{token}' has no "
-                        f"mass in references/particle-masses.json; add its PDG "
-                        f"mass so the ordering can be checked"
-                    )
-                elif require_known:
-                    issues.append(
-                        f"  {label}: state '{stage}' particle '{token}' is not "
-                        f"a known particle; add its PDG mass to "
-                        f"references/particle-masses.json (or list it under "
-                        f"'non_orderable' if it cannot be ordered)"
-                    )
+            issues.append(
+                f"  {label}: state '{stage}' particle '{token}' is not a "
+                f"registered pid; add it to the registry tables of "
+                f"references/particle-naming.md (or list it as non-orderable "
+                f"if it cannot be ordered)"
+            )
 
         if all(value is not None for value in types):
             for left in range(len(types) - 1):
@@ -591,11 +521,16 @@ def _order_issues_for_body(
                         and abs(group_masses[pos] - group_masses[pos + 1]) < 1e-9
                         and group_charges[pos] > group_charges[pos + 1]
                     ):
+                        expected = '.'.join(
+                            token for _, token in sorted(
+                                zip(group_charges, group_tokens),
+                                key=lambda item: item[0],
+                            )
+                        )
                         issues.append(
                             f"  {label}: state '{stage}' breaks "
                             f"charge order in '{'.'.join(group_tokens)}'; "
-                            f"expected "
-                            f"'{'.'.join(token for _, token in sorted(zip(group_charges, group_tokens), key=lambda item: item[0]))}' "
+                            f"expected '{expected}' "
                             f"(equal masses: + -> - -> 0)"
                         )
                         break
@@ -606,6 +541,25 @@ def _order_issues_for_body(
 def _observable_symbol(name: str) -> str:
     """Return the bare symbol, dropping a ``[condition]``/``(parameter)`` tag."""
     return re.split(r'[\[(]', name, maxsplit=1)[0]
+
+
+# A condition may qualify the measurement (confidence level, model, data
+# set) but never a kinematic bin: those live in q2min/q2max, emin/emax or
+# the group note. ``=`` is deliberately not matched, so parameter tags
+# such as ``mH=125GeV`` survive.
+_KINEMATIC_CONDITION_RE = re.compile(
+    r'[<>]|q2|^\d+(?:\.\d+)?[,-]\d+(?:\.\d+)?$', re.IGNORECASE
+)
+# Lepton-flavour ratios of rates are named ``R``; the two transitions are
+# the key. Ratios of other observables keep ``ROBS[condition]``.
+_LEPTON_FLAVOUR_RATIO_RE = re.compile(
+    r'^(?:e|mu|tau|l)\s*/\s*(?:e|mu|tau|l)$', re.IGNORECASE
+)
+_RATE_SYMBOLS = {'Br', 'Gamma', 'dBr/dq2', 'dGamma/dq2'}
+_DEPRECATED_RATIO_NAMES = {
+    'RK': 'R', 'RK*': 'R', 'RK+': 'R', 'RD': 'R', 'RD*': 'R',
+    'Rmue': 'R', 'Rtaumu': 'R', 'Re/mu': 'R', 'RWenu2Wmumu': 'R',
+}
 
 
 def validate_observable_name(name: str) -> list[str]:
@@ -629,6 +583,32 @@ def validate_observable_name(name: str) -> list[str]:
             f"  Observable '{name}': obsolete LFU-difference symbol "
             f"'{symbol}'; write '{_DEPRECATED_LFU_Q_NAMES[symbol]}' instead"
         )
+    if symbol in _DEPRECATED_MASS_NAMES:
+        issues.append(
+            f"  Observable '{name}': obsolete mass shortcut '{symbol}'; write "
+            f"'{_DEPRECATED_MASS_NAMES[symbol]}' instead"
+        )
+    if symbol in _DEPRECATED_RATIO_NAMES:
+        issues.append(
+            f"  Observable '{name}': ratio symbol '{symbol}' embeds the "
+            f"channel; write '{_DEPRECATED_RATIO_NAMES[symbol]}' and put both "
+            f"transitions in the data key"
+        )
+    for condition in re.findall(r'\[([^\]]*)\]', name):
+        if _KINEMATIC_CONDITION_RE.search(condition):
+            issues.append(
+                f"  Observable '{name}': condition '[{condition}]' is a "
+                f"kinematic bin; use q2min/q2max or emin/emax, or record the "
+                f"window in the group note"
+            )
+        if _LEPTON_FLAVOUR_RATIO_RE.fullmatch(condition.strip()):
+            base = symbol[1:] if symbol.startswith('R') else symbol
+            if base in _RATE_SYMBOLS or not symbol.startswith(('R', 'Delta')):
+                issues.append(
+                    f"  Observable '{name}': a lepton-flavour ratio of rates "
+                    f"is named 'R' (or 'DeltaOBS' for a difference); the data "
+                    f"key carries both transitions"
+                )
     for _, _, body in _parenthetical_blocks(name):
         if _looks_like_transition(body):
             issues.append(
@@ -753,7 +733,6 @@ def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
     """
     issues = []
     n = len(matrix)
-    # Check rectangular
     for i, row in enumerate(matrix):
         if not isinstance(row, list) or len(row) != n:
             row_len = len(row) if isinstance(row, list) else 'N/A'
@@ -762,7 +741,6 @@ def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
                 f"does not match column count ({n})"
             )
             return issues
-    # Check element types and finiteness
     for i in range(n):
         for j in range(n):
             element = matrix[i][j]
@@ -821,29 +799,22 @@ def validate_correlation(matrix: list, label: str, is_covariance: bool = False,
 
 
 def validate_arxiv_format(arxiv) -> list[str]:
-    """Check arxiv field format. Accepted forms:
+    """Check the arxiv field: JSON null, a ``[id](url)`` Markdown link, or a
+    legacy bare ID string (normalized to Markdown on re-import).
 
-    - ``null`` (no preprint available, e.g. journal-only paper)
-    - ``[primary_category/arxiv_id](url)`` (any arXiv ID form, with or
-      without version suffix)
-    - ``[non-arxiv-id](url)`` (e.g. ``[LHCb-NOTE-2015-001]``,
-      ``[LHCb-ANA-2015-001]`` — LHC note numbers, journal
-      citations, conference proceedings)
-    - legacy bare string like ``"hep-ex/1512.04442"`` (will be
-      normalized to markdown form on import)
+    The link text may be an arXiv ID (with or without ``vN``) or a non-arXiv
+    identifier such as ``LHCb-NOTE-2015-001``.
     """
     issues = []
     if arxiv is None:
-        return issues  # null is allowed
+        return issues
     if not isinstance(arxiv, str):
         issues.append(
             f"  arxiv field must be a string or null, "
             f"got {type(arxiv).__name__}"
         )
         return issues
-    # The string ``"null"`` is almost always a hand-written mistake:
-    # JSON's actual null is the bare value ``null``, not the 4-char
-    # literal. Reject so the file is auto-fixable.
+    # JSON's null is the bare value, not the 4-char literal "null".
     if arxiv == "null":
         issues.append(
             f"  arxiv field is the string '\"null\"'; use JSON null instead"
@@ -852,8 +823,6 @@ def validate_arxiv_format(arxiv) -> list[str]:
     if not arxiv.strip():
         issues.append("  arxiv field is empty; use JSON null instead")
         return issues
-    # Bare string (no brackets) — legacy form, accepted as-is. Caller
-    # can normalize to markdown form when importing.
     if not arxiv.startswith("["):
         return issues
     md_match = re.match(r'^\[([^\]]+)\]\(([^)]*)\)$', arxiv)
@@ -864,13 +833,9 @@ def validate_arxiv_format(arxiv) -> list[str]:
         )
         return issues
     link_text = md_match.group(1)
-    # If the text contains a slash, it's a real arXiv ID — require
-    # version. Otherwise it's a non-arXiv ID (CERN note etc.) and is
-    # accepted as-is.
+    # A slash means a real arXiv ID; a missing vN is a warning, not a
+    # failure, so legacy files stay valid inputs.
     if '/' in link_text and 'v' not in link_text.split('/', 1)[1]:
-        # Real arXiv ID without version (legacy): accept but warn so the
-        # importer / human notices. This is not a validation failure —
-        # legacy files are valid inputs and are normalized on re-import.
         print(
             f"  [WARN] arxiv field '{link_text}' is missing version suffix "
             f"(e.g. 'v1', 'v2') — consider adding it"
@@ -944,15 +909,32 @@ def _is_float_string(text) -> bool:
     return True
 
 
-def _scale_unit_issue(unit, label: str) -> list[str]:
-    """Reject scientific-notation scale factors stored in ``unit``."""
-    if isinstance(unit, str) and _SCALE_UNIT_RE.fullmatch(unit.strip()):
-        return [
-            f"  {label}.unit: {unit!r} is a pure scale factor, not a unit; "
-            f"multiply it into value/total_upper/total_lower/bounds and "
-            f"omit unit"
-        ]
-    return []
+def _unit_issue(unit, label: str) -> list[str]:
+    """Units are bare ASCII symbols with an optional integer power.
+
+    Scale factors and percentages belong in the numbers, not in ``unit``
+    (json-meta.md §"unit").
+    """
+    if not isinstance(unit, str):
+        return []
+    text = unit.strip()
+    if _UNIT_RE.fullmatch(text):
+        return []
+    if '%' in text:
+        hint = (
+            "divide value/errors/bounds by 100 and omit unit"
+        )
+    elif re.search(r'\d[eE][+-]?\d|10\^|\d\s+[A-Za-z]', text):
+        hint = (
+            "multiply the scale factor into value/total_upper/total_lower/"
+            "type@N_upper/type@N_lower and keep only the physical unit"
+        )
+    else:
+        hint = (
+            "write a bare ASCII unit with an optional integer power "
+            "(GeV, GeV-2, GeV2, MeV, ps-1); no LaTeX and no scale prefix"
+        )
+    return [f"  {label}.unit: {unit!r} is not a bare ASCII unit; {hint}"]
 
 
 def _kinematic_issues(value, label: str) -> list[str]:
@@ -1075,6 +1057,9 @@ def _validate_measurement_scheme(obs: dict, label: str) -> list[str]:
     return issues
 
 
+_MARKDOWN_LINK_RE = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
+
+
 def _validate_observable(obs, label: str) -> list[str]:
     """Validate one ``obs@N`` object."""
     if not isinstance(obs, dict):
@@ -1082,13 +1067,44 @@ def _validate_observable(obs, label: str) -> list[str]:
 
     issues = []
 
-    for key in obs:
+    for key, value in obs.items():
         if not is_observable_field(key):
             issues.append(
                 f"  {label}: unknown observable field '{key}'; allowed "
                 f"fields are {sorted(OBS_EXACT_FIELDS)} plus "
                 f"type@N_error/type@N_upper/type@N_lower/type@N_level"
             )
+        if key == 'unit':
+            if not isinstance(value, str) or not value.strip():
+                issues.append(f"  {label}.{key}: must be a non-empty string")
+            else:
+                issues.extend(_unit_issue(value, label))
+        elif key in DATA_ENTRY_KINEMATIC_FIELDS:
+            issues.extend(_kinematic_issues(value, f"{label}.{key}"))
+        elif key in ('dataset', 'note'):
+            if not isinstance(value, str) or not value.strip():
+                issues.append(f"  {label}.{key}: must be a non-empty string")
+        elif key == 'ref':
+            if (not isinstance(value, str)
+                    or not _MARKDOWN_LINK_RE.fullmatch(value.strip())):
+                issues.append(
+                    f"  {label}.{key}: must be a Markdown link "
+                    f"'[TexKey](https://inspirehep.net/literature/<recid>)'"
+                )
+        elif _NUMERIC_OBS_KEY_RE.fullmatch(key):
+            if not isinstance(value, str):
+                issues.append(
+                    f"  {label}.{key}: expected string, "
+                    f"got {type(value).__name__}"
+                )
+            elif not value.strip():
+                issues.append(f"  {label}.{key}: must not be empty")
+            elif not _is_float_string(value):
+                issues.append(
+                    f"  {label}.{key}: expected a float-as-string, "
+                    f"got {value!r}"
+                )
+
     if 'name' not in obs:
         issues.append(f"  {label}: missing required field: name")
     issues.extend(_validate_component_errors_and_bounds(obs, label))
@@ -1100,45 +1116,12 @@ def _validate_observable(obs, label: str) -> list[str]:
         )
     issues.extend(_validate_measurement_scheme(obs, label))
 
-    if 'name' in obs and (
-        not isinstance(obs['name'], str) or not obs['name'].strip()
-    ):
-        issues.append(f"  {label}.name: must be a non-empty string")
-
-    for key in obs:
-        if key == 'unit':
-            if not isinstance(obs[key], str) or not obs[key].strip():
-                issues.append(f"  {label}.{key}: must be a non-empty string")
-            else:
-                issues.extend(_scale_unit_issue(obs[key], label))
-            continue
-        if not _NUMERIC_OBS_KEY_RE.fullmatch(key):
-            continue
-        if not isinstance(obs[key], str):
-            issues.append(
-                f"  {label}.{key}: expected string, "
-                f"got {type(obs[key]).__name__}"
-            )
-        elif not obs[key].strip():
-            issues.append(f"  {label}.{key}: must not be empty")
-        elif not _is_float_string(obs[key]):
-            issues.append(
-                f"  {label}.{key}: expected a float-as-string, "
-                f"got {obs[key]!r}"
-            )
-
-    for key in obs:
-        if key in DATA_ENTRY_KINEMATIC_FIELDS:
-            issues.extend(_kinematic_issues(obs[key], f"{label}.{key}"))
-
-    for key in ('dataset', 'note'):
-        if key in obs and (
-            not isinstance(obs[key], str) or not obs[key].strip()
-        ):
-            issues.append(f"  {label}.{key}: must be a non-empty string")
-
-    if 'name' in obs and isinstance(obs['name'], str):
-        issues.extend(validate_observable_name(obs['name']))
+    if 'name' in obs:
+        name = obs['name']
+        if not isinstance(name, str) or not name.strip():
+            issues.append(f"  {label}.name: must be a non-empty string")
+        else:
+            issues.extend(validate_observable_name(name))
 
     return issues
 
@@ -1153,8 +1136,8 @@ def _validate_data_group(group, label: str) -> list[str]:
     group holds form-factor expansion coefficients. An optional
     group-level ``note`` documents the accompanying matrix (e.g. a
     published out-of-range correlation element). These keys must precede
-    any matrix key. The optional ``correlation``/``covariance`` matrix
-    aligns with the observables of all channels, flattened in channel
+    any matrix key. The optional ``correlation``/``covariance`` matrices
+    align with the observables of all channels, flattened in channel
     order then ``obs@N`` order.
     """
     issues = []
@@ -1165,13 +1148,15 @@ def _validate_data_group(group, label: str) -> list[str]:
     channel_count = 0
     obs_total = 0
     ordered_obs = []
-    saw_dataset = False
+    first_metadata = None
     saw_scheme = False
     saw_note = False
     saw_matrix = False
     has_coefficients = False
     for key in group:
         if key in ('dataset', 'scheme', 'note'):
+            if first_metadata is None:
+                first_metadata = key
             value = group[key]
             if not isinstance(value, str) or not value.strip():
                 issues.append(f"  {label}.{key}: must be a non-empty string")
@@ -1200,7 +1185,6 @@ def _validate_data_group(group, label: str) -> list[str]:
                         f"  {label}: 'dataset' appears after 'note'; "
                         f"keep 'dataset' first"
                     )
-                saw_dataset = True
             elif key == 'scheme':
                 if saw_note:
                     issues.append(
@@ -1215,20 +1199,10 @@ def _validate_data_group(group, label: str) -> list[str]:
             matrix_keys.append(key)
             saw_matrix = True
             continue
-        if saw_dataset:
+        if first_metadata is not None:
             issues.append(
-                f"  {label}: channel '{key}' appears after 'dataset'; "
-                f"keep all channel keys first"
-            )
-        elif saw_scheme:
-            issues.append(
-                f"  {label}: channel '{key}' appears after 'scheme'; "
-                f"keep all channel keys first"
-            )
-        elif saw_note:
-            issues.append(
-                f"  {label}: channel '{key}' appears after 'note'; "
-                f"keep all channel keys first"
+                f"  {label}: channel '{key}' appears after "
+                f"'{first_metadata}'; keep all channel keys first"
             )
         if saw_matrix:
             issues.append(
@@ -1272,7 +1246,11 @@ def _validate_data_group(group, label: str) -> list[str]:
     for key in matrix_keys:
         matrix = group[key]
         if matrix is None:
-            continue  # null means no matrix — acceptable
+            issues.append(
+                f"  {label}['{key}']: omit the key entirely when no matrix "
+                f"is available; do not set it to null"
+            )
+            continue
         if not isinstance(matrix, list):
             issues.append(f"  {label}['{key}']: expected 2D array")
             continue
@@ -1320,206 +1298,13 @@ def validate_transition_mode(value: str) -> list[str]:
     if not isinstance(value, str) or not value.strip():
         issues.append("  transition-mode must be a non-empty string")
         return issues
-    normalized = {mode.lower() for mode in VALID_TRANSITION_MODES}
-    if value.lower() not in normalized:
+    if value.lower() not in VALID_TRANSITION_MODES:
         issues.append(
             f"  transition-mode '{value}' is not in the allowed list: "
             f"{VALID_TRANSITION_MODES}; use hyphenated property names like "
             f"'semileptonic-decay', 'scattering', etc."
         )
     return issues
-
-
-def _detect_snapshot(data: dict) -> str | None:
-    """Return ``'pdg'``, ``'hflav'``, or ``None`` for a non-snapshot file.
-
-    PDG: top-level ``data`` is a dict of subgroups whose keys are ``obs@N``
-    (sparse) plus an optional ``correlation``. Standard per-paper files
-    have ``transition-mode`` and a ``data`` array of groups, so the two
-    shapes are unambiguous. HFLAV: no top-level ``data``;
-    each top-level value is a subgroup containing an ``observables`` list.
-    """
-    if 'transition-mode' not in data and isinstance(data.get('data'), dict):
-        subgroups = data['data']
-        if subgroups and all(
-            isinstance(sub, dict)
-            and all(
-                key == 'correlation' or re.fullmatch(r'obs@\d+', str(key))
-                for key in sub
-            )
-            for sub in subgroups.values()
-        ):
-            return 'pdg'
-        return None
-    if 'data' not in data and 'transition-mode' not in data:
-        if any(
-            isinstance(value, dict)
-            and isinstance(value.get('observables'), list)
-            for value in data.values()
-        ):
-            return 'hflav'
-    return None
-
-
-def _validate_snapshot_obs(obs, label: str, issues: list[str]) -> None:
-    """Validate one snapshot observable (shared by PDG and HFLAV)."""
-    if not isinstance(obs, dict):
-        issues.append(f"  {label}: must be an object")
-        return
-    for key in obs:
-        if key not in SNAPSHOT_OBS_ALLOWED_FIELDS:
-            issues.append(
-                f"  {label}: unknown observable field '{key}'; snapshots "
-                f"allow {sorted(SNAPSHOT_OBS_ALLOWED_FIELDS)}"
-            )
-    for field in ('name', 'value'):
-        if field not in obs:
-            issues.append(f"  {label}: missing required field: {field}")
-
-    if 'name' in obs and (
-        not isinstance(obs['name'], str) or not obs['name'].strip()
-    ):
-        issues.append(f"  {label}.name: must be a non-empty string")
-
-    # Snapshot observables use the total error pair only, never the
-    # per-paper type@N_error triplets.
-    for field in ('total_upper', 'total_lower'):
-        if field not in obs:
-            issues.append(f"  {label}: missing required field: {field}")
-
-    # Snapshot numbers are JSON numbers, not float-strings (json-meta.md
-    # §"Shared rules for both snapshots").
-    for field in ('value', 'total_upper', 'total_lower'):
-        if field in obs and (
-            isinstance(obs[field], bool)
-            or not isinstance(obs[field], (int, float))
-        ):
-            issues.append(
-                f"  {label}.{field}: must be a number, "
-                f"got {type(obs[field]).__name__}"
-            )
-    if 'unit' in obs and not isinstance(obs['unit'], str):
-        issues.append(f"  {label}.unit: must be a string")
-    elif 'unit' in obs:
-        issues.extend(_scale_unit_issue(obs['unit'], label))
-
-def _validate_snapshot_correlation(
-    sub: dict, label: str, n_obs: int, issues: list[str]
-) -> None:
-    """Validate an optional subgroup-level correlation matrix."""
-    correlation = sub.get('correlation')
-    if correlation is None:
-        return
-    if not isinstance(correlation, list):
-        issues.append(f"  {label}.correlation: expected a 2D array or null")
-        return
-    if len(correlation) != n_obs:
-        issues.append(
-            f"  {label}.correlation: dimension ({len(correlation)}x"
-            f"{len(correlation)}) does not match observable count ({n_obs})"
-        )
-    issues.extend(
-        validate_correlation(correlation, f"{label}.correlation")
-    )
-
-
-def _validate_pdg_subgroup(name: str, sub, issues: list[str]) -> None:
-    label = f"data['{name}']"
-    if not isinstance(sub, dict):
-        issues.append(f"  {label}: must be an object of obs@N entries")
-        return
-
-    obs_keys = []
-    for key in sub:
-        if isinstance(key, str) and key.startswith('obs@'):
-            try:
-                int(key.split('@', 1)[1])
-            except (ValueError, IndexError):
-                issues.append(
-                    f"  {label}: invalid obs key '{key}'; "
-                    f"expected obs@N format (N as integer)"
-                )
-                continue
-            obs_keys.append(key)
-        elif key not in PDG_SUBGROUP_ALLOWED_FIELDS:
-            issues.append(
-                f"  {label}: unexpected key '{key}' "
-                f"(only obs@N and 'correlation' allowed)"
-            )
-
-    if not obs_keys:
-        issues.append(f"  {label}: no obs@N entries")
-    for key in obs_keys:
-        _validate_snapshot_obs(sub[key], f"{label}.{key}", issues)
-    _validate_snapshot_correlation(sub, label, len(obs_keys), issues)
-
-
-def _validate_hflav_subgroup(name: str, sub, issues: list[str]) -> None:
-    label = f"'{name}'"
-    if not isinstance(sub, dict):
-        issues.append(f"  {label}: must be an object")
-        return
-
-    for key in sub:
-        if key not in HFLAV_SUBGROUP_ALLOWED_FIELDS:
-            issues.append(f"  {label}: unexpected key '{key}'")
-    for field in ('group', 'observables'):
-        if field not in sub:
-            issues.append(f"  {label}: missing required field: {field}")
-    if not sub.get('inspire-hep') and not sub.get('arxiv'):
-        issues.append(f"  {label}: missing citation ('inspire-hep' or 'arxiv')")
-
-    observables = sub.get('observables')
-    if not isinstance(observables, list) or not observables:
-        issues.append(f"  {label}.observables: must be a non-empty array")
-        observables = []
-    for idx, obs in enumerate(observables):
-        _validate_snapshot_obs(
-            obs, f"{label}.observables[{idx}]", issues
-        )
-    _validate_snapshot_correlation(sub, label, len(observables), issues)
-
-
-def _validate_snapshot(data: dict, file_path: str, kind: str) -> list[str]:
-    """Validate an HFLAV or PDG snapshot.
-
-    See references/json-meta.md §"Non-Standard Schemas".
-    """
-    print(f"Validating (snapshot: {kind}): {file_path}")
-    all_issues = []
-
-    if kind == 'pdg':
-        for field in (
-            'inspire-hep', 'author', 'collaboration', 'title', 'year', 'data',
-        ):
-            if field not in data:
-                all_issues.append(f"  Missing required field: {field}")
-        year = data.get('year')
-        if year is not None and not (
-            isinstance(year, str) and re.fullmatch(r'\d{4}', year)
-        ):
-            all_issues.append("  year must be a four-digit string, e.g. '2024'")
-        subgroups = data.get('data')
-        if not isinstance(subgroups, dict):
-            all_issues.append("  data: must be an object of subgroup entries")
-        elif not subgroups:
-            all_issues.append("  data dict is empty")
-        else:
-            for sub_name, sub in subgroups.items():
-                _validate_pdg_subgroup(str(sub_name), sub, all_issues)
-    else:
-        if not data:
-            all_issues.append("  snapshot is empty")
-        for sub_name, sub in data.items():
-            _validate_hflav_subgroup(str(sub_name), sub, all_issues)
-
-    if all_issues:
-        print(f"  [FAIL] Found {len(all_issues)} issue(s):")
-        for issue in all_issues:
-            print(issue)
-    else:
-        print("  [OK] Snapshot validated")
-    return all_issues
 
 
 def validate_json(file_path: str) -> list[str]:
@@ -1562,16 +1347,12 @@ def validate_json(file_path: str) -> list[str]:
             print(issue)
         return all_issues
 
-    # Detect non-standard schema (HFLAV / PDG snapshots).
-    snapshot_kind = _detect_snapshot(data)
-    if snapshot_kind:
-        return _validate_snapshot(data, file_path, snapshot_kind)
-
     # 2. Check top-level fields
     for field in REQUIRED_TOP_FIELDS:
         if field not in data:
             all_issues.append(f"  Missing required field: {field}")
-        elif field != 'arxiv' and isinstance(data[field], str) and not data[field].strip():
+        elif (field != 'arxiv' and isinstance(data[field], str)
+              and not data[field].strip()):
             all_issues.append(f"  Top-level field '{field}' must not be empty")
     if 'collaboration' in data and (
         not isinstance(data['collaboration'], str)
@@ -1617,7 +1398,7 @@ def validate_json(file_path: str) -> list[str]:
         all_issues.extend(validate_transition_mode(data['transition-mode']))
 
     # 7. Check data: an array of groups; each group maps transition
-    # channels to their observables and optionally carries one matrix.
+    # channels to their observables and optionally carries matrices.
     if 'data' not in data:
         all_issues.append("  Missing required field: data")
     elif isinstance(data['data'], list):
@@ -1625,7 +1406,8 @@ def validate_json(file_path: str) -> list[str]:
     else:
         all_issues.append(
             "  data must be an array of data groups, e.g. "
-            "[{'B0.2.K*0.mu+.mu-': {'obs@1': {...}}, "
+            "[{'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': "
+            "{'obs@1': {...}}, "
             "'correlation': [[1.0]]}]; "
             "channels sharing one matrix belong in the same group"
         )
@@ -1642,14 +1424,7 @@ def validate_json(file_path: str) -> list[str]:
 
 
 def main() -> None:
-    """CLI entry point.
-
-    Examples
-    --------
-    >>> python3 flav-data-importer/scripts/json-valid.py path/to/file.json
-    >>> python3 flav-data-importer/scripts/json-valid.py a.json b.json c.json --quiet
-    >>> python3 flav-data-importer/scripts/json-valid.py --help
-    """
+    """CLI entry point."""
     parser = argparse.ArgumentParser(
         description=(
             "Validate a flav-data JSON file against the schema defined "
@@ -1662,7 +1437,8 @@ def main() -> None:
     )
     parser.add_argument(
         '--quiet', '-q', action='store_true',
-        help='Suppress per-file OK/FAIL banners; only print issues + summary.'
+        help='Omit the per-file "Validating:" header and trailing blank '
+             'line. Check results, issues and the summary are still printed.'
     )
     args = parser.parse_args()
 

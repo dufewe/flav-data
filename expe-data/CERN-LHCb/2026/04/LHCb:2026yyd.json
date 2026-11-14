@@ -9,7 +9,7 @@
     "transition-mode": "radiative-decay",
     "data": [
         {
-            "Bs0.2.J/psi0.gamma": {
+            "sB_I0?_0-n_0.2.cC_I0-_1--_0.ph_I??_1--_0": {
                 "obs@1": {
                     "name": "Br",
                     "type@3_upper": "2.9e-6",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "B0.2.J/psi0.gamma": {
+            "dB_I1?_0-n_0.2.cC_I0-_1--_0.ph_I??_1--_0": {
                 "obs@1": {
                     "name": "Br",
                     "type@3_upper": "2.6e-6",

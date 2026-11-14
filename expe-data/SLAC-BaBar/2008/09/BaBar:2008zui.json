@@ -9,37 +9,35 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B-.2.D0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "2.34",
+                    "value": "0.0234",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.03",
-                    "type@1_lower": "0.03",
+                    "type@1_upper": "0.0003",
+                    "type@1_lower": "0.0003",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.13",
-                    "type@2_lower": "0.13",
-                    "unit": "%"
+                    "type@2_upper": "0.0013",
+                    "type@2_lower": "0.0013"
                 }
             }
         },
         {
-            "B-.2.D*0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "5.40",
+                    "value": "0.0540",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.02",
-                    "type@1_lower": "0.02",
+                    "type@1_upper": "0.0002",
+                    "type@1_lower": "0.0002",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.21",
-                    "type@2_lower": "0.21",
-                    "unit": "%"
+                    "type@2_upper": "0.0021",
+                    "type@2_lower": "0.0021"
                 }
             }
         },
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "G1Vcb",
                     "value": "4.31e-2",
@@ -63,7 +61,7 @@
             }
         },
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.99e-2",
@@ -80,7 +78,7 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "F1Vcb",
                     "value": "3.59e-2",
@@ -104,7 +102,7 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.86e-2",

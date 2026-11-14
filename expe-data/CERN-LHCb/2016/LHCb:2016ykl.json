@@ -11,7 +11,7 @@
         {
             "no-transition": {
                 "obs@1": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.021",
                     "q2min": "0.1",
                     "q2max": "0.98",
@@ -23,7 +23,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@2": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.144",
                     "q2min": "1.1",
                     "q2max": "2.5",
@@ -35,7 +35,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@3": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.029",
                     "q2min": "2.5",
                     "q2max": "4.0",
@@ -47,7 +47,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@4": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.117",
                     "q2min": "4.0",
                     "q2max": "6.0",
@@ -59,7 +59,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@5": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.033",
                     "q2min": "6.0",
                     "q2max": "8.0",
@@ -71,7 +71,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@6": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.021",
                     "q2min": "11.0",
                     "q2max": "12.5",
@@ -83,7 +83,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@7": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "-0.008",
                     "q2min": "15.0",
                     "q2max": "17.0",
@@ -95,7 +95,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@8": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.018",
                     "q2min": "17.0",
                     "q2max": "19.0",
@@ -107,7 +107,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@9": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.101",
                     "q2min": "1.1",
                     "q2max": "6.0",
@@ -119,7 +119,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@10": {
-                    "name": "FS[796,996]",
+                    "name": "FS",
                     "value": "0.01",
                     "q2min": "15.0",
                     "q2max": "19.0",
@@ -130,12 +130,13 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            }
+            },
+            "note": "S-wave fraction of the $K^+\\pi^-$ system in $796 < m(K\\pi) < 996$ MeV."
         },
         {
             "no-transition": {
                 "obs@1": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.052",
                     "q2min": "0.1",
                     "q2max": "0.98",
@@ -147,7 +148,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@2": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.304",
                     "q2min": "1.1",
                     "q2max": "2.5",
@@ -159,7 +160,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@3": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.071",
                     "q2min": "2.5",
                     "q2max": "4.0",
@@ -171,7 +172,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@4": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.254",
                     "q2min": "4.0",
                     "q2max": "6.0",
@@ -183,7 +184,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@5": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.082",
                     "q2min": "6.0",
                     "q2max": "8.0",
@@ -195,7 +196,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@6": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.049",
                     "q2min": "11.0",
                     "q2max": "12.5",
@@ -207,7 +208,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@7": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "-0.016",
                     "q2min": "15.0",
                     "q2max": "17.0",
@@ -219,7 +220,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@8": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.034",
                     "q2min": "17.0",
                     "q2max": "19.0",
@@ -231,7 +232,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@9": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.224",
                     "q2min": "1.1",
                     "q2max": "6.0",
@@ -243,7 +244,7 @@
                     "type@2_error": "syst"
                 },
                 "obs@10": {
-                    "name": "FS[644,1200]",
+                    "name": "FS",
                     "value": "0.019",
                     "q2min": "15.0",
                     "q2max": "19.0",
@@ -254,7 +255,8 @@
                     "type@1_error": "stat",
                     "type@2_error": "syst"
                 }
-            }
+            },
+            "note": "S-wave fraction of the $K^+\\pi^-$ system in $644 < m(K\\pi) < 1200$ MeV."
         },
         {
             "no-transition": {

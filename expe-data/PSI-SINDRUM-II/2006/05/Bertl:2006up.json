@@ -9,13 +9,14 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "mu-.Au.2.e-.Au": {
+            "mu_I??_1+n_0.n~79~197.2.e_I??_1+n_0.n~79~197": {
                 "obs@1": {
-                    "name": "Rmue",
+                    "name": "R",
                     "type@1_upper": "7e-13",
                     "type@1_level": "90%@CL"
                 }
-            }
+            },
+            "note": "Rate normalised to ordinary muon capture on the same nucleus."
         }
     ]
 }

@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B-.2.D0.tau-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.tau_I??_1+n_0.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.86e-2",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "B-.2.D*0.tau-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.tau_I??_1+n_0.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.62e-2",
@@ -37,9 +37,9 @@
             }
         },
         {
-            "B-.2.D0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.tau_I??_1+n_0.vBar/Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
-                    "name": "R[tau/l]",
+                    "name": "R",
                     "value": "0.416",
                     "type@1_error": "stat",
                     "type@1_upper": "0.117",
@@ -51,9 +51,9 @@
             }
         },
         {
-            "B-.2.D*0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.tau_I??_1+n_0.vBar/Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
-                    "name": "R[tau/l]",
+                    "name": "R",
                     "value": "0.297",
                     "type@1_error": "stat",
                     "type@1_upper": "0.056",

@@ -38,10 +38,15 @@ The database covers measurements from **1990** to the present, organized by coll
 | **LQCD** | Other lattice QCD calculations |
 | **QCD** | Other QCD-based calculations |
 
-Every group in `THEOGROUP` is exposed in the navigation.
-The database stores only experimental measurements and theoretical
-calculations — fits, parameter determinations, bounds and theory-group
-averages derived from existing data are not ingested. Small calculation
+Every group in `THEOGROUP` is exposed in the navigation; the full
+experimental folder list is under [Directory Structure](#directory-structure).
+The database stores experimental measurements (including published HFLAV/PDG
+world averages) and theoretical calculations. Form-factor parametrization
+fits (`aN_FF` coefficients plus a group-level `scheme`) are primary theory
+data and are imported, even when they combine lattice, LCSR, and experimental
+input. Global analyses that reinterpret existing measurements —
+Wilson-coefficient fits, CKM/parameter determinations, mass or coupling
+bounds — are not ingested. Small calculation
 groups are filed under a method folder (`theo-data/LCSR/`,
 `theo-data/LQCD/`, `theo-data/QCD/`) instead of their own group folder.
 
@@ -52,7 +57,7 @@ Each paper corresponds to one JSON file with the following structure:
 ```json
 {
     "inspire-hep": "[LHCb:2015svh](https://inspirehep.net/literature/1409497)",
-    "author": "Aaij, Roel and others",
+    "author": "Aaij, R. and others",
     "collaboration": "LHCb",
     "title": "Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay",
     "arxiv": "[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)",
@@ -61,7 +66,7 @@ Each paper corresponds to one JSON file with the following structure:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.mu+.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "FL",
                     "value": "0.69",
@@ -87,10 +92,10 @@ channels to an `obs@N` object and may carry group-level `dataset` /
 `scheme` strings plus a matrix whose rows follow the channel
 keys, then their `obs@N` order. The channel key alone encodes the
 transition; `data` stores no LaTeX. `dataset` records data sources only
-(`LQCD`, `LCSR`, `EXPE`, joined with `+` in that order). Groups of
+(`LQCD`, `LCSR`, `QCDSR`, `EXPE`, joined with `+` in that order). Groups of
 form-factor expansion coefficients (`aN_FF`) must name their expansion in
 `scheme` as one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or `MR` (full names and arXiv IDs
-in the importer's `references/obs-abbr.md`). Add another group for
+in the importer's `references/observable-naming.md`). Add another group for
 different kinematic bins, fit choices, or datasets.
 
 ### Key Design Principles
@@ -106,23 +111,23 @@ different kinematic bins, fit choices, or datasets.
 
 ## Naming Convention
 
-### Transition Symbol: `A.B.2.C.D`
+### Channel Key: `.2.` Transitions
 
-Represents $A + B \to C + D$ with `2` replacing the arrow.
+Represents $A + B \to C + D$ with `2` replacing the arrow. Particles are
+internal pids (`<core>_<ig>_<jpc>_<serial>`); the grammar, registry,
+masses, and widths are in the importer's
+`references/particle-naming.md`.
 
 | Rule | Example |
 |------|---------|
-| Particle state: `<name>[*]<charge>[Bar]`; charge is mandatory | `phi0`, `p+`, `D*+`, `W-`, `n0` |
-| Particle-type order: baryon → meson → charged lepton → neutral lepton | `Lambdab0.2.p+.J/psi0.pi-` |
-| Mass order within a type: heaviest → lightest | `B0.2.K*0.tau-.e+` |
-| Charge order for equal masses: `+` → `-` → `0` | `B+.2.K+.mu+.mu-` |
-| Antiparticles: name + `Bar` (baryons: `Bar` last) | `B0Bar.2.e+.e-`, `Lambdac+Bar` |
-| Charged particles: use charge directly | `W-.2.mu-.vBar` |
-| Neutrinos: `v`/`vBar`, flavor appended only when the signature fixes it | `v`, `vBar`, `ve` |
-| Only neutrinos and `Z`/`gamma`/`g` omit the charge | `Z`, `gamma` |
-| Particle case follows the handwritten symbol | `pi0`, `Lambdab0`, `KS0` |
-| Antiparticle marker is capital `Bar` | `K0Bar`, `p+Bar`, `fBar` |
-| Multi-step: additional `2` separators | `p+.p+.2.Z.2.mu+.mu-` |
+| pid: content core + $I^G$ + $J^{PC}$ + serial | `dB_I1?_0-n_0` ($B^0$) |
+| Particle-type order: baryon → meson → charged lepton → neutral lepton | `udb_I0?_1+n_0.2.uud_I1?_1+n_0.cC_I0-_1--_0.Ud_I2-_0-n_0` |
+| Mass order within a type: heaviest → lightest | `dB_I1?_0-n_0.2.dS_I1?_1-n_0.TAU_I??_1+n_0.E_I??_1+n_0` |
+| Charge order for equal masses: `+` → `-` → `0` | `uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0` |
+| Antiparticles: letter case swapped in place | `Db_I1?_0-n_0.2.E_I??_1+n_0.e_I??_1+n_0` |
+| Charged states: charge is part of the core | `WB_I??_1??_0.2.mu_I??_1+n_0.VMU_I??_1+n_0` |
+| Neutrinos: `ve`/`vmu`/`vtau`, or generic `v`/`vBar` | `ve_I??_1+n_0`, `v` |
+| Multi-step: additional `2` separators | `uud_I1?_1+n_0.uud_I1?_1+n_0.2.Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
 
 ### Observable Name: `OBS` / `OBS[condition]`
 
@@ -138,7 +143,7 @@ symbol plus optional condition/method tags.
 **Special patterns:**
 - Differences: `DeltaOBS[condition]` → $\Delta_{OBS}^{condition}$
 - Ratios: `ROBS[condition]` → $R_{OBS}^{condition}$
-- CKM parameters: `r`, `delta` (under the `B-.2.D0.K-` key)
+- CKM parameters: `r`, `delta` (under the `Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.Us_I1?_0-n_0` key)
 
 ### Observable Categories
 
@@ -161,12 +166,13 @@ symbol plus optional condition/method tags.
 flav-data/
 ├── expe-data/
 │   ├── CERN-LHCb/
-│   │   ├── LHCb@2015.json          # Annual index
-│   │   └── 2015/12/LHCb:2015svh.json
+│   │   └── 2015/
+│   │       ├── LHCb@2015.json      # Annual index
+│   │       └── 12/LHCb:2015svh.json
 │   ├── HFLAV/
-│   │   └── HFLAV@2024.json         # Flat snapshot (year subdirs also supported)
+│   │   └── 2024/11/HeavyFlavorAveragingGroupHFLAV:2024ctg.json
 │   ├── PDG/
-│   │   └── 2024/PDG@2024.json
+│   │   └── 2024/08/ParticleDataGroup:2024cfk.json
 │   └── ...                         # Other experimental groups
 ├── theo-data/
 │   ├── HPQCD/                       # Large collaborations: own folder
@@ -175,10 +181,11 @@ flav-data/
 │   ├── flavor.py                    # Observable naming guide
 │   └── ewpo.py                      # EWPO naming guide
 ├── tests/
-│   └── test_importer_regressions.py
+│   ├── test_importer_regressions.py
+│   └── test_dashboard_ui.py
 ├── main.py                          # Streamlit app entry (builds all pages)
 ├── home.py                          # Homepage
-├── flav.py                          # Dashboard renderers (standard + snapshot)
+├── flav.py                          # Dashboard renderer
 └── defs.py                          # Shared definitions
 ```
 
@@ -209,19 +216,11 @@ The full Lab-Collaboration folder convention is:
 | `Cornell-CLEO` | Cornell | CLEO | CESR |
 | `TRIUMF-PiENu` | TRIUMF | PiENu | |
 | `PSI-SINDRUM-II` | PSI | SINDRUM-II | Mu-e conversion |
-| `PSI-nTRV` | PSI | nTRV | Neutron trimer |
+| `PSI-nTRV` | PSI | nTRV | Neutron decay electron polarization |
 | `LANL-UCNA` | LANL | UCNA | |
 | `NIST-aCORN` | NIST | aCORN | |
-| `HFLAV` | — | HFLAV | Aggregation, non-standard schema (rendered by `run_snapshot_dashboard`) |
-| `PDG` | — | PDG | Aggregation, non-standard schema |
-
-### Special cases
-
-- **HFLAV** and **PDG** store data in a non-standard flav-data schema
-  (one snapshot JSON per year whose keys are subgroup names containing
-  nested observables). `main.py` routes them to
-  `run_snapshot_dashboard` in `flav.py`, which bypasses
-  `run_dashboard`.
+| `HFLAV` | — | HFLAV | World averages of $b$/$c$/$\tau$ properties |
+| `PDG` | — | PDG | World averages of particle properties |
 
 The Experimental registry that drives this lives in `defs.py` (`EXPEGROUP`). Each entry is a 2-tuple `(lab, group)` for the default `<Lab>-<Group>` path. A 3-tuple `(lab, group, folder_override)` is supported for groups that need a non-standard parent directory but is currently unused. To add a new group: (1) add the tuple to `EXPEGROUP`, (2) drop data into `expe-data/<folder>/<year>/<month>/...` with the standard `<group>@<year>.json` index. `main.py` generates the page automatically.
 
@@ -251,7 +250,7 @@ streamlit run main.py
 | Page | Content |
 |------|---------|
 | **Home** | Database overview, format specification, statistics |
-| **Observable** → Flavor | Transition symbols, particle table, observable abbreviations |
+| **Observable** → Flavor | Channel keys, pid lookup table, observable abbreviations |
 | **Observable** → EWPO | Electroweak precision observable definitions |
 | **Experimental** → [Lab-Group] | Interactive dashboard with year, month, and transition-mode filters |
 | **Theoretical** → [Group] | Theory group results browser |
@@ -273,9 +272,10 @@ See [`flav-data-importer/`](flav-data-importer/) for the complete import workflo
 
 | Supported | Not Supported |
 |-----------|---------------|
-| Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, ...) | Phenomenological fits of theoretical parameters |
-| Theoretical calculations (HPQCD, RBC/UKQCD, ...) | Conference papers without arXiv/journal version |
-| arXiv preprints and peer-reviewed papers | Informal non-peer-reviewed results |
+| Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, ...) | Global analyses: Wilson-coefficient fits, CKM/parameter determinations, mass or coupling bounds |
+| Published combinations and HFLAV/PDG world averages | Conference papers without arXiv/journal version |
+| Theoretical calculations, including form-factor parametrization fits (`aN_FF` + `scheme`) | Informal non-peer-reviewed results |
+| arXiv preprints and peer-reviewed papers | |
 
 ## License
 

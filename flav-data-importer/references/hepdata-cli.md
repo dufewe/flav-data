@@ -9,8 +9,7 @@ prefixes. Raises `RuntimeError` with install instructions if not found.
 
 ## CLI Commands
 
-This workflow uses only `fetch-names` and `download` (invocations below);
-`find` and `upload` exist but are unused.
+This workflow uses only `fetch-names` and `download`.
 
 ## Workflow
 
@@ -41,14 +40,11 @@ hepdata_ext = load_script("hepdata_ext")   # SKILL.md §"Python Helpers"
 
 yaml_text = hepdata_ext.download_table_yaml("1409497", "Table 1")
 table_type = hepdata_ext.detect_table_type(yaml_text)  # 'observable' | 'correlation' | 'covariance' | 'unknown'
-if table_type == 'observable':
-    observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
-else:
+if table_type in ('correlation', 'covariance'):
     matrix_type, matrix, qualifiers = hepdata_ext.parse_yaml_correlation(yaml_text)
+else:
+    observables, qualifiers = hepdata_ext.parse_yaml_observables(yaml_text)
 ```
-
-YAML is preferred because it preserves the structured hierarchy of observables,
-qualifiers, and errors better than CSV or JSON for HEPData's nested format.
 
 ## YAML Data Structure
 
@@ -113,10 +109,10 @@ The script wraps the `hepdata-cli` binary and exposes:
 | `fetch_table_names(inspire_id)` → `list[str] \| None` | List table names for a record |
 | `download_metadata(inspire_id, output_dir)` → `str \| None` | Download (or reuse an existing matching) metadata JSON |
 | `download_table_yaml(inspire_id, table_name)` → `str` | Fetch one table's YAML through `hepdata-cli` |
-| `detect_table_type(yaml_text)` → `str` | `'observable'`, `'correlation'`, `'covariance'`, or `'unknown'` (PyYAML missing / unparseable YAML) |
+| `detect_table_type(yaml_text)` → `str` | `'observable'`, `'correlation'`, `'covariance'`, or `'unknown'` (PyYAML missing) |
 | `parse_yaml_observables(yaml_text)` → `(list[dict], dict)` | Parse observable YAML into per-point entries (incl. `q2min`/`q2max`) |
 | `parse_yaml_correlation(yaml_text)` → `(matrix_type: str, matrix: list[list[float]], qualifiers: dict)` | Parse correlation/covariance matrix YAML |
-| `parse_metadata(metadata_path)` → `dict` | Parse downloaded metadata JSON |
+| `parse_metadata(meta_path)` → `dict` | Parse downloaded metadata JSON |
 
 Constants: `HEPDATA_CLI` (absolute path to binary, or `''`) and
 `HAS_YAML` (whether PyYAML is available).
@@ -144,10 +140,9 @@ even when a directory is given.
 
 ## Notes
 
-1. **Must use hepdata-cli** — direct `curl`/`urllib` is blocked by Cloudflare.
-2. **Theory papers** rarely have HEPData — check the arXiv ancillary files
+1. **Theory papers** rarely have HEPData — check the arXiv ancillary files
    and e-print LaTeX source next (`data-source.md` §4), PDF last.
-3. **Table names are passed verbatim** — `hepdata-cli` handles quoting/encoding.
-4. **Missing matrix entries**: `value: "-"` (or any non-numeric cell) is
+2. **Table names are passed verbatim** — `hepdata-cli` handles quoting/encoding.
+3. **Missing matrix entries**: `value: "-"` (or any non-numeric cell) is
    substituted with `0.0` and reported as a warning, keeping the matrix square.
-5. **PyYAML** required for YAML parsers (`pip install pyyaml`).
+4. **PyYAML** required for YAML parsers (`pip install pyyaml`).

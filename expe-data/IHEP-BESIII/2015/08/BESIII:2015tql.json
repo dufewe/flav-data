@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "D0.2.K-.e+.ve": {
+            "Uc_I1?_0-n_0.2.Us_I1?_0-n_0.E_I??_1+n_0.ve_I??_1+n_0": {
                 "obs@1": {
                     "name": "BR",
                     "value": "0.03505",
@@ -19,7 +19,7 @@
             }
         },
         {
-            "D0.2.K-.e+.ve": {
+            "Uc_I1?_0-n_0.2.Us_I1?_0-n_0.E_I??_1+n_0.ve_I??_1+n_0": {
                 "obs@1": {
                     "name": "f+.Vcs",
                     "value": "0.7209",
@@ -35,7 +35,7 @@
             }
         },
         {
-            "D0.2.pi-.e+.ve": {
+            "Uc_I1?_0-n_0.2.Ud_I2-_0-n_0.E_I??_1+n_0.ve_I??_1+n_0": {
                 "obs@1": {
                     "name": "BR",
                     "value": "0.00295",
@@ -45,7 +45,7 @@
             }
         },
         {
-            "D0.2.pi-.e+.ve": {
+            "Uc_I1?_0-n_0.2.Ud_I2-_0-n_0.E_I??_1+n_0.ve_I??_1+n_0": {
                 "obs@1": {
                     "name": "f+.Vcd",
                     "value": "0.1475",

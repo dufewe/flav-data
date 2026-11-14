@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "p+.p+Bar.2.W-.2.tau-.vtau": {
+            "uud_I1?_1+n_0.UUD_I1?_1+n_0.2.WB_I??_1??_0.2.tau_I??_1+n_0.VTAU_I??_1+n_0": {
                 "obs@1": {
                     "name": "sigmaWtaunu",
                     "value": "2.22",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "W-.2.tau-.vtau": {
+            "WB_I??_1??_0.2.tau_I??_1+n_0.VTAU_I??_1+n_0": {
                 "obs@1": {
                     "name": "gtauoverge",
                     "value": "0.980",

@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "H0.2.Z.gamma": {
+            "H_I??_0++_0.2.Z_I??_1??_0.ph_I??_1--_0": {
                 "obs@1": {
                     "name": "mu_HZg[13TeV]",
                     "type@1_upper": "6.6",

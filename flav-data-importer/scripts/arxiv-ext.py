@@ -3,7 +3,8 @@
 Extract paper information from the arXiv API and download PDF files.
 
 Usage:
-    python3 arxiv-ext.py <arxiv_id> [--output_dir /path/to/dir] [--no-pdf] [--source]
+    python3 arxiv-ext.py <arxiv_id> [--output_dir DIR] [--no-pdf] [--source]
+                         [--no-write]
 
 Example:
     python3 arxiv-ext.py 1512.04442
@@ -53,21 +54,25 @@ def get_arxiv_info(arxiv_id: str) -> dict:
             f"(API returned total={total})"
         )
 
-    # Basic info (safe checks: elements may be missing)
-    # Apply Unicode -> LaTeX to title/abstract (rule 4 of SKILL.md "Core Conventions")
+    # Basic info; elements may be missing. Title/abstract go through
+    # Unicode -> LaTeX (SKILL.md rule 4).
     published_elem = entry.find('atom:published', ns)
     published = published_elem.text if published_elem is not None else ''
     updated_elem = entry.find('atom:updated', ns)
     updated = updated_elem.text if updated_elem is not None else ''
     title_elem = entry.find('atom:title', ns)
-    title = unicode_to_latex(title_elem.text.strip()) if title_elem is not None else ''
+    title = (
+        unicode_to_latex(title_elem.text.strip())
+        if title_elem is not None else ''
+    )
     summary_elem = entry.find('atom:summary', ns)
-    summary = unicode_to_latex(summary_elem.text.strip()) if summary_elem is not None else ''
+    summary = (
+        unicode_to_latex(summary_elem.text.strip())
+        if summary_elem is not None else ''
+    )
 
-    # Authors (full names; convert first to BibTeX form for `author_str`).
-    # Strip XML whitespace: arXiv payloads for collaboration papers wrap
-    # the author text in whitespace, which leaks into the final author_str
-    # and breaks the "Surname and others" rendering.
+    # Collaboration payloads wrap author text in XML whitespace, which
+    # would leak into author_str and break "Surname and others".
     authors: list[str] = []
     for a in entry.findall('atom:author', ns):
         name_elem = a.find('atom:name', ns)
@@ -89,36 +94,33 @@ def get_arxiv_info(arxiv_id: str) -> dict:
             pdf_link = link.get('href')
             break
 
-    # Extract versioned arxiv_id from id_url. Handles new-style
-    # ("1512.04442v1") and old-style ("hep-ex/9901001v1") identifiers.
-    # id_url format: "http://arxiv.org/abs/<id>[vN]"
+    # <atom:id> is "http://arxiv.org/abs/<id>[vN]", new- or old-style.
     tail_match = re.search(r'/abs/(.+)$', id_url)
     arxiv_id_with_version = tail_match.group(1) if tail_match else arxiv_id
 
-    # Primary category
+    # Primary category, falling back to the first listed category
+    categories = [c.get('term') for c in entry.findall('atom:category', ns)]
     primary_category_elem = entry.find('arxiv:primary_category', ns)
     primary_category = (
         primary_category_elem.get('term', '')
         if primary_category_elem is not None else ''
     )
     if not primary_category:
-        categories = [c.get('term') for c in entry.findall('atom:category', ns)]
         primary_category = categories[0] if categories else ''
 
-    # Categories
-    categories = [c.get('term') for c in entry.findall('atom:category', ns)]
-
-    # Comments
     comment_elem = entry.find('arxiv:comment', ns)
     comment = comment_elem.text if comment_elem is not None else ''
 
-    # Journal reference
     journal_ref_elem = entry.find('arxiv:journal_ref', ns)
     journal_ref = journal_ref_elem.text if journal_ref_elem is not None else ''
 
-    # DOI
     doi_elem = entry.find('arxiv:doi', ns)
     doi = doi_elem.text if doi_elem is not None else ''
+
+    # Old-style IDs already carry their category prefix; do not prepend twice.
+    link_label = arxiv_id_with_version
+    if '/' not in link_label and primary_category:
+        link_label = f'{primary_category}/{link_label}'
 
     return {
         'arxiv_id': arxiv_id,
@@ -135,20 +137,7 @@ def get_arxiv_info(arxiv_id: str) -> dict:
         'author_str': format_authors([arxiv_name_to_bibtex(a) for a in authors]),
         'pdf_url': pdf_link,
         'abs_url': f'https://arxiv.org/abs/{arxiv_id}',
-        # Markdown link for JSON arxiv field. Old-style IDs already
-        # contain their category prefix, so do not prepend it twice.
-        'arxiv_link': (
-            f'[{arxiv_id_with_version}]'
-            f'(https://arxiv.org/pdf/{arxiv_id})'
-            if '/' in arxiv_id_with_version
-            else (
-                f'[{primary_category}/{arxiv_id_with_version}]'
-                f'(https://arxiv.org/pdf/{arxiv_id})'
-                if primary_category
-                else f'[{arxiv_id_with_version}]'
-                     f'(https://arxiv.org/pdf/{arxiv_id})'
-            )
-        ),
+        'arxiv_link': f'[{link_label}](https://arxiv.org/pdf/{arxiv_id})',
         'categories': categories,
         'comment': comment,
         'journal_ref': journal_ref,
@@ -160,29 +149,10 @@ def get_arxiv_info(arxiv_id: str) -> dict:
 def download_pdf(arxiv_id: str, output_dir: str) -> str:
     """Download the arXiv PDF to ``<output_dir>/<arxiv_id>.pdf``.
 
-    Parameters
-    ----------
-    arxiv_id : str
-        arXiv identifier. May be bare (``"1512.04442"``) or
-        versioned (``"1512.04442v1"``). The downloaded file is named
-        after the full string passed in, including the version
-        suffix, so subsequent calls with a different version won't
-        collide.
-    output_dir : str
-        Directory to write the PDF to. Created if it does not exist.
-
-    Returns
-    -------
-    str
-        Absolute path to the saved PDF, e.g.
-        ``"/tmp/dl/1512.04442v1.pdf"``.
-
-    Raises
-    ------
-    ValueError
-        If the download fails (HTTP error or connection failure).
-    OSError
-        If the PDF cannot be written to disk.
+    The filename keeps any version suffix, so different versions do not
+    collide. ``output_dir`` is created if missing. Returns the saved path;
+    raises ``ValueError`` on a failed download and ``OSError`` on a failed
+    write.
     """
     os.makedirs(output_dir, exist_ok=True)
     pdf_url = f'https://arxiv.org/pdf/{arxiv_id}'
@@ -252,11 +222,8 @@ def download_source(arxiv_id: str, output_dir: str) -> dict:
     the package are the preferred data source; the paper tables are then used
     to validate their numbers (see ``references/data-source.md`` §4).
 
-    Returns
-    -------
-    dict
-        ``archive_path``, ``source_dir``, ``files`` (relative paths), and
-        ``data_files`` (candidate machine-readable data files).
+    Returns ``archive_path``, ``source_dir``, ``files`` (relative paths), and
+    ``data_files`` (candidate machine-readable data files).
     """
     os.makedirs(output_dir, exist_ok=True)
     safe_id = arxiv_id.replace('/', '_')
@@ -284,14 +251,7 @@ def download_source(arxiv_id: str, output_dir: str) -> dict:
 
 
 def main() -> None:
-    """CLI entry point.
-
-    Examples
-    --------
-    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442
-    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --output_dir /tmp/dl --no-pdf
-    >>> python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442 --source -o /tmp/dl
-    """
+    """CLI entry point."""
     parser = argparse.ArgumentParser(
         description='Extract arXiv paper information and download PDF'
     )
@@ -348,7 +308,7 @@ def main() -> None:
         print(f"\nJSON saved to: {json_path}")
 
         if not args.no_pdf:
-            print(f"\nDownloading PDF...")
+            print("\nDownloading PDF...")
             pdf_path = download_pdf(args.arxiv_id, output_dir)
             print(f"PDF saved to: {pdf_path}")
 
@@ -365,7 +325,7 @@ def main() -> None:
                 print("No machine-readable ancillary data files found; "
                       "use the paper tables as the data source.")
     elif args.source:
-        print("\nError: --source needs --output_dir/-o to unpack the package.")
+        print("\nError: --source needs --output_dir/-o without --no-write.")
     else:
         print("\nNo file written (use --output_dir /path to save JSON + PDF).")
 

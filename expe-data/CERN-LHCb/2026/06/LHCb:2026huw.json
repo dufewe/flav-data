@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "1.95e-9",
@@ -17,12 +17,12 @@
                     "total_lower": "0.23e-9",
                     "q2min": "0.1",
                     "q2max": "2.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "1.34e-9",
@@ -30,12 +30,12 @@
                     "total_lower": "0.20e-9",
                     "q2min": "2.0",
                     "q2max": "4.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.63e-9",
@@ -43,12 +43,12 @@
                     "total_lower": "0.13e-9",
                     "q2min": "4.0",
                     "q2max": "6.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.78e-9",
@@ -56,12 +56,12 @@
                     "total_lower": "0.14e-9",
                     "q2min": "6.0",
                     "q2max": "8.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.37e-9",
@@ -69,12 +69,12 @@
                     "total_lower": "0.10e-9",
                     "q2min": "11.0",
                     "q2max": "12.5",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.90e-9",
@@ -82,12 +82,12 @@
                     "total_lower": "0.12e-9",
                     "q2min": "15.0",
                     "q2max": "17.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.68e-9",
@@ -95,12 +95,12 @@
                     "total_lower": "0.10e-9",
                     "q2min": "17.0",
                     "q2max": "19.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.47e-9",
@@ -108,12 +108,12 @@
                     "total_lower": "0.08e-9",
                     "q2min": "19.0",
                     "q2max": "22.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "dBr/dq2",
                     "value": "0.36e-9",
@@ -121,12 +121,12 @@
                     "total_lower": "0.08e-9",
                     "q2min": "22.0",
                     "q2max": "25.0",
-                    "unit": "GeV^{-2}"
+                    "unit": "GeV-2"
                 }
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-0.09",
@@ -138,7 +138,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-0.27",
@@ -150,7 +150,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "0.16",
@@ -162,7 +162,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "0.00",
@@ -174,7 +174,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-0.02",
@@ -186,7 +186,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "-0.13",
@@ -198,7 +198,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "0.19",
@@ -210,7 +210,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "0.02",
@@ -222,7 +222,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "ACP",
                     "value": "0.19",
@@ -234,7 +234,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0572",
@@ -246,7 +246,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0492",
@@ -258,7 +258,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0230",
@@ -270,7 +270,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0287",
@@ -282,7 +282,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0174",
@@ -294,7 +294,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0479",
@@ -306,7 +306,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0347",
@@ -318,7 +318,7 @@
             }
         },
         {
-            "B+.2.pi+.mu+.mu-": {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "RBr[pi/K]",
                     "value": "0.0587",

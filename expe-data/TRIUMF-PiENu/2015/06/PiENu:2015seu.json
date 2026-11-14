@@ -9,9 +9,9 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "pi+.2.e+.ve/pi+.2.mu+.vmu": {
+            "uD_I2-_0-n_0.2.E_I??_1+n_0.ve_I??_1+n_0/uD_I2-_0-n_0.2.MU_I??_1+n_0.vmu_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Re/mu",
+                    "name": "R",
                     "value": "1.2344e-4",
                     "total_upper": "0.0030e-4",
                     "total_lower": "0.0030e-4"

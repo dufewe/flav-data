@@ -1,0 +1,1313 @@
+{
+    "inspire-hep": "[HeavyFlavorAveragingGroupHFLAV:2024ctg](https://inspirehep.net/literature/2854243)",
+    "author": "Banerjee, Sw. and others",
+    "collaboration": "HFLAV",
+    "title": "Averages of $b$-hadron, $c$-hadron, and $\\tau$-lepton properties as of 2023",
+    "arxiv": "[hep-ex/2411.18639v1](https://arxiv.org/pdf/2411.18639)",
+    "time": "2024.11.25",
+    "abstract": "This paper reports world averages of measurements of $b$-hadron, $c$-hadron, and $\\tau$-lepton properties obtained by the Heavy Flavour Averaging Group using results available before October 2023. In rare cases, significant results obtained several months later are also used. For the averaging, common input parameters used in the various analyses are adjusted (rescaled) to common values, and known correlations are taken into account. The averages include branching fractions, lifetimes, neutral meson mixing parameters, CP violation parameters, parameters of semileptonic decays, and Cabibbo-Kobayashi-Maskawa matrix elements.",
+    "transition-mode": "world-average",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Tau(B0)",
+                    "value": "1.517",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004",
+                    "unit": "ps"
+                },
+                "obs@2": {
+                    "name": "Tau(B+)",
+                    "value": "1.638",
+                    "total_upper": "0.004",
+                    "total_lower": "0.004",
+                    "unit": "ps"
+                },
+                "obs@3": {
+                    "name": "Tau(Bs0)",
+                    "value": "1.516",
+                    "total_upper": "0.006",
+                    "total_lower": "0.006",
+                    "unit": "ps"
+                },
+                "obs@4": {
+                    "name": "Tau(BsL0)",
+                    "value": "1.432",
+                    "total_upper": "0.006",
+                    "total_lower": "0.006",
+                    "unit": "ps"
+                },
+                "obs@5": {
+                    "name": "Tau(BsH0)",
+                    "value": "1.612",
+                    "total_upper": "0.008",
+                    "total_lower": "0.008",
+                    "unit": "ps"
+                },
+                "obs@6": {
+                    "name": "Tau(Bc+)",
+                    "value": "0.51",
+                    "total_upper": "0.009",
+                    "total_lower": "0.009",
+                    "unit": "ps"
+                },
+                "obs@7": {
+                    "name": "Tau(Lambdab0)",
+                    "value": "1.468",
+                    "total_upper": "0.009",
+                    "total_lower": "0.009",
+                    "unit": "ps"
+                }
+            },
+            "note": "BsL0 and BsH0 are the light and heavy Bs mass eigenstates; Tau(Bs0) is the flavour-averaged lifetime."
+        },
+        {
+            "dB_I1?_0-n_0.2.Db_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "DeltaMass",
+                    "value": "0.5069",
+                    "total_upper": "0.0019",
+                    "total_lower": "0.0019",
+                    "unit": "ps-1"
+                }
+            }
+        },
+        {
+            "Sb_I0?_0-n_0.2.sB_I0?_0-n_0": {
+                "obs@1": {
+                    "name": "DeltaMass",
+                    "value": "17.766",
+                    "total_upper": "0.006",
+                    "total_lower": "0.006",
+                    "unit": "ps-1"
+                }
+            }
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.049",
+                    "total_upper": "0.0012",
+                    "total_lower": "0.0012"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0553",
+                    "total_upper": "0.0022",
+                    "total_lower": "0.0022"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0212",
+                    "total_upper": "0.0006",
+                    "total_lower": "0.0006"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0221",
+                    "total_upper": "0.0006",
+                    "total_lower": "0.0006"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.00015",
+                    "total_upper": "5e-06",
+                    "total_lower": "5e-06"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I2+_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000158",
+                    "total_upper": "1.1e-05",
+                    "total_lower": "1.1e-05"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0-_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000119",
+                    "total_upper": "1e-05",
+                    "total_lower": "1e-05"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0+_0-+_0.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.44e-05",
+                    "total_upper": "4.3e-06",
+                    "total_lower": "4.3e-06"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0+_0-+_1.l+.v": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.49e-05",
+                    "total_upper": "6.7e-06",
+                    "total_lower": "6.7e-06"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate."
+        },
+        {
+            "B.2.Xc.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1063",
+                    "total_upper": "0.0015",
+                    "total_lower": "0.0015"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.had.l-.vBar": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.1082",
+                    "total_upper": "0.0015",
+                    "total_lower": "0.0015"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture. Total inclusive semileptonic rate, B -> (Xc + Xu) l nu."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "|Vub|(GGOU)",
+                    "value": "0.00406",
+                    "total_upper": "0.00016",
+                    "total_lower": "0.00016"
+                }
+            },
+            "note": "GGOU fit to the inclusive charmless semileptonic rate."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "|Vub|(exclusive)",
+                    "value": "0.00375",
+                    "total_upper": "0.0002",
+                    "total_lower": "0.0002"
+                },
+                "obs@2": {
+                    "name": "|Vcb|(exclusive)",
+                    "value": "0.03962",
+                    "total_upper": "0.00047",
+                    "total_lower": "0.00047"
+                }
+            },
+            "note": "Exclusive determinations."
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.99e-05",
+                    "total_upper": "1.2e-06",
+                    "total_lower": "1.2e-06"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uD_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.8e-07",
+                    "total_upper": "2.4e-07",
+                    "total_lower": "2.4e-07"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uD_I2-_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.78e-08",
+                    "total_upper": "2.3e-09",
+                    "total_lower": "2.3e-09"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "5.76e-07",
+                    "total_upper": "4e-08",
+                    "total_lower": "4e-08"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "5.61e-07",
+                    "total_upper": "5.6e-08",
+                    "total_lower": "5.6e-08"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.5e-07",
+                    "total_upper": "2.1e-08",
+                    "total_lower": "2.1e-08"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.01e-06",
+                    "total_upper": "9.9e-08",
+                    "total_lower": "9.9e-08"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.55e-06",
+                    "total_upper": "3.3e-07",
+                    "total_lower": "3.3e-07"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.6e-07",
+                    "total_upper": "1e-07",
+                    "total_lower": "1e-07"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.21e-05",
+                    "total_upper": "1.1e-06",
+                    "total_lower": "1.1e-06"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.qQ_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "8.6e-07",
+                    "total_upper": "1.5e-07",
+                    "total_lower": "1.5e-07"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.qQ_I0-_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.4e-07",
+                    "total_upper": "1.7e-07",
+                    "total_lower": "1.7e-07"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.28e-07",
+                    "total_upper": "3.2e-08",
+                    "total_lower": "3.2e-08"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "2.49e-07",
+                    "total_upper": "7.2e-08",
+                    "total_lower": "7.2e-08"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "3.41e-07",
+                    "total_upper": "3.4e-08",
+                    "total_lower": "3.4e-08"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.9e-07",
+                    "total_upper": "1.2e-07",
+                    "total_lower": "1.2e-07"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.04e-06",
+                    "total_upper": "1.7e-07",
+                    "total_lower": "1.7e-07"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "9.4e-07",
+                    "total_upper": "6e-08",
+                    "total_lower": "6e-08"
+                }
+            }
+        },
+        {
+            "B.2.Xs.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.000349",
+                    "total_upper": "1.9e-05",
+                    "total_lower": "1.9e-05"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture. Photon energy E_gamma > 1.6 GeV."
+        },
+        {
+            "B.2.uD_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.4e-06",
+                    "total_upper": "2.2e-07",
+                    "total_lower": "2.2e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture. Isospin average of B+ -> rho+ gamma and B0 -> rho0 gamma."
+        },
+        {
+            "B.2.uD_I2+_1--_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.3e-06",
+                    "total_upper": "1.8e-07",
+                    "total_lower": "1.8e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture. Isospin average of B -> rho gamma and B -> omega gamma."
+        },
+        {
+            "B.2.Xs.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "6.67e-06",
+                    "total_upper": "8.3e-07",
+                    "total_lower": "8.3e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.Xs.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.27e-06",
+                    "total_upper": "9.5e-07",
+                    "total_lower": "9.5e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.Xs.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "5.84e-06",
+                    "total_upper": "6.9e-07",
+                    "total_lower": "6.9e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.4e-07",
+                    "total_upper": "6e-08",
+                    "total_lower": "6e-08"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.22e-06",
+                    "total_upper": "1.6e-07",
+                    "total_lower": "1.6e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.42e-07",
+                    "total_upper": "3.6e-08",
+                    "total_lower": "3.6e-08"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.07e-06",
+                    "total_upper": "9e-08",
+                    "total_lower": "9e-08"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_0-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "4.8e-07",
+                    "total_upper": "4e-08",
+                    "total_lower": "4e-08"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "B.2.uS_I1?_1-n_0.l+.l-": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "1.07e-06",
+                    "total_upper": "1e-07",
+                    "total_lower": "1e-07"
+                }
+            },
+            "note": "B+/B0 charge-averaged admixture."
+        },
+        {
+            "uB_I1?_0-n_0.2.TAU_I??_1+n_0.vtau_I??_1+n_0": {
+                "obs@1": {
+                    "name": "Br",
+                    "value": "0.0001094",
+                    "total_upper": "2.08e-05",
+                    "total_lower": "2.08e-05"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "0.947",
+                    "total_upper": "0.047",
+                    "total_lower": "0.047",
+                    "q2min": "1.1",
+                    "q2max": "6.0"
+                }
+            }
+        },
+        {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "1.028",
+                    "total_upper": "0.074",
+                    "total_lower": "0.074",
+                    "q2min": "1.1",
+                    "q2max": "6.0"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "ACP",
+                    "value": "0.014",
+                    "total_upper": "0.018",
+                    "total_lower": "0.018"
+                }
+            }
+        },
+        {
+            "uB_I1?_0-n_0.2.XsBar.ph_I??_1--_0": {
+                "obs@1": {
+                    "name": "ACP",
+                    "value": "0.028",
+                    "total_upper": "0.019",
+                    "total_lower": "0.019"
+                }
+            }
+        },
+        {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "dBr/dq2",
+                    "value": "6.63e-06",
+                    "total_upper": "6.1e-07",
+                    "total_lower": "6.1e-07",
+                    "q2min": "0.0",
+                    "q2max": "2.0",
+                    "unit": "GeV-2"
+                },
+                "obs@2": {
+                    "name": "dBr/dq2",
+                    "value": "6.99e-06",
+                    "total_upper": "4.5e-07",
+                    "total_lower": "4.5e-07",
+                    "q2min": "2.0",
+                    "q2max": "4.0",
+                    "unit": "GeV-2"
+                },
+                "obs@3": {
+                    "name": "dBr/dq2",
+                    "value": "6.55e-06",
+                    "total_upper": "3.9e-07",
+                    "total_lower": "3.9e-07",
+                    "q2min": "4.0",
+                    "q2max": "6.0",
+                    "unit": "GeV-2"
+                },
+                "obs@4": {
+                    "name": "dBr/dq2",
+                    "value": "7.26e-06",
+                    "total_upper": "4.2e-07",
+                    "total_lower": "4.2e-07",
+                    "q2min": "6.0",
+                    "q2max": "8.0",
+                    "unit": "GeV-2"
+                },
+                "obs@5": {
+                    "name": "dBr/dq2",
+                    "value": "6.72e-06",
+                    "total_upper": "4.3e-07",
+                    "total_lower": "4.3e-07",
+                    "q2min": "8.0",
+                    "q2max": "10.0",
+                    "unit": "GeV-2"
+                },
+                "obs@6": {
+                    "name": "dBr/dq2",
+                    "value": "7.42e-06",
+                    "total_upper": "4.6e-07",
+                    "total_lower": "4.6e-07",
+                    "q2min": "10.0",
+                    "q2max": "12.0",
+                    "unit": "GeV-2"
+                },
+                "obs@7": {
+                    "name": "dBr/dq2",
+                    "value": "6.77e-06",
+                    "total_upper": "4.6e-07",
+                    "total_lower": "4.6e-07",
+                    "q2min": "12.0",
+                    "q2max": "14.0",
+                    "unit": "GeV-2"
+                },
+                "obs@8": {
+                    "name": "dBr/dq2",
+                    "value": "6.49e-06",
+                    "total_upper": "4.7e-07",
+                    "total_lower": "4.7e-07",
+                    "q2min": "14.0",
+                    "q2max": "16.0",
+                    "unit": "GeV-2"
+                },
+                "obs@9": {
+                    "name": "dBr/dq2",
+                    "value": "6.15e-06",
+                    "total_upper": "4.4e-07",
+                    "total_lower": "4.4e-07",
+                    "q2min": "16.0",
+                    "q2max": "18.0",
+                    "unit": "GeV-2"
+                },
+                "obs@10": {
+                    "name": "dBr/dq2",
+                    "value": "4.21e-06",
+                    "total_upper": "4.3e-07",
+                    "total_lower": "4.3e-07",
+                    "q2min": "18.0",
+                    "q2max": "20.0",
+                    "unit": "GeV-2"
+                },
+                "obs@11": {
+                    "name": "dBr/dq2",
+                    "value": "4.53e-06",
+                    "total_upper": "4e-07",
+                    "total_lower": "4e-07",
+                    "q2min": "20.0",
+                    "q2max": "22.0",
+                    "unit": "GeV-2"
+                },
+                "obs@12": {
+                    "name": "dBr/dq2",
+                    "value": "3.71e-06",
+                    "total_upper": "4.2e-07",
+                    "total_lower": "4.2e-07",
+                    "q2min": "22.0",
+                    "q2max": "24.0",
+                    "unit": "GeV-2"
+                },
+                "obs@13": {
+                    "name": "dBr/dq2",
+                    "value": "1.32e-06",
+                    "total_upper": "2.6e-07",
+                    "total_lower": "2.6e-07",
+                    "q2min": "24.0",
+                    "q2max": "26.4",
+                    "unit": "GeV-2"
+                }
+            },
+            "note": "Charge-averaged rate; the key gives one concrete charge conjugate.",
+            "correlation": [
+                [
+                    1.0,
+                    -0.009,
+                    0.233,
+                    0.176,
+                    0.136,
+                    0.17,
+                    0.145,
+                    0.184,
+                    0.159,
+                    0.133,
+                    0.167,
+                    0.15,
+                    0.106
+                ],
+                [
+                    -0.009,
+                    1.0,
+                    -0.091,
+                    0.279,
+                    0.126,
+                    0.154,
+                    0.139,
+                    0.144,
+                    0.126,
+                    0.091,
+                    0.127,
+                    0.102,
+                    0.072
+                ],
+                [
+                    0.233,
+                    -0.091,
+                    1.0,
+                    -0.031,
+                    0.274,
+                    0.195,
+                    0.207,
+                    0.171,
+                    0.164,
+                    0.116,
+                    0.153,
+                    0.126,
+                    0.093
+                ],
+                [
+                    0.176,
+                    0.279,
+                    -0.031,
+                    1.0,
+                    -0.006,
+                    0.294,
+                    0.226,
+                    0.2,
+                    0.186,
+                    0.124,
+                    0.167,
+                    0.151,
+                    0.092
+                ],
+                [
+                    0.136,
+                    0.126,
+                    0.274,
+                    -0.006,
+                    1.0,
+                    0.033,
+                    0.297,
+                    0.171,
+                    0.182,
+                    0.12,
+                    0.138,
+                    0.138,
+                    0.082
+                ],
+                [
+                    0.17,
+                    0.154,
+                    0.195,
+                    0.294,
+                    0.033,
+                    1.0,
+                    0.097,
+                    0.254,
+                    0.219,
+                    0.153,
+                    0.172,
+                    0.173,
+                    0.103
+                ],
+                [
+                    0.145,
+                    0.139,
+                    0.207,
+                    0.226,
+                    0.297,
+                    0.097,
+                    1.0,
+                    -0.011,
+                    0.196,
+                    0.094,
+                    0.146,
+                    0.13,
+                    0.079
+                ],
+                [
+                    0.184,
+                    0.144,
+                    0.171,
+                    0.2,
+                    0.171,
+                    0.254,
+                    -0.011,
+                    1.0,
+                    0.139,
+                    0.194,
+                    0.146,
+                    0.161,
+                    0.103
+                ],
+                [
+                    0.159,
+                    0.126,
+                    0.164,
+                    0.186,
+                    0.182,
+                    0.219,
+                    0.196,
+                    0.139,
+                    1.0,
+                    0.076,
+                    0.149,
+                    0.13,
+                    0.087
+                ],
+                [
+                    0.133,
+                    0.091,
+                    0.116,
+                    0.124,
+                    0.12,
+                    0.153,
+                    0.094,
+                    0.194,
+                    0.076,
+                    1.0,
+                    0.043,
+                    0.111,
+                    0.057
+                ],
+                [
+                    0.167,
+                    0.127,
+                    0.153,
+                    0.167,
+                    0.138,
+                    0.172,
+                    0.146,
+                    0.146,
+                    0.149,
+                    0.043,
+                    1.0,
+                    0.073,
+                    0.094
+                ],
+                [
+                    0.15,
+                    0.102,
+                    0.126,
+                    0.151,
+                    0.138,
+                    0.173,
+                    0.13,
+                    0.161,
+                    0.13,
+                    0.111,
+                    0.073,
+                    1.0,
+                    -0.038
+                ],
+                [
+                    0.106,
+                    0.072,
+                    0.093,
+                    0.092,
+                    0.082,
+                    0.103,
+                    0.079,
+                    0.103,
+                    0.087,
+                    0.057,
+                    0.094,
+                    -0.038,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I2+_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "dGamma/dq2",
+                    "value": "1.54e-18",
+                    "total_upper": "6.2e-19",
+                    "total_lower": "6.2e-19",
+                    "q2min": "0.0",
+                    "q2max": "2.0",
+                    "unit": "GeV-1"
+                },
+                "obs@2": {
+                    "name": "dGamma/dq2",
+                    "value": "2.11e-18",
+                    "total_upper": "6e-19",
+                    "total_lower": "6e-19",
+                    "q2min": "2.0",
+                    "q2max": "4.0",
+                    "unit": "GeV-1"
+                },
+                "obs@3": {
+                    "name": "dGamma/dq2",
+                    "value": "2.68e-18",
+                    "total_upper": "6.5e-19",
+                    "total_lower": "6.5e-19",
+                    "q2min": "4.0",
+                    "q2max": "6.0",
+                    "unit": "GeV-1"
+                },
+                "obs@4": {
+                    "name": "dGamma/dq2",
+                    "value": "3.22e-18",
+                    "total_upper": "6.7e-19",
+                    "total_lower": "6.7e-19",
+                    "q2min": "6.0",
+                    "q2max": "8.0",
+                    "unit": "GeV-1"
+                },
+                "obs@5": {
+                    "name": "dGamma/dq2",
+                    "value": "2.4e-18",
+                    "total_upper": "5.6e-19",
+                    "total_lower": "5.6e-19",
+                    "q2min": "8.0",
+                    "q2max": "10.0",
+                    "unit": "GeV-1"
+                },
+                "obs@6": {
+                    "name": "dGamma/dq2",
+                    "value": "3.34e-18",
+                    "total_upper": "6.5e-19",
+                    "total_lower": "6.5e-19",
+                    "q2min": "10.0",
+                    "q2max": "12.0",
+                    "unit": "GeV-1"
+                },
+                "obs@7": {
+                    "name": "dGamma/dq2",
+                    "value": "3.35e-18",
+                    "total_upper": "6.5e-19",
+                    "total_lower": "6.5e-19",
+                    "q2min": "12.0",
+                    "q2max": "14.0",
+                    "unit": "GeV-1"
+                },
+                "obs@8": {
+                    "name": "dGamma/dq2",
+                    "value": "3.27e-18",
+                    "total_upper": "6.3e-19",
+                    "total_lower": "6.3e-19",
+                    "q2min": "14.0",
+                    "q2max": "16.0",
+                    "unit": "GeV-1"
+                },
+                "obs@9": {
+                    "name": "dGamma/dq2",
+                    "value": "2.66e-18",
+                    "total_upper": "5.7e-19",
+                    "total_lower": "5.7e-19",
+                    "q2min": "16.0",
+                    "q2max": "18.0",
+                    "unit": "GeV-1"
+                },
+                "obs@10": {
+                    "name": "dGamma/dq2",
+                    "value": "2.22e-18",
+                    "total_upper": "5.2e-19",
+                    "total_lower": "5.2e-19",
+                    "q2min": "18.0",
+                    "q2max": "20.0",
+                    "unit": "GeV-1"
+                },
+                "obs@11": {
+                    "name": "dGamma/dq2",
+                    "value": "3.5e-19",
+                    "total_upper": "3.2e-19",
+                    "total_lower": "3.2e-19",
+                    "q2min": "20.0",
+                    "q2max": "22.0",
+                    "unit": "GeV-1"
+                }
+            },
+            "correlation": [
+                [
+                    1.0,
+                    -0.3,
+                    0.03,
+                    0.01,
+                    0.09,
+                    0.09,
+                    0.09,
+                    0.09,
+                    0.08,
+                    0.08,
+                    0.02
+                ],
+                [
+                    -0.3,
+                    1.0,
+                    -0.03,
+                    0.09,
+                    0.11,
+                    0.12,
+                    0.12,
+                    0.12,
+                    0.11,
+                    0.1,
+                    0.02
+                ],
+                [
+                    0.03,
+                    -0.03,
+                    1.0,
+                    -0.18,
+                    0.13,
+                    0.13,
+                    0.15,
+                    0.14,
+                    0.13,
+                    0.12,
+                    0.03
+                ],
+                [
+                    0.01,
+                    0.09,
+                    -0.18,
+                    1.0,
+                    0.06,
+                    0.18,
+                    0.18,
+                    0.18,
+                    0.16,
+                    0.14,
+                    0.04
+                ],
+                [
+                    0.09,
+                    0.11,
+                    0.13,
+                    0.06,
+                    1.0,
+                    -0.21,
+                    0.05,
+                    0.04,
+                    0.12,
+                    0.1,
+                    0.03
+                ],
+                [
+                    0.09,
+                    0.12,
+                    0.13,
+                    0.18,
+                    -0.21,
+                    1.0,
+                    -0.0,
+                    0.07,
+                    0.15,
+                    0.13,
+                    0.04
+                ],
+                [
+                    0.09,
+                    0.12,
+                    0.15,
+                    0.18,
+                    0.05,
+                    -0.0,
+                    1.0,
+                    -0.16,
+                    0.14,
+                    0.12,
+                    0.04
+                ],
+                [
+                    0.09,
+                    0.12,
+                    0.14,
+                    0.18,
+                    0.04,
+                    0.07,
+                    -0.16,
+                    1.0,
+                    0.1,
+                    0.14,
+                    0.05
+                ],
+                [
+                    0.08,
+                    0.11,
+                    0.13,
+                    0.16,
+                    0.12,
+                    0.15,
+                    0.14,
+                    0.1,
+                    1.0,
+                    -0.27,
+                    -0.11
+                ],
+                [
+                    0.08,
+                    0.1,
+                    0.12,
+                    0.14,
+                    0.1,
+                    0.13,
+                    0.12,
+                    0.14,
+                    -0.27,
+                    1.0,
+                    -0.13
+                ],
+                [
+                    0.02,
+                    0.02,
+                    0.03,
+                    0.04,
+                    0.03,
+                    0.04,
+                    0.04,
+                    0.05,
+                    -0.11,
+                    -0.13,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "uB_I1?_0-n_0.2.qQ_I0-_1--_0.l+.v": {
+                "obs@1": {
+                    "name": "dGamma/dq2",
+                    "value": "1.51e-18",
+                    "total_upper": "4.6e-19",
+                    "total_lower": "4.6e-19",
+                    "q2min": "0.0",
+                    "q2max": "4.0",
+                    "unit": "GeV-1"
+                },
+                "obs@2": {
+                    "name": "dGamma/dq2",
+                    "value": "1.82e-18",
+                    "total_upper": "3.5e-19",
+                    "total_lower": "3.5e-19",
+                    "q2min": "4.0",
+                    "q2max": "8.0",
+                    "unit": "GeV-1"
+                },
+                "obs@3": {
+                    "name": "dGamma/dq2",
+                    "value": "2.95e-18",
+                    "total_upper": "5.6e-19",
+                    "total_lower": "5.6e-19",
+                    "q2min": "8.0",
+                    "q2max": "10.0",
+                    "unit": "GeV-1"
+                },
+                "obs@4": {
+                    "name": "dGamma/dq2",
+                    "value": "3.44e-18",
+                    "total_upper": "5.9e-19",
+                    "total_lower": "5.9e-19",
+                    "q2min": "10.0",
+                    "q2max": "12.0",
+                    "unit": "GeV-1"
+                },
+                "obs@5": {
+                    "name": "dGamma/dq2",
+                    "value": "2.22e-18",
+                    "total_upper": "4e-19",
+                    "total_lower": "4e-19",
+                    "q2min": "12.0",
+                    "q2max": "21.0",
+                    "unit": "GeV-1"
+                }
+            },
+            "note": "The source table also lists two LCSR nuisance parameters, theta2 and theta5, which are not observables; they are dropped and the 7x7 correlation matrix reduced to the 5x5 bin block.",
+            "correlation": [
+                [
+                    1.0,
+                    -0.15,
+                    0.08,
+                    0.04,
+                    0.06
+                ],
+                [
+                    -0.15,
+                    1.0,
+                    0.09,
+                    0.09,
+                    0.15
+                ],
+                [
+                    0.08,
+                    0.09,
+                    1.0,
+                    -0.01,
+                    0.12
+                ],
+                [
+                    0.04,
+                    0.09,
+                    -0.01,
+                    1.0,
+                    0.15
+                ],
+                [
+                    0.06,
+                    0.15,
+                    0.12,
+                    0.15,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "|Vub|",
+                    "value": "0.00343",
+                    "total_upper": "0.00012",
+                    "total_lower": "0.00012"
+                },
+                "obs@2": {
+                    "name": "|Vcb|",
+                    "value": "0.03977",
+                    "total_upper": "0.00046",
+                    "total_lower": "0.00046"
+                }
+            },
+            "note": "Combined average of the inclusive and exclusive determinations.",
+            "correlation": [
+                [
+                    1.0,
+                    0.239
+                ],
+                [
+                    0.239,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "0.342",
+                    "total_upper": "0.026",
+                    "total_lower": "0.026"
+                }
+            },
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "R",
+                    "value": "0.286",
+                    "total_upper": "0.012",
+                    "total_lower": "0.012"
+                }
+            },
+            "note": "Combined R(D)-R(D*) average; D+/D0 admixture.",
+            "correlation": [
+                [
+                    1.0,
+                    -0.39
+                ],
+                [
+                    -0.39,
+                    1.0
+                ]
+            ]
+        }
+    ]
+}

@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Bs0Bar.2.K+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.uS_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.336",
@@ -30,7 +30,7 @@
             ]
         },
         {
-            "Bs0Bar.2.K+.l-.vBar": {
+            "Sb_I0?_0-n_0.2.uS_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fT",
                     "value": "0.320",
@@ -52,7 +52,7 @@
             ]
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.395",
@@ -74,7 +74,7 @@
             ]
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "a0_fT",
                     "value": "0.381",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "B0Bar.2.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.301",
@@ -118,7 +118,7 @@
             ]
         },
         {
-            "B0Bar.2.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_fT",
                     "value": "0.273",

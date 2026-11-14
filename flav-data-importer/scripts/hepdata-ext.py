@@ -87,7 +87,8 @@ def fetch_table_names(inspire_id: str) -> list[str] | None:
     if result.returncode != 0:
         if not result.stdout.strip() and not result.stderr.strip():
             print(f"Error: hepdata-cli returned no output (rc={result.returncode}). "
-                  f"Verify '{HEPDATA_CLI} fetch-names -i inspire {inspire_id}' works manually.")
+                  f"Verify '{HEPDATA_CLI} fetch-names -i inspire {inspire_id}' "
+                  f"works manually.")
         else:
             print(f"Error: {result.stderr or result.stdout}")
         return None
@@ -136,19 +137,9 @@ def _is_raw_metadata(path: str) -> bool:
 
 
 def download_metadata(inspire_id: str, output_dir: str) -> str | None:
-    """Download HEPData metadata JSON.
+    """Download HEPData metadata JSON for ``inspire_id`` into ``output_dir``.
 
-    Parameters
-    ----------
-    inspire_id : int or str
-        InspireHEP control number (recid).
-    output_dir : str
-        Directory to write the metadata file into (created if missing).
-
-    Returns
-    -------
-    str or None
-        Absolute path to the downloaded JSON file, or ``None`` on failure.
+    Returns the saved path, or ``None`` on failure.
     """
     _require_hepdata_cli()
     os.makedirs(output_dir, exist_ok=True)
@@ -304,47 +295,20 @@ def _independent_point(cell) -> tuple[str | None, str | None]:
 
 
 def parse_yaml_observables(yaml_text: str) -> tuple[list[dict], dict]:
-    """Parse observable YAML data from a HEPData ``dependent_variables`` table.
+    """Parse a HEPData ``dependent_variables`` table into observables.
 
-    A HEPData "observable table" describes one observable measured at one or
-    more kinematic points (e.g. ``F_L`` measured in 10 q² bins). In the YAML
-    schema, each ``dependent_variables`` entry is **one observable** whose
-    ``values`` list contains the data points for that observable.
+    Each ``dependent_variables`` element is one observable measured at one
+    or more kinematic points, so each returned entry keeps a ``values``
+    list of data points instead of flattening to one entry per bin; the
+    caller decides the ``obs@N`` granularity.
 
-    This function preserves that structure: each returned entry represents
-    one observable, with a ``values`` list of data points (each having its
-    own value, errors, and per-point qualifiers). It is the caller's job to
-    decide whether to flatten this into the per-``obs@N`` JSON model
-    (one obs = one q² bin) or keep it as one obs = one observable.
-
-    Parameters
-    ----------
-    yaml_text : str
-        The raw YAML text of a HEPData table.
-
-    Returns
-    -------
-    tuple[list[dict], dict]
-        ``(observables, qualifiers)`` where:
-
-        * ``observables`` is a list with one entry per
-          ``dependent_variables`` element. Each entry has the shape::
-
-              {
-                "header": str,           # e.g. "$F_L$"
-                "qualifiers": [..],      # table-level qualifiers (shared)
-                "values": [              # one per data point / q² bin
-                    {
-                      "value": str,       # central value as string
-                      "errors": [..],    # [{label, symerror/asymerror{plus,minus}}]
-                      "qualifiers": [..] # per-point qualifiers (e.g. q² bin)
-                    },
-                    ...
-                ]
-              }
-
-        * ``qualifiers`` is ``{"global": <independent_variables> }`` —
-          currently a passthrough of the table-level independent variables.
+    Returns ``(observables, qualifiers)``. Each observable is
+    ``{"header": str, "qualifiers": [...], "values": [...]}``, where every
+    point carries ``value`` (string), ``errors``
+    (``[{label, symerror/asymerror{plus,minus}}]``) and per-point
+    ``qualifiers`` (e.g. the q² bin). ``qualifiers`` is
+    ``{"global": <independent_variables>}``, a passthrough of the
+    table-level independent variables.
     """
     if not HAS_YAML:
         print("Warning: PyYAML not installed. Install with: pip install pyyaml")
@@ -436,11 +400,9 @@ def parse_yaml_observables(yaml_text: str) -> tuple[list[dict], dict]:
 
 
 def parse_yaml_correlation(yaml_text: str) -> tuple[str, list[list[float]], dict]:
-    """Parse correlation/covariance matrix YAML data.
-
-    Returns: (matrix_type, matrix, qualifiers)
-    matrix_type: 'correlation' or 'covariance'
-    matrix: 2D list
+    """Parse matrix YAML into ``(matrix_type, matrix, qualifiers)``, where
+    ``matrix_type`` is ``'correlation'`` or ``'covariance'`` and ``matrix``
+    is a 2D list.
     """
     if not HAS_YAML:
         return 'unknown', [], {}
@@ -449,7 +411,6 @@ def parse_yaml_correlation(yaml_text: str) -> tuple[str, list[list[float]], dict
     if not data or 'dependent_variables' not in data:
         return 'unknown', [], {}
 
-    # Determine matrix type from header
     matrix_type = 'correlation'
     for var in data.get('dependent_variables', []):
         header = var.get('header', {}).get('name', '').lower()
@@ -457,9 +418,9 @@ def parse_yaml_correlation(yaml_text: str) -> tuple[str, list[list[float]], dict
             matrix_type = 'covariance'
             break
 
-    # Extract matrix values (row-major order). A '-' cell means the entry
-    # was not reported; substituting 0.0 keeps the matrix square instead
-    # of silently shifting every following element.
+    # Row-major order. A '-' cell means the entry was not reported;
+    # substituting 0.0 keeps the matrix square instead of silently
+    # shifting every following element.
     values = []
     qualifiers = {}
     missing = 0
@@ -479,11 +440,9 @@ def parse_yaml_correlation(yaml_text: str) -> tuple[str, list[list[float]], dict
             qualifiers[q.get('name', '')] = q.get('value', '')
     if missing:
         print(
-            f"Warning: {missing} missing matrix entr(y/ies) ('-') "
-            f"treated as 0.0"
+            f"Warning: {missing} missing matrix entr(y/ies) ('-') treated as 0.0"
         )
 
-    # Reconstruct into 2D matrix
     n = int(len(values) ** 0.5)
     if n * n != len(values):
         print(f"Warning: Matrix size {len(values)} is not a perfect square")
@@ -541,21 +500,8 @@ def detect_table_type(yaml_text: str) -> str:
 
 
 def main() -> int:
-    """CLI entry point.
-
-    Fails fast with an actionable ``pip install hepdata-cli`` message if
-    the CLI is not installed.
-
-    Examples
-    --------
-    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497
-    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497 --output_dir /tmp/hd
-    >>> python3 flav-data-importer/scripts/hepdata-ext.py 1409497 --table "Table 1"
-    """
-    # Fail fast with a clear install message if the CLI is missing.
-    if not HEPDATA_CLI:
-        _require_hepdata_cli()  # always raises
-        sys.exit(1)  # unreachable; satisfies type checkers
+    """CLI entry point."""
+    _require_hepdata_cli()
     parser = argparse.ArgumentParser(
         description='Extract HEPData paper data'
     )
@@ -597,7 +543,6 @@ def main() -> int:
 
     print(f"Fetching HEPData for Inspire ID: {inspire_id}")
 
-    # List tables
     print("\n=== Available Tables ===")
     tables = fetch_table_names(inspire_id)
     if tables:
@@ -621,7 +566,6 @@ def main() -> int:
     if not args.no_write:
         print(f"Metadata saved to: {meta_path}")
 
-    # Parse metadata
     print("\n=== Metadata Summary ===")
     info = parse_metadata(meta_path)
 
@@ -633,9 +577,8 @@ def main() -> int:
     print(f"  Observable tables: {len(info['observable_tables'])}")
     print(f"  Correlation tables: {len(info['correlation_tables'])}")
 
-    # Print correlation matrix q² bins
     if info['correlation_tables']:
-        print(f"\nCorrelation/Covariance matrix bins:")
+        print("\nCorrelation/Covariance tables:")
         for t in info['correlation_tables'][:5]:
             print(f"  {t['name']}: {t['description'][:80]}...")
         if len(info['correlation_tables']) > 5:
@@ -643,7 +586,6 @@ def main() -> int:
                 f"  ... and {len(info['correlation_tables']) - 5} more"
             )
 
-    # Download specific table (optional)
     if args.table:
         print(f"\n=== Downloading {args.table} ===")
         yaml_data = download_table_yaml(inspire_id, args.table)
@@ -655,8 +597,6 @@ def main() -> int:
         if not args.no_write:
             print(f"YAML saved to: {yaml_path}")
 
-        # Attempt to parse. Table names ("Table 9") carry no type
-        # information, so classify from the YAML structure.
         table_type = detect_table_type(yaml_data)
         print(f"Detected table type: {table_type}")
         if table_type in ('correlation', 'covariance'):
@@ -685,7 +625,6 @@ def main() -> int:
                     f"(errors: {len(first.get('errors', []))}){q2}"
                 )
 
-    # Save JSON summary
     if not args.no_write:
         summary_path = os.path.join(output_dir, 'hepdata_summary.json')
         write_json(summary_path, info)

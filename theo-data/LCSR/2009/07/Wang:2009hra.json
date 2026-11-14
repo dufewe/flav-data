@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.p+.l-.vBar": {
+            "udb_I0?_1+n_0.2.uud_I1?_1+n_0.l-.vBar": {
                 "obs@1": {
                     "name": "f1",
                     "value": "0.023",
@@ -30,7 +30,7 @@
             "note": "Values at $q^2=0$ (Table II) from the $\\Lambda_b$-baryon LCSR, not the light-baryon LCSR. Only the Dirac form factors $f_1$ and $f_2$ are given; $f_2$ is in GeV$^{-1}$. Errors combine the Borel-mass, threshold and distribution-amplitude uncertainties; no correlation matrix is published. The $\\xi$-polynomial fit and the plotted $q^2$ dependence are not stored."
         },
         {
-            "Lambdab0.2.Lambda0.l-.vBar": {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.l-.vBar": {
                 "obs@1": {
                     "name": "g2",
                     "value": "0.018",

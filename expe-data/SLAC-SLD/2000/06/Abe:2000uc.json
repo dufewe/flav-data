@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "e+.e-.2.Z.2.s.sBar": {
+            "E_I??_1+n_0.e_I??_1+n_0.2.Z_I??_1??_0.2.s_I??_1+n_0.S_I??_1+n_0": {
                 "obs@1": {
                     "name": "As",
                     "value": "0.895",

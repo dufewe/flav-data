@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "B+.2.mu+.vmu": {
+            "uB_I1?_0-n_0.2.MU_I??_1+n_0.vmu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5.3e-7",

@@ -18,7 +18,7 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.mu+.mu-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": { ... },
                 "obs@2": { ... }
             },
@@ -38,12 +38,12 @@ Each paper (experimental or theoretical) corresponds to exactly one JSON file:
 | `inspire-hep` | string | Yes | Markdown link: `[TexKey](https://inspirehep.net/literature/{recid})`. TexKey is the InspireHEP BibTeX citation key; recid is the control number. Always verify via InspireHEP API. | `[LHCb:2015svh](https://inspirehep.net/literature/1409497)` |
 | `author` | string | Yes | InspireHEP BibTeX format with initials only: 1 author → `"Surname, I."`; 2 → `"A and B"`; 3 → `"A, B, and C"`; 4+ → `"Surname, I. and others"`. If no person names are found, fall back to `"{group} collaboration"`. | `Aaij, R. and others` |
 | `collaboration` | string | Conditional | Required for named collaborations: experimental collaborations, HFLAV/PDG, and large theory collaborations (HPQCD, JLQCD, RBC/UKQCD, ...). For multi-collaboration papers, use comma-separated names (e.g., `"ATLAS, CMS"`). **Omit the key entirely** for papers by individual authors or small theory groups. | `LHCb` |
-| `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer arXiv-sourced titles. All Unicode characters in the original title (Greek letters, math symbols, etc.) must be converted to LaTeX. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
+| `title` | string | Yes | The paper title from the latest InspireHEP or arXiv version. Must preserve LaTeX for any formulas. Double-backslash escaped in JSON. Prefer the InspireHEP entry whose `source` is `"arXiv"`. All Unicode characters in the original title (Greek letters, math symbols, etc.) must be converted to LaTeX. | `Angular analysis of the $B^{0}\\to K^{*0}\\mu^{+}\\mu^{-}$ decay` |
 | `arxiv` | string/null | Yes | Markdown link: `[primary_category/arxiv_idvN](https://arxiv.org/pdf/{id})`. The version number (vN) must match the article version from which data was cited. If no arXiv ID exists (e.g., some older journal-only papers), set to `null`. A malformed link or the string `"null"` fails validation; a legacy bare string passes and a missing `vN` only warns — new imports always use the full form. | `[hep-ex/1512.04442v1](https://arxiv.org/pdf/1512.04442)` |
 | `time` | string | Yes | arXiv v1 first submission date in `YYYY.MM.DD` format (dot-separated). If no arXiv v1 date exists, use the journal acceptance date instead. Database file indexing is based on this date. The validator checks presence only, not the format. | `2015.12.14` |
 | `abstract` | string | Yes | The complete abstract from the latest InspireHEP or arXiv version, with LaTeX preserved. **Multi-line LaTeX blocks** (`\begin{align*} ... \end{align*}`) **must be converted to single-line LaTeX** so the abstract is a single line. Use arXiv-sourced abstracts from InspireHEP when available; fall back to journal abstracts. All Unicode must be LaTeX-escaped. | `An angular analysis of the...` |
 | `transition-mode` | string | Yes | Must immediately precede `data`; `data` is the final top-level key. Describes the physical process type using a property-based category. Do NOT use non-property descriptors like "rare decay". | `semileptonic-decay` |
-| `data` | array | Yes | **Non-empty array of data groups**. Each group is an object mapping one or more canonical transition channels (`A.B.2.C.D`, or `"no-transition"`) to an `obs@N` object, plus optional group-level `dataset`/`scheme` strings and `correlation`/`covariance` matrices. Grouping channels together lets one matrix correlate observables across channels. | See Data Entries section |
+| `data` | array | Yes | **Non-empty array of data groups**. Each group is an object mapping one or more canonical pid transition channels (pids joined by `.2.`, or `"no-transition"`) to an `obs@N` object, plus optional group-level `dataset`/`scheme` strings and `correlation`/`covariance` matrices. Grouping channels together lets one matrix correlate observables across channels. | See Data Entries section |
 
 Import eligibility (which papers belong in the database at all) is defined
 in `data-source.md` §Scope.
@@ -57,7 +57,7 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
 ```json
 "data": [
     {
-        "B0.2.K*0.mu+.mu-": {
+        "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
             "obs@1": { ... },
             "obs@2": { ... }
         },
@@ -67,10 +67,10 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
         ]
     },
     {
-        "B+.2.K+.mu+.mu-": {
+        "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
             "obs@1": { ... }
         },
-        "B+.2.K*+.mu+.mu-": {
+        "uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
             "obs@1": { ... },
             "obs@2": { ... }
         },
@@ -84,17 +84,17 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
 ]
 ```
 
-1. **Transition channel** — a canonical transition (`A.B.2.C.D`, per
-   `obs-abbr.md` §1) or `"no-transition"` for basic observables (`MZ`,
-   `Tau(B0)`, CKM elements, ...). The channel key alone carries the
+1. **Transition channel** — a canonical pid transition
+   (`observable-naming.md` §1; pid grammar and registry in
+   `particle-naming.md`) or `"no-transition"` for basic observables
+   (`Mass(Z)`, `Tau(...)`, CKM elements, ...). The channel key alone carries the
    transition: observable `name` values must not repeat it. The validator
    rejects a transition embedded in `name` (e.g.
-   `FL(B0.2.K*0.mu+.mu-)`); write `FL` instead. Each channel maps to an
-   object of `obs@N` entries; no LaTeX is stored in `data`. Particle
-   tokens follow `<name>[*]<charge>[Bar]` with a mandatory charge
-   (`obs-abbr.md` §1 rule 5); a trailing `(NNNN)` is a PDG mass label in
-   MeV (`D0*+(2300)`, rule 10). Charge-averaged measurements use one
-   concrete charge-conjugate representative.
+   `FL(dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0)`); write
+   `FL` instead. Each channel maps to an object of `obs@N` entries; no
+   LaTeX is stored in `data`. Charge-averaged measurements use one
+   concrete charge-conjugate pid, and alternative masses or fit scenarios
+   go in the group `note`, never in a trailing label.
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables
@@ -110,7 +110,7 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    channel keys, never inside `obs@N`.
 4. **Group-level `scheme`** — required for any group holding form-factor
    expansion coefficients (`aN_FF`): one of `BK`, `BGL`, `BCL`, `BSZ`,
-   `DLM`, `MR` (mapping to full names and arXiv IDs in `obs-abbr.md`
+   `DLM`, `MR` (mapping to full names and arXiv IDs in `observable-naming.md`
    §2.4). Optional for other groups. It follows `dataset` and precedes
    any matrix.
 5. **Group-level `note`** — optional non-empty string placed after
@@ -134,20 +134,18 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
 ### Form-Factor Expansion Coefficients
 
 Naming (`aN_FF`, one observable per symbol, never joined) is specified in
-`obs-abbr.md` §2.4 and SKILL.md rule 9. The JSON consequence: every
+`observable-naming.md` §2.4 and SKILL.md rule 9. The JSON consequence: every
 coefficient group carries a group-level `scheme`, and fit variants
 (nominal, higher-order, ...) are separate groups rather than a name tag
 or a metadata field.
 
 ### Form-Factor Values
 
-A value at a fixed kinematic point uses the bare symbol, not `aN_FF`, so
-the group carries no `scheme` (`obs-abbr.md` §2.6). Set `q2min` = `q2max`
-inside the observable; if the source specifies the point by an energy
-variable rather than `q2`, omit both and state the point in the group
-`note`, together with how the values were obtained and whether a
-correlation matrix was published. Use one group per source table or fit
-scenario.
+Bare symbol, `q2min` = `q2max`, no `scheme`, and the group `note` content
+are specified in `observable-naming.md` §2.6. Two JSON consequences: when
+the source specifies the point by an energy variable rather than `q2`,
+omit both fields and state the point in the group `note`; and use one
+group per source table or fit scenario.
 
 ### Standard Measurement Format
 
@@ -170,7 +168,7 @@ Use this format when the paper reports a central value with two or more componen
 
 | Field | Required | Type | Description |
 |-------|----------|------|-------------|
-| `name` | Yes | string | Observable symbol, optionally followed by a `[condition]` or a parameter tag: `OBS`, `OBS[condition]`, `OBS(parameter)`. Do **not** embed the transition channel — the `data` key already carries it. Symbolic notation only — no full expression definitions. |
+| `name` | Yes | string | Observable symbol, optionally followed by a `[condition]` or a parameter tag: `OBS`, `OBS[condition]`, `OBS(parameter)`. Do **not** embed the transition channel — the `data` key already carries it — and do **not** embed a kinematic bin or threshold (see `observable-naming.md` §2). Symbolic notation only — no full expression definitions. |
 | `value` | Yes | string | Central value. Must be a string, even for integers. |
 | `total_upper` | Conditional | string | Total upper error. Required whenever the measurement has exactly one error; pair with `total_lower`. For symmetric errors the two are equal. |
 | `total_lower` | Conditional | string | Total lower error. Required whenever the measurement has exactly one error. |
@@ -180,13 +178,14 @@ Use this format when the paper reports a central value with two or more componen
 | `type@N_level` | Conditional | string | Confidence level of a bound, e.g. `"90%@CLs"`, `"95%@CLs"`. Never mixed with `type@N_error`. |
 | `q2min` | Conditional | string | Lower kinematic boundary (usually q² in GeV²). String-formatted float, e.g. `"0.1"`. If the lower bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
 | `q2max` | Conditional | string | Upper kinematic boundary. String-formatted float, e.g. `"1.1"`. If the upper bound is unbounded, **omit the field** or use `"+inf"` (see §Combined Kinematic Bins). |
+| `emin`/`emax` | Conditional | string | Charged-lepton energy boundaries in GeV (e.g. the $E_{\rm cut}$ of a $B\to X_c\ell\nu$ moment measurement). Same string format as `q2min`/`q2max`. |
 | `pTmin`/`pTmax` | Conditional | string | Transverse momentum boundaries. Use instead of q² for non-decay processes. |
 | `etamin`/`etamax` | Conditional | string | Pseudorapidity boundaries. |
 | `w_min`/`w_max` | Conditional | string | Hadronic invariant-mass boundaries (semi-inclusive processes). |
 | `cos_min`/`cos_max` | Conditional | string | Angular boundaries for a measured decay angle. |
 | `chi_min`/`chi_max` | Conditional | string | Binned boundaries for the χ angular variable. |
 | `mxs_min`/`mxs_max` | Conditional | string | Missing-mass boundaries. |
-| `unit` | Conditional | string | Physical unit only (e.g., `"GeV"`, `"ps"`, `"fb"`). A scientific-notation scale factor (`"1e-6"`, `"10^{-4}"`) is **not** a unit: multiply `value`, `total_upper`/`total_lower`, and any bounds by it, then omit `unit`. Omit for dimensionless observables. |
+| `unit` | Conditional | string | A bare ASCII unit with an optional integer power: `"GeV"`, `"GeV-2"`, `"GeV2"`, `"MeV"`, `"ps"`, `"ps-1"`, `"pb"`. No LaTeX (`"GeV^{-2}"`, `"GeV$^{-2}$"`), no `%`, no space, no scale prefix (`"1e-3GeV2"`, `"1e-15 GeV"`). Multiply any scale factor into `value`, `total_upper`/`total_lower`, every `type@N_upper`/`_lower` and every bound, then keep only the physical unit. Convert percentages to fractions (divide by 100) and omit `unit`. Omit for dimensionless observables. |
 | `ref` | Conditional | string | External reference as Markdown link for cited values. Look up the arXiv ID in the paper's references, then search InspireHEP for the correct TexKey. Never guess. |
 | `dataset` | No | string | Prose description of the data sample or dataset selection, e.g. `"run1"`, `"run1+run2"`. Only checked for being a non-empty string. |
 | `note` | No | string | Free-form provenance note carried over from the source. |
@@ -289,11 +288,11 @@ from different statistical procedures and coexist in the same `obs@N` entry.
 
 ### External Reference Format
 
-Use this format for values taken from external sources (PDG world averages, HFLAV combinations, earlier papers). Per `obs-abbr.md` §2.2.2, **ratio observable names use the `R<OBS>[cond]` form** (e.g. `RBr`, `RFL`, `RDeltaGamma`); the transition is carried by the data key. When the ratio is the canonical LFU ratio whose final state is already fixed by the channel key (e.g. \(R(D)\), \(R(D^*)\)), write the bare symbol `R`:
+Use this format for values taken from external sources (PDG world averages, HFLAV combinations, earlier papers).
 
 ```json
 {
-    "name": "RBr[mu/e]",
+    "name": "R",
     "value": "0.175",
     "total_upper": "0.012",
     "total_lower": "0.012",
@@ -310,8 +309,8 @@ inside an `obs@N` object:
 
 ```json
 {
-    "B0.2.K*0.mu+.mu-": { "obs@1": { ... }, "obs@2": { ... } },
-    "B+.2.K+.mu+.mu-": { "obs@1": { ... } },
+    "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": { "obs@1": { ... }, "obs@2": { ... } },
+    "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0": { "obs@1": { ... } },
     "correlation": [
         [1.0, 0.5, 0.1],
         [0.5, 1.0, 0.2],
@@ -361,7 +360,7 @@ share a group or be split across groups as appropriate.
 
 When measurements are performed across non-contiguous regions and combined into a single result:
 
-- `q2min` and `q2max` (and similarly `pTmin`/`pTmax`, `etamin`/`etamax`) accept **comma-separated multi-interval** strings.
+- `q2min` and `q2max` (and similarly `emin`/`emax`, `pTmin`/`pTmax`, `etamin`/`etamax`) accept **comma-separated multi-interval** strings.
 - Ranges must be paired one-to-one: `"q2min": "11.0,17.5"` with `"q2max": "15.0,+inf"`.
 - `"+inf"` denotes an unbounded upper limit. Example: two non-contiguous bins covering [11.0, 15.0] ∪ [17.5, +∞).
 - Symbolic endpoints such as `E_max` are invalid; use `"+inf"` when the bound is the kinematic endpoint.
@@ -388,108 +387,26 @@ measurement process.
 | `higgs-production` | Higgs boson production | $pp \to H$, VBF, $t\bar{t}H$ |
 | `low-energy` | Low-energy precision measurements | $g-2$, atomic parity violation |
 | `oblique-corrections` | S, T, U parameter fits | New physics constraints |
+| `world-average` | Compiled averages of many processes (HFLAV, PDG) | HFLAV $b$-hadron averages, PDG Review summary tables |
 
 **Do NOT use** non-property descriptors such as "rare decay", "flavor-changing", "BSM search", etc.
 
-## Non-Standard Schemas: HFLAV and PDG
-
-The aggregation groups **HFLAV** and **PDG** do not follow the
-per-paper schema above. Each ships one snapshot JSON per year.
-`scripts/json-valid.py` auto-detects both (a `data` dict whose subgroup
-keys are `obs@N`/`correlation` means PDG; top-level values containing an
-`observables` list mean HFLAV) and validates them with dedicated rules —
-they are no longer checked by hand.
-
-### PDG snapshot
-
-Top level: `inspire-hep`, `author`, `collaboration`, `title`,
-`year`, `data`. All six are required, and `year` must be a four-digit
-string (e.g. `"2024"`). `data` is an **object keyed by subgroup name**
-(e.g. `PDG@W`, `PDG@Z`, `PDG@Higgs`). Each subgroup holds flat
-`obs@N` entries plus an optional `correlation` matrix; `obs@N`
-numbering may be sparse (only `obs@N` and `correlation` are allowed
-as subgroup keys).
-
-```json
-{
-    "inspire-hep": "[PDG:2024](https://...)",
-    "author": "Navas, S. and others",
-    "collaboration": "PDG",
-    "title": "Review of Particle Physics",
-    "year": "2024",
-    "data": {
-        "PDG@W": {
-            "obs@1": {
-                "name": "MW", "value": 80.3692,
-                "total_upper": 0.0133, "total_lower": 0.0133, "unit": "GeV"
-            },
-            "obs@27": {
-                "name": "Br(W2lnu)", "value": 0.1086,
-                "total_upper": 0.0009, "total_lower": 0.0009
-            },
-            "correlation": null
-        },
-        "PDG@Z": { "...": "..." }
-    }
-}
-```
-
-### HFLAV snapshot
-
-There is **no top-level `data`**. Each top-level key is a subgroup
-name (`HFLAV@overview`, `HFLAV@B02pilnu`, ...) mapping to an object
-with `group`, `arxiv`, `inspire-hep`, `description`, an
-`observables` **array**, and an optional `correlation` matrix.
-
-```json
-{
-    "HFLAV@overview": {
-        "group": "HFLAV",
-        "arxiv": null,
-        "inspire-hep": "[HFLAV:2024](https://...)",
-        "description": "overview of popular observables",
-        "observables": [
-            {
-                "name": "Tau(B0)", "value": 1.517,
-                "total_upper": 0.004, "total_lower": 0.004, "unit": "ps"
-            }
-        ],
-        "correlation": null
-    },
-    "HFLAV@B02pilnu": { "...": "..." }
-}
-```
-
-### Shared rules for both snapshots
-
-- No `transition-mode` field — each subgroup is a different process.
-- Snapshot `value`/error fields are **numbers**, not strings (the
-  all-strings rule in §Key Constraints applies only to the standard
-  per-paper schema).
-- Each observable needs `name`, `value`, and the numeric total error pair
-  `total_upper`/`total_lower`. Snapshots never split errors into
-  components: write a symmetric source error as an equal pair, and an
-  asymmetric interval directly into the two fields. Do not use
-  `type@N_*` fields.
-- Unknown observable keys are rejected: the only allowed fields are
-  `name`, `value`, `total_upper`, `total_lower`, `unit`, `limit`.
-- `unit` is a free-form string (`"GeV"`, `"ps"`, `"fb"`).
-- Optional subgroup `correlation` is a square N×N matrix whose
-  dimension must equal the observable count; `null` is allowed.
-- HFLAV observables may carry a free-form `limit` string annotating
-  the phase-space or charge combination.
+A `world-average` file is an ordinary per-paper entry: one `data` array
+whose groups span whatever processes the compilation covers. The
+aggregation group is named by `collaboration` (`HFLAV`, `PDG`), never by
+a subgroup key.
 
 ## Key Constraints
 
 These are the constraints that are not already stated by a field table
 above. Naming, ordering and grouping rules are the 9 hard rules in
-SKILL.md §Core Conventions and `obs-abbr.md` §1–§2.
+SKILL.md §Core Conventions and `observable-naming.md` §1–§2.
 
-1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, the kinematic boundaries (`q2min`/`q2max`, `pTmin`/`pTmax`, ...), and every error/bound field. `unit` is a unit string, not a number.
+1. **All numeric values are strings** (`"0.25"`) except matrix elements (floats). Applies to `value`, the kinematic boundaries (`q2min`/`q2max`, `emin`/`emax`, `pTmin`/`pTmax`, ...), and every error/bound field. `unit` is a unit string, not a number.
 2. **LaTeX uses double backslash** — in `title`/`abstract`, `\\to` in the JSON file becomes `\to` after `json.load()`.
 3. **4-space indentation** — JSON files use exactly 4 spaces per indent level.
 4. **Field order** — top-level fields follow the Top-Level Fields table; group keys are ordered channels → `dataset` → `scheme` → `note` → matrices; within `obs@N`, follow the Standard Measurement table.
-5. **No `year`/`pdf` fields** — The standard schema has neither a top-level `year` nor `pdf` field (HFLAV/PDG snapshots use `year`; see §Non-Standard Schemas). Citations come from the `arxiv` and `inspire-hep` fields.
+5. **No `year`/`pdf` fields** — The schema has neither a top-level `year` nor `pdf` field. Citations come from the `arxiv` and `inspire-hep` fields; the publication year is the directory name.
 6. **Omit empty fields** — Do not include keys with empty string or `null` values (except `arxiv`, which uses `null` when absent).
 7. **No Unicode** — `author`, `title` and `abstract` are validated Unicode-free; the replacement mapping lives in `scripts/common.py` (SKILL.md rule 4).
 
@@ -499,7 +416,7 @@ When a paper introduces a field, error type, kinematic variable or data
 format not covered here: add it to the relevant section of this document,
 extend `scripts/json-valid.py` if it needs a structural check, and keep the
 naming, string types and ordering of existing fields. Naming extensions
-follow `obs-abbr.md` §5.
+follow `observable-naming.md` §5.
 
 Validator touch-points:
 

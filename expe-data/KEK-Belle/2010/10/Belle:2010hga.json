@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.D*+.l+.v": {
+            "dB_I1?_0-n_0.2.Dc_I1?_1-n_0.l+.v": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.934e-2",
@@ -23,19 +23,19 @@
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dGdw",
-                    "value": "16.45",
+                    "value": "1.645e-14",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.95",
-                    "type@1_lower": "0.95",
+                    "type@1_upper": "9.5e-16",
+                    "type@1_lower": "9.5e-16",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.57",
-                    "type@2_lower": "0.57",
+                    "type@2_upper": "5.7e-16",
+                    "type@2_lower": "5.7e-16",
                     "w_min": "1.00",
                     "w_max": "1.05",
-                    "unit": "1e-15 GeV"
+                    "unit": "GeV"
                 },
                 "obs@2": {
                     "name": "dGdw",
@@ -148,7 +148,7 @@
             }
         },
         {
-            "B0.2.D*-.l.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.l.v": {
                 "obs@1": {
                     "name": "rho2",
                     "value": "1.206",
@@ -163,7 +163,7 @@
             }
         },
         {
-            "B0.2.D*-.l.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.l.v": {
                 "obs@1": {
                     "name": "R1",
                     "value": "1.395",

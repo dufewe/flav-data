@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.l+.l-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "q2max": "1.1",
                     "value": "0.46",
@@ -23,7 +23,7 @@
                     "type@2_lower": "0.13"
                 },
                 "obs@2": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "1.1",
                     "q2max": "6.0",
                     "value": "1.06",
@@ -35,7 +35,7 @@
                     "type@2_lower": "0.14"
                 },
                 "obs@3": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.1",
                     "q2max": "8.0",
                     "value": "0.86",
@@ -47,7 +47,7 @@
                     "type@2_lower": "0.09"
                 },
                 "obs@4": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "15.0",
                     "q2max": "19.0",
                     "value": "1.12",
@@ -59,7 +59,7 @@
                     "type@2_lower": "0.10"
                 },
                 "obs@5": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "value": "1.12",
                     "type@1_error": "stat",
@@ -72,9 +72,9 @@
             }
         },
         {
-            "B+.2.K*+.l+.l-": {
+            "uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "q2max": "1.1",
                     "value": "0.62",
@@ -86,7 +86,7 @@
                     "type@2_lower": "0.09"
                 },
                 "obs@2": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "1.1",
                     "q2max": "6.0",
                     "value": "0.72",
@@ -98,7 +98,7 @@
                     "type@2_lower": "0.15"
                 },
                 "obs@3": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.1",
                     "q2max": "8.0",
                     "value": "0.96",
@@ -110,7 +110,7 @@
                     "type@2_lower": "0.14"
                 },
                 "obs@4": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "15.0",
                     "q2max": "19.0",
                     "value": "1.40",
@@ -122,7 +122,7 @@
                     "type@2_lower": "0.12"
                 },
                 "obs@5": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "value": "0.70",
                     "type@1_error": "stat",
@@ -135,9 +135,9 @@
             }
         },
         {
-            "B0.2.K*0.l+.l-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "q2max": "1.1",
                     "value": "0.52",
@@ -149,7 +149,7 @@
                     "type@2_lower": "0.06"
                 },
                 "obs@2": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "1.1",
                     "q2max": "6.0",
                     "value": "0.96",
@@ -161,7 +161,7 @@
                     "type@2_lower": "0.11"
                 },
                 "obs@3": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.1",
                     "q2max": "8.0",
                     "value": "0.90",
@@ -173,7 +173,7 @@
                     "type@2_lower": "0.10"
                 },
                 "obs@4": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "15.0",
                     "q2max": "19.0",
                     "value": "1.18",
@@ -185,7 +185,7 @@
                     "type@2_lower": "0.11"
                 },
                 "obs@5": {
-                    "name": "R[mu/e]",
+                    "name": "R",
                     "q2min": "0.045",
                     "value": "0.94",
                     "type@1_error": "stat",

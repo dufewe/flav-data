@@ -1,6 +1,6 @@
 ---
 name: flav-data-importer
-description: Import flavor-physics measurement data from arXiv, InspireHEP, and HEPData into the flav-data JSON format. Use for the full lifecycle, i.e., metadata lookup, HEPData extraction, transition-symbol and observable-name construction, JSON schema validation, and paper-index maintenance.
+description: Import flavor-physics measurement data from arXiv, InspireHEP, and HEPData into the flav-data JSON format. Use for the full lifecycle, i.e., metadata lookup, HEPData extraction, channel-key and observable-name construction, JSON schema validation, and paper-index maintenance.
 license: MIT
 category: data-science
 tags: [flavor-physics, data-collecting, json-importer]
@@ -19,13 +19,13 @@ flav-data-importer/
 ├── SKILL.md                    # Workflow, conventions, pitfalls (this file)
 ├── references/                 # Authority documents
 │   ├── json-meta.md            # JSON field spec (authority)
-│   ├── obs-abbr.md             # Transition symbols, observable naming, LaTeX
+│   ├── observable-naming.md    # Channel-key ordering, observable naming, LaTeX
+│   ├── particle-naming.md      # Internal pid scheme + particle registry
 │   ├── file-index.md           # Directory layout, indexing
 │   ├── data-source.md          # Source priority, scope
 │   ├── arxiv-api.md            # arXiv API usage
 │   ├── inspirehep-api.md       # InspireHEP API usage
-│   ├── hepdata-cli.md          # HEPData CLI usage
-│   └── particle-masses.json    # PDG masses + non-orderable tokens
+│   └── hepdata-cli.md          # HEPData CLI usage
 ├── assets/
 │   └── workflow-lhcb-2015svh.md # Paper-specific import notes
 └── scripts/
@@ -81,7 +81,7 @@ to_bibtex("Aaij, Roel")               # → "Aaij, R."
 |------|-----|
 | **arXiv API** | v1 date, title, abstract, primary category, PDF URL, ancillary/source files → `references/arxiv-api.md` |
 | **InspireHEP API** | TexKey, recid, collaboration, DOI, authors → `references/inspirehep-api.md` |
-| **hepdata-cli** | Machine-readable HEPData. Install: `pip install hepdata-cli` → `references/hepdata-cli.md` |
+| **hepdata-cli** | Machine-readable HEPData → `references/hepdata-cli.md` |
 | **pymupdf** | PDF text extraction (fallback data source) |
 | **Image reading** | Table screenshots and PDF page images, read with the agent's image tool |
 
@@ -93,29 +93,27 @@ to_bibtex("Aaij, Roel")               # → "Aaij, R."
 | `scripts/arxiv-ext.py` | arXiv API metadata + PDF and e-print source download (`--source` lists ancillary data files). `python3 flav-data-importer/scripts/arxiv-ext.py 1512.04442`. |
 | `scripts/inspirehep-ext.py` | InspireHEP API metadata. `python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442`. |
 | `scripts/hepdata-ext.py` | HEPData table extraction (YAML parsing, q² pairing, matrix detection). `python3 flav-data-importer/scripts/hepdata-ext.py <inspire_id>`. |
-| `scripts/json-valid.py` | JSON schema validator (standard + auto-detected HFLAV/PDG snapshots). `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]`. |
+| `scripts/json-valid.py` | JSON schema validator. `python3 flav-data-importer/scripts/json-valid.py <file> [<file> ...] [--quiet]`. |
 
 ## Scope
 
 | Supported | Not Supported |
 |-----------|--------------|
 | Experimental measurements (LHCb, CMS, ATLAS, Belle, BaBar, BESIII, etc.) | Conference/report papers (no formal preprint) |
-| Published experimental combinations and HFLAV/PDG snapshots | Global analyses: Wilson-coefficient fits, CKM/parameter determinations, mass or coupling bounds, world averages |
+| Published experimental combinations and HFLAV/PDG world averages | Global analyses: Wilson-coefficient fits, CKM/parameter determinations, mass or coupling bounds |
 | Theoretical calculations (HPQCD, lattice QCD, perturbative QCD, etc.) | Unpublished results, theses |
 | Multi-collaboration papers | Internal notes (CDS restricted) |
 
 Form-factor parametrization fits (`aN_FF` coefficients plus a group-level
-`scheme`) are primary theory data and **are** imported, even when they
-combine lattice, LCSR, and experimental input. The exclusion above covers
-global analyses that reinterpret existing measurements, not the
-parametrization of a form factor. See `references/data-source.md` §Scope.
+`scheme`) **are** imported, even when they combine lattice, LCSR, and
+experimental input; the exclusion above covers global analyses only
+(`references/data-source.md` §Scope).
 
 ## Workflow
 
 ### Step 1: Discovery
 
 **Always start by searching for an existing entry** in the paper index.
-This prevents duplicates and tracks the version history of each measurement.
 
 1. Check if the file already exists. New imports go to `<year>/<month>/`,
    but legacy files may sit directly under `<year>/`, so search both depths:
@@ -209,8 +207,8 @@ common = load_script("common")
        "data": [
            {
                # each group maps one or more transition channels to an
-               # obs@N object, then optionally one group-level matrix
-               "B0.2.K*0.mu+.mu-": {
+               # obs@N object, then optionally the group matrices
+               "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0": {
                    # for each obs@N:
                    #   "name":  "FL"                    # symbol only; channel is the group key
                    #   "value": "0.69"
@@ -227,16 +225,17 @@ common = load_script("common")
    ```
 
    `data` is an array of data groups. Each group keys one or more
-   transition channels (`A.B.2.C.D`, or `no-transition` for basic
-   observables such as `MZ` or `Tau(B0)`) to their observables, and may
+   transition channels (pids joined by `.2.`, or `no-transition` for basic
+   observables such as `Mass(Z)` or `Tau(...)`) to their observables, and may
    carry a group-level `correlation`/`covariance` matrix. Channels that
    share a matrix belong to the same group; add another element when the
    dataset, scheme, fit choice, kinematic bin, or matrix differs.
    See rules 6 and 7 below and `references/json-meta.md` §"Data Entries".
 
    Field-source priorities when there are two candidates:
-   - **Title / Abstract**: InspireHEP preferred (LaTeX-preserved);
-     fall back to arXiv only if InspireHEP lacks the paper.
+   - **Title / Abstract**: from InspireHEP, preferring its `source: "arXiv"`
+     entry (LaTeX-preserved); fall back to the arXiv API only if InspireHEP
+     lacks the paper.
    - **Author**: Always from InspireHEP; apply `to_bibtex()` to each
      full name, then arrange by author count per SKILL.md rule 3.
 
@@ -257,16 +256,10 @@ references in any index file.
 python3 flav-data-importer/scripts/json-valid.py <file>
 ```
 
-Runs the standard schema validator. HFLAV and PDG snapshots are
-auto-detected by shape: PDG has a top-level `data` dict of `obs@N`
-subgroups; HFLAV has top-level `HFLAV@...` subgroup keys containing an
-`observables` list. Snapshots are validated against their own relaxed
-schema (see `references/json-meta.md` §"Non-Standard Schemas").
-
-For standard files the `data` array of groups is validated strictly
+Runs the schema validator. The `data` array of groups is validated strictly
 (unknown observable fields, error triplets/labels, one measurement
-format, transition match, and particle masses). Every group maps one or
-more transition channels to per-channel `obs@N` objects;
+format, and channel-key ordering against the pid registry). Every group
+maps one or more transition channels to per-channel `obs@N` objects;
 its optional matrix dimension must equal the group's total observable
 count.
 
@@ -287,8 +280,7 @@ find expe-data/CERN-LHCb/2015 -mindepth 1 -maxdepth 2 -name 'LHCb:2015svh.json' 
 
 ## Core Conventions
 
-These are the 9 hard rules for writing JSON files in this repo. Each
-reference doc points back to these.
+These are the 9 hard rules for writing JSON files in this repo.
 
 1. **Matrix format (row-per-line)** — each matrix row on one line:
    ```json
@@ -315,11 +307,6 @@ reference doc points back to these.
    | **4+** | `"Surname, I. and others"` | `"Aaij, R. and others"` |
    | **Group-only** (no person names) | `"{Collaboration} collaboration"` | `"HPQCD collaboration"` |
 
-   `to_bibtex()` in `scripts/common.py` converts an InspireHEP full name
-   (`"Surname, Full First Name"`) → BibTeX initials (`"Surname, I."`).
-   For LHCb papers with the standard `Aaij:NNNNNNN` authorship use the
-   4+ tier (`"Aaij, R. and others"`).
-
 4. **No Unicode** — replace with LaTeX equivalents:
    `μ`→`\mu`, `Δ`→`\Delta`, `±`→`\pm`, `→`→`\to`,
    `°`→`^{\circ}`, `¯`→`\bar{}`, smart quotes → `` ` ``/`'`/`` `` ``/`''`.
@@ -330,32 +317,25 @@ reference doc points back to these.
    `title` and `abstract` are validated Unicode-free. Characters outside
    the mapping pass through unchanged — convert those by hand.
 
-5. **Transition symbol order** — a `data` channel key is `A.B.2.C.D`
-   (`no-transition` is the only exception; a multi-transition ratio joins
-   two full keys with `/`, e.g. `B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-`).
-   `.2.` separates the initial from the final state and repeats for
-   cascades (`p+.p+.2.W+.2.mu+.v`). Within each state, order by
+5. **Channel key** — a `data` channel key joins pids with `.` and the
+   arrow `.2.` (`no-transition` is the only exception; a ratio joins two
+   full keys with `/`). `.2.` separates the initial from the final state
+   and repeats for cascades
+   (`uud_I1?_1+n_0.uud_I1?_1+n_0.2.WB_I??_1??_0.2.mu_I??_1+n_0.VMU_I??_1+n_0`).
+   Within each state, order by
    - particle type: **baryon → meson → charged lepton → neutral lepton**;
-   - then mass: **heaviest → lightest** (`Lambdab0.2.p+.J/psi0.pi-`,
-     `B0.2.K*0.tau-.e+`);
-   - then charge for equal masses: **`+` → `-` → `0`** (`e+.e-`, `mu+.mu-`).
+   - then mass: **heaviest → lightest**
+     (`udb_I0?_1+n_0.2.uud_I1?_1+n_0.cC_I0-_1--_0.Ud_I2-_0-n_0`);
+   - then charge for equal masses: **`+` → `-` → `0`**
+     (`E_I??_1+n_0.e_I??_1+n_0`).
 
-   Every particle state is `<name>[*]<charge>[Bar]`: the charge is
-   mandatory (`+`/`-`/`0`), `*` sits between name and charge, `Bar` goes
-   last. `p`/`m` suffixes (`Bp`), charge-less states (`B`, `pi`, `mu`),
-   lowercase `bar` and misplaced `Bar`/`*` are rejected; a charge-averaged
-   measurement uses a concrete charge-conjugate representative. Only
-   neutrinos (`v`/`vBar`, `ve`, `vmu`, `vtau`, ...) and the neutral gauge
-   bosons `Z`, `gamma`, `g` omit the charge. Placeholders (`l`, `q1`),
-   partons, inclusive systems, nuclei and detector/BSM pseudo-labels carry
-   no charge and appear only in shared multi-transition keys. Letter case,
-   intermediate resonances and PDG mass labels: `obs-abbr.md` §1 rules 5–10.
-
-   `json-valid.py` fails non-canonical order and bad markers. Masses come
-   from `references/particle-masses.json` (PDG 2024); a particle missing
-   there is an error — add its PDG mass, or list it under `non_orderable`
-   when it cannot be ordered. Placeholders and Z/γ/gluon states are not
-   order-checked.
+   The pid grammar (`<core>_<ig>_<jpc>_<serial>`), registry, masses and
+   widths are in `references/particle-naming.md`; `json-valid.py` fails an
+   unregistered pid or a non-canonical order. Ordering is skipped for the
+   placeholders of `particle-naming.md` §2.7 (`l`, `v`, `q`, `Xs`, ...),
+   exotics without a registered mass, and nuclei. A mass label, fit
+   scenario, or measurement suffix never enters the key — record it in the
+   group `note`.
 
 6. **One group per property set** — a data group is a set of observables
    linked by one correlation/covariance matrix and one measurement
@@ -366,16 +346,15 @@ reference doc points back to these.
    never share a group unless the source matrix genuinely couples them.
 
 7. **`data` is an array of groups** — each group maps one or more
-   transition symbols (`A.B.2.C.D`, or `no-transition` for observables
-   without a transition) to an `obs@N` object, then optionally a
-   group-level `dataset` string naming the data sources, then a `scheme`
-   short code for form-factor coefficient groups, then an optional
-   group-level matrix. Group keys are ordered channels → `dataset` →
-   `scheme` → matrices. JSON data stores no LaTeX for channels or
-   observables. Channels that share a matrix belong to the same group;
-   separate measurement contexts are separate array elements. The
+   channel keys (rule 5, or `no-transition` for observables without a
+   transition) to an `obs@N` object, then optionally a group-level
+   `dataset` string naming the data sources, a `scheme` short code for
+   form-factor coefficient groups, a `note`, and the group matrices.
+   Group keys are ordered channels → `dataset` → `scheme` → `note` →
+   matrices. JSON data stores no LaTeX for channels or observables. The
    channel key alone carries the transition, so observable `name` values
-   must **not** repeat it: `FL`, not `FL(B0.2.K*0.mu+.mu-)`. Conditions
+   must **not** repeat it: `FL`, not
+   `FL(dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0)`. Conditions
    and parameter tags stay in the name (`DeltaP6p[mu-e]`, `Vcb(CLN)`); the
    validator rejects an embedded transition. Matrix rows follow the
    channel keys in written order, then each channel's `obs@N` order.
@@ -388,7 +367,7 @@ reference doc points back to these.
 
 9. **Form-factor expansion coefficients use `aN_FF`** — `N` is the
    expansion order (0, 1, 2, ...) and `FF` is the form-factor symbol from
-   `references/obs-abbr.md` §2.4 (`F+`, `F0`, `Fv`, `G+`, `G0`, `Gv`,
+   `references/observable-naming.md` §2.4 (`F+`, `F0`, `Fv`, `G+`, `G0`, `Gv`,
    `h+`, `hv`, `f+`, `f0`, `fT`, `V`, `A0`, `A1`, `A12`, `T1`, `T2`,
    `T23`, ...). Examples: `a0_F+`, `a1_F0`, `a2_Gv`. When one reported
    number applies to several form factors (e.g. both `a0_Gv` and
@@ -400,16 +379,16 @@ reference doc points back to these.
    Every coefficient group declares its expansion form in the group-level
    `scheme` field as a short code: `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or
    `MR`; the full names and defining papers are in
-   `references/obs-abbr.md` §2.4. The JSON stores only the short code; the
-   validator rejects any other spelling and rejects a coefficient group
-   without `scheme`.
+   `references/observable-naming.md` §2.4. The validator rejects any other
+   spelling and rejects a coefficient group without `scheme`.
 
 ## Decision Points
 
-**Q: What if the paper has a CERN note number instead of an arXiv ID?**
-A: Set `arxiv` to `null`. Use a Markdown link for `inspire-hep`:
-`[LHCb-NOTE-2015-001](https://cds.cern.ch/record/1234567)`. The validator
-accepts any non-null Markdown link as the `inspire-hep` value.
+**Q: What if the paper has no arXiv ID (CERN note, journal-only)?**
+A: Set `arxiv` to `null` and use the InspireHEP-only metadata path — look the
+paper up by DOI or title. For a CERN note, `inspire-hep` may link to CDS
+instead: `[LHCb-NOTE-2015-001](https://cds.cern.ch/record/1234567)`. The
+validator accepts any non-null Markdown link as the `inspire-hep` value.
 
 **Q: What if there's no HEPData entry for this paper?**
 A: First check the arXiv ancillary files (e-print package): a machine-readable
@@ -429,15 +408,16 @@ paper's `abstract`.
 A: `q2min`/`q2max` live inside each `obs@N`. When each bin comes with its
 own source matrix (the usual case), each bin is its own element of the
 paper's `data` array; observables coupled by one matrix stay in one group
-even when their bins differ. The `[condition]` syntax is for
-multi-channel ratios only (e.g. `RBr[mu/e]`).
+even when their bins differ. A `[condition]` may name the sides of a
+comparison or qualify the measurement (`[mu/e]`, `[90%@CL]`, `[13TeV]`), but
+never a bin or threshold.
 
 ## Troubleshooting
 
-### Error: "JSON format correct" but obs fields missing
-
-Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
-`[FAIL]` lines above the summary. Common ones:
+Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read every
+`[FAIL]` line above the summary. Each message names the offending key; the
+rule it enforces is in `references/json-meta.md` (fields, errors, matrices)
+or `references/observable-naming.md` (names and channel keys). Common ones:
 
 - `incomplete error triplet for 'type@1'` — every component error needs
   `type@N_error` + `type@N_upper` + `type@N_lower` together.
@@ -446,86 +426,57 @@ Run `python3 flav-data-importer/scripts/json-valid.py <file>` and read all
   more components.
 - `mixes component errors (type@N_error) with total errors` — pick one
   error scheme per observable.
-- `transition-mode: invalid value` — pick a hyphenated value from the
-  whitelist in `references/json-meta.md` §"transition-mode Values".
-- `matrix not symmetric [i][j] != [j][i]` — fix the matrix entries.
-  Re-check the source PDF table for the correct `ij`/`ji` pair.
+- `transition-mode '...' is not in the allowed list` — pick a hyphenated
+  value from `references/json-meta.md` §"transition-mode Values".
+- `matrix not symmetric` — re-check the source table for the correct
+  `ij`/`ji` pair.
+- `is not a registered pid` — register the state in
+  `references/particle-naming.md` §3 before using it in a channel key.
+- `name must not embed the transition channel` — keep only the symbol
+  (`FL`, `Br`, `a0_F0`, `dBr/dq2`), with a `[condition]` or parameter tag
+  when the source reports one (`DeltaP6p[mu-e]`, `Vcb(CLN)`). Basic
+  observables use their documented forms (`Mass(Z)`, `Tau(...)`,
+  `gammaCKM`); see `references/observable-naming.md` §2.1.
+- `condition '[...]' is a kinematic bin` — move it to `q2min`/`q2max` or
+  `emin`/`emax`, or record the window in the group `note`.
+- `ratio symbol '...' embeds the channel` / `a lepton-flavour ratio of
+  rates is named 'R'` — write bare `R` and put both full transitions in
+  the data key; ratios of other observables keep `ROBS[condition]`
+  (`observable-naming.md` §2.2.2, §2.3).
+- `empty particle state` — every stage around `.2.` must name at least
+  one pid.
+- `is not a bare ASCII unit` — no LaTeX, `%` or scale prefix; multiply the
+  scale factor into every number (`json-meta.md` §"Standard Measurement
+  Format").
+- `the inclusive system is '...'` / `must be accompanied by '...'` — the
+  final state must follow the parent's $b$ flavour and match the charged
+  lepton's charge and flavour (`particle-naming.md` §2.1, §2.7).
 
-### Error: "name must not embed the transition channel"
+**HEPData 401 / Cloudflare blocked** — direct `curl` to hepdata.net is
+blocked. `pip install hepdata-cli`, then re-run `hepdata-ext.py`; it
+resolves the binary from `$PATH`, the active venv, `~/.local/bin/`, or
+Homebrew prefixes.
 
-The channel lives in the `data` key. Keep only the observable symbol in
-`name`: `FL`, `Br`, `a0_F0`, `dBr/dq2`. Keep a `[condition]` or a
-parameter tag when the source reports one (`DeltaP6p[mu-e]`, `Vcb(CLN)`), but
-never `FL(B0.2.K*0.mu+.mu-)`. **Basic observables** (particle masses,
-lifetimes, CKM parameters, EW parameters) use their documented forms:
-`Mass(Z)`, `Tau(e-)`, `gammaCKM`, `MZ` (see `references/obs-abbr.md`
-§2.1).
-
-### Error: "data must be an array of data groups"
-
-`data` must be an array of **data group** objects, each mapping one or
-more transition channels to an `obs@N` object
-(`{"B0.2.K*0.mu+.mu-": {"obs@1": {...}, "obs@2": {...}}, "correlation": [...]}`);
-each `obs@N` value must itself be an object. See
-`references/json-meta.md` §"Data Entries" for the canonical shape.
-
-### Error: "unknown observable field" / "unknown error label" / "incomplete error triplet" / "single error must be written as the total error"
-
-Per-paper files accept only the documented `obs@N` fields:
-`name`, `value`, `unit`, `ref`, `dataset`, `note`,
-the kinematic boundaries, `total_upper`/`total_lower`, and the
-`type@N_*` keys. The canonical data-source list and the expansion `scheme`
-are **group-level** keys beside the channel keys (`references/json-meta.md`
-§"Data Entries"); the per-observable `dataset` is only a free-form sample
-description. Fit choices get no dedicated field: separate groups plus a
-group `note` carry them.
-
-A measurement with **exactly one error** records it as the total error
-(`total_upper`/`total_lower`) even when the source labels it stat or theo;
-only **two or more** errors become complete `type@N_error`/`_upper`/`_lower`
-triplets. Never mix the two schemes. Labels and every allowed field are
-tabulated in `references/json-meta.md` §"Standard Measurement Format"
-onward (including bound-only entries, which carry `type@N_upper`/`_lower`
-plus a required `type@N_level` and no `type@N_error`).
-
-### Error: "HEPData 401 / Cloudflare blocked"
-
-Direct `curl` to hepdata.net is blocked. Install `hepdata-cli`:
-
-```bash
-pip install hepdata-cli
-```
-
-Then re-run `flav-data-importer/scripts/hepdata-ext.py`. The script resolves the binary from
-`$PATH`, the active venv, `~/.local/bin/`, or Homebrew prefixes.
-
-### Error: "I have TexKey from InspireHEP but JSON doesn't show it"
-
-The JSON field is `inspire-hep` (a Markdown link whose display text is the
-TexKey and whose target is the InspireHEP record URL), not a bare `texkey`
-key. Run `inspirehep-ext.py` to get the correct `inspire-hep` value. The
-`texkey` itself is embedded in that link.
+**TexKey missing from the JSON** — the field is `inspire-hep`, a Markdown
+link whose display text is the TexKey and whose target is the InspireHEP
+record URL. `inspirehep-ext.py` returns it as `inspire_hep_link`.
 
 ## Verification Checklist
 
-Before committing any new or updated JSON file:
+`json-valid.py` enforces rules 4-9 and every field and error format in
+`json-meta.md`. These are the checks it cannot make:
 
-- [ ] File parses: `python3 flav-data-importer/scripts/json-valid.py <file>` returns no issues (HFLAV/PDG snapshots are auto-detected)
-- [ ] `time` field is v1 arXiv submission date in `YYYY.MM.DD` format
-- [ ] `arxiv` field is either `null` or a Markdown link with display text `primary_category/<id>v<N>` and target the arXiv PDF URL
-- [ ] `inspire-hep` is `[<TexKey>](https://inspirehep.net/literature/<recid>)` with verified TexKey
-- [ ] arXiv ancillary files were checked before the PDF; if data came from them, every value was validated against the paper's table
+- [ ] Each matrix row sits on one line, and `abstract` is a single line
+      (rules 1-2)
+- [ ] `time` is the arXiv v1 submission date, and the `arxiv` link's `vN`
+      is the version the data was cited from
+- [ ] `inspire-hep` TexKey and recid were verified against InspireHEP
+- [ ] arXiv ancillary files were checked before the PDF, and every value
+      taken from them was validated against the paper's own table
 - [ ] `author` follows the 1 / 2 / 3 / 4+ tier rule (initials only)
-- [ ] `transition-mode` is immediately before `data`, and `data` is the final top-level key
-- [ ] `data` is a non-empty array of groups; each group maps channel keys to an `obs@N` object, then an optional group-level `dataset` string, then a `scheme` string for coefficient groups, then any group matrices; no observable repeats the channel in its `name`, and any group matrix dimension matches the group's observable count
-- [ ] Each `obs@N` has `name` plus exactly one error scheme: single error → `total_upper`/`total_lower`; two or more → complete `type@N` triplets; bound-only → `type@N_upper`/`_lower` + `type@N_level` and no `value`
-- [ ] Error labels are `stat`, `syst`, `lumi`, `norm`, `theo`, `expe` or `theo:<source>`; only `dataset` (free-form sample description), `note`, `ref` and documented kinematic fields accompany them
-- [ ] `unit` holds only a physical unit (`GeV`, `ps`, ...); scientific-notation scale factors (`1e-6`, `10^{-4}`) are multiplied into the numbers and the field omitted
-- [ ] Groups that differ in dataset, scheme, fit choice, or kinematic region are separate elements of the `data` array, not merged
-- [ ] Form-factor expansion coefficients use `aN_FF` (`a0_F+`, `a2_Gv`); a value quoted for several form factors is repeated as one observable per symbol (`a0_Gv`, `a0_G+`), never joined; fit choices are separate groups, and the group-level `scheme` is one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, `MR`
-- [ ] Matrix fields use row-per-line layout, symmetric for correlation
-- [ ] No non-ASCII characters remain (`μ`, `Δ`, `±`, `→`, ligatures, smart quotes)
-- [ ] Annual index file includes the new paper if added (or excludes if deleted)
+- [ ] `transition-mode` describes the actual process, and the group
+      `dataset`/`scheme`/`note` match the source
+- [ ] The annual index includes the new paper (or excludes the deleted one)
 
 ## Known Limitations
 
@@ -538,53 +489,7 @@ Before committing any new or updated JSON file:
    by reading the e-print LaTeX, the PDF (via `pymupdf`), or screenshots.
    Ancillary files are discovered and unpacked by `arxiv-ext.py --source`,
    but their contents are read manually.
-4. **No combination building**. Published HFLAV/PDG snapshots are stored
-   as they appear; the importer never computes an average itself.
+4. **No combination building**. Published HFLAV/PDG world averages are
+   stored as they appear; the importer never computes an average itself.
 5. **Atomicity is manual**. If you crash between writing the JSON and
    updating the index, you must re-run Cleanup (Step 3) by hand.
-
-## FAQ
-
-**Q: What is the canonical JSON file path?**
-A: `expe-data/<Lab>-<Collaboration>/<year>/<month>/<Collaboration>:<TexKey>.json`
-(legacy files may sit directly under `<year>/`); theory papers use
-`theo-data/<Group-or-Method>/<year>/<month>/<TexKey>.json` (see
-`references/file-index.md`). For a multi-collaboration paper, use the
-primary collaboration's directory and list all groups in the
-`collaboration` field (`"LHCb, CMS"`). If no TexKey exists, use
-`<Collaboration>:<recid>` as the filename stem and record it in the annual
-index.
-
-**Q: Can I import a paper with no arXiv ID (journal-only)?**
-A: Yes. Set `arxiv` to `null`. Look up the paper by DOI or title on
-InspireHEP and use the InspireHEP-only metadata path.
-
-**Q: How do I name the observable for a branching ratio?**
-A: Use `Br`; the decay channel is the enclosing `data` key. For Lepton
-Flavor Universality ratios, use `RBr[mu/e]` (R + observable + condition)
-under the same channel key.
-
-**Q: What about a CP asymmetry measurement?**
-A: Use `ACP` for the time-integrated direct asymmetry; the channel
-(e.g. `B+.2.J/psi0.K+`) is the `data` key, so no charge suffix belongs
-in the name. See `references/obs-abbr.md` §3.
-
-**Q: Why are there `obs@N` suffixes on field names?**
-A: To group the observables that share one correlation/covariance matrix
-inside a single data group. Each `obs@N` carries its own
-`q2min`/`q2max`; bins whose source matrices are separate become separate
-groups, while observables coupled by one matrix stay together even when
-their bins differ. See `assets/workflow-lhcb-2015svh.md` for a worked
-example.
-
-## See Also
-
-- `assets/workflow-lhcb-2015svh.md` — paper-specific notes for a worked
-  import (LHCb B⁰ → K*⁰ μ⁺μ⁻ angular analysis, arXiv 1512.04442)
-- `references/json-meta.md` — full JSON field specification
-- `references/obs-abbr.md` — transition symbols and observable naming
-- `references/file-index.md` — directory layout and index format
-- `references/data-source.md` — source priority and scope decisions
-- `references/arxiv-api.md` — arXiv API usage
-- `references/inspirehep-api.md` — InspireHEP API usage
-- `references/hepdata-cli.md` — HEPData CLI and YAML parsing

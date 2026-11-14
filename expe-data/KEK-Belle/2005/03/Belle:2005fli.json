@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.XsBar.e+.e-": {
+            "Db_I1?_0-n_0.2.Xs.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Br[Mll>0.2]",
+                    "name": "Br",
                     "value": "4.04e-6",
                     "type@1_error": "stat",
                     "type@1_upper": "1.30e-6",
@@ -25,9 +25,9 @@
             }
         },
         {
-            "B0Bar.2.XsBar.mu+.mu-": {
+            "Db_I1?_0-n_0.2.Xs.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Br[Mll>0.2]",
+                    "name": "Br",
                     "value": "4.13e-6",
                     "type@1_error": "stat",
                     "type@1_upper": "1.05e-6",
@@ -41,9 +41,9 @@
             }
         },
         {
-            "B0Bar.2.XsBar.l+.l-": {
+            "Db_I1?_0-n_0.2.Xs.l+.l-": {
                 "obs@1": {
-                    "name": "Br[Mll>0.2]",
+                    "name": "Br",
                     "value": "4.11e-6",
                     "type@1_error": "stat",
                     "type@1_upper": "8.3e-7",
@@ -55,7 +55,7 @@
                     "q2max": "25.0"
                 },
                 "obs@2": {
-                    "name": "Br[0.04<Mll<1.0]",
+                    "name": "Br",
                     "value": "1.134e-6",
                     "type@1_error": "stat",
                     "type@1_upper": "4.83e-7",
@@ -67,7 +67,7 @@
                     "q2max": "1.0"
                 },
                 "obs@3": {
-                    "name": "Br[1.0<Mll<6.0]",
+                    "name": "Br",
                     "value": "1.493e-6",
                     "type@1_error": "stat",
                     "type@1_upper": "5.04e-7",
@@ -79,7 +79,7 @@
                     "q2max": "6.0"
                 },
                 "obs@4": {
-                    "name": "Br[6.0<Mll<14.4]",
+                    "name": "Br",
                     "value": "7.32e-7",
                     "type@1_error": "stat",
                     "type@1_upper": "6.14e-7",
@@ -91,7 +91,7 @@
                     "q2max": "14.4"
                 },
                 "obs@5": {
-                    "name": "Br[14.4<Mll<25.0]",
+                    "name": "Br",
                     "value": "4.18e-7",
                     "type@1_error": "stat",
                     "type@1_upper": "1.17e-7",
@@ -105,7 +105,7 @@
             }
         },
         {
-            "B0Bar.2.XsBar.l+.l-": {
+            "Db_I1?_0-n_0.2.Xs.l+.l-": {
                 "obs@1": {
                     "name": "dBr/dMxs",
                     "value": "3.75e-7",

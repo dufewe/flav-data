@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.K*0.l+.l-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.l+.l-": {
                 "obs@1": {
                     "name": "P4p",
                     "q2min": "1.00",
@@ -109,7 +109,7 @@
             }
         },
         {
-            "B0.2.K*0.l+.l-": {
+            "dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
                     "name": "DeltaP4p[mu-e]",
                     "q2min": "1.00",

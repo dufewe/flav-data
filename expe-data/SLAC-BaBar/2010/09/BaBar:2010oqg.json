@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.K+.v.vBar": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "2e-6",
@@ -17,7 +17,7 @@
                     "total_lower": "7e-6"
                 },
                 "obs@2": {
-                    "name": "Br[low-q2]",
+                    "name": "Br",
                     "value": "2e-6",
                     "total_upper": "6e-6",
                     "total_lower": "5e-6",
@@ -25,7 +25,7 @@
                     "q2max": "11.2"
                 },
                 "obs@3": {
-                    "name": "Br[high-q2]",
+                    "name": "Br",
                     "value": "-1.8e-5",
                     "total_upper": "3.8e-5",
                     "total_lower": "3.8e-5",
@@ -35,26 +35,30 @@
             }
         },
         {
-            "B+.2.K+.v.vBar": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.3e-5",
                     "type@1_level": "90%@CL"
                 },
                 "obs@2": {
-                    "name": "Br[low-q2][90%@CL]",
+                    "name": "Br[90%@CL]",
                     "type@1_upper": "0.9e-5",
-                    "type@1_level": "90%@CL"
+                    "type@1_level": "90%@CL",
+                    "q2min": "0.0",
+                    "q2max": "11.2"
                 },
                 "obs@3": {
-                    "name": "Br[high-q2][90%@CL]",
+                    "name": "Br[90%@CL]",
                     "type@1_upper": "3.1e-5",
-                    "type@1_level": "90%@CL"
+                    "type@1_level": "90%@CL",
+                    "q2min": "11.2",
+                    "q2max": "28.3"
                 }
             }
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.7e-5",
@@ -64,7 +68,7 @@
             }
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "5.6e-5",
@@ -73,7 +77,7 @@
             }
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "5e-6",
@@ -83,7 +87,7 @@
             }
         },
         {
-            "B0.2.K0.v.vBar": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.v.vBar": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "1.4e-5",

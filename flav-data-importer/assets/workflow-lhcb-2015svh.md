@@ -27,9 +27,8 @@ its binning consistent with the observable table you imported.
 
 Each q² bin of the observable table becomes one element of the `data`
 array, holding every observable of that bin under the channel key
-`B0.2.K*0.mu+.mu-`. Table 9's matrix goes into the first (low-q²) group,
+`dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0`. Table 9's matrix goes into the first (low-q²) group,
 Table 10 into the second, and so on. The matrix is N×N with rows in
-`obs@N` order, one row per line. Observables coupled by one source matrix
-stay in that group even across channels (SKILL.md rule 6).
+`obs@N` order, one row per line.
 
 Canonical JSON shape: `references/json-meta.md` §"Data Entries".

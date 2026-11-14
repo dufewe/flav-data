@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.Lambda0.l-.vBar": {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.l-.vBar": {
                 "obs@1": {
                     "name": "F1",
                     "value": "1.26",

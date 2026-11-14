@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "e+.e-.2.W+.2.W-.2.l.v": {
+            "E_I??_1+n_0.e_I??_1+n_0.2.W_I??_1??_0.2.WB_I??_1??_0.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80.376",
@@ -27,13 +27,12 @@
             }
         },
         {
-            "e+.e-.2.W+.2.W-.2.q.qBar": {
+            "E_I??_1+n_0.e_I??_1+n_0.2.W_I??_1??_0.2.WB_I??_1??_0.2.q.qBar": {
                 "obs@1": {
                     "name": "BrW2had",
-                    "value": "67.41",
-                    "total_upper": "0.27",
-                    "total_lower": "0.27",
-                    "unit": "%"
+                    "value": "0.6741",
+                    "total_upper": "0.0027",
+                    "total_lower": "0.0027"
                 }
             }
         }

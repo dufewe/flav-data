@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "Bs0.2.mu+.mu-": {
+            "sB_I0?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "value": "3.83e-09",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "Bs0.2.mu+.mu-": {
+            "sB_I0?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Tau",
                     "value": "1.83",
@@ -41,7 +41,7 @@
             }
         },
         {
-            "B0.2.mu+.mu-": {
+            "dB_I1?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.37e-10",
@@ -55,7 +55,7 @@
             }
         },
         {
-            "B0.2.mu+.mu-": {
+            "dB_I1?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br",
                     "type@1_upper": "1.5e-10",

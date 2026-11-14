@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B+.2.K+.l+.l-": {
+            "uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/uB_I1?_0-n_0.2.uS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "0.92",
                     "type@1_error": "stat",
                     "type@1_upper": "0.27",
@@ -23,7 +23,7 @@
                     "q2max": "4.0"
                 },
                 "obs@2": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "1.22",
                     "type@1_error": "stat",
                     "type@1_upper": "0.42",
@@ -35,7 +35,7 @@
                     "q2max": "8.12"
                 },
                 "obs@3": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "1.31",
                     "type@1_error": "stat",
                     "type@1_upper": "0.34",
@@ -47,7 +47,7 @@
                     "q2max": "6.0"
                 },
                 "obs@4": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "1.08",
                     "type@1_error": "stat",
                     "type@1_upper": "0.30",
@@ -61,9 +61,9 @@
             }
         },
         {
-            "B0.2.K0.l+.l-": {
+            "dB_I1?_0-n_0.2.dS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_0-n_0.E_I??_1+n_0.e_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "1.5",
                     "type@1_error": "stat",
                     "type@1_upper": "1.2",
@@ -75,7 +75,7 @@
                     "q2max": "4.0"
                 },
                 "obs@2": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "0.50",
                     "type@1_error": "stat",
                     "type@1_upper": "0.39",
@@ -87,7 +87,7 @@
                     "q2max": "8.12"
                 },
                 "obs@3": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "0.53",
                     "type@1_error": "stat",
                     "type@1_upper": "0.44",
@@ -99,7 +99,7 @@
                     "q2max": "6.0"
                 },
                 "obs@4": {
-                    "name": "Rmue",
+                    "name": "R",
                     "value": "1.52",
                     "type@1_error": "stat",
                     "type@1_upper": "1.23",

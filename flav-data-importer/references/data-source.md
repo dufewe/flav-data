@@ -10,7 +10,7 @@ This document defines which data sources to use, in what order, and what data is
 - **arXiv preprints** and **peer-reviewed journal papers**
 
 ### Not Supported for Import
-- **Global analyses** — interpretations of existing measurements rather than primary data: Wilson-coefficient fits, CKM/parameter determinations, mass or coupling bounds, and world averages.
+- **Global analyses** — interpretations of existing measurements rather than primary data: Wilson-coefficient fits, CKM/parameter determinations, and mass or coupling bounds. Published HFLAV/PDG world averages are measurements and **are** imported (`world-average` transition mode).
 - **Conference papers** — results without a formal preprint or publication.
 - **Report papers** — conference contributions or internal reports without peer review.
 - **Informal non-peer-reviewed results** — blog posts, personal web pages, unpublished notes.
@@ -41,8 +41,6 @@ picks the parser from the table structure, and `parse_yaml_observables()`
 - Theory papers almost never have HEPData entries.
 - Many BSM search papers (mass limits, exclusion contours) do not upload tabulated data.
 - For these cases move on to the arXiv ancillary files (§4), not straight to the PDF.
-
-See `hepdata-cli.md` for detailed YAML parsing guidance.
 
 ### 2. CDS (CERN Document Server)
 
@@ -124,8 +122,6 @@ for page in doc:
 
 Prefer the LaTeX source from the e-print package over the PDF when a table is
 needed: `\begin{tabular}` blocks keep row/column alignment that PDF text loses.
-
-**Important**: pymupdf must be installed in the Python environment (`pip install pymupdf`).
 
 **Limitations**:
 - Table extraction from PDF text is error-prone. Column alignment may be lost.

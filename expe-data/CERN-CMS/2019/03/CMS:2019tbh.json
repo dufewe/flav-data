@@ -9,7 +9,7 @@
     "transition-mode": "higgs-decay",
     "data": [
         {
-            "VH.2.H0.2.c.cBar": {
+            "VH.2.H_I??_0++_0.2.c_I??_1+n_0.C_I??_1+n_0": {
                 "obs@1": {
                     "name": "mu_VHcc",
                     "type@1_upper": "31",

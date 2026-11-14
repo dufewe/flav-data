@@ -48,11 +48,46 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(any('Top-level JSON must be an object' in issue for issue in issues))
 
     def test_observable_name_rejects_embedded_transition(self):
-        for name in ('FL', 'R', 'RBr[mu/e]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
+        for name in ('FL', 'R', 'RBr[pi/K]', 'DeltaACP[mu-e]', 'Vcb(CLN)', 'f+.Vcs'):
             self.assertEqual(json_valid.validate_observable_name(name), [], name)
 
-        for name in ('FL(B0.2.K*0.mu+.mu-)', 'FL(B02K*mumu)'):
+        for name in (
+            'FL(dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0)',
+        ):
             self.assertTrue(json_valid.validate_observable_name(name), name)
+
+    def test_kinematic_condition_is_rejected(self):
+        for name in (
+            'dBr/dq2[4.0-4.53]', 'Br[Mll>0.2]', 'FS[Ecut>0.4]',
+            'Br[high-q2]', 'M1[796,996]',
+        ):
+            issues = json_valid.validate_observable_name(name)
+            self.assertIn('is a kinematic bin', ' '.join(issues), name)
+
+        for name in (
+            'FS', 'dBr', 'M1', 'Br[90%@CL]', 'Br[13TeV]',
+            'Br[World.Average]', 'Br[mH=125GeV]', 'Br[composite_SSM]',
+            'Br[k_Mpl_0.01]', 'Br[bayes]',
+        ):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
+    def test_channel_bearing_ratio_symbol_is_rejected(self):
+        for name in (
+            'RK', 'RK*', 'RK+', 'RD', 'RD*', 'Rmue', 'Rtaumu', 'Re/mu',
+            'RWenu2Wmumu', 'RD*[tau/mu]', 'RK+[mu/e]',
+        ):
+            issues = json_valid.validate_observable_name(name)
+            self.assertIn('embeds the channel', ' '.join(issues), name)
+
+    def test_lepton_flavour_ratio_is_named_bare_R(self):
+        for name in ('RBr[mu/e]', 'RGamma[tau/e]', 'RdBr/dq2[mu/e]', 'FL[mu/e]'):
+            issues = json_valid.validate_observable_name(name)
+            self.assertIn("a lepton-flavour ratio of rates is named 'R'",
+                          ' '.join(issues), name)
+
+        for name in ('R', 'DeltaFL[mu-e]', 'RBr[pi/K]', 'RFL[mu/e]',
+                     'RACP[tau/mu]'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
 
     def test_form_factor_value_names_are_accepted(self):
         for name in ('f+', 'f-', 'V', 'A0', 'A1', 'A2', 'A12'):
@@ -60,7 +95,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_form_factor_value_group_needs_no_scheme(self):
         data = [{
-            'Bc-.2.J/psi0.l-.vBar': self._channel(
+            'Cb_I0?_0-n_0.2.cC_I0-_1--_0.l-.vBar': self._channel(
                 {**self._obs('V'), 'q2min': '-20', 'q2max': '-20'},
             ),
             'dataset': 'QCDSR',
@@ -74,20 +109,20 @@ class JsonValidatorTests(unittest.TestCase):
     def test_hqet_basis_value_groups_need_no_scheme(self):
         data = [
             {
-                'Lambdab0.2.p+.l-.vBar': self._channel(
+                'udb_I0?_1+n_0.2.uud_I1?_1+n_0.l-.vBar': self._channel(
                     {**self._obs('f1'), 'q2min': '0', 'q2max': '0'},
                     {**self._obs('f2'), 'q2min': '0', 'q2max': '0'},
                 ),
                 'dataset': 'LCSR',
             },
             {
-                'Lambdab0.2.Lambda0.l-.vBar': self._channel(
+                'udb_I0?_1+n_0.2.uds_I0?_1+n_0.l-.vBar': self._channel(
                     {**self._obs('g2'), 'q2min': '0', 'q2max': '0'},
                 ),
                 'dataset': 'LCSR',
             },
             {
-                'Lambdab0.2.p+.l-.vBar': self._channel(
+                'udb_I0?_1+n_0.2.uud_I1?_1+n_0.l-.vBar': self._channel(
                     self._obs_with_components('F1'),
                     self._obs_with_components('F2'),
                 ),
@@ -123,112 +158,125 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(json_valid.validate_transition_mode('Higgs decay'))
         self.assertTrue(json_valid.validate_transition_mode('electroweak precision'))
 
-    def test_vector_meson_names_use_star(self):
-        for key in ('B0.2.K*0.mu+.mu-', 'B+.2.K*+.mu+.mu-',
-                    'B0.2.D*0.mu+.mu-', 'B+.2.Ds*+.mu+.mu-'):
+    def test_pid_transition_keys_are_accepted(self):
+        for key in (
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0',
+            'uB_I1?_0-n_0.2.uS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0',
+            'WB_I??_1??_0.2.mu_I??_1+n_0.VMU_I??_1+n_0',
+            'uB_I1?_0-n_0.2.uS_I1?_0-n_0.l+.v',
+            'uud_I1?_1+n_0.UUD_I1?_1+n_0.2.Z_I??_1??_0.2.l+.l-',
+            'qQ_I1?_0-n_0.2.Ud_I2-_0-n_0.E_I??_1+n_0.ve_I??_1+n_0',
+            'dB_I1?_0-n_0.2.cC_I0-_1--_0.qQ_I1?_0-n_0',
+            'Cb_I0?_0-n_0.2.cC_I0-_1--_0.l-.vBar',
+            'no-transition',
+        ):
             self.assertEqual(json_valid.validate_transition_key(key), [], key)
 
-        for key in ('B0.2.Kst0.mu+.mu-', 'B+.2.Kst+.mu+.mu-',
-                    'B0.2.Dst0.mu+.mu-', 'B+.2.Dsst+.mu+.mu-'):
-            self.assertTrue(json_valid.validate_transition_key(key), key)
-
-    def test_neutrino_tokens_use_v_not_nu(self):
-        for key in ('W-.2.mu-.vBar', 'B+.2.K+.v.vBar',
-                    'B+.2.mu+.ve', 'B+.2.e+.vmuBar',
-                    'B+.2.tau+.vtau'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
-
-        for key in ('W-.2.mu-.nuBar', 'B+.2.K+.nu.nuBar',
-                    'B+.2.mu+.nue', 'B+.2.e+.numubar',
-                    'BBar.2.Xcl.nubar'):
-            self.assertTrue(json_valid.validate_transition_key(key), key)
-
-    def test_hadron_tokens_follow_handwritten_case(self):
-        for key in ('B0.2.pi0.mu+.mu-', 'Lambdab0.2.p+.pi-.vBar',
-                    'B0.2.KS0.v.vBar', 'Sigma+.2.p+.mu+.mu-',
-                    'Lambdac+.2.p+.mu+.mu-', 'B0.2.KL0.v.vBar'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
-
-        for key in ('B0.2.K0S.v.vBar', 'B0s.2.mu+.mu-',
-                    'B0.2.K0bar.v.vBar', 'B0.2.fbar.v.vBar',
-                    'B0.2.K0L.v.vBar',
-                    'LambdacBar-.2.p+Bar.mu+.mu-',
-                    'Lambda0.2.p+bar.vBar'):
-            self.assertTrue(json_valid.validate_transition_key(key), key)
-
-    def test_charge_uses_plus_minus_zero(self):
-        for key in ('B+.2.K*+.mu+.mu-', 'B-.2.D*0.tau-.vBar',
-                    'Bc+.2.J/psi0.l+.v'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
-
-        for key in ('Bp.2.K*+.mu+.mu-', 'Bm.2.D0.mu-.vBar',
-                    'B+.2.K+.mup.mum', 'B+.2.K+.ep.em',
-                    'B+.2.pip.pim', 'B+.2.D*p.D*m',
-                    'B+.2.K*p.taup.taum'):
-            issues = json_valid.validate_transition_key(key)
-            self.assertTrue(issues, key)
-            self.assertIn('writes its charge', ' '.join(issues), key)
-
-        # Lowercase antiparticle marker is rejected, capital Bar is accepted.
-        self.assertTrue(json_valid.validate_transition_key('B0.2.K*0bar.v.vBar'))
-        self.assertEqual(json_valid.validate_transition_key('B0Bar.2.XsBar.e+.e-'), [])
-
-    def test_particle_states_require_an_explicit_charge(self):
-        for key in ('p+.p+.2.Z.2.mu+.mu-', 'n0.2.p+.e-.veBar',
-                    'Lambda0.2.p+.pi-', 'B0.2.phi0.K*0',
-                    'B0.2.J/psi0.K*0', 'H0.2.W+.W-',
-                    'B+.2.D*+Bar.mu-.vBar', 'B0Bar.2.K*0Bar.v.vBar'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
-
-        for key in ('p.p.2.Z.2.mu+.mu-', 'B0.2.phi.mu+.mu-',
-                    'Lambdab0.2.p.J/psi.pi-', 'n.2.p.e-.veBar',
-                    'H.2.W.W', 'Lambda.2.p+.vBar',
-                    'B0.2.J/psi.K*0', 'B0.2.K*.mu+.mu-',
-                    'B+.2.mu.e'):
-            issues = json_valid.validate_transition_key(key)
-            self.assertTrue(issues, key)
-            self.assertIn('no charge marker', ' '.join(issues), key)
-
-    def test_particle_grammar_exemptions(self):
-        for key in ('W-.2.mu-.vBar', 'B0.2.K*0.v.vBar',
-                    'W-.2.e-.vBar', 'B0.2.KS0.v.vBar',
-                    'B0.2.Xs.gamma', 'p+.p+.2.Z.2.l+.l-',
-                    'B0.2.K+.l+.v', 'B0.2.D0.q.qBar'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
-
-    def test_particle_grammar_placement(self):
-        for key, expected in (
-            ('B+.2.D+*.e+.ve', 'vector marker'),
-            ('B0.2.K*Bar+.mu+.mu-', 'vector marker'),
-            ('LambdacBar-.2.p+.mu+.mu-', 'Bar'),
-            ('B0.2.K*0bar.v.vBar', 'lowercase'),
+    def test_legacy_particle_tokens_are_rejected(self):
+        for key in (
+            'B0.2.K*0.mu+.mu-',
+            'B0.2.Kst0.mu+.mu-',
+            'W-.2.mu-.nuBar',
+            'B0.2.K*0bar.v.vBar',
+            'B0Bar.2.D0*+(2300).l-.vBar',
         ):
             issues = json_valid.validate_transition_key(key)
             self.assertTrue(issues, key)
-            self.assertIn(expected, ' '.join(issues), key)
+            self.assertIn('is not a registered pid', ' '.join(issues), key)
 
-    def test_scalar_meson_mass_tags(self):
-        for key in ('B0Bar.2.D0*+(2300).l-.vBar',
-                    'Bs0Bar.2.Ds0*+(2317).l-.vBar',
-                    'B0Bar.2.D0*+(2451).l-.vBar'):
+    def test_empty_particle_state_is_rejected(self):
+        for key in (
+            '.2.', '.2.dS_I1?_1-n_0', 'dB_I1?_0-n_0.2.',
+            'dB_I1?_0-n_0.2..2.dS_I1?_1-n_0',
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0/uB_I1?_0-n_0.2.',
+        ):
+            issues = json_valid.validate_transition_key(key)
+            self.assertIn('empty particle state', ' '.join(issues), key)
+
+    def test_particle_type_order(self):
+        issues = json_valid.validate_transition_key(
+            'dB_I1?_0-n_0.2.MU_I??_1+n_0.dS_I1?_1-n_0'
+        )
+        self.assertTrue(issues)
+        self.assertIn('orders charged lepton before meson', ' '.join(issues))
+
+    def test_mass_order_within_particle_type(self):
+        issues = json_valid.validate_transition_key(
+            'dB_I1?_0-n_0.2.E_I??_1+n_0.mu_I??_1+n_0'
+        )
+        self.assertTrue(issues)
+        self.assertIn('light to heavy', ' '.join(issues))
+        self.assertIn('mu_I??_1+n_0.E_I??_1+n_0', ' '.join(issues))
+
+    def test_charge_order_for_equal_masses(self):
+        issues = json_valid.validate_transition_key(
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.mu_I??_1+n_0.MU_I??_1+n_0'
+        )
+        self.assertTrue(issues)
+        self.assertIn('charge order', ' '.join(issues))
+
+    def test_ratio_keys_check_each_transition(self):
+        good = (
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0/'
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
+        )
+        self.assertEqual(json_valid.validate_transition_key(good), [])
+        bad = (
+            'dB_I1?_0-n_0.2.MU_I??_1+n_0.dS_I1?_1-n_0/'
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
+        )
+        self.assertTrue(json_valid.validate_transition_key(bad))
+
+    def test_inclusive_system_follows_parent_b_flavour(self):
+        for key in (
+            'uB_I1?_0-n_0.2.Xc.e_I??_1+n_0.VE_I??_1+n_0',
+            'dB_I1?_0-n_0.2.Xs.ph_I??_1--_0',
+        ):
+            issues = json_valid.validate_transition_key(key)
+            self.assertIn('the inclusive system is', ' '.join(issues), key)
+
+        for key in (
+            'uB_I1?_0-n_0.2.XcBar.E_I??_1+n_0.ve_I??_1+n_0',
+            'Ub_I1?_0-n_0.2.Xc.e_I??_1+n_0.VE_I??_1+n_0',
+            'Db_I1?_0-n_0.2.Xs.ph_I??_1--_0',
+            'dB_I1?_0-n_0.2.XsBar.ph_I??_1--_0',
+            'B.2.Xc.l-.vBar',
+            'uB_I1?_0-n_0.2.Xu.l-.vBar',
+        ):
             self.assertEqual(json_valid.validate_transition_key(key), [], key)
 
-        for key in ('B0Bar.2.D0*+(23xx).l-.vBar',
-                    'B0Bar.2.D0*+2300.l-.vBar',
-                    'B0Bar.2.D0*+(2300)+.l-.vBar'):
-            self.assertTrue(json_valid.validate_transition_key(key), key)
+    def test_charged_lepton_fixes_its_neutrino(self):
+        for key in (
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.v',
+            'WB_I??_1??_0.2.tau_I??_1+n_0.vtau_I??_1+n_0',
+            'uB_I1?_0-n_0.2.uS_I1?_0-n_0.l+.vBar',
+        ):
+            issues = json_valid.validate_transition_key(key)
+            self.assertIn('must be accompanied by', ' '.join(issues), key)
 
-    def test_ratio_key_keeps_slash_inside_particle_name(self):
-        for key in ('B0.2.J/psi0.KS0/B0.2.J/psi0.KL0',
-                    'B+.2.J/psi0.K+/B0.2.J/psi0.KS0',
-                    'B0.2.J/psi0.mu+.mu-/B0.2.J/psi0.e+.e-',
-                    'B0.2.psi(2S)0(2.mu+.mu-).KS0/B0.2.J/psi0.KS0',
-                    'B0.2.K*0.e+.e-/B0.2.K*0.mu+.mu-'):
-            self.assertEqual(json_valid.validate_transition_key(key), [], key)
+        issues = json_valid.validate_transition_key(
+            'qQ_I1?_0-n_0.2.Ud_I2-_0-n_0.MU_I??_1+n_0.ve_I??_1+n_0'
+        )
+        self.assertIn('does not match the charged lepton', ' '.join(issues))
 
-    def test_ratio_key_still_checks_each_side(self):
-        key = 'B0.2.mu+.mu-.K*0/B0.2.K*0.mu+.mu-'
-        self.assertTrue(json_valid.validate_transition_key(key), key)
+        # scattering already carries the neutrino in the initial state
+        self.assertEqual(json_valid.validate_transition_key(
+            'qQ_I1?_0-n_0.vmu_I??_1+n_0.2.qQ_I1?_0-n_0.mu_I??_1+n_0'
+        ), [])
+
+    def test_lepton_energy_boundaries_are_kinematic_fields(self):
+        obs = {**self._obs('M1'), 'emin': '0.4', 'emax': '+inf', 'unit': 'GeV'}
+        self.assertEqual(self._validate_data([{
+            'Ub_I1?_0-n_0.2.Xc.e_I??_1+n_0.VE_I??_1+n_0': {'obs@1': obs},
+        }]), [])
+
+    def test_scalar_meson_scenarios_share_one_pid(self):
+        key = 'Db_I1?_0-n_0.2.Dc_I1?_0+n_0.l-.vBar'
+        self.assertEqual(json_valid.validate_transition_key(key), [])
+        # the scenario mass label belongs in the group note, not in the pid
+        self.assertTrue(json_valid.validate_transition_key(
+            'Db_I1?_0-n_0.2.Dc_I1?_0+n_0(2300).l-.vBar'
+        ))
 
     def _validate_raw(self, raw):
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
@@ -241,12 +289,12 @@ class JsonValidatorTests(unittest.TestCase):
                '"total_upper": "0.02", "total_lower": "0.02"}')
         channel = '{"obs@1": %s}' % obs
         cases = {
-            'B0.2.pi-.l+.v': (
-                '"data": [{"B0.2.pi-.l+.v": %s, "B0.2.pi-.l+.v": %s}]'
+            'dB_I1?_0-n_0.2.Ud_I2-_0-n_0.l+.v': (
+                '"data": [{"dB_I1?_0-n_0.2.Ud_I2-_0-n_0.l+.v": %s, "dB_I1?_0-n_0.2.Ud_I2-_0-n_0.l+.v": %s}]'
                 % (channel, channel)
             ),
             'obs@1': (
-                '"data": [{"B0.2.pi-.l+.v": {"obs@1": %s, "obs@1": %s}}]'
+                '"data": [{"dB_I1?_0-n_0.2.Ud_I2-_0-n_0.l+.v": {"obs@1": %s, "obs@1": %s}}]'
                 % (obs, obs)
             ),
             'title': '"title": "Second", "data": []',
@@ -291,7 +339,7 @@ class JsonValidatorTests(unittest.TestCase):
     def _channel(cls, *obs):
         return {f'obs@{i}': o for i, o in enumerate(obs, 1)}
 
-    def _validate_data(self, data_block):
+    def _validate_data(self, data_block, mode='semileptonic-decay'):
         doc = {
             'inspire-hep': '[Test:2024](https://inspirehep.net/literature/1)',
             'author': 'Doe, J.',
@@ -299,7 +347,7 @@ class JsonValidatorTests(unittest.TestCase):
             'arxiv': '[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)',
             'time': '2024.01.01',
             'abstract': 'Test abstract.',
-            'transition-mode': 'semileptonic-decay',
+            'transition-mode': mode,
             'data': data_block,
         }
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
@@ -309,17 +357,17 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_data_groups_allow_cross_channel_matrices(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(
                 self._obs('FL'), self._obs('S3'),
             ),
-            'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
+            'uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'correlation': [[1.0, 0.5, 0.1], [0.5, 1.0, 0.2], [0.1, 0.2, 1.0]],
         }]
         self.assertEqual(self._validate_data(data), [])
 
     def test_group_note_acknowledges_out_of_range_correlation(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(
                 self._obs('FL'), self._obs('S3'),
             ),
             'note': 'Authors print rho = 1.06 for this pair.',
@@ -331,7 +379,7 @@ class JsonValidatorTests(unittest.TestCase):
         for value in ('', '   ', 1):
             with self.subTest(note=value):
                 data = [{
-                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
                     'note': value,
                 }]
                 issues = self._validate_data(data)
@@ -340,7 +388,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_group_note_sits_before_matrix(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'correlation': [[1.0]],
             'note': 'documented',
         }]
@@ -350,10 +398,10 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_data_group_matrix_dimension_must_cover_all_channels(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(
                 self._obs('FL'), self._obs('S3'),
             ),
-            'B+.2.K+.mu+.mu-': self._channel(self._obs('FL')),
+            'uB_I1?_0-n_0.2.uS_I1?_0-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'correlation': [[1.0, 0.5], [0.5, 1.0]],
         }]
         issues = self._validate_data(data)
@@ -362,14 +410,22 @@ class JsonValidatorTests(unittest.TestCase):
     def test_data_group_channel_must_precede_matrix(self):
         data = [{
             'correlation': [[1.0]],
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
         }]
         issues = self._validate_data(data)
         self.assertTrue(any('appears after a matrix key' in issue for issue in issues))
 
+    def test_group_matrix_must_not_be_null(self):
+        data = [{
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
+            'correlation': None,
+        }]
+        issues = self._validate_data(data)
+        self.assertTrue(any('do not set it to null' in issue for issue in issues))
+
     def test_group_dataset_sits_between_channels_and_matrix(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'dataset': 'EXPE',
             'correlation': [[1.0]],
         }]
@@ -380,7 +436,7 @@ class JsonValidatorTests(unittest.TestCase):
                       'LQCD+LCSR+QCDSR', 'LQCD+LCSR+QCDSR+EXPE'):
             with self.subTest(dataset=value):
                 data = [{
-                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
                     'dataset': value,
                 }]
                 self.assertEqual(self._validate_data(data), [])
@@ -391,7 +447,7 @@ class JsonValidatorTests(unittest.TestCase):
                       'LQCD+QCDSR+LCSR'):
             with self.subTest(dataset=value):
                 data = [{
-                    'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                    'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
                     'dataset': value,
                 }]
                 issues = self._validate_data(data)
@@ -403,13 +459,24 @@ class JsonValidatorTests(unittest.TestCase):
         obs = self._obs('FL')
         obs['scheme'] = 'BCL'
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any("unknown observable field 'scheme'" in issue for issue in issues))
 
+    def test_observable_ref_must_be_a_markdown_link(self):
+        channel = 'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
+        good = {**self._obs('FL'),
+                'ref': '[LHCb:2015svh](https://inspirehep.net/literature/1409497)'}
+        self.assertEqual(self._validate_data([{channel: {'obs@1': good}}]), [])
+
+        for ref in ('LHCb:2015svh', '1409497', '[LHCb:2015svh]()', '[](https://x)'):
+            obs = {**self._obs('FL'), 'ref': ref}
+            issues = self._validate_data([{channel: {'obs@1': obs}}])
+            self.assertTrue(any('must be a Markdown link' in i for i in issues), ref)
+
     def test_group_metadata_order_is_enforced(self):
         after_matrix = [{
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'correlation': [[1.0]],
             'dataset': 'EXPE',
         }]
@@ -418,13 +485,13 @@ class JsonValidatorTests(unittest.TestCase):
 
         after_dataset = [{
             'dataset': 'EXPE',
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
         }]
         issues = self._validate_data(after_dataset)
         self.assertTrue(any("appears after 'dataset'" in issue for issue in issues))
 
         dataset_after_scheme = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
             'scheme': 'BCL',
             'dataset': 'LQCD+LCSR',
         }]
@@ -433,7 +500,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_group_dataset_must_be_non_empty_string(self):
         data = [{
-            'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             'dataset': '',
         }]
         issues = self._validate_data(data)
@@ -441,7 +508,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_coefficient_group_requires_scheme(self):
         data = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
         }]
         issues = self._validate_data(data)
         self.assertTrue(any(
@@ -453,7 +520,7 @@ class JsonValidatorTests(unittest.TestCase):
         for scheme in ('BK', 'BGL', 'BCL', 'BSZ', 'DLM', 'MR'):
             with self.subTest(scheme=scheme):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+                    'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
                     'dataset': 'LQCD+LCSR',
                     'scheme': scheme,
                     'correlation': [[1.0]],
@@ -464,7 +531,7 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('a0_F+(nominal)', 'a1_f+[higher-order]', 'a0_f+'):
             with self.subTest(name=name):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs(name)),
                     'dataset': 'LQCD',
                 }]
                 issues = self._validate_data(data)
@@ -474,7 +541,7 @@ class JsonValidatorTests(unittest.TestCase):
                 ), issues)
 
         data = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_F+(nominal)')),
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_F+(nominal)')),
             'dataset': 'LQCD',
             'scheme': 'BCL',
         }]
@@ -489,7 +556,7 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('a0_fp', 'a1_Fp', 'a2_Gp', 'a0_hp', 'a1_htp'):
             with self.subTest(name=name):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs(name)),
                     'dataset': 'LQCD',
                     'scheme': 'BCL',
                 }]
@@ -502,7 +569,7 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('a0_h+', 'a1_ht+'):
             with self.subTest(name=name):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs(name)),
+                    'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs(name)),
                     'dataset': 'LQCD',
                     'scheme': 'BCL',
                 }]
@@ -512,7 +579,7 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ("a0_Fv'", "a1_Gv'", "a2_hv'", "a0_htv'"):
             with self.subTest(name=name):
                 data = [{
-                    'Lambdab0.2.Lambda0(1520).l+.l-': self._channel(self._obs(name)),
+                    'udb_I0?_1+n_0.2.uds_I0?_3-n_0.l+.l-': self._channel(self._obs(name)),
                     'dataset': 'LQCD',
                     'scheme': 'MR',
                 }]
@@ -523,7 +590,7 @@ class JsonValidatorTests(unittest.TestCase):
                       'BGL '):
             with self.subTest(scheme=value):
                 data = [{
-                    'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+                    'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
                     'scheme': value,
                 }]
                 issues = self._validate_data(data)
@@ -531,7 +598,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_scheme_order_is_enforced(self):
         after_matrix = [{
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
             'correlation': [[1.0]],
             'dataset': 'LQCD',
             'scheme': 'BCL',
@@ -543,7 +610,7 @@ class JsonValidatorTests(unittest.TestCase):
 
         after_scheme = [{
             'scheme': 'BCL',
-            'B0Bar.2.pi+.l-.vBar': self._channel(self._obs('a0_f+')),
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': self._channel(self._obs('a0_f+')),
         }]
         issues = self._validate_data(after_scheme)
         self.assertTrue(any(
@@ -559,7 +626,7 @@ class JsonValidatorTests(unittest.TestCase):
             'type@1_lower': '0.1',
         })
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any(
             'single error must be written as the total error' in issue
@@ -569,7 +636,7 @@ class JsonValidatorTests(unittest.TestCase):
     def test_multiple_component_errors_are_accepted(self):
         obs = self._obs_with_components('FL')
         self.assertEqual(self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }]), [])
 
     def test_theo_source_labels_are_accepted(self):
@@ -577,7 +644,7 @@ class JsonValidatorTests(unittest.TestCase):
         obs['type@1_error'] = 'theo:a2_a4'
         obs['type@2_error'] = 'theo:mu_pi'
         self.assertEqual(self._validate_data([{
-            'B0Bar.2.pi+.l-.vBar': {'obs@1': obs},
+            'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': {'obs@1': obs},
             'scheme': 'BCL',
         }]), [])
 
@@ -586,35 +653,39 @@ class JsonValidatorTests(unittest.TestCase):
             obs = self._obs_with_components('a0_f+')
             obs['type@1_error'] = label
             issues = self._validate_data([{
-                'B0Bar.2.pi+.l-.vBar': {'obs@1': obs},
+                'Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar': {'obs@1': obs},
                 'scheme': 'BCL',
             }])
             self.assertTrue(issues, label)
             self.assertIn('unknown error label', ' '.join(issues), label)
 
-    def test_scale_factor_unit_is_rejected(self):
-        for unit in ('1e-6', '10^{-4}', '1E-3', '10^-11'):
+    def test_unit_must_be_bare_ascii(self):
+        channel = 'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
+        for unit in (
+            '1e-6', '10^{-4}', '1E-3', '10^-11',
+            '1e-3GeV2', '1e-3GeV3', '1e-15 GeV',
+            'GeV^{-2}', 'GeV$^{-2}$', '%',
+        ):
             obs = self._obs('Br')
             obs['unit'] = unit
-            issues = self._validate_data([{
-                'B0.2.K*0.mu+.mu-': {'obs@1': obs},
-            }])
+            issues = self._validate_data([{channel: {'obs@1': obs}}])
             self.assertTrue(
-                any('pure scale factor' in issue for issue in issues), unit
+                any('is not a bare ASCII unit' in issue for issue in issues), unit
             )
 
-        obs = self._obs('Mass')
-        obs['unit'] = 'GeV'
-        self.assertEqual(self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
-        }]), [])
+        for unit in ('GeV', 'GeV-2', 'GeV2', 'MeV', 'ps-1'):
+            obs = self._obs('Mass')
+            obs['unit'] = unit
+            self.assertEqual(
+                self._validate_data([{channel: {'obs@1': obs}}]), [], unit
+            )
 
     def test_total_and_component_errors_cannot_mix(self):
         obs = self._obs_with_components('FL')
         obs['total_upper'] = '0.1'
         obs['total_lower'] = '0.1'
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any(
             'mixes component errors' in issue for issue in issues
@@ -627,12 +698,12 @@ class JsonValidatorTests(unittest.TestCase):
             'type@1_level': '90%@CLs',
         }
         self.assertEqual(self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }]), [])
 
         obs.pop('type@1_level')
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any(
             "present without 'type@1_level'" in issue for issue in issues
@@ -642,13 +713,13 @@ class JsonValidatorTests(unittest.TestCase):
         obs = self._obs_with_components('Br')
         obs.update({'type@3_upper': '5.9e-6', 'type@3_level': '90%@CLs'})
         self.assertEqual(self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }]), [])
 
         shared = self._obs_with_components('Br')
         shared.update({'type@1_upper': '5.9e-6', 'type@1_level': '90%@CLs'})
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': shared},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': shared},
         }])
         self.assertTrue(any(
             "is used both as a component error" in issue for issue in issues
@@ -659,7 +730,7 @@ class JsonValidatorTests(unittest.TestCase):
         del obs['total_upper'], obs['total_lower']
         obs.update({'error_upper': '0.1', 'error_lower': '0.1'})
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any(
             "unknown observable field 'error_upper'" in issue for issue in issues
@@ -667,7 +738,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_legacy_channel_to_group_dict_is_rejected(self):
         issues = self._validate_data({
-            'B0.2.K*0.mu+.mu-': [{'obs@1': self._obs('FL')}],
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': [{'obs@1': self._obs('FL')}],
         })
         self.assertTrue(any('data must be an array of data groups' in issue for issue in issues))
 
@@ -676,7 +747,7 @@ class JsonValidatorTests(unittest.TestCase):
             [{'obs@1': self._obs('FL')}],
             [r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$', {'obs@1': self._obs('FL')}],
         ):
-            issues = self._validate_data([{'B0.2.K*0.mu+.mu-': channel}])
+            issues = self._validate_data([{'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': channel}])
             self.assertTrue(
                 any('must be an object of obs@N entries' in issue for issue in issues),
                 channel,
@@ -684,7 +755,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_channel_latex_key_is_rejected(self):
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {
                 'latex': r'$B^{0}\to K^{*0}\mu^{+}\mu^{-}$',
                 'obs@1': self._obs('FL'),
             },
@@ -693,7 +764,7 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_no_transition_channel_is_observable_object(self):
         data = [{
-            'no-transition': self._channel(self._obs('MZ')),
+            'no-transition': self._channel(self._obs('Mass(Z)')),
         }]
         self.assertEqual(self._validate_data(data), [])
 
@@ -701,7 +772,7 @@ class JsonValidatorTests(unittest.TestCase):
         obs = self._obs('FL')
         obs['latex'] = r'$F_L$'
         issues = self._validate_data([{
-            'B0.2.K*0.mu+.mu-': {'obs@1': obs},
+            'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs},
         }])
         self.assertTrue(any("unknown observable field 'latex'" in issue for issue in issues))
 
@@ -716,7 +787,7 @@ class JsonValidatorTests(unittest.TestCase):
             'pdf': 'https://arxiv.org/pdf/2401.00001',
             'transition-mode': 'semileptonic-decay',
             'data': [{
-                'B0.2.K*0.mu+.mu-': self._channel(self._obs('FL')),
+                'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
             }],
         }
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
@@ -726,66 +797,104 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertTrue(any("Forbidden field present: 'pdf'" in issue for issue in issues))
 
 
-    def _validate_snapshot_doc(self, doc):
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
-            json.dump(doc, f)
-            f.flush()
-            return json_valid.validate_json(f.name)
+    def test_world_average_spans_processes_in_one_file(self):
+        data = [
+            {
+                'no-transition': self._channel(
+                    {**self._obs('Tau(BsL0)'), 'unit': 'ps'},
+                    {**self._obs('Tau(BsH0)'), 'unit': 'ps'},
+                ),
+            },
+            {
+                'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar': self._channel(
+                    self._obs('Br'),
+                ),
+            },
+        ]
+        self.assertEqual(self._validate_data(data, mode='world-average'), [])
 
-    @staticmethod
-    def _pdg_snapshot(obs):
-        return {
+    def test_world_average_group_matrix_spans_all_channels(self):
+        data = [{
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/'
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar': self._channel(
+                self._obs('R'),
+            ),
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/'
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar': self._channel(
+                self._obs('R'),
+            ),
+            'note': 'combined R(D)-R(D*) average',
+            'correlation': [[1.0, -0.38], [-0.38, 1.0]],
+        }]
+        self.assertEqual(self._validate_data(data, mode='world-average'), [])
+
+    def test_world_average_matrix_must_cover_every_channel(self):
+        data = [{
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar/'
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar': self._channel(
+                self._obs('R'),
+            ),
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar/'
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar': self._channel(
+                self._obs('R'),
+            ),
+            'correlation': [[1.0]],
+        }]
+        issues = self._validate_data(data, mode='world-average')
+        self.assertTrue(any('does not match' in issue for issue in issues))
+
+    def test_world_average_values_are_float_strings(self):
+        obs = {'name': 'Mass(W)', 'value': 80.3692,
+               'total_upper': 0.0133, 'total_lower': 0.0133, 'unit': 'GeV'}
+        issues = self._validate_data(
+            [{'no-transition': self._channel(obs)}], mode='world-average',
+        )
+        self.assertTrue(any('value' in issue for issue in issues))
+
+    def test_particle_label_argument_names_are_accepted(self):
+        for name in ('Mass(Z)', 'Mass(W)', 'Mass(t)', 'Mass(H)', 'Mass(BsL0)',
+                     'Tau(B0)', 'Tau(Lambdab0)', 'Gamma(Z)', 'mass(b)',
+                     'alphas(MZ)'):
+            with self.subTest(name=name):
+                self.assertEqual(json_valid.validate_observable_name(name), [])
+
+    def test_obsolete_mass_shortcuts_are_rejected(self):
+        for name in ('MZ', 'MW', 'Mtop', 'MH', 'Mh'):
+            with self.subTest(name=name):
+                issues = json_valid.validate_observable_name(name)
+                self.assertTrue(any(
+                    'obsolete mass shortcut' in issue for issue in issues
+                ))
+
+    def test_legacy_snapshot_shapes_are_rejected(self):
+        pdg = {
             'inspire-hep': '[PDG:2024](https://inspirehep.net/literature/1)',
             'author': 'Navas, S. and others',
             'collaboration': 'PDG',
             'title': 'Review of Particle Physics',
             'year': '2024',
-            'data': {'PDG@W': {'obs@1': obs}},
+            'data': {'PDG@W': {'obs@1': {
+                'name': 'Mass(W)', 'value': 80.3692,
+                'total_upper': 0.0133, 'total_lower': 0.0133,
+            }}},
         }
-
-    def test_pdg_snapshot_accepts_numeric_total_error(self):
-        doc = self._pdg_snapshot({
-            'name': 'MW', 'value': 80.3692,
-            'total_upper': 0.0133, 'total_lower': 0.0133, 'unit': 'GeV',
-        })
-        self.assertEqual(self._validate_snapshot_doc(doc), [])
-
-    def test_pdg_snapshot_rejects_scalar_error(self):
-        doc = self._pdg_snapshot({
-            'name': 'MW', 'value': 80.3692, 'error': 0.0133,
-        })
-        issues = self._validate_snapshot_doc(doc)
-        self.assertTrue(any(
-            "unknown observable field 'error'" in issue for issue in issues
-        ))
-        self.assertTrue(any(
-            'missing required field: total_upper' in issue for issue in issues
-        ))
-
-    def test_pdg_snapshot_requires_numeric_total_error(self):
-        doc = self._pdg_snapshot({
-            'name': 'MW', 'value': 80.3692,
-            'total_upper': '0.0133', 'total_lower': '0.0133',
-        })
-        issues = self._validate_snapshot_doc(doc)
-        self.assertTrue(any(
-            'total_upper: must be a number' in issue for issue in issues
-        ))
-
-    def test_hflav_snapshot_accepts_numeric_total_error(self):
-        doc = {
+        hflav = {
             'HFLAV@overview': {
                 'group': 'HFLAV',
                 'inspire-hep': '[HFLAV:2024](https://inspirehep.net/literature/1)',
-                'description': 'overview of popular observables',
-                'observables': [{
-                    'name': 'Tau(B0)', 'value': 1.517,
-                    'total_upper': 0.004, 'total_lower': 0.004, 'unit': 'ps',
-                }],
-                'correlation': None,
+                'observables': [{'name': 'Tau(B0)', 'value': 1.517}],
             },
         }
-        self.assertEqual(self._validate_snapshot_doc(doc), [])
+        for doc in (pdg, hflav):
+            with self.subTest(keys=list(doc)):
+                with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
+                    json.dump(doc, f)
+                    f.flush()
+                    issues = json_valid.validate_json(f.name)
+                self.assertTrue(issues)
+                self.assertTrue(any(
+                    'transition-mode' in issue for issue in issues
+                ))
 
 
 class CorrelationMatrixTests(unittest.TestCase):
@@ -909,53 +1018,11 @@ class DashboardDataTests(unittest.TestCase):
                'type@1_upper': '0.1', 'type@1_lower': '0.1',
                'type@2_error': 'syst',
                'type@2_upper': '0.05', 'type@2_lower': '0.05'}
-        group = {'B0.2.mu+.mu-': {'obs@1': obs}, 'type@1_correlation': [[1.0]]}
+        group = {'dB_I1?_0-n_0.2.MU_I??_1+n_0.mu_I??_1+n_0': {'obs@1': obs}, 'type@1_correlation': [[1.0]]}
         self.assertEqual(
             namespace['matrix_label']('type@1_correlation', group),
             'STAT-CORRELATION',
         )
-
-
-def load_dashboard():
-    dashboard_path = PROJECT_ROOT / 'flav.py'
-    namespace = {'__name__': 'dashboard_test'}
-    exec(compile('from __future__ import annotations\n' + dashboard_path.read_text(encoding='utf-8'),
-                 str(dashboard_path), 'exec'), namespace)
-    return namespace
-
-
-class StreamlitSnapshotTests(unittest.TestCase):
-    def test_latest_snapshot_picks_newest_year(self):
-        namespace = load_dashboard()
-        with tempfile.TemporaryDirectory() as directory:
-            for year in ('2023', '2024'):
-                folder = Path(directory) / 'HFLAV' / year
-                folder.mkdir(parents=True)
-                (folder / f'HFLAV@{year}.json').write_text('{}', encoding='utf-8')
-
-            found = namespace['_latest_snapshot'](
-                str(Path(directory) / 'HFLAV'), 'HFLAV'
-            )
-
-        self.assertEqual(found[0], '2024')
-        self.assertTrue(found[1].endswith('HFLAV@2024.json'))
-
-    def test_latest_snapshot_missing_directory_returns_none(self):
-        namespace = load_dashboard()
-        with tempfile.TemporaryDirectory() as directory:
-            missing = str(Path(directory) / 'Missing')
-            self.assertIsNone(namespace['_latest_snapshot'](missing, 'HFLAV'))
-
-    def test_latest_snapshot_accepts_flat_snapshot_file(self):
-        namespace = load_dashboard()
-        with tempfile.TemporaryDirectory() as directory:
-            folder = Path(directory) / 'PDG'
-            folder.mkdir()
-            (folder / 'PDG@2022.json').write_text('{}', encoding='utf-8')
-
-            found = namespace['_latest_snapshot'](str(folder), 'PDG')
-
-        self.assertEqual(found[0], '2022')
 
 
 class AuthorFormattingTests(unittest.TestCase):

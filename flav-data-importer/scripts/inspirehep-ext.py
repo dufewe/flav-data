@@ -3,7 +3,7 @@
 Extract detailed paper information from the InspireHEP API.
 
 Usage:
-    python3 inspirehep-ext.py <arxiv_id> [--output_dir /path/to/dir]
+    python3 inspirehep-ext.py <arxiv_id> [--output_dir DIR] [--no-write]
     python3 inspirehep-ext.py --recid <recid>
 
 Example:
@@ -68,8 +68,7 @@ def extract_metadata(hit: dict) -> dict:
     texkeys = meta.get('texkeys', [''])
     texkey = texkeys[0] if texkeys else ''
 
-    # Title (prefer arXiv source, preserves full LaTeX).
-    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Core Conventions".
+    # Title and abstract: prefer the arXiv source, which preserves full LaTeX.
     title = ''
     for t in meta.get('titles', []):
         if t.get('source') == 'arXiv':
@@ -79,8 +78,6 @@ def extract_metadata(hit: dict) -> dict:
         titles = meta.get('titles') or [{}]
         title = unicode_to_latex(titles[0].get('title', ''))
 
-    # Abstract (prefer arXiv source, preserves LaTeX format).
-    # Apply Unicode -> LaTeX per rule 4 of SKILL.md "Core Conventions".
     abstract = ''
     for a in meta.get('abstracts', []):
         if a.get('source') == 'arXiv':
@@ -90,35 +87,26 @@ def extract_metadata(hit: dict) -> dict:
         abstracts = meta.get('abstracts') or [{}]
         abstract = unicode_to_latex(abstracts[0].get('value', ''))
 
-    # Author list. Apply the 1 / 2 / 3 / 4+ tiers from SKILL.md rule 3.
-    authors = meta.get('authors', [])
-    author_list = [a.get('full_name', '') for a in authors]
-    author_str = format_authors(author_list)
-    if not author_str:
-        # If no person name found, use collaboration name
-        collaborations = meta.get('collaborations', [])
-        if collaborations:
-            author_str = f"{collaborations[0]['value']} collaboration"
-        else:
-            author_str = ''
-
-    # Collaboration: join multi-collaboration papers with ", ".
     collaborations = meta.get('collaborations', [])
+    author_list = [a.get('full_name', '') for a in meta.get('authors', [])]
+    author_str = format_authors(author_list)
+    if not author_str and collaborations:
+        author_str = f"{collaborations[0]['value']} collaboration"
+
+    # Multi-collaboration papers join with ", ".
     collaboration = ', '.join(
         c.get('value', '') for c in collaborations if c.get('value')
     )
 
-    # Date (use preprint_date = arXiv v1 submission date)
+    # preprint_date is the arXiv v1 submission date.
     preprint_date = meta.get('preprint_date', '')
     time_str = preprint_date.replace('-', '.') if preprint_date else ''
 
-    # arXiv info
     eprints = meta.get('arxiv_eprints', [{}])
     arxiv_id = eprints[0].get('value', '') if eprints else ''
     arxiv_categories = eprints[0].get('categories', []) if eprints else []
     primary_cat = arxiv_categories[0] if arxiv_categories else ''
 
-    # Publication info
     pub_info = (
         meta.get('publication_info', [{}])[0]
         if meta.get('publication_info') else {}
@@ -129,16 +117,18 @@ def extract_metadata(hit: dict) -> dict:
     journal_issue = pub_info.get('journal_issue', '')
     artid = pub_info.get('artid', '')
 
-    # DOI
     dois = meta.get('dois', [])
     doi = dois[0]['value'] if dois else ''
 
-    # Keywords
     keywords = [k.get('value', '') for k in meta.get('keywords', [])]
-
-    # Citation stats
     citation_count = meta.get('citation_count', 0)
     citation_without_self = meta.get('citation_count_without_self_citations', 0)
+
+    # Old-style IDs already carry their category; do not prepend twice.
+    # The vN suffix is only available from the arXiv API (arxiv-ext.py).
+    arxiv_label = arxiv_id
+    if arxiv_id and '/' not in arxiv_id and primary_cat:
+        arxiv_label = f'{primary_cat}/{arxiv_id}'
 
     return {
         'texkey': texkey,
@@ -160,41 +150,20 @@ def extract_metadata(hit: dict) -> dict:
         'keywords': keywords,
         'citation_count': citation_count,
         'citation_without_self': citation_without_self,
-        # Markdown links (for JSON files)
-        # NOTE: arxiv_link includes primary category when available.
-        # The version number (vN) is only available from arXiv API (arxiv-ext.py).
         'inspire_hep_link': (
             f'[{texkey}](https://inspirehep.net/literature/{recid})'
             if texkey and recid else None
         ),
         'arxiv_link': (
-            # Old-style IDs already carry their category (hep-ph/9504235);
-            # do not prepend primary_cat twice.
-            f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-            if arxiv_id and '/' in arxiv_id
-            else (
-                f'[{primary_cat}/{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-                if arxiv_id and primary_cat
-                else (
-                    f'[{arxiv_id}](https://arxiv.org/pdf/{arxiv_id})'
-                    if arxiv_id else None
-                )
-            )
+            f'[{arxiv_label}](https://arxiv.org/pdf/{arxiv_id})'
+            if arxiv_id else None
         ),
         'pdf_url': f'https://arxiv.org/pdf/{arxiv_id}' if arxiv_id else None,
     }
 
 
 def main() -> None:
-    """CLI entry point.
-
-    Examples
-    --------
-    >>> python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442
-    >>> python3 flav-data-importer/scripts/inspirehep-ext.py --arxiv-id 1512.04442
-    >>> python3 flav-data-importer/scripts/inspirehep-ext.py --recid 1409497
-    >>> python3 flav-data-importer/scripts/inspirehep-ext.py 1512.04442 --output_dir /tmp/meta
-    """
+    """CLI entry point."""
     parser = argparse.ArgumentParser(
         description='Extract InspireHEP paper information'
     )
@@ -215,8 +184,7 @@ def main() -> None:
     )
     parser.add_argument(
         '--no-write', dest='no_write', action='store_true',
-        help='Skip writing the JSON file; print summary only. Default is to '
-             'not write unless --output_dir is given.'
+        help='Skip writing the JSON file; print summary only.'
     )
     args = parser.parse_args()
 
@@ -224,7 +192,9 @@ def main() -> None:
     arxiv_id = args.arxiv_id or args.arxiv_id_flag
 
     if not arxiv_id and not args.recid:
-        parser.error("Either arxiv_id (positional or --arxiv-id) or --recid is required")
+        parser.error(
+            "Either arxiv_id (positional or --arxiv-id) or --recid is required"
+        )
 
     if args.recid:
         print(f"Fetching InspireHEP record: {args.recid}")

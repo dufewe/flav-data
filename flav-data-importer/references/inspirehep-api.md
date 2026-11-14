@@ -67,7 +67,7 @@ even when a directory is given.
 ## Notes
 
 1. Always prefer arXiv-sourced titles/abstracts — they preserve LaTeX formatting. Journal-sourced versions often strip LaTeX.
-2. `author_str` uses the 1 / 2 / 3 / 4+ tiers (SKILL.md rule 3). If no person authors, fall back to `"{group} collaboration"`.
+2. `author_str` follows SKILL.md rule 3.
 3. Multi-collaboration records are joined with `", "` (e.g. `"ATLAS, CMS"`).
 4. Use the collaboration-level TexKey for filenames and indices, not the author-level one.
 5. TexKeys can change when papers are updated — always verify before writing indices.

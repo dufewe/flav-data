@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "e+.e-.2.Z.2.all": {
+            "E_I??_1+n_0.e_I??_1+n_0.2.Z_I??_1??_0.2.all": {
                 "obs@1": {
                     "name": "mZ",
                     "value": "91.1875",
@@ -27,7 +27,7 @@
             }
         },
         {
-            "e+.e-.2.Z.2.had": {
+            "E_I??_1+n_0.e_I??_1+n_0.2.Z_I??_1??_0.2.had": {
                 "obs@1": {
                     "name": "sigma_had0",
                     "value": "41.540",
@@ -38,7 +38,7 @@
             }
         },
         {
-            "Z.2.v.vBar": {
+            "Z_I??_1??_0.2.v.vBar": {
                 "obs@1": {
                     "name": "Nnu",
                     "value": "2.9840",
@@ -48,7 +48,7 @@
             }
         },
         {
-            "Z.2.l+.l-": {
+            "Z_I??_1??_0.2.l+.l-": {
                 "obs@1": {
                     "name": "sin2theta_eff_lept",
                     "value": "0.23153",

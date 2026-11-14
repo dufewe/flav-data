@@ -17,7 +17,7 @@ with open(os.path.join(HERE, 'defs.py'), 'r', encoding='utf-8') as f:
 
 import streamlit as st
 
-from flav import run_dashboard, run_snapshot_dashboard
+from flav import run_dashboard
 
 st.set_page_config(layout="wide")
 
@@ -31,20 +31,6 @@ def _dashboard_page(lab, group, base_path):
     )
 
 
-def _snapshot_page(group):
-    return partial(
-        run_snapshot_dashboard, group=group,
-        get_json_func=get_json, base_path=EXPERIMENTAL_BASE,
-    )
-
-
-def _experimental_page(entry):
-    lab, group = entry[0], entry[1]
-    if group in ('HFLAV', 'PDG'):
-        return _snapshot_page(group)
-    return _dashboard_page(lab, group, EXPERIMENTAL_BASE)
-
-
 def _title(entry):
     lab, group = entry[0], entry[1]
     return f"{lab}-{group}" if lab else group
@@ -56,8 +42,8 @@ main_pages = {
         st.Page(f"obs-info/{obs.lower()}.py", title=obs) for obs in OBSGROUP
     ],
     "Experimental": [
-        st.Page(_experimental_page(entry), title=_title(entry),
-                url_path=_title(entry))
+        st.Page(_dashboard_page(entry[0], entry[1], EXPERIMENTAL_BASE),
+                title=_title(entry), url_path=_title(entry))
         for entry in EXPEGROUP
     ],
     "Theoretical": [

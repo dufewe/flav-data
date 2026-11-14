@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # Electroweak precision observable guide for the flav-data
 # Streamlit app. Uses the same naming rules as the flavor page;
-# symbols come from flav-data-importer/references/obs-abbr.md.
+# symbols come from flav-data-importer/references/observable-naming.md.
 # ---------------------------------------------------------
 
 import os
@@ -23,8 +23,8 @@ and `[condition]` is reserved for multi-transition ratios or differences.
 
 | Component | Meaning |
 |-----------|---------|
-| `OBS` | Abbreviation from `flav-data-importer/references/obs-abbr.md` §3 |
-| `data` key | Transition (`A.B.2.C.D`) or `no-transition` for intrinsic properties |
+| `OBS` | Abbreviation from `flav-data-importer/references/observable-naming.md` §3 |
+| `data` key | pid transition (pids joined by `.2.`) or `no-transition` for intrinsic properties |
 | `[condition]` | Flavor mapping for multi-transition observables only |
 | `(parameter)` | Non-transition tag, e.g. `R1(CLN)` |
 
@@ -40,15 +40,16 @@ process, so they sit under the `no-transition` key in a data group:
 
 | Quantity | Symbol | Notes |
 |----------|--------|-------|
-| $Z$ mass | `Mass(Z)` | Legacy shortcut `MZ` |
-| $W$ mass | `Mass(W)` | Legacy shortcut `MW` |
-| Higgs mass | `Mass(H)` | Legacy shortcut `MH`; light Higgs `Mh` |
-| Top mass | `Mass(t)` | Legacy shortcut `Mtop` |
+| $Z$ mass | `Mass(Z)` | On-shell mass |
+| $W$ mass | `Mass(W)` | On-shell mass |
+| Higgs mass | `Mass(H)` | On-shell mass |
+| Top mass | `Mass(t)` | On-shell mass |
 | $\overline{\text{MS}}$ mass | `mass(t)` | Running mass (lowercase `mass`) |
 | Lifetime | `Tau(f)` | `f` is the particle symbol, e.g. `Tau(Bs0)` |
 
-Legacy shortcuts remain valid for existing files, but new imports should
-use the generic `Mass(f)` form.
+The argument is the PDG particle label, not a pid. Single-token
+shortcuts (`MZ`, `MW`, `Mtop`, `MH`, `Mh`) are rejected by the
+validator.
 
 Some EWPO quantities are bare names without any transition or particle
 argument:
@@ -67,21 +68,21 @@ and put the transition in the `data` key:
 
 | Quantity | Symbol | Data key |
 |----------|--------|----------|
-| Branching fraction | `Br` | `H.2.gamma.gamma` |
-| Decay fraction | `f` | `Z.2.mu+.mu-` |
-| Partial or total width | `Gamma` | `Z.2.mu+.mu-` |
-| Forward-backward asymmetry | `AFB` | `e+.e-.2.Z.2.mu+.mu-` |
-| Cross section | `Sigma` | `p+.p+.2.W+.2.mu+.v` |
-| Differential cross section in $p_T$ | `dSigma/dpT` | `p+.p+.2.W+.2.mu+.v` |
-| Differential cross section in $\eta$ | `dSigma/deta` | `p+.p+.2.W+.2.mu+.v` |
-| Charge asymmetry | `AC` | `B+.2.J/psi0.K+` |
+| Branching fraction | `Br` | `H_I??_0++_0.2.ph_I??_1--_0.ph_I??_1--_0` |
+| Decay fraction | `f` | `Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
+| Partial or total width | `Gamma` | `Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
+| Forward-backward asymmetry | `AFB` | `E_I??_1+n_0.e_I??_1+n_0.2.Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
+| Cross section | `Sigma` | `uud_I1?_1+n_0.uud_I1?_1+n_0.2.W_I??_1??_0.2.MU_I??_1+n_0.v` |
+| Differential cross section in $p_T$ | `dSigma/dpT` | `uud_I1?_1+n_0.uud_I1?_1+n_0.2.W_I??_1??_0.2.MU_I??_1+n_0.v` |
+| Differential cross section in $\eta$ | `dSigma/deta` | `uud_I1?_1+n_0.uud_I1?_1+n_0.2.W_I??_1??_0.2.MU_I??_1+n_0.v` |
+| Charge asymmetry | `AC` | `uB_I1?_0-n_0.2.cC_I0-_1--_0.uS_I1?_0-n_0` |
 | Direct CP asymmetry | `ACP` | channel of the decay |
 
 Transition keys follow the full rules used everywhere else in the
-database: initial state, `2`, final state, with cascades repeating `2`
-(`p+.p+.2.W+.2.mu+.v`). See the **Flavor** guide for particle ordering,
-charge indicators, and antiparticle `Bar`; compact keys without `.2.`
-are rejected.
+database: pids, initial state, `2`, final state, with cascades repeating
+`2` (`uud_I1?_1+n_0.uud_I1?_1+n_0.2.W_I??_1??_0.2.MU_I??_1+n_0.v`). See
+the **Flavor** guide for pid grammar and ordering; a compact key without
+`.2.` is rejected.
 
 ## Ratios and Differences
 
@@ -97,14 +98,13 @@ the final state; do not repeat that state in the name.
 ## Names Not Yet in the Reference
 
 The importer reference is the contract. Quantities without an entry in
-`obs-abbr.md` §3 — for example the effective weak mixing angle, Higgs
+`observable-naming.md` §3 — for example the effective weak mixing angle, Higgs
 signal strengths, or coupling modifiers — must first be given a symbol
 and added to that table (see §5 of the reference), then used in JSON.
 Do not invent a page-only spelling that the importer does not validate.
 
-The same applies to new particles or intermediate states: add them to
-the particle tables in `obs-abbr.md` §1 before using them in a
-transition key.
+The same applies to new particles or intermediate states: register the
+pid in `particle-naming.md` before using it in a transition key.
 ''')
 
 # ---------------------------------------------------------
@@ -127,6 +127,7 @@ such as "rare decay" or "BSM search" are invalid.
 | `oblique-corrections` | $S$, $T$, $U$ parameter fits | New-physics constraints |
 | `scattering` | Scattering and production processes | $pp \to W$, $e^+e^- \to \mu^+\mu^-$ |
 | `mixing` | Mixing, oscillation, lifetime measurements | $\Delta m_s$, $\tau(B_s^0)$ |
+| `world-average` | Compiled averages of many processes | PDG Review, HFLAV averages |
 
 The complete list (including the decay categories `leptonic-decay`,
 `semileptonic-decay`, `non-leptonic-decay`, `radiative-decay`,

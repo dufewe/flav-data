@@ -9,9 +9,9 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0Bar.2.D+.tau-.v": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.tau_I??_1+n_0.vBar": {
                 "obs@1": {
-                    "name": "dBr/dq2[4.0-4.53]",
+                    "name": "dBr/dq2",
                     "value": "0.078",
                     "type@1_error": "stat",
                     "type@1_upper": "0.053",
@@ -23,7 +23,7 @@
                     "q2max": "4.53"
                 },
                 "obs@2": {
-                    "name": "dBr/dq2[4.53-5.07]",
+                    "name": "dBr/dq2",
                     "value": "0.091",
                     "type@1_error": "stat",
                     "type@1_upper": "0.050",
@@ -35,7 +35,7 @@
                     "q2max": "5.07"
                 },
                 "obs@3": {
-                    "name": "dBr/dq2[5.07-5.6]",
+                    "name": "dBr/dq2",
                     "value": "0.072",
                     "type@1_error": "stat",
                     "type@1_upper": "0.046",
@@ -47,7 +47,7 @@
                     "q2max": "5.6"
                 },
                 "obs@4": {
-                    "name": "dBr/dq2[5.6-6.13]",
+                    "name": "dBr/dq2",
                     "value": "0.093",
                     "type@1_error": "stat",
                     "type@1_upper": "0.047",
@@ -59,7 +59,7 @@
                     "q2max": "6.13"
                 },
                 "obs@5": {
-                    "name": "dBr/dq2[6.13-6.67]",
+                    "name": "dBr/dq2",
                     "value": "0.053",
                     "type@1_error": "stat",
                     "type@1_upper": "0.048",
@@ -71,7 +71,7 @@
                     "q2max": "6.67"
                 },
                 "obs@6": {
-                    "name": "dBr/dq2[6.67-7.2]",
+                    "name": "dBr/dq2",
                     "value": "0.145",
                     "type@1_error": "stat",
                     "type@1_upper": "0.051",
@@ -83,7 +83,7 @@
                     "q2max": "7.2"
                 },
                 "obs@7": {
-                    "name": "dBr/dq2[7.2-7.73]",
+                    "name": "dBr/dq2",
                     "value": "0.046",
                     "type@1_error": "stat",
                     "type@1_upper": "0.053",
@@ -95,7 +95,7 @@
                     "q2max": "7.73"
                 },
                 "obs@8": {
-                    "name": "dBr/dq2[7.73-8.27]",
+                    "name": "dBr/dq2",
                     "value": "-0.01",
                     "type@1_error": "stat",
                     "type@1_upper": "0.050",
@@ -107,7 +107,7 @@
                     "q2max": "8.27"
                 },
                 "obs@9": {
-                    "name": "dBr/dq2[8.27-8.8]",
+                    "name": "dBr/dq2",
                     "value": "0.053",
                     "type@1_error": "stat",
                     "type@1_upper": "0.050",
@@ -119,7 +119,7 @@
                     "q2max": "8.8"
                 },
                 "obs@10": {
-                    "name": "dBr/dq2[8.8-9.33]",
+                    "name": "dBr/dq2",
                     "value": "0.122",
                     "type@1_error": "stat",
                     "type@1_upper": "0.051",
@@ -131,7 +131,7 @@
                     "q2max": "9.33"
                 },
                 "obs@11": {
-                    "name": "dBr/dq2[9.33-9.86]",
+                    "name": "dBr/dq2",
                     "value": "0.063",
                     "type@1_error": "stat",
                     "type@1_upper": "0.050",
@@ -143,7 +143,7 @@
                     "q2max": "9.86"
                 },
                 "obs@12": {
-                    "name": "dBr/dq2[9.86-10.4]",
+                    "name": "dBr/dq2",
                     "value": "0.121",
                     "type@1_error": "stat",
                     "type@1_upper": "0.051",
@@ -155,7 +155,7 @@
                     "q2max": "10.4"
                 },
                 "obs@13": {
-                    "name": "dBr/dq2[10.4-10.93]",
+                    "name": "dBr/dq2",
                     "value": "-0.003",
                     "type@1_error": "stat",
                     "type@1_upper": "0.046",
@@ -167,7 +167,7 @@
                     "q2max": "10.93"
                 },
                 "obs@14": {
-                    "name": "dBr/dq2[10.93-11.47]",
+                    "name": "dBr/dq2",
                     "value": "0.065",
                     "type@1_error": "stat",
                     "type@1_upper": "0.043",
@@ -179,7 +179,7 @@
                     "q2max": "11.47"
                 },
                 "obs@15": {
-                    "name": "dBr/dq2[11.47-12.0]",
+                    "name": "dBr/dq2",
                     "value": "0.011",
                     "type@1_error": "stat",
                     "type@1_upper": "0.036",
@@ -193,7 +193,7 @@
             }
         },
         {
-            "B0.2.D-.tau+.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_0-n_0.TAU_I??_1+n_0.v/dB_I1?_0-n_0.2.dC_I1?_0-n_0.l+.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.375",
@@ -207,7 +207,7 @@
             }
         },
         {
-            "B0.2.D*-.tau+.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.TAU_I??_1+n_0.v/dB_I1?_0-n_0.2.dC_I1?_1-n_0.l+.v": {
                 "obs@1": {
                     "name": "R",
                     "value": "0.293",
@@ -221,9 +221,9 @@
             }
         },
         {
-            "B0Bar.2.D*+.tau-.v": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.tau_I??_1+n_0.vBar": {
                 "obs@1": {
-                    "name": "dBr/dq2[5.2-6.8]",
+                    "name": "dBr/dq2",
                     "value": "6.0e-4",
                     "type@1_error": "stat",
                     "type@1_upper": "3.2e-4",
@@ -235,7 +235,7 @@
                     "q2max": "6.8"
                 },
                 "obs@2": {
-                    "name": "dBr/dq2[6.8-8.4]",
+                    "name": "dBr/dq2",
                     "value": "1.00",
                     "type@1_error": "stat",
                     "type@1_upper": "0.28",
@@ -247,7 +247,7 @@
                     "q2max": "8.4"
                 },
                 "obs@3": {
-                    "name": "dBr/dq2[8.4-10.0]",
+                    "name": "dBr/dq2",
                     "value": "1.52",
                     "type@1_error": "stat",
                     "type@1_upper": "0.26",
@@ -259,7 +259,7 @@
                     "q2max": "10.0"
                 },
                 "obs@4": {
-                    "name": "dBr/dq2[10.0-11.6]",
+                    "name": "dBr/dq2",
                     "value": "1.95",
                     "type@1_error": "stat",
                     "type@1_upper": "0.26",
@@ -271,7 +271,7 @@
                     "q2max": "11.6"
                 },
                 "obs@5": {
-                    "name": "dBr/dq2[11.6-13.2]",
+                    "name": "dBr/dq2",
                     "value": "2.07",
                     "type@1_error": "stat",
                     "type@1_upper": "0.28",
@@ -283,7 +283,7 @@
                     "q2max": "13.2"
                 },
                 "obs@6": {
-                    "name": "dBr/dq2[13.2-14.8]",
+                    "name": "dBr/dq2",
                     "value": "2.00",
                     "type@1_error": "stat",
                     "type@1_upper": "0.29",
@@ -295,7 +295,7 @@
                     "q2max": "14.8"
                 },
                 "obs@7": {
-                    "name": "dBr/dq2[14.8-16.4]",
+                    "name": "dBr/dq2",
                     "value": "1.87",
                     "type@1_error": "stat",
                     "type@1_upper": "0.31",
@@ -307,7 +307,7 @@
                     "q2max": "16.4"
                 },
                 "obs@8": {
-                    "name": "dBr/dq2[16.4-18.0]",
+                    "name": "dBr/dq2",
                     "value": "1.63",
                     "type@1_error": "stat",
                     "type@1_upper": "0.33",
@@ -319,7 +319,7 @@
                     "q2max": "18.0"
                 },
                 "obs@9": {
-                    "name": "dBr/dq2[18.0-19.6]",
+                    "name": "dBr/dq2",
                     "value": "1.35",
                     "type@1_error": "stat",
                     "type@1_upper": "0.32",
@@ -331,7 +331,7 @@
                     "q2max": "19.6"
                 },
                 "obs@10": {
-                    "name": "dBr/dq2[19.6-21.2]",
+                    "name": "dBr/dq2",
                     "value": "0.87",
                     "type@1_error": "stat",
                     "type@1_upper": "0.24",
@@ -343,7 +343,7 @@
                     "q2max": "21.2"
                 },
                 "obs@11": {
-                    "name": "dBr/dq2[21.2-22.8]",
+                    "name": "dBr/dq2",
                     "value": "0.45",
                     "type@1_error": "stat",
                     "type@1_upper": "0.15",
@@ -355,7 +355,7 @@
                     "q2max": "22.8"
                 },
                 "obs@12": {
-                    "name": "dBr/dq2[22.8-24.4]",
+                    "name": "dBr/dq2",
                     "value": "0.17",
                     "type@1_error": "stat",
                     "type@1_upper": "0.08",

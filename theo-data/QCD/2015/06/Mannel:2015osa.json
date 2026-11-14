@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.Lambdac+.l-.vBar": {
+            "udb_I0?_1+n_0.2.udc_I0?_1+n_0.l-.vBar": {
                 "obs@1": {
                     "name": "I0A",
                     "value": "0.811",

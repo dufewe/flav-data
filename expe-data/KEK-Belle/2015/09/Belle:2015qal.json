@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B0.2.pi-.tau+.vtau": {
+            "dB_I1?_0-n_0.2.Ud_I2-_0-n_0.TAU_I??_1+n_0.vtau_I??_1+n_0": {
                 "obs@1": {
                     "name": "Br[90%@CL]",
                     "type@1_upper": "2.5e-4",

@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.Lambdac+(2625).l-.vBar": {
+            "udb_I0?_1+n_0.2.udc_I0?_3-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_F+",
                     "value": "0.0498171762048",
@@ -178,7 +178,7 @@
                     "total_lower": "0.52213"
                 }
             },
-            "Lambdab0.2.Lambdac+(2595).l-.vBar": {
+            "udb_I0?_1+n_0.2.udc_I0?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "a0_F+",
                     "value": "0.162832741977",

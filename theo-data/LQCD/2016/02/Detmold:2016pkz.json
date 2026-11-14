@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Lambdab0.2.Lambda0.l+.l-": {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.l+.l-": {
                 "obs@1": {
                     "name": "a0_F+",
                     "value": "0.4220840771427",
@@ -157,7 +157,7 @@
             ]
         },
         {
-            "Lambdab0.2.Lambda0.l+.l-": {
+            "udb_I0?_1+n_0.2.uds_I0?_1+n_0.l+.l-": {
                 "obs@1": {
                     "name": "a0_F+",
                     "value": "0.42289944554385",

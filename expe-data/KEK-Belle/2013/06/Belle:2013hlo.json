@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B-.2.pi0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I2-_0-+_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "8.0e-5",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "B-.2.pi0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I2-_0-+_0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.81e-05",
@@ -92,7 +92,7 @@
             ]
         },
         {
-            "B0Bar.2.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.49e-4",
@@ -106,7 +106,7 @@
             }
         },
         {
-            "B0Bar.2.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.95e-05",
@@ -229,7 +229,7 @@
             ]
         },
         {
-            "B-.2.rho0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I2+_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.83e-4",
@@ -243,7 +243,7 @@
             }
         },
         {
-            "B-.2.rho0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I2+_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "1.24e-05",
@@ -348,7 +348,7 @@
             ]
         },
         {
-            "B0Bar.2.rho+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2+_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "3.22e-4",
@@ -362,7 +362,7 @@
             }
         },
         {
-            "B0Bar.2.rho+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2+_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "3.73e-05",
@@ -422,7 +422,7 @@
             ]
         },
         {
-            "B-.2.omega0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I0-_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
                     "value": "1.07e-4",
@@ -436,7 +436,7 @@
             }
         },
         {
-            "B-.2.omega0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.qQ_I0-_1--_0.l-.vBar": {
                 "obs@1": {
                     "name": "dBr",
                     "value": "2.28e-05",
@@ -469,7 +469,7 @@
             ]
         },
         {
-            "B0Bar.2.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.52e-3",

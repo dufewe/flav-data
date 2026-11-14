@@ -9,7 +9,7 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "p+.p+Bar.2.W-.2.l.v": {
+            "uud_I1?_1+n_0.UUD_I1?_1+n_0.2.WB_I??_1??_0.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80387",
@@ -17,10 +17,11 @@
                     "total_lower": "19",
                     "unit": "MeV"
                 }
-            }
+            },
+            "note": "Tevatron average"
         },
         {
-            "p+.p+Bar.2.W-.2.l.v.world": {
+            "uud_I1?_1+n_0.UUD_I1?_1+n_0.2.WB_I??_1??_0.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80385",
@@ -28,10 +29,11 @@
                     "total_lower": "15",
                     "unit": "MeV"
                 }
-            }
+            },
+            "note": "world average (Tevatron + LEP)"
         },
         {
-            "p+.p+Bar.2.W-.2.l.v.CDF": {
+            "uud_I1?_1+n_0.UUD_I1?_1+n_0.2.WB_I??_1??_0.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80387",
@@ -43,10 +45,11 @@
                     "type@2_upper": "12",
                     "type@2_lower": "12"
                 }
-            }
+            },
+            "note": "CDF measurement"
         },
         {
-            "p+.p+Bar.2.W-.2.l.v.D0": {
+            "uud_I1?_1+n_0.UUD_I1?_1+n_0.2.WB_I??_1??_0.2.l.v": {
                 "obs@1": {
                     "name": "mW",
                     "value": "80367",
@@ -58,7 +61,8 @@
                     "type@2_upper": "13",
                     "type@2_lower": "13"
                 }
-            }
+            },
+            "note": "D0 measurement"
         }
     ]
 }

@@ -9,152 +9,142 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "B-.2.D0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "2.33",
+                    "value": "0.0233",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.09",
-                    "type@1_lower": "0.09",
+                    "type@1_upper": "0.0009",
+                    "type@1_lower": "0.0009",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.09",
-                    "type@2_lower": "0.09",
-                    "unit": "%"
+                    "type@2_upper": "0.0009",
+                    "type@2_lower": "0.0009"
                 }
             }
         },
         {
-            "B-.2.D*0.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Uc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "5.83",
+                    "value": "0.0583",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.15",
-                    "type@1_lower": "0.15",
+                    "type@1_upper": "0.0015",
+                    "type@1_lower": "0.0015",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.30",
-                    "type@2_lower": "0.30",
-                    "unit": "%"
+                    "type@2_upper": "0.0030",
+                    "type@2_lower": "0.0030"
                 }
             }
         },
         {
-            "B0Bar.2.D+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "2.21",
+                    "value": "0.0221",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.11",
-                    "type@1_lower": "0.11",
+                    "type@1_upper": "0.0011",
+                    "type@1_lower": "0.0011",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.12",
-                    "type@2_lower": "0.12",
-                    "unit": "%"
+                    "type@2_upper": "0.0012",
+                    "type@2_lower": "0.0012"
                 }
             }
         },
         {
-            "B0Bar.2.D*+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "5.49",
+                    "value": "0.0549",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.16",
-                    "type@1_lower": "0.16",
+                    "type@1_upper": "0.0016",
+                    "type@1_lower": "0.0016",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.25",
-                    "type@2_lower": "0.25",
-                    "unit": "%"
+                    "type@2_upper": "0.0025",
+                    "type@2_lower": "0.0025"
                 }
             }
         },
         {
-            "B-.2.D+.pi-.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Dc_I1?_0-n_0.Ud_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.42",
+                    "value": "0.0042",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.06",
-                    "type@1_lower": "0.06",
+                    "type@1_upper": "0.0006",
+                    "type@1_lower": "0.0006",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.03",
-                    "type@2_lower": "0.03",
-                    "unit": "%"
+                    "type@2_upper": "0.0003",
+                    "type@2_lower": "0.0003"
                 }
             }
         },
         {
-            "B-.2.D*+.pi-.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Dc_I1?_1-n_0.Ud_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.59",
+                    "value": "0.0059",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.05",
-                    "type@1_lower": "0.05",
+                    "type@1_upper": "0.0005",
+                    "type@1_lower": "0.0005",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.04",
-                    "type@2_lower": "0.04",
-                    "unit": "%"
+                    "type@2_upper": "0.0004",
+                    "type@2_lower": "0.0004"
                 }
             }
         },
         {
-            "B0Bar.2.D0.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Uc_I1?_0-n_0.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.43",
+                    "value": "0.0043",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.08",
-                    "type@1_lower": "0.08",
+                    "type@1_upper": "0.0008",
+                    "type@1_lower": "0.0008",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.03",
-                    "type@2_lower": "0.03",
-                    "unit": "%"
+                    "type@2_upper": "0.0003",
+                    "type@2_lower": "0.0003"
                 }
             }
         },
         {
-            "B0Bar.2.D*0.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Uc_I1?_1-n_0.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "0.48",
+                    "value": "0.0048",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.08",
-                    "type@1_lower": "0.08",
+                    "type@1_upper": "0.0008",
+                    "type@1_lower": "0.0008",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.04",
-                    "type@2_lower": "0.04",
-                    "unit": "%"
+                    "type@2_upper": "0.0004",
+                    "type@2_lower": "0.0004"
                 }
             }
         },
         {
-            "B-.2.D*+.pi-.l-.vBar": {
+            "Ub_I1?_0-n_0.2.Dc_I1?_1-n_0.Ud_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.52",
+                    "value": "0.0152",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.12",
-                    "type@1_lower": "0.12",
+                    "type@1_upper": "0.0012",
+                    "type@1_lower": "0.0012",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.10",
-                    "type@2_lower": "0.10",
-                    "unit": "%"
+                    "type@2_upper": "0.0010",
+                    "type@2_lower": "0.0010"
                 }
             }
         },
         {
-            "B0Bar.2.D*0.pi+.l-.vBar": {
+            "Db_I1?_0-n_0.2.Uc_I1?_1-n_0.uD_I2-_0-n_0.l-.vBar": {
                 "obs@1": {
                     "name": "Br",
-                    "value": "1.37",
+                    "value": "0.0137",
                     "type@1_error": "stat",
-                    "type@1_upper": "0.17",
-                    "type@1_lower": "0.17",
+                    "type@1_upper": "0.0017",
+                    "type@1_lower": "0.0017",
                     "type@2_error": "syst",
-                    "type@2_upper": "0.10",
-                    "type@2_lower": "0.10",
-                    "unit": "%"
+                    "type@2_upper": "0.0010",
+                    "type@2_lower": "0.0010"
                 }
             }
         }

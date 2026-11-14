@@ -9,9 +9,9 @@
     "transition-mode": "leptonic-decay",
     "data": [
         {
-            "W-.2.tau-.vtau": {
+            "WB_I??_1??_0.2.tau_I??_1+n_0.VTAU_I??_1+n_0/WB_I??_1??_0.2.mu_I??_1+n_0.VMU_I??_1+n_0": {
                 "obs@1": {
-                    "name": "Rtaumu",
+                    "name": "R",
                     "value": "0.992",
                     "type@1_error": "syst",
                     "type@1_upper": "0.011",

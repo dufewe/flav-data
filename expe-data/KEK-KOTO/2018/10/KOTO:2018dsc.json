@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "KL0.2.pi0.v.vBar": {
+            "qQ_I1?_0-n_1.2.qQ_I2-_0-+_0.v.vBar": {
                 "obs@1": {
                     "name": "BR",
                     "type@1_upper": "4.9e-9",
@@ -18,7 +18,7 @@
             }
         },
         {
-            "KL0.2.pi0.v.vBar": {
+            "qQ_I1?_0-n_1.2.qQ_I2-_0-+_0.v.vBar": {
                 "obs@1": {
                     "name": "SES",
                     "value": "1.30e-9",
