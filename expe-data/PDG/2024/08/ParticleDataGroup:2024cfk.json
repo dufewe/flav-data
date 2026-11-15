@@ -732,7 +732,7 @@
             "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
         },
         {
-            "uB_I1?_0-n_0.2.Uc_I1?_0-n_0.l+.v": {
+            "uB_I1?_0-n_0.2.uC_I1?_0-n_0.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0221",
@@ -743,7 +743,7 @@
             "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
         },
         {
-            "uB_I1?_0-n_0.2.Uc_I1?_0-n_0.TAU_I??_1+n_0.v": {
+            "uB_I1?_0-n_0.2.uC_I1?_0-n_0.TAU_I??_1+n_0.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0077",
@@ -754,7 +754,7 @@
             "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
         },
         {
-            "uB_I1?_0-n_0.2.Uc_I1?_1-n_0.l+.v": {
+            "uB_I1?_0-n_0.2.uC_I1?_1-n_0.l+.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0553",
@@ -765,7 +765,7 @@
             "note": "PDG charge-averaged rate; the B flavour follows the charge of the final state as listed by PDG."
         },
         {
-            "uB_I1?_0-n_0.2.Uc_I1?_1-n_0.TAU_I??_1+n_0.v": {
+            "uB_I1?_0-n_0.2.uC_I1?_1-n_0.TAU_I??_1+n_0.v": {
                 "obs@1": {
                     "name": "Br",
                     "value": "0.0188",

@@ -41,6 +41,7 @@ flav-data-importer/
 - Python 3.10+
 - `hepdata-cli`: `pip install hepdata-cli` (HEPData access)
 - `pymupdf`: `pip install pymupdf` (PDF fallback extraction)
+- `marker-pdf`: `pip install marker-pdf` (optional, scanned-PDF OCR)
 - `pyyaml`: `pip install pyyaml` (HEPData YAML parsers)
 
 arXiv and InspireHEP APIs are unauthenticated and rate-limited
@@ -83,6 +84,7 @@ to_bibtex("Aaij, Roel")               # → "Aaij, R."
 | **InspireHEP API** | TexKey, recid, collaboration, DOI, authors → `references/inspirehep-api.md` |
 | **hepdata-cli** | Machine-readable HEPData → `references/hepdata-cli.md` |
 | **pymupdf** | PDF text extraction (fallback data source) |
+| **marker-pdf** | Scanned-PDF OCR, replaces pymupdf (optional) → `references/data-source.md` §5 |
 | **Image reading** | Table screenshots and PDF page images, read with the agent's image tool |
 
 ### Local scripts

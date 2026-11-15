@@ -339,9 +339,10 @@ class JsonValidatorTests(unittest.TestCase):
     def _channel(cls, *obs):
         return {f'obs@{i}': o for i, o in enumerate(obs, 1)}
 
-    def _validate_data(self, data_block, mode='semileptonic-decay'):
+    def _validate_data(self, data_block, mode='semileptonic-decay',
+                       inspire='[Test:2024](https://inspirehep.net/literature/1)'):
         doc = {
-            'inspire-hep': '[Test:2024](https://inspirehep.net/literature/1)',
+            'inspire-hep': inspire,
             'author': 'Doe, J.',
             'title': 'Test',
             'arxiv': '[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)',
@@ -354,6 +355,21 @@ class JsonValidatorTests(unittest.TestCase):
             json.dump(doc, f)
             f.flush()
             return json_valid.validate_json(f.name)
+
+    def test_inspire_hep_requires_markdown_link(self):
+        channel = 'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
+        data = [{channel: self._channel(self._obs('FL'))}]
+        for bad in ('1', 1, 'Test:2024', '',
+                    'https://inspirehep.net/literature/1',
+                    '[Test:2024](https://inspirehep.net/literature/abc)',
+                    '[Test:2024](http://inspirehep.net/literature/1)',
+                    '[Test:2024](https://inspirehep.net/record/1)'):
+            with self.subTest(value=bad):
+                issues = self._validate_data(data, inspire=bad)
+                self.assertTrue(
+                    any('inspire-hep field must be' in i for i in issues),
+                    issues,
+                )
 
     def test_data_groups_allow_cross_channel_matrices(self):
         data = [{

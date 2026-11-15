@@ -1,0 +1,21 @@
+{
+    "inspire-hep": "[Vilain:1994qy](https://inspirehep.net/literature/376363)",
+    "author": "Vilain, P. and others",
+    "collaboration": "CHARM-II",
+    "title": "Precision measurement of electroweak parameters from the scattering of muon-neutrinos on electrons",
+    "time": "1994.01.01",
+    "abstract": "We report final results on electroweak parameters from muon-neutrino electron scattering observed in the CHARM II detector from 1987 till 1991. In total $2677 \\pm 82$ and $2752 \\pm 88$ neutrino-electron scattering events have been detected in the $\\nu$ and $\\bar{\\nu}$ beam, respectively. From the ratio of differential cross sections we obtain for the electroweak mixing angle $\\sin^{2}\\Theta = 0.2324 \\pm 0.0083$. From the absolute neutrino-electron scattering event rate we determined the effective vector and axial-vector neutral current coupling constants to be $g_V^{\\nu e} = -0.035 \\pm 0.017$ and $g_A^{\\nu e} = -0.503 \\pm 0.017$.",
+    "transition-mode": "scattering",
+    "data": [
+        {
+            "e_I??_1+n_0.v.2.e_I??_1+n_0.v": {
+                "obs@1": {
+                    "name": "sin2theta_W",
+                    "value": "0.2324",
+                    "total_upper": "0.0083",
+                    "total_lower": "0.0083"
+                }
+            }
+        }
+    ]
+}

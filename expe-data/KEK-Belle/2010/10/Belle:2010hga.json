@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "dB_I1?_0-n_0.2.Dc_I1?_1-n_0.l+.v": {
+            "dB_I1?_0-n_0.2.dC_I1?_1-n_0.l+.v": {
                 "obs@1": {
                     "name": "Vcb",
                     "value": "3.934e-2",

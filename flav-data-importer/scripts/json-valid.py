@@ -843,6 +843,31 @@ def validate_arxiv_format(arxiv) -> list[str]:
     return issues
 
 
+_INSPIRE_LINK_RE = re.compile(
+    r'\[([^\]]+)\]\(https://inspirehep\.net/literature/(\d+)\)'
+)
+
+
+def validate_inspire_format(inspire) -> list[str]:
+    """Check the inspire-hep field: ``[TexKey](https://inspirehep.net/literature/<recid>)``.
+
+    Unlike ``arxiv``, no legacy bare form is accepted: json-meta.md
+    §"Top-Level Metadata Fields" requires the Markdown link.
+    """
+    if not isinstance(inspire, str):
+        return [
+            f"  inspire-hep field must be a string, "
+            f"got {type(inspire).__name__}"
+        ]
+    if not _INSPIRE_LINK_RE.fullmatch(inspire.strip()):
+        return [
+            f"  inspire-hep field must be a Markdown link "
+            f"'[TexKey](https://inspirehep.net/literature/<recid>)', "
+            f"got: {inspire!r}"
+        ]
+    return []
+
+
 def _validate_channel_entry(channel, label: str) -> tuple[list[str], int]:
     """Validate one channel entry: an object of ``obs@N`` entries.
 
@@ -1389,9 +1414,11 @@ def validate_json(file_path: str) -> list[str]:
                 f"keys after transition-mode: {keys[tm_idx + 1:]}"
             )
 
-    # 5. Check arxiv field format
+    # 5. Check arxiv and inspire-hep field formats
     arxiv = data.get('arxiv')
     all_issues.extend(validate_arxiv_format(arxiv))
+    if 'inspire-hep' in data:
+        all_issues.extend(validate_inspire_format(data['inspire-hep']))
 
     # 6. Check transition-mode content
     if 'transition-mode' in data:
