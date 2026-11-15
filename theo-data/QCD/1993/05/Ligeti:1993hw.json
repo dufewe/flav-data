@@ -1,0 +1,23 @@
+{
+    "inspire-hep": "[Ligeti:1993hw](https://inspirehep.net/literature/355334)",
+    "author": "Ligeti, Z., Nir, Y., and Neubert, M.",
+    "title": "The Subleading Isgur-Wise Form Factor $\\xi_3(v\\cdot v')$ and its Implications for the Decays $\\bar B\\to D^{(*)}\\ell\\,\\bar\\nu$",
+    "abstract": "We calculate, in the framework of QCD sum rules and to next-to-leading order in perturbation theory, the universal function $\\xi_3(v\\cdot v')$ which appears at order $1/m_Q$ in the heavy quark expansion of meson weak decay form factors. We find that radiative corrections of order $\\alpha_s$ are very important. Over the kinematic range accessible in semileptonic decays, $\\xi_3(v\\cdot v')$ is proportional to the leading-order Isgur-Wise function $\\xi(v\\cdot v')$ to very good accuracy. Taking into account all sources of uncertainty, we estimate $\\xi_3/\\xi=(0.6\\pm 0.2)$. This reduces the theoretical uncertainty in the extraction of $|\\,V_{cb}|$ from $\\bar B\\to D\\,\\ell\\, \\bar\\nu$ transitions. A measurement of the form factor ratio $A_2/A_1$ in $\\bar B\\to D^*\\ell\\,\\bar\\nu$ decays can be used to test our prediction.",
+    "arxiv": "[hep-ph/9305304v1](https://arxiv.org/pdf/hep-ph/9305304)",
+    "time": "1993.05.24",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "eta",
+                    "value": "0.6",
+                    "total_upper": "0.2",
+                    "total_lower": "0.2"
+                }
+            },
+            "dataset": "QCDSR",
+            "note": "Next-to-leading-order QCD sum rule for $\\xi_3(y)$, including the two-loop perturbative, quark-condensate and gluon-condensate contributions. The quoted $\\eta(y)=\\xi_3/\\xi\\approx 0.6\\pm 0.2$ holds for $1.0<y<1.6$ and is stored as a single value; the error covers the variation of the sum-rule inputs and the systematic uncertainty, and no correlation is published. $\\xi_3$ itself, the curves of Figs. 2-3, the derived $1+S\\cdot K\\approx 1.00\\pm 0.03$ and the Table 1 predictions $R_2(1)=0.80$, $R_2(y_{\\rm max})=0.84$ are not stored: the latter carry no uncertainties and $R_2$ for $\\bar B\\to D^*\\ell\\bar\\nu$ is the $[1-q^2/(m_B+m_{D^*})^2]A_2/A_1$ form-factor ratio, not the polarization ratio stored under the same name for this channel."
+        }
+    ]
+}

@@ -94,7 +94,10 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    `FL` instead. Each channel maps to an object of `obs@N` entries; no
    LaTeX is stored in `data`. Charge-averaged measurements use one
    concrete charge-conjugate pid, and alternative masses or fit scenarios
-   go in the group `note`, never in a trailing label.
+   go in the group `note`, never in a trailing label. A `no-transition`
+   channel may be empty (no `obs@N`) only when the group `note` states
+   that the source tabulates no numeric values; every other channel needs
+   at least one observable.
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables

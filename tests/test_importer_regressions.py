@@ -874,6 +874,34 @@ class JsonValidatorTests(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertEqual(json_valid.validate_observable_name(name), [])
 
+    def test_hqet_universal_form_factors_are_accepted(self):
+        for name in ('chi_2(1)', 'chi_2(1.3)', 'chi_3(1)', 'eta'):
+            with self.subTest(name=name):
+                self.assertEqual(json_valid.validate_observable_name(name), [])
+
+    def test_zero_recoil_pseudoscalar_normalization_is_accepted(self):
+        self.assertEqual(json_valid.validate_observable_name('G(1)'), [])
+
+    def test_hqet_universal_form_factor_under_no_transition(self):
+        data = [{
+            'no-transition': self._channel(self._obs('chi_2(1)')),
+            'dataset': 'QCDSR',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_empty_no_transition_channel_needs_a_note(self):
+        data = [{'no-transition': {}}]
+        issues = self._validate_data(data)
+        self.assertTrue(any('no obs@N entries' in issue for issue in issues))
+
+    def test_empty_no_transition_channel_with_note_is_allowed(self):
+        data = [{
+            'no-transition': {},
+            'dataset': 'QCDSR',
+            'note': 'The source publishes this function only graphically.',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
     def test_obsolete_mass_shortcuts_are_rejected(self):
         for name in ('MZ', 'MW', 'Mtop', 'MH', 'Mh'):
             with self.subTest(name=name):
@@ -1047,6 +1075,29 @@ class AuthorFormattingTests(unittest.TestCase):
         self.assertEqual(common.arxiv_name_to_bibtex('Roel Aaij'), 'Aaij, Roel')
         self.assertEqual(common.arxiv_name_to_bibtex('LHCb'), 'LHCb')
         self.assertEqual(common.arxiv_name_to_bibtex('Aaij, Roel'), 'Aaij, Roel')
+
+    def test_to_bibtex_keeps_compound_initials(self):
+        self.assertEqual(common.to_bibtex('Davies, Christine T.H.'), 'Davies, C.T.H.')
+        self.assertEqual(common.to_bibtex('Aaij, Roel'), 'Aaij, R.')
+        self.assertEqual(common.to_bibtex('Moinester, M.A.'), 'Moinester, M.A.')
+        self.assertEqual(common.to_bibtex('Dyk, Jean-Luc'), 'Dyk, J.-L.')
+        self.assertEqual(common.to_bibtex('Hiller, Th.'), 'Hiller, T.')
+
+    def test_extract_metadata_drops_decorated_collaboration(self):
+        hit = {
+            'metadata': {
+                'texkeys': ['Harrison:2023dzh'],
+                'authors': [{'full_name': 'Harrison, Judd'},
+                            {'full_name': 'Davies, Christine T.H.'}],
+                'collaborations': [
+                    {'value': 'HPQCD'},
+                    {'value': '(HPQCD Collaboration)\u2021'},
+                ],
+            },
+        }
+        meta = inspirehep_ext.extract_metadata(hit)
+        self.assertEqual(meta['collaboration'], 'HPQCD')
+        self.assertEqual(meta['author_str'], 'Harrison, J. and Davies, C.T.H.')
 
     def test_arxiv_author_str_uses_bibtex_tiers(self):
         names = ['Danny van Dyk', 'Blaženka Melić', 'Roel Aaij']

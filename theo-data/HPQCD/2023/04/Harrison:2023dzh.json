@@ -1,0 +1,85 @@
+{
+    "inspire-hep": "[Harrison:2023dzh](https://inspirehep.net/literature/2649580)",
+    "author": "Harrison, J. and Davies, C.T.H.",
+    "collaboration": "HPQCD",
+    "title": "$B \\rightarrow D^*$ vector, axial-vector and tensor form factors for the full $q^2$ range from lattice QCD",
+    "abstract": "We compute the complete set of SM and tensor $B_{(s)}\\to D_{(s)}^*\\ell\\bar{\\nu}$ semileptonic form factors across the full kinematic range of the decay using second generation MILC $n_f=2+1+1$ HISQ gluon field configurations and HISQ valence quarks, with the heavy-HISQ method. Lattice spacings range from $0.09\\mathrm{fm}$ to $0.044\\mathrm{fm}$ with pion masses from $\\approx 300\\mathrm{MeV}$ down to the physical value and heavy quark masses ranging between $\\approx 1.5 m_c$ and $4.1 m_c \\approx 0.9 m_b$; currents are normalised nonperturbatively. Using the recent $B_{(s)}\\to D^*_{(s)}\\ell\\bar{\\nu}_\\ell$ data from Belle and LHCb together with our form factors we determine a model independent value of $V_{cb}=39.03(56)_\\mathrm{exp}(67)_\\mathrm{latt}\\times 10^{-3}$, in agreement with previous exclusive determinations and in tension with the inclusive result at the level of $3.6\\sigma$. We observe a $\\approx 1\\sigma$ tension between the shape of the differential decay rates computed using our form factors and those measured by Belle. We compute a lattice-only SM value for the ratio of semitauonic and semimuonic decay rates, $R(D^*)=0.273(15)$, which we find to be closer to the recent Belle measurement and HFLAV average than theory predictions using fits to experimental differential rate data for $B\\to D^*\\ell\\bar{\\nu}_\\ell$. Determining $V_{cb}$ using the total rate for $B\\to D^*\\ell\\nu$ gives a value in agreement with inclusive results. We compute the longitudinal polarisation fraction for the semitauonic mode, $F_L^{D^*}=0.395(24)$, which is in tension at the level of $2.2\\sigma$ with the recent Belle measurement. Our calculation combines $B\\to D^*$ and $B_s\\to D_s^*$ lattice results, and we provide an update which supersedes our previous lattice computation of the $B_s\\to D_s^*$ form factors. We also give the chiral perturbation theory needed to analyse the tensor form factors.",
+    "arxiv": "[hep-lat/2304.03137v2](https://arxiv.org/pdf/2304.03137)",
+    "time": "2023.04.06",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "a0_g",
+                    "value": "0.0318",
+                    "total_upper": "0.0017",
+                    "total_lower": "0.0017"
+                },
+                "obs@2": {
+                    "name": "a1_g",
+                    "value": "-0.128",
+                    "total_upper": "0.095",
+                    "total_lower": "0.095"
+                },
+                "obs@3": {
+                    "name": "a2_g",
+                    "value": "0.08",
+                    "total_upper": "0.76",
+                    "total_lower": "0.76"
+                },
+                "obs@4": {
+                    "name": "a0_f",
+                    "value": "0.01212",
+                    "total_upper": "0.00017",
+                    "total_lower": "0.00017"
+                },
+                "obs@5": {
+                    "name": "a1_f",
+                    "value": "0.012",
+                    "total_upper": "0.017",
+                    "total_lower": "0.017"
+                },
+                "obs@6": {
+                    "name": "a2_f",
+                    "value": "-0.18",
+                    "total_upper": "0.45",
+                    "total_lower": "0.45"
+                },
+                "obs@7": {
+                    "name": "a1_F1",
+                    "value": "-0.0081",
+                    "total_upper": "0.0086",
+                    "total_lower": "0.0086"
+                },
+                "obs@8": {
+                    "name": "a2_F1",
+                    "value": "-0.08",
+                    "total_upper": "0.27",
+                    "total_lower": "0.27"
+                },
+                "obs@9": {
+                    "name": "a0_F2",
+                    "value": "0.0415",
+                    "total_upper": "0.0027",
+                    "total_lower": "0.0027"
+                },
+                "obs@10": {
+                    "name": "a1_F2",
+                    "value": "-0.20",
+                    "total_upper": "0.12",
+                    "total_lower": "0.12"
+                },
+                "obs@11": {
+                    "name": "a2_F2",
+                    "value": "-0.01",
+                    "total_upper": "0.80",
+                    "total_lower": "0.80"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BGL",
+            "note": "Quadratic BGL fit, $P(z)\\phi(z)\\mathcal{F}(z)=\\sum_n a_n z^n$, to synthetic $B\\to D^*$ form factors at $w=1.025$, $1.225$ and $1.425$ generated from this paper's lattice results (Table \\texttt{bglfitparams}), with the Blaschke factors, outer functions and $B_c^{(*)}$ resonances of Bigi:2017jbd as in FermilabLattice:2021cdg. $a_0^{F_1}$ is fixed by $F_1(1)=M_B(1-r)f(1)$ and is not stored; no correlation matrix is published. The $B_s\\to D_s^*$ update, which supersedes Harrison:2021tol, and the tensor form factors are given only through the $(w-1)$ fit-function parameters of the ancillary file, so they are not stored as $z$-expansion coefficients."
+        }
+    ]
+}

@@ -294,7 +294,7 @@ rejected by the validator; write the plus charge explicitly (`f+`, `F+`,
 `G+`, `h+`, `ht+`). `Fv`, `Gv`, `hv`, and `htv` keep their existing
 spelling.
 
-### 2.5 Zero-Recoil Form-Factor Normalization: `hA1(1)`
+### 2.5 Zero-Recoil Form-Factor Normalization: `hA1(1)`, `G(1)`
 
 The zero-recoil normalization of the $\bar B \to D^*$ axial form factor is
 written `hA1(1)`:
@@ -304,6 +304,13 @@ $h_{A_1}(1)$ and `Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar` carries the $B_s$ value
 $h^s_{A_1}(1)$. The parenthetical `(1)` is a parameter tag, not a
 multi-transition condition. This symbol names a form-factor value, not an
 expansion coefficient, so the group does not need `scheme`.
+
+The pseudoscalar channel $\bar B_{(s)}\to D_{(s)}\ell\bar\nu$ has the
+analogous normalization `G(1)`, the zero-recoil value of the HQET
+combination ${\cal G}(w)\propto f_+(q^2)$. The transition key separates
+$B_s\to D_s$ (`Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar`) from $B\to D$, and the
+`note` records the lattice action and the continuum extrapolation. As for
+`hA1(1)`, the value carries no `scheme`.
 
 ### 2.6 Form-Factor Values at Fixed `q2`
 
@@ -323,6 +330,30 @@ through the dimensionless integrals $I_{0,A}$ and $I_{0,V}$, written
 `note` records the scale $\epsilon_M=\mu$ and which combination each
 integral bounds; no `scheme` is needed because these are sum-rule
 integrals, not expansion coefficients.
+
+### 2.8 Subleading HQET Universal Form Factors: `chi_2`, `chi_3`, `eta`
+
+The spin-symmetry-violating HQET functions $\chi_2(v\cdot v')$ and
+$\chi_3(v\cdot v')$, which enter the $1/m_Q$ expansion through the
+chromo-magnetic operator, are written `chi_2` and `chi_3`. They are
+universal — independent of the heavy meson and of the decay — and belong
+to neither the helicity set nor the HQET-basis set of §2.4, so the
+`data` key is `no-transition`. The argument is a parameter tag, as for
+`hA1(1)`: `chi_2(1)` is the zero-recoil value, `chi_2(1.3)` a point at
+$v\cdot v'=1.3$. These are form-factor values, not expansion
+coefficients, so the group carries no `scheme`; the `note` records the
+method and its inputs. The leading Isgur-Wise function $\xi(y)$, which is
+normalized to unity at zero recoil, is not stored. When a paper publishes
+the functions only graphically, the group keeps an empty `no-transition`
+channel and a `note` saying so (`json-meta.md` §"Data Entries").
+
+The ratio $\eta\equiv\xi_3(v\cdot v',\mu)/\xi(v\cdot v',\mu)$ of the
+subleading $\xi_3$ to the leading Isgur-Wise function is written `eta`.
+It is renormalization-group invariant, so it takes neither a `scheme` nor
+a parameter tag: when a source quotes a single value valid over a recoil
+range, the group stores one `eta` and the `note` records that range and
+that $\xi_3$ itself is not stored. `eta` is not the CKM parameter
+`etabar`.
 
 ## 3. Observable Abbreviations
 

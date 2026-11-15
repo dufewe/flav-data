@@ -226,12 +226,33 @@ def unicode_to_latex(text: str) -> str:
 # BibTeX author-name formatting (SKILL.md rule 3)
 # ---------------------------------------------------------------------------
 
+def _token_initials(token: str) -> str:
+    """Initials of one hyphen-free name token.
+
+    Every letter that starts the token or follows a dot is kept, so
+    compound initials survive: ``"Christine"`` → ``"C."``, ``"T.H."`` →
+    ``"T.H."``. Abbreviations keep only their first letter (``"Th."`` →
+    ``"T."``), as before.
+    """
+    letters = []
+    starts_word = True
+    for char in token:
+        if char == '.':
+            starts_word = True
+        elif char.isalpha():
+            if starts_word:
+                letters.append(char.upper())
+            starts_word = False
+    return '.'.join(letters) + '.' if letters else ''
+
+
 def to_bibtex(full_name: str) -> str:
     """Shorten an InspireHEP name to BibTeX initials: ``"Aaij, Roel"`` → ``"Aaij, R."``.
 
     Already-initials forms (``"R."``, ``"A.M."``), surname-only strings, and
     group fallbacks pass through. Hyphenated given names keep both initials
-    (``"Jean-Luc"`` → ``"J.-L."``).
+    (``"Jean-Luc"`` → ``"J.-L."``), and a spelled-out first name followed by
+    compound initials keeps all of them (``"Christine T.H."`` → ``"C.T.H."``).
     """
     if not isinstance(full_name, str) or not full_name.strip():
         return full_name or ''
@@ -258,8 +279,7 @@ def to_bibtex(full_name: str) -> str:
     tokens = first_part.split()
     initials_list = []
     for token in tokens:
-        sub_tokens = token.split('-')
-        sub_initials = [st[0].upper() + '.' for st in sub_tokens if st]
+        sub_initials = [_token_initials(st) for st in token.split('-') if st]
         initials_list.append('-'.join(sub_initials))
     initials = ''.join(initials_list)
 

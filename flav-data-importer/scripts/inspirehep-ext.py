@@ -93,9 +93,11 @@ def extract_metadata(hit: dict) -> dict:
     if not author_str and collaborations:
         author_str = f"{collaborations[0]['value']} collaboration"
 
-    # Multi-collaboration papers join with ", ".
+    # Multi-collaboration papers join with ", ". INSPIRE also lists the
+    # same group in a decorated form ("(HPQCD Collaboration)‡"); drop those.
+    plain = [c.get('value', '').strip() for c in collaborations]
     collaboration = ', '.join(
-        c.get('value', '') for c in collaborations if c.get('value')
+        dict.fromkeys(n for n in plain if n and not n.startswith('('))
     )
 
     # preprint_date is the arXiv v1 submission date.

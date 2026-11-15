@@ -1,0 +1,16 @@
+{
+    "inspire-hep": "[Neubert:1992pn](https://inspirehep.net/literature/341632)",
+    "author": "Neubert, M., Ligeti, Z., and Nir, Y.",
+    "title": "The Subleading Isgur-Wise Form Factor $\\chi_3(v\\cdot v')$ to Order $\\alpha_s$ in QCD Sum Rules",
+    "abstract": "We calculate the contributions arising at order $\\alpha_s$ in the QCD sum rule for the spin-symmetry violating universal function $\\chi_3(v\\cdot v')$, which appears at order $1/m_Q$ in the heavy quark expansion of meson form factors. In particular, we derive the two-loop perturbative contribution to the sum rule. Over the kinematic range accessible in $B\\to D^{(*)}\\ell\\,\\nu$ decays, we find that $\\chi_3(v\\cdot v')$ does not exceed the level of $\\sim 1\\%$, indicating that power corrections induced by the chromo-magnetic operator in the heavy quark expansion are small.",
+    "arxiv": "[hep-ph/9212266v1](https://arxiv.org/pdf/hep-ph/9212266)",
+    "time": "1992.12.16",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "no-transition": {},
+            "dataset": "QCDSR",
+            "note": "Complete order-$\\alpha_s$ QCD sum rule for $\\chi_3(y)$, including the two-loop perturbative contribution and the renormalization of the spin-symmetry-violating decay constant $G_2(\\mu)$. The result is shown only in Figs. 2-3: over the kinematic range accessible in $B\\to D^{(*)}\\ell\\nu$ decays $\\chi_3(y)$ does not exceed the level of $\\sim 1\\%$, with a relative uncertainty of about $\\pm 25\\%$ dominated by the continuum threshold. No tabulated values are published, so the channel is empty; $\\chi_3(1)=0$ follows from Luke's theorem and is not a measurement of this paper."
+        }
+    ]
+}

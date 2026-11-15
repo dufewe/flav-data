@@ -6,7 +6,7 @@ A structured, machine-readable database of flavor physics measurements.
 
 **flav-data** curates experimental and theoretical results in flavor physics — branching fractions, angular observables, CP asymmetries, lepton flavor universality ratios, form factors, and more — into standardized JSON entries following a consistent naming convention and format specification.
 
-The database covers measurements from **1993** to the present, organized by collaboration/theory group and indexed by year.
+The database covers measurements from **1992** to the present, organized by collaboration/theory group and indexed by year.
 
 ## Supported Groups
 

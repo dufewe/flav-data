@@ -45,8 +45,8 @@ def get_json(file_path):
 # Configuration -------------------------------------------------------
 
 # Year range scanned when looking for annual index files. The
-# earliest indexed entry is SINDRUM-II 1993.
-year_min, year_max = 1993, datetime.now().year
+# earliest indexed entry is the Neubert-Ligeti-Nir QCD sum rules, 1992.
+year_min, year_max = 1992, datetime.now().year
 
 # Mapping from month-number string (zero-padded, as used in the
 # annual index file and the month subdirectory name) to the

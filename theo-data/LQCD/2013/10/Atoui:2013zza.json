@@ -1,0 +1,39 @@
+{
+    "inspire-hep": "[Atoui:2013zza](https://inspirehep.net/literature/1261415)",
+    "author": "Atoui, M., Becirevic, D., Morenas, V., and Sanfilippo, F.",
+    "title": "$B_s\\to D_s\\ell \\nu_\\ell$ near zero recoil in and beyond the Standard Model",
+    "abstract": "We compute the normalization of the form factor entering the $B_s\\to D_s\\ell \\nu$ decay amplitude by using numerical simulations of QCD on the lattice. From our study with $N_{\\rm f}=2$ dynamical light quarks, and by employing the maximally twisted Wilson quark action, we obtain in the continuum limit ${\\cal G}(1)=1.052(46)$. We also compute the scalar and tensor form factors in the region near zero recoil and find $f_0(q_0^2)/f_+(q_0^2)=0.77(2)$, $f_T(q_0^2,m_b)/f_+(q_0^2)=1.08(7)$, for $q_0^2=11.5\\ \\mathrm{GeV}^2$. These latter results are useful for searching the effects of physics beyond the Standard Model in $B_s\\to D_s\\ell \\nu$ decays. Our results for the similar form factors relevant to the non-strange case indicate that the method employed here can be used to achieve the precision determination of the $B\\to D\\ell \\nu$ decay amplitude as well.",
+    "arxiv": "[1310.5238v3](https://arxiv.org/pdf/1310.5238)",
+    "time": "2013.10.19",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Sb_I0?_0-n_0.2.Sc_I0?_0-n_0.l-.vBar": {
+                "obs@1": {
+                    "name": "G(1)",
+                    "value": "1.052",
+                    "total_upper": "0.046",
+                    "total_lower": "0.046"
+                },
+                "obs@2": {
+                    "name": "f0/f+",
+                    "value": "0.77",
+                    "total_upper": "0.02",
+                    "total_lower": "0.02",
+                    "q2min": "11.5",
+                    "q2max": "11.5"
+                },
+                "obs@3": {
+                    "name": "fT/f+",
+                    "value": "1.08",
+                    "total_upper": "0.07",
+                    "total_lower": "0.07",
+                    "q2min": "11.5",
+                    "q2max": "11.5"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "$N_{\\rm f}=2$ maximally twisted-mass Wilson fermions, continuum extrapolation with the coefficient $\\beta_k$ free; ${\\cal G}(1)$ is the final boxed result. The same fit in Table 3 quotes $1.052(47)$ instead of the abstract's $1.052(46)$. The ratio values are interpolated to $q_0^2=11.5\\ \\mathrm{GeV}^2$ from the $w\\simeq1.004$ point of Table 3; $f_T$ is renormalized at $\\mu=m_b$ in the $\\overline{\\mathrm{MS}}$ scheme. The per-$w$ table rows, the $\\beta_k=0$ variants, the $\\rho^2$ fits and the non-strange $B\\to D$ cross-checks are not stored, and no correlations are published."
+        }
+    ]
+}

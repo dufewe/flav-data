@@ -868,13 +868,17 @@ def validate_inspire_format(inspire) -> list[str]:
     return []
 
 
-def _validate_channel_entry(channel, label: str) -> tuple[list[str], int]:
+def _validate_channel_entry(channel, label: str,
+                            allow_empty: bool = False) -> tuple[list[str], int]:
     """Validate one channel entry: an object of ``obs@N`` entries.
 
     The channel key carries the transition; the value holds only
     ``obs@N`` entries. Kinematic bounds belong inside the observable and
     matrices at the group level. Returns the issues and the observable
-    count, which feeds the group matrix dimension check.
+    count, which feeds the group matrix dimension check. An empty channel
+    is rejected unless ``allow_empty`` is set; only a ``no-transition``
+    group whose ``note`` records that the source tabulates no numbers may
+    be empty (json-meta.md §"Data Entries").
     """
     issues = []
     if not isinstance(channel, dict):
@@ -914,7 +918,7 @@ def _validate_channel_entry(channel, label: str) -> tuple[list[str], int]:
                 f"{obs_nums}, expected 1..{len(obs_nums)}; missing "
                 f"obs@{missing}"
             )
-    else:
+    elif not allow_empty:
         issues.append(f"  {label}: no obs@N entries")
 
     for obs_key in obs_keys:
@@ -1237,8 +1241,13 @@ def _validate_data_group(group, label: str) -> list[str]:
             )
         channel_count += 1
         issues.extend(validate_transition_key(key))
+        allow_empty = (
+            key == 'no-transition'
+            and isinstance(group.get('note'), str)
+            and bool(group['note'].strip())
+        )
         channel_issues, obs_count = _validate_channel_entry(
-            group[key], f"{label}['{key}']",
+            group[key], f"{label}['{key}']", allow_empty=allow_empty,
         )
         issues.extend(channel_issues)
         obs_total += obs_count
