@@ -213,11 +213,17 @@ order-checked and are not registered in any other table.
 | `Xs`, `XsBar`; `Xc`, `XcBar`; `Xu` | inclusive strange, charm, up systems |
 | `had`, `all`; `V`, `VH` | hadronic system; all final states; vector boson, $VH$ |
 | `gg`, `gamma+gamma` | gluon/photon initial state |
+| `0` | vacuum final state; only allowed as the last stage |
 | `no-transition` | observable without a transition |
 
 An inclusive system is always its own token: $B^-\to X_c e^-\bar\nu_e$ is
 `Ub_I1?_0-n_0.2.Xc.e_I??_1+n_0.vBar`, never a merged `Xce` that swallows the
 charged lepton.
+
+`0` makes the hadron-to-vacuum transition of a decay constant explicit:
+$f_{\bar B^0}$ is `Db_I1?_0-n_0.2.0`. Keep `no-transition` for intrinsic
+properties and quantities without a channel (masses, bag parameters,
+HQET functions).
 
 The inclusive token follows the parent's $b$ flavour, because $b\to c/s$
 and $\bar b\to\bar c/\bar s$ produce conjugate systems:
@@ -278,7 +284,9 @@ $K_S^0$ and $K_L^0$ share the $K^0$ mass and differ only by width.
 | `Dc_I1?_1-n_0` | $D^{*+}$ | $+1$ | 2.01027 | 8.34e-5 |
 | `dC_I1?_1-n_0` | $D^{*-}$ | $-1$ | 2.01027 | 8.34e-5 |
 | `Sc_I0?_0-n_0` | $D_s^+$ | $+1$ | 1.96835 | 1.313e-12 |
+| `sC_I0?_0-n_0` | $D_s^-$ | $-1$ | 1.96835 | 1.313e-12 |
 | `Sc_I0?_1-n_0` | $D_s^{*+}$ | $+1$ | 2.1122 | — |
+| `sC_I0?_1-n_0` | $D_s^{*-}$ | $-1$ | 2.1122 | — |
 | `Dc_I1?_0+n_0` | $D_0^*(2300)^+$ | $+1$ | 2.343 | 0.229 |
 | `Sc_I0?_0+n_0` | $D_{s0}^*(2317)^+$ | $+1$ | 2.3178 | 0.010 |
 | `uB_I1?_0-n_0` | $B^+$ | $+1$ | 5.27941 | 4.021e-13 |

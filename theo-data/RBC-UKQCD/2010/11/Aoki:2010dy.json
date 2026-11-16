@@ -9,7 +9,7 @@
     "transition-mode": "low-energy",
     "data": [
         {
-            "no-transition": {
+            "uD_I2-_0-n_0.2.0": {
                 "obs@1": {
                     "name": "fpi",
                     "value": "124",
@@ -20,8 +20,10 @@
                     "type@2_upper": "5",
                     "type@2_lower": "5",
                     "unit": "MeV"
-                },
-                "obs@2": {
+                }
+            },
+            "uS_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fK",
                     "value": "149",
                     "type@1_error": "stat",
@@ -31,8 +33,10 @@
                     "type@2_upper": "4",
                     "type@2_lower": "4",
                     "unit": "MeV"
-                },
-                "obs@3": {
+                }
+            },
+            "uS_I1?_0-n_0.2.0/uD_I2-_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fK/fpi",
                     "value": "1.204",
                     "type@1_error": "stat",

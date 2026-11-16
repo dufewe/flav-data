@@ -9,7 +9,7 @@
     "transition-mode": "low-energy",
     "data": [
         {
-            "no-transition": {
+            "dB_I1?_0-n_0.2.0": {
                 "obs@1": {
                     "name": "fB0",
                     "value": "199.5",
@@ -20,8 +20,10 @@
                     "type@2_upper": "11.1",
                     "type@2_lower": "11.1",
                     "unit": "MeV"
-                },
-                "obs@2": {
+                }
+            },
+            "uB_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fB+",
                     "value": "195.6",
                     "type@1_error": "stat",
@@ -31,8 +33,10 @@
                     "type@2_upper": "13.3",
                     "type@2_lower": "13.3",
                     "unit": "MeV"
-                },
-                "obs@3": {
+                }
+            },
+            "sB_I0?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fBs",
                     "value": "235.4",
                     "type@1_error": "stat",
@@ -42,8 +46,10 @@
                     "type@2_upper": "11.1",
                     "type@2_lower": "11.1",
                     "unit": "MeV"
-                },
-                "obs@4": {
+                }
+            },
+            "sB_I0?_0-n_0.2.0/dB_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fBs/fB0",
                     "value": "1.197",
                     "type@1_error": "stat",
@@ -52,8 +58,10 @@
                     "type@2_error": "syst",
                     "type@2_upper": "0.049",
                     "type@2_lower": "0.049"
-                },
-                "obs@5": {
+                }
+            },
+            "sB_I0?_0-n_0.2.0/uB_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fBs/fB+",
                     "value": "1.223",
                     "type@1_error": "stat",

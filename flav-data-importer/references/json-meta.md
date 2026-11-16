@@ -97,17 +97,22 @@ optional group-level metadata (`dataset`, `scheme`) and matrices:
    go in the group `note`, never in a trailing label. A `no-transition`
    channel may be empty (no `obs@N`) only when the group `note` states
    that the source tabulates no numeric values; every other channel needs
-   at least one observable.
+   at least one observable. Under `theo-data/` a form-factor group keys
+   only the hadron transition (`Db_I1?_0-n_0.2.Dc_I1?_1-n_0`); lepton and
+   neutrino legs are spectators and the validator rejects them, and a
+   hadron with no hadronic final state ends in the vacuum `0`
+   (`Db_I1?_0-n_0.2.0`, `observable-naming.md` §1.1 rule 7 and §1.3).
 2. **Data group** — one element of the array: a measurement context whose
    observables share one correlation/covariance matrix. A group may hold
    **several channels** when the source matrix correlates observables
    across them; channels placed in different groups are uncorrelated.
 3. **Group-level `dataset`** — an optional string naming the data sources
    behind the group, never the analysis technique or fit choice. Use the
-   canonical tokens `LQCD`, `LCSR`, `QCDSR`, and `EXPE`, joined with `+` in
-   that order: `"LQCD"`, `"LCSR"`, `"LQCD+LCSR"`,
-   `"LQCD+LCSR+QCDSR"`, `"LQCD+LCSR+QCDSR+EXPE"`. The validator rejects
-   other tokens, spaces,
+   canonical tokens `LQCD`, `LCSR`, `QCDSR`, `pQCD`, and `EXPE`, joined
+   with `+` in that order: `"LQCD"`, `"LCSR"`, `"LQCD+LCSR"`,
+   `"LQCD+LCSR+QCDSR"`, `"QCDSR+pQCD"`,
+   `"LQCD+LCSR+QCDSR+pQCD+EXPE"`. The validator rejects other tokens,
+   spaces,
    duplicates, and wrong order. Experimental groups normally omit the
    key because their source is the paper itself. It sits beside the
    channel keys, never inside `obs@N`.
@@ -196,7 +201,7 @@ Use this format when the paper reports a central value with two or more componen
 Data sources and expansion scheme are **group-level**, not
 per-observable: see the `dataset` and `scheme` bullets in §"Data Entries"
 above. The two `dataset` keys share a name but not a rule: the
-group-level one is a closed token list (`LQCD`/`LCSR`/`QCDSR`/`EXPE`,
+group-level one is a closed token list (`LQCD`/`LCSR`/`QCDSR`/`pQCD`/`EXPE`,
 ordered, no duplicates), while the per-observable one inside `obs@N` is
 free text and is **not** subject to that list.
 

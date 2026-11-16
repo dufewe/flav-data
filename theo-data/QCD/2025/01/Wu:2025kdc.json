@@ -1,0 +1,323 @@
+{
+    "inspire-hep": "[Wu:2025kdc](https://inspirehep.net/literature/2865368)",
+    "author": "Wu, S.-B. and others",
+    "title": "Footprint in fitting $B \\to D$ vector form factor and determination for $D$-meson leading-twist LCDA",
+    "abstract": "In this paper, we fit the $B\\to D$ vector transition form factor (TFF) by using the data measured by \\textsl{BABAR} and Belle Collaborations within Monte Carlo (MC) method. Meanwhile, the $B\\to D$ TFF is also calculated by using the QCD light-cone sum rules approach (LCSRs) within right-handed chiral current correlation function. In the TFF, $D$-meson leading-twist light-cone distribution amplitude (LCDA) is the most important non-perturbative input parameter, the precise behavior of which is mainly determined by the parameter $B_{2;D}$ in the light-cone harmonic oscillator model. Through fitting the TFF, we determine the value $B_{2;D}=0.445$. Then, we present the curve of $D$-meson leading-twist LCDA in comparison with other theoretical approaches. Subsequently, the $B\\to D$ TFF $f_{+}^{BD}(q^2)$ at the large recoil region is $f_{+}^{BD}(0)=0.648_{-0.063}^{+0.067}$, which is compared in detail with theoretical estimates and experimental measurements. Furthermore, we calculated the decay width and branching fractions of the Cabibbo-favored semileptonic decays $B\\to D\\ell^+\\nu_{\\ell}$, which lead to the results $\\mathcal{B}(B^0\\to D^-\\ell ^+\\nu_{\\ell}) =(2.10_{-0.38}^{+0.44})\\times 10^{-2}$ and $\\mathcal{B}(B^+\\to \\bar{D}^0\\ell ^+\\nu_{\\ell}) =(2.26_{-0.41}^{+0.48})\\times 10^{-2}$. Finally, we predict the CKM matrix element with two scenarios $|V_{cb}|_{\\rm SR}=41.55_{-4.50}^{+4.91}\\times 10^{-3}$ and $|V_{cb} |_{\\rm MC}=41.47_{-2.66}^{+2.55 }\\times 10^{-3}$ from $B^0\\to D^-\\ell^+\\nu_{\\ell}$, $|V_{cb}|_{\\rm SR}=40.54_{-3.80}^{+4.33}\\times 10^{-3}$ and $|V_{cb} |_{\\rm MC}=40.46_{-1.38}^{+1.40}\\times 10^{-3}$ from $B^+\\to \\bar{D}^0\\ell^+\\nu_{\\ell}$ which are in good agreement with theoretical and experimental predictions.",
+    "arxiv": "[hep-ph/2501.02694v2](https://arxiv.org/pdf/2501.02694)",
+    "time": "2025.01.06",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0121",
+                    "total_upper": "0.0006",
+                    "total_lower": "0.0006"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.092",
+                    "total_upper": "0.0018",
+                    "total_lower": "0.0018"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.3519",
+                    "total_upper": "0.0095",
+                    "total_lower": "0.0095"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.3616",
+                    "total_upper": "0.1025",
+                    "total_lower": "0.1025"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the BABAR'10 ${\\cal G}(w)$ data points, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=5.834/6$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0126",
+                    "total_upper": "0.00006",
+                    "total_lower": "0.00006"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.0923",
+                    "total_upper": "0.0022",
+                    "total_lower": "0.0022"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.3319",
+                    "total_upper": "0.0064",
+                    "total_lower": "0.0064"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.0739",
+                    "total_upper": "0.0556",
+                    "total_lower": "0.0556"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the BABAR'23 ${\\cal G}(w)$ data points, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=4.613/6$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0109",
+                    "total_upper": "0.0008",
+                    "total_lower": "0.0008"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.089",
+                    "total_upper": "0.0016",
+                    "total_lower": "0.0016"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.340",
+                    "total_upper": "0.0020",
+                    "total_lower": "0.0020"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.037",
+                    "total_upper": "0.027",
+                    "total_lower": "0.027"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the Belle'02 ${\\cal G}(w)$ data points, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=9.678/6$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0126",
+                    "total_upper": "0.0001",
+                    "total_lower": "0.0001"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.094",
+                    "total_upper": "0.003",
+                    "total_lower": "0.003"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.34",
+                    "total_upper": "0.04",
+                    "total_lower": "0.04"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.1",
+                    "total_upper": "0.6",
+                    "total_lower": "0.6"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the Belle'16 ${\\cal G}(w)$ data points, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=5.568/6$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0127",
+                    "total_upper": "0.00001",
+                    "total_lower": "0.00001"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.0936",
+                    "total_upper": "0.0004",
+                    "total_lower": "0.0004"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.3328",
+                    "total_upper": "0.0069",
+                    "total_lower": "0.0069"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.1732",
+                    "total_upper": "0.0886",
+                    "total_lower": "0.0886"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the Belle'22 ${\\cal G}(w)$ data points, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=3.275/6$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "a0_f+",
+                    "value": "0.0153",
+                    "total_upper": "0.00008",
+                    "total_lower": "0.00008"
+                },
+                "obs@2": {
+                    "name": "a1_f+",
+                    "value": "-0.0622",
+                    "total_upper": "0.0031",
+                    "total_lower": "0.0031"
+                },
+                "obs@3": {
+                    "name": "a2_f+",
+                    "value": "0.3596",
+                    "total_upper": "0.0301",
+                    "total_lower": "0.0301"
+                },
+                "obs@4": {
+                    "name": "a3_f+",
+                    "value": "-0.2205",
+                    "total_upper": "0.1119",
+                    "total_lower": "0.1119"
+                }
+            },
+            "dataset": "EXPE",
+            "scheme": "BGL",
+            "note": "Combined BGL fit to the five experimental ${\\cal G}(w)$ data sets, truncated at $N=3$ ($\\chi^2/\\mathrm{ndf}=73.306/46$; the paper quotes 82.814/47 and 87.591/45 for $N=2$ and $N=4$). These coefficients are the ones used to fix the $D$-meson LCDA; no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.648",
+                    "total_upper": "0.067",
+                    "total_lower": "0.063",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "LCSR value at $q^2=0$. The $D$-meson leading-twist LCDA entering the LCSR was determined by matching the LCSR expression to the MC fit of the experimental ${\\cal G}(w)$ data, so experimental input is included."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.652",
+                    "total_upper": "0.023",
+                    "total_lower": "0.023",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "EXPE",
+            "note": "MC fit to the five experimental ${\\cal G}(w)$ data sets, evaluated at $q^2=0$."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.706",
+                    "total_upper": "0.071",
+                    "total_lower": "0.068",
+                    "q2min": "2",
+                    "q2max": "2"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV, $\\Delta=0.00051\\%$); Table VI of the paper. The LCDA input of the LCSR was fixed by matching to the MC fit of the experimental ${\\cal G}(w)$ data, hence the mixed data tag."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.772",
+                    "total_upper": "0.076",
+                    "total_lower": "0.072",
+                    "q2min": "4",
+                    "q2max": "4"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.848",
+                    "total_upper": "0.082",
+                    "total_lower": "0.077",
+                    "q2min": "6",
+                    "q2max": "6"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.936",
+                    "total_upper": "0.088",
+                    "total_lower": "0.083",
+                    "q2min": "8",
+                    "q2max": "8"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper. Values above $q^2=7.2$ GeV$^2$ lie outside the region where the LCSRs are used."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "1.038",
+                    "total_upper": "0.096",
+                    "total_lower": "0.089",
+                    "q2min": "10",
+                    "q2max": "10"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper, outside the LCSR region."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "1.096",
+                    "total_upper": "0.101",
+                    "total_lower": "0.092",
+                    "q2min": "11",
+                    "q2max": "11"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper, outside the LCSR region."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "1.135",
+                    "total_upper": "0.103",
+                    "total_lower": "0.094",
+                    "q2min": "11.64",
+                    "q2max": "11.64"
+                }
+            },
+            "dataset": "LCSR+EXPE",
+            "note": "SSE extrapolation of the LCSR band (Eq. (23), $k=0,1,2$, $m_{B_c^*}=6.332$ GeV); Table VI of the paper at $q^2_\\mathrm{max}$, outside the LCSR region."
+        }
+    ]
+}

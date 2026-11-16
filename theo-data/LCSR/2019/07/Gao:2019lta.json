@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Db_I1?_0-n_0.2.uD_I2+_1--_0.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2+_1--_0": {
                 "obs@1": {
                     "name": "a0_V",
                     "value": "0.285",
@@ -341,7 +341,7 @@
             "note": "Values are the SCET-normalized (calligraphic) form factors of the leading-power factorization formulae, not the conventional $V$, $A_0$, $A_1$, $A_{12}$, $T_1$, $T_2$, $T_{23}$; the paper defines them only through the factorization formulae."
         },
         {
-            "uB_I1?_0-n_0.2.qQ_I0-_1--_0.l+.v": {
+            "uB_I1?_0-n_0.2.qQ_I0-_1--_0": {
                 "obs@1": {
                     "name": "a0_V",
                     "value": "0.311",
@@ -674,7 +674,7 @@
             "note": "Values are the SCET-normalized (calligraphic) form factors of the leading-power factorization formulae, not the conventional $V$, $A_0$, $A_1$, $A_{12}$, $T_1$, $T_2$, $T_{23}$; the paper defines them only through the factorization formulae."
         },
         {
-            "Db_I1?_0-n_0.2.Ds_I1?_1-n_0.l+.l-": {
+            "Db_I1?_0-n_0.2.Ds_I1?_1-n_0": {
                 "obs@1": {
                     "name": "a0_V",
                     "value": "0.359",

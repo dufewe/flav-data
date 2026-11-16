@@ -1,0 +1,169 @@
+{
+    "inspire-hep": "[Bigi:2017njr](https://inspirehep.net/literature/1518165)",
+    "author": "Bigi, D., Gambino, P., and Schacht, S.",
+    "title": "A fresh look at the determination of $|V_{cb}|$ from $B \\to D^*\\ell\\bar\\nu$",
+    "abstract": "We use recent Belle results on $\\bar{B}^0\\rightarrow D^{*+}l^-\\bar\\nu_l$ decays to extract the CKM element $|V_{cb}|$ with two different but well-founded parameterizations of the form factors. We show that the CLN and BGL parameterizations lead to quite different results for $|V_{cb}|$ and provide a simple explanation of this unexpected behaviour. A long lasting discrepancy between the inclusive and exclusive determinations of $|V_{cb}|$ may have to be thoroughly reconsidered.",
+    "arxiv": "[hep-ph/1703.06124v2](https://arxiv.org/pdf/1703.06124)",
+    "time": "2017.03.17",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a0_f",
+                    "value": "0.01223",
+                    "total_upper": "0.00018",
+                    "total_lower": "0.00018"
+                },
+                "obs@2": {
+                    "name": "a1_f",
+                    "value": "-0.054",
+                    "total_upper": "0.058",
+                    "total_lower": "0.043"
+                },
+                "obs@3": {
+                    "name": "a2_f",
+                    "value": "0.2",
+                    "total_upper": "0.7",
+                    "total_lower": "1.2"
+                },
+                "obs@4": {
+                    "name": "a1_F1",
+                    "value": "-0.0100",
+                    "total_upper": "0.0061",
+                    "total_lower": "0.0056"
+                },
+                "obs@5": {
+                    "name": "a2_F1",
+                    "value": "0.12",
+                    "total_upper": "0.10",
+                    "total_lower": "0.10"
+                },
+                "obs@6": {
+                    "name": "a0_g",
+                    "value": "0.012",
+                    "total_upper": "0.011",
+                    "total_lower": "0.008"
+                },
+                "obs@7": {
+                    "name": "a1_g",
+                    "value": "0.7",
+                    "total_upper": "0.3",
+                    "total_lower": "0.4"
+                },
+                "obs@8": {
+                    "name": "a2_g",
+                    "value": "0.8",
+                    "total_upper": "0.2",
+                    "total_lower": "1.7"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit to the unfolded Belle $w$, $\\cos\\theta_v$, $\\cos\\theta_l$, $\\chi$ binned distributions with $h_{A_1}(1)=0.906(13)$ fixed from Fermilab/MILC (arXiv:1403.0635); series truncated at $N=2$ with $a_0^{F_1}$ fixed by $F_1(0)=(m_B-m_{D^*})f(0)$ and the unitarity bounds of Eq. (10) imposed ($\\chi^2/\\mathrm{dof}=27.9/32$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a0_f",
+                    "value": "0.01224",
+                    "total_upper": "0.00018",
+                    "total_lower": "0.00018"
+                },
+                "obs@2": {
+                    "name": "a1_f",
+                    "value": "-0.052",
+                    "total_upper": "0.027",
+                    "total_lower": "0.015"
+                },
+                "obs@3": {
+                    "name": "a2_f",
+                    "value": "1.0",
+                    "total_upper": "0.0",
+                    "total_lower": "0.5"
+                },
+                "obs@4": {
+                    "name": "a1_F1",
+                    "value": "-0.0070",
+                    "total_upper": "0.0054",
+                    "total_lower": "0.0052"
+                },
+                "obs@5": {
+                    "name": "a2_F1",
+                    "value": "0.089",
+                    "total_upper": "0.096",
+                    "total_lower": "0.100"
+                },
+                "obs@6": {
+                    "name": "a0_g",
+                    "value": "0.0289",
+                    "total_upper": "0.0057",
+                    "total_lower": "0.0037"
+                },
+                "obs@7": {
+                    "name": "a1_g",
+                    "value": "0.08",
+                    "total_upper": "0.08",
+                    "total_lower": "0.22"
+                },
+                "obs@8": {
+                    "name": "a2_g",
+                    "value": "-1.0",
+                    "total_upper": "2.0",
+                    "total_lower": "0.0"
+                }
+            },
+            "dataset": "LQCD+LCSR+EXPE",
+            "scheme": "BGL",
+            "note": "Same BGL fit with the LCSR constraints $h_{A_1}(w_{\\max})=0.65(18)$, $R_1(w_{\\max})=1.32(4)$, $R_2(w_{\\max})=0.91(17)$ from Faller et al. (arXiv:0809.0222) added ($\\chi^2/\\mathrm{dof}=31.4/35$); $h_{A_1}(1)$ fixed from Fermilab/MILC; no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "rho2(CLN)",
+                    "value": "1.17",
+                    "total_upper": "0.15",
+                    "total_lower": "0.16"
+                },
+                "obs@2": {
+                    "name": "R1(CLN)",
+                    "value": "1.391",
+                    "total_upper": "0.092",
+                    "total_lower": "0.088"
+                },
+                "obs@3": {
+                    "name": "R2(CLN)",
+                    "value": "0.913",
+                    "total_upper": "0.073",
+                    "total_lower": "0.080"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "note": "CLN fit to the unfolded Belle $w$, $\\cos\\theta_v$, $\\cos\\theta_l$, $\\chi$ binned distributions with $h_{A_1}(1)=0.906(13)$ fixed from Fermilab/MILC and the HQET slopes and curvatures of Eq. (5) for $R_1(w)$ and $R_2(w)$ ($\\chi^2/\\mathrm{dof}=34.3/36$); no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "rho2(CLN)",
+                    "value": "1.16",
+                    "total_upper": "0.14",
+                    "total_lower": "0.14"
+                },
+                "obs@2": {
+                    "name": "R1(CLN)",
+                    "value": "1.372",
+                    "total_upper": "0.036",
+                    "total_lower": "0.036"
+                },
+                "obs@3": {
+                    "name": "R2(CLN)",
+                    "value": "0.916",
+                    "total_upper": "0.065",
+                    "total_lower": "0.070"
+                }
+            },
+            "dataset": "LQCD+LCSR+EXPE",
+            "note": "Same CLN fit with the LCSR constraints $h_{A_1}(w_{\\max})=0.65(18)$, $R_1(w_{\\max})=1.32(4)$, $R_2(w_{\\max})=0.91(17)$ from Faller et al. (arXiv:0809.0222) added ($\\chi^2/\\mathrm{dof}=34.8/39$); $h_{A_1}(1)$ fixed from Fermilab/MILC; no correlation matrix is published."
+        }
+    ]
+}

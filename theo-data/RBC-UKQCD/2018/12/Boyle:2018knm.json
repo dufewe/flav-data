@@ -9,7 +9,7 @@
     "transition-mode": "low-energy",
     "data": [
         {
-            "no-transition": {
+            "Sc_I0?_0-n_0.2.0/Dc_I1?_0-n_0.2.0": {
                 "obs@1": {
                     "name": "fDs/fD",
                     "value": "1.1740",
@@ -19,8 +19,10 @@
                     "type@2_error": "syst",
                     "type@2_upper": "0.0045",
                     "type@2_lower": "0.0044"
-                },
-                "obs@2": {
+                }
+            },
+            "sB_I0?_0-n_0.2.0/dB_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fBs/fB",
                     "value": "1.1949",
                     "type@1_error": "stat",
@@ -29,8 +31,14 @@
                     "type@2_error": "syst",
                     "type@2_upper": "0.0073",
                     "type@2_lower": "0.0165"
-                },
-                "obs@3": {
+                }
+            },
+            "dataset": "LQCD",
+            "note": "The paper labels the second error as sys, but it is the total (stat+syst) uncertainty; the systematic components used here come from the error-budget table."
+        },
+        {
+            "no-transition": {
+                "obs@1": {
                     "name": "BBs/BBd",
                     "value": "0.9984",
                     "type@1_error": "stat",
@@ -40,7 +48,7 @@
                     "type@2_upper": "0.0066",
                     "type@2_lower": "0.0045"
                 },
-                "obs@4": {
+                "obs@2": {
                     "name": "xi",
                     "value": "1.1939",
                     "type@1_error": "stat",

@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "sB_I0?_0-n_0.2.Us_I1?_0-n_0.l+.v": {
+            "sB_I0?_0-n_0.2.Us_I1?_0-n_0": {
                 "obs@1": {
                     "name": "a0_f+",
                     "value": "0.3623",

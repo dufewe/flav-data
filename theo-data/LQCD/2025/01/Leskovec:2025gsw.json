@@ -1,0 +1,76 @@
+{
+    "inspire-hep": "[Leskovec:2025gsw](https://inspirehep.net/literature/2864308)",
+    "author": "Leskovec, L. and others",
+    "title": "$B \\to \\rho\\ell \\bar\\nu$ resonance form factors from $B \\to \\pi\\pi\\ell \\bar\\nu$ in lattice QCD",
+    "abstract": "The decay $B \\to \\rho\\ell \\bar\\nu$ is an attractive process for determining the magnitude of the smallest CKM matrix element, $|V_{ub}|$, and can provide new insights into the origin of the long-standing exclusive-inclusive discrepancy in determinations of this Standard-Model parameter. This requires a nonperturbative QCD calculation of the $B \\to \\rho$ form factors $V$, $A_0$, $A_1$, and $A_{12}$. The unstable nature of the $\\rho$ resonance has prevented precise lattice QCD calculations of these form factors to date. Here, we present the first lattice QCD calculation of the $B \\to \\rho$ form factors in which the $\\rho$ is treated properly as a resonance in $P$-wave $\\pi\\pi$ scattering. To this end, we use the Lellouch-L\\\"{u}scher finite-volume formalism to compute the $B \\to \\pi\\pi$ form factors as a function of both momentum transfer and $\\pi\\pi$ invariant mass, and then analytically continue to the $\\rho$ resonance pole. This calculation is performed with $2+1$ dynamical quark flavors at a pion mass of approximately 320 MeV, and demonstrates a clear path toward results at the physical point.",
+    "arxiv": "[hep-lat/2501.00903v2](https://arxiv.org/pdf/2501.00903)",
+    "time": "2025.01.01",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Db_I1?_0-n_0.2.uD_I2+_1--_0": {
+                "obs@1": {
+                    "name": "a0_V",
+                    "value": "0.0608",
+                    "total_upper": "0.0022",
+                    "total_lower": "0.0022"
+                },
+                "obs@2": {
+                    "name": "a1_V",
+                    "value": "-0.262",
+                    "total_upper": "0.047",
+                    "total_lower": "0.047"
+                },
+                "obs@3": {
+                    "name": "a0_A0",
+                    "value": "0.0652",
+                    "total_upper": "0.0019",
+                    "total_lower": "0.0019"
+                },
+                "obs@4": {
+                    "name": "a1_A0",
+                    "value": "-0.092",
+                    "total_upper": "0.075",
+                    "total_lower": "0.075"
+                },
+                "obs@5": {
+                    "name": "a0_A1",
+                    "value": "0.02010",
+                    "total_upper": "0.00058",
+                    "total_lower": "0.00058"
+                },
+                "obs@6": {
+                    "name": "a1_A1",
+                    "value": "-0.0139",
+                    "total_upper": "0.0091",
+                    "total_lower": "0.0091"
+                },
+                "obs@7": {
+                    "name": "a0_A12",
+                    "value": "0.01709",
+                    "total_upper": "0.00047",
+                    "total_lower": "0.00047"
+                },
+                "obs@8": {
+                    "name": "a1_A12",
+                    "value": "-0.040",
+                    "total_upper": "0.015",
+                    "total_lower": "0.015"
+                }
+            },
+            "dataset": "LQCD",
+            "scheme": "BSZ",
+            "note": "The stored $a_n$ parametrize the $s$-independent $B\\to\\pi\\pi$ form factors; the $B\\to\\rho$ resonance form factors follow from analytic continuation to the $\\rho$ pole and are not directly equal to this polynomial. First-order $z$-expansion $f(q^2,s)=\\sum_{n=0}^{1}a_n^{(f)}z^n/[1-q^2/(am_P^{(f)})^2]$ in lattice units, with $a=0.11403(77)$ fm, $a^2t_0=6.0$ for $V$ and $6.5$ for $A_0,A_1,A_{12}$, and $a^2t_+=(am_B+am_\\pi)^2$ for $V$, $(am_{B^*}+am_\\pi)^2$ for the axial form factors; the pole masses are $am_{B^*}=3.0956(15)$, $am_B=3.0696(15)$ and $am_{B_1}=3.3275(16)$ (Table I). The axial fit enforces $A_0(0)=A_3(0)$ and gives $\\chi^2/\\mathrm{dof}=105.1/178$, the vector fit $72.1/62$. Uncertainties are statistical only. The $\\pi\\pi$ scattering parameters $am_\\rho$ and $g$ of Table II are not form-factor parameters and are not stored; the resonant form factors $f^R(q^2)$ appear only in Fig. 2 and are not tabulated.",
+            "correlation": [
+                [1.0, 0.5375, 0.5447, 0.1822, 0.7221, 0.1717, 0.7094, 0.0747],
+                [0.5375, 1.0, -0.0632, 0.4719, -0.0138, 0.4929, 0.0231, 0.4848],
+                [0.5447, -0.0632, 1.0, -0.1442, 0.7833, -0.172, 0.805, -0.2773],
+                [0.1822, 0.4719, -0.1442, 1.0, -0.0563, 0.9933, 0.0202, 0.7192],
+                [0.7221, -0.0138, 0.7833, -0.0563, 1.0, -0.0873, 0.936, -0.2293],
+                [0.1717, 0.4929, -0.172, 0.9933, -0.0873, 1.0, -0.0234, 0.7946],
+                [0.7094, 0.0231, 0.805, 0.0202, 0.936, -0.0234, 1.0, -0.2472],
+                [0.0747, 0.4848, -0.2773, 0.7192, -0.2293, 0.7946, -0.2472, 1.0]
+            ]
+        }
+    ]
+}

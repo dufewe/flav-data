@@ -6,10 +6,11 @@ This document defines which data sources to use, in what order, and what data is
 
 ### Supported for Import
 - **Experimental measurements** from recognized collaborations: LHCb, CMS, ATLAS, Belle, BaBar, BESIII, CDF, D0, HFLAV, LEP, NA62, KOTO, etc.
-- **Theoretical calculations** (lattice QCD, perturbative QCD, first-principles or fixed-order results) from established groups: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD, etc. Form-factor parametrization fits belong here: they produce the `aN_FF` coefficients plus a group-level `scheme`, and are imported even when the fit combines lattice, LCSR, and experimental input (`dataset: "LQCD+LCSR+EXPE"`).
+- **Theoretical calculations** (lattice QCD, perturbative QCD, first-principles or fixed-order results) from established groups: HPQCD, RBC/UKQCD, FNAL/MILC, JLQCD, etc. Form-factor parametrization fits belong here: they produce the `aN_FF` coefficients plus a group-level `scheme`, and are imported even when the fit combines lattice, LCSR, and experimental input (`dataset: "LQCD+LCSR+EXPE"`). Tag the group with the canonical sources it uses: `LQCD`, `LCSR`, `QCDSR`, `pQCD`, `EXPE`, joined with `+` in that order (e.g. `"QCDSR+pQCD"` for a pure perturbative-QCD calculation).
 - **arXiv preprints** and **peer-reviewed journal papers**
 
 ### Not Supported for Import
+- **Derived theory observables** — the theory database stores form-factor values and the fit parameters they follow from, not predictions that are obtained from them: LFU ratios such as $R(D_{(s)}^{(*)})$, polarisations such as $F_L$, branching fractions, and angular observables are not imported.
 - **Global analyses** — interpretations of existing measurements rather than primary data: Wilson-coefficient fits, CKM/parameter determinations, and mass or coupling bounds. Published HFLAV/PDG world averages are measurements and **are** imported (`world-average` transition mode).
 - **Conference papers** — results without a formal preprint or publication.
 - **Report papers** — conference contributions or internal reports without peer review.

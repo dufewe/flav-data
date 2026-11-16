@@ -1,0 +1,281 @@
+{
+    "inspire-hep": "[Dey:2026epk](https://inspirehep.net/literature/3113815)",
+    "author": "Dey, U., and Nandi, S.",
+    "title": "Study of Form Factors and Observables in $B_c^-\\to D_s^{*-}\\ell^+\\ell^-$ and $B_c^-\\to D_s^{*-}\\nu\\bar{\\nu}$ decays",
+    "abstract": "We investigate the decays $B_c^- \\rightarrow D_{s}^{(*)-}\\ell^+\\ell^-$ and $B_c^- \\rightarrow D_{s}^{(*)-}\\nu\\bar{\\nu}$ within the Standard Model (SM), employing perturbative QCD (pQCD) form factors that are sensitive to the wave functions of $B_c$ and $D_{s}^{(*)}$ mesons. We determine the shape parameters of these mesons and the $B_c \\to D_s^{(*)}$ form factors at $q^2 = 0$ from available lattice QCD inputs for $B_s \\to D_s^{(*)}$ and $B_c \\to D_s$ transitions. To obtain the $q^2$ dependence of the $B_c \\to D_s^*$ form factors, we employ heavy-quark spin symmetry (HQSS) and an appropriate parametrization scheme over the allowed $q^2$ region. Based on these inputs, we present predictions for branching ratios and lepton-flavour-sensitive observables. Furthermore, we perform a detailed angular analysis of the cascade decay $B_c^- \\to D_s^{*-}(\\to D_s^- \\pi^0)\\,\\ell^+\\ell^-$, providing Standard Model predictions for several angular observables.",
+    "arxiv": "[2602.02399v2](https://arxiv.org/pdf/2602.02399)",
+    "time": "2026.02.02",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "no-transition": {
+                "obs@1": {
+                    "name": "Sigma_1(1)",
+                    "value": "0.860",
+                    "total_upper": "0.012",
+                    "total_lower": "0.012"
+                },
+                "obs@2": {
+                    "name": "Sigma_1'(1)",
+                    "value": "-3.111",
+                    "total_upper": "0.089",
+                    "total_lower": "0.089"
+                },
+                "obs@3": {
+                    "name": "Sigma_1''(1)",
+                    "value": "8.645",
+                    "total_upper": "0.420",
+                    "total_lower": "0.420"
+                },
+                "obs@4": {
+                    "name": "a0Sigma_2(1)",
+                    "value": "0.444",
+                    "total_upper": "0.012",
+                    "total_lower": "0.012",
+                    "unit": "GeV-1"
+                },
+                "obs@5": {
+                    "name": "a0Sigma_2'(1)",
+                    "value": "-1.577",
+                    "total_upper": "0.083",
+                    "total_lower": "0.083",
+                    "unit": "GeV-1"
+                },
+                "obs@6": {
+                    "name": "a0Sigma_2''(1)",
+                    "value": "4.244",
+                    "total_upper": "0.278",
+                    "total_lower": "0.278",
+                    "unit": "GeV-1"
+                }
+            },
+            "dataset": "LQCD",
+            "note": "Taylor coefficients of the HQET universal functions at $w=1$, from a $\\chi^2$ fit to the HPQCD lattice values of $F_+$, $F_0$ and $F_T$ for $B_c\\to D_s$ at $w=1.0$, 1.15 and 1.3 ($\\chi^2/\\mathrm{DOF}=1.916$, $p=12.5\\%$). $\\Sigma_1$ is dimensionless and $a_0\\Sigma_2$ is in GeV$^{-1}$; the fit is confined to $w\\in(1,1.3)$ and the $\\Sigma_1(w)$, $a_0\\Sigma_2(w)$ curves are not stored. The $c=0.236$ Sudakov parameter and the LCDA shape parameters are not stored.",
+            "correlation": [
+                [1.0, -0.551, 0.357, 0.104, -0.114, 0.106],
+                [-0.551, 1.0, -0.883, -0.372, 0.298, -0.285],
+                [0.357, -0.883, 1.0, 0.414, -0.45, 0.46],
+                [0.104, -0.372, 0.414, 1.0, -0.861, -0.795],
+                [-0.114, 0.298, -0.45, -0.861, 1.0, -0.985],
+                [0.106, -0.285, 0.46, -0.795, -0.985, 1.0]
+            ]
+        },
+        {
+            "Cb_I0?_0-n_0.2.sC_I0?_1-n_0": {
+                "obs@1": {
+                    "name": "A0",
+                    "value": "0.219",
+                    "total_upper": "0.065",
+                    "total_lower": "0.065",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "A1",
+                    "value": "0.236",
+                    "total_upper": "0.077",
+                    "total_lower": "0.077",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@3": {
+                    "name": "V",
+                    "value": "0.319",
+                    "total_upper": "0.112",
+                    "total_lower": "0.112",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@4": {
+                    "name": "T1",
+                    "value": "0.269",
+                    "total_upper": "0.095",
+                    "total_lower": "0.095",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@5": {
+                    "name": "T3",
+                    "value": "0.234",
+                    "total_upper": "0.082",
+                    "total_lower": "0.082",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "pQCD",
+            "note": "pQCD predictions at $q^2=0$, with a $30\\%$ uncertainty added for neglected higher-order and higher-twist corrections. $A_2(0)$ and $T_2(0)$ are not quoted because they follow from the kinematic constraints $2rA_0(0)=(1+r)A_1(0)-(1-r)A_2(0)$ and $T_1(0)=T_2(0)$. The $B_s\\to D_s^{(*)}$ predictions of the paper are not stored.",
+            "correlation": [
+                [1.0, 0.105, -0.134, 0.14, 0.123],
+                [0.105, 1.0, -0.193, 0.21, 0.175],
+                [-0.134, -0.193, 1.0, -0.261, -0.231],
+                [0.14, 0.21, -0.261, 1.0, 0.966],
+                [0.123, 0.175, -0.231, 0.966, 1.0]
+            ]
+        },
+        {
+            "Cb_I0?_0-n_0.2.sC_I0?_1-n_0": {
+                "obs@1": {
+                    "name": "a0_A0",
+                    "value": "0.0841",
+                    "total_upper": "0.0016",
+                    "total_lower": "0.0016"
+                },
+                "obs@2": {
+                    "name": "a1_A0",
+                    "value": "-0.406",
+                    "total_upper": "0.028",
+                    "total_lower": "0.028"
+                },
+                "obs@3": {
+                    "name": "a2_A0",
+                    "value": "0.688",
+                    "total_upper": "0.350",
+                    "total_lower": "0.350"
+                },
+                "obs@4": {
+                    "name": "a0_A1",
+                    "value": "0.0348",
+                    "total_upper": "0.0008",
+                    "total_lower": "0.0008"
+                },
+                "obs@5": {
+                    "name": "a1_A1",
+                    "value": "-0.117",
+                    "total_upper": "0.016",
+                    "total_lower": "0.016"
+                },
+                "obs@6": {
+                    "name": "a2_A1",
+                    "value": "0.704",
+                    "total_upper": "0.163",
+                    "total_lower": "0.163"
+                },
+                "obs@7": {
+                    "name": "a1_A12",
+                    "value": "-0.032",
+                    "total_upper": "0.006",
+                    "total_lower": "0.006"
+                },
+                "obs@8": {
+                    "name": "a2_A12",
+                    "value": "0.279",
+                    "total_upper": "0.065",
+                    "total_lower": "0.065"
+                },
+                "obs@9": {
+                    "name": "a0_V",
+                    "value": "0.0957",
+                    "total_upper": "0.0031",
+                    "total_lower": "0.0031"
+                },
+                "obs@10": {
+                    "name": "a1_V",
+                    "value": "-0.328",
+                    "total_upper": "0.046",
+                    "total_lower": "0.046"
+                },
+                "obs@11": {
+                    "name": "a2_V",
+                    "value": "0.288",
+                    "total_upper": "0.282",
+                    "total_lower": "0.282"
+                },
+                "obs@12": {
+                    "name": "a0_T1",
+                    "value": "0.0455",
+                    "total_upper": "0.0009",
+                    "total_lower": "0.0009"
+                },
+                "obs@13": {
+                    "name": "a1_T1",
+                    "value": "-0.197",
+                    "total_upper": "0.013",
+                    "total_lower": "0.013"
+                },
+                "obs@14": {
+                    "name": "a2_T1",
+                    "value": "0.356",
+                    "total_upper": "0.147",
+                    "total_lower": "0.147"
+                },
+                "obs@15": {
+                    "name": "a1_T2",
+                    "value": "-0.0638",
+                    "total_upper": "0.0045",
+                    "total_lower": "0.0045"
+                },
+                "obs@16": {
+                    "name": "a2_T2",
+                    "value": "0.116",
+                    "total_upper": "0.059",
+                    "total_lower": "0.059"
+                },
+                "obs@17": {
+                    "name": "a0_T23",
+                    "value": "0.0452",
+                    "total_upper": "0.0015",
+                    "total_lower": "0.0015"
+                },
+                "obs@18": {
+                    "name": "a1_T23",
+                    "value": "-0.350",
+                    "total_upper": "0.022",
+                    "total_lower": "0.022"
+                },
+                "obs@19": {
+                    "name": "a2_T23",
+                    "value": "0.881",
+                    "total_upper": "0.262",
+                    "total_lower": "0.262"
+                }
+            },
+            "dataset": "pQCD",
+            "scheme": "BGL",
+            "note": "BGL fit to the $B_c\\to D_s^*$ form factors; $A_{12}$ has no $a_0$ and $T_2$ no $a_0$. The three $w$-points of each form factor were treated as uncorrelated with the other form factors because the full matrix built from $\\Sigma_1$ and $a_0\\Sigma_2$ is positive semidefinite and made the fit unstable ($\\chi^2/\\mathrm{DOF}=5.074$). The paper writes $t_+=(m_{B_0}+m_{K/K^*})^2$, the $b\\to s$ threshold, instead of the $B_c\\to D_s^*$ threshold, and $t_0=t_\\mathrm{opt}$.",
+            "correlation": [
+                [1.0, 0.343, -0.149, 0.002, 0.003, 0.002, 0.46, 0.344, -0.003, -0.003, -0.0005, 0.001, 0.002, 0.001, 0.002, 0.002, -0.002, -0.003, -0.002],
+                [0.343, 1.0, 0.546, 0.003, 0.005, 0.004, 0.879, 0.657, -0.006, -0.006, -0.001, 0.003, 0.004, 0.002, 0.004, 0.003, -0.003, -0.007, -0.004],
+                [-0.149, 0.546, 1.0, 0.002, 0.004, 0.003, 0.687, 0.514, -0.005, -0.005, -0.0008, 0.002, 0.003, 0.002, 0.004, 0.003, -0.003, -0.005, -0.003],
+                [0.002, 0.003, 0.002, 1.0, 0.451, 0.016, 0.003, 0.002, -0.004, -0.004, -0.0007, 0.002, 0.003, 0.002, 0.004, 0.003, -0.005, -0.009, -0.006],
+                [0.003, 0.005, 0.004, 0.451, 1.0, 0.734, 0.005, 0.004, -0.006, -0.007, -0.001, 0.004, 0.005, 0.003, 0.006, 0.005, -0.008, -0.015, -0.01],
+                [0.002, 0.004, 0.003, 0.016, 0.734, 1.0, 0.004, 0.003, -0.005, -0.006, -0.0009, 0.003, 0.004, 0.002, 0.005, 0.004, -0.006, -0.013, -0.008],
+                [0.46, 0.879, 0.687, 0.003, 0.005, 0.004, 1.0, 0.692, -0.006, -0.007, -0.001, 0.003, 0.004, 0.002, 0.005, 0.003, -0.003, -0.007, -0.005],
+                [0.344, 0.657, 0.514, 0.002, 0.004, 0.003, 0.692, 1.0, -0.005, -0.005, -0.0008, 0.002, 0.003, 0.002, 0.004, 0.003, -0.003, -0.005, -0.003],
+                [-0.003, -0.006, -0.005, -0.004, -0.006, -0.005, -0.006, -0.005, 1.0, 0.517, -0.211, -0.003, -0.005, -0.003, -0.006, -0.004, 0.004, 0.008, 0.005],
+                [-0.003, -0.006, -0.005, -0.004, -0.007, -0.006, -0.007, -0.005, 0.517, 1.0, -0.057, -0.004, -0.006, -0.003, -0.007, -0.005, 0.004, 0.008, 0.006],
+                [-0.0005, -0.001, -0.0008, -0.0007, -0.001, -0.0009, -0.001, -0.0008, -0.211, -0.057, 1.0, -0.0006, -0.0009, -0.0005, -0.001, -0.0008, 0.0007, 0.001, 0.0009],
+                [0.001, 0.003, 0.002, 0.002, 0.004, 0.003, 0.003, 0.002, -0.003, -0.004, -0.0006, 1.0, 0.181, -0.308, 0.449, 0.331, 0.093, 0.189, 0.125],
+                [0.002, 0.004, 0.003, 0.003, 0.005, 0.004, 0.004, 0.003, -0.005, -0.006, -0.0009, 0.181, 1.0, 0.047, 0.678, 0.5, 0.141, 0.285, 0.189],
+                [0.001, 0.002, 0.002, 0.002, 0.003, 0.002, 0.002, 0.002, -0.003, -0.003, -0.0005, -0.308, 0.047, 1.0, 0.352, 0.259, 0.073, 0.148, 0.098],
+                [0.002, 0.004, 0.004, 0.004, 0.006, 0.005, 0.005, 0.004, -0.006, -0.007, -0.001, 0.449, 0.678, 0.352, 1.0, 0.501, 0.161, 0.325, 0.216],
+                [0.002, 0.003, 0.003, 0.003, 0.005, 0.004, 0.003, 0.003, -0.004, -0.005, -0.0008, 0.331, 0.5, 0.259, 0.501, 1.0, 0.119, 0.24, 0.159],
+                [-0.002, -0.003, -0.003, -0.005, -0.008, -0.006, -0.003, -0.003, 0.004, 0.004, 0.0007, 0.093, 0.141, 0.073, 0.161, 0.119, 1.0, 0.306, -0.334],
+                [-0.003, -0.007, -0.005, -0.009, -0.015, -0.013, -0.007, -0.005, 0.008, 0.008, 0.001, 0.189, 0.285, 0.148, 0.325, 0.24, 0.306, 1.0, 0.611],
+                [-0.002, -0.004, -0.003, -0.006, -0.01, -0.008, -0.005, -0.003, 0.005, 0.006, 0.0009, 0.125, 0.189, 0.098, 0.216, 0.159, -0.334, 0.611, 1.0]
+            ]
+        },
+        {
+            "Cb_I0?_0-n_0.2.sC_I0?_0-n_0": {
+                "obs@1": {
+                    "name": "f+",
+                    "value": "0.203",
+                    "total_upper": "0.016",
+                    "total_lower": "0.016",
+                    "q2min": "0",
+                    "q2max": "0"
+                },
+                "obs@2": {
+                    "name": "fT",
+                    "value": "0.293",
+                    "total_upper": "0.057",
+                    "total_lower": "0.057",
+                    "q2min": "0",
+                    "q2max": "0"
+                }
+            },
+            "dataset": "pQCD",
+            "note": "pQCD predictions at $q^2=0$; the paper writes these as $F_+(0)$ and $F_T(0)$. $F_0(0)$ is not quoted; the zero-recoil constraint is printed as $F_+(0)=F_+(0)$, evidently meant as $F_0(0)=F_+(0)$. No correlation with $F_T(0)$ is published, and the $B_s\\to D_s^{(*)}$ values of the same table are not stored."
+        }
+    ]
+}

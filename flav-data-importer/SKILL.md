@@ -339,6 +339,14 @@ These are the 9 hard rules for writing JSON files in this repo.
    scenario, or measurement suffix never enters the key — record it in the
    group `note`.
 
+   **Theory form factors** key only the hadron transition: drop the
+   lepton and neutrino legs of the measured process
+   (`Db_I1?_0-n_0.2.Dc_I1?_1-n_0` for the $\bar B\to D^*$ form factors;
+   `observable-naming.md` §1.3). A hadron with no hadronic final state
+   ends in the vacuum `0` (`Db_I1?_0-n_0.2.0` for a decay constant,
+   §1.1 rule 7). The validator rejects lepton tokens in a `theo-data/`
+   channel key.
+
 6. **One group per property set** — a data group is a set of observables
    linked by one correlation/covariance matrix and one measurement
    context. Do not merge into one group measurements whose dataset,

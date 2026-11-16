@@ -123,7 +123,7 @@ FORM_FACTOR_SCHEMES = {'BK', 'BGL', 'BCL', 'BSZ', 'DLM', 'MR'}
 
 # Group-level ``dataset`` names the data sources behind a group, in this
 # canonical order, joined with ``+`` (e.g. ``LQCD+LCSR``).
-DATASET_SOURCES = ('LQCD', 'LCSR', 'QCDSR', 'EXPE')
+DATASET_SOURCES = ('LQCD', 'LCSR', 'QCDSR', 'pQCD', 'EXPE')
 
 
 def _dataset_issue(value) -> str:
@@ -323,15 +323,32 @@ def validate_transition_key(key: str) -> list[str]:
             f"<pid>.<pid>.2.<pid>.<pid> (or 'no-transition' for "
             f"observables without one)"
         ]
-    if any(
-        not stage.replace('.', '')
-        for part in key.split('/')
-        for stage in part.split('.2.')
-    ):
-        return [
-            f"  data key '{key}': empty particle state; every stage separated "
-            f"by '.2.' must name at least one pid"
-        ]
+    issues = []
+    for part in key.split('/'):
+        stages = part.split('.2.')
+        for index, stage in enumerate(stages):
+            if not stage.replace('.', ''):
+                issues.append(
+                    f"  data key '{key}': empty particle state; every stage "
+                    f"separated by '.2.' must name at least one pid (write the "
+                    f"vacuum as '0')"
+                )
+                continue
+            if '0' not in stage.split('.'):
+                continue
+            if stage != '0':
+                issues.append(
+                    f"  data key '{key}': state '{stage}' mixes the vacuum "
+                    f"token '0' with particles; the vacuum is a stage of its "
+                    f"own"
+                )
+            elif index != len(stages) - 1:
+                issues.append(
+                    f"  data key '{key}': the vacuum stage '0' must be the "
+                    f"final state"
+                )
+    if issues:
+        return issues
     issues = _order_issues_for_body(key, f"data key '{key}'")
     issues.extend(_flow_issues(key, f"data key '{key}'"))
     return issues
@@ -364,6 +381,46 @@ _NEUTRINO_PARTNER = {
 _NEUTRINO_TOKEN = {
     partner: token for token, partner in _NEUTRINO_PARTNER.items()
 }
+
+# Theory data describe a hadron transition (a form factor or a decay
+# constant); the leptons of the measured process are spectators and never
+# enter the key (references/observable-naming.md §1.3).
+_THEORY_SCOPE_DIR = 'theo-data'
+
+
+def is_theory_path(file_path: str) -> bool:
+    """True when ``file_path`` sits in the theory tree (``theo-data/``)."""
+    return _THEORY_SCOPE_DIR in os.path.normpath(
+        os.path.abspath(file_path)
+    ).split(os.sep)
+
+
+def _is_lepton_token(token: str) -> bool:
+    core = token.split('_', 1)[0]
+    return core in _LEPTON_CHARGE or core in _NEUTRINO_PARTNER
+
+
+def _drop_spectator_leptons(key: str) -> str:
+    """Return ``key`` with every lepton/neutrino token removed.
+
+    A final state that held only leptons becomes the vacuum ``0`` (a
+    decay constant); an emptied intermediate stage stays empty so the
+    key check reports it.
+    """
+    parts = []
+    for part in key.split('/'):
+        stages = part.split('.2.')
+        kept = []
+        for index, stage in enumerate(stages):
+            tokens = [
+                token for token in stage.split('.')
+                if token and not _is_lepton_token(token)
+            ]
+            if not tokens and index == len(stages) - 1:
+                tokens = ['0']
+            kept.append('.'.join(tokens))
+        parts.append('.2.'.join(kept))
+    return '/'.join(parts)
 
 
 def _flow_issues(key: str, label: str) -> list[str]:
@@ -1155,7 +1212,7 @@ def _validate_observable(obs, label: str) -> list[str]:
     return issues
 
 
-def _validate_data_group(group, label: str) -> list[str]:
+def _validate_data_group(group, label: str, theory: bool = False) -> list[str]:
     """Validate one data group: channel bundles, metadata, matrices.
 
     A group is an object whose non-matrix, non-metadata keys are
@@ -1168,12 +1225,17 @@ def _validate_data_group(group, label: str) -> list[str]:
     any matrix key. The optional ``correlation``/``covariance`` matrices
     align with the observables of all channels, flattened in channel
     order then ``obs@N`` order.
+
+    ``theory`` marks a group under ``theo-data/``. Such a group holds
+    form factors of one hadron transition, so its channel keys carry no
+    lepton or neutrino tokens.
     """
     issues = []
     if not isinstance(group, dict):
         return [f"  {label}: must be an object"]
 
     matrix_keys = []
+    channel_keys = []
     channel_count = 0
     obs_total = 0
     ordered_obs = []
@@ -1240,6 +1302,7 @@ def _validate_data_group(group, label: str) -> list[str]:
                 f"unambiguous"
             )
         channel_count += 1
+        channel_keys.append(key)
         issues.extend(validate_transition_key(key))
         allow_empty = (
             key == 'no-transition'
@@ -1267,6 +1330,29 @@ def _validate_data_group(group, label: str) -> list[str]:
             f"  {label}: no transition channel; every data group needs at "
             f"least one channel key (or 'no-transition')"
         )
+
+    if theory:
+        for key in channel_keys:
+            if key == 'no-transition':
+                continue
+            stripped = _drop_spectator_leptons(key)
+            if stripped == key:
+                continue
+            if any(
+                not stage
+                for part in stripped.split('/')
+                for stage in part.split('.2.')
+            ):
+                issues.append(
+                    f"  {label}['{key}']: theory data name the hadron "
+                    f"transition; no cascade stage may be empty"
+                )
+            else:
+                issues.append(
+                    f"  {label}['{key}']: theory data describe a hadron "
+                    f"transition, not its leptons; drop the spectator "
+                    f"leptons: '{key}' -> '{stripped}'"
+                )
 
     if has_coefficients and not saw_scheme:
         issues.append(
@@ -1310,7 +1396,7 @@ def _validate_data_group(group, label: str) -> list[str]:
     return issues
 
 
-def _validate_data_list(groups: list) -> list[str]:
+def _validate_data_list(groups: list, theory: bool = False) -> list[str]:
     """Validate the ``[group, ...]`` ``data`` schema.
 
     Each group may carry one or more transition channels; a channel may
@@ -1322,7 +1408,9 @@ def _validate_data_list(groups: list) -> list[str]:
         issues.append("  data array is empty")
         return issues
     for group_idx, group in enumerate(groups):
-        issues.extend(_validate_data_group(group, f"data[{group_idx}]"))
+        issues.extend(
+            _validate_data_group(group, f"data[{group_idx}]", theory=theory)
+        )
     return issues
 
 
@@ -1341,8 +1429,13 @@ def validate_transition_mode(value: str) -> list[str]:
     return issues
 
 
-def validate_json(file_path: str) -> list[str]:
-    """Validate a single flav-data JSON file."""
+def validate_json(file_path: str, theory: bool | None = None) -> list[str]:
+    """Validate a single flav-data JSON file.
+
+    ``theory`` selects the form-factor key rule (no lepton tokens in a
+    channel key). When ``None`` it is inferred from the path: a file
+    under ``theo-data/`` is theory data.
+    """
     # 1. Parse JSON. ``json.load`` silently keeps the last of a repeated
     # key, which would drop a channel or an observable without any error.
     duplicates: list[str] = []
@@ -1438,7 +1531,9 @@ def validate_json(file_path: str) -> list[str]:
     if 'data' not in data:
         all_issues.append("  Missing required field: data")
     elif isinstance(data['data'], list):
-        all_issues.extend(_validate_data_list(data['data']))
+        if theory is None:
+            theory = is_theory_path(file_path)
+        all_issues.extend(_validate_data_list(data['data'], theory=theory))
     else:
         all_issues.append(
             "  data must be an array of data groups, e.g. "

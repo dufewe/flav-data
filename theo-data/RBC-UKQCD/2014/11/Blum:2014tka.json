@@ -9,22 +9,26 @@
     "transition-mode": "low-energy",
     "data": [
         {
-            "no-transition": {
+            "uD_I2-_0-n_0.2.0": {
                 "obs@1": {
                     "name": "fpi",
                     "value": "130.19",
                     "total_upper": "0.89",
                     "total_lower": "0.89",
                     "unit": "MeV"
-                },
-                "obs@2": {
+                }
+            },
+            "uS_I1?_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fK",
                     "value": "155.51",
                     "total_upper": "0.83",
                     "total_lower": "0.83",
                     "unit": "MeV"
-                },
-                "obs@3": {
+                }
+            },
+            "uS_I1?_0-n_0.2.0/uD_I2-_0-n_0.2.0": {
+                "obs@1": {
                     "name": "fK/fpi",
                     "value": "1.1945",
                     "total_upper": "0.0045",

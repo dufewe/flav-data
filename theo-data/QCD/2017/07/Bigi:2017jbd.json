@@ -1,0 +1,207 @@
+{
+    "inspire-hep": "[Bigi:2017jbd](https://inspirehep.net/literature/1613680)",
+    "author": "Bigi, D., Gambino, P., and Schacht, S.",
+    "title": "$R(D^*)$, $|V_{cb}|$, and the Heavy Quark Symmetry relations between form factors",
+    "abstract": "Stringent relations between the $B^{(*)} \\to D^{(*)} $ form factors exist in the heavy quark limit and the leading symmetry breaking corrections are known. We reconsider their uncertainty and role in the analysis of recent Belle data for $B\\to D^{(*)}\\ell\\nu$ with model-independent parametrizations and in the related prediction of $R(D^{(*)})$. We find $|V_{cb}|=41.5(1.3) \\ 10^{-3}$ and $|V_{cb}|=40.6(^{+1.2}_{-1.3}) \\ 10^{-3}$ using input from Light Cone Sum Rules, and $R(D^{*})=0.260(8)$.",
+    "arxiv": "[hep-ph/1707.09509v2](https://arxiv.org/pdf/1707.09509)",
+    "time": "2017.07.29",
+    "transition-mode": "semileptonic-decay",
+    "data": [
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a1_A1",
+                    "value": "-0.053",
+                    "total_upper": "0.056",
+                    "total_lower": "0.044"
+                },
+                "obs@2": {
+                    "name": "a2_A1",
+                    "value": "0.2",
+                    "total_upper": "0.8",
+                    "total_lower": "1.2"
+                },
+                "obs@3": {
+                    "name": "a1_A5",
+                    "value": "-0.0101",
+                    "total_upper": "0.0059",
+                    "total_lower": "0.0055"
+                },
+                "obs@4": {
+                    "name": "a2_A5",
+                    "value": "0.12",
+                    "total_upper": "0.10",
+                    "total_lower": "0.10"
+                },
+                "obs@5": {
+                    "name": "a0_V4",
+                    "value": "0.011",
+                    "total_upper": "0.010",
+                    "total_lower": "0.008"
+                },
+                "obs@6": {
+                    "name": "a1_V4",
+                    "value": "0.7",
+                    "total_upper": "0.3",
+                    "total_lower": "0.4"
+                },
+                "obs@7": {
+                    "name": "a2_V4",
+                    "value": "0.7",
+                    "total_upper": "0.2",
+                    "total_lower": "1.7"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BGL",
+            "note": "BGL fit with $N=2$ to the unfolded Belle $B\\to D^*\\ell\\nu$ distributions plus the HFLAV average ${\\cal B}(\\bar B^0\\to D^{*+}\\ell^-\\bar\\nu_\\ell)=0.0488(10)$; weak unitarity bounds only ($\\chi^2/\\mathrm{dof}=28.2/33$). $a_0^{A_1}$ is fixed by the lattice average $A_1(1)=0.902(12)$ and $a_0^{A_5}=0.1675\\,a_0^{A_1}$, so neither is stored; no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a1_A1",
+                    "value": "-0.052",
+                    "total_upper": "0.025",
+                    "total_lower": "0.014"
+                },
+                "obs@2": {
+                    "name": "a2_A1",
+                    "value": "0.99",
+                    "total_upper": "0.00",
+                    "total_lower": "0.46"
+                },
+                "obs@3": {
+                    "name": "a1_A5",
+                    "value": "-0.0072",
+                    "total_upper": "0.0052",
+                    "total_lower": "0.0050"
+                },
+                "obs@4": {
+                    "name": "a2_A5",
+                    "value": "0.092",
+                    "total_upper": "0.092",
+                    "total_lower": "0.095"
+                },
+                "obs@5": {
+                    "name": "a0_V4",
+                    "value": "0.0286",
+                    "total_upper": "0.0055",
+                    "total_lower": "0.0036"
+                },
+                "obs@6": {
+                    "name": "a1_V4",
+                    "value": "0.08",
+                    "total_upper": "0.08",
+                    "total_lower": "0.22"
+                },
+                "obs@7": {
+                    "name": "a2_V4",
+                    "value": "-1.0",
+                    "total_upper": "2.0",
+                    "total_lower": "0.0"
+                }
+            },
+            "dataset": "LQCD+LCSR+EXPE",
+            "scheme": "BGL",
+            "note": "Same fit with the LCSR constraints $A_1(w_{\\max})=0.65(18)$, $R_1(w_{\\max})=1.32(4)$, $R_2(w_{\\max})=0.91(17)$ added; weak unitarity bounds ($\\chi^2/\\mathrm{dof}=32.0/36$). $a_0^{A_1}$ fixed by the lattice average $A_1(1)=0.902(12)$ and $a_0^{A_5}=0.1675\\,a_0^{A_1}$; no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a1_A1",
+                    "value": "-0.046",
+                    "total_upper": "0.034",
+                    "total_lower": "0.018"
+                },
+                "obs@2": {
+                    "name": "a2_A1",
+                    "value": "0.48",
+                    "total_upper": "0.02",
+                    "total_lower": "0.92"
+                },
+                "obs@3": {
+                    "name": "a1_A5",
+                    "value": "-0.0063",
+                    "total_upper": "0.0036",
+                    "total_lower": "0.0011"
+                },
+                "obs@4": {
+                    "name": "a2_A5",
+                    "value": "0.062",
+                    "total_upper": "0.004",
+                    "total_lower": "0.064"
+                },
+                "obs@5": {
+                    "name": "a0_V4",
+                    "value": "0.0209",
+                    "total_upper": "0.0044",
+                    "total_lower": "0.0"
+                },
+                "obs@6": {
+                    "name": "a1_V4",
+                    "value": "0.33",
+                    "total_upper": "0.04",
+                    "total_lower": "0.17"
+                },
+                "obs@7": {
+                    "name": "a2_V4",
+                    "value": "0.6",
+                    "total_upper": "0.2",
+                    "total_lower": "1.3"
+                }
+            },
+            "dataset": "LQCD+EXPE",
+            "scheme": "BGL",
+            "note": "Same fit with the strong unitarity bounds obtained from the HQET form-factor ratios ($\\chi^2/\\mathrm{dof}=29.6/33$). $a_0^{A_1}$ fixed by the lattice average $A_1(1)=0.902(12)$ and $a_0^{A_5}=0.1675\\,a_0^{A_1}$; $a_0^{V_4}=0.0209$ sits on the lower edge of the $0.0209<a_0^{V_4}<0.0440$ range used for the bounds; no correlation matrix is published."
+        },
+        {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
+                "obs@1": {
+                    "name": "a1_A1",
+                    "value": "-0.029",
+                    "total_upper": "0.021",
+                    "total_lower": "0.013"
+                },
+                "obs@2": {
+                    "name": "a2_A1",
+                    "value": "0.5",
+                    "total_upper": "0.0",
+                    "total_lower": "0.3"
+                },
+                "obs@3": {
+                    "name": "a1_A5",
+                    "value": "-0.0051",
+                    "total_upper": "0.0049",
+                    "total_lower": "0.0013"
+                },
+                "obs@4": {
+                    "name": "a2_A5",
+                    "value": "0.065",
+                    "total_upper": "0.009",
+                    "total_lower": "0.089"
+                },
+                "obs@5": {
+                    "name": "a0_V4",
+                    "value": "0.0299",
+                    "total_upper": "0.0053",
+                    "total_lower": "0.0035"
+                },
+                "obs@6": {
+                    "name": "a1_V4",
+                    "value": "0.04",
+                    "total_upper": "0.07",
+                    "total_lower": "0.20"
+                },
+                "obs@7": {
+                    "name": "a2_V4",
+                    "value": "-0.9",
+                    "total_upper": "1.8",
+                    "total_lower": "0.0"
+                }
+            },
+            "dataset": "LQCD+LCSR+EXPE",
+            "scheme": "BGL",
+            "note": "Same fit with the strong unitarity bounds and the LCSR constraints $A_1(w_{\\max})=0.65(18)$, $R_1(w_{\\max})=1.32(4)$, $R_2(w_{\\max})=0.91(17)$ ($\\chi^2/\\mathrm{dof}=33.1/36$). $a_0^{A_1}$ fixed by the lattice average $A_1(1)=0.902(12)$ and $a_0^{A_5}=0.1675\\,a_0^{A_1}$; no correlation matrix is published."
+        }
+    ]
+}

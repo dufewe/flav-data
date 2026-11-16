@@ -29,6 +29,12 @@ fixes how pids are joined and ordered.
    single lepton-averaged transition, never for a comparison.
 6. **`no-transition`** — the only key without `.2.`, for observables that
    involve no process.
+7. **Vacuum final state** — a quantity whose final state has no hadron
+   (a decay constant) writes the vacuum as `0`, e.g.
+   `Db_I1?_0-n_0.2.0` is $\bar B^0\to$ vacuum. `0` is its own stage and
+   only the last one; `no-transition` stays reserved for intrinsic
+   properties (masses, bag parameters) and other quantities without a
+   channel.
 
 The rules are enforced by `scripts/json-valid.py` against the registry:
 an unregistered token, a non-canonical order, or a missing `.2.` is a
@@ -60,6 +66,31 @@ suffix.
 | $pp\to Z\to\mu^+\mu^-$ | `uud_I1?_1+n_0.uud_I1?_1+n_0.2.Z_I??_1??_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
 | $e^+e^-\to\mu^+\mu^-$ | `E_I??_1+n_0.e_I??_1+n_0.2.MU_I??_1+n_0.mu_I??_1+n_0` |
 | $R_{K^*}$ | `dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0/dB_I1?_0-n_0.2.dS_I1?_1-n_0.E_I??_1+n_0.e_I??_1+n_0` |
+
+### 1.3 Form-factor transitions (theory data)
+
+A form factor belongs to one hadron transition, $A\to B$; every other
+final-state particle is a spectator. Channel keys under `theo-data/`
+therefore name **only the hadrons**: drop the lepton pair (or neutrino
+pair) of the measured decay, and keep every hadron of the final state.
+A ratio keeps the hadron transitions on both sides.
+
+| Form factors of | Key |
+|-----------------|-----|
+| $\bar B\to D^*$ | `Db_I1?_0-n_0.2.Dc_I1?_1-n_0` |
+| $\bar B\to D$ | `Db_I1?_0-n_0.2.Dc_I1?_0-n_0` |
+| $\bar B\to \pi$ | `Db_I1?_0-n_0.2.uD_I2-_0-n_0` |
+| $\bar B_s\to \phi$ | `sB_I0?_0-n_0.2.qQ_I0-_1--_1` |
+| $\Lambda_b\to\Lambda_c$ | `udb_I0?_1+n_0.2.udc_I0?_1+n_0` |
+| $\bar B^0\to$ vacuum (a decay constant) | `Db_I1?_0-n_0.2.0` |
+
+Experimental groups keep the full process, because the measured rate is
+tied to one lepton mode. A hadron with no hadronic final state (a decay
+constant) ends in the vacuum `0` (§1.1 rule 7), and a ratio of decay
+constants keeps `.2.0` on both sides. Intrinsic properties and
+quantities with no channel (masses, bag parameters, HQET functions) stay
+under `no-transition`. The validator enforces the rule for files under
+`theo-data/`.
 
 ## 2. Observable Naming: `OBS` / `OBS[condition]`
 
@@ -256,12 +287,27 @@ decomposition; these are the standard symbols):
 | `f` | BGL $f$ ($\bar B \to D^*$) |
 | `F1` | BGL $F_1$ ($\bar B \to D^*$) |
 | `F2` | BGL $F_2$ ($\bar B \to D^*$) |
+| `V1` | CLN-basis helicity amplitude $V_1$ ($\bar B \to D^{(*)}$) |
+| `S1` | CLN-basis helicity amplitude $S_1$ ($\bar B \to D$) |
+| `A5` | CLN-basis helicity amplitude $A_5$ ($\bar B \to D^*$) |
+| `V4` | CLN-basis helicity amplitude $V_4$ ($\bar B \to D^*$) |
+| `P1` | CLN-basis helicity amplitude $P_1$ ($\bar B \to D^*$) |
 
 For a BGL $z$-series fit of the $\bar B_{(s)} \to D_{(s)}^{(*)}
 \ell\bar\nu_\ell$ form factors, the basis is $f_+, f_0$ for the
 pseudoscalar channel and $g, f, F_1, F_2$ for the vector channel, so the
 coefficients are named `aN_f+`, `aN_f0`, `aN_g`, `aN_f`, `aN_F1`,
 `aN_F2` (e.g. `a0_f+`, `a2_F1`).
+
+A fit that instead expands the CLN-basis helicity amplitudes,
+$F_i(w)=p_i(w)/[B_i(z)\varphi_i(z)]\sum_n a_n z^n$, uses the same `aN_FF`
+form with `V1`/`S1` for $\bar B \to D$ and `A1`, `A5`, `V4`, `P1` for
+$\bar B \to D^*$ (e.g. `a0_A1`, `a1_V4`). These symbols collide with the
+bare angular-observable tokens `S1`, `A5`, `P1` of the §3 table; only the
+`aN_` prefix marks the coefficient. A normalisation related to another
+one by a fixed kinematic or heavy-quark identity (such as
+$a_0^{A_5}=0.1675\,a_0^{A_1}$) is not stored; the group `note` records
+the relation.
 
 Baryon semileptonic decays ($\Lambda_b \to \Lambda_c \ell^- \bar{\nu}$,
 $\Lambda_b \to p \ell^- \bar{\nu}$) use the helicity set, with the
@@ -305,6 +351,13 @@ $h^s_{A_1}(1)$. The parenthetical `(1)` is a parameter tag, not a
 multi-transition condition. This symbol names a form-factor value, not an
 expansion coefficient, so the group does not need `scheme`.
 
+A Caprini-Lellouch-Neubert (CLN) fit of the same channel returns the slope
+`rho2(CLN)` and the zero-recoil ratios `R1(CLN)`, `R2(CLN)` together with
+`hA1(1)`. Store only the parameters the paper itself determines; a
+normalization or ratio fixed to a lattice or HQET input goes in the group
+`note`. CLN is a parameterization of $h_{A_1}(w)$ and $R_{1,2}(w)$, not a
+$z$-expansion basis, so such a group carries no `scheme`.
+
 The pseudoscalar channel $\bar B_{(s)}\to D_{(s)}\ell\bar\nu$ has the
 analogous normalization `G(1)`, the zero-recoil value of the HQET
 combination ${\cal G}(w)\propto f_+(q^2)$. The transition key separates
@@ -331,7 +384,7 @@ through the dimensionless integrals $I_{0,A}$ and $I_{0,V}$, written
 integral bounds; no `scheme` is needed because these are sum-rule
 integrals, not expansion coefficients.
 
-### 2.8 Subleading HQET Universal Form Factors: `chi_2`, `chi_3`, `eta`
+### 2.8 HQET Universal Form Factors: `chi_2`, `chi_3`, `eta`, `Sigma_1`, `a0Sigma_2`
 
 The spin-symmetry-violating HQET functions $\chi_2(v\cdot v')$ and
 $\chi_3(v\cdot v')$, which enter the $1/m_Q$ expansion through the
@@ -354,6 +407,22 @@ a parameter tag: when a source quotes a single value valid over a recoil
 range, the group stores one `eta` and the `note` records that range and
 that $\xi_3$ itself is not stored. `eta` is not the CKM parameter
 `etabar`.
+
+The leading and subleading universal form factors of a heavy-to-heavy
+doublet in the HQET trace formalism, $\Sigma_1(w)$ and
+$a_0\Sigma_2(w)$, are written `Sigma_1` and `a0Sigma_2`. The product is
+stored as one symbol because the source fits and tabulates $a_0\Sigma_2$
+itself rather than separating the Bohr radius $a_0$ from $\Sigma_2$:
+`Sigma_1` is dimensionless and `a0Sigma_2` carries
+`unit: "GeV-1"`. Taylor coefficients around zero recoil mark the
+derivative order with apostrophes — `Sigma_1'(1)`, `Sigma_1''(1)`,
+`a0Sigma_2'(1)`, `a0Sigma_2''(1)` — with the parameter tag `(1)` naming
+the expansion point $w=1$, as for `chi_2(1)`. Because the expansion is
+$\Sigma_i(w)=\Sigma_i(1)+\Sigma_i'(w-1)+\tfrac12\Sigma_i''(w-1)^2$,
+`Sigma_i''(1)` is the second derivative, not the coefficient of
+$(w-1)^2$. These functions are universal within the doublet, so the
+`data` key is `no-transition`; the group `note` records which transition
+they belong to and what the fit used, and the group carries no `scheme`.
 
 ## 3. Observable Abbreviations
 

@@ -92,7 +92,7 @@ channels to an `obs@N` object and may carry group-level `dataset` /
 `scheme` strings plus a matrix whose rows follow the channel
 keys, then their `obs@N` order. The channel key alone encodes the
 transition; `data` stores no LaTeX. `dataset` records data sources only
-(`LQCD`, `LCSR`, `QCDSR`, `EXPE`, joined with `+` in that order). Groups of
+(`LQCD`, `LCSR`, `QCDSR`, `pQCD`, `EXPE`, joined with `+` in that order). Groups of
 form-factor expansion coefficients (`aN_FF`) must name their expansion in
 `scheme` as one of `BK`, `BGL`, `BCL`, `BSZ`, `DLM`, or `MR` (full names and arXiv IDs
 in the importer's `references/observable-naming.md`). Add another group for

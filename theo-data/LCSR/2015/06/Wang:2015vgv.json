@@ -8,7 +8,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Db_I1?_0-n_0.2.uD_I2-_0-n_0.l-.vBar": {
+            "Db_I1?_0-n_0.2.uD_I2-_0-n_0": {
                 "obs@1": {
                     "name": "a1_f+",
                     "value": "-3.92",

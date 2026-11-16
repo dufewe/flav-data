@@ -9,7 +9,7 @@
     "transition-mode": "semileptonic-decay",
     "data": [
         {
-            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar": {
+            "Db_I1?_0-n_0.2.Dc_I1?_1-n_0": {
                 "obs@1": {
                     "name": "hA1(1)",
                     "value": "0.906",

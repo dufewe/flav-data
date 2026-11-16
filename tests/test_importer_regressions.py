@@ -93,6 +93,19 @@ class JsonValidatorTests(unittest.TestCase):
         for name in ('f+', 'f-', 'V', 'A0', 'A1', 'A2', 'A12'):
             self.assertEqual(json_valid.validate_observable_name(name), [], name)
 
+    def test_cln_parameter_names_are_accepted(self):
+        for name in ('hA1(1)', 'rho2(CLN)', 'R1(CLN)', 'R2(CLN)'):
+            self.assertEqual(json_valid.validate_observable_name(name), [], name)
+
+    def test_cln_parameter_group_needs_no_scheme(self):
+        data = [{
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar': self._channel(
+                self._obs('rho2(CLN)'), self._obs('R1(CLN)'),
+                self._obs('R2(CLN)'), self._obs('hA1(1)')),
+            'dataset': 'LQCD+EXPE',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
     def test_form_factor_value_group_needs_no_scheme(self):
         data = [{
             'Cb_I0?_0-n_0.2.cC_I0-_1--_0.l-.vBar': self._channel(
@@ -168,6 +181,8 @@ class JsonValidatorTests(unittest.TestCase):
             'qQ_I1?_0-n_0.2.Ud_I2-_0-n_0.E_I??_1+n_0.ve_I??_1+n_0',
             'dB_I1?_0-n_0.2.cC_I0-_1--_0.qQ_I1?_0-n_0',
             'Cb_I0?_0-n_0.2.cC_I0-_1--_0.l-.vBar',
+            'Cb_I0?_0-n_0.2.sC_I0?_1-n_0.l+.l-',
+            'Cb_I0?_0-n_0.2.sC_I0?_0-n_0.l+.l-',
             'no-transition',
         ):
             self.assertEqual(json_valid.validate_transition_key(key), [], key)
@@ -340,7 +355,8 @@ class JsonValidatorTests(unittest.TestCase):
         return {f'obs@{i}': o for i, o in enumerate(obs, 1)}
 
     def _validate_data(self, data_block, mode='semileptonic-decay',
-                       inspire='[Test:2024](https://inspirehep.net/literature/1)'):
+                       inspire='[Test:2024](https://inspirehep.net/literature/1)',
+                       theory=None):
         doc = {
             'inspire-hep': inspire,
             'author': 'Doe, J.',
@@ -354,7 +370,7 @@ class JsonValidatorTests(unittest.TestCase):
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as f:
             json.dump(doc, f)
             f.flush()
-            return json_valid.validate_json(f.name)
+            return json_valid.validate_json(f.name, theory=theory)
 
     def test_inspire_hep_requires_markdown_link(self):
         channel = 'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0'
@@ -448,8 +464,9 @@ class JsonValidatorTests(unittest.TestCase):
         self.assertEqual(self._validate_data(data), [])
 
     def test_group_dataset_accepts_canonical_sources(self):
-        for value in ('LQCD', 'LCSR', 'QCDSR', 'EXPE', 'LQCD+LCSR',
-                      'LQCD+LCSR+QCDSR', 'LQCD+LCSR+QCDSR+EXPE'):
+        for value in ('LQCD', 'LCSR', 'QCDSR', 'pQCD', 'EXPE', 'LQCD+LCSR',
+                      'LQCD+pQCD', 'QCDSR+pQCD', 'LQCD+LCSR+QCDSR',
+                      'LQCD+LCSR+QCDSR+pQCD', 'LQCD+LCSR+QCDSR+pQCD+EXPE'):
             with self.subTest(dataset=value):
                 data = [{
                     'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
@@ -459,8 +476,8 @@ class JsonValidatorTests(unittest.TestCase):
 
     def test_group_dataset_rejects_non_source_values(self):
         for value in ('maximum likelihood', 'nominal', 'experiment',
-                      'LCSR + LQCD', 'LCSR+LQCD', 'LQCD+LQCD', 'NLO',
-                      'LQCD+QCDSR+LCSR'):
+                      'LCSR + LQCD', 'LCSR+LQCD', 'LQCD+LQCD', 'NLO', 'pqcd',
+                      'PQCD', 'LQCD+QCDSR+LCSR'):
             with self.subTest(dataset=value):
                 data = [{
                     'dB_I1?_0-n_0.2.dS_I1?_1-n_0.MU_I??_1+n_0.mu_I??_1+n_0': self._channel(self._obs('FL')),
@@ -542,6 +559,117 @@ class JsonValidatorTests(unittest.TestCase):
                     'correlation': [[1.0]],
                 }]
                 self.assertEqual(self._validate_data(data), [])
+
+    def test_bgl_vector_channel_coefficients_need_bgl_scheme(self):
+        names = ('a0_f', 'a1_F1', 'a0_g')
+        data = [{
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar': self._channel(
+                *(self._obs(name) for name in names)),
+            'dataset': 'LQCD+EXPE',
+            'scheme': 'BGL',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+        data[0].pop('scheme')
+        issues = self._validate_data(data)
+        self.assertTrue(any(
+            "must declare a group-level 'scheme'" in issue for issue in issues
+        ))
+
+    def test_cln_basis_bgl_coefficients_are_accepted(self):
+        for names in (('a0_V1', 'a1_S1'), ('a0_A1', 'a1_A5', 'a1_V4', 'a0_P1')):
+            with self.subTest(names=names):
+                data = [{
+                    'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar': self._channel(
+                        *(self._obs(name) for name in names)),
+                    'dataset': 'LQCD+LCSR+EXPE',
+                    'scheme': 'BGL',
+                }]
+                self.assertEqual(self._validate_data(data), [])
+
+    def test_theory_keys_drop_spectator_leptons(self):
+        key = 'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar'
+        data = [{
+            key: self._channel(self._obs('f+')),
+            'dataset': 'LQCD',
+        }]
+        self.assertEqual(self._validate_data(data, theory=False), [])
+        issues = self._validate_data(data, theory=True)
+        self.assertTrue(
+            any(
+                f"'{key}' -> 'Db_I1?_0-n_0.2.Dc_I1?_1-n_0'" in issue
+                and 'drop the spectator leptons' in issue
+                for issue in issues
+            ),
+            issues,
+        )
+
+    def test_theory_hadron_only_keys_are_accepted(self):
+        data = [{
+            'Db_I1?_0-n_0.2.Dc_I1?_1-n_0': self._channel(self._obs('a0_f')),
+            'dataset': 'LQCD+LCSR',
+            'scheme': 'BGL',
+        }, {
+            'Db_I1?_0-n_0.2.Dc_I1?_0-n_0/Db_I1?_0-n_0.2.uD_I2-_0-n_0':
+                self._channel(self._obs('f0/f+')),
+            'dataset': 'LQCD',
+        }]
+        self.assertEqual(self._validate_data(data, theory=True), [])
+
+    def test_theory_key_without_hadronic_daughter_becomes_vacuum(self):
+        key = 'uD_I2-_0-n_0.2.l-.vBar'
+        data = [{
+            key: self._channel(self._obs('fpi')),
+        }]
+        issues = self._validate_data(data, theory=True)
+        self.assertTrue(
+            any(
+                f"'{key}' -> 'uD_I2-_0-n_0.2.0'" in issue
+                for issue in issues
+            ),
+            issues,
+        )
+
+    def test_vacuum_final_stage_is_accepted(self):
+        data = [{
+            'Db_I1?_0-n_0.2.0': self._channel(self._obs('fB0')),
+        }, {
+            'sB_I0?_0-n_0.2.0/dB_I1?_0-n_0.2.0':
+                self._channel(self._obs('fBs/fB0')),
+        }]
+        self.assertEqual(self._validate_data(data, theory=True), [])
+
+    def test_vacuum_stage_must_be_final_and_alone(self):
+        for key in (
+            'dB_I1?_0-n_0.2.0.2.dS_I1?_1-n_0',
+            'Db_I1?_0-n_0.2.0.Dc_I1?_1-n_0',
+            '0.2.Db_I1?_0-n_0',
+        ):
+            with self.subTest(key=key):
+                self.assertTrue(json_valid.validate_transition_key(key), key)
+
+    def test_theory_scope_is_inferred_from_path(self):
+        doc = {
+            'inspire-hep': '[Test:2024](https://inspirehep.net/literature/1)',
+            'author': 'Doe, J.',
+            'title': 'Test',
+            'arxiv': '[hep-ex/2401.00001v1](https://arxiv.org/pdf/2401.00001)',
+            'time': '2024.01.01',
+            'abstract': 'Test abstract.',
+            'transition-mode': 'semileptonic-decay',
+            'data': [{
+                'Db_I1?_0-n_0.2.Dc_I1?_1-n_0.l-.vBar':
+                    self._channel(self._obs('f+')),
+            }],
+        }
+        for tree, expect_issue in (('theo-data', True), ('expe-data', False)):
+            with self.subTest(tree=tree):
+                with tempfile.TemporaryDirectory() as tmp:
+                    path = Path(tmp, tree, '2024', '01', 'Test:2024.json')
+                    path.parent.mkdir(parents=True)
+                    path.write_text(json.dumps(doc), encoding='utf-8')
+                    issues = json_valid.validate_json(str(path))
+                self.assertEqual(bool(issues), expect_issue, issues)
 
     def test_tagged_coefficient_name_still_requires_scheme(self):
         for name in ('a0_F+(nominal)', 'a1_f+[higher-order]', 'a0_f+'):
@@ -875,7 +1003,9 @@ class JsonValidatorTests(unittest.TestCase):
                 self.assertEqual(json_valid.validate_observable_name(name), [])
 
     def test_hqet_universal_form_factors_are_accepted(self):
-        for name in ('chi_2(1)', 'chi_2(1.3)', 'chi_3(1)', 'eta'):
+        for name in ('chi_2(1)', 'chi_2(1.3)', 'chi_3(1)', 'eta',
+                     'Sigma_1(1)', "Sigma_1'(1)", "Sigma_1''(1)",
+                     'a0Sigma_2(1)', "a0Sigma_2'(1)", "a0Sigma_2''(1)"):
             with self.subTest(name=name):
                 self.assertEqual(json_valid.validate_observable_name(name), [])
 
@@ -886,6 +1016,20 @@ class JsonValidatorTests(unittest.TestCase):
         data = [{
             'no-transition': self._channel(self._obs('chi_2(1)')),
             'dataset': 'QCDSR',
+        }]
+        self.assertEqual(self._validate_data(data), [])
+
+    def test_hqet_sigma_coefficients_need_no_scheme(self):
+        names = ('Sigma_1(1)', "Sigma_1'(1)", "Sigma_1''(1)",
+                 'a0Sigma_2(1)', "a0Sigma_2'(1)", "a0Sigma_2''(1)")
+        obs = [self._obs(name) for name in names]
+        for entry in obs[3:]:
+            entry['unit'] = 'GeV-1'
+        data = [{
+            'no-transition': self._channel(*obs),
+            'dataset': 'LQCD',
+            'correlation': [[1.0 if row == col else 0.0 for col in range(6)]
+                            for row in range(6)],
         }]
         self.assertEqual(self._validate_data(data), [])
 
